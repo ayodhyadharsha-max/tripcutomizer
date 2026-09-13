@@ -1,0 +1,228 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String            @id @default(uuid())
+  email         String            @unique
+  phone         String?           @unique
+  passwordHash  String?
+  firstName     String
+  lastName      String
+  role          String            @default("CUSTOMER") // SUPER_ADMIN, ADMIN, SALES_AGENT, CUSTOMER
+  avatar        String?
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+  
+  bookings      Booking[]
+  leads         Lead[]            @relation("CustomerLeads")
+  assignedLeads Lead[]            @relation("AgentLeads")
+  forexOrders   ForexOrder[]
+  visaApps      VisaApplication[]
+  travellers    Traveller[]
+  wishlist      Wishlist[]
+  auditLogs     AuditLog[]
+}
+
+model Destination {
+  id              String             @id @default(uuid())
+  name            String
+  slug            String             @unique
+  country         String
+  region          String
+  heroImage       String
+  description     String
+  isInternational Boolean            @default(true)
+  content         DestinationContent?
+  packages        HolidayPackage[]
+  hotels          Hotel[]
+}
+
+model DestinationContent {
+  id            String      @id @default(uuid())
+  destinationId String      @unique
+  destination   Destination @relation(fields: [destinationId], references: [id])
+  placesToVisit String
+  thingsToDo    String
+  bestTime      String
+  howToReach    String
+  weather       String
+  currency      String
+  visaInfo      String
+  travelTips    String
+}
+
+model HolidayPackage {
+  id             String             @id @default(uuid())
+  name           String
+  slug           String             @unique
+  destinationId  String
+  destination    Destination        @relation(fields: [destinationId], references: [id])
+  durationDays   Int
+  durationNights Int
+  startingPrice  Float
+  discountPrice  Float?
+  heroImage      String
+  gallery        String
+  highlights     String
+  inclusions     String
+  exclusions     String
+  theme          String
+  hotelCategory  String
+  rating         Float              @default(4.5)
+  isFeatured     Boolean            @default(false)
+  isHoneymoon    Boolean            @default(false)
+  isSpiritual    Boolean            @default(false)
+  isEscorted     Boolean            @default(false)
+  isPrivate      Boolean            @default(false)
+  itineraries    PackageItinerary[]
+  bookingItems   BookingItem[]
+}
+
+model PackageItinerary {
+  id          String         @id @default(uuid())
+  packageId   String
+  package     HolidayPackage @relation(fields: [packageId], references: [id], onDelete: Cascade)
+  dayNumber   Int
+  title       String
+  description String
+  meals       String
+  activities  String
+}
+
+model Hotel {
+  id            String      @id @default(uuid())
+  name          String
+  destinationId String
+  destination   Destination @relation(fields: [destinationId], references: [id])
+  starRating    Int
+  address       String
+  images        String
+  amenities     String
+  rooms         HotelRoom[]
+}
+
+model HotelRoom {
+  id            String   @id @default(uuid())
+  hotelId       String
+  hotel         Hotel    @relation(fields: [hotelId], references: [id])
+  roomType      String
+  pricePerNight Float
+  capacity      Int
+}
+
+model Booking {
+  id            String        @id @default(uuid())
+  bookingRef    String        @unique
+  userId        String
+  user          User          @relation(fields: [userId], references: [id])
+  totalAmount   Float
+  status        String        @default("PENDING") // DRAFT, PENDING, CONFIRMED, CANCELLED, COMPLETED
+  paymentStatus String        @default("PENDING") // PENDING, PROCESSING, SUCCESS, FAILED
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  items         BookingItem[]
+  payments      Payment[]
+}
+
+model BookingItem {
+  id          String          @id @default(uuid())
+  bookingId   String
+  booking     Booking         @relation(fields: [bookingId], references: [id])
+  itemType    String
+  packageId   String?
+  package     HolidayPackage? @relation(fields: [packageId], references: [id])
+  details     String
+  price       Float
+}
+
+model Payment {
+  id            String        @id @default(uuid())
+  bookingId     String
+  booking       Booking       @relation(fields: [bookingId], references: [id])
+  paymentRef    String        @unique
+  amount        Float
+  method        String
+  status        String        @default("PENDING")
+  createdAt     DateTime      @default(now())
+}
+
+model ForexOrder {
+  id            String           @id @default(uuid())
+  orderRef      String           @unique
+  userId        String
+  user          User             @relation(fields: [userId], references: [id])
+  orderType     String           // BUY, SELL, RELOAD, ENCASH, REMITTANCE
+  currency      String
+  amount        Float
+  inrAmount     Float
+  status        String           @default("DRAFT")
+  kycDocuments  String
+  createdAt     DateTime         @default(now())
+}
+
+model VisaApplication {
+  id          String   @id @default(uuid())
+  appRef      String   @unique
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  country     String
+  visaType    String
+  status      String   @default("SUBMITTED")
+  documents   String
+  createdAt   DateTime @default(now())
+}
+
+model Traveller {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  firstName   String
+  lastName    String
+  dob         String
+  passportNo  String?
+}
+
+model Wishlist {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  packageSlug String
+  createdAt   DateTime @default(now())
+}
+
+model Lead {
+  id              String     @id @default(uuid())
+  leadRef         String     @unique
+  name            String
+  phone           String
+  email           String
+  destination     String?
+  travelDate      String?
+  budget          String?
+  travellers      Int        @default(1)
+  status          String     @default("NEW") // NEW, CONTACTED, QUALIFIED, QUOTE_SENT, CONVERTED, LOST
+  customerId      String?
+  customer        User?      @relation("CustomerLeads", fields: [customerId], references: [id])
+  assignedAgentId String?
+  assignedAgent   User?      @relation("AgentLeads", fields: [assignedAgentId], references: [id])
+  notes           String?
+  createdAt       DateTime   @default(now())
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  action    String
+  entity    String
+  entityId  String?
+  oldValue  String?
+  newValue  String?
+  timestamp DateTime @default(now())
+}
