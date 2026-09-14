@@ -18,6 +18,14 @@ export interface CustomerBooking {
   destination: string;
   travelDates: string;
   travelersCount: number;
+  hotelCategory?: string;
+  basePrice?: number;
+  gstAmount?: number;
+  discountAmount?: number;
+  couponApplied?: string;
+  paymentMethod?: string;
+  transactionId?: string;
+  specialRequests?: string;
   totalAmount: number;
   status: 'Pending' | 'Confirmed' | 'Completed' | 'Cancelled';
   paymentStatus: 'Paid' | 'Partial' | 'Pending';
@@ -108,6 +116,13 @@ export const cloudStore = {
   saveBooking: (booking: Omit<CustomerBooking, 'id' | 'referenceNo' | 'createdAt'>): CustomerBooking => {
     const existing = cloudStore.getBookings();
 
+    const total = booking.totalAmount || 0;
+    const computedBase = booking.basePrice || Math.round(total / 1.05);
+    const computedGst = booking.gstAmount || Math.round(total - computedBase);
+    const hotelCat = booking.hotelCategory || '4-Star Premium Deluxe Hotel & Resort';
+    const payMethod = booking.paymentMethod || 'Online PG (Cashfree / UPI)';
+    const txnId = booking.transactionId || `CF_TXN_${Date.now()}`;
+
     // Deduplicate: If an entry for the same package & email was added recently as Pending, upgrade it to Confirmed!
     const now = Date.now();
     const recentPendingIndex = existing.findIndex((b) => {
@@ -124,6 +139,11 @@ export const cloudStore = {
       const updatedBooking: CustomerBooking = {
         ...matched,
         ...booking,
+        hotelCategory: booking.hotelCategory || matched.hotelCategory || hotelCat,
+        basePrice: booking.basePrice || matched.basePrice || computedBase,
+        gstAmount: booking.gstAmount || matched.gstAmount || computedGst,
+        paymentMethod: booking.paymentMethod || matched.paymentMethod || payMethod,
+        transactionId: booking.transactionId || matched.transactionId || txnId,
         status: booking.status || 'Confirmed',
         paymentStatus: booking.paymentStatus || 'Paid',
       };
@@ -138,6 +158,11 @@ export const cloudStore = {
       id: `bk-${Date.now()}`,
       referenceNo: refNum,
       createdAt: new Date().toISOString(),
+      hotelCategory: hotelCat,
+      basePrice: computedBase,
+      gstAmount: computedGst,
+      paymentMethod: payMethod,
+      transactionId: txnId,
     };
     const updated = [newBooking, ...existing];
     setStoredData(STORAGE_KEYS.BOOKINGS, updated);

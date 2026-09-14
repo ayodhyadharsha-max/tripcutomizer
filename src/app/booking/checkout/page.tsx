@@ -236,6 +236,15 @@ export default function BookingCheckoutPage() {
       }
 
       // 2. Save Booking to Database
+      const searchParams = new URLSearchParams(window.location.search);
+      const tierParam = searchParams.get('tier') || 'deluxe';
+      const selectedHotelCategory =
+        tierParam === 'standard'
+          ? '3-Star Standard Hotel'
+          : tierParam === 'super_deluxe'
+          ? '5-Star Luxury Heritage Resort'
+          : '4-Star Deluxe Hotel & Resort';
+
       const newBooking = cloudStore.saveBooking({
         customerName: fullName || 'Valued Traveler',
         customerEmail: travellerData.email,
@@ -244,6 +253,13 @@ export default function BookingCheckoutPage() {
         destination: pkgInfo.destination,
         travelDates: '15 Oct 2026 - 20 Oct 2026',
         travelersCount: pkgInfo.travelersCount,
+        hotelCategory: selectedHotelCategory,
+        basePrice: subtotal,
+        gstAmount: gstTax,
+        discountAmount: appliedDiscountAmount,
+        couponApplied: appliedCouponName,
+        paymentMethod: paymentMethod === 'cashfree' ? 'Cashfree PG (UPI / Cards / NetBanking)' : paymentMethod.toUpperCase(),
+        transactionId: `CF_TXN_${Date.now()}`,
         totalAmount: grandTotal,
         status: 'Confirmed',
         paymentStatus: 'Paid',
