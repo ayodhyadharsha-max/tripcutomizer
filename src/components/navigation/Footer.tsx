@@ -9,12 +9,26 @@ export const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
-      setIsSubscribed(true);
-      setEmail('');
-      setTimeout(() => setIsSubscribed(false), 4000);
+      try {
+        const formData = new FormData();
+        formData.append('access_key', 'c542ca79-b08a-4352-bf3e-1045518a0486');
+        formData.append('subject', '📩 New Newsletter Subscription');
+        formData.append('email', email);
+
+        await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formData,
+        });
+
+        setIsSubscribed(true);
+        setEmail('');
+        setTimeout(() => setIsSubscribed(false), 5000);
+      } catch (err) {
+        console.error('Failed to submit newsletter email:', err);
+      }
     }
   };
 
