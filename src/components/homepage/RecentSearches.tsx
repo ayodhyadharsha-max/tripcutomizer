@@ -26,15 +26,15 @@ export const RecentSearches: React.FC = () => {
   }, [isLoggedIn, user]);
 
   const recentSearchesList = [
-    { query: 'Dubai 5 Days Package', date: 'Popular', href: '/holidays/dubai' },
-    { query: 'Bali Honeymoon Package', date: 'Trending', href: '/holidays/bali' },
-    { query: 'Char Dham Sacred Yatra', date: 'Popular', href: '/char-dham' },
-    { query: 'Delhi to Singapore Flights', date: 'Best Fares', href: '/flights?to=Singapore' },
+    { query: 'Dubai 5 Days', date: 'Popular', href: '/holidays/dubai' },
+    { query: 'Bali Honeymoon', date: 'Trending', href: '/holidays/bali' },
+    { query: 'Char Dham Yatra', date: 'Popular', href: '/char-dham' },
+    { query: 'Delhi to Singapore', date: 'Best Fares', href: '/flights?to=Singapore' },
   ];
 
   return (
-    <div className="bg-slate-100/70 border-b border-slate-200/60 py-3 text-xs">
-      <Container className="space-y-3">
+    <div className="bg-slate-100/70 border-b border-slate-200/60 py-2.5 text-xs">
+      <Container className="space-y-2">
         {/* Dynamic Active Booking Progress Bar - Only shown if logged-in user has a pending booking */}
         {userPendingBooking && (
           <div className="bg-gradient-to-r from-brand-800 to-brand-900 text-white rounded-2xl p-4 shadow-md flex flex-col md:flex-row items-center justify-between gap-4">
@@ -70,18 +70,18 @@ export const RecentSearches: React.FC = () => {
           </div>
         )}
 
-        {/* Recent Searches Pills - 2 columns per line on mobile, wrapping flex on desktop */}
-        <div className="space-y-2 text-slate-600">
-          <div className="flex items-center space-x-1.5 font-bold text-slate-800 shrink-0">
-            <History className="w-4 h-4 text-brand-500" />
+        {/* Recent Searches Pills - Exactly 2 columns per line on phone screens */}
+        <div className="space-y-1.5 text-slate-600">
+          <div className="flex items-center space-x-1.5 font-bold text-slate-800 text-[11px] sm:text-xs">
+            <History className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand-500 shrink-0" />
             <span>Popular & Recent Searches:</span>
           </div>
-          <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-1.5 sm:gap-2">
             {recentSearchesList.map((item, idx) => (
               <Link
                 key={idx}
                 href={item.href}
-                className="bg-white border border-slate-200 hover:border-brand-500 hover:text-brand-600 px-2.5 py-1.5 rounded-xl font-semibold shadow-xs transition-colors flex items-center justify-between text-[11px] leading-tight truncate"
+                className="bg-white border border-slate-200/90 hover:border-brand-500 hover:text-brand-600 px-2 sm:px-3 py-1.5 rounded-xl font-semibold shadow-2xs transition-all flex items-center justify-between text-[10px] sm:text-[11px] leading-tight"
               >
                 <span className="truncate">{item.query}</span>
                 <span className="text-[9px] text-slate-400 font-normal ml-1 shrink-0">({item.date})</span>
