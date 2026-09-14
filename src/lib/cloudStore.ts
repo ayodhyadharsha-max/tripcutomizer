@@ -104,23 +104,49 @@ const setStoredData = <T>(key: string, data: T): void => {
   }
 };
 
-// Async helper to sync booking to Cloud Firestore DB
+// Async helper to sync booking to Cloud Server API & Firestore DB
 const syncBookingToFirestore = async (booking: CustomerBooking) => {
-  if (typeof window === 'undefined' || !db) return;
+  if (typeof window === 'undefined') return;
+
+  // 1. Post to Server-Side API endpoint (works across all devices & Incognito mode)
   try {
-    await setDoc(doc(db, 'bookings', booking.id), booking, { merge: true });
-  } catch (e) {
-    console.warn('Firestore booking sync note:', e);
+    fetch('/api/bookings', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(booking),
+    }).catch((e) => console.warn('Server API booking POST note:', e));
+  } catch (e) {}
+
+  // 2. Also sync to Cloud Firestore DB
+  if (db) {
+    try {
+      await setDoc(doc(db, 'bookings', booking.id), booking, { merge: true });
+    } catch (e) {
+      console.warn('Firestore booking sync note:', e);
+    }
   }
 };
 
-// Async helper to sync lead to Cloud Firestore DB
+// Async helper to sync lead to Cloud Server API & Firestore DB
 const syncLeadToFirestore = async (lead: CustomerLead) => {
-  if (typeof window === 'undefined' || !db) return;
+  if (typeof window === 'undefined') return;
+
+  // 1. Post to Server-Side API endpoint (works across all devices & Incognito mode)
   try {
-    await setDoc(doc(db, 'leads', lead.id), lead, { merge: true });
-  } catch (e) {
-    console.warn('Firestore lead sync note:', e);
+    fetch('/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(lead),
+    }).catch((e) => console.warn('Server API lead POST note:', e));
+  } catch (e) {}
+
+  // 2. Also sync to Cloud Firestore DB
+  if (db) {
+    try {
+      await setDoc(doc(db, 'leads', lead.id), lead, { merge: true });
+    } catch (e) {
+      console.warn('Firestore lead sync note:', e);
+    }
   }
 };
 
@@ -134,57 +160,102 @@ const syncProfileToFirestore = async (profile: UserProfile) => {
   }
 };
 
-// Initialize Realtime Cloud Firestore listeners
-let isFirestoreListenerInitialized = false;
-
-const initCloudFirestoreListeners = () => {
-  if (typeof window === 'undefined' || isFirestoreListenerInitialized || !db) return;
-  isFirestoreListenerInitialized = true;
-
+// Fetch latest global bookings & leads from Next.js Server API
+const syncFromServerApi = async () => {
+  if (typeof window === 'undefined') return;
   try {
-    // Listen to live Bookings collection in Cloud Firestore
-    onSnapshot(collection(db, 'bookings'), (snapshot) => {
-      if (!snapshot.empty) {
-        const cloudBookings: CustomerBooking[] = [];
-        snapshot.forEach((docSnap) => {
-          cloudBookings.push(docSnap.data() as CustomerBooking);
-        });
-
+    const resBookings = await fetch('/api/bookings');
+    if (resBookings.ok) {
+      const data = await resBookings.json();
+      if (data.success && Array.isArray(data.bookings) && data.bookings.length > 0) {
         const localBookings = getStoredData<CustomerBooking[]>(STORAGE_KEYS.BOOKINGS, []);
         const bookingMap = new Map<string, CustomerBooking>();
         localBookings.forEach((b) => bookingMap.set(b.id, b));
-        cloudBookings.forEach((b) => bookingMap.set(b.id, b));
+        (data.bookings as CustomerBooking[]).forEach((b) => bookingMap.set(b.id, b));
 
         const merged = Array.from(bookingMap.values()).sort(
           (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         );
-
         setStoredData(STORAGE_KEYS.BOOKINGS, merged);
       }
-    }, (err) => console.warn('Firestore bookings snapshot info:', err));
+    }
+  } catch (e) {}
 
-    // Listen to live Leads collection in Cloud Firestore
-    onSnapshot(collection(db, 'leads'), (snapshot) => {
-      if (!snapshot.empty) {
-        const cloudLeads: CustomerLead[] = [];
-        snapshot.forEach((docSnap) => {
-          cloudLeads.push(docSnap.data() as CustomerLead);
-        });
-
+  try {
+    const resLeads = await fetch('/api/leads');
+    if (resLeads.ok) {
+      const data = await resLeads.json();
+      if (data.success && Array.isArray(data.leads) && data.leads.length > 0) {
         const localLeads = getStoredData<CustomerLead[]>(STORAGE_KEYS.LEADS, []);
         const leadMap = new Map<string, CustomerLead>();
         localLeads.forEach((l) => leadMap.set(l.id, l));
-        cloudLeads.forEach((l) => leadMap.set(l.id, l));
+        (data.leads as CustomerLead[]).forEach((l) => leadMap.set(l.id, l));
 
         const merged = Array.from(leadMap.values()).sort(
           (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         );
-
         setStoredData(STORAGE_KEYS.LEADS, merged);
       }
-    }, (err) => console.warn('Firestore leads snapshot info:', err));
-  } catch (e) {
-    console.warn('Firestore listener init info:', e);
+    }
+  } catch (e) {}
+};
+
+// Initialize Realtime Cloud Firestore listeners & Server API Polling
+let isFirestoreListenerInitialized = false;
+
+const initCloudFirestoreListeners = () => {
+  if (typeof window === 'undefined' || isFirestoreListenerInitialized) return;
+  isFirestoreListenerInitialized = true;
+
+  // Immediate sync from Server API
+  syncFromServerApi();
+
+  if (db) {
+    try {
+      // Listen to live Bookings collection in Cloud Firestore
+      onSnapshot(collection(db, 'bookings'), (snapshot) => {
+        if (!snapshot.empty) {
+          const cloudBookings: CustomerBooking[] = [];
+          snapshot.forEach((docSnap) => {
+            cloudBookings.push(docSnap.data() as CustomerBooking);
+          });
+
+          const localBookings = getStoredData<CustomerBooking[]>(STORAGE_KEYS.BOOKINGS, []);
+          const bookingMap = new Map<string, CustomerBooking>();
+          localBookings.forEach((b) => bookingMap.set(b.id, b));
+          cloudBookings.forEach((b) => bookingMap.set(b.id, b));
+
+          const merged = Array.from(bookingMap.values()).sort(
+            (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          );
+
+          setStoredData(STORAGE_KEYS.BOOKINGS, merged);
+        }
+      }, (err) => console.warn('Firestore bookings snapshot info:', err));
+
+      // Listen to live Leads collection in Cloud Firestore
+      onSnapshot(collection(db, 'leads'), (snapshot) => {
+        if (!snapshot.empty) {
+          const cloudLeads: CustomerLead[] = [];
+          snapshot.forEach((docSnap) => {
+            cloudLeads.push(docSnap.data() as CustomerLead);
+          });
+
+          const localLeads = getStoredData<CustomerLead[]>(STORAGE_KEYS.LEADS, []);
+          const leadMap = new Map<string, CustomerLead>();
+          localLeads.forEach((l) => leadMap.set(l.id, l));
+          cloudLeads.forEach((l) => leadMap.set(l.id, l));
+
+          const merged = Array.from(leadMap.values()).sort(
+            (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          );
+
+          setStoredData(STORAGE_KEYS.LEADS, merged);
+        }
+      }, (err) => console.warn('Firestore leads snapshot info:', err));
+    } catch (e) {
+      console.warn('Firestore listener init info:', e);
+    }
   }
 };
 
@@ -197,6 +268,7 @@ export const cloudStore = {
   // --- BOOKINGS ---
   getBookings: (): CustomerBooking[] => {
     initCloudFirestoreListeners();
+    syncFromServerApi();
     return getStoredData<CustomerBooking[]>(STORAGE_KEYS.BOOKINGS, DEFAULT_BOOKINGS);
   },
 
@@ -258,11 +330,19 @@ export const cloudStore = {
     setStoredData(STORAGE_KEYS.BOOKINGS, updated);
     const matched = updated.find((b) => b.id === id);
     if (matched) syncBookingToFirestore(matched);
+    try {
+      fetch('/api/bookings', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, status }),
+      }).catch(() => {});
+    } catch (e) {}
   },
 
   // --- LEADS / ENQUIRIES ---
   getLeads: (): CustomerLead[] => {
     initCloudFirestoreListeners();
+    syncFromServerApi();
     return getStoredData<CustomerLead[]>(STORAGE_KEYS.LEADS, DEFAULT_LEADS);
   },
 
@@ -285,6 +365,13 @@ export const cloudStore = {
     setStoredData(STORAGE_KEYS.LEADS, updated);
     const matched = updated.find((l) => l.id === id);
     if (matched) syncLeadToFirestore(matched);
+    try {
+      fetch('/api/leads', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, status }),
+      }).catch(() => {});
+    } catch (e) {}
   },
 
   // --- USER PROFILES & PERSISTENT SESSION ---
