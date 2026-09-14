@@ -15,7 +15,7 @@ import {
   Star, Clock, MapPin, CheckCircle2, ChevronRight, ChevronDown, ChevronUp,
   Hotel, Plane, Utensils, ShieldCheck, MessageCircle, Share2, Download,
   PhoneCall, Sparkles, Tag, Check, X, Car, Info, Users, ArrowRight,
-  CheckCircle, XCircle, FileText, Plus, Minus, Calendar, ArrowLeft, Baby, UserCheck
+  CheckCircle, XCircle, FileText, Plus, Minus, Calendar, ArrowLeft, Baby, UserCheck, Train, Bus
 } from 'lucide-react';
 
 export type ChildAgeCategory = 'infant' | 'childNoBed' | 'childWithBed';
@@ -59,9 +59,18 @@ export default function PackageDetailPage({ params }: { params: { destination: s
 
   // Thomas Cook Style Travel Details & Calculate Price Wizard View State
   const [isCalculatePriceView, setIsCalculatePriceView] = useState(false);
-  const [joiningCity, setJoiningCity] = useState('Joining Direct');
+  
+  // Dynamic Joining Location State based on package destination
+  const defaultJoiningOption = `Joining Direct in ${pkg.destination} (Bus/Train/Self-Reach)`;
+  const [joiningCity, setJoiningCity] = useState(defaultJoiningOption);
   const [travelDate, setTravelDate] = useState('2026-09-25');
   
+  useEffect(() => {
+    if (pkg?.destination) {
+      setJoiningCity(`Joining Direct in ${pkg.destination} (Bus/Train/Self-Reach)`);
+    }
+  }, [pkg?.destination]);
+
   // Clean & Intuitive Room Configuration State
   const [rooms, setRooms] = useState<RoomConfig[]>([
     { adults: 2, hasChildren: false, children: [] }
@@ -1021,9 +1030,9 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                   
                   {/* Form Step 1: Joining Direct & Date of Travel */}
                   <form onSubmit={handleCalculatePrice} className="space-y-6">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 space-y-3">
                       
-                      {/* Departure City / Joining Location Dropdown */}
+                      {/* Departure City / Joining Location Dropdown (DYNAMIC DESTINATION OPTIONS) */}
                       <div className="space-y-1.5">
                         <label className="text-xs font-bold text-slate-700 block">Joining Location / Departure City</label>
                         <div className="relative">
@@ -1032,23 +1041,42 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                             onChange={(e) => { setJoiningCity(e.target.value); setIsPriceCalculated(false); }}
                             className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-3 text-xs font-bold text-slate-900 focus:outline-none focus:border-brand-600 appearance-none pr-8 cursor-pointer"
                           >
-                            <option value="Joining Direct">Joining Direct (Land Only Package)</option>
-                            <option value="New Delhi">New Delhi (DEL)</option>
-                            <option value="Mumbai">Mumbai (BOM)</option>
-                            <option value="Bengaluru">Bengaluru (BLR)</option>
-                            <option value="Kolkata">Kolkata (CCU)</option>
-                            <option value="Hyderabad">Hyderabad (HYD)</option>
-                            <option value="Chennai">Chennai (MAA)</option>
-                            <option value="Ahmedabad">Ahmedabad (AMD)</option>
+                            <option value={`Joining Direct in ${pkg.destination} (Bus/Train/Self-Reach)`}>
+                              📍 Joining Direct in {pkg.destination} (Land Only - Bus / Train / Self Arrival)
+                            </option>
+                            <option value={`${pkg.destination} Railway Station Pickup`}>
+                              🚆 {pkg.destination} Railway Station Pickup
+                            </option>
+                            <option value={`${pkg.destination} Bus Stand / Main City Pickup`}>
+                              🚌 {pkg.destination} Bus Stand / City Center Pickup
+                            </option>
+                            <option value={`${pkg.destination} Airport Pickup`}>
+                              ✈️ {pkg.destination} Airport Pickup
+                            </option>
+                            <option value="New Delhi (DEL)">✈️ New Delhi (DEL Flight / Volvo Pickup)</option>
+                            <option value="Mumbai (BOM)">✈️ Mumbai (BOM Flight Pickup)</option>
+                            <option value="Bengaluru (BLR)">✈️ Bengaluru (BLR Flight Pickup)</option>
+                            <option value="Kolkata (CCU)">✈️ Kolkata (CCU Flight Pickup)</option>
+                            <option value="Hyderabad (HYD)">✈️ Hyderabad (HYD Flight Pickup)</option>
+                            <option value="Chennai (MAA)">✈️ Chennai (MAA Flight Pickup)</option>
+                            <option value="Ahmedabad (AMD)">✈️ Ahmedabad (AMD Flight Pickup)</option>
                           </select>
                           <ChevronDown className="w-4 h-4 text-slate-500 absolute right-3 top-3.5 pointer-events-none" />
+                        </div>
+
+                        {/* Direct Pickup Badge Note */}
+                        <div className="p-3 bg-emerald-50/80 border border-emerald-200 rounded-xl text-[11px] font-semibold text-emerald-900 flex items-start space-x-2">
+                          <MapPin className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                          <span>
+                            <strong>Direct Destination Pickup Included:</strong> Private cab pickup provided directly at <strong>{pkg.destination}</strong> Railway Station, Bus Stand, or Airport upon your arrival by train, bus, or private vehicle.
+                          </span>
                         </div>
                       </div>
 
                       {/* Travel Date Selection */}
-                      <div className="space-y-1.5">
+                      <div className="space-y-1.5 pt-2">
                         <label className="text-xs font-bold text-slate-700 block">Date of Travel *</label>
-                        <div className="relative">
+                        <div className="relative max-w-sm">
                           <input
                             required
                             type="date"
