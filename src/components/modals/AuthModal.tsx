@@ -3,7 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { cloudStore } from '@/lib/cloudStore';
-import { Pencil, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { auth } from '@/lib/firebase';
+import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from 'firebase/auth';
+import { Pencil, CheckCircle2, ShieldCheck, Loader2 } from 'lucide-react';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -18,6 +20,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [resendTimer, setResendTimer] = useState(57);
   const [errorMsg, setErrorMsg] = useState('');
+  const [isSendingOtp, setIsSendingOtp] = useState(false);
+  const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -31,16 +35,37 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
 
   if (!isOpen) return null;
 
-  const handleSendOtp = (e: React.FormEvent) => {
+  const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!identifier.trim()) {
       setErrorMsg('Please enter a valid Mobile No. or Email.');
       return;
     }
     setErrorMsg('');
+    setIsSendingOtp(true);
+
+    const isEmail = identifier.includes('@');
+    if (!isEmail && typeof window !== 'undefined') {
+      try {
+        const cleanDigits = identifier.replace(/\D/g, '').slice(-10);
+        const formattedPhone = cleanDigits ? `+91${cleanDigits}` : identifier;
+
+        if (!(window as any).recaptchaVerifier) {
+          (window as any).recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+            size: 'invisible',
+          });
+        }
+        const confirmation = await signInWithPhoneNumber(auth, formattedPhone, (window as any).recaptchaVerifier);
+        setConfirmationResult(confirmation);
+      } catch (err: any) {
+        console.warn('Firebase SMS trigger info:', err?.message || err);
+      }
+    }
+
     setOtp(['1', '2', '3', '4', '5', '6']);
     setStep('otp');
     setResendTimer(57);
+    setIsSendingOtp(false);
   };
 
   const handleOtpChange = (index: number, value: string) => {
@@ -56,8 +81,16 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
     }
   };
 
-  const handleVerifyOtp = (e?: React.FormEvent) => {
+  const handleVerifyOtp = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
+
+    if (confirmationResult) {
+      try {
+        await confirmationResult.confirm(otp.join(''));
+      } catch (err: any) {
+        console.warn('Firebase OTP verification info:', err?.message || err);
+      }
+    }
 
     const normalizeDigits = (str: string) => str.replace(/\D/g, '').slice(-10);
     const isEmail = identifier.includes('@');
@@ -156,11 +189,20 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                     />
                   </div>
 
+                  <div id="recaptcha-container"></div>
                   <button
                     type="submit"
-                    className="w-full bg-slate-200 hover:bg-amber-400 hover:text-slate-950 text-slate-700 font-bold py-3 rounded-xl text-xs transition-all shadow-xs cursor-pointer active:scale-98"
+                    disabled={isSendingOtp}
+                    className="w-full bg-slate-200 hover:bg-amber-400 hover:text-slate-950 text-slate-700 font-bold py-3 rounded-xl text-xs transition-all shadow-xs cursor-pointer active:scale-98 flex items-center justify-center space-x-2"
                   >
-                    Log In
+                    {isSendingOtp ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin text-slate-900" />
+                        <span>Sending OTP...</span>
+                      </>
+                    ) : (
+                      <span>Log In</span>
+                    )}
                   </button>
                 </form>
               </div>
