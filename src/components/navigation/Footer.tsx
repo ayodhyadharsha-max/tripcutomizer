@@ -22,12 +22,12 @@ export const Footer: React.FC = () => {
     <footer className="relative bg-brand-900 text-slate-300 text-xs">
       {/* Overlapping "Stay in the Loop!" Newsletter Card */}
       <Container className="relative z-20">
-        <div className="bg-brand-950 rounded-3xl p-8 sm:p-10 border border-white/10 shadow-2xl relative overflow-hidden -mb-16">
+        <div className="bg-brand-950 rounded-2xl sm:rounded-3xl p-6 sm:p-10 border border-white/10 shadow-2xl relative overflow-hidden -mb-16">
           {/* Subtle World Landmark Silhouettes Background */}
           <div className="absolute right-0 bottom-0 top-0 w-1/2 opacity-10 pointer-events-none bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]" />
 
-          <div className="relative z-10 max-w-2xl space-y-4">
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+          <div className="relative z-10 max-w-2xl space-y-3 sm:space-y-4">
+            <h3 className="text-xl sm:text-3xl font-extrabold text-white tracking-tight">
               Stay in the Loop!
             </h3>
             <p className="text-slate-300 text-xs sm:text-sm font-medium">
@@ -37,7 +37,7 @@ export const Footer: React.FC = () => {
             {/* Newsletter Input Form */}
             <form onSubmit={handleSubscribe} className="pt-2">
               {isSubscribed ? (
-                <div className="bg-emerald-500/20 border border-emerald-400 text-emerald-300 font-bold px-5 py-3 rounded-full text-xs flex items-center gap-2 max-w-md animate-in fade-in duration-200">
+                <div className="bg-emerald-500/20 border border-emerald-400 text-emerald-300 font-bold px-4 py-2.5 rounded-full text-xs flex items-center gap-2 max-w-md animate-in fade-in duration-200">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                   <span>Thank you for subscribing! Check your inbox for exclusive deals.</span>
                 </div>
@@ -49,11 +49,11 @@ export const Footer: React.FC = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full bg-transparent px-4 text-xs font-semibold text-white placeholder-slate-400 focus:outline-none"
+                    className="w-full bg-transparent px-3 sm:px-4 text-xs font-semibold text-white placeholder-slate-400 focus:outline-none"
                   />
                   <button
                     type="submit"
-                    className="bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs px-6 py-2.5 rounded-full transition-all shadow-md shrink-0 cursor-pointer"
+                    className="bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs px-4 py-2 sm:px-6 sm:py-2.5 rounded-full transition-all shadow-md shrink-0 cursor-pointer"
                   >
                     Subscribe
                   </button>
@@ -65,7 +65,7 @@ export const Footer: React.FC = () => {
       </Container>
 
       {/* Main Footer Container */}
-      <div className="pt-28 pb-12 border-t border-brand-800/60 relative z-10">
+      <div className="pt-24 sm:pt-28 pb-20 sm:pb-12 border-t border-brand-800/60 relative z-10">
         <Container>
           {/* Top Category Tab Links & PCI DSS Badge Row */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between pb-8 mb-10 border-b border-brand-800/80 gap-6">

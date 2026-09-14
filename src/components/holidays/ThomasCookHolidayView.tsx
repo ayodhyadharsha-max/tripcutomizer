@@ -310,7 +310,7 @@ export function tripcustomizerHolidayView() {
   return (
     <div className="bg-slate-50 min-h-screen">
       {/* SECTION 1: HERO BANNER (Full-width cliff/beach ocean backdrop with centered search) */}
-      <div className="relative w-full h-[380px] sm:h-[480px] bg-slate-900 flex items-center justify-center overflow-hidden">
+      <div className="relative w-full h-[340px] sm:h-[480px] bg-slate-900 flex items-center justify-center overflow-hidden">
         <Image
           src="/destinations/hero-holidays.jpg"
           alt="Perfect Holidays"
@@ -321,13 +321,13 @@ export function tripcustomizerHolidayView() {
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/40 to-slate-900/60" />
 
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <span className="bg-white/10 backdrop-blur-md border border-white/20 text-white text-[11px] font-extrabold px-4 py-1.5 rounded-full inline-block mb-4 tracking-wider uppercase">
+          <span className="bg-white/10 backdrop-blur-md border border-white/20 text-white text-[10px] sm:text-[11px] font-extrabold px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full inline-block mb-3 sm:mb-4 tracking-wider uppercase">
             YOUR JOURNEY, OUR EXPERTISE
           </span>
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight mb-3 font-serif drop-shadow-md">
+          <h1 className="text-2xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight mb-2 sm:mb-3 font-serif drop-shadow-md leading-tight">
             Perfect Holidays, Crafted Just for You
           </h1>
-          <p className="text-slate-200 text-sm sm:text-lg font-medium mb-8 drop-shadow-sm">
+          <p className="text-slate-200 text-xs sm:text-lg font-medium mb-6 sm:mb-8 drop-shadow-sm">
             Explore 50+ curated tour packages across India & worldwide destinations
           </p>
 
@@ -339,18 +339,18 @@ export function tripcustomizerHolidayView() {
                 window.location.href = `/holidays?search=${encodeURIComponent(heroSearch)}`;
               }
             }}
-            className="bg-white p-2 pl-6 rounded-full shadow-2xl max-w-2xl mx-auto flex items-center justify-between border border-slate-100"
+            className="bg-white p-1.5 pl-4 sm:p-2 sm:pl-6 rounded-full shadow-2xl max-w-2xl mx-auto flex items-center justify-between border border-slate-100"
           >
             <input
               type="text"
-              placeholder='Search "Australia, Kashmir, Dubai, Kerala..."'
+              placeholder='Search "Australia, Kashmir, Dubai..."'
               value={heroSearch}
               onChange={(e) => setHeroSearch(e.target.value)}
-              className="w-full text-slate-800 placeholder-slate-400 font-semibold text-sm focus:outline-none bg-transparent pr-4"
+              className="w-full text-slate-800 placeholder-slate-400 font-semibold text-xs sm:text-sm focus:outline-none bg-transparent pr-2 sm:pr-4"
             />
             <button
               type="submit"
-              className="bg-brand-600 hover:bg-brand-700 text-white p-3 sm:px-6 sm:py-3.5 rounded-full font-bold text-xs flex items-center space-x-2 shrink-0 shadow-md transition-all"
+              className="bg-brand-600 hover:bg-brand-700 text-white px-4 py-2.5 sm:px-6 sm:py-3.5 rounded-full font-bold text-xs flex items-center space-x-2 shrink-0 shadow-md transition-all"
             >
               <Search className="w-4 h-4" />
               <span className="hidden sm:inline">Search</span>
@@ -359,24 +359,24 @@ export function tripcustomizerHolidayView() {
         </div>
       </div>
 
-      <Container className="py-12 space-y-16">
+      <Container className="py-8 sm:py-12 space-y-12 sm:space-y-16 pb-20 sm:pb-12">
         {/* SECTION 2: TRENDING HOLIDAY DESTINATIONS (Signature Oval Pills) */}
         <div>
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8 gap-3 sm:gap-4">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-black text-slate-900">
+              <h2 className="text-xl sm:text-3xl font-black text-slate-900">
                 Trending Holiday Destinations
               </h2>
-              <p className="text-slate-500 text-xs sm:text-sm mt-1">
+              <p className="text-slate-500 text-xs sm:text-sm mt-0.5 sm:mt-1">
                 Handpicked popular vacation spots for your next big trip
               </p>
             </div>
 
             {/* Pill Toggle */}
-            <div className="bg-slate-200/70 p-1 rounded-full flex space-x-1 shrink-0">
+            <div className="bg-slate-200/70 p-1 rounded-full flex space-x-1 shrink-0 w-full sm:w-auto justify-center">
               <button
                 onClick={() => setTrendingCategory('INTERNATIONAL')}
-                className={`text-xs font-extrabold px-5 py-2 rounded-full transition-all ${
+                className={`text-xs font-extrabold px-4 sm:px-5 py-2 rounded-full transition-all flex-1 sm:flex-initial ${
                   trendingCategory === 'INTERNATIONAL'
                     ? 'bg-brand-700 text-white shadow-sm'
                     : 'text-slate-600 hover:text-slate-900'
@@ -386,7 +386,7 @@ export function tripcustomizerHolidayView() {
               </button>
               <button
                 onClick={() => setTrendingCategory('INDIA')}
-                className={`text-xs font-extrabold px-5 py-2 rounded-full transition-all ${
+                className={`text-xs font-extrabold px-4 sm:px-5 py-2 rounded-full transition-all flex-1 sm:flex-initial ${
                   trendingCategory === 'INDIA'
                     ? 'bg-brand-700 text-white shadow-sm'
                     : 'text-slate-600 hover:text-slate-900'
@@ -398,12 +398,12 @@ export function tripcustomizerHolidayView() {
           </div>
 
           {/* Oval Capsule Cards Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-6">
             {currentTrending.map((dest, idx) => (
               <Link
                 key={idx}
                 href={`/holidays/${dest.slug}`}
-                className="group relative h-64 sm:h-72 rounded-[50px] sm:rounded-[65px] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-slate-200/60 block bg-slate-900"
+                className="group relative h-48 sm:h-72 rounded-[32px] sm:rounded-[65px] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-slate-200/60 block bg-slate-900"
               >
                 <Image
                   src={dest.image}
@@ -413,8 +413,8 @@ export function tripcustomizerHolidayView() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-transparent to-slate-900/80" />
 
-                <div className="absolute top-6 inset-x-0 text-center px-2">
-                  <span className="text-white font-black text-sm sm:text-base tracking-wider drop-shadow-md group-hover:text-accent-400 transition-colors uppercase">
+                <div className="absolute top-4 sm:top-6 inset-x-0 text-center px-2">
+                  <span className="text-white font-black text-xs sm:text-base tracking-wider drop-shadow-md group-hover:text-accent-400 transition-colors uppercase">
                     {dest.name}
                   </span>
                 </div>
@@ -422,10 +422,10 @@ export function tripcustomizerHolidayView() {
             ))}
           </div>
 
-          <div className="text-center mt-8">
+          <div className="text-center mt-6 sm:mt-8">
             <Link
               href={trendingCategory === 'INTERNATIONAL' ? '/holidays/international' : '/holidays/india'}
-              className="bg-brand-700 hover:bg-brand-800 text-white font-extrabold text-xs sm:text-sm px-7 py-3 rounded-full shadow-md inline-flex items-center space-x-2 transition-all"
+              className="bg-brand-700 hover:bg-brand-800 text-white font-extrabold text-xs sm:text-sm px-6 py-2.5 sm:px-7 sm:py-3 rounded-full shadow-md inline-flex items-center space-x-2 transition-all"
             >
               <span>Explore Now</span>
               <ArrowUpRight className="w-4 h-4" />
@@ -502,24 +502,24 @@ export function tripcustomizerHolidayView() {
         </div>
 
         {/* SECTION 4: INTERNATIONAL HOLIDAY SECTION */}
-        <div className="bg-amber-50/40 border border-amber-100 p-8 sm:p-10 rounded-3xl">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 border-b border-amber-200/60 pb-4 gap-4">
+        <div className="bg-amber-50/40 border border-amber-100 p-5 sm:p-10 rounded-2xl sm:rounded-3xl">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8 border-b border-amber-200/60 pb-4 gap-3 sm:gap-4">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-black text-slate-900">
+              <h2 className="text-xl sm:text-3xl font-black text-slate-900">
                 International Holiday
               </h2>
-              <p className="text-slate-500 text-xs sm:text-sm mt-1">
+              <p className="text-slate-500 text-xs sm:text-sm mt-0.5 sm:mt-1">
                 Curated vacations across continents with flights & visa support
               </p>
             </div>
 
-            {/* Region Sub-tabs */}
-            <div className="flex flex-wrap gap-4 text-xs font-bold text-slate-500">
+            {/* Region Sub-tabs (Horizontally scrollable on mobile) */}
+            <div className="flex overflow-x-auto no-scrollbar gap-4 text-xs font-bold text-slate-500 w-full sm:w-auto pb-1 sm:pb-0">
               {(['Europe', 'Asia', 'Oceania', 'Middle East', 'Africa', 'America'] as const).map((reg) => (
                 <button
                   key={reg}
                   onClick={() => setIntlRegionTab(reg)}
-                  className={`pb-1 transition-all ${
+                  className={`pb-1 transition-all whitespace-nowrap shrink-0 ${
                     intlRegionTab === reg
                       ? 'border-b-2 border-brand-700 text-brand-700 font-extrabold'
                       : 'hover:text-slate-900'
@@ -531,11 +531,11 @@ export function tripcustomizerHolidayView() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {(intlRegionCards[intlRegionTab] || intlRegionCards['Europe']).map((card, idx) => (
               <div
                 key={idx}
-                className="group relative h-64 rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all bg-slate-900 border border-slate-200"
+                className="group relative h-56 sm:h-64 rounded-2xl sm:rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all bg-slate-900 border border-slate-200"
               >
                 <Image
                   src={card.image}
@@ -545,20 +545,20 @@ export function tripcustomizerHolidayView() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
 
-                <div className="absolute bottom-5 left-5 right-16 z-10 text-white">
-                  <h3 className="font-black text-lg group-hover:text-amber-300 transition-colors mb-1">
+                <div className="absolute bottom-4 sm:bottom-5 left-4 sm:left-5 right-14 sm:right-16 z-10 text-white">
+                  <h3 className="font-black text-base sm:text-lg group-hover:text-amber-300 transition-colors mb-0.5 sm:mb-1">
                     {card.title}
                   </h3>
                   <p className="text-xs text-slate-300 font-semibold">
-                    Starting at <span className="text-amber-400 font-black text-sm">{formatCurrency(card.price)}</span>
+                    Starting at <span className="text-amber-400 font-black text-xs sm:text-sm">{formatCurrency(card.price)}</span>
                   </p>
                 </div>
 
                 <Link
                   href={`/holidays/${card.slug}`}
-                  className="absolute bottom-4 right-4 z-20 bg-amber-400 hover:bg-amber-300 text-slate-950 p-3.5 rounded-full shadow-md transition-transform group-hover:scale-110 flex items-center justify-center"
+                  className="absolute bottom-3.5 sm:bottom-4 right-3.5 sm:right-4 z-20 bg-amber-400 hover:bg-amber-300 text-slate-950 p-3 sm:p-3.5 rounded-full shadow-md transition-transform group-hover:scale-110 flex items-center justify-center"
                 >
-                  <ArrowUpRight className="w-5 h-5 stroke-[3]" />
+                  <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-[3]" />
                 </Link>
               </div>
             ))}
@@ -567,23 +567,23 @@ export function tripcustomizerHolidayView() {
 
         {/* SECTION 5: INDIA & AROUND HOLIDAY SECTION */}
         <div>
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 border-b border-slate-200 pb-4 gap-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8 border-b border-slate-200 pb-4 gap-3 sm:gap-4">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-black text-slate-900">
+              <h2 className="text-xl sm:text-3xl font-black text-slate-900">
                 India & Around Holiday
               </h2>
-              <p className="text-slate-500 text-xs sm:text-sm mt-1">
+              <p className="text-slate-500 text-xs sm:text-sm mt-0.5 sm:mt-1">
                 Explore majestic mountains, serene backwaters & sacred heritage trails
               </p>
             </div>
 
-            {/* Region Sub-tabs */}
-            <div className="flex space-x-6 text-xs font-bold text-slate-500">
+            {/* Region Sub-tabs (Horizontally scrollable on mobile) */}
+            <div className="flex overflow-x-auto no-scrollbar gap-4 text-xs font-bold text-slate-500 w-full sm:w-auto pb-1 sm:pb-0">
               {(['North', 'South', 'East', 'West', 'Around'] as const).map((reg) => (
                 <button
                   key={reg}
                   onClick={() => setIndiaRegionTab(reg)}
-                  className={`pb-1 transition-all ${
+                  className={`pb-1 transition-all whitespace-nowrap shrink-0 ${
                     indiaRegionTab === reg
                       ? 'border-b-2 border-brand-700 text-brand-700 font-extrabold'
                       : 'hover:text-slate-900'
@@ -595,11 +595,11 @@ export function tripcustomizerHolidayView() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {(indiaRegionCards[indiaRegionTab] || indiaRegionCards['North']).map((card, idx) => (
               <div
                 key={idx}
-                className="group relative h-72 rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all bg-slate-900 border border-slate-200"
+                className="group relative h-56 sm:h-72 rounded-2xl sm:rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all bg-slate-900 border border-slate-200"
               >
                 <Image
                   src={card.image}
@@ -609,18 +609,18 @@ export function tripcustomizerHolidayView() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
 
-                <div className="absolute bottom-5 left-5 right-14 z-10 text-white">
-                  <h3 className="font-black text-lg group-hover:text-amber-300 transition-colors mb-1">
+                <div className="absolute bottom-4 sm:bottom-5 left-4 sm:left-5 right-12 sm:right-14 z-10 text-white">
+                  <h3 className="font-black text-base sm:text-lg group-hover:text-amber-300 transition-colors mb-0.5 sm:mb-1">
                     {card.title}
                   </h3>
                   <p className="text-xs text-slate-300 font-semibold">
-                    Starting at <span className="text-amber-400 font-black text-sm">{formatCurrency(card.price)}</span>
+                    Starting at <span className="text-amber-400 font-black text-xs sm:text-sm">{formatCurrency(card.price)}</span>
                   </p>
                 </div>
 
                 <Link
                   href={`/holidays/${card.slug}`}
-                  className="absolute bottom-4 right-4 z-20 bg-amber-400 hover:bg-amber-300 text-slate-950 p-3 rounded-full shadow-md transition-transform group-hover:scale-110 flex items-center justify-center"
+                  className="absolute bottom-3.5 sm:bottom-4 right-3.5 sm:right-4 z-20 bg-amber-400 hover:bg-amber-300 text-slate-950 p-2.5 sm:p-3 rounded-full shadow-md transition-transform group-hover:scale-110 flex items-center justify-center"
                 >
                   <ArrowUpRight className="w-4 h-4 stroke-[3]" />
                 </Link>
@@ -987,21 +987,21 @@ export function tripcustomizerHolidayView() {
 
         {/* SECTION 9: EXPLORE THEMES THAT INSPIRE TRAVEL */}
         <div>
-          <div className="mb-8">
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900">
+          <div className="mb-6 sm:mb-8">
+            <h2 className="text-xl sm:text-3xl font-black text-slate-900">
               Explore Themes that Inspire Travel
             </h2>
-            <p className="text-slate-500 text-xs sm:text-sm mt-1">
+            <p className="text-slate-500 text-xs sm:text-sm mt-0.5 sm:mt-1">
               Find itineraries tailored to your unique travel style
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-6">
             {themeCards.map((theme, i) => (
               <Link
                 key={i}
                 href={`/holidays/${theme.slug}`}
-                className="group relative h-[380px] rounded-[36px] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-slate-900 border border-slate-200 block"
+                className="group relative h-[260px] sm:h-[380px] rounded-3xl sm:rounded-[36px] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 bg-slate-900 border border-slate-200 block"
               >
                 <Image
                   src={theme.image}
@@ -1012,11 +1012,11 @@ export function tripcustomizerHolidayView() {
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
 
                 {/* Top Tags Pills */}
-                <div className="absolute top-4 left-4 right-12 z-10 flex flex-wrap gap-1.5">
-                  {theme.tags.slice(0, 3).map((tag, tIdx) => (
+                <div className="absolute top-3 sm:top-4 left-3 sm:left-4 right-10 sm:right-12 z-10 flex flex-wrap gap-1">
+                  {theme.tags.slice(0, 2).map((tag, tIdx) => (
                     <span
                       key={tIdx}
-                      className="bg-white/20 backdrop-blur-md text-white text-[9px] font-extrabold px-2 py-0.5 rounded-full border border-white/30"
+                      className="bg-white/20 backdrop-blur-md text-white text-[8px] sm:text-[9px] font-extrabold px-1.5 sm:px-2 py-0.5 rounded-full border border-white/30 truncate"
                     >
                       {tag}
                     </span>
@@ -1024,16 +1024,16 @@ export function tripcustomizerHolidayView() {
                 </div>
 
                 {/* Top Right Arrow */}
-                <div className="absolute top-4 right-4 z-20 bg-amber-400 group-hover:bg-amber-300 text-slate-950 p-2.5 rounded-full shadow-md transition-transform group-hover:scale-110">
-                  <ArrowUpRight className="w-4 h-4 stroke-[3]" />
+                <div className="absolute top-3 sm:top-4 right-3 sm:right-4 z-20 bg-amber-400 group-hover:bg-amber-300 text-slate-950 p-2 sm:p-2.5 rounded-full shadow-md transition-transform group-hover:scale-110">
+                  <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[3]" />
                 </div>
 
                 {/* Bottom Content */}
-                <div className="absolute bottom-6 left-6 right-6 z-10 text-white">
-                  <h3 className="font-black text-2xl group-hover:text-amber-300 transition-colors mb-1">
+                <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 z-10 text-white">
+                  <h3 className="font-black text-lg sm:text-2xl group-hover:text-amber-300 transition-colors mb-0.5 sm:mb-1">
                     {theme.title}
                   </h3>
-                  <p className="text-xs text-slate-200 font-medium leading-snug line-clamp-2">
+                  <p className="text-[10px] sm:text-xs text-slate-200 font-medium leading-snug line-clamp-2">
                     {theme.description}
                   </p>
                 </div>
@@ -1042,13 +1042,13 @@ export function tripcustomizerHolidayView() {
           </div>
         </div>
 
-        {/* SECTION 10: WHY THOMAS COOK ? (AIRPORT LOUNGE FAMILY BACKDROP & 5 CARDS) */}
-        <div className="space-y-8">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900">
+        {/* SECTION 10: WHY TRIPCUSTOMIZER ? (AIRPORT LOUNGE FAMILY BACKDROP & 5 CARDS) */}
+        <div className="space-y-6 sm:space-y-8">
+          <h2 className="text-xl sm:text-3xl font-black text-slate-900">
             Why tripcustomizer ?
           </h2>
 
-          <div className="relative rounded-[40px] overflow-hidden shadow-xl min-h-[380px] sm:h-[420px] bg-slate-900 p-6 sm:p-10 flex flex-col justify-end">
+          <div className="relative rounded-3xl sm:rounded-[40px] overflow-hidden shadow-xl min-h-[360px] sm:h-[420px] bg-slate-900 p-5 sm:p-10 flex flex-col justify-end">
             <Image
               src="/destinations/why-thomas-cook.jpg"
               alt="Why Choose Us"
@@ -1058,67 +1058,67 @@ export function tripcustomizerHolidayView() {
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
 
             {/* 5 Bottom Overlay Cards Grid */}
-            <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-              <div className="bg-gradient-to-b from-orange-500/90 to-amber-600/90 backdrop-blur-md p-5 rounded-3xl text-white shadow-lg">
-                <h3 className="font-black text-base mb-1">Trusted Advisor</h3>
-                <p className="text-xs text-orange-100 leading-snug">Trusted Since 1881, Designed for Modern Journeys.</p>
+            <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
+              <div className="bg-gradient-to-b from-orange-500/90 to-amber-600/90 backdrop-blur-md p-4 sm:p-5 rounded-2xl sm:rounded-3xl text-white shadow-lg">
+                <h3 className="font-black text-sm sm:text-base mb-0.5 sm:mb-1">Trusted Advisor</h3>
+                <p className="text-[11px] sm:text-xs text-orange-100 leading-snug">Trusted Since 1881, Designed for Modern Journeys.</p>
               </div>
 
-              <div className="bg-gradient-to-b from-orange-600/90 to-rose-600/90 backdrop-blur-md p-5 rounded-3xl text-white shadow-lg">
-                <h3 className="font-black text-base mb-1">Customized Holidays</h3>
-                <p className="text-xs text-orange-100 leading-snug">Offers the ability to personalize your holidays according to your needs.</p>
+              <div className="bg-gradient-to-b from-orange-600/90 to-rose-600/90 backdrop-blur-md p-4 sm:p-5 rounded-2xl sm:rounded-3xl text-white shadow-lg">
+                <h3 className="font-black text-sm sm:text-base mb-0.5 sm:mb-1">Customized Holidays</h3>
+                <p className="text-[11px] sm:text-xs text-orange-100 leading-snug">Offers the ability to personalize your holidays according to your needs.</p>
               </div>
 
-              <div className="bg-gradient-to-b from-blue-600/90 to-indigo-600/90 backdrop-blur-md p-5 rounded-3xl text-white shadow-lg">
-                <h3 className="font-black text-base mb-1">Wide Varieties of Holidays</h3>
-                <p className="text-xs text-blue-100 leading-snug">From adventure trips to romantic honeymoon getaways, we have your back.</p>
+              <div className="bg-gradient-to-b from-blue-600/90 to-indigo-600/90 backdrop-blur-md p-4 sm:p-5 rounded-2xl sm:rounded-3xl text-white shadow-lg">
+                <h3 className="font-black text-sm sm:text-base mb-0.5 sm:mb-1">Wide Varieties</h3>
+                <p className="text-[11px] sm:text-xs text-blue-100 leading-snug">From adventure trips to romantic honeymoon getaways, we have your back.</p>
               </div>
 
-              <div className="bg-gradient-to-b from-cyan-600/90 to-blue-600/90 backdrop-blur-md p-5 rounded-3xl text-white shadow-lg">
-                <h3 className="font-black text-base mb-1">Seamless Booking</h3>
-                <p className="text-xs text-cyan-100 leading-snug">Book from a wide selection of travel plans with easy online payments.</p>
+              <div className="bg-gradient-to-b from-cyan-600/90 to-blue-600/90 backdrop-blur-md p-4 sm:p-5 rounded-2xl sm:rounded-3xl text-white shadow-lg">
+                <h3 className="font-black text-sm sm:text-base mb-0.5 sm:mb-1">Seamless Booking</h3>
+                <p className="text-[11px] sm:text-xs text-cyan-100 leading-snug">Book from a wide selection of travel plans with easy online payments.</p>
               </div>
 
-              <div className="bg-gradient-to-b from-amber-400 to-yellow-500 text-slate-950 p-5 rounded-3xl shadow-lg">
-                <h3 className="font-black text-base mb-1">Convenient Holidays</h3>
-                <p className="text-xs text-slate-900 font-medium leading-snug">All-in-one travel plans featuring accommodations, flights, activities, and meals.</p>
+              <div className="bg-gradient-to-b from-amber-400 to-yellow-500 text-slate-950 p-4 sm:p-5 rounded-2xl sm:rounded-3xl shadow-lg">
+                <h3 className="font-black text-sm sm:text-base mb-0.5 sm:mb-1">Convenient Holidays</h3>
+                <p className="text-[11px] sm:text-xs text-slate-900 font-medium leading-snug">All-in-one travel plans featuring accommodations, flights, activities, and meals.</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* SECTION 11: WHY CUSTOMERS LOVE THOMAS COOK (LEGACY STATS & TESTIMONIALS) */}
-        <div className="bg-amber-50/50 border border-amber-200/60 rounded-[40px] p-8 sm:p-12 shadow-sm text-center">
-          <h2 className="text-3xl sm:text-5xl font-black text-amber-950 font-serif mb-10">
+        {/* SECTION 11: WHY CUSTOMERS LOVE TRIPCUSTOMIZER (LEGACY STATS & TESTIMONIALS) */}
+        <div className="bg-amber-50/50 border border-amber-200/60 rounded-3xl sm:rounded-[40px] p-6 sm:p-12 shadow-sm text-center">
+          <h2 className="text-2xl sm:text-5xl font-black text-amber-950 font-serif mb-6 sm:mb-10">
             Why Customers Love tripcustomizer
           </h2>
 
           {/* Stat Pillars */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 border-b border-amber-200/80 pb-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12 border-b border-amber-200/80 pb-6 sm:pb-10">
             <div>
-              <span className="text-3xl sm:text-5xl font-black text-amber-900 block mb-1">140+</span>
-              <span className="text-xs font-bold text-amber-800 uppercase tracking-wider">Years of legacy</span>
+              <span className="text-2xl sm:text-5xl font-black text-amber-900 block mb-0.5 sm:mb-1">140+</span>
+              <span className="text-[10px] sm:text-xs font-bold text-amber-800 uppercase tracking-wider">Years of legacy</span>
             </div>
             <div className="border-l border-amber-200">
-              <span className="text-3xl sm:text-5xl font-black text-amber-900 block mb-1">4,000+</span>
-              <span className="text-xs font-bold text-amber-800 uppercase tracking-wider">Tours</span>
+              <span className="text-2xl sm:text-5xl font-black text-amber-900 block mb-0.5 sm:mb-1">4,000+</span>
+              <span className="text-[10px] sm:text-xs font-bold text-amber-800 uppercase tracking-wider">Tours</span>
             </div>
             <div className="border-l border-amber-200">
-              <span className="text-3xl sm:text-5xl font-black text-amber-900 block mb-1">1M+</span>
-              <span className="text-xs font-bold text-amber-800 uppercase tracking-wider">Happy Travelers</span>
+              <span className="text-2xl sm:text-5xl font-black text-amber-900 block mb-0.5 sm:mb-1">1M+</span>
+              <span className="text-[10px] sm:text-xs font-bold text-amber-800 uppercase tracking-wider">Happy Travelers</span>
             </div>
             <div className="border-l border-amber-200">
-              <span className="text-3xl sm:text-5xl font-black text-amber-900 block mb-1">50+</span>
-              <span className="text-xs font-bold text-amber-800 uppercase tracking-wider">Awards</span>
+              <span className="text-2xl sm:text-5xl font-black text-amber-900 block mb-0.5 sm:mb-1">50+</span>
+              <span className="text-[10px] sm:text-xs font-bold text-amber-800 uppercase tracking-wider">Awards</span>
             </div>
           </div>
 
           {/* Testimonial Cards Carousel */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 text-left">
             {testimonials.map((t, idx) => (
-              <div key={idx} className="bg-white p-6 rounded-3xl border border-amber-100 shadow-md flex flex-col justify-between space-y-4">
+              <div key={idx} className="bg-white p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-amber-100 shadow-md flex flex-col justify-between space-y-4">
                 <div>
-                  <Quote className="w-8 h-8 text-amber-400 mb-2" />
+                  <Quote className="w-6 h-6 sm:w-8 sm:h-8 text-amber-400 mb-2" />
                   <p className="text-xs text-slate-600 font-medium leading-relaxed italic">
                     "{t.text}"
                   </p>
@@ -1138,29 +1138,29 @@ export function tripcustomizerHolidayView() {
         </div>
 
         {/* SECTION 12: INSTA MOMENTS THAT TELL A STORY (REELS REEL CAROUSEL) */}
-        <div className="bg-slate-900 text-white rounded-[40px] p-8 sm:p-12 shadow-2xl">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
+        <div className="bg-slate-900 text-white rounded-3xl sm:rounded-[40px] p-6 sm:p-12 shadow-2xl">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8 gap-3 sm:gap-4">
             <div>
               <div className="inline-flex items-center space-x-2 border border-rose-400/50 bg-rose-500/10 text-rose-300 font-bold text-xs px-3.5 py-1 rounded-full mb-3">
                 <Instagram className="w-3.5 h-3.5" />
-                <span>Follow Us @tripcustomizerIndia</span>
+                <span>Follow Us @tripcustomizer</span>
               </div>
-              <h2 className="text-2xl sm:text-4xl font-black font-serif">
+              <h2 className="text-xl sm:text-4xl font-black font-serif">
                 Insta Moments That Tell a Story
               </h2>
             </div>
             <div className="flex space-x-2">
-              <button className="bg-slate-800 hover:bg-slate-700 text-white p-3 rounded-full shadow-md">
-                <ChevronLeft className="w-5 h-5" />
+              <button className="bg-slate-800 hover:bg-slate-700 text-white p-2.5 sm:p-3 rounded-full shadow-md">
+                <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
-              <button className="bg-brand-600 hover:bg-brand-500 text-white p-3 rounded-full shadow-md">
-                <ChevronRight className="w-5 h-5" />
+              <button className="bg-brand-600 hover:bg-brand-500 text-white p-2.5 sm:p-3 rounded-full shadow-md">
+                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <div className="relative h-80 rounded-3xl overflow-hidden bg-slate-950 shadow-lg group border border-slate-800">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+            <div className="relative h-64 sm:h-80 rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-950 shadow-lg group border border-slate-800">
               <Image src="/destinations/insta-reel-1.jpg" alt="Insta Reel 1" fill className="object-cover opacity-75 group-hover:scale-105 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
               <div className="absolute inset-0 flex items-center justify-center">
@@ -1173,7 +1173,7 @@ export function tripcustomizerHolidayView() {
               </div>
             </div>
 
-            <div className="relative h-80 rounded-3xl overflow-hidden bg-slate-950 shadow-lg group border border-slate-800">
+            <div className="relative h-64 sm:h-80 rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-950 shadow-lg group border border-slate-800">
               <Image src="/destinations/insta-reel-2.jpg" alt="Insta Reel 2" fill className="object-cover opacity-75 group-hover:scale-105 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
               <div className="absolute inset-0 flex items-center justify-center">
@@ -1186,7 +1186,7 @@ export function tripcustomizerHolidayView() {
               </div>
             </div>
 
-            <div className="relative h-80 rounded-3xl overflow-hidden bg-slate-950 shadow-lg group border border-slate-800">
+            <div className="relative h-64 sm:h-80 rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-950 shadow-lg group border border-slate-800">
               <Image src="/destinations/insta-reel-3.jpg" alt="Insta Reel 3" fill className="object-cover opacity-75 group-hover:scale-105 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
               <div className="absolute inset-0 flex items-center justify-center">
@@ -1202,12 +1202,12 @@ export function tripcustomizerHolidayView() {
         </div>
 
         {/* SECTION 13: FREQUENTLY ASKED QUESTIONS (FAQ ACCORDION) */}
-        <div className="bg-white border border-slate-200 rounded-[40px] p-8 sm:p-12 shadow-sm">
-          <h2 className="text-2xl sm:text-4xl font-black text-slate-900 text-center mb-10">
+        <div className="bg-white border border-slate-200 rounded-3xl sm:rounded-[40px] p-6 sm:p-12 shadow-sm">
+          <h2 className="text-xl sm:text-4xl font-black text-slate-900 text-center mb-6 sm:mb-10">
             Frequently Asked Questions
           </h2>
 
-          <div className="max-w-3xl mx-auto space-y-4">
+          <div className="max-w-3xl mx-auto space-y-3 sm:space-y-4">
             {faqs.map((faq, idx) => {
               const isOpen = activeFaq === idx;
               return (
@@ -1215,19 +1215,19 @@ export function tripcustomizerHolidayView() {
                   key={idx}
                   className={`rounded-2xl transition-all border ${
                     isOpen
-                      ? 'bg-brand-600 text-white border-brand-600 shadow-md p-6'
-                      : 'bg-slate-50 text-slate-800 border-slate-200 p-5 hover:border-brand-300'
+                      ? 'bg-brand-600 text-white border-brand-600 shadow-md p-4 sm:p-6'
+                      : 'bg-slate-50 text-slate-800 border-slate-200 p-4 sm:p-5 hover:border-brand-300'
                   }`}
                 >
                   <button
                     onClick={() => setActiveFaq(isOpen ? null : idx)}
-                    className="w-full flex items-center justify-between text-left font-extrabold text-sm sm:text-base focus:outline-none"
+                    className="w-full flex items-center justify-between text-left font-extrabold text-xs sm:text-base focus:outline-none gap-2"
                   >
                     <span>{faq.q}</span>
-                    <ChevronDown className={`w-5 h-5 shrink-0 transition-transform ${isOpen ? 'rotate-180 text-white' : 'text-slate-400'}`} />
+                    <ChevronDown className={`w-4 h-4 sm:w-5 sm:h-5 shrink-0 transition-transform ${isOpen ? 'rotate-180 text-white' : 'text-slate-400'}`} />
                   </button>
                   {isOpen && (
-                    <p className="mt-3 text-xs sm:text-sm text-brand-50 leading-relaxed font-medium">
+                    <p className="mt-2.5 sm:mt-3 text-xs sm:text-sm text-brand-50 leading-relaxed font-medium">
                       {faq.a}
                     </p>
                   )}
@@ -1238,18 +1238,18 @@ export function tripcustomizerHolidayView() {
         </div>
 
         {/* SECTION 14: SEO DIRECTORY & QUICK LINKS MATRIX */}
-        <div className="bg-slate-100/70 border border-slate-200 rounded-[40px] p-8 sm:p-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="bg-slate-100/70 border border-slate-200 rounded-3xl sm:rounded-[40px] p-6 sm:p-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
             {/* Left Category List */}
-            <div className="lg:col-span-4 space-y-2 border-r border-slate-200 pr-6">
+            <div className="lg:col-span-4 flex overflow-x-auto lg:block no-scrollbar gap-2 lg:space-y-2 lg:border-r border-slate-200 lg:pr-6 pb-2 lg:pb-0">
               {seoCategories.map((cat, idx) => (
                 <button
                   key={idx}
                   onClick={() => setSeoCategory(idx)}
-                  className={`w-full text-left text-xs font-bold py-2.5 px-4 rounded-xl transition-all ${
+                  className={`whitespace-nowrap lg:whitespace-normal shrink-0 lg:shrink text-left text-xs font-bold py-2 sm:py-2.5 px-3.5 sm:px-4 rounded-xl transition-all ${
                     seoCategory === idx
                       ? 'bg-white text-brand-700 border-l-4 border-brand-600 shadow-xs'
-                      : 'text-slate-600 hover:text-slate-900'
+                      : 'text-slate-600 hover:text-slate-900 bg-white/50 lg:bg-transparent'
                   }`}
                 >
                   {cat}
@@ -1258,12 +1258,12 @@ export function tripcustomizerHolidayView() {
             </div>
 
             {/* Right Blue Pill Tag Matrix */}
-            <div className="lg:col-span-8 flex flex-wrap gap-2.5 items-start">
+            <div className="lg:col-span-8 flex flex-wrap gap-2 sm:gap-2.5 items-start">
               {seoTags.map((tag, idx) => (
                 <Link
                   key={idx}
                   href={`/holidays?search=${encodeURIComponent(tag.split(' ')[0])}`}
-                  className="bg-white hover:bg-brand-50 text-brand-700 hover:text-brand-800 border border-brand-200 text-xs font-bold px-4 py-2 rounded-full transition-all shadow-2xs"
+                  className="bg-white hover:bg-brand-50 text-brand-700 hover:text-brand-800 border border-brand-200 text-[11px] sm:text-xs font-bold px-3 py-1.5 sm:px-4 sm:py-2 rounded-full transition-all shadow-2xs"
                 >
                   {tag}
                 </Link>
@@ -1273,12 +1273,12 @@ export function tripcustomizerHolidayView() {
         </div>
 
         {/* SECTION 15: EXPLORE ALL 50+ PACKAGES WITH FILTERS BANNER */}
-        <div className="bg-gradient-to-r from-brand-900 via-brand-800 to-slate-900 text-white rounded-3xl p-8 sm:p-10 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="space-y-2">
-            <span className="bg-accent-400/20 text-accent-400 border border-accent-400/30 text-xs font-bold px-3 py-1 rounded-full inline-block">
+        <div className="bg-gradient-to-r from-brand-900 via-brand-800 to-slate-900 text-white rounded-3xl p-6 sm:p-10 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="space-y-2 text-center sm:text-left">
+            <span className="bg-accent-400/20 text-accent-400 border border-accent-400/30 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full inline-block">
               COMPLETE TOUR DIRECTORY
             </span>
-            <h3 className="text-2xl sm:text-4xl font-black">Looking for all 50+ Packages & Filters?</h3>
+            <h3 className="text-xl sm:text-4xl font-black">Looking for all 50+ Packages & Filters?</h3>
             <p className="text-slate-300 text-xs sm:text-sm max-w-xl">
               Filter packages by price, hotel star rating, duration, and theme using our complete interactive sidebar filter.
             </p>
@@ -1286,12 +1286,28 @@ export function tripcustomizerHolidayView() {
 
           <button
             onClick={() => setActiveTab('ALL_PACKAGES')}
-            className="bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-sm px-8 py-4 rounded-2xl shadow-xl hover:scale-105 transition-all shrink-0"
+            className="w-full sm:w-auto bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs sm:text-sm px-6 py-3.5 sm:px-8 sm:py-4 rounded-2xl shadow-xl hover:scale-105 transition-all shrink-0"
           >
             BROWSE ALL 50+ PACKAGES →
           </button>
         </div>
       </Container>
+
+      {/* Floating Sticky Mobile Quick Action Navigation Bar */}
+      <div className="fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-slate-200 px-3 py-2.5 z-40 flex sm:hidden items-center justify-between shadow-2xl gap-1.5">
+        <a href="tel:18002099100" className="flex items-center space-x-1 text-[11px] font-extrabold text-slate-800 bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-full border border-slate-200 shrink-0">
+          <PhoneCall className="w-3.5 h-3.5 text-brand-600" />
+          <span>Call Us</span>
+        </a>
+        <button onClick={() => setActiveTab('ALL_PACKAGES')} className="flex items-center space-x-1 text-[11px] font-extrabold text-white bg-brand-700 hover:bg-brand-800 px-3 py-2 rounded-full shadow-md shrink-0">
+          <SlidersHorizontal className="w-3.5 h-3.5" />
+          <span>50+ Packages</span>
+        </button>
+        <Link href="/customize-trip" className="flex items-center space-x-1 text-[11px] font-black text-slate-950 bg-amber-400 hover:bg-amber-300 px-3 py-2 rounded-full shadow-sm shrink-0">
+          <Sparkles className="w-3.5 h-3.5" />
+          <span>Custom Trip</span>
+        </Link>
+      </div>
     </div>
   );
 }
