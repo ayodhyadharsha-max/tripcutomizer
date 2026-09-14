@@ -58,7 +58,17 @@ export const HeaderTopBar: React.FC = () => {
               onMouseLeave={() => setIsHovered(false)}
             >
               <button
-                onClick={handleAccountClick}
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setIsHovered(false);
+                  if (!isLoggedIn) {
+                    setIsModalOpen(true);
+                  } else {
+                    router.push('/account');
+                  }
+                }}
                 className="flex items-center space-x-1.5 bg-brand-700/60 hover:bg-brand-700 px-3.5 py-1 rounded-full text-white font-medium transition-all cursor-pointer shadow-xs"
               >
                 <User className="w-3.5 h-3.5 text-accent-400" />
