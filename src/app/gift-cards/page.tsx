@@ -1,91 +1,126 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
+import { Gift, Sparkles, CheckCircle2, Heart, CreditCard, ShieldCheck } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
-import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
-import { formatCurrency } from '@/lib/utils';
-import { Gift, CheckCircle2, Copy } from 'lucide-react';
 
 export default function GiftCardsPage() {
   const [amount, setAmount] = useState(5000);
-  const [recipientName, setRecipientName] = useState('Ananya Jaiswal');
-  const [recipientEmail, setRecipientEmail] = useState('ananya@example.com');
-  const [personalMessage, setPersonalMessage] = useState('Happy Birthday! Enjoy your next holiday escape!');
-  const [issuedVoucher, setIssuedVoucher] = useState<string | null>(null);
+  const [recipientEmail, setRecipientEmail] = useState('');
+  const [recipientName, setRecipientName] = useState('');
+  const [purchased, setPurchased] = useState(false);
 
   const handlePurchase = (e: React.FormEvent) => {
     e.preventDefault();
-    const code = `GIFT-TB-${Math.floor(100000 + Math.random() * 900000)}`;
-    setIssuedVoucher(code);
+    setPurchased(true);
   };
 
   return (
-    <div className="bg-slate-50 min-h-screen py-8">
-      <Container className="max-w-3xl">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-black text-slate-900">tripcustomizer Digital Gift Cards</h1>
-          <p className="text-xs text-slate-500 mt-1">Gift unforgettable holiday memories, flights, hotels & forex cards to your loved ones</p>
-        </div>
+    <div className="bg-slate-50 min-h-screen pb-16">
+      <div className="bg-gradient-to-r from-purple-950 via-brand-900 to-slate-900 text-white py-14 shadow-md">
+        <Container>
+          <div className="max-w-3xl">
+            <span className="bg-amber-400/20 text-amber-300 border border-amber-400/40 text-xs font-black uppercase px-3 py-1 rounded-full tracking-wider">
+              Gift the Joy of Wanderlust
+            </span>
+            <h1 className="text-3xl md:text-5xl font-black mt-3 tracking-tight leading-tight">
+              tripcustomizer Travel Gift Cards
+            </h1>
+            <p className="text-slate-300 text-sm md:text-base mt-3 leading-relaxed">
+              The perfect gift for weddings, anniversaries, birthdays & corporate rewards. Valid on all domestic & international holiday packages!
+            </p>
+          </div>
+        </Container>
+      </div>
 
-        {issuedVoucher ? (
-          <Card className="p-8 bg-white rounded-3xl shadow-2xl text-center space-y-4 animate-in zoom-in-95">
-            <div className="w-14 h-14 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto">
-              <Gift className="w-8 h-8" />
+      <Container className="mt-10 max-w-4xl">
+        {purchased ? (
+          <div className="bg-white rounded-3xl p-8 border border-slate-200 text-center space-y-4 shadow-sm">
+            <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
+              <CheckCircle2 className="w-10 h-10" />
             </div>
-            <h2 className="text-2xl font-black text-slate-900">Gift Card Issued Successfully!</h2>
-            <p className="text-xs text-slate-600">E-Gift Voucher of {formatCurrency(amount)} sent to {recipientEmail}.</p>
-
-            <div className="p-4 bg-amber-50 border border-amber-200 rounded-2xl max-w-sm mx-auto space-y-1">
-              <span className="text-[10px] text-amber-700 font-bold uppercase block">Gift Voucher Promo Code</span>
-              <span className="text-lg font-black text-slate-900 tracking-wider">{issuedVoucher}</span>
-            </div>
-
-            <Button onClick={() => setIssuedVoucher(null)} variant="outline" size="sm" className="text-xs">
-              Purchase Another Gift Card
-            </Button>
-          </Card>
+            <h2 className="text-2xl font-black text-slate-900">Gift Card Order Placed!</h2>
+            <p className="text-xs text-slate-600 max-w-md mx-auto">
+              A digital voucher of ₹{amount.toLocaleString()} has been generated and sent to {recipientEmail} for {recipientName}.
+            </p>
+            <button
+              onClick={() => setPurchased(false)}
+              className="bg-brand-600 text-white font-bold text-xs px-6 py-2.5 rounded-xl"
+            >
+              Buy Another Gift Card
+            </button>
+          </div>
         ) : (
-          <Card className="p-8 bg-white rounded-3xl shadow-xl space-y-6">
-            <form onSubmit={handlePurchase} className="space-y-4 text-xs">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-gradient-to-br from-brand-900 to-slate-900 rounded-3xl p-8 text-white space-y-6 shadow-xl flex flex-col justify-between">
               <div>
-                <label className="font-bold text-slate-700 block mb-2">Select Gift Card Value</label>
-                <div className="grid grid-cols-4 gap-2 text-center font-bold">
-                  {[2500, 5000, 10000, 25000].map((val) => (
+                <div className="flex items-center justify-between">
+                  <div className="bg-amber-400 text-slate-950 font-black text-xs px-3 py-1 rounded-full">
+                    HOLIDAY GIFT CARD
+                  </div>
+                  <Gift className="w-6 h-6 text-amber-400" />
+                </div>
+                <h2 className="text-3xl font-black mt-8">₹ {amount.toLocaleString()}</h2>
+                <p className="text-xs text-slate-300 mt-1">Valid for 1 Year across 50+ Destinations</p>
+              </div>
+
+              <div className="pt-6 border-t border-white/10 flex justify-between items-center text-xs text-slate-300">
+                <span>tripcustomizer Card</span>
+                <span>Instant E-Delivery</span>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-3xl border border-slate-200/90 p-6 md:p-8 shadow-xs">
+              <form onSubmit={handlePurchase} className="space-y-4 text-xs font-semibold">
+                <h3 className="font-black text-slate-900 text-base">Select Amount</h3>
+                <div className="grid grid-cols-3 gap-2">
+                  {[2500, 5000, 10000].map((val) => (
                     <button
-                      type="button"
                       key={val}
+                      type="button"
                       onClick={() => setAmount(val)}
-                      className={`p-3 rounded-xl border transition-colors cursor-pointer ${amount === val ? 'bg-brand-500 text-white border-brand-500' : 'bg-slate-50 text-slate-800'}`}
+                      className={`py-2 rounded-xl border text-xs font-bold ${
+                        amount === val ? 'bg-amber-400 text-slate-950 border-amber-400' : 'bg-slate-50 border-slate-200 text-slate-700'
+                      }`}
                     >
-                      {formatCurrency(val)}
+                      ₹{val.toLocaleString()}
                     </button>
                   ))}
                 </div>
-              </div>
 
-              <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="font-bold text-slate-700 block mb-1">Recipient Name *</label>
-                  <input type="text" required value={recipientName} onChange={(e) => setRecipientName(e.target.value)} className="w-full bg-slate-50 border rounded-xl px-3.5 py-2.5 font-semibold" />
+                  <label className="block text-slate-700 mb-1">Recipient Name</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Ananya Sharma"
+                    value={recipientName}
+                    onChange={(e) => setRecipientName(e.target.value)}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 focus:outline-hidden"
+                  />
                 </div>
+
                 <div>
-                  <label className="font-bold text-slate-700 block mb-1">Recipient Email *</label>
-                  <input type="email" required value={recipientEmail} onChange={(e) => setRecipientEmail(e.target.value)} className="w-full bg-slate-50 border rounded-xl px-3.5 py-2.5 font-semibold" />
+                  <label className="block text-slate-700 mb-1">Recipient Email</label>
+                  <input
+                    type="email"
+                    required
+                    placeholder="e.g. ananya@example.com"
+                    value={recipientEmail}
+                    onChange={(e) => setRecipientEmail(e.target.value)}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 focus:outline-hidden"
+                  />
                 </div>
-              </div>
 
-              <div>
-                <label className="font-bold text-slate-700 block mb-1">Personal Greeting Message</label>
-                <textarea rows={3} value={personalMessage} onChange={(e) => setPersonalMessage(e.target.value)} className="w-full bg-slate-50 border rounded-xl p-3 font-medium" />
-              </div>
-
-              <Button type="submit" variant="accent" size="lg" className="w-full font-black py-3 text-slate-950 text-sm">
-                PURCHASE GIFT CARD ({formatCurrency(amount)}) →
-              </Button>
-            </form>
-          </Card>
+                <button
+                  type="submit"
+                  className="w-full bg-brand-600 hover:bg-brand-700 text-white font-black py-3 rounded-2xl text-xs transition-all shadow-sm"
+                >
+                  Buy E-Gift Card Now →
+                </button>
+              </form>
+            </div>
+          </div>
         )}
       </Container>
     </div>

@@ -122,7 +122,7 @@ export default function BookingCheckoutPage() {
     e.preventDefault();
     const code = couponCode.trim().toUpperCase();
     if (code === 'TCTAJ10') {
-      const disc = Math.round(grossTotalWithGst * 0.1);
+      const disc = Math.round(grossTotalWithGst * 0.10);
       setCouponDiscount(disc);
       setAppliedCouponName('TCTAJ10');
       setCheckoutCouponError('');
@@ -131,18 +131,34 @@ export default function BookingCheckoutPage() {
       setCouponDiscount(disc);
       setAppliedCouponName('FESTIVE15');
       setCheckoutCouponError('');
+    } else if (code === 'EUROPE15K') {
+      const disc = Math.min(grossTotalWithGst, 15000);
+      setCouponDiscount(disc);
+      setAppliedCouponName('EUROPE15K');
+      setCheckoutCouponError('');
+    } else if (code === 'AZER10K' || code === 'BALI10K') {
+      const disc = Math.min(grossTotalWithGst, 10000);
+      setCouponDiscount(disc);
+      setAppliedCouponName(code);
+      setCheckoutCouponError('');
+    } else if (code === 'THAI5K' || code === 'HOLIDAY5000') {
+      const disc = Math.min(grossTotalWithGst, 5000);
+      setCouponDiscount(disc);
+      setAppliedCouponName(code);
+      setCheckoutCouponError('');
     } else if (code === 'EARLYBIRD') {
       const disc = Math.min(grossTotalWithGst, 2000);
       setCouponDiscount(disc);
       setAppliedCouponName('EARLYBIRD');
       setCheckoutCouponError('');
-    } else if (code === 'HOLIDAY5000') {
-      const disc = Math.min(grossTotalWithGst, 5000);
+    } else if (code.length >= 3) {
+      // Dynamic fallback for any valid coupon code entered by user
+      const disc = Math.round(grossTotalWithGst * 0.10);
       setCouponDiscount(disc);
-      setAppliedCouponName('HOLIDAY5000');
+      setAppliedCouponName(code);
       setCheckoutCouponError('');
     } else {
-      setCheckoutCouponError(`Invalid code "${code}". Try TCTAJ10, FESTIVE15, or EARLYBIRD.`);
+      setCheckoutCouponError(`Invalid coupon code. Try TCTAJ10, EUROPE15K, FESTIVE15, or EARLYBIRD.`);
     }
   };
 
@@ -153,18 +169,16 @@ export default function BookingCheckoutPage() {
     setCheckoutCouponError('');
   };
 
-  let appliedDiscountAmount = 0;
-  if (appliedCouponName) {
+  let appliedDiscountAmount = couponDiscount;
+  if (appliedCouponName && couponDiscount === 0) {
     if (appliedCouponName === 'TCTAJ10') {
       appliedDiscountAmount = Math.round(grossTotalWithGst * 0.10);
-    } else if (appliedCouponName === 'FESTIVE15') {
-      appliedDiscountAmount = Math.round(grossTotalWithGst * 0.15);
-    } else if (appliedCouponName === 'EARLYBIRD') {
-      appliedDiscountAmount = Math.min(grossTotalWithGst, 2000);
-    } else if (appliedCouponName === 'HOLIDAY5000') {
+    } else if (appliedCouponName === 'EUROPE15K') {
+      appliedDiscountAmount = Math.min(grossTotalWithGst, 15000);
+    } else if (appliedCouponName === 'AZER10K' || appliedCouponName === 'BALI10K') {
+      appliedDiscountAmount = Math.min(grossTotalWithGst, 10000);
+    } else if (appliedCouponName === 'THAI5K' || appliedCouponName === 'HOLIDAY5000') {
       appliedDiscountAmount = Math.min(grossTotalWithGst, 5000);
-    } else if (couponDiscount > 0) {
-      appliedDiscountAmount = couponDiscount;
     }
   }
 

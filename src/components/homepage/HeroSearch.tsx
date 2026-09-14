@@ -92,13 +92,9 @@ export const HeroSearch: React.FC = () => {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      router.push(`/holidays?destination=${encodeURIComponent(searchQuery.trim())}`);
-    } else {
-      // Default fallback search
-      const currentHint = searchPlaceholders[placeholderIndex].replace(/Search "|"$/g, '');
-      router.push(`/holidays?destination=${encodeURIComponent(currentHint)}`);
-    }
+    const query = searchQuery.trim() || searchPlaceholders[placeholderIndex].replace(/Search "|"$/g, '');
+    const cleanSlug = query.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    router.push(`/holidays/${cleanSlug}`);
   };
 
   const activeSlide = slides[currentSlide];
