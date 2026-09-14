@@ -227,11 +227,21 @@ export const cloudStore = {
 
   // --- CO-TRAVELLERS PERSISTENT STORAGE (STRICT USER ISOLATION) ---
   getCoTravellers: (uid?: string): CoTraveller[] => {
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.removeItem(STORAGE_KEYS.CO_TRAVELLERS);
+      } catch (e) {}
+    }
     if (!uid) return [];
     return getStoredData<CoTraveller[]>(`tc_cotravellers_${uid}`, []);
   },
 
   saveCoTravellers: (list: CoTraveller[], uid?: string): void => {
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.removeItem(STORAGE_KEYS.CO_TRAVELLERS);
+      } catch (e) {}
+    }
     if (!uid) return;
     setStoredData(`tc_cotravellers_${uid}`, list);
   },
@@ -262,3 +272,10 @@ export const cloudStore = {
     cloudStore.saveCoTravellers(updated, uid);
   },
 };
+
+// Purge legacy global key on module load in client environment
+if (typeof window !== 'undefined') {
+  try {
+    localStorage.removeItem(STORAGE_KEYS.CO_TRAVELLERS);
+  } catch (e) {}
+}
