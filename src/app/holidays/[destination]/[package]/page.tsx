@@ -12,6 +12,7 @@ import { DEMO_PACKAGES, HolidayPackage } from '@/data/packagesData';
 import { formatCurrency } from '@/lib/utils';
 import { useAuth } from '@/context/AuthContext';
 import { cloudStore, CoTraveller } from '@/lib/cloudStore';
+import { sendWeb3FormLead } from '@/lib/web3forms';
 import {
   Star, Clock, MapPin, CheckCircle2, ChevronRight, ChevronDown, ChevronUp,
   Hotel, Plane, Utensils, ShieldCheck, MessageCircle, Share2, Download,
@@ -394,6 +395,14 @@ export default function PackageDetailPage({ params }: { params: { destination: s
       email: '',
       destination: pkg.name,
       status: 'New',
+      source: `Package Detail Page (${pkg.destination})`,
+    });
+    sendWeb3FormLead({
+      subject: `[tripcustomizer] 📞 Quick Callback Request: ${callbackName || 'Valued Client'} (${pkg.name})`,
+      name: callbackName || 'Valued Client',
+      email: '',
+      phone: callbackPhone,
+      destination: pkg.name,
       source: `Package Detail Page (${pkg.destination})`,
     });
     setCallbackSuccess(true);
