@@ -95,6 +95,47 @@ export default function PackageDetailPage({ params }: { params: { destination: s
   // Toast / Share State
   const [shareToast, setShareToast] = useState(false);
 
+  // Coupon / Promo Code State & Interactive Coupons Registry
+  const [promoInput, setPromoInput] = useState('TCTAJ10');
+  const [appliedCoupon, setAppliedCoupon] = useState<{ code: string; percent?: number; amount?: number } | null>({
+    code: 'TCTAJ10',
+    percent: 10,
+  });
+  const [couponError, setCouponError] = useState('');
+
+  const VALID_COUPONS: Record<string, { percent?: number; amount?: number; label: string }> = {
+    TCTAJ10: { percent: 10, label: '10% Instant Discount' },
+    FESTIVE15: { percent: 15, label: '15% Festive Special Discount' },
+    EARLYBIRD: { amount: 2000, label: '₹2,000 Flat Early Bird Bonus' },
+    HOLIDAY5000: { amount: 5000, label: '₹5,000 Flat Mega Holiday Saver' },
+  };
+
+  const handleApplyCoupon = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    const cleanCode = promoInput.trim().toUpperCase();
+    if (!cleanCode) {
+      setCouponError('Please enter a valid coupon code.');
+      return;
+    }
+    const matched = VALID_COUPONS[cleanCode];
+    if (matched) {
+      setAppliedCoupon({
+        code: cleanCode,
+        percent: matched.percent,
+        amount: matched.amount,
+      });
+      setCouponError('');
+    } else {
+      setCouponError(`Invalid code "${cleanCode}". Try TCTAJ10, FESTIVE15, or EARLYBIRD.`);
+    }
+  };
+
+  const handleRemoveCoupon = () => {
+    setAppliedCoupon(null);
+    setPromoInput('');
+    setCouponError('');
+  };
+
   // Saved Co-Travellers List for 1-Click Passenger Selection
   const [savedCoTravellers, setSavedCoTravellers] = useState<CoTraveller[]>([]);
 
@@ -304,6 +345,17 @@ export default function PackageDetailPage({ params }: { params: { destination: s
     (totalAge5to9 * basePricePerPerson * 0.5) +
     (totalUnder5 * 0)
   );
+
+  let couponDiscountAmount = 0;
+  if (appliedCoupon) {
+    if (appliedCoupon.percent) {
+      couponDiscountAmount = Math.round((calculatedTotalPrice * appliedCoupon.percent) / 100);
+    } else if (appliedCoupon.amount) {
+      couponDiscountAmount = Math.min(calculatedTotalPrice, appliedCoupon.amount);
+    }
+  }
+  const finalPayablePrice = Math.max(0, calculatedTotalPrice - couponDiscountAmount);
+
   const rewardPoints = Math.round(basePricePerPerson * 0.01);
 
   // Fallback Gallery Images for 4-image grid
@@ -370,10 +422,10 @@ export default function PackageDetailPage({ params }: { params: { destination: s
       cloudStore.syncPassengersToCoTravellers(passengerList, loggedUser?.uid);
     }
 
-    // Pass encoded passenger list to checkout
+    // Pass encoded passenger list & applied coupon discount to checkout
     const encodedPassengers = encodeURIComponent(JSON.stringify(passengers));
     router.push(
-      `/booking/checkout?slug=${pkg.slug}&pax=${totalTravellersCount}&tier=${tourTier}&date=${travelDate}&city=${encodeURIComponent(joiningCity)}&lead=${encodeURIComponent(leadName)}&paxData=${encodedPassengers}`
+      `/booking/checkout?slug=${pkg.slug}&pax=${totalTravellersCount}&tier=${tourTier}&date=${travelDate}&city=${encodeURIComponent(joiningCity)}&lead=${encodeURIComponent(leadName)}&paxData=${encodedPassengers}&coupon=${appliedCoupon?.code || ''}&discount=${couponDiscountAmount}`
     );
   };
 
@@ -1015,16 +1067,85 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                 <span className="text-[10px] text-slate-400 block font-medium">Starting price per adult</span>
               </div>
 
-              {/* Deal Promo Badge */}
-              <div className="p-3 bg-amber-50 border border-amber-200 rounded-2xl flex items-center justify-between text-xs">
-                <div className="flex items-center space-x-2">
-                  <Tag className="w-4 h-4 text-amber-600" />
-                  <div>
-                    <span className="font-black text-amber-900 block">Promo Code: TCTAJ10</span>
-                    <span className="text-[10px] text-amber-700 font-medium">Extra 10% instant discount</span>
+              {/* Interactive Coupon / Promo Code Input Card */}
+              <div className="p-3.5 bg-amber-50/90 border border-amber-200 rounded-2xl text-xs space-y-2.5 shadow-2xs">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-1.5 font-black text-amber-950">
+                    <Tag className="w-4 h-4 text-amber-600" />
+                    <span>Apply Promo Code / Coupon</span>
                   </div>
+                  {appliedCoupon && (
+                    <button
+                      type="button"
+                      onClick={handleRemoveCoupon}
+                      className="text-[10px] text-rose-600 font-bold hover:underline cursor-pointer"
+                    >
+                      Remove Code
+                    </button>
+                  )}
                 </div>
-                <Badge variant="gold">Applied</Badge>
+
+                {appliedCoupon ? (
+                  <div className="p-2.5 bg-emerald-100/90 border border-emerald-300 rounded-xl text-emerald-950 flex items-center justify-between text-xs font-bold animate-in fade-in">
+                    <div className="flex items-center space-x-1.5">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                      <div>
+                        <span className="block font-extrabold text-emerald-900">Code "{appliedCoupon.code}" Applied!</span>
+                        <span className="text-[10px] text-emerald-800 font-semibold">
+                          {appliedCoupon.percent ? `${appliedCoupon.percent}% Instant Discount` : `₹${appliedCoupon.amount} Flat OFF`}
+                        </span>
+                      </div>
+                    </div>
+                    <Badge variant="gold">Active</Badge>
+                  </div>
+                ) : (
+                  <form onSubmit={handleApplyCoupon} className="flex gap-2">
+                    <input
+                      type="text"
+                      placeholder="e.g. TCTAJ10, FESTIVE15"
+                      value={promoInput}
+                      onChange={(e) => setPromoInput(e.target.value)}
+                      className="flex-1 bg-white border border-amber-300 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-900 uppercase tracking-wider focus:outline-none focus:border-brand-600"
+                    />
+                    <button
+                      type="submit"
+                      className="bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs px-3 py-1.5 rounded-xl cursor-pointer shadow-2xs transition-all"
+                    >
+                      Apply
+                    </button>
+                  </form>
+                )}
+
+                {couponError && (
+                  <p className="text-[11px] text-rose-600 font-bold animate-in fade-in">{couponError}</p>
+                )}
+
+                {!appliedCoupon && (
+                  <div className="flex flex-wrap gap-1.5 pt-1">
+                    <span className="text-[10px] text-slate-500 font-semibold block w-full">Available Codes:</span>
+                    <button
+                      type="button"
+                      onClick={() => { setPromoInput('TCTAJ10'); setAppliedCoupon({ code: 'TCTAJ10', percent: 10 }); setCouponError(''); }}
+                      className="text-[10px] bg-white border border-amber-300 text-amber-900 font-bold px-2 py-0.5 rounded-md hover:bg-amber-100 cursor-pointer"
+                    >
+                      TCTAJ10 (-10%)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => { setPromoInput('FESTIVE15'); setAppliedCoupon({ code: 'FESTIVE15', percent: 15 }); setCouponError(''); }}
+                      className="text-[10px] bg-white border border-amber-300 text-amber-900 font-bold px-2 py-0.5 rounded-md hover:bg-amber-100 cursor-pointer"
+                    >
+                      FESTIVE15 (-15%)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => { setPromoInput('EARLYBIRD'); setAppliedCoupon({ code: 'EARLYBIRD', amount: 2000 }); setCouponError(''); }}
+                      className="text-[10px] bg-white border border-amber-300 text-amber-900 font-bold px-2 py-0.5 rounded-md hover:bg-amber-100 cursor-pointer"
+                    >
+                      EARLYBIRD (-₹2000)
+                    </button>
+                  </div>
+                )}
               </div>
 
               {/* Reward Points Badge */}
@@ -1687,7 +1808,12 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                       </div>
 
                       <div className="text-2xl font-black text-emerald-700">
-                        {formatCurrency(calculatedTotalPrice)}
+                        {formatCurrency(finalPayablePrice)}
+                        {couponDiscountAmount > 0 && (
+                          <span className="text-xs font-bold text-slate-400 line-through ml-2">
+                            {formatCurrency(calculatedTotalPrice)}
+                          </span>
+                        )}
                       </div>
 
                       {/* Itemized Price Breakdown Table */}
@@ -1720,9 +1846,15 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                             <span>FREE ₹0</span>
                           </div>
                         )}
+                        {couponDiscountAmount > 0 && (
+                          <div className="flex justify-between text-emerald-800 font-extrabold bg-emerald-100/90 px-2 py-1 rounded-md">
+                            <span>• Coupon Savings ({appliedCoupon?.code}):</span>
+                            <span>-{formatCurrency(couponDiscountAmount)}</span>
+                          </div>
+                        )}
                         <div className="pt-1.5 border-t border-emerald-200/80 flex justify-between font-black text-emerald-900 text-xs">
                           <span>Final Total Payable:</span>
-                          <span>{formatCurrency(calculatedTotalPrice)}</span>
+                          <span className="text-emerald-700 font-black">{formatCurrency(finalPayablePrice)}</span>
                         </div>
                       </div>
                     </div>

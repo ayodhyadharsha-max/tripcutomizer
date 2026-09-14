@@ -5,8 +5,9 @@ import Link from 'next/link';
 import { Container } from '@/components/ui/Container';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { Badge } from '@/components/ui/Badge';
 import { formatCurrency } from '@/lib/utils';
-import { CheckCircle2, ShieldCheck, ChevronRight, User } from 'lucide-react';
+import { CheckCircle2, ShieldCheck, ChevronRight, User, Tag } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { cloudStore, CustomerBooking } from '@/lib/cloudStore';
 import { DEMO_PACKAGES } from '@/data/packagesData';
@@ -67,6 +68,14 @@ export default function BookingCheckoutPage() {
         });
       }
 
+      const urlCoupon = params.get('coupon');
+      const urlDiscount = params.get('discount');
+      if (urlCoupon && urlDiscount) {
+        setAppliedCouponName(urlCoupon);
+        setCouponDiscount(parseInt(urlDiscount, 10) || 0);
+        setCouponCode(urlCoupon);
+      }
+
       const paxDataRaw = params.get('paxData');
       if (paxDataRaw) {
         try {
@@ -96,7 +105,50 @@ export default function BookingCheckoutPage() {
 
   const [parsedPassengersList, setParsedPassengersList] = useState<{ name: string; age?: number | string; gender?: string; type?: string }[]>([]);
 
-  const grandTotal = pkgInfo.pricePerPerson * pkgInfo.travelersCount;
+  // Checkout Interactive Coupon State
+  const [couponCode, setCouponCode] = useState('');
+  const [couponDiscount, setCouponDiscount] = useState(0);
+  const [appliedCouponName, setAppliedCouponName] = useState('');
+  const [checkoutCouponError, setCheckoutCouponError] = useState('');
+
+  const handleApplyCheckoutCoupon = (e: React.FormEvent) => {
+    e.preventDefault();
+    const code = couponCode.trim().toUpperCase();
+    const sub = pkgInfo.pricePerPerson * pkgInfo.travelersCount;
+    if (code === 'TCTAJ10') {
+      const disc = Math.round(sub * 0.1);
+      setCouponDiscount(disc);
+      setAppliedCouponName('TCTAJ10');
+      setCheckoutCouponError('');
+    } else if (code === 'FESTIVE15') {
+      const disc = Math.round(sub * 0.15);
+      setCouponDiscount(disc);
+      setAppliedCouponName('FESTIVE15');
+      setCheckoutCouponError('');
+    } else if (code === 'EARLYBIRD') {
+      const disc = Math.min(sub, 2000);
+      setCouponDiscount(disc);
+      setAppliedCouponName('EARLYBIRD');
+      setCheckoutCouponError('');
+    } else if (code === 'HOLIDAY5000') {
+      const disc = Math.min(sub, 5000);
+      setCouponDiscount(disc);
+      setAppliedCouponName('HOLIDAY5000');
+      setCheckoutCouponError('');
+    } else {
+      setCheckoutCouponError(`Invalid code "${code}". Try TCTAJ10, FESTIVE15, or EARLYBIRD.`);
+    }
+  };
+
+  const handleRemoveCheckoutCoupon = () => {
+    setAppliedCouponName('');
+    setCouponDiscount(0);
+    setCouponCode('');
+    setCheckoutCouponError('');
+  };
+
+  const subtotal = pkgInfo.pricePerPerson * pkgInfo.travelersCount;
+  const grandTotal = Math.max(0, subtotal - couponDiscount);
 
   // Form State
   const [travellerData, setTravellerData] = useState({
@@ -296,9 +348,67 @@ export default function BookingCheckoutPage() {
               </p>
             </div>
 
-            <div className="p-4 bg-slate-100 rounded-2xl flex justify-between items-center text-sm font-black text-slate-900">
-              <span>Total Amount ({pkgInfo.travelersCount} Pax):</span>
-              <span className="text-2xl text-brand-700">{formatCurrency(grandTotal)}</span>
+            {/* Interactive Coupon Box in Checkout */}
+            <div className="p-4 bg-amber-50/90 rounded-2xl border border-amber-200 text-xs space-y-3">
+              <div className="flex items-center justify-between font-bold text-amber-950">
+                <span className="flex items-center space-x-1.5">
+                  <Tag className="w-4 h-4 text-amber-600" />
+                  <span>Apply Promo Code / Coupon</span>
+                </span>
+                {appliedCouponName && (
+                  <button
+                    type="button"
+                    onClick={handleRemoveCheckoutCoupon}
+                    className="text-rose-600 hover:underline cursor-pointer text-[10px]"
+                  >
+                    Remove Coupon
+                  </button>
+                )}
+              </div>
+
+              {appliedCouponName ? (
+                <div className="p-3 bg-emerald-100 border border-emerald-300 rounded-xl text-emerald-950 flex items-center justify-between font-bold">
+                  <div>
+                    <span className="block text-emerald-900 font-extrabold">✓ Coupon "{appliedCouponName}" Applied!</span>
+                    <span className="text-[11px] text-emerald-800 font-medium">Discount: -{formatCurrency(couponDiscount)}</span>
+                  </div>
+                  <Badge variant="gold">Saved {formatCurrency(couponDiscount)}</Badge>
+                </div>
+              ) : (
+                <form onSubmit={handleApplyCheckoutCoupon} className="flex gap-2">
+                  <input
+                    type="text"
+                    placeholder="Enter coupon code (e.g. TCTAJ10)"
+                    value={couponCode}
+                    onChange={(e) => setCouponCode(e.target.value)}
+                    className="flex-1 bg-white border border-amber-300 rounded-xl px-3.5 py-2 text-xs font-bold text-slate-900 uppercase tracking-wider focus:outline-none"
+                  />
+                  <Button type="submit" variant="primary" size="sm" className="font-bold cursor-pointer px-4">
+                    Apply Code
+                  </Button>
+                </form>
+              )}
+
+              {checkoutCouponError && (
+                <p className="text-[11px] text-rose-600 font-bold">{checkoutCouponError}</p>
+              )}
+            </div>
+
+            <div className="p-4 bg-slate-100 rounded-2xl space-y-1.5 text-xs text-slate-900">
+              <div className="flex justify-between font-medium text-slate-600">
+                <span>Subtotal Package Fare ({pkgInfo.travelersCount} Pax):</span>
+                <span>{formatCurrency(subtotal)}</span>
+              </div>
+              {couponDiscount > 0 && (
+                <div className="flex justify-between font-bold text-emerald-700">
+                  <span>Coupon Savings ({appliedCouponName}):</span>
+                  <span>-{formatCurrency(couponDiscount)}</span>
+                </div>
+              )}
+              <div className="pt-2 border-t border-slate-200 flex justify-between items-center text-sm font-black text-slate-900">
+                <span>Final Total Amount:</span>
+                <span className="text-2xl text-brand-700">{formatCurrency(grandTotal)}</span>
+              </div>
             </div>
 
             <div className="flex space-x-3">
