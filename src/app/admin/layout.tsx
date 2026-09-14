@@ -82,7 +82,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { name: 'Bookings Desk', href: '/admin/bookings', icon: ShoppingBag, badge: 'Cloud' },
     { name: 'Package CMS', href: '/admin/packages', icon: Compass },
     { name: 'Destination CMS', href: '/admin/destinations', icon: MapPin },
-    { name: 'Forex Orders', href: '/admin/forex', icon: DollarSign },
     { name: 'Offer Coupons', href: '/admin/offers', icon: Tag },
     { name: 'Blog CMS', href: '/admin/blogs', icon: BookOpen },
     { name: 'Settings & Audit', href: '/admin/settings', icon: Settings },
