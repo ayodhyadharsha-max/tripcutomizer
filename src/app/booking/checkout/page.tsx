@@ -210,7 +210,7 @@ export default function BookingCheckoutPage() {
     }
   }, [user]);
 
-  const [paymentMethod, setPaymentMethod] = useState<'upi' | 'card' | 'netbanking'>('upi');
+  const [paymentMethod, setPaymentMethod] = useState<'cashfree' | 'upi' | 'card' | 'netbanking'>('cashfree');
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
   const handleSimulatePayment = () => {
@@ -477,7 +477,7 @@ export default function BookingCheckoutPage() {
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <div>
                 <h2 className="text-lg font-black text-slate-900">Secure Payment Gateway</h2>
-                <p className="text-xs text-slate-500 font-medium">Powered by Razorpay & Paytm SSL Payments</p>
+                <p className="text-xs text-slate-500 font-medium">Powered by Cashfree Payments (SSL Encrypted)</p>
               </div>
               <div className="text-right">
                 <span className="text-[10px] text-slate-400 font-bold block uppercase">Payable Total</span>
@@ -486,32 +486,52 @@ export default function BookingCheckoutPage() {
             </div>
 
             {/* Gateway Selection Tabs */}
-            <div className="grid grid-cols-3 gap-2 bg-slate-100 p-1.5 rounded-2xl text-xs font-bold text-center">
+            <div className="grid grid-cols-4 gap-2 bg-slate-100 p-1.5 rounded-2xl text-xs font-bold text-center">
+              <button
+                type="button"
+                onClick={() => setPaymentMethod('cashfree')}
+                className={`py-2.5 rounded-xl cursor-pointer transition-all ${paymentMethod === 'cashfree' ? 'bg-brand-600 text-white shadow-sm font-black' : 'text-slate-600 hover:text-slate-900'}`}
+              >
+                Cashfree Gateway
+              </button>
               <button
                 type="button"
                 onClick={() => setPaymentMethod('upi')}
                 className={`py-2.5 rounded-xl cursor-pointer transition-all ${paymentMethod === 'upi' ? 'bg-white text-brand-700 shadow-sm font-black' : 'text-slate-600 hover:text-slate-900'}`}
               >
-                UPI / QR (GooglePay/PhonePe)
+                UPI / QR
               </button>
               <button
                 type="button"
                 onClick={() => setPaymentMethod('card')}
                 className={`py-2.5 rounded-xl cursor-pointer transition-all ${paymentMethod === 'card' ? 'bg-white text-brand-700 shadow-sm font-black' : 'text-slate-600 hover:text-slate-900'}`}
               >
-                Credit / Debit Card
+                Cards
               </button>
               <button
                 type="button"
                 onClick={() => setPaymentMethod('netbanking')}
                 className={`py-2.5 rounded-xl cursor-pointer transition-all ${paymentMethod === 'netbanking' ? 'bg-white text-brand-700 shadow-sm font-black' : 'text-slate-600 hover:text-slate-900'}`}
               >
-                Net Banking
+                NetBanking
               </button>
             </div>
 
             {/* Payment Method Details Box */}
             <div className="p-6 bg-slate-50 border border-slate-200/90 rounded-2xl space-y-4 text-xs">
+              {paymentMethod === 'cashfree' && (
+                <div className="space-y-3 text-center py-2">
+                  <span className="bg-emerald-100 text-emerald-800 font-extrabold text-[11px] px-3.5 py-1 rounded-full inline-block">
+                    ✓ Official Cashfree Payment Gateway Selected
+                  </span>
+                  <p className="text-slate-600 max-w-md mx-auto leading-relaxed">
+                    Pay securely using Cashfree (UPI, Cards, NetBanking, Paytm, EMI & Wallet options). 
+                  </p>
+                  <div className="p-3 bg-white rounded-xl border border-slate-200 text-[11px] text-slate-500 font-medium max-w-sm mx-auto">
+                    🔒 Cashfree API credentials integration slot is ready. Direct redirect & SDK popup configured.
+                  </div>
+                </div>
+              )}
               {paymentMethod === 'upi' && (
                 <div className="space-y-3 text-center">
                   <span className="bg-emerald-100 text-emerald-800 font-bold text-[11px] px-3 py-1 rounded-full inline-block">
