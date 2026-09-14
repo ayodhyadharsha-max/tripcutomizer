@@ -9,7 +9,7 @@ import { Badge } from '@/components/ui/Badge';
 import { Percent, Copy, Check, Clock, Tag, ChevronRight } from 'lucide-react';
 
 export default function OffersPage() {
-  const [activeTab, setActiveTab] = useState<'all' | 'holidays' | 'forex' | 'flights' | 'bank'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'holidays' | 'flights' | 'bank'>('all');
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
   const offersList = [
@@ -22,16 +22,6 @@ export default function OffersPage() {
       image: 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?q=80&w=600&auto=format&fit=crop',
       product: 'International Holidays',
       terms: 'Minimum booking value ₹1,50,000. Applicable on select departures.',
-    },
-    {
-      id: 'off-2',
-      category: 'forex',
-      title: 'Zero Forex Card Issuance Fee + ₹500 Cashback',
-      code: 'FREECARD',
-      validity: 'Valid till 15 Nov 2026',
-      image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=600&auto=format&fit=crop',
-      product: 'Forex Card',
-      terms: 'Applicable on loading minimum 1,000 USD equivalent.',
     },
     {
       id: 'off-3',
@@ -98,12 +88,6 @@ export default function OffersPage() {
             className={`px-4 py-2 rounded-xl cursor-pointer ${activeTab === 'holidays' ? 'bg-brand-900 text-white shadow' : 'bg-white text-slate-700 hover:bg-slate-200'}`}
           >
             Holiday Offers
-          </button>
-          <button
-            onClick={() => setActiveTab('forex')}
-            className={`px-4 py-2 rounded-xl cursor-pointer ${activeTab === 'forex' ? 'bg-emerald-700 text-white shadow' : 'bg-white text-slate-700 hover:bg-slate-200'}`}
-          >
-            Forex Deals
           </button>
           <button
             onClick={() => setActiveTab('flights')}

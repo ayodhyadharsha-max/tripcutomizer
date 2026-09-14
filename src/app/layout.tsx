@@ -5,8 +5,8 @@ import { Footer } from '@/components/navigation/Footer';
 import { ClientProviders } from '@/components/providers/ClientProviders';
 
 export const metadata: Metadata = {
-  title: 'tripcustomizer — Holidays, Forex, Flights, Hotels, Visa & Travel Insurance',
-  description: 'Book international & domestic India holidays, buy/sell forex, currency cards, university fee remittance, flights, hotels, visa assistance & travel insurance.',
+  title: 'tripcustomizer — Customized Holidays, Flights, Hotels, Visa & Travel Insurance',
+  description: 'Book international & domestic India holiday packages, flights, luxury hotels, visa assistance & travel insurance with 24x7 support.',
 };
 
 export default function RootLayout({
