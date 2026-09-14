@@ -90,15 +90,57 @@ export class MockHotelProvider implements IHotelProvider {
       propertyType: 'Hotel',
       distanceFromCenter: '0.5 km from City Center',
     },
+    {
+      id: 'ht-4',
+      name: 'Grand Hyatt Bali Beach Resort',
+      location: 'Nusa Dua, Bali',
+      city: 'Bali',
+      country: 'Indonesia',
+      starRating: 5,
+      userRating: 4.9,
+      reviewsCount: 520,
+      image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=800&auto=format&fit=crop',
+      amenities: ['Private Beach', 'Lagoon Pool', 'Water Sports', 'Spa & Wellness', 'Balinese Spa'],
+      roomType: 'Ocean Front Suite',
+      mealPlan: 'Free Breakfast Included',
+      pricePerNight: 9800,
+      taxesPerNight: 1400,
+      totalPrice: 11200,
+      propertyType: 'Resort',
+      distanceFromCenter: 'Direct Beach Access',
+    },
+    {
+      id: 'ht-5',
+      name: 'Ramayana Heritage Hotel & Suites',
+      location: 'Near Ram Janmabhoomi, Ayodhya',
+      city: 'Ayodhya',
+      country: 'India',
+      starRating: 4,
+      userRating: 4.8,
+      reviewsCount: 290,
+      image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop',
+      amenities: ['Free WiFi', 'Vegetarian Restaurant', 'Temple Transfers', 'Travel Desk', 'AC Rooms'],
+      roomType: 'Royal Heritage Deluxe Room',
+      mealPlan: 'Breakfast & Dinner Included',
+      pricePerNight: 4500,
+      taxesPerNight: 550,
+      totalPrice: 5050,
+      propertyType: 'Hotel',
+      distanceFromCenter: '1.0 km from Ram Mandir',
+    },
   ];
 
   async searchHotels(params: HotelSearchParams): Promise<HotelResult[]> {
     if (!params.location) return this.hotels;
-    return this.hotels.filter(
+    const query = params.location.toLowerCase().trim();
+    const matched = this.hotels.filter(
       (h) =>
-        h.city.toLowerCase().includes(params.location.toLowerCase()) ||
-        h.location.toLowerCase().includes(params.location.toLowerCase())
+        h.city.toLowerCase().includes(query) ||
+        h.location.toLowerCase().includes(query) ||
+        h.name.toLowerCase().includes(query) ||
+        h.country.toLowerCase().includes(query)
     );
+    return matched.length > 0 ? matched : this.hotels;
   }
 }
 

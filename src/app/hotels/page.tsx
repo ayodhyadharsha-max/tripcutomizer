@@ -35,22 +35,7 @@ export default function HotelSearchPage() {
           <span className="font-semibold text-slate-800">Hotel Search</span>
         </div>
 
-        {/* Coming Soon Notice Banner */}
-        <div className="bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 p-4 rounded-2xl shadow-md mb-6 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="p-2 bg-slate-950/10 rounded-xl">
-              <Hotel className="w-6 h-6 text-slate-950" />
-            </div>
-            <div>
-              <h3 className="font-extrabold text-sm sm:text-base uppercase tracking-tight">
-                Online Hotel Bookings – Coming Soon!
-              </h3>
-              <p className="text-xs text-slate-900 font-medium">
-                We are currently onboarding luxury resort & hotel inventories. For customized hotel packages, call 1800-2099-100.
-              </p>
-            </div>
-          </div>
-        </div>
+
 
         {/* Hotel Search Engine Header */}
         <Card className="p-6 bg-brand-900 text-white rounded-3xl mb-8 shadow-xl">

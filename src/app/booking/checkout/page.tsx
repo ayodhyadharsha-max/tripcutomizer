@@ -461,47 +461,121 @@ export default function BookingCheckoutPage() {
         {step === 3 && (
           <Card className="p-8 bg-white rounded-3xl shadow-xl border border-slate-200 space-y-6">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <h2 className="text-lg font-black text-slate-900">Secure Payment Gateway</h2>
-              <span className="text-xs font-bold text-slate-400">Total: {formatCurrency(grandTotal)}</span>
+              <div>
+                <h2 className="text-lg font-black text-slate-900">Secure Payment Gateway</h2>
+                <p className="text-xs text-slate-500 font-medium">Powered by Razorpay & Paytm SSL Payments</p>
+              </div>
+              <div className="text-right">
+                <span className="text-[10px] text-slate-400 font-bold block uppercase">Payable Total</span>
+                <span className="text-xl font-black text-brand-700">{formatCurrency(grandTotal)}</span>
+              </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-2 bg-slate-100 p-1 rounded-xl text-xs font-bold text-center">
+            {/* Gateway Selection Tabs */}
+            <div className="grid grid-cols-3 gap-2 bg-slate-100 p-1.5 rounded-2xl text-xs font-bold text-center">
               <button
+                type="button"
                 onClick={() => setPaymentMethod('upi')}
-                className={`py-2 rounded-lg cursor-pointer ${paymentMethod === 'upi' ? 'bg-white text-slate-900 shadow' : 'text-slate-600'}`}
+                className={`py-2.5 rounded-xl cursor-pointer transition-all ${paymentMethod === 'upi' ? 'bg-white text-brand-700 shadow-sm font-black' : 'text-slate-600 hover:text-slate-900'}`}
               >
-                UPI / QR Code
+                UPI / QR (GooglePay/PhonePe)
               </button>
               <button
+                type="button"
                 onClick={() => setPaymentMethod('card')}
-                className={`py-2 rounded-lg cursor-pointer ${paymentMethod === 'card' ? 'bg-white text-slate-900 shadow' : 'text-slate-600'}`}
+                className={`py-2.5 rounded-xl cursor-pointer transition-all ${paymentMethod === 'card' ? 'bg-white text-brand-700 shadow-sm font-black' : 'text-slate-600 hover:text-slate-900'}`}
               >
                 Credit / Debit Card
               </button>
               <button
+                type="button"
                 onClick={() => setPaymentMethod('netbanking')}
-                className={`py-2 rounded-lg cursor-pointer ${paymentMethod === 'netbanking' ? 'bg-white text-slate-900 shadow' : 'text-slate-600'}`}
+                className={`py-2.5 rounded-xl cursor-pointer transition-all ${paymentMethod === 'netbanking' ? 'bg-white text-brand-700 shadow-sm font-black' : 'text-slate-600 hover:text-slate-900'}`}
               >
                 Net Banking
               </button>
             </div>
 
-            <div className="p-6 bg-slate-50 border border-slate-200 rounded-2xl text-center space-y-4 text-xs">
-              <ShieldCheck className="w-10 h-10 text-emerald-600 mx-auto" />
-              <p className="font-bold text-slate-900 text-sm">256-bit Encrypted SSL Payment</p>
-              <p className="text-slate-500">Instant confirmation & digital e-voucher will be generated upon payment completion.</p>
+            {/* Payment Method Details Box */}
+            <div className="p-6 bg-slate-50 border border-slate-200/90 rounded-2xl space-y-4 text-xs">
+              {paymentMethod === 'upi' && (
+                <div className="space-y-3 text-center">
+                  <span className="bg-emerald-100 text-emerald-800 font-bold text-[11px] px-3 py-1 rounded-full inline-block">
+                    Instant 0% Convenience Fee via UPI
+                  </span>
+                  <div className="max-w-xs mx-auto space-y-2">
+                    <label className="block text-left font-bold text-slate-700">Enter UPI VPA ID</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. mobile@upi or name@okaxis"
+                      className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-semibold focus:outline-hidden focus:ring-2 focus:ring-brand-500"
+                    />
+                  </div>
+                  <p className="text-[11px] text-slate-500">Supported: PhonePe, Google Pay, Paytm, BHIM, Cred UPI</p>
+                </div>
+              )}
+
+              {paymentMethod === 'card' && (
+                <div className="space-y-3 max-w-md mx-auto">
+                  <div>
+                    <label className="block font-bold text-slate-700 mb-1">Card Number</label>
+                    <input
+                      type="text"
+                      placeholder="4532 •••• •••• 8921"
+                      className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-semibold focus:outline-hidden"
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Expiry (MM/YY)</label>
+                      <input
+                        type="text"
+                        placeholder="08/28"
+                        className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-semibold focus:outline-hidden"
+                      />
+                    </div>
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">CVV / CVC</label>
+                      <input
+                        type="password"
+                        maxLength={4}
+                        placeholder="•••"
+                        className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-semibold focus:outline-hidden"
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {paymentMethod === 'netbanking' && (
+                <div className="space-y-3 max-w-md mx-auto">
+                  <label className="block font-bold text-slate-700">Select Bank</label>
+                  <select className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-semibold">
+                    <option value="HDFC">HDFC Bank</option>
+                    <option value="ICICI">ICICI Bank</option>
+                    <option value="SBI">State Bank of India (SBI)</option>
+                    <option value="AXIS">Axis Bank</option>
+                    <option value="KOTAK">Kotak Mahindra Bank</option>
+                  </select>
+                </div>
+              )}
+
+              <div className="pt-3 border-t border-slate-200 flex items-center justify-center space-x-2 text-[11px] text-slate-500 font-medium">
+                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>256-Bit SSL Encrypted Payment Authorization</span>
+              </div>
 
               <Button
                 onClick={handleSimulatePayment}
                 disabled={isProcessingPayment}
                 variant="accent"
                 size="lg"
-                className="w-full max-w-sm mx-auto font-black py-3 text-slate-950 text-sm shadow-xl cursor-pointer disabled:opacity-75 flex items-center justify-center gap-2"
+                className="w-full max-w-md mx-auto font-black py-3.5 text-slate-950 text-sm shadow-xl cursor-pointer disabled:opacity-75 flex items-center justify-center gap-2"
               >
                 {isProcessingPayment ? (
                   <>
                     <Loader2 className="w-5 h-5 animate-spin text-slate-950" />
-                    <span>Verifying & Confirming Payment...</span>
+                    <span>Authorizing Payment & Syncing Lead...</span>
                   </>
                 ) : (
                   `PAY & CONFIRM BOOKING (${formatCurrency(grandTotal)})`
