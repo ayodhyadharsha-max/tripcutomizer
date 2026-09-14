@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/Button';
 import { useAuth } from '@/context/AuthContext';
 import { cloudStore, CustomerBooking } from '@/lib/cloudStore';
 import { formatCurrency } from '@/lib/utils';
-import { User, Phone, Mail, Calendar, MapPin, CheckCircle2, Clock, LogOut, Package, ArrowRight } from 'lucide-react';
+import { User, Phone, Mail, MapPin, LogOut, Package, FileText, Printer, CheckCircle2, ShieldCheck, Download } from 'lucide-react';
 
 export default function CustomerAccountPage() {
   const { user, isLoggedIn, login, logout, updateProfile } = useAuth();
@@ -27,13 +27,16 @@ export default function CustomerAccountPage() {
   // User Bookings
   const [userBookings, setUserBookings] = useState<CustomerBooking[]>([]);
 
+  // Selected Booking for Detailed Tax Invoice Modal
+  const [selectedInvoice, setSelectedInvoice] = useState<CustomerBooking | null>(null);
+
   useEffect(() => {
     if (user) {
       setProfileName(user.name || '');
       setProfilePhone(user.phone || '');
       setProfileCity(user.city || '');
 
-      // Load bookings matching this user's email or phone
+      // Strict user booking isolation
       const allBookings = cloudStore.getBookings();
       const filtered = allBookings.filter(
         (b) => b.customerEmail.toLowerCase() === user.email.toLowerCase() || b.customerPhone === user.phone
@@ -57,6 +60,12 @@ export default function CustomerAccountPage() {
     setEditing(false);
   };
 
+  const handlePrintInvoice = () => {
+    if (typeof window !== 'undefined') {
+      window.print();
+    }
+  };
+
   if (!isLoggedIn) {
     return (
       <div className="bg-slate-50 min-h-screen py-14 flex items-center justify-center">
@@ -68,7 +77,7 @@ export default function CustomerAccountPage() {
               </div>
               <h1 className="text-2xl font-black text-slate-900">Customer Login / Signup</h1>
               <p className="text-xs text-slate-500">
-                Enter your details once. We save your profile so you never have to re-enter details again!
+                Enter your details once. Access your booked trips, tax invoices, and e-vouchers anytime!
               </p>
             </div>
 
@@ -164,7 +173,7 @@ export default function CustomerAccountPage() {
                   type="text"
                   value={profileName}
                   onChange={(e) => setProfileName(e.target.value)}
-                  className="w-full bg-slate-50 border rounded-xl px-3 py-2 font-semibold"
+                  className="w-full bg-slate-50 border rounded-xl px-3 py-2 font-semibold text-slate-800"
                 />
               </div>
               <div>
@@ -173,7 +182,7 @@ export default function CustomerAccountPage() {
                   type="text"
                   value={profilePhone}
                   onChange={(e) => setProfilePhone(e.target.value)}
-                  className="w-full bg-slate-50 border rounded-xl px-3 py-2 font-semibold"
+                  className="w-full bg-slate-50 border rounded-xl px-3 py-2 font-semibold text-slate-800"
                 />
               </div>
               <div>
@@ -182,7 +191,7 @@ export default function CustomerAccountPage() {
                   type="text"
                   value={profileCity}
                   onChange={(e) => setProfileCity(e.target.value)}
-                  className="w-full bg-slate-50 border rounded-xl px-3 py-2 font-semibold"
+                  className="w-full bg-slate-50 border rounded-xl px-3 py-2 font-semibold text-slate-800"
                 />
               </div>
               <div className="sm:col-span-3 flex justify-end gap-2 pt-2">
@@ -194,7 +203,7 @@ export default function CustomerAccountPage() {
           </Card>
         )}
 
-        {/* Bookings Section */}
+        {/* Bookings & Invoices Section */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-extrabold text-slate-900 flex items-center gap-2">
@@ -209,7 +218,7 @@ export default function CustomerAccountPage() {
 
           {userBookings.length === 0 ? (
             <Card className="p-12 text-center bg-white rounded-3xl border border-slate-200 space-y-3">
-              <p className="text-slate-500 text-sm font-semibold">No active bookings found yet.</p>
+              <p className="text-slate-500 text-sm font-semibold">No active bookings found for your account yet.</p>
               <Link href="/holidays">
                 <Button variant="primary" size="sm" className="font-bold">Explore 50+ Packages</Button>
               </Link>
@@ -221,7 +230,7 @@ export default function CustomerAccountPage() {
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pb-3 border-b border-slate-100">
                     <div>
                       <span className="text-[11px] font-extrabold bg-brand-50 text-brand-700 px-2.5 py-0.5 rounded-md">
-                        {b.referenceNo}
+                        Ref: {b.referenceNo}
                       </span>
                       <h3 className="text-lg font-black text-slate-900 mt-1">{b.packageName}</h3>
                     </div>
@@ -254,9 +263,26 @@ export default function CustomerAccountPage() {
                       <span className="font-bold text-slate-800">{b.travelersCount} Adults</span>
                     </div>
                     <div>
-                      <span className="text-slate-400 font-bold block uppercase text-[10px]">Total Amount</span>
+                      <span className="text-slate-400 font-bold block uppercase text-[10px]">Total Paid Amount</span>
                       <span className="font-black text-brand-700 text-sm">{formatCurrency(b.totalAmount)}</span>
                     </div>
+                  </div>
+
+                  {/* Actions Bar for Bill / Invoice / Voucher */}
+                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <div className="flex items-center space-x-2 text-xs text-emerald-700 font-bold">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                      <span>E-Voucher & Tax Invoice Ready</span>
+                    </div>
+
+                    <Button
+                      onClick={() => setSelectedInvoice(b)}
+                      variant="primary"
+                      size="sm"
+                      className="font-bold flex items-center gap-1.5 cursor-pointer"
+                    >
+                      <FileText className="w-4 h-4" /> View Tax Invoice Bill & Voucher 📄
+                    </Button>
                   </div>
                 </Card>
               ))}
@@ -264,6 +290,129 @@ export default function CustomerAccountPage() {
           )}
         </div>
       </Container>
+
+      {/* TAX INVOICE & TRAVEL VOUCHER MODAL */}
+      {selectedInvoice && (
+        <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white rounded-3xl p-6 sm:p-8 max-w-2xl w-full space-y-6 shadow-2xl border border-slate-200 relative my-8">
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedInvoice(null)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 font-bold text-base cursor-pointer"
+            >
+              ✕
+            </button>
+
+            {/* Print Header */}
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-4 border-b-2 border-slate-200 gap-4">
+              <div>
+                <div className="flex items-center space-x-2">
+                  <div className="bg-brand-700 text-white font-black text-sm px-2 py-0.5 rounded-lg">TC</div>
+                  <span className="font-black text-xl text-brand-900 tracking-tight">tripcustomizer</span>
+                </div>
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-1">Official Tax Invoice & Travel Voucher</p>
+              </div>
+              <div className="sm:text-right">
+                <span className="text-xs font-bold text-slate-400 block uppercase">Invoice No.</span>
+                <span className="font-black text-brand-700 text-sm">INV-{selectedInvoice.referenceNo}</span>
+                <span className="block text-[10px] text-slate-400 font-semibold mt-0.5">Issued: {new Date(selectedInvoice.createdAt).toLocaleDateString('en-IN')}</span>
+              </div>
+            </div>
+
+            {/* Company & Customer Details */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs">
+              <div className="space-y-1">
+                <span className="font-extrabold text-slate-400 uppercase text-[10px] block">Issued By (Service Provider)</span>
+                <p className="font-black text-slate-900 text-sm">tripcustomizer Travels Pvt. Ltd.</p>
+                <p className="text-slate-600">GSTIN: 07AAAAA0000A1Z5</p>
+                <p className="text-slate-600">Toll Free: 1800-2099-100</p>
+                <p className="text-slate-600">Support: support@tripcustomizer.com</p>
+              </div>
+              <div className="space-y-1 sm:border-l sm:border-slate-200 sm:pl-4">
+                <span className="font-extrabold text-slate-400 uppercase text-[10px] block">Billed To (Customer Details)</span>
+                <p className="font-black text-slate-900 text-sm">{selectedInvoice.customerName}</p>
+                <p className="text-slate-600 font-semibold"><Phone className="w-3 h-3 inline mr-1 text-brand-500" /> {selectedInvoice.customerPhone}</p>
+                <p className="text-slate-600 font-semibold"><Mail className="w-3 h-3 inline mr-1 text-brand-500" /> {selectedInvoice.customerEmail}</p>
+              </div>
+            </div>
+
+            {/* Package & Trip Particulars Table */}
+            <div className="space-y-2">
+              <h4 className="font-black text-slate-900 text-xs uppercase tracking-wider">Booked Package Details</h4>
+              <div className="border border-slate-200 rounded-2xl overflow-hidden text-xs">
+                <table className="w-full text-left">
+                  <thead className="bg-slate-100 text-slate-700 font-extrabold text-[10px] uppercase border-b border-slate-200">
+                    <tr>
+                      <th className="py-2.5 px-3">Description</th>
+                      <th className="py-2.5 px-3">Travel Dates</th>
+                      <th className="py-2.5 px-3">Pax</th>
+                      <th className="py-2.5 px-3 text-right">Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100 font-medium text-slate-800">
+                    <tr>
+                      <td className="py-3 px-3">
+                        <span className="font-extrabold text-slate-900 block">{selectedInvoice.packageName}</span>
+                        <span className="text-[10px] text-slate-500">{selectedInvoice.destination}</span>
+                      </td>
+                      <td className="py-3 px-3 font-semibold">{selectedInvoice.travelDates}</td>
+                      <td className="py-3 px-3 font-semibold">{selectedInvoice.travelersCount} Adults</td>
+                      <td className="py-3 px-3 text-right font-black text-slate-900">{formatCurrency(selectedInvoice.totalAmount)}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Tax Breakdown Table */}
+            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs space-y-2">
+              <div className="flex justify-between text-slate-600">
+                <span>Base Tour Package Fare:</span>
+                <span className="font-bold text-slate-900">{formatCurrency(selectedInvoice.totalAmount * 0.95)}</span>
+              </div>
+              <div className="flex justify-between text-slate-600">
+                <span>GST (5% Tour Operator Service Tax):</span>
+                <span className="font-bold text-slate-900">{formatCurrency(selectedInvoice.totalAmount * 0.05)}</span>
+              </div>
+              <div className="pt-2 border-t border-slate-200 flex justify-between items-center text-slate-900">
+                <span className="font-black text-sm">Grand Total Paid:</span>
+                <span className="text-xl font-black text-emerald-700">{formatCurrency(selectedInvoice.totalAmount)}</span>
+              </div>
+            </div>
+
+            {/* Voucher Inclusions List */}
+            <div className="p-4 bg-brand-50/70 border border-brand-100 rounded-2xl text-xs space-y-2">
+              <span className="font-extrabold text-brand-900 uppercase text-[10px] block">Voucher Inclusions & Voucher Benefits</span>
+              <ul className="space-y-1 text-slate-700 font-semibold list-disc list-inside">
+                <li>🏨 4-Star Resort Accommodations with Daily Breakfast & Dinner</li>
+                <li>🚘 Private AC Vehicle for Transfers & Full Sightseeing Tour</li>
+                <li>🎟️ Monument Entry Tickets & Glass Skywalk Access Included</li>
+                <li>📞 24/7 On-Tour Manager Support & Emergency Assistance</li>
+              </ul>
+            </div>
+
+            {/* Modal Actions */}
+            <div className="flex justify-between items-center pt-2">
+              <Button
+                onClick={handlePrintInvoice}
+                variant="accent"
+                size="md"
+                className="font-bold flex items-center gap-1.5 cursor-pointer text-slate-950"
+              >
+                <Printer className="w-4 h-4" /> Print / Save Tax Invoice PDF 🖨️
+              </Button>
+              <Button
+                onClick={() => setSelectedInvoice(null)}
+                variant="outline"
+                size="md"
+                className="font-bold cursor-pointer"
+              >
+                Close
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
