@@ -1,4 +1,5 @@
-'use client';
+import { db } from '@/lib/firebase';
+import { collection, doc, setDoc, onSnapshot } from 'firebase/firestore';
 
 export interface PassengerDetail {
   name: string;
@@ -103,6 +104,90 @@ const setStoredData = <T>(key: string, data: T): void => {
   }
 };
 
+// Async helper to sync booking to Cloud Firestore DB
+const syncBookingToFirestore = async (booking: CustomerBooking) => {
+  if (typeof window === 'undefined' || !db) return;
+  try {
+    await setDoc(doc(db, 'bookings', booking.id), booking, { merge: true });
+  } catch (e) {
+    console.warn('Firestore booking sync note:', e);
+  }
+};
+
+// Async helper to sync lead to Cloud Firestore DB
+const syncLeadToFirestore = async (lead: CustomerLead) => {
+  if (typeof window === 'undefined' || !db) return;
+  try {
+    await setDoc(doc(db, 'leads', lead.id), lead, { merge: true });
+  } catch (e) {
+    console.warn('Firestore lead sync note:', e);
+  }
+};
+
+// Async helper to sync user profile to Cloud Firestore DB
+const syncProfileToFirestore = async (profile: UserProfile) => {
+  if (typeof window === 'undefined' || !db) return;
+  try {
+    await setDoc(doc(db, 'profiles', profile.uid), profile, { merge: true });
+  } catch (e) {
+    console.warn('Firestore profile sync note:', e);
+  }
+};
+
+// Initialize Realtime Cloud Firestore listeners
+let isFirestoreListenerInitialized = false;
+
+const initCloudFirestoreListeners = () => {
+  if (typeof window === 'undefined' || isFirestoreListenerInitialized || !db) return;
+  isFirestoreListenerInitialized = true;
+
+  try {
+    // Listen to live Bookings collection in Cloud Firestore
+    onSnapshot(collection(db, 'bookings'), (snapshot) => {
+      if (!snapshot.empty) {
+        const cloudBookings: CustomerBooking[] = [];
+        snapshot.forEach((docSnap) => {
+          cloudBookings.push(docSnap.data() as CustomerBooking);
+        });
+
+        const localBookings = getStoredData<CustomerBooking[]>(STORAGE_KEYS.BOOKINGS, []);
+        const bookingMap = new Map<string, CustomerBooking>();
+        localBookings.forEach((b) => bookingMap.set(b.id, b));
+        cloudBookings.forEach((b) => bookingMap.set(b.id, b));
+
+        const merged = Array.from(bookingMap.values()).sort(
+          (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+
+        setStoredData(STORAGE_KEYS.BOOKINGS, merged);
+      }
+    }, (err) => console.warn('Firestore bookings snapshot info:', err));
+
+    // Listen to live Leads collection in Cloud Firestore
+    onSnapshot(collection(db, 'leads'), (snapshot) => {
+      if (!snapshot.empty) {
+        const cloudLeads: CustomerLead[] = [];
+        snapshot.forEach((docSnap) => {
+          cloudLeads.push(docSnap.data() as CustomerLead);
+        });
+
+        const localLeads = getStoredData<CustomerLead[]>(STORAGE_KEYS.LEADS, []);
+        const leadMap = new Map<string, CustomerLead>();
+        localLeads.forEach((l) => leadMap.set(l.id, l));
+        cloudLeads.forEach((l) => leadMap.set(l.id, l));
+
+        const merged = Array.from(leadMap.values()).sort(
+          (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+
+        setStoredData(STORAGE_KEYS.LEADS, merged);
+      }
+    }, (err) => console.warn('Firestore leads snapshot info:', err));
+  } catch (e) {
+    console.warn('Firestore listener init info:', e);
+  }
+};
+
 // Helper to strip common honorific titles for smart deduplication
 const stripTitle = (name: string): string => {
   return name.replace(/^(Mr|Mrs|Ms|Dr|Master|Miss)\.?\s+/i, '').trim().toLowerCase();
@@ -111,6 +196,7 @@ const stripTitle = (name: string): string => {
 export const cloudStore = {
   // --- BOOKINGS ---
   getBookings: (): CustomerBooking[] => {
+    initCloudFirestoreListeners();
     return getStoredData<CustomerBooking[]>(STORAGE_KEYS.BOOKINGS, DEFAULT_BOOKINGS);
   },
 
@@ -139,6 +225,7 @@ export const cloudStore = {
 
     const updated = [newBooking, ...existing];
     setStoredData(STORAGE_KEYS.BOOKINGS, updated);
+    syncBookingToFirestore(newBooking);
 
     // Also auto-sync as CRM Lead so admin sees it in both /admin/bookings and /admin/leads
     try {
@@ -169,10 +256,13 @@ export const cloudStore = {
     const existing = cloudStore.getBookings();
     const updated = existing.map((b) => (b.id === id ? { ...b, status } : b));
     setStoredData(STORAGE_KEYS.BOOKINGS, updated);
+    const matched = updated.find((b) => b.id === id);
+    if (matched) syncBookingToFirestore(matched);
   },
 
   // --- LEADS / ENQUIRIES ---
   getLeads: (): CustomerLead[] => {
+    initCloudFirestoreListeners();
     return getStoredData<CustomerLead[]>(STORAGE_KEYS.LEADS, DEFAULT_LEADS);
   },
 
@@ -185,6 +275,7 @@ export const cloudStore = {
     };
     const updated = [newLead, ...existing];
     setStoredData(STORAGE_KEYS.LEADS, updated);
+    syncLeadToFirestore(newLead);
     return newLead;
   },
 
@@ -192,6 +283,8 @@ export const cloudStore = {
     const existing = cloudStore.getLeads();
     const updated = existing.map((l) => (l.id === id ? { ...l, status } : l));
     setStoredData(STORAGE_KEYS.LEADS, updated);
+    const matched = updated.find((l) => l.id === id);
+    if (matched) syncLeadToFirestore(matched);
   },
 
   // --- USER PROFILES & PERSISTENT SESSION ---
@@ -204,6 +297,7 @@ export const cloudStore = {
     const profiles = getStoredData<Record<string, UserProfile>>(STORAGE_KEYS.PROFILES, {});
     profiles[profile.uid] = { ...profile, updatedAt: new Date().toISOString() };
     setStoredData(STORAGE_KEYS.PROFILES, profiles);
+    syncProfileToFirestore(profile);
   },
 
   getPersistedUser: (): UserProfile | null => {
