@@ -50,19 +50,28 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
         const cleanDigits = identifier.replace(/\D/g, '').slice(-10);
         const formattedPhone = cleanDigits ? `+91${cleanDigits}` : identifier;
 
-        if (!(window as any).recaptchaVerifier) {
+        if (typeof window !== 'undefined') {
+          if ((window as any).recaptchaVerifier) {
+            try {
+              (window as any).recaptchaVerifier.clear();
+              (window as any).recaptchaVerifier = null;
+            } catch (e) {}
+          }
           (window as any).recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
             size: 'invisible',
           });
         }
+
         const confirmation = await signInWithPhoneNumber(auth, formattedPhone, (window as any).recaptchaVerifier);
         setConfirmationResult(confirmation);
       } catch (err: any) {
         console.error('Firebase SMS Error:', err);
         if (err?.code === 'auth/unauthorized-domain') {
-          setErrorMsg('Firebase Error: Domain tripcutomizer.vercel.app is not added in Firebase Authorized Domains.');
+          setErrorMsg('Firebase Error: Please add tripcutomizer.vercel.app & tripcutomizer.com to Firebase Authorized Domains.');
+        } else if (err?.code === 'auth/invalid-phone-number') {
+          setErrorMsg('Please enter a valid 10-digit mobile number.');
         } else if (err?.message) {
-          setErrorMsg(`Firebase Info: ${err.message}`);
+          setErrorMsg(`Firebase SMS Info: ${err.message}`);
         }
       }
     }
