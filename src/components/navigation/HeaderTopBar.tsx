@@ -2,13 +2,15 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Phone, MapPin, User, ChevronDown, MessageCircle, HelpCircle, LogOut, ShoppingBag, LogIn } from 'lucide-react';
 import { Container } from '../ui/Container';
 import { useAuth } from '@/context/AuthContext';
 import { AuthModal } from '../modals/AuthModal';
 
 export const HeaderTopBar: React.FC = () => {
-  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const router = useRouter();
+  const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { user, isLoggedIn, logout } = useAuth();
 
@@ -16,7 +18,7 @@ export const HeaderTopBar: React.FC = () => {
     if (!isLoggedIn) {
       setIsModalOpen(true);
     } else {
-      setIsAuthOpen(!isAuthOpen);
+      router.push('/account');
     }
   };
 
@@ -53,52 +55,84 @@ export const HeaderTopBar: React.FC = () => {
               <span>Customer Support</span>
             </Link>
 
-            {/* User Auth Button / Dropdown */}
-            <div className="relative">
+            {/* User Auth Button with Hover Dropdown (Matching Holidays & More menus) */}
+            <div
+              className="relative py-1"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
               <button
                 onClick={handleAccountClick}
-                className="flex items-center space-x-1.5 bg-brand-700/60 hover:bg-brand-700 px-3 py-1 rounded-full text-white font-medium transition-all cursor-pointer"
+                className="flex items-center space-x-1.5 bg-brand-700/60 hover:bg-brand-700 px-3.5 py-1 rounded-full text-white font-medium transition-all cursor-pointer shadow-xs"
               >
                 <User className="w-3.5 h-3.5 text-accent-400" />
                 <span>{isLoggedIn ? user?.name || 'My Account' : 'Login / Sign Up'}</span>
-                {isLoggedIn ? <ChevronDown className="w-3 h-3 text-slate-300" /> : <LogIn className="w-3 h-3 text-accent-400" />}
+                <ChevronDown className="w-3 h-3 text-slate-300" />
               </button>
 
-              {isLoggedIn && isAuthOpen && (
-                <div className="absolute right-0 mt-2 w-60 bg-white text-slate-800 rounded-2xl shadow-2xl border border-slate-100 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                  <div className="px-4 py-2 border-b border-slate-100">
-                    <p className="text-xs font-bold text-slate-900">
-                      Logged in as {user?.name}
-                    </p>
-                    <p className="text-[11px] text-slate-500">
-                      {user?.email}
-                    </p>
-                  </div>
+              {/* Hover Dropdown Menu */}
+              {isHovered && (
+                <div className="absolute right-0 top-full pt-1 w-64 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                  <div className="bg-white text-slate-800 rounded-2xl shadow-2xl border border-slate-100 py-3 overflow-hidden">
+                    {isLoggedIn ? (
+                      <>
+                        <div className="px-4 py-2.5 bg-slate-50 border-b border-slate-100">
+                          <p className="text-xs font-black text-slate-900">
+                            Hi {user?.name}
+                          </p>
+                          <p className="text-[11px] text-slate-500 font-medium truncate">
+                            {user?.email}
+                          </p>
+                        </div>
 
-                  <div className="py-1 text-xs">
-                    <Link
-                      href="/account"
-                      className="flex items-center space-x-2 px-4 py-2 hover:bg-slate-50 text-slate-700 font-semibold"
-                    >
-                      <User className="w-4 h-4 text-brand-600" />
-                      <span>My Saved Account & Profile</span>
-                    </Link>
+                        <div className="py-1 text-xs">
+                          <Link
+                            href="/account"
+                            onClick={() => setIsHovered(false)}
+                            className="flex items-center space-x-2.5 px-4 py-2.5 hover:bg-sky-50 text-slate-800 font-bold transition-colors"
+                          >
+                            <ShoppingBag className="w-4 h-4 text-sky-600" />
+                            <span>My Bookings & E-Vouchers</span>
+                          </Link>
 
-                    <Link
-                      href="/account"
-                      className="flex items-center space-x-2 px-4 py-2 hover:bg-slate-50 text-slate-700 font-semibold"
-                    >
-                      <ShoppingBag className="w-4 h-4 text-brand-600" />
-                      <span>My Bookings & E-Vouchers</span>
-                    </Link>
+                          <Link
+                            href="/account"
+                            onClick={() => setIsHovered(false)}
+                            className="flex items-center space-x-2.5 px-4 py-2.5 hover:bg-sky-50 text-slate-800 font-bold transition-colors"
+                          >
+                            <User className="w-4 h-4 text-sky-600" />
+                            <span>Personal Profile</span>
+                          </Link>
 
-                    <button
-                      onClick={logout}
-                      className="w-full flex items-center space-x-2 px-4 py-2 text-rose-600 hover:bg-rose-50 font-bold border-t border-slate-100 text-left cursor-pointer"
-                    >
-                      <LogOut className="w-4 h-4" />
-                      <span>Logout</span>
-                    </button>
+                          <button
+                            onClick={() => {
+                              setIsHovered(false);
+                              logout();
+                            }}
+                            className="w-full flex items-center space-x-2.5 px-4 py-2.5 text-rose-600 hover:bg-rose-50 font-bold border-t border-slate-100 text-left cursor-pointer transition-colors"
+                          >
+                            <LogOut className="w-4 h-4" />
+                            <span>Logout Account</span>
+                          </button>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="px-4 py-3 text-xs space-y-3">
+                        <div>
+                          <p className="font-black text-slate-900 text-sm">Customer Access</p>
+                          <p className="text-[11px] text-slate-500 font-medium">Log in to view bookings, vouchers & tax invoices.</p>
+                        </div>
+                        <button
+                          onClick={() => {
+                            setIsHovered(false);
+                            setIsModalOpen(true);
+                          }}
+                          className="w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-black py-2 rounded-xl text-xs transition-all shadow-sm cursor-pointer"
+                        >
+                          Login / Sign Up Now →
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
@@ -107,7 +141,7 @@ export const HeaderTopBar: React.FC = () => {
         </Container>
       </div>
 
-      {/* Thomas Cook Style OTP Auth Modal */}
+      {/* OTP Auth Modal */}
       <AuthModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
