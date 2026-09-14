@@ -11,7 +11,7 @@ import { Badge } from '@/components/ui/Badge';
 import { DEMO_PACKAGES, HolidayPackage } from '@/data/packagesData';
 import { formatCurrency } from '@/lib/utils';
 import { useAuth } from '@/context/AuthContext';
-import { cloudStore } from '@/lib/cloudStore';
+import { cloudStore, CoTraveller } from '@/lib/cloudStore';
 import {
   Star, Clock, MapPin, CheckCircle2, ChevronRight, ChevronDown, ChevronUp,
   Hotel, Plane, Utensils, ShieldCheck, MessageCircle, Share2, Download,
@@ -95,13 +95,107 @@ export default function PackageDetailPage({ params }: { params: { destination: s
   // Toast / Share State
   const [shareToast, setShareToast] = useState(false);
 
+  // Saved Co-Travellers List for 1-Click Passenger Selection
+  const [savedCoTravellers, setSavedCoTravellers] = useState<CoTraveller[]>([]);
+
   useEffect(() => {
+    const userCo = user ? cloudStore.getCoTravellers(user.uid) : [];
+    const fallbackCo = cloudStore.getCoTravellers();
+    const finalCo = userCo.length > 0 ? userCo : fallbackCo;
+    setSavedCoTravellers(finalCo);
+
     if (user) {
       setContactName(user.name || '');
       setContactEmail(user.email || '');
       setContactPhone(user.phone || '');
     }
   }, [user]);
+
+  // Helper to select a saved co-traveller into a passenger field
+  const selectCoTraveller = (pKey: string, coTravellerId: string) => {
+    const found = savedCoTravellers.find((c) => c.id === coTravellerId);
+    if (!found) return;
+    setPassengers((prev) => {
+      const updated = {
+        ...prev,
+        [pKey]: {
+          title: found.gender === 'Female' ? (found.age < 18 ? 'Miss' : 'Mrs') : (found.age < 18 ? 'Master' : 'Mr'),
+          fullName: found.name,
+          gender: found.gender || 'Male',
+          age: String(found.age || ''),
+        },
+      };
+      if (pKey === 'r0_adult_0') {
+        setContactName(found.name);
+      }
+      return updated;
+    });
+  };
+
+  // 1-Click Auto-Fill All Passengers from Saved Co-Travellers & Logged-in User
+  const autoFillAllPassengers = () => {
+    const pool: { name: string; age: number; gender: string; title: string }[] = [];
+
+    // Add logged-in user if available
+    if (user?.name) {
+      pool.push({
+        name: user.name,
+        age: 28,
+        gender: 'Male',
+        title: 'Mr',
+      });
+    }
+
+    // Add saved co-travellers
+    savedCoTravellers.forEach((c) => {
+      if (!pool.some((p) => p.name.toLowerCase() === c.name.toLowerCase())) {
+        pool.push({
+          name: c.name,
+          age: c.age || 25,
+          gender: c.gender || 'Male',
+          title: c.gender === 'Female' ? (c.age < 18 ? 'Miss' : 'Mrs') : (c.age < 18 ? 'Master' : 'Mr'),
+        });
+      }
+    });
+
+    let poolIdx = 0;
+    const newPassengers: Record<string, PassengerData> = { ...passengers };
+
+    rooms.forEach((room, roomIdx) => {
+      for (let a = 0; a < room.adults; a++) {
+        const pKey = `r${roomIdx}_adult_${a}`;
+        if (!newPassengers[pKey]?.fullName && poolIdx < pool.length) {
+          const item = pool[poolIdx++];
+          newPassengers[pKey] = {
+            title: item.title,
+            fullName: item.name,
+            gender: item.gender,
+            age: String(item.age),
+          };
+          if (pKey === 'r0_adult_0') {
+            setContactName(item.name);
+          }
+        }
+      }
+
+      if (room.hasChildren) {
+        room.children.forEach((_, cIdx) => {
+          const cKey = `r${roomIdx}_child_${cIdx}`;
+          if (!newPassengers[cKey]?.fullName && poolIdx < pool.length) {
+            const item = pool[poolIdx++];
+            newPassengers[cKey] = {
+              title: item.gender === 'Female' ? 'Miss' : 'Master',
+              fullName: item.name,
+              gender: item.gender,
+              age: String(item.age),
+            };
+          }
+        });
+      }
+    });
+
+    setPassengers(newPassengers);
+  };
 
   // Helper to update individual passenger field
   const updatePassengerField = (key: string, field: keyof PassengerData, val: string) => {
@@ -1293,19 +1387,32 @@ export default function PackageDetailPage({ params }: { params: { destination: s
 
                     {/* STEP 3: PASSENGER NAMES & DETAILS FORM */}
                     <div className="space-y-4 pt-4 border-t border-slate-100">
-                      <div>
-                        <h3 className="font-black text-sm text-slate-900 flex items-center space-x-2">
-                          <UserCheck className="w-4.5 h-4.5 text-brand-600" />
-                          <span>Passenger Names & Information</span>
-                        </h3>
-                        <p className="text-[11px] text-slate-500">Please enter passenger details as per official Govt. ID proof (Aadhar/Passport).</p>
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-1">
+                        <div>
+                          <h3 className="font-black text-sm text-slate-900 flex items-center space-x-2">
+                            <UserCheck className="w-4.5 h-4.5 text-brand-600" />
+                            <span>Passenger Names & Information</span>
+                          </h3>
+                          <p className="text-[11px] text-slate-500">Please enter passenger details as per official Govt. ID proof (Aadhar/Passport).</p>
+                        </div>
+
+                        {(savedCoTravellers.length > 0 || user?.name) && (
+                          <button
+                            type="button"
+                            onClick={autoFillAllPassengers}
+                            className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-3.5 py-1.5 rounded-xl shadow-xs transition-all flex items-center space-x-1.5 cursor-pointer shrink-0"
+                          >
+                            <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                            <span>⚡ Auto-Fill Saved Passengers</span>
+                          </button>
+                        )}
                       </div>
 
                       {/* Loop through each room */}
                       {rooms.map((room, roomIdx) => (
                         <div key={roomIdx} className="space-y-3 p-4 bg-slate-50/90 rounded-2xl border border-slate-200">
                           <span className="font-black text-xs text-slate-800 uppercase tracking-wider block border-b border-slate-200 pb-2">
-                            🏨 Room {roomIdx + 1} Passenger List
+                            🏨 Room {roomIdx + 1} Passenger List ({room.adults} Adult{room.adults > 1 ? 's' : ''}{room.hasChildren ? `, ${room.children.length} Child${room.children.length > 1 ? 'ren' : ''}` : ''})
                           </span>
 
                           {/* Adult Passengers */}
@@ -1313,9 +1420,29 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                             const pKey = `r${roomIdx}_adult_${adultIdx}`;
                             return (
                               <div key={pKey} className="p-3.5 bg-white rounded-xl border border-slate-200 space-y-2 shadow-2xs">
-                                <span className="font-bold text-xs text-brand-700 flex items-center space-x-1.5">
-                                  <span>👤 Adult {adultIdx + 1} {adultIdx === 0 ? '(Lead Traveller)' : ''}</span>
-                                </span>
+                                <div className="flex items-center justify-between">
+                                  <span className="font-bold text-xs text-brand-700 flex items-center space-x-1.5">
+                                    <span>👤 Adult {adultIdx + 1} {adultIdx === 0 ? '(Lead Traveller)' : ''}</span>
+                                  </span>
+
+                                  {savedCoTravellers.length > 0 && (
+                                    <select
+                                      defaultValue=""
+                                      onChange={(e) => {
+                                        if (e.target.value) selectCoTraveller(pKey, e.target.value);
+                                      }}
+                                      className="bg-brand-50 border border-brand-200 text-brand-700 text-[11px] font-bold rounded-lg px-2 py-1 focus:outline-none cursor-pointer max-w-[200px]"
+                                    >
+                                      <option value="">📋 Select Saved Co-Traveller...</option>
+                                      {user?.name && <option value="user_self">👤 {user.name} (Logged User)</option>}
+                                      {savedCoTravellers.map((c) => (
+                                        <option key={c.id} value={c.id}>
+                                          {c.name} ({c.relation || 'Saved'}, {c.age}y {c.gender})
+                                        </option>
+                                      ))}
+                                    </select>
+                                  )}
+                                </div>
 
                                 <div className="grid grid-cols-12 gap-2 text-xs">
                                   {/* Title Dropdown */}
@@ -1381,15 +1508,34 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                             const cKey = `r${roomIdx}_child_${childIdx}`;
                             return (
                               <div key={cKey} className="p-3.5 bg-amber-50/70 rounded-xl border border-amber-200 space-y-2 shadow-2xs">
-                                <span className="font-bold text-xs text-amber-900 flex items-center space-x-1.5">
-                                  <span>👶 Child {childIdx + 1} ({
-                                    child.ageCategory === 'under5' ? 'Below 5 yrs (FREE)' :
-                                    child.ageCategory === 'age5to9' ? '5-9 yrs (50% Fare)' :
-                                    child.ageCategory === 'age10to14' ? '10-14 yrs (80% Fare)' :
-                                    child.ageCategory === 'age15to17' ? '15-17 yrs (80% Fare)' :
-                                    '18+ yrs (Full Adult)'
-                                  })</span>
-                                </span>
+                                <div className="flex items-center justify-between">
+                                  <span className="font-bold text-xs text-amber-900 flex items-center space-x-1.5">
+                                    <span>👶 Child {childIdx + 1} ({
+                                      child.ageCategory === 'under5' ? 'Below 5 yrs (FREE)' :
+                                      child.ageCategory === 'age5to9' ? '5-9 yrs (50% Fare)' :
+                                      child.ageCategory === 'age10to14' ? '10-14 yrs (80% Fare)' :
+                                      child.ageCategory === 'age15to17' ? '15-17 yrs (80% Fare)' :
+                                      '18+ yrs (Full Adult)'
+                                    })</span>
+                                  </span>
+
+                                  {savedCoTravellers.length > 0 && (
+                                    <select
+                                      defaultValue=""
+                                      onChange={(e) => {
+                                        if (e.target.value) selectCoTraveller(cKey, e.target.value);
+                                      }}
+                                      className="bg-amber-100 border border-amber-300 text-amber-900 text-[11px] font-bold rounded-lg px-2 py-1 focus:outline-none cursor-pointer max-w-[200px]"
+                                    >
+                                      <option value="">📋 Select Saved Child...</option>
+                                      {savedCoTravellers.map((c) => (
+                                        <option key={c.id} value={c.id}>
+                                          {c.name} ({c.relation || 'Saved'}, {c.age}y {c.gender})
+                                        </option>
+                                      ))}
+                                    </select>
+                                  )}
+                                </div>
 
                                 <div className="grid grid-cols-12 gap-2 text-xs">
                                   {/* Title */}
