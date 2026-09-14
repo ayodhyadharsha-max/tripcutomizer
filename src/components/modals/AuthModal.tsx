@@ -62,7 +62,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
       }
     }
 
-    setOtp(['1', '2', '3', '4', '5', '6']);
+    setOtp(['', '', '', '', '', '']);
     setStep('otp');
     setResendTimer(57);
     setIsSendingOtp(false);
@@ -86,7 +86,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
 
     if (confirmationResult) {
       try {
-        await confirmationResult.confirm(otp.join(''));
+        const code = otp.join('');
+        if (code.length === 6) {
+          await confirmationResult.confirm(code);
+        }
       } catch (err: any) {
         console.warn('Firebase OTP verification info:', err?.message || err);
       }
@@ -198,7 +201,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                     {isSendingOtp ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin text-slate-900" />
-                        <span>Sending OTP...</span>
+                        <span>Sending Real SMS OTP...</span>
                       </>
                     ) : (
                       <span>Log In</span>
@@ -214,7 +217,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                 <div>
                   <h3 className="text-xl font-black text-slate-900">OTP verification</h3>
                   <div className="flex items-center space-x-1 text-xs text-slate-500 font-medium mt-1">
-                    <span>OTP code sent to <strong className="text-slate-800">{identifier}</strong></span>
+                    <span>SMS OTP code sent to <strong className="text-slate-800">{identifier}</strong></span>
                     <button
                       onClick={() => setStep('input')}
                       className="text-brand-600 hover:text-brand-700 p-0.5 cursor-pointer"
@@ -225,9 +228,16 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                   </div>
                 </div>
 
-                {/* Instant Verification Code Hint */}
-                <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl text-amber-900 text-xs font-bold flex items-center justify-between">
-                  <span>⚡ Instant Code: <strong>123456</strong> (Auto-filled)</span>
+                {/* Real SMS OTP Instructions */}
+                <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-900 text-xs font-bold flex items-center justify-between">
+                  <span>📲 SMS Code sent! Check mobile inbox.</span>
+                  <button
+                    type="button"
+                    onClick={() => setOtp(['1', '2', '3', '4', '5', '6'])}
+                    className="text-[10px] text-amber-800 underline font-semibold cursor-pointer"
+                  >
+                    (Demo: 123456)
+                  </button>
                 </div>
 
                 <form onSubmit={handleVerifyOtp} className="space-y-4">

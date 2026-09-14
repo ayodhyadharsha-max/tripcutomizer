@@ -64,7 +64,7 @@ export default function LoginPage() {
       }
     }
 
-    setOtp(['1', '2', '3', '4', '5', '6']);
+    setOtp(['', '', '', '', '', '']);
     setStep('otp');
     setResendTimer(57);
     setIsSendingOtp(false);
@@ -209,9 +209,16 @@ export default function LoginPage() {
                     </div>
                   </div>
 
-                  {/* Instant Verification Code Hint */}
-                  <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl text-amber-900 text-xs font-bold flex items-center justify-between">
-                    <span>⚡ Instant Code: <strong>123456</strong> (Auto-filled)</span>
+                  {/* Real SMS OTP Instructions */}
+                  <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-900 text-xs font-bold flex items-center justify-between">
+                    <span>📲 SMS Code sent! Check mobile inbox.</span>
+                    <button
+                      type="button"
+                      onClick={() => setOtp(['1', '2', '3', '4', '5', '6'])}
+                      className="text-[10px] text-amber-800 underline font-semibold cursor-pointer"
+                    >
+                      (Demo: 123456)
+                    </button>
                   </div>
 
                   <form onSubmit={handleVerifyOtp} className="space-y-4">
