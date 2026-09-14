@@ -1676,19 +1676,54 @@ export default function PackageDetailPage({ params }: { params: { destination: s
 
                   {/* Calculated Price Result Box */}
                   {isPriceCalculated && (
-                    <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl space-y-2 animate-in zoom-in-95">
-                      <span className="text-[10px] font-black text-emerald-800 block uppercase tracking-wider">
-                        ✓ Calculated Total ({totalTravellersCount} Travellers)
-                      </span>
+                    <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl space-y-2.5 animate-in zoom-in-95">
+                      <div className="flex items-center justify-between border-b border-emerald-200/80 pb-2">
+                        <span className="text-[10px] font-black text-emerald-900 uppercase tracking-wider">
+                          ✓ Calculated Total ({totalTravellersCount} Travellers)
+                        </span>
+                        <span className="text-[10px] font-bold bg-emerald-200/80 text-emerald-950 px-2 py-0.5 rounded-full">
+                          {tourTier.toUpperCase()} TIER
+                        </span>
+                      </div>
+
                       <div className="text-2xl font-black text-emerald-700">
                         {formatCurrency(calculatedTotalPrice)}
                       </div>
-                      <div className="text-[10px] text-emerald-900 font-medium space-y-0.5 border-t border-emerald-200 pt-1 mt-1">
-                        <div>• {effectiveAdultsCount} Adults / 18+ yrs</div>
-                        {totalAge15to17 > 0 && <div>• {totalAge15to17} Teens 15-17 yrs (80% Fare)</div>}
-                        {totalAge10to14 > 0 && <div>• {totalAge10to14} Children 10-14 yrs (80% Fare - Extra Bed)</div>}
-                        {totalAge5to9 > 0 && <div>• {totalAge5to9} Children 5-9 yrs (50% Fare)</div>}
-                        {totalUnder5 > 0 && <div className="text-emerald-700 font-bold">• {totalUnder5} Children Below 5 yrs (FREE - 0% Fare)</div>}
+
+                      {/* Itemized Price Breakdown Table */}
+                      <div className="text-[11px] text-emerald-950 space-y-1 border-t border-emerald-200/80 pt-2 font-medium">
+                        <div className="flex justify-between">
+                          <span>• Adults ({effectiveAdultsCount} × {formatCurrency(basePricePerPerson)}):</span>
+                          <span className="font-bold">{formatCurrency(effectiveAdultsCount * basePricePerPerson)}</span>
+                        </div>
+                        {totalAge15to17 > 0 && (
+                          <div className="flex justify-between">
+                            <span>• Teens 15-17y ({totalAge15to17} × 80%):</span>
+                            <span className="font-bold">{formatCurrency(Math.round(totalAge15to17 * basePricePerPerson * 0.8))}</span>
+                          </div>
+                        )}
+                        {totalAge10to14 > 0 && (
+                          <div className="flex justify-between">
+                            <span>• Children 10-14y ({totalAge10to14} × 80% Bed):</span>
+                            <span className="font-bold">{formatCurrency(Math.round(totalAge10to14 * basePricePerPerson * 0.8))}</span>
+                          </div>
+                        )}
+                        {totalAge5to9 > 0 && (
+                          <div className="flex justify-between">
+                            <span>• Children 5-9y ({totalAge5to9} × 50% No Bed):</span>
+                            <span className="font-bold">{formatCurrency(Math.round(totalAge5to9 * basePricePerPerson * 0.5))}</span>
+                          </div>
+                        )}
+                        {totalUnder5 > 0 && (
+                          <div className="flex justify-between text-emerald-800 font-bold">
+                            <span>• Children Below 5y ({totalUnder5} Infant):</span>
+                            <span>FREE ₹0</span>
+                          </div>
+                        )}
+                        <div className="pt-1.5 border-t border-emerald-200/80 flex justify-between font-black text-emerald-900 text-xs">
+                          <span>Final Total Payable:</span>
+                          <span>{formatCurrency(calculatedTotalPrice)}</span>
+                        </div>
                       </div>
                     </div>
                   )}
