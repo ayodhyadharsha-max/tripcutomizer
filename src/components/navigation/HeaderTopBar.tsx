@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Phone, MapPin, User, ChevronDown, MessageCircle, HelpCircle, LogOut, ShieldCheck, ShoppingBag } from 'lucide-react';
+import { Phone, MapPin, User, ChevronDown, MessageCircle, HelpCircle, LogOut, ShoppingBag } from 'lucide-react';
 import { Container } from '../ui/Container';
 import { useAuth } from '@/context/AuthContext';
 
@@ -42,12 +42,12 @@ export const HeaderTopBar: React.FC = () => {
             <span>Customer Support</span>
           </Link>
 
-          {/* User Auth Dropdown */}
+          {/* User Auth Dropdown - Completely isolated for Customers */}
           <div className="relative">
             <button
               onClick={() => setIsAuthOpen(!isAuthOpen)}
               onBlur={() => setTimeout(() => setIsAuthOpen(false), 200)}
-              className="flex items-center space-x-1.5 bg-brand-700/60 hover:bg-brand-700 px-3 py-1 rounded-full text-white font-medium transition-all"
+              className="flex items-center space-x-1.5 bg-brand-700/60 hover:bg-brand-700 px-3 py-1 rounded-full text-white font-medium transition-all cursor-pointer"
             >
               <User className="w-3.5 h-3.5 text-accent-400" />
               <span>{isLoggedIn ? user?.name || 'My Account' : 'Account / Login'}</span>
@@ -61,7 +61,7 @@ export const HeaderTopBar: React.FC = () => {
                     {isLoggedIn ? `Logged in as ${user?.name}` : 'Welcome to tripcustomizer'}
                   </p>
                   <p className="text-[11px] text-slate-500">
-                    {isLoggedIn ? user?.email : 'Cloud saved profile & live bookings'}
+                    {isLoggedIn ? user?.email : 'Save profile & track your trips'}
                   </p>
                 </div>
 
@@ -82,18 +82,10 @@ export const HeaderTopBar: React.FC = () => {
                     <span>My Bookings & Cloud Vouchers</span>
                   </Link>
 
-                  <Link
-                    href="/admin/dashboard"
-                    className="flex items-center space-x-2 px-4 py-2 hover:bg-amber-50 text-amber-900 font-bold border-t border-slate-100"
-                  >
-                    <ShieldCheck className="w-4 h-4 text-amber-600" />
-                    <span>Admin Operations Desk</span>
-                  </Link>
-
                   {isLoggedIn && (
                     <button
                       onClick={logout}
-                      className="w-full flex items-center space-x-2 px-4 py-2 text-rose-600 hover:bg-rose-50 font-bold border-t border-slate-100 text-left"
+                      className="w-full flex items-center space-x-2 px-4 py-2 text-rose-600 hover:bg-rose-50 font-bold border-t border-slate-100 text-left cursor-pointer"
                     >
                       <LogOut className="w-4 h-4" />
                       <span>Logout</span>

@@ -312,9 +312,9 @@ export default function BookingCheckoutPage() {
                   VIEW IN MY ACCOUNT →
                 </Button>
               </Link>
-              <Link href="/admin/bookings">
+              <Link href="/holidays">
                 <Button variant="outline" size="lg" className="font-bold text-slate-800 px-6">
-                  VIEW IN ADMIN PANEL →
+                  EXPLORE MORE PACKAGES →
                 </Button>
               </Link>
             </div>
