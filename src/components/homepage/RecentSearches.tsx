@@ -70,21 +70,21 @@ export const RecentSearches: React.FC = () => {
           </div>
         )}
 
-        {/* Recent Searches Pills */}
-        <div className="flex flex-wrap items-center space-x-3 text-slate-600">
+        {/* Recent Searches Pills - 2 columns per line on mobile, wrapping flex on desktop */}
+        <div className="space-y-2 text-slate-600">
           <div className="flex items-center space-x-1.5 font-bold text-slate-800 shrink-0">
             <History className="w-4 h-4 text-brand-500" />
             <span>Popular & Recent Searches:</span>
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
             {recentSearchesList.map((item, idx) => (
               <Link
                 key={idx}
                 href={item.href}
-                className="bg-white border border-slate-200 hover:border-brand-500 hover:text-brand-600 px-3 py-1 rounded-full font-medium shadow-xs transition-colors flex items-center space-x-1.5"
+                className="bg-white border border-slate-200 hover:border-brand-500 hover:text-brand-600 px-2.5 py-1.5 rounded-xl font-semibold shadow-xs transition-colors flex items-center justify-between text-[11px] leading-tight truncate"
               >
-                <span>{item.query}</span>
-                <span className="text-[10px] text-slate-400">({item.date})</span>
+                <span className="truncate">{item.query}</span>
+                <span className="text-[9px] text-slate-400 font-normal ml-1 shrink-0">({item.date})</span>
               </Link>
             ))}
           </div>
