@@ -50,12 +50,15 @@ export default function BookingCheckoutPage() {
         matched = DEMO_PACKAGES.find((p) => p.name.toLowerCase().includes(title.toLowerCase()));
       }
 
+      const tierParam = params.get('tier') || 'deluxe';
+      const tierMultiplier = tierParam === 'standard' ? 0.9 : tierParam === 'super_deluxe' ? 1.25 : 1.0;
+
       if (matched) {
         setPkgInfo({
           name: matched.name,
           destination: matched.destination,
           duration: `${matched.durationDays} Days / ${matched.durationNights} Nights`,
-          pricePerPerson: matched.startingPrice,
+          pricePerPerson: Math.round(matched.startingPrice * tierMultiplier),
           travelersCount: paxStr ? Math.max(1, parseInt(paxStr, 10)) : 2,
         });
       } else if (title || priceStr) {
@@ -111,27 +114,30 @@ export default function BookingCheckoutPage() {
   const [appliedCouponName, setAppliedCouponName] = useState('');
   const [checkoutCouponError, setCheckoutCouponError] = useState('');
 
+  const subtotal = pkgInfo.pricePerPerson * pkgInfo.travelersCount;
+  const gstTax = Math.round(subtotal * 0.05); // 5% Govt. Tour Service Tax
+  const grossTotalWithGst = subtotal + gstTax;
+
   const handleApplyCheckoutCoupon = (e: React.FormEvent) => {
     e.preventDefault();
     const code = couponCode.trim().toUpperCase();
-    const sub = pkgInfo.pricePerPerson * pkgInfo.travelersCount;
     if (code === 'TCTAJ10') {
-      const disc = Math.round(sub * 0.1);
+      const disc = Math.round(grossTotalWithGst * 0.1);
       setCouponDiscount(disc);
       setAppliedCouponName('TCTAJ10');
       setCheckoutCouponError('');
     } else if (code === 'FESTIVE15') {
-      const disc = Math.round(sub * 0.15);
+      const disc = Math.round(grossTotalWithGst * 0.15);
       setCouponDiscount(disc);
       setAppliedCouponName('FESTIVE15');
       setCheckoutCouponError('');
     } else if (code === 'EARLYBIRD') {
-      const disc = Math.min(sub, 2000);
+      const disc = Math.min(grossTotalWithGst, 2000);
       setCouponDiscount(disc);
       setAppliedCouponName('EARLYBIRD');
       setCheckoutCouponError('');
     } else if (code === 'HOLIDAY5000') {
-      const disc = Math.min(sub, 5000);
+      const disc = Math.min(grossTotalWithGst, 5000);
       setCouponDiscount(disc);
       setAppliedCouponName('HOLIDAY5000');
       setCheckoutCouponError('');
@@ -147,8 +153,22 @@ export default function BookingCheckoutPage() {
     setCheckoutCouponError('');
   };
 
-  const subtotal = pkgInfo.pricePerPerson * pkgInfo.travelersCount;
-  const grandTotal = Math.max(0, subtotal - couponDiscount);
+  let appliedDiscountAmount = 0;
+  if (appliedCouponName) {
+    if (appliedCouponName === 'TCTAJ10') {
+      appliedDiscountAmount = Math.round(grossTotalWithGst * 0.10);
+    } else if (appliedCouponName === 'FESTIVE15') {
+      appliedDiscountAmount = Math.round(grossTotalWithGst * 0.15);
+    } else if (appliedCouponName === 'EARLYBIRD') {
+      appliedDiscountAmount = Math.min(grossTotalWithGst, 2000);
+    } else if (appliedCouponName === 'HOLIDAY5000') {
+      appliedDiscountAmount = Math.min(grossTotalWithGst, 5000);
+    } else if (couponDiscount > 0) {
+      appliedDiscountAmount = couponDiscount;
+    }
+  }
+
+  const grandTotal = Math.max(0, grossTotalWithGst - appliedDiscountAmount);
 
   // Form State
   const [travellerData, setTravellerData] = useState({
@@ -399,20 +419,24 @@ export default function BookingCheckoutPage() {
               )}
             </div>
 
-            <div className="p-4 bg-slate-100 rounded-2xl space-y-1.5 text-xs text-slate-900">
+            <div className="p-4 bg-slate-100 rounded-2xl space-y-2 text-xs text-slate-900">
               <div className="flex justify-between font-medium text-slate-600">
                 <span>Subtotal Package Fare ({pkgInfo.travelersCount} Pax):</span>
                 <span>{formatCurrency(subtotal)}</span>
               </div>
-              {couponDiscount > 0 && (
+              <div className="flex justify-between font-medium text-slate-700">
+                <span>GST (5% Govt. Tour Service Tax):</span>
+                <span className="text-emerald-700 font-bold">+{formatCurrency(gstTax)}</span>
+              </div>
+              {appliedDiscountAmount > 0 && (
                 <div className="flex justify-between font-bold text-emerald-700">
                   <span>Coupon Savings ({appliedCouponName}):</span>
-                  <span>-{formatCurrency(couponDiscount)}</span>
+                  <span>-{formatCurrency(appliedDiscountAmount)}</span>
                 </div>
               )}
               <div className="pt-2 border-t border-slate-200 flex justify-between items-center text-sm font-black text-slate-900">
-                <span>Final Total Amount:</span>
-                <span className="text-2xl text-brand-700">{formatCurrency(grandTotal)}</span>
+                <span>Final Total Amount (Incl. 5% GST):</span>
+                <span className="text-2xl text-brand-700 font-black">{formatCurrency(grandTotal)}</span>
               </div>
             </div>
 
