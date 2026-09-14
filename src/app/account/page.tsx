@@ -8,10 +8,42 @@ import { Button } from '@/components/ui/Button';
 import { useAuth } from '@/context/AuthContext';
 import { cloudStore, CustomerBooking } from '@/lib/cloudStore';
 import { formatCurrency } from '@/lib/utils';
-import { User, Phone, Mail, MapPin, LogOut, Package, FileText, Printer, CheckCircle2, ShieldCheck, Pencil } from 'lucide-react';
+import {
+  User,
+  Phone,
+  Mail,
+  MapPin,
+  LogOut,
+  Package,
+  FileText,
+  Printer,
+  CheckCircle2,
+  ShieldCheck,
+  Pencil,
+  Briefcase,
+  Users,
+  Settings,
+  Plus,
+  Trash2,
+  Calendar,
+  Sparkles,
+  Lock,
+} from 'lucide-react';
+
+interface CoTraveller {
+  id: string;
+  name: string;
+  age: number;
+  gender: string;
+  relation: string;
+}
 
 export default function CustomerAccountPage() {
   const { user, isLoggedIn, login, logout, updateProfile } = useAuth();
+
+  // Navigation Tab State (Matching Thomas Cook Screenshots)
+  const [activeTab, setActiveTab] = useState<'profile' | 'bookings' | 'settings' | 'cotravellers' | 'manage'>('bookings');
+  const [bookingSubTab, setBookingSubTab] = useState<'upcoming' | 'past'>('upcoming');
 
   // OTP Login Flow State
   const [step, setStep] = useState<'input' | 'otp'>('input');
@@ -32,6 +64,18 @@ export default function CustomerAccountPage() {
 
   // Selected Booking for Detailed Tax Invoice Modal
   const [selectedInvoice, setSelectedInvoice] = useState<CustomerBooking | null>(null);
+
+  // Co-Travellers State
+  const [coTravellers, setCoTravellers] = useState<CoTraveller[]>([
+    { id: 'cot-1', name: 'Priya Sharma', age: 28, gender: 'Female', relation: 'Spouse' },
+    { id: 'cot-2', name: 'Aarav Sharma Jr.', age: 6, gender: 'Male', relation: 'Son' },
+  ]);
+
+  const [showAddCoModal, setShowAddCoModal] = useState(false);
+  const [newCoName, setNewCoName] = useState('');
+  const [newCoAge, setNewCoAge] = useState('');
+  const [newCoGender, setNewCoGender] = useState('Male');
+  const [newCoRelation, setNewCoRelation] = useState('Family');
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -125,6 +169,28 @@ export default function CustomerAccountPage() {
     setEditing(false);
   };
 
+  const handleAddCoTraveller = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newCoName.trim()) return;
+
+    const newTraveller: CoTraveller = {
+      id: `cot-${Date.now()}`,
+      name: newCoName.trim(),
+      age: parseInt(newCoAge, 10) || 25,
+      gender: newCoGender,
+      relation: newCoRelation,
+    };
+
+    setCoTravellers([...coTravellers, newTraveller]);
+    setNewCoName('');
+    setNewCoAge('');
+    setShowAddCoModal(false);
+  };
+
+  const handleRemoveCoTraveller = (id: string) => {
+    setCoTravellers(coTravellers.filter((t) => t.id !== id));
+  };
+
   const handlePrintInvoice = () => {
     if (typeof window !== 'undefined') {
       window.print();
@@ -209,7 +275,7 @@ export default function CustomerAccountPage() {
                     <div>
                       <h3 className="text-xl font-black text-slate-900">OTP verification</h3>
                       <div className="flex items-center space-x-1 text-xs text-slate-500 font-medium mt-1">
-                        <span>OTP code sent to <strong className="text-slate-800">{identifier}</strong></span>
+                        <span>SMS OTP code sent to <strong className="text-slate-800">{identifier}</strong></span>
                         <button
                           onClick={() => setStep('input')}
                           className="text-brand-600 hover:text-brand-700 p-0.5 cursor-pointer"
@@ -263,168 +329,463 @@ export default function CustomerAccountPage() {
     );
   }
 
+  // Filter Upcoming vs Past Bookings
+  const upcomingBookings = userBookings.filter((b) => b.status === 'Confirmed' || b.status === 'Pending');
+  const pastBookings = userBookings.filter((b) => b.status === 'Completed' || b.status === 'Cancelled');
+
   return (
-    <div className="bg-slate-50 min-h-screen py-10">
-      <Container className="max-w-5xl space-y-8">
-        {/* Profile Card Header */}
-        <Card className="p-8 bg-white rounded-3xl shadow-xl border border-slate-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div className="flex items-center space-x-4">
-            <div className="w-16 h-16 bg-brand-600 text-white rounded-2xl flex items-center justify-center font-black text-2xl shadow-md">
-              {user?.name ? user.name[0].toUpperCase() : 'U'}
+    <div className="bg-slate-100 min-h-screen py-8 font-sans">
+      <Container className="max-w-6xl space-y-6">
+        {/* Top Breadcrumbs (Matching Screenshots) */}
+        <div className="text-xs text-slate-500 font-medium flex items-center space-x-1.5">
+          <Link href="/" className="text-sky-600 hover:underline">
+            Home
+          </Link>
+          <span>/</span>
+          <span className="text-slate-800 capitalize font-bold">
+            {activeTab === 'manage'
+              ? 'Manage Your Holidays'
+              : activeTab === 'cotravellers'
+              ? 'Co-travellers'
+              : activeTab === 'bookings'
+              ? 'My Bookings'
+              : activeTab}
+          </span>
+        </div>
+
+        {/* Main 2-Column Dashboard Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          {/* LEFT SIDEBAR MENU (Exact Match to Screenshots media_1789370461943 & media_1789370461945) */}
+          <div className="lg:col-span-3 bg-white border border-slate-200 shadow-xs rounded-xl overflow-hidden">
+            <div className="flex flex-col">
+              {/* Profile Tab */}
+              <button
+                onClick={() => setActiveTab('profile')}
+                className={`flex items-center space-x-3 px-5 py-3.5 text-xs font-bold transition-all text-left border-b border-slate-100 cursor-pointer ${
+                  activeTab === 'profile'
+                    ? 'bg-sky-500 text-white font-extrabold shadow-sm'
+                    : 'text-slate-700 hover:bg-slate-50'
+                }`}
+              >
+                <User className="w-4 h-4" />
+                <span>Profile</span>
+              </button>
+
+              {/* My Bookings Tab */}
+              <button
+                onClick={() => setActiveTab('bookings')}
+                className={`flex items-center space-x-3 px-5 py-3.5 text-xs font-bold transition-all text-left border-b border-slate-100 cursor-pointer ${
+                  activeTab === 'bookings'
+                    ? 'bg-sky-500 text-white font-extrabold shadow-sm'
+                    : 'text-slate-700 hover:bg-slate-50'
+                }`}
+              >
+                <Briefcase className="w-4 h-4" />
+                <span>My Bookings</span>
+              </button>
+
+              {/* Settings Tab */}
+              <button
+                onClick={() => setActiveTab('settings')}
+                className={`flex items-center space-x-3 px-5 py-3.5 text-xs font-bold transition-all text-left border-b border-slate-100 cursor-pointer ${
+                  activeTab === 'settings'
+                    ? 'bg-sky-500 text-white font-extrabold shadow-sm'
+                    : 'text-slate-700 hover:bg-slate-50'
+                }`}
+              >
+                <Settings className="w-4 h-4" />
+                <span>Settings</span>
+              </button>
+
+              {/* Co-Travellers Tab */}
+              <button
+                onClick={() => setActiveTab('cotravellers')}
+                className={`flex items-center space-x-3 px-5 py-3.5 text-xs font-bold transition-all text-left border-b border-slate-100 cursor-pointer ${
+                  activeTab === 'cotravellers'
+                    ? 'bg-sky-500 text-white font-extrabold shadow-sm'
+                    : 'text-slate-700 hover:bg-slate-50'
+                }`}
+              >
+                <Users className="w-4 h-4" />
+                <span>Co-Travellers</span>
+              </button>
+
+              {/* Manage Your Holidays Tab */}
+              <button
+                onClick={() => setActiveTab('manage')}
+                className={`flex items-center space-x-3 px-5 py-3.5 text-xs font-bold transition-all text-left cursor-pointer ${
+                  activeTab === 'manage'
+                    ? 'bg-sky-500 text-white font-extrabold shadow-sm'
+                    : 'text-slate-700 hover:bg-slate-50'
+                }`}
+              >
+                <Briefcase className="w-4 h-4" />
+                <span>Manage Your Holidays</span>
+              </button>
             </div>
-            <div>
-              <div className="flex items-center space-x-2">
-                <h1 className="text-2xl font-black text-slate-900">{user?.name}</h1>
-                <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
-                  Verified Traveler
-                </span>
-              </div>
-              <div className="flex flex-wrap gap-4 text-xs text-slate-500 mt-1 font-medium">
-                <span className="flex items-center gap-1"><Mail className="w-3.5 h-3.5 text-brand-500" /> {user?.email}</span>
-                <span className="flex items-center gap-1"><Phone className="w-3.5 h-3.5 text-brand-500" /> {user?.phone}</span>
-                {user?.city && <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5 text-brand-500" /> {user?.city}</span>}
-              </div>
-            </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <Button onClick={() => setEditing(!editing)} variant="outline" size="sm" className="font-bold">
-              {editing ? 'Cancel' : 'Edit Profile'}
-            </Button>
-            <Button onClick={logout} variant="ghost" size="sm" className="text-rose-600 hover:bg-rose-50 font-bold flex items-center gap-1 cursor-pointer">
-              <LogOut className="w-4 h-4" /> Logout
-            </Button>
-          </div>
-        </Card>
+          {/* RIGHT MAIN CONTENT AREA */}
+          <div className="lg:col-span-9 space-y-6">
+            {/* 1. MY BOOKINGS / MANAGE YOUR HOLIDAYS TAB (Matching Screenshot media_1789370461943) */}
+            {(activeTab === 'bookings' || activeTab === 'manage') && (
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+                    {activeTab === 'manage' ? 'Manage Your Holidays' : 'My Bookings'}
+                  </h1>
+                  <Link href="/holidays">
+                    <Button variant="accent" size="sm" className="font-bold text-slate-950">
+                      + Book New Holiday
+                    </Button>
+                  </Link>
+                </div>
 
-        {/* Edit Profile Form if Active */}
-        {editing && (
-          <Card className="p-6 bg-white rounded-3xl shadow-lg border border-slate-200">
-            <h3 className="font-bold text-slate-900 text-sm mb-4">Update Profile Details</h3>
-            <form onSubmit={handleSaveProfile} className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-              <div>
-                <label className="font-bold text-slate-700 block mb-1">Full Name</label>
-                <input
-                  type="text"
-                  value={profileName}
-                  onChange={(e) => setProfileName(e.target.value)}
-                  className="w-full bg-slate-50 border rounded-xl px-3 py-2 font-semibold text-slate-800"
-                />
-              </div>
-              <div>
-                <label className="font-bold text-slate-700 block mb-1">Phone</label>
-                <input
-                  type="text"
-                  value={profilePhone}
-                  onChange={(e) => setProfilePhone(e.target.value)}
-                  className="w-full bg-slate-50 border rounded-xl px-3 py-2 font-semibold text-slate-800"
-                />
-              </div>
-              <div>
-                <label className="font-bold text-slate-700 block mb-1">City</label>
-                <input
-                  type="text"
-                  value={profileCity}
-                  onChange={(e) => setProfileCity(e.target.value)}
-                  className="w-full bg-slate-50 border rounded-xl px-3 py-2 font-semibold text-slate-800"
-                />
-              </div>
-              <div className="sm:col-span-3 flex justify-end gap-2 pt-2">
-                <Button type="submit" variant="primary" size="sm" className="font-bold cursor-pointer">
-                  Save Changes
-                </Button>
-              </div>
-            </form>
-          </Card>
-        )}
+                {/* Sub-Tabs: Upcoming | Past */}
+                <div className="bg-white rounded-xl border border-slate-200 p-2 shadow-xs flex space-x-2 w-full max-w-xs">
+                  <button
+                    onClick={() => setBookingSubTab('upcoming')}
+                    className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer text-center ${
+                      bookingSubTab === 'upcoming' ? 'bg-slate-100 text-slate-900 border-b-2 border-sky-500' : 'text-slate-500 hover:text-slate-800'
+                    }`}
+                  >
+                    Upcoming
+                  </button>
+                  <button
+                    onClick={() => setBookingSubTab('past')}
+                    className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer text-center ${
+                      bookingSubTab === 'past' ? 'bg-slate-100 text-slate-900 border-b-2 border-sky-500' : 'text-slate-500 hover:text-slate-800'
+                    }`}
+                  >
+                    Past
+                  </button>
+                </div>
 
-        {/* Bookings & Invoices Section */}
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl font-extrabold text-slate-900 flex items-center gap-2">
-              <Package className="w-5 h-5 text-brand-600" /> My Holiday Bookings & E-Vouchers
-            </h2>
-            <Link href="/holidays">
-              <Button variant="accent" size="sm" className="font-bold text-slate-950">
-                + Book New Trip
-              </Button>
-            </Link>
-          </div>
-
-          {userBookings.length === 0 ? (
-            <Card className="p-12 text-center bg-white rounded-3xl border border-slate-200 space-y-3">
-              <p className="text-slate-500 text-sm font-semibold">No active bookings found for your account yet.</p>
-              <Link href="/holidays">
-                <Button variant="primary" size="sm" className="font-bold">Explore 50+ Packages</Button>
-              </Link>
-            </Card>
-          ) : (
-            <div className="space-y-4">
-              {userBookings.map((b) => (
-                <Card key={b.id} className="p-6 bg-white rounded-3xl shadow-sm border border-slate-200 space-y-4">
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pb-3 border-b border-slate-100">
-                    <div>
-                      <span className="text-[11px] font-extrabold bg-brand-50 text-brand-700 px-2.5 py-0.5 rounded-md">
-                        Ref: {b.referenceNo}
-                      </span>
-                      <h3 className="text-lg font-black text-slate-900 mt-1">{b.packageName}</h3>
+                {/* Booking Content List or Empty State */}
+                {bookingSubTab === 'upcoming' ? (
+                  upcomingBookings.length === 0 ? (
+                    <div className="bg-white border border-slate-200 rounded-xl p-10 text-center space-y-3 shadow-xs">
+                      <p className="text-slate-500 text-xs font-semibold">No bookings present at this time</p>
+                      <Link href="/holidays">
+                        <Button variant="outline" size="sm" className="font-bold">Explore Holiday Packages</Button>
+                      </Link>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span
-                        className={`text-xs font-bold px-3 py-1 rounded-full ${
-                          b.status === 'Confirmed'
-                            ? 'bg-emerald-100 text-emerald-800'
-                            : b.status === 'Pending'
-                            ? 'bg-amber-100 text-amber-800'
-                            : 'bg-slate-100 text-slate-700'
-                        }`}
-                      >
-                        {b.status === 'Confirmed' ? '✓ Confirmed' : b.status}
-                      </span>
+                  ) : (
+                    <div className="space-y-4">
+                      {upcomingBookings.map((b) => (
+                        <Card key={b.id} className="p-6 bg-white rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pb-3 border-b border-slate-100">
+                            <div>
+                              <span className="text-[11px] font-extrabold bg-sky-50 text-sky-700 px-2.5 py-0.5 rounded-md">
+                                Ref: {b.referenceNo}
+                              </span>
+                              <h3 className="text-base font-black text-slate-900 mt-1">{b.packageName}</h3>
+                            </div>
+                            <span
+                              className={`text-xs font-bold px-3 py-1 rounded-full ${
+                                b.status === 'Confirmed' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
+                              }`}
+                            >
+                              {b.status === 'Confirmed' ? '✓ Confirmed' : b.status}
+                            </span>
+                          </div>
+
+                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
+                            <div>
+                              <span className="text-slate-400 font-bold block uppercase text-[10px]">Destination</span>
+                              <span className="font-bold text-slate-800">{b.destination}</span>
+                            </div>
+                            <div>
+                              <span className="text-slate-400 font-bold block uppercase text-[10px]">Travel Dates</span>
+                              <span className="font-bold text-slate-800">{b.travelDates}</span>
+                            </div>
+                            <div>
+                              <span className="text-slate-400 font-bold block uppercase text-[10px]">Travelers</span>
+                              <span className="font-bold text-slate-800">{b.travelersCount} Adults</span>
+                            </div>
+                            <div>
+                              <span className="text-slate-400 font-bold block uppercase text-[10px]">Total Paid Amount</span>
+                              <span className="font-black text-sky-700 text-sm">{formatCurrency(b.totalAmount)}</span>
+                            </div>
+                          </div>
+
+                          <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <div className="flex items-center space-x-2 text-xs text-emerald-700 font-bold">
+                              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                              <span>E-Voucher & Tax Invoice Ready</span>
+                            </div>
+
+                            <Button
+                              onClick={() => setSelectedInvoice(b)}
+                              variant="primary"
+                              size="sm"
+                              className="font-bold flex items-center gap-1.5 cursor-pointer"
+                            >
+                              <FileText className="w-4 h-4" /> View Tax Invoice Bill & Voucher 📄
+                            </Button>
+                          </div>
+                        </Card>
+                      ))}
                     </div>
+                  )
+                ) : pastBookings.length === 0 ? (
+                  <div className="bg-white border border-slate-200 rounded-xl p-10 text-center space-y-3 shadow-xs">
+                    <p className="text-slate-500 text-xs font-semibold">No past holiday bookings</p>
                   </div>
-
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
-                    <div>
-                      <span className="text-slate-400 font-bold block uppercase text-[10px]">Destination</span>
-                      <span className="font-bold text-slate-800">{b.destination}</span>
-                    </div>
-                    <div>
-                      <span className="text-slate-400 font-bold block uppercase text-[10px]">Travel Dates</span>
-                      <span className="font-bold text-slate-800">{b.travelDates}</span>
-                    </div>
-                    <div>
-                      <span className="text-slate-400 font-bold block uppercase text-[10px]">Travelers</span>
-                      <span className="font-bold text-slate-800">{b.travelersCount} Adults</span>
-                    </div>
-                    <div>
-                      <span className="text-slate-400 font-bold block uppercase text-[10px]">Total Paid Amount</span>
-                      <span className="font-black text-brand-700 text-sm">{formatCurrency(b.totalAmount)}</span>
-                    </div>
+                ) : (
+                  <div className="space-y-4">
+                    {pastBookings.map((b) => (
+                      <Card key={b.id} className="p-6 bg-white rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                        <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+                          <h3 className="font-bold text-slate-800 text-sm">{b.packageName}</h3>
+                          <span className="text-xs bg-slate-100 text-slate-600 font-bold px-2.5 py-0.5 rounded-full">{b.status}</span>
+                        </div>
+                        <p className="text-xs text-slate-500">Ref: {b.referenceNo} • Amount: {formatCurrency(b.totalAmount)}</p>
+                      </Card>
+                    ))}
                   </div>
+                )}
+              </div>
+            )}
 
-                  {/* Actions Bar for Bill / Invoice / Voucher */}
-                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
-                    <div className="flex items-center space-x-2 text-xs text-emerald-700 font-bold">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                      <span>E-Voucher & Tax Invoice Ready</span>
-                    </div>
+            {/* 2. CO-TRAVELLERS TAB (Exact Match to Screenshot media_1789370461945) */}
+            {activeTab === 'cotravellers' && (
+              <div className="space-y-6">
+                <div>
+                  <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+                    Hi {user?.name || 'New User'},
+                  </h1>
+                </div>
 
-                    <Button
-                      onClick={() => setSelectedInvoice(b)}
-                      variant="primary"
-                      size="sm"
-                      className="font-bold flex items-center gap-1.5 cursor-pointer"
+                <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-xs space-y-6">
+                  <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+                    <h2 className="text-lg font-bold text-sky-600">Co-travellers</h2>
+                    <button
+                      onClick={() => setShowAddCoModal(true)}
+                      className="border border-sky-500 text-sky-600 hover:bg-sky-50 font-bold text-xs px-4 py-2 rounded-lg transition-all cursor-pointer flex items-center gap-1.5"
                     >
-                      <FileText className="w-4 h-4" /> View Tax Invoice Bill & Voucher 📄
+                      <Plus className="w-4 h-4" /> Add Co-Traveller
+                    </button>
+                  </div>
+
+                  {coTravellers.length === 0 ? (
+                    <p className="text-xs text-slate-500 font-medium py-4 text-center">No saved co-travellers added yet.</p>
+                  ) : (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {coTravellers.map((t) => (
+                        <div key={t.id} className="p-4 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between text-xs">
+                          <div>
+                            <span className="font-extrabold text-slate-900 text-sm block">{t.name}</span>
+                            <span className="text-slate-500 font-medium">{t.age} Yrs • {t.gender} ({t.relation})</span>
+                          </div>
+                          <button
+                            onClick={() => handleRemoveCoTraveller(t.id)}
+                            className="text-rose-500 hover:text-rose-700 p-1.5 rounded-lg hover:bg-rose-50 cursor-pointer"
+                            title="Remove Co-Traveller"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* 3. PROFILE TAB */}
+            {activeTab === 'profile' && (
+              <div className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <h1 className="text-2xl font-black text-slate-900 tracking-tight">Personal Profile</h1>
+                  <Button onClick={() => setEditing(!editing)} variant="outline" size="sm" className="font-bold">
+                    {editing ? 'Cancel' : 'Edit Profile'}
+                  </Button>
+                </div>
+
+                <Card className="p-6 bg-white rounded-2xl border border-slate-200 shadow-xs space-y-4">
+                  <div className="flex items-center space-x-4 pb-4 border-b border-slate-100">
+                    <div className="w-16 h-16 bg-sky-600 text-white rounded-2xl flex items-center justify-center font-black text-2xl shadow-md">
+                      {user?.name ? user.name[0].toUpperCase() : 'U'}
+                    </div>
+                    <div>
+                      <h2 className="text-xl font-black text-slate-900">{user?.name}</h2>
+                      <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full inline-block mt-1">
+                        Verified Traveler Account
+                      </span>
+                    </div>
+                  </div>
+
+                  {editing ? (
+                    <form onSubmit={handleSaveProfile} className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs pt-2">
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Full Name</label>
+                        <input
+                          type="text"
+                          value={profileName}
+                          onChange={(e) => setProfileName(e.target.value)}
+                          className="w-full bg-slate-50 border rounded-xl px-3 py-2 font-semibold text-slate-800"
+                        />
+                      </div>
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Phone</label>
+                        <input
+                          type="text"
+                          value={profilePhone}
+                          onChange={(e) => setProfilePhone(e.target.value)}
+                          className="w-full bg-slate-50 border rounded-xl px-3 py-2 font-semibold text-slate-800"
+                        />
+                      </div>
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">City</label>
+                        <input
+                          type="text"
+                          value={profileCity}
+                          onChange={(e) => setProfileCity(e.target.value)}
+                          className="w-full bg-slate-50 border rounded-xl px-3 py-2 font-semibold text-slate-800"
+                        />
+                      </div>
+                      <div className="sm:col-span-3 flex justify-end gap-2 pt-2">
+                        <Button type="submit" variant="primary" size="sm" className="font-bold cursor-pointer">
+                          Save Changes
+                        </Button>
+                      </div>
+                    </form>
+                  ) : (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                      <div>
+                        <span className="text-slate-400 font-bold block uppercase text-[10px]">Email Address</span>
+                        <span className="font-bold text-slate-800">{user?.email}</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-400 font-bold block uppercase text-[10px]">Phone Number</span>
+                        <span className="font-bold text-slate-800">{user?.phone}</span>
+                      </div>
+                      {user?.city && (
+                        <div>
+                          <span className="text-slate-400 font-bold block uppercase text-[10px]">City</span>
+                          <span className="font-bold text-slate-800">{user.city}</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </Card>
+              </div>
+            )}
+
+            {/* 4. SETTINGS TAB */}
+            {activeTab === 'settings' && (
+              <div className="space-y-6">
+                <h1 className="text-2xl font-black text-slate-900 tracking-tight">Account Settings</h1>
+
+                <Card className="p-6 bg-white rounded-2xl border border-slate-200 shadow-xs space-y-6 text-xs">
+                  <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+                    <div>
+                      <span className="font-extrabold text-slate-900 block text-sm">WhatsApp Trip Updates</span>
+                      <span className="text-slate-500 font-medium">Receive e-vouchers and itinerary updates on WhatsApp</span>
+                    </div>
+                    <input type="checkbox" defaultChecked className="w-5 h-5 accent-sky-600 cursor-pointer" />
+                  </div>
+
+                  <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+                    <div>
+                      <span className="font-extrabold text-slate-900 block text-sm">Email Invoices & Vouchers</span>
+                      <span className="text-slate-500 font-medium">Get PDF receipts sent directly to {user?.email}</span>
+                    </div>
+                    <input type="checkbox" defaultChecked className="w-5 h-5 accent-sky-600 cursor-pointer" />
+                  </div>
+
+                  <div className="pt-2 flex justify-between items-center">
+                    <span className="font-bold text-slate-700">Account Session</span>
+                    <Button onClick={logout} variant="ghost" size="sm" className="text-rose-600 hover:bg-rose-50 font-bold flex items-center gap-1 cursor-pointer">
+                      <LogOut className="w-4 h-4" /> Logout Account
                     </Button>
                   </div>
                 </Card>
-              ))}
-            </div>
-          )}
+              </div>
+            )}
+          </div>
         </div>
       </Container>
+
+      {/* ADD CO-TRAVELLER MODAL */}
+      {showAddCoModal && (
+        <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl p-6 max-w-md w-full space-y-4 shadow-2xl border border-slate-200 relative animate-in zoom-in-95">
+            <button
+              onClick={() => setShowAddCoModal(false)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 font-bold text-sm cursor-pointer"
+            >
+              ✕
+            </button>
+
+            <h3 className="font-black text-slate-900 text-lg">Add Co-Traveller</h3>
+
+            <form onSubmit={handleAddCoTraveller} className="space-y-4 text-xs">
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">Full Name *</label>
+                <input
+                  required
+                  type="text"
+                  placeholder="Enter Co-Traveller Name"
+                  value={newCoName}
+                  onChange={(e) => setNewCoName(e.target.value)}
+                  className="w-full bg-slate-50 border rounded-xl px-3.5 py-2.5 font-semibold text-slate-800"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="font-bold text-slate-700 block mb-1">Age</label>
+                  <input
+                    required
+                    type="number"
+                    placeholder="25"
+                    value={newCoAge}
+                    onChange={(e) => setNewCoAge(e.target.value)}
+                    className="w-full bg-slate-50 border rounded-xl px-3.5 py-2.5 font-semibold text-slate-800"
+                  />
+                </div>
+                <div>
+                  <label className="font-bold text-slate-700 block mb-1">Gender</label>
+                  <select
+                    value={newCoGender}
+                    onChange={(e) => setNewCoGender(e.target.value)}
+                    className="w-full bg-slate-50 border rounded-xl px-3.5 py-2.5 font-semibold text-slate-800"
+                  >
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">Relationship</label>
+                <select
+                  value={newCoRelation}
+                  onChange={(e) => setNewCoRelation(e.target.value)}
+                  className="w-full bg-slate-50 border rounded-xl px-3.5 py-2.5 font-semibold text-slate-800"
+                >
+                  <option value="Spouse">Spouse</option>
+                  <option value="Child">Child</option>
+                  <option value="Parent">Parent</option>
+                  <option value="Friend">Friend</option>
+                  <option value="Family">Family</option>
+                </select>
+              </div>
+
+              <div className="flex justify-end gap-2 pt-2">
+                <Button type="button" onClick={() => setShowAddCoModal(false)} variant="outline" size="sm">
+                  Cancel
+                </Button>
+                <Button type="submit" variant="primary" size="sm" className="font-bold cursor-pointer">
+                  Save Co-Traveller
+                </Button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* TAX INVOICE & TRAVEL VOUCHER MODAL */}
       {selectedInvoice && (
