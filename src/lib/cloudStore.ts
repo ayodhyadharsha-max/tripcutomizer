@@ -67,46 +67,9 @@ const STORAGE_KEYS = {
   CO_TRAVELLERS: 'tc_cloud_co_travellers_v1',
 };
 
-// Initial Seed Data for Demo & Admin Testing
-const DEFAULT_BOOKINGS: CustomerBooking[] = [
-  {
-    id: 'bk-101',
-    referenceNo: 'TC-BK-89421',
-    customerName: 'Aarav Sharma',
-    customerPhone: '+91 98765 43210',
-    customerEmail: 'aarav.sharma@example.com',
-    packageName: 'Char Dham Yatra Divine Tour',
-    destination: 'Uttarakhand',
-    travelDates: '15 Oct 2026 - 24 Oct 2026',
-    travelersCount: 4,
-    totalAmount: 202000,
-    status: 'Confirmed',
-    paymentStatus: 'Paid',
-    createdAt: new Date(Date.now() - 3600000 * 24 * 2).toISOString(),
-    passengersList: [
-      { name: 'Aarav Sharma', age: 34, gender: 'Male', type: 'Adult (Lead)' },
-      { name: 'Priya Sharma', age: 31, gender: 'Female', type: 'Adult' },
-      { name: 'Aarav Sharma Jr.', age: 6, gender: 'Male', type: 'Child (5-9 yrs)' },
-      { name: 'Ananya Sharma', age: 4, gender: 'Female', type: 'Child (Below 5 yrs)' },
-    ],
-  },
-];
-
-const DEFAULT_LEADS: CustomerLead[] = [
-  {
-    id: 'lead-201',
-    name: 'Rohan Gupta',
-    phone: '+91 99887 76655',
-    email: 'rohan.g@example.com',
-    destination: 'Switzerland & Paris',
-    budget: '₹ 3,50,000',
-    travelDates: 'December 2026',
-    travelersCount: 2,
-    status: 'New',
-    createdAt: new Date(Date.now() - 3600000 * 2).toISOString(),
-    source: 'Custom Trip Wizard',
-  },
-];
+// Initial Seed Data - Empty by default for fresh production/demo state
+const DEFAULT_BOOKINGS: CustomerBooking[] = [];
+const DEFAULT_LEADS: CustomerLead[] = [];
 
 // Helper to safely access localStorage
 const getStoredData = <T>(key: string, fallback: T): T => {
@@ -308,6 +271,19 @@ export const cloudStore = {
     });
 
     cloudStore.saveCoTravellers(updated, uid);
+  },
+
+  clearAllStoreData: (): void => {
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.removeItem(STORAGE_KEYS.BOOKINGS);
+        localStorage.removeItem(STORAGE_KEYS.LEADS);
+        localStorage.removeItem(STORAGE_KEYS.PROFILES);
+        localStorage.removeItem(STORAGE_KEYS.CURRENT_USER);
+        localStorage.removeItem(STORAGE_KEYS.CO_TRAVELLERS);
+        window.dispatchEvent(new Event('storage'));
+      } catch (e) {}
+    }
   },
 };
 
