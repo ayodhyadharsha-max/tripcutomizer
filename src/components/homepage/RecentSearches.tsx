@@ -26,10 +26,10 @@ export const RecentSearches: React.FC = () => {
   }, [isLoggedIn, user]);
 
   const recentSearchesList = [
-    { query: 'Dubai 5 Days', date: 'Popular', href: '/holidays/dubai' },
-    { query: 'Bali Honeymoon', date: 'Trending', href: '/holidays/bali' },
-    { query: 'Char Dham Yatra', date: 'Popular', href: '/char-dham' },
-    { query: 'Delhi to Singapore', date: 'Best Fares', href: '/flights?to=Singapore' },
+    { query: 'Dubai 5 Days Package', date: 'Popular', href: '/holidays/dubai' },
+    { query: 'Bali Honeymoon Package', date: 'Trending', href: '/holidays/bali' },
+    { query: 'Char Dham Sacred Yatra', date: 'Popular', href: '/char-dham' },
+    { query: 'Delhi to Singapore Flights', date: 'Best Fares', href: '/flights?to=Singapore' },
   ];
 
   return (
@@ -76,15 +76,15 @@ export const RecentSearches: React.FC = () => {
             <History className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-brand-500 shrink-0" />
             <span>Popular & Recent Searches:</span>
           </div>
-          <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-1.5 sm:gap-2">
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2">
             {recentSearchesList.map((item, idx) => (
               <Link
                 key={idx}
                 href={item.href}
-                className="bg-white border border-slate-200/90 hover:border-brand-500 hover:text-brand-600 px-2 sm:px-3 py-1.5 rounded-xl font-semibold shadow-2xs transition-all flex items-center justify-between text-[10px] sm:text-[11px] leading-tight"
+                className="bg-white border border-slate-200/90 hover:border-brand-500 hover:text-brand-600 px-2.5 py-1.5 rounded-xl font-semibold shadow-2xs transition-all flex items-center justify-between text-[11px] sm:text-xs leading-tight w-full sm:w-auto"
               >
                 <span className="truncate">{item.query}</span>
-                <span className="text-[9px] text-slate-400 font-normal ml-1 shrink-0">({item.date})</span>
+                <span className="text-[10px] text-slate-400 font-normal ml-1 shrink-0">({item.date})</span>
               </Link>
             ))}
           </div>
