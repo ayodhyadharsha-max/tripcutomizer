@@ -24,10 +24,16 @@ export default function AdminBookingsPage() {
 
   useEffect(() => {
     loadBookings();
-    // Listen for cloud storage updates across tabs
+    // Listen for cloud storage updates across tabs & same tab
     const handleStorageChange = () => loadBookings();
     window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
+    window.addEventListener('cloudstore_update', handleStorageChange);
+    const pollTimer = setInterval(loadBookings, 2000);
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('cloudstore_update', handleStorageChange);
+      clearInterval(pollTimer);
+    };
   }, []);
 
   const handleUpdateStatus = (id: string, status: CustomerBooking['status']) => {

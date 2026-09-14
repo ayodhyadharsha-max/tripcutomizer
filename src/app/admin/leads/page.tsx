@@ -24,7 +24,13 @@ export default function AdminLeadsPage() {
   useEffect(() => {
     loadLeads();
     window.addEventListener('storage', loadLeads);
-    return () => window.removeEventListener('storage', loadLeads);
+    window.addEventListener('cloudstore_update', loadLeads);
+    const pollTimer = setInterval(loadLeads, 2000);
+    return () => {
+      window.removeEventListener('storage', loadLeads);
+      window.removeEventListener('cloudstore_update', loadLeads);
+      clearInterval(pollTimer);
+    };
   }, []);
 
   const updateStatus = (id: string, newStatus: CustomerLead['status']) => {

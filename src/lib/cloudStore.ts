@@ -95,8 +95,9 @@ const setStoredData = <T>(key: string, data: T): void => {
   if (typeof window === 'undefined') return;
   try {
     localStorage.setItem(key, JSON.stringify(data));
-    // Trigger window event for cross-tab realtime sync
+    // Trigger window events for instant cross-tab & same-tab realtime sync
     window.dispatchEvent(new Event('storage'));
+    window.dispatchEvent(new CustomEvent('cloudstore_update', { detail: { key, data } }));
   } catch (e) {
     console.error('Failed to write cloud storage key', key, e);
   }
@@ -123,39 +124,10 @@ export const cloudStore = {
     const payMethod = booking.paymentMethod || 'Online PG (Cashfree / UPI)';
     const txnId = booking.transactionId || `CF_TXN_${Date.now()}`;
 
-    // Deduplicate: If an entry for the same package & email was added recently as Pending, upgrade it to Confirmed!
-    const now = Date.now();
-    const recentPendingIndex = existing.findIndex((b) => {
-      const ageMs = now - new Date(b.createdAt).getTime();
-      return (
-        b.customerEmail.toLowerCase() === booking.customerEmail.toLowerCase() &&
-        b.packageName === booking.packageName &&
-        (b.status === 'Pending' || ageMs < 120000)
-      );
-    });
-
-    if (recentPendingIndex !== -1) {
-      const matched = existing[recentPendingIndex];
-      const updatedBooking: CustomerBooking = {
-        ...matched,
-        ...booking,
-        hotelCategory: booking.hotelCategory || matched.hotelCategory || hotelCat,
-        basePrice: booking.basePrice || matched.basePrice || computedBase,
-        gstAmount: booking.gstAmount || matched.gstAmount || computedGst,
-        paymentMethod: booking.paymentMethod || matched.paymentMethod || payMethod,
-        transactionId: booking.transactionId || matched.transactionId || txnId,
-        status: booking.status || 'Confirmed',
-        paymentStatus: booking.paymentStatus || 'Paid',
-      };
-      existing[recentPendingIndex] = updatedBooking;
-      setStoredData(STORAGE_KEYS.BOOKINGS, existing);
-      return updatedBooking;
-    }
-
     const refNum = `TC-BK-${Math.floor(10000 + Math.random() * 90000)}`;
     const newBooking: CustomerBooking = {
       ...booking,
-      id: `bk-${Date.now()}`,
+      id: `bk-${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
       referenceNo: refNum,
       createdAt: new Date().toISOString(),
       hotelCategory: hotelCat,
@@ -164,8 +136,32 @@ export const cloudStore = {
       paymentMethod: payMethod,
       transactionId: txnId,
     };
+
     const updated = [newBooking, ...existing];
     setStoredData(STORAGE_KEYS.BOOKINGS, updated);
+
+    // Also auto-sync as CRM Lead so admin sees it in both /admin/bookings and /admin/leads
+    try {
+      const existingLeads = cloudStore.getLeads();
+      const hasRecentLead = existingLeads.some(
+        (l) => l.email?.toLowerCase() === booking.customerEmail?.toLowerCase() || l.phone === booking.customerPhone
+      );
+      if (!hasRecentLead) {
+        cloudStore.saveLead({
+          name: booking.customerName,
+          phone: booking.customerPhone,
+          email: booking.customerEmail,
+          destination: `${booking.packageName} (${booking.destination})`,
+          budget: `₹${booking.totalAmount.toLocaleString('en-IN')}`,
+          travelersCount: booking.travelersCount,
+          status: 'Converted',
+          source: 'Confirmed Online Booking',
+        });
+      }
+    } catch (e) {
+      console.warn('Lead sync skipped:', e);
+    }
+
     return newBooking;
   },
 

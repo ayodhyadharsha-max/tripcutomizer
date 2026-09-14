@@ -26,7 +26,13 @@ export default function AdminDashboardPage() {
   useEffect(() => {
     loadData();
     window.addEventListener('storage', loadData);
-    return () => window.removeEventListener('storage', loadData);
+    window.addEventListener('cloudstore_update', loadData);
+    const pollTimer = setInterval(loadData, 2000);
+    return () => {
+      window.removeEventListener('storage', loadData);
+      window.removeEventListener('cloudstore_update', loadData);
+      clearInterval(pollTimer);
+    };
   }, []);
 
   const totalRevenue = bookings.reduce((sum, b) => (b.status !== 'Cancelled' ? sum + b.totalAmount : sum), 0);
