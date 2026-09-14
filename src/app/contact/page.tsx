@@ -16,44 +16,18 @@ export default function ContactPage() {
     message: '',
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const formDataToSend = new FormData();
-      formDataToSend.append('access_key', 'c542ca79-b08a-4352-bf3e-1045518a0486');
-      formDataToSend.append('subject', `Contact Form: ${formData.subject}`);
-      formDataToSend.append('name', formData.name);
-      formDataToSend.append('email', formData.email);
-      formDataToSend.append('phone', formData.phone);
-      formDataToSend.append('message', formData.message);
-
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: formDataToSend,
-      });
-
-      const data = await response.json();
-
-      cloudStore.saveLead({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        destination: formData.subject,
-        budget: formData.message,
-        status: 'New',
-        source: 'Contact Us Form',
-      });
-
-      setSubmitted(true);
-    } catch (err) {
-      console.error('Failed to submit contact form:', err);
-    } finally {
-      setIsSubmitting(false);
-    }
+    cloudStore.saveLead({
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      destination: formData.subject,
+      budget: formData.message,
+      status: 'New',
+      source: 'Contact Us Form',
+    });
+    setSubmitted(true);
   };
 
   return (
@@ -237,11 +211,10 @@ export default function ContactPage() {
 
                   <button
                     type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-black py-3.5 rounded-2xl text-sm transition-all shadow-md flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-75"
+                    className="w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-black py-3.5 rounded-2xl text-sm transition-all shadow-md flex items-center justify-center space-x-2 cursor-pointer"
                   >
                     <Send className="w-4 h-4" />
-                    <span>{isSubmitting ? 'Sending Inquiry...' : 'Submit Inquiry Now →'}</span>
+                    <span>Submit Inquiry Now →</span>
                   </button>
                 </form>
               )}

@@ -34,35 +34,10 @@ export const BuildTripWizard: React.FC = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    try {
-      const formDataToSend = new FormData();
-      formDataToSend.append('access_key', 'c542ca79-b08a-4352-bf3e-1045518a0486');
-      formDataToSend.append('subject', `🚨 New Custom Trip Inquiry: ${formData.destination || 'Custom Trip'}`);
-      formDataToSend.append('name', formData.name || 'Valued Client');
-      formDataToSend.append('email', formData.email);
-      formDataToSend.append('phone', formData.phone);
-      formDataToSend.append('destination', formData.destination);
-      formDataToSend.append('departure_city', formData.departureCity);
-      formDataToSend.append('travel_date', formData.travelDate);
-      formDataToSend.append('duration_days', formData.durationDays);
-      formDataToSend.append('adults', String(formData.adults));
-      formDataToSend.append('budget', formData.budget);
-      formDataToSend.append('services_needed', [
-        formData.needFlights ? 'Flights' : null,
-        formData.needHotels ? 'Hotels' : null,
-        formData.needSightseeing ? 'Sightseeing' : null,
-        formData.needTransfers ? 'Transfers' : null,
-      ].filter(Boolean).join(', '));
-
-      await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: formDataToSend,
-      });
-
+    setTimeout(() => {
       cloudStore.saveLead({
         name: formData.name || 'Valued Client',
         email: formData.email,
@@ -84,11 +59,8 @@ export const BuildTripWizard: React.FC = () => {
         assignedAgent: randomAgent,
         summary: `Custom Trip to ${formData.destination || 'Selected Destination'} for ${formData.adults} Adults, ${formData.children} Children starting ${formData.travelDate || 'Upcoming Dates'}.`,
       });
-    } catch (err) {
-      console.error('Failed to submit Web3Forms trip request:', err);
-    } finally {
       setIsSubmitting(false);
-    }
+    }, 600);
   };
 
   return (
