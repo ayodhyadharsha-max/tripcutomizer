@@ -7,8 +7,27 @@ import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Building2, ShieldCheck, CheckCircle2, Phone, Mail } from 'lucide-react';
 
+import { cloudStore } from '@/lib/cloudStore';
+
 export default function CorporateTravelPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [companyName, setCompanyName] = useState('');
+  const [contactName, setContactName] = useState('');
+  const [workEmail, setWorkEmail] = useState('');
+  const [workPhone, setWorkPhone] = useState('');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    cloudStore.saveLead({
+      name: `${contactName} (${companyName})`.trim(),
+      phone: workPhone,
+      email: workEmail,
+      destination: 'Corporate B2B Account',
+      status: 'New',
+      source: 'Corporate Travel Page',
+    });
+    setSubmitted(true);
+  };
 
   return (
     <div className="bg-slate-50 min-h-screen py-10">
@@ -56,25 +75,53 @@ export default function CorporateTravelPage() {
                   <p className="text-slate-600">Our B2B Corporate Desk lead will reach out to schedule an account setup demo.</p>
                 </div>
               ) : (
-                <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-3 text-xs">
+                <form onSubmit={handleSubmit} className="space-y-3 text-xs">
                   <div>
                     <label className="font-bold text-slate-700 block mb-1">Company Name *</label>
-                    <input required type="text" placeholder="Acme Technologies Pvt Ltd" className="w-full bg-slate-50 border rounded-xl px-3 py-2 font-semibold" />
+                    <input
+                      required
+                      type="text"
+                      placeholder="Acme Technologies Pvt Ltd"
+                      value={companyName}
+                      onChange={(e) => setCompanyName(e.target.value)}
+                      className="w-full bg-slate-50 border rounded-xl px-3 py-2 font-semibold"
+                    />
                   </div>
                   <div className="grid grid-cols-2 gap-2">
                     <div>
                       <label className="font-bold text-slate-700 block mb-1">Contact Person</label>
-                      <input required type="text" placeholder="John Doe" className="w-full bg-slate-50 border rounded-xl px-3 py-2 font-semibold" />
+                      <input
+                        required
+                        type="text"
+                        placeholder="John Doe"
+                        value={contactName}
+                        onChange={(e) => setContactName(e.target.value)}
+                        className="w-full bg-slate-50 border rounded-xl px-3 py-2 font-semibold"
+                      />
                     </div>
                     <div>
                       <label className="font-bold text-slate-700 block mb-1">Work Email</label>
-                      <input required type="email" placeholder="john@acme.com" className="w-full bg-slate-50 border rounded-xl px-3 py-2 font-semibold" />
+                      <input
+                        required
+                        type="email"
+                        placeholder="john@acme.com"
+                        value={workEmail}
+                        onChange={(e) => setWorkEmail(e.target.value)}
+                        className="w-full bg-slate-50 border rounded-xl px-3 py-2 font-semibold"
+                      />
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-2">
                     <div>
                       <label className="font-bold text-slate-700 block mb-1">Work Phone</label>
-                      <input required type="tel" placeholder="+91 9876543210" className="w-full bg-slate-50 border rounded-xl px-3 py-2 font-semibold" />
+                      <input
+                        required
+                        type="tel"
+                        placeholder="+91 9876543210"
+                        value={workPhone}
+                        onChange={(e) => setWorkPhone(e.target.value)}
+                        className="w-full bg-slate-50 border rounded-xl px-3 py-2 font-semibold"
+                      />
                     </div>
                     <div>
                       <label className="font-bold text-slate-700 block mb-1">Employee Strength</label>

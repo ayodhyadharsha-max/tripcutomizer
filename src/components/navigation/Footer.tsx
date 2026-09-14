@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { Container } from '../ui/Container';
 import { ShieldCheck, Lock, Award, Heart, Mail, CheckCircle2, ArrowRight, ChevronDown } from 'lucide-react';
 
+import { cloudStore } from '@/lib/cloudStore';
+
 export const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
@@ -12,6 +14,14 @@ export const Footer: React.FC = () => {
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
+      cloudStore.saveLead({
+        name: 'Newsletter Subscriber',
+        phone: '',
+        email: email,
+        destination: 'Newsletter Subscription',
+        status: 'New',
+        source: 'Footer Newsletter',
+      });
       setIsSubscribed(true);
       setEmail('');
       setTimeout(() => setIsSubscribed(false), 4000);

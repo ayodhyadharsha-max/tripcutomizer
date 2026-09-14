@@ -8,13 +8,31 @@ import { Button } from '@/components/ui/Button';
 import { formatCurrency } from '@/lib/utils';
 import { Train, Globe, CheckCircle2, ShieldCheck, ChevronRight } from 'lucide-react';
 
+import { cloudStore } from '@/lib/cloudStore';
+
 export default function EurailPage() {
   const [passType, setPassType] = useState('Global Pass (33 Countries)');
   const [duration, setDuration] = useState('7 Days in 1 Month');
   const [travelClass, setTravelClass] = useState('1st Class');
   const [submitted, setSubmitted] = useState(false);
+  const [contactName, setContactName] = useState('');
+  const [contactPhone, setContactPhone] = useState('');
 
   const price = travelClass === '1st Class' ? 38500 : 29500;
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    cloudStore.saveLead({
+      name: contactName || 'Eurail Traveler',
+      phone: contactPhone,
+      email: '',
+      destination: `Eurail ${passType} (${duration})`,
+      budget: `₹${price.toLocaleString('en-IN')}`,
+      status: 'New',
+      source: 'Eurail Pass Page',
+    });
+    setSubmitted(true);
+  };
 
   return (
     <div className="bg-slate-50 min-h-screen py-8">
@@ -51,7 +69,33 @@ export default function EurailPage() {
               <Link href="/account" className="inline-block font-bold text-xs text-brand-600 hover:underline pt-2">View E-Pass in Account</Link>
             </div>
           ) : (
-            <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-4 text-xs">
+            <form onSubmit={handleSubmit} className="space-y-4 text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2">
+                <div>
+                  <label className="font-bold text-slate-700 block mb-1">Your Name *</label>
+                  <input
+                    required
+                    type="text"
+                    placeholder="Enter Name"
+                    value={contactName}
+                    onChange={(e) => setContactName(e.target.value)}
+                    className="w-full bg-slate-50 border rounded-xl px-3 py-2.5 font-semibold"
+                  />
+                </div>
+
+                <div>
+                  <label className="font-bold text-slate-700 block mb-1">Mobile No *</label>
+                  <input
+                    required
+                    type="tel"
+                    placeholder="Enter Mobile No."
+                    value={contactPhone}
+                    onChange={(e) => setContactPhone(e.target.value)}
+                    className="w-full bg-slate-50 border rounded-xl px-3 py-2.5 font-semibold"
+                  />
+                </div>
+              </div>
+
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                   <label className="font-bold text-slate-700 block mb-1">Pass Type</label>

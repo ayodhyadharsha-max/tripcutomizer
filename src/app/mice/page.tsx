@@ -7,8 +7,27 @@ import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Users, CheckCircle2, Award } from 'lucide-react';
 
+import { cloudStore } from '@/lib/cloudStore';
+
 export default function MicePage() {
   const [submitted, setSubmitted] = useState(false);
+  const [destination, setDestination] = useState('');
+  const [groupSize, setGroupSize] = useState('50');
+  const [contactName, setContactName] = useState('');
+  const [contactPhone, setContactPhone] = useState('');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    cloudStore.saveLead({
+      name: contactName || 'Valued Corporate Client',
+      phone: contactPhone,
+      email: '',
+      destination: `MICE Event: ${destination || 'Global Destination'} (${groupSize} Pax)`,
+      status: 'New',
+      source: 'MICE Corporate Events Page',
+    });
+    setSubmitted(true);
+  };
 
   return (
     <div className="bg-slate-50 min-h-screen py-10">
@@ -36,26 +55,54 @@ export default function MicePage() {
               <p className="text-slate-600">Our MICE Event Director will contact you to discuss venue selection & custom gala arrangements.</p>
             </div>
           ) : (
-            <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-4 text-xs">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <form onSubmit={handleSubmit} className="space-y-4 text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 <div>
-                  <label className="font-bold text-slate-700 block mb-1">Event Category</label>
-                  <select className="w-full bg-slate-50 border rounded-xl px-3 py-2.5 font-semibold">
-                    <option>Corporate Incentive Trip</option>
-                    <option>Annual Dealers Conference</option>
-                    <option>Leadership Executive Retreat</option>
-                    <option>Exhibition & Trade Fair</option>
-                  </select>
+                  <label className="font-bold text-slate-700 block mb-1">Your Name *</label>
+                  <input
+                    required
+                    type="text"
+                    placeholder="Enter Name"
+                    value={contactName}
+                    onChange={(e) => setContactName(e.target.value)}
+                    className="w-full bg-slate-50 border rounded-xl px-3 py-2.5 font-semibold"
+                  />
+                </div>
+
+                <div>
+                  <label className="font-bold text-slate-700 block mb-1">Mobile No *</label>
+                  <input
+                    required
+                    type="tel"
+                    placeholder="Enter Mobile No."
+                    value={contactPhone}
+                    onChange={(e) => setContactPhone(e.target.value)}
+                    className="w-full bg-slate-50 border rounded-xl px-3 py-2.5 font-semibold"
+                  />
                 </div>
 
                 <div>
                   <label className="font-bold text-slate-700 block mb-1">Preferred Destination</label>
-                  <input required type="text" placeholder="e.g. Dubai / Bali / Goa" className="w-full bg-slate-50 border rounded-xl px-3 py-2.5 font-semibold" />
+                  <input
+                    required
+                    type="text"
+                    placeholder="e.g. Dubai / Bali / Goa"
+                    value={destination}
+                    onChange={(e) => setDestination(e.target.value)}
+                    className="w-full bg-slate-50 border rounded-xl px-3 py-2.5 font-semibold"
+                  />
                 </div>
 
                 <div>
                   <label className="font-bold text-slate-700 block mb-1">Group Size (Pax)</label>
-                  <input required type="number" placeholder="50" className="w-full bg-slate-50 border rounded-xl px-3 py-2.5 font-bold" />
+                  <input
+                    required
+                    type="number"
+                    placeholder="50"
+                    value={groupSize}
+                    onChange={(e) => setGroupSize(e.target.value)}
+                    className="w-full bg-slate-50 border rounded-xl px-3 py-2.5 font-bold"
+                  />
                 </div>
               </div>
 
