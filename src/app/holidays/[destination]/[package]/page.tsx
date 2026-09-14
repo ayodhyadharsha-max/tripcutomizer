@@ -334,7 +334,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
 
               <div className="pt-2">
                 <Button type="submit" variant="accent" size="lg" className="w-full font-black py-3 text-slate-950 text-xs">
-                  PROCEED TO PAYMENT & SAVE TO CLOUD →
+                  PROCEED TO PAYMENT & CHECKOUT →
                 </Button>
               </div>
             </form>

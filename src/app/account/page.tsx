@@ -198,7 +198,7 @@ export default function CustomerAccountPage() {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-extrabold text-slate-900 flex items-center gap-2">
-              <Package className="w-5 h-5 text-brand-600" /> My Holiday Bookings & Cloud Vouchers
+              <Package className="w-5 h-5 text-brand-600" /> My Holiday Bookings & E-Vouchers
             </h2>
             <Link href="/holidays">
               <Button variant="accent" size="sm" className="font-bold text-slate-950">

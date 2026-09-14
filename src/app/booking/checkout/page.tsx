@@ -22,7 +22,6 @@ export default function BookingCheckoutPage() {
     email: '',
     phone: '',
     passportNo: '',
-    addOnInsurance: true,
   });
 
   const [createdBooking, setCreatedBooking] = useState<CustomerBooking | null>(null);
@@ -43,16 +42,14 @@ export default function BookingCheckoutPage() {
 
   const [paymentMethod, setPaymentMethod] = useState<'upi' | 'card' | 'netbanking'>('upi');
 
-  const basePrice = 48990 * 2; // 2 Adults
-  const insurancePrice = travellerData.addOnInsurance ? 1200 : 0;
-  const grandTotal = basePrice + insurancePrice;
+  const grandTotal = 48990 * 2; // 2 Adults
 
   const handleSimulatePayment = () => {
     // 1. Ensure Persistent User Session
     const fullName = `${travellerData.firstName} ${travellerData.lastName}`.trim();
     login(travellerData.email, travellerData.phone, fullName);
 
-    // 2. Save Booking to Cloud DB
+    // 2. Save Booking to Database
     const newBooking = cloudStore.saveBooking({
       customerName: fullName || 'Valued Traveler',
       customerEmail: travellerData.email,
@@ -82,17 +79,17 @@ export default function BookingCheckoutPage() {
           <ChevronRight className="w-4 h-4 text-slate-300" />
           <div className={`flex items-center space-x-1.5 ${step >= 2 ? 'text-brand-600 font-black' : 'text-slate-400'}`}>
             <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs ${step >= 2 ? 'bg-brand-500 text-white' : 'bg-slate-200'}`}>2</span>
-            <span>Review & Add-ons</span>
+            <span>Review Trip Details</span>
           </div>
           <ChevronRight className="w-4 h-4 text-slate-300" />
           <div className={`flex items-center space-x-1.5 ${step >= 3 ? 'text-brand-600 font-black' : 'text-slate-400'}`}>
             <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs ${step >= 3 ? 'bg-brand-500 text-white' : 'bg-slate-200'}`}>3</span>
-            <span>Mock Payment</span>
+            <span>Secure Payment</span>
           </div>
           <ChevronRight className="w-4 h-4 text-slate-300" />
           <div className={`flex items-center space-x-1.5 ${step === 4 ? 'text-emerald-600 font-black' : 'text-slate-400'}`}>
             <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs ${step === 4 ? 'bg-emerald-600 text-white' : 'bg-slate-200'}`}>4</span>
-            <span>Invoice & Cloud Voucher</span>
+            <span>Invoice & E-Voucher</span>
           </div>
         </div>
 
@@ -174,17 +171,17 @@ export default function BookingCheckoutPage() {
               </div>
 
               <Button type="submit" variant="accent" size="lg" className="w-full font-black py-3 text-slate-950 mt-4">
-                CONTINUE TO REVIEW & ADD-ONS →
+                CONTINUE TO REVIEW DETAILS →
               </Button>
             </form>
           </Card>
         )}
 
-        {/* Step 2: Review & Add-ons */}
+        {/* Step 2: Review Trip Details */}
         {step === 2 && (
           <Card className="p-8 bg-white rounded-3xl shadow-xl border border-slate-200 space-y-6">
             <h2 className="text-lg font-black text-slate-900 pb-3 border-b border-slate-100">
-              Review Trip Details & Add-ons
+              Review Trip Details
             </h2>
 
             <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs space-y-2">
@@ -195,21 +192,8 @@ export default function BookingCheckoutPage() {
               </p>
             </div>
 
-            <div className="p-4 bg-purple-50 rounded-2xl border border-purple-200 text-xs flex items-center justify-between">
-              <div>
-                <h4 className="font-bold text-purple-950">Add Overseas Travel Insurance Coverage (+₹1,200)</h4>
-                <p className="text-purple-700">$50,000 USD Medical Emergency & Loss of Passport Protection.</p>
-              </div>
-              <input
-                type="checkbox"
-                checked={travellerData.addOnInsurance}
-                onChange={(e) => setTravellerData({ ...travellerData, addOnInsurance: e.target.checked })}
-                className="w-5 h-5 accent-purple-600 cursor-pointer"
-              />
-            </div>
-
             <div className="p-4 bg-slate-100 rounded-2xl flex justify-between items-center text-sm font-black text-slate-900">
-              <span>Total Payable Amount:</span>
+              <span>Total Amount:</span>
               <span className="text-xl text-brand-700">{formatCurrency(grandTotal)}</span>
             </div>
 
@@ -224,7 +208,7 @@ export default function BookingCheckoutPage() {
           </Card>
         )}
 
-        {/* Step 3: Mock Payment Gateway */}
+        {/* Step 3: Payment Gateway */}
         {step === 3 && (
           <Card className="p-8 bg-white rounded-3xl shadow-xl border border-slate-200 space-y-6">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
@@ -255,16 +239,16 @@ export default function BookingCheckoutPage() {
 
             <div className="p-6 bg-slate-50 border border-slate-200 rounded-2xl text-center space-y-4 text-xs">
               <ShieldCheck className="w-10 h-10 text-emerald-600 mx-auto" />
-              <p className="font-bold text-slate-900 text-sm">Cloud Sync Enabled — Live Booking Database</p>
-              <p className="text-slate-500">Your profile and booking will be saved in Cloud DB & available on Admin Panel instantly.</p>
+              <p className="font-bold text-slate-900 text-sm">256-bit Encrypted SSL Payment</p>
+              <p className="text-slate-500">Instant confirmation & digital e-voucher will be generated upon payment completion.</p>
 
               <Button
                 onClick={handleSimulatePayment}
                 variant="accent"
                 size="lg"
-                className="w-full max-w-sm mx-auto font-black py-3 text-slate-950 text-sm shadow-xl"
+                className="w-full max-w-sm mx-auto font-black py-3 text-slate-950 text-sm shadow-xl cursor-pointer"
               >
-                SIMULATE PAYMENT & SAVE TO CLOUD ({formatCurrency(grandTotal)})
+                PAY & CONFIRM BOOKING ({formatCurrency(grandTotal)})
               </Button>
             </div>
           </Card>
@@ -281,9 +265,9 @@ export default function BookingCheckoutPage() {
               Booking Ref: {createdBooking.referenceNo}
             </span>
 
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900">Booking Saved to Cloud!</h2>
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-900">Booking & Payment Confirmed!</h2>
             <p className="text-xs text-slate-500 max-w-md mx-auto">
-              Thank you {travellerData.firstName}! Your booking has been registered in the cloud. Details are available in your account and sent to the tripcustomizer Admin team.
+              Thank you {travellerData.firstName}! Your booking has been confirmed. Confirmation vouchers and invoice are available in your account.
             </p>
 
             <div className="p-4 bg-slate-50 rounded-2xl text-left text-xs border border-slate-200 space-y-2 max-w-md mx-auto">

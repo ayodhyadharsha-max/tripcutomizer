@@ -144,7 +144,7 @@ export default function ManageBookingPage() {
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-4 border-t border-slate-100 text-xs">
               <div className="flex items-center space-x-2 text-slate-500">
                 <FileText className="w-4 h-4 text-brand-500" />
-                <span>Cloud Sync Reference Verified</span>
+                <span>Official Booking Reference Verified</span>
               </div>
               <Link href="/account">
                 <Button variant="primary" size="sm" className="font-bold">
