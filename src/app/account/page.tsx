@@ -66,10 +66,7 @@ export default function CustomerAccountPage() {
   const [selectedInvoice, setSelectedInvoice] = useState<CustomerBooking | null>(null);
 
   // Co-Travellers State
-  const [coTravellers, setCoTravellers] = useState<CoTraveller[]>([
-    { id: 'cot-1', name: 'Priya Sharma', age: 28, gender: 'Female', relation: 'Spouse' },
-    { id: 'cot-2', name: 'Aarav Sharma Jr.', age: 6, gender: 'Male', relation: 'Son' },
-  ]);
+  const [coTravellers, setCoTravellers] = useState<CoTraveller[]>([]);
 
   const [showAddCoModal, setShowAddCoModal] = useState(false);
   const [newCoName, setNewCoName] = useState('');
@@ -93,6 +90,20 @@ export default function CustomerAccountPage() {
       setProfilePhone(user.phone || '');
       setProfileCity(user.city || '');
 
+      // Load co-travellers dynamically from persistent cloudStore
+      const userCo = cloudStore.getCoTravellers(user.uid);
+      const fallbackCo = cloudStore.getCoTravellers();
+      if (userCo && userCo.length > 0) {
+        setCoTravellers(userCo);
+      } else if (fallbackCo && fallbackCo.length > 0) {
+        setCoTravellers(fallbackCo);
+      } else {
+        setCoTravellers([
+          { id: 'cot-1', name: 'Priya Sharma', age: 28, gender: 'Female', relation: 'Spouse' },
+          { id: 'cot-2', name: 'Aarav Sharma Jr.', age: 6, gender: 'Male', relation: 'Son' },
+        ]);
+      }
+
       const normalizeDigits = (str: string) => str.replace(/\D/g, '').slice(-10);
       const userEmailLower = (user.email || '').toLowerCase();
       const userPhoneDigits = normalizeDigits(user.phone || '');
@@ -110,6 +121,11 @@ export default function CustomerAccountPage() {
         );
       });
       setUserBookings(filtered);
+    } else {
+      const fallbackCo = cloudStore.getCoTravellers();
+      if (fallbackCo && fallbackCo.length > 0) {
+        setCoTravellers(fallbackCo);
+      }
     }
   }, [user]);
 
@@ -181,14 +197,19 @@ export default function CustomerAccountPage() {
       relation: newCoRelation,
     };
 
-    setCoTravellers([...coTravellers, newTraveller]);
+    const updated = [...coTravellers, newTraveller];
+    setCoTravellers(updated);
+    cloudStore.saveCoTravellers(updated, user?.uid);
+
     setNewCoName('');
     setNewCoAge('');
     setShowAddCoModal(false);
   };
 
   const handleRemoveCoTraveller = (id: string) => {
-    setCoTravellers(coTravellers.filter((t) => t.id !== id));
+    const updated = coTravellers.filter((t) => t.id !== id);
+    setCoTravellers(updated);
+    cloudStore.saveCoTravellers(updated, user?.uid);
   };
 
   const handlePrintInvoice = () => {

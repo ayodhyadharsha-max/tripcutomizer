@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/Badge';
 import { DEMO_PACKAGES, HolidayPackage } from '@/data/packagesData';
 import { formatCurrency } from '@/lib/utils';
 import { useAuth } from '@/context/AuthContext';
+import { cloudStore } from '@/lib/cloudStore';
 import {
   Star, Clock, MapPin, CheckCircle2, ChevronRight, ChevronDown, ChevronUp,
   Hotel, Plane, Utensils, ShieldCheck, MessageCircle, Share2, Download,
@@ -201,12 +202,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
   const originalPricePerPerson = pkg.discountPrice ? Math.round(pkg.discountPrice * tierMultiplier) : Math.round(basePricePerPerson * 1.18);
   const discountPercent = Math.round(((originalPricePerPerson - basePricePerPerson) / originalPricePerPerson) * 100);
 
-  // Dynamic Total Calculation:
-  // Below 5 = FREE (0%)
-  // 5 to 9 = 50%
-  // 10 to 14 = 80%
-  // 15 to 17 = 80%
-  // 18+ = 100% (Full Adult Fare)
+  // Dynamic Total Calculation
   const calculatedTotalPrice = Math.round(
     (effectiveAdultsCount * basePricePerPerson) +
     (totalAge15to17 * basePricePerPerson * 0.8) +
@@ -259,13 +255,27 @@ export default function PackageDetailPage({ params }: { params: { destination: s
     setIsPriceCalculated(true);
   };
 
-  // Proceed to Final Booking Checkout
+  // Proceed to Final Booking Checkout & Auto-Sync Passenger Names into User Profile / Co-Travellers
   const handleProceedToCheckout = () => {
     const leadName = passengers['r0_adult_0']?.fullName || contactName || 'Valued Traveller';
+    let loggedUser = user;
     if (contactEmail && contactPhone) {
-      login(contactEmail, contactPhone, leadName);
+      loggedUser = login(contactEmail, contactPhone, leadName);
     }
     
+    // Extract & sync all passenger names into user's persistent Co-Travellers list
+    const passengerList = Object.values(passengers)
+      .filter((p) => p.fullName && p.fullName.trim() !== '')
+      .map((p) => ({
+        fullName: p.fullName,
+        age: p.age,
+        gender: p.gender,
+      }));
+
+    if (passengerList.length > 0) {
+      cloudStore.syncPassengersToCoTravellers(passengerList, loggedUser?.uid);
+    }
+
     // Pass encoded passenger list to checkout
     const encodedPassengers = encodeURIComponent(JSON.stringify(passengers));
     router.push(

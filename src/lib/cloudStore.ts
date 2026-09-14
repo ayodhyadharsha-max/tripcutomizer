@@ -43,11 +43,20 @@ export interface UserProfile {
   updatedAt: string;
 }
 
+export interface CoTraveller {
+  id: string;
+  name: string;
+  age: number;
+  gender: string;
+  relation: string;
+}
+
 const STORAGE_KEYS = {
   BOOKINGS: 'tc_cloud_bookings_v1',
   LEADS: 'tc_cloud_leads_v1',
   PROFILES: 'tc_cloud_profiles_v1',
   CURRENT_USER: 'tc_cloud_current_user_v1',
+  CO_TRAVELLERS: 'tc_cloud_co_travellers_v1',
 };
 
 // Initial Seed Data for Demo & Admin Testing
@@ -200,5 +209,44 @@ export const cloudStore = {
 
   setPersistedUser: (user: UserProfile | null): void => {
     setStoredData(STORAGE_KEYS.CURRENT_USER, user);
+  },
+
+  // --- CO-TRAVELLERS PERSISTENT STORAGE ---
+  getCoTravellers: (uid?: string): CoTraveller[] => {
+    const key = uid ? `tc_cotravellers_${uid}` : STORAGE_KEYS.CO_TRAVELLERS;
+    return getStoredData<CoTraveller[]>(key, []);
+  },
+
+  saveCoTravellers: (list: CoTraveller[], uid?: string): void => {
+    const key = uid ? `tc_cotravellers_${uid}` : STORAGE_KEYS.CO_TRAVELLERS;
+    setStoredData(key, list);
+    if (uid) {
+      setStoredData(STORAGE_KEYS.CO_TRAVELLERS, list);
+    }
+  },
+
+  syncPassengersToCoTravellers: (
+    passengersList: Array<{ fullName: string; age?: string | number; gender?: string; relation?: string }>,
+    uid?: string
+  ): void => {
+    const existing = cloudStore.getCoTravellers(uid);
+    const updated = [...existing];
+
+    passengersList.forEach((p) => {
+      if (!p.fullName || !p.fullName.trim()) return;
+      const cleanName = p.fullName.trim();
+      const exists = updated.some((item) => item.name.toLowerCase() === cleanName.toLowerCase());
+      if (!exists) {
+        updated.push({
+          id: `cot-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+          name: cleanName,
+          age: typeof p.age === 'number' ? p.age : parseInt(p.age || '25', 10) || 25,
+          gender: p.gender || 'Male',
+          relation: p.relation || 'Co-Traveller',
+        });
+      }
+    });
+
+    cloudStore.saveCoTravellers(updated, uid);
   },
 };

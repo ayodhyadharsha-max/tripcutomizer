@@ -66,8 +66,27 @@ export default function BookingCheckoutPage() {
           travelersCount: paxStr ? Math.max(1, parseInt(paxStr, 10)) : 2,
         });
       }
+
+      const paxDataRaw = params.get('paxData');
+      if (paxDataRaw) {
+        try {
+          const parsedPax = JSON.parse(decodeURIComponent(paxDataRaw));
+          const list = Object.values(parsedPax)
+            .filter((p: any) => p && p.fullName && p.fullName.trim() !== '')
+            .map((p: any) => ({
+              fullName: p.fullName,
+              age: p.age,
+              gender: p.gender,
+            }));
+          if (list.length > 0) {
+            cloudStore.syncPassengersToCoTravellers(list, user?.uid);
+          }
+        } catch (e) {
+          console.error('Error parsing paxData in checkout:', e);
+        }
+      }
     }
-  }, []);
+  }, [user]);
 
   const grandTotal = pkgInfo.pricePerPerson * pkgInfo.travelersCount;
 
@@ -102,7 +121,11 @@ export default function BookingCheckoutPage() {
   const handleSimulatePayment = () => {
     // 1. Ensure Persistent User Session
     const fullName = `${travellerData.firstName} ${travellerData.lastName}`.trim();
-    login(travellerData.email, travellerData.phone, fullName);
+    const loggedUser = login(travellerData.email, travellerData.phone, fullName);
+
+    if (fullName) {
+      cloudStore.syncPassengersToCoTravellers([{ fullName }], loggedUser.uid);
+    }
 
     // 2. Save Booking to Database
     const newBooking = cloudStore.saveBooking({
