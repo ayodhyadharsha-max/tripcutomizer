@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   LayoutDashboard, ShoppingBag, Users, Compass, MapPin, DollarSign,
-  Tag, BookOpen, Settings, LogOut, Shield
+  Tag, BookOpen, Settings, LogOut, Shield, RefreshCw
 } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -14,6 +14,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
   const router = useRouter();
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState<boolean | null>(null);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const handleGlobalRefresh = () => {
+    setIsRefreshing(true);
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('storage'));
+    }
+    setTimeout(() => setIsRefreshing(false), 600);
+  };
 
   useEffect(() => {
     // Check Admin Session
@@ -162,7 +171,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <span className="font-bold text-slate-900 text-sm">Protected Admin Operations Desk</span>
           </div>
 
-          <div className="flex items-center space-x-4 text-xs font-semibold">
+          <div className="flex items-center space-x-3 text-xs font-semibold">
+            <button
+              onClick={handleGlobalRefresh}
+              disabled={isRefreshing}
+              className="flex items-center gap-1.5 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-200 px-3 py-1.5 rounded-xl cursor-pointer transition-all shadow-xs"
+              title="Refresh All Cloud Data"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 text-brand-600 ${isRefreshing ? 'animate-spin' : ''}`} />
+              <span>Refresh Data</span>
+            </button>
             <span className="bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-full border border-emerald-200">
               ● Cloud DB Live
             </span>

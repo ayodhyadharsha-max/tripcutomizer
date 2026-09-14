@@ -4,16 +4,29 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Card } from '@/components/ui/Card';
 import { formatCurrency } from '@/lib/utils';
-import { TrendingUp, ShoppingBag, Users, DollarSign, ArrowUpRight } from 'lucide-react';
+import { TrendingUp, ShoppingBag, Users, DollarSign, ArrowUpRight, RefreshCw } from 'lucide-react';
 import { cloudStore, CustomerBooking, CustomerLead } from '@/lib/cloudStore';
 
 export default function AdminDashboardPage() {
   const [bookings, setBookings] = useState<CustomerBooking[]>([]);
   const [leads, setLeads] = useState<CustomerLead[]>([]);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
-  useEffect(() => {
+  const loadData = () => {
     setBookings(cloudStore.getBookings());
     setLeads(cloudStore.getLeads());
+  };
+
+  const handleRefresh = () => {
+    setIsRefreshing(true);
+    loadData();
+    setTimeout(() => setIsRefreshing(false), 600);
+  };
+
+  useEffect(() => {
+    loadData();
+    window.addEventListener('storage', loadData);
+    return () => window.removeEventListener('storage', loadData);
   }, []);
 
   const totalRevenue = bookings.reduce((sum, b) => (b.status !== 'Cancelled' ? sum + b.totalAmount : sum), 0);
@@ -34,9 +47,19 @@ export default function AdminDashboardPage() {
           <h1 className="text-2xl font-black text-slate-900 tracking-tight">Executive Cloud Dashboard & Realtime Analytics</h1>
           <p className="text-xs text-slate-500 mt-1">Real-time overview of customer bookings, sales CRM leads, and active revenue.</p>
         </div>
-        <span className="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-3.5 py-1.5 rounded-full flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span> Live Cloud Data Active
-        </span>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handleRefresh}
+            disabled={isRefreshing}
+            className="flex items-center gap-1.5 text-xs font-bold text-slate-700 bg-white border border-slate-300 px-3.5 py-2 rounded-xl hover:bg-slate-50 cursor-pointer shadow-xs transition-all"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 text-brand-600 ${isRefreshing ? 'animate-spin' : ''}`} />
+            <span>Refresh Data</span>
+          </button>
+          <span className="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-3.5 py-1.5 rounded-full flex items-center gap-1.5">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span> Live Cloud Data Active
+          </span>
+        </div>
       </div>
 
       {/* Metrics Cards */}

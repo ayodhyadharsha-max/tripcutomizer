@@ -10,9 +10,16 @@ export default function AdminBookingsPage() {
   const [statusFilter, setStatusFilter] = useState<string>('ALL');
   const [bookings, setBookings] = useState<CustomerBooking[]>([]);
   const [selectedBooking, setSelectedBooking] = useState<CustomerBooking | null>(null);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const loadBookings = () => {
     setBookings(cloudStore.getBookings());
+  };
+
+  const handleRefresh = () => {
+    setIsRefreshing(true);
+    loadBookings();
+    setTimeout(() => setIsRefreshing(false), 600);
   };
 
   useEffect(() => {
@@ -64,10 +71,12 @@ export default function AdminBookingsPage() {
         </div>
         <div className="flex items-center gap-3">
           <button
-            onClick={loadBookings}
-            className="flex items-center gap-1 text-xs font-bold text-slate-700 bg-white border border-slate-300 px-3 py-2 rounded-xl hover:bg-slate-50 cursor-pointer shadow-xs"
+            onClick={handleRefresh}
+            disabled={isRefreshing}
+            className="flex items-center gap-1.5 text-xs font-bold text-slate-700 bg-white border border-slate-300 px-3 py-2 rounded-xl hover:bg-slate-50 cursor-pointer shadow-xs transition-all"
           >
-            <RefreshCw className="w-3.5 h-3.5" /> Refresh Cloud Data
+            <RefreshCw className={`w-3.5 h-3.5 text-brand-600 ${isRefreshing ? 'animate-spin' : ''}`} />
+            <span>Refresh Cloud Data</span>
           </button>
           <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs px-3 py-2 rounded-xl font-bold">
             Total Confirmed Value: {formatCurrency(totalRevenue)}

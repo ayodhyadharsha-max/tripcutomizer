@@ -9,9 +9,16 @@ import { cloudStore, CustomerLead } from '@/lib/cloudStore';
 export default function AdminLeadsPage() {
   const [leads, setLeads] = useState<CustomerLead[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const loadLeads = () => {
     setLeads(cloudStore.getLeads());
+  };
+
+  const handleRefresh = () => {
+    setIsRefreshing(true);
+    loadLeads();
+    setTimeout(() => setIsRefreshing(false), 600);
   };
 
   useEffect(() => {
@@ -52,10 +59,12 @@ export default function AdminLeadsPage() {
           </p>
         </div>
         <button
-          onClick={loadLeads}
-          className="flex items-center gap-1 text-xs font-bold text-slate-700 bg-white border border-slate-300 px-3.5 py-2 rounded-xl hover:bg-slate-50 cursor-pointer shadow-xs"
+          onClick={handleRefresh}
+          disabled={isRefreshing}
+          className="flex items-center gap-1.5 text-xs font-bold text-slate-700 bg-white border border-slate-300 px-3.5 py-2 rounded-xl hover:bg-slate-50 cursor-pointer shadow-xs transition-all"
         >
-          <RefreshCw className="w-3.5 h-3.5" /> Refresh Leads
+          <RefreshCw className={`w-3.5 h-3.5 text-brand-600 ${isRefreshing ? 'animate-spin' : ''}`} />
+          <span>Refresh Leads</span>
         </button>
       </div>
 
