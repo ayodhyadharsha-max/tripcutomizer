@@ -11,10 +11,9 @@ import { Badge } from '@/components/ui/Badge';
 import { DEMO_PACKAGES } from '@/data/packagesData';
 import { formatCurrency } from '@/lib/utils';
 import { useAuth } from '@/context/AuthContext';
-import { cloudStore } from '@/lib/cloudStore';
 import {
   Star, Clock, MapPin, CheckCircle2, ChevronRight, ChevronDown, ChevronUp,
-  Hotel, Plane, Utensils, Calendar, ShieldCheck, MessageCircle, Phone, User
+  Hotel, Plane, Utensils, ShieldCheck, MessageCircle
 } from 'lucide-react';
 
 export default function PackageDetailPage({ params }: { params: { destination: string; package: string } }) {
@@ -43,25 +42,13 @@ export default function PackageDetailPage({ params }: { params: { destination: s
 
   const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // 1. Login/Save Customer Profile
-    login(custEmail, custPhone, custName);
-
-    // 2. Save Booking to Cloud DB
-    cloudStore.saveBooking({
-      customerName: custName,
-      customerEmail: custEmail,
-      customerPhone: custPhone,
-      packageName: pkg.name,
-      destination: pkg.destination,
-      travelDates: 'Flexible / Dates to be confirmed',
-      travelersCount: selectedTravellers,
-      totalAmount: totalPrice,
-      status: 'Pending',
-      paymentStatus: 'Pending',
-    });
+    // 1. Save/login Customer Profile
+    if (custEmail && custPhone) {
+      login(custEmail, custPhone, custName);
+    }
 
     setIsBookingModalOpen(false);
-    // 3. Navigate to Checkout Page with package slug & pax
+    // 2. Navigate directly to Checkout Page (Checkout handles single booking creation)
     router.push(`/booking/checkout?slug=${pkg.slug}&pax=${selectedTravellers}`);
   };
 
@@ -181,7 +168,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                           </span>
                           <span className="font-bold text-sm text-slate-900">{dayItem.title}</span>
                         </div>
-                        {isOpen ? <ChevronUp className="w-4 h-4 text-slate-400" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
+                        {isOpen ? <ChevronDown className="w-4 h-4 text-slate-400 transform rotate-180" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
                       </button>
 
                       {isOpen && (
@@ -253,7 +240,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                   onClick={() => setIsBookingModalOpen(true)}
                   variant="accent"
                   size="lg"
-                  className="w-full font-black py-3 text-slate-950 text-sm shadow-md"
+                  className="w-full font-black py-3 text-slate-950 text-sm shadow-md cursor-pointer"
                 >
                   BOOK THIS HOLIDAY NOW →
                 </Button>
@@ -284,7 +271,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
           <Card className="max-w-lg w-full p-6 bg-white rounded-3xl shadow-2xl relative animate-in zoom-in-95">
             <button
               onClick={() => setIsBookingModalOpen(false)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 font-bold text-sm"
+              className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 font-bold text-sm cursor-pointer"
             >
               ✕
             </button>
@@ -333,7 +320,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
               </div>
 
               <div className="pt-2">
-                <Button type="submit" variant="accent" size="lg" className="w-full font-black py-3 text-slate-950 text-xs">
+                <Button type="submit" variant="accent" size="lg" className="w-full font-black py-3 text-slate-950 text-xs cursor-pointer">
                   PROCEED TO PAYMENT & CHECKOUT →
                 </Button>
               </div>

@@ -67,21 +67,6 @@ const DEFAULT_BOOKINGS: CustomerBooking[] = [
     paymentStatus: 'Paid',
     createdAt: new Date(Date.now() - 3600000 * 24 * 2).toISOString(),
   },
-  {
-    id: 'bk-102',
-    referenceNo: 'TC-BK-76129',
-    customerName: 'Priya Verma',
-    customerPhone: '+91 98112 34567',
-    customerEmail: 'priya.v@example.com',
-    packageName: 'Bali Luxury Pool Villa Honeymoon',
-    destination: 'Bali',
-    travelDates: '01 Nov 2026 - 07 Nov 2026',
-    travelersCount: 2,
-    totalAmount: 119600,
-    status: 'Pending',
-    paymentStatus: 'Pending',
-    createdAt: new Date(Date.now() - 3600000 * 5).toISOString(),
-  },
 ];
 
 const DEFAULT_LEADS: CustomerLead[] = [
@@ -131,6 +116,31 @@ export const cloudStore = {
 
   saveBooking: (booking: Omit<CustomerBooking, 'id' | 'referenceNo' | 'createdAt'>): CustomerBooking => {
     const existing = cloudStore.getBookings();
+
+    // Deduplicate: If an entry for the same package & email was added recently as Pending, upgrade it to Confirmed!
+    const now = Date.now();
+    const recentPendingIndex = existing.findIndex((b) => {
+      const ageMs = now - new Date(b.createdAt).getTime();
+      return (
+        b.customerEmail.toLowerCase() === booking.customerEmail.toLowerCase() &&
+        b.packageName === booking.packageName &&
+        (b.status === 'Pending' || ageMs < 120000)
+      );
+    });
+
+    if (recentPendingIndex !== -1) {
+      const matched = existing[recentPendingIndex];
+      const updatedBooking: CustomerBooking = {
+        ...matched,
+        ...booking,
+        status: booking.status || 'Confirmed',
+        paymentStatus: booking.paymentStatus || 'Paid',
+      };
+      existing[recentPendingIndex] = updatedBooking;
+      setStoredData(STORAGE_KEYS.BOOKINGS, existing);
+      return updatedBooking;
+    }
+
     const refNum = `TC-BK-${Math.floor(10000 + Math.random() * 90000)}`;
     const newBooking: CustomerBooking = {
       ...booking,
