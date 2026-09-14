@@ -239,15 +239,9 @@ export const cloudStore = {
     }
     if (!uid) return [];
     const rawList = getStoredData<CoTraveller[]>(`tc_cotravellers_${uid}`, []);
-    const userProfile = cloudStore.getUserProfile(uid);
-    const userBaseName = userProfile?.name ? stripTitle(userProfile.name) : '';
 
     const cleanList: CoTraveller[] = [];
     const seenBaseNames = new Set<string>();
-
-    if (userBaseName) {
-      seenBaseNames.add(userBaseName);
-    }
 
     rawList.forEach((item) => {
       if (!item.name || !item.name.trim()) return;
@@ -285,16 +279,11 @@ export const cloudStore = {
     if (!uid) return;
     const existing = cloudStore.getCoTravellers(uid);
     const updated = [...existing];
-    const userProfile = cloudStore.getUserProfile(uid);
-    const userBaseName = userProfile?.name ? stripTitle(userProfile.name) : '';
 
     passengersList.forEach((p) => {
       if (!p.fullName || !p.fullName.trim()) return;
       const rawName = p.fullName.trim();
       const baseName = stripTitle(rawName);
-
-      // Skip if this passenger is the primary user account holder
-      if (userBaseName && baseName === userBaseName) return;
 
       const existingIdx = updated.findIndex((item) => stripTitle(item.name) === baseName);
       if (existingIdx !== -1) {

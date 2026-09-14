@@ -206,13 +206,19 @@ export default function BookingCheckoutPage() {
       const fullName = `${travellerData.firstName} ${travellerData.lastName}`.trim();
       const loggedUser = login(travellerData.email, travellerData.phone, fullName);
 
-      if (fullName) {
-        cloudStore.syncPassengersToCoTravellers([{ fullName }], loggedUser.uid);
-      }
-
       const finalPassengersList = parsedPassengersList.length > 0
         ? parsedPassengersList
         : [{ name: fullName || 'Lead Traveller', type: 'Lead Adult' }];
+
+      const passengersToSync = finalPassengersList.map((p) => ({
+        fullName: p.name,
+        age: p.age,
+        gender: p.gender,
+      }));
+
+      if (passengersToSync.length > 0) {
+        cloudStore.syncPassengersToCoTravellers(passengersToSync, loggedUser.uid);
+      }
 
       // 2. Save Booking to Database
       const newBooking = cloudStore.saveBooking({
