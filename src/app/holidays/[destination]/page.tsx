@@ -108,18 +108,46 @@ export default function DestinationListingPage({ params }: { params: { destinati
       return true;
     }
 
+    // Additional international aliases
     if (
-      (rawSlug === 'europe' || rawSlug === 'switzerland' || rawSlug === 'uk') &&
-      (country.includes('europe') || dest.includes('europe') || name.includes('europe') || p.isInternational)
-    ) {
-      return true;
-    }
+      (rawSlug === 'dubai' || rawSlug === 'uae') &&
+      (dest.includes('dubai') || dest.includes('uae') || name.includes('dubai') || p.id === 'pkg-intl-dubai')
+    ) return true;
+
+    if (
+      (rawSlug === 'bali' || rawSlug === 'indonesia') &&
+      (dest.includes('bali') || dest.includes('indonesia') || name.includes('bali') || p.id === 'pkg-intl-bali')
+    ) return true;
+
+    if (
+      rawSlug === 'thailand' &&
+      (dest.includes('thailand') || name.includes('thailand') || p.id === 'pkg-intl-thailand')
+    ) return true;
+
+    if (
+      rawSlug === 'singapore' &&
+      (dest.includes('singapore') || name.includes('singapore') || p.id === 'pkg-intl-singapore')
+    ) return true;
+
+    if (
+      rawSlug === 'maldives' &&
+      (dest.includes('maldives') || name.includes('maldives') || p.id === 'pkg-intl-maldives')
+    ) return true;
 
     return false;
   });
 
-  // Never fall back to ALL packages (Ayodhya) if slug doesn't match
-  const displayPackages = matchedPackages;
+  // Fail-safe fallback: If specific slug match is empty, show relevant category packages so 0 packages is NEVER displayed
+  const displayPackages = matchedPackages.length > 0
+    ? matchedPackages
+    : DEMO_PACKAGES.filter((p) => {
+        const isIntlSlug = [
+          'dubai', 'uae', 'bali', 'thailand', 'singapore', 'maldives', 'switzerland',
+          'vietnam', 'japan', 'australia', 'azerbaijan', 'bhutan', 'sri-lanka', 'malaysia',
+          'nepal', 'europe', 'international'
+        ].some((s) => rawSlug.includes(s));
+        return isIntlSlug ? p.isInternational : !p.isInternational;
+      });
 
   const destName = rawSlug
     .split('-')
