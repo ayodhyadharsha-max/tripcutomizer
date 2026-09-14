@@ -14,9 +14,16 @@ import { useAuth } from '@/context/AuthContext';
 import {
   Star, Clock, MapPin, CheckCircle2, ChevronRight, ChevronDown, ChevronUp,
   Hotel, Plane, Utensils, ShieldCheck, MessageCircle, Share2, Download,
-  PhoneCall, Sparkles, Tag, Check, Cross, X, Car, Info, Users, ArrowRight,
-  Sparkle, CheckCircle, XCircle, FileText
+  PhoneCall, Sparkles, Tag, Check, X, Car, Info, Users, ArrowRight,
+  CheckCircle, XCircle, FileText, Plus, Minus, Calendar, ArrowLeft
 } from 'lucide-react';
+
+interface RoomConfig {
+  adult: number;
+  childWithBed: number;
+  childNoBed: number;
+  infant: number;
+}
 
 export default function PackageDetailPage({ params }: { params: { destination: string; package: string } }) {
   const router = useRouter();
@@ -37,36 +44,83 @@ export default function PackageDetailPage({ params }: { params: { destination: s
 
   // Pricing & Tier State
   const [tourTier, setTourTier] = useState<'standard' | 'deluxe' | 'luxury'>('deluxe');
-  const [selectedTravellers, setSelectedTravellers] = useState(2);
+
+  // Thomas Cook Style Travel Details & Calculate Price Wizard View State
+  const [isCalculatePriceView, setIsCalculatePriceView] = useState(false);
+  const [joiningCity, setJoiningCity] = useState('Joining Direct');
+  const [travelDate, setTravelDate] = useState('2026-09-25');
+  const [rooms, setRooms] = useState<RoomConfig[]>([
+    { adult: 2, childWithBed: 0, childNoBed: 0, infant: 0 }
+  ]);
+
+  // Contact Details Form State
+  const [contactPhone, setContactPhone] = useState('');
+  const [contactEmail, setContactEmail] = useState('');
+  const [contactName, setContactName] = useState('');
+  const [acceptedTerms, setAcceptedTerms] = useState(true);
+  const [isPriceCalculated, setIsPriceCalculated] = useState(false);
 
   // Callback Form State
   const [callbackName, setCallbackName] = useState('');
   const [callbackPhone, setCallbackPhone] = useState('');
   const [callbackSuccess, setCallbackSuccess] = useState(false);
 
-  // Booking Modal State
-  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
-  const [custName, setCustName] = useState('');
-  const [custEmail, setCustEmail] = useState('');
-  const [custPhone, setCustPhone] = useState('');
-
   // Toast / Share State
   const [shareToast, setShareToast] = useState(false);
 
   useEffect(() => {
     if (user) {
-      setCustName(user.name || '');
-      setCustEmail(user.email || '');
-      setCustPhone(user.phone || '');
+      setContactName(user.name || '');
+      setContactEmail(user.email || '');
+      setContactPhone(user.phone || '');
     }
   }, [user]);
 
-  // Pricing calculations based on tier
+  // Room & Travellers Counters Logic
+  const totalAdults = rooms.reduce((sum, r) => sum + r.adult, 0);
+  const totalChildWithBed = rooms.reduce((sum, r) => sum + r.childWithBed, 0);
+  const totalChildNoBed = rooms.reduce((sum, r) => sum + r.childNoBed, 0);
+  const totalInfants = rooms.reduce((sum, r) => sum + r.infant, 0);
+  const totalTravellersCount = totalAdults + totalChildWithBed + totalChildNoBed + totalInfants;
+
+  const updateRoomCount = (roomIdx: number, type: keyof RoomConfig, delta: number) => {
+    const updated = [...rooms];
+    const currentVal = updated[roomIdx][type];
+    const newVal = Math.max(0, currentVal + delta);
+    // Adults minimum 1 per room
+    if (type === 'adult' && newVal < 1) return;
+    updated[roomIdx][type] = newVal;
+    setRooms(updated);
+    setIsPriceCalculated(false);
+  };
+
+  const addRoom = () => {
+    if (rooms.length < 4) {
+      setRooms([...rooms, { adult: 2, childWithBed: 0, childNoBed: 0, infant: 0 }]);
+      setIsPriceCalculated(false);
+    }
+  };
+
+  const removeRoom = (idx: number) => {
+    if (rooms.length > 1) {
+      setRooms(rooms.filter((_, i) => i !== idx));
+      setIsPriceCalculated(false);
+    }
+  };
+
+  // Pricing calculations based on tier & travellers
   const tierMultiplier = tourTier === 'standard' ? 0.9 : tourTier === 'deluxe' ? 1.0 : 1.25;
   const basePricePerPerson = Math.round(pkg.startingPrice * tierMultiplier);
   const originalPricePerPerson = pkg.discountPrice ? Math.round(pkg.discountPrice * tierMultiplier) : Math.round(basePricePerPerson * 1.18);
   const discountPercent = Math.round(((originalPricePerPerson - basePricePerPerson) / originalPricePerPerson) * 100);
-  const totalPrice = basePricePerPerson * selectedTravellers;
+
+  // Detailed Total Calculation: Adults + Children (70%) + Infants (20%)
+  const calculatedTotalPrice = Math.round(
+    (totalAdults * basePricePerPerson) +
+    (totalChildWithBed * basePricePerPerson * 0.8) +
+    (totalChildNoBed * basePricePerPerson * 0.6) +
+    (totalInfants * basePricePerPerson * 0.2)
+  );
   const rewardPoints = Math.round(basePricePerPerson * 0.01);
 
   // Fallback Gallery Images for 4-image grid
@@ -106,14 +160,18 @@ export default function PackageDetailPage({ params }: { params: { destination: s
     }, 5000);
   };
 
-  // Handle Booking Modal Submit
-  const handleBookingSubmit = (e: React.FormEvent) => {
+  // Calculate Price Submit
+  const handleCalculatePrice = (e: React.FormEvent) => {
     e.preventDefault();
-    if (custEmail && custPhone) {
-      login(custEmail, custPhone, custName);
+    setIsPriceCalculated(true);
+  };
+
+  // Proceed to Final Booking Checkout
+  const handleProceedToCheckout = () => {
+    if (contactEmail && contactPhone) {
+      login(contactEmail, contactPhone, contactName || 'Valued Traveller');
     }
-    setIsBookingModalOpen(false);
-    router.push(`/booking/checkout?slug=${pkg.slug}&pax=${selectedTravellers}&tier=${tourTier}`);
+    router.push(`/booking/checkout?slug=${pkg.slug}&pax=${totalTravellersCount}&tier=${tourTier}&date=${travelDate}&city=${encodeURIComponent(joiningCity)}`);
   };
 
   // Handle Share Click
@@ -710,7 +768,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                 </span>
                 <div className="grid grid-cols-3 gap-1.5 p-1 bg-slate-100 rounded-xl text-xs font-bold">
                   <button
-                    onClick={() => setTourTier('standard')}
+                    onClick={() => { setTourTier('standard'); setIsPriceCalculated(false); }}
                     className={`py-2 rounded-lg transition-all cursor-pointer ${
                       tourTier === 'standard' ? 'bg-white text-slate-950 shadow-xs' : 'text-slate-600 hover:text-slate-900'
                     }`}
@@ -718,7 +776,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                     3★ Standard
                   </button>
                   <button
-                    onClick={() => setTourTier('deluxe')}
+                    onClick={() => { setTourTier('deluxe'); setIsPriceCalculated(false); }}
                     className={`py-2 rounded-lg transition-all cursor-pointer ${
                       tourTier === 'deluxe' ? 'bg-brand-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
                     }`}
@@ -726,7 +784,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                     4★ Deluxe
                   </button>
                   <button
-                    onClick={() => setTourTier('luxury')}
+                    onClick={() => { setTourTier('luxury'); setIsPriceCalculated(false); }}
                     className={`py-2 rounded-lg transition-all cursor-pointer ${
                       tourTier === 'luxury' ? 'bg-amber-500 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
                     }`}
@@ -751,46 +809,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                   <span className="text-3xl font-black text-brand-700">{formatCurrency(basePricePerPerson)}</span>
                   <span className="text-xs text-slate-500 font-semibold">/ adult</span>
                 </div>
-                <span className="text-[10px] text-slate-400 block font-medium">Inclusive of all taxes & fees</span>
-              </div>
-
-              {/* Traveller Counter */}
-              <div className="space-y-1.5 text-xs">
-                <label className="font-bold text-slate-700 flex justify-between">
-                  <span>Number of Adults</span>
-                  <span className="text-slate-500 font-normal">Min 1 Person</span>
-                </label>
-                <div className="flex items-center space-x-3 bg-slate-50 p-2 rounded-xl border border-slate-200">
-                  <button
-                    onClick={() => setSelectedTravellers(Math.max(1, selectedTravellers - 1))}
-                    className="w-8 h-8 rounded-lg bg-white border font-bold text-slate-700 shadow-xs cursor-pointer hover:bg-slate-100"
-                  >
-                    -
-                  </button>
-                  <span className="flex-1 text-center font-bold text-sm text-slate-900">{selectedTravellers} Adults</span>
-                  <button
-                    onClick={() => setSelectedTravellers(selectedTravellers + 1)}
-                    className="w-8 h-8 rounded-lg bg-white border font-bold text-slate-700 shadow-xs cursor-pointer hover:bg-slate-100"
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-
-              {/* Price Calculation Summary */}
-              <div className="p-3.5 bg-slate-50 rounded-2xl text-xs space-y-1.5 border border-slate-200">
-                <div className="flex justify-between text-slate-600">
-                  <span>Total Base Price ({selectedTravellers} Pax):</span>
-                  <span className="font-bold text-slate-900">{formatCurrency(totalPrice)}</span>
-                </div>
-                <div className="flex justify-between text-slate-600">
-                  <span>GST & Taxes:</span>
-                  <span className="font-bold text-emerald-600">INCLUDED</span>
-                </div>
-                <div className="pt-2 border-t border-slate-200 flex justify-between items-center text-slate-900 font-black">
-                  <span>Total Payable:</span>
-                  <span className="text-lg text-brand-700">{formatCurrency(totalPrice)}</span>
-                </div>
+                <span className="text-[10px] text-slate-400 block font-medium">Starting price per adult</span>
               </div>
 
               {/* Deal Promo Badge */}
@@ -811,15 +830,15 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                 <span>Earn {rewardPoints} tripcustomizer Rewards Points</span>
               </div>
 
-              {/* Primary CTA Buttons */}
+              {/* Primary Action Button: Calculate Price & Enter Travel Details */}
               <div className="space-y-2 pt-1">
                 <Button
-                  onClick={() => setIsBookingModalOpen(true)}
+                  onClick={() => setIsCalculatePriceView(true)}
                   variant="accent"
                   size="lg"
-                  className="w-full font-black py-3.5 text-slate-950 text-sm shadow-md cursor-pointer hover:scale-[1.01] transition-transform"
+                  className="w-full font-black py-3.5 text-slate-950 text-sm shadow-md cursor-pointer hover:scale-[1.01] transition-transform flex items-center justify-center space-x-2"
                 >
-                  BOOK THIS HOLIDAY NOW →
+                  <span>CALCULATE PRICE & BOOK TOUR →</span>
                 </Button>
 
                 <a
@@ -877,67 +896,348 @@ export default function PackageDetailPage({ params }: { params: { destination: s
         </div>
       </Container>
 
-      {/* BOOKING CHECKOUT MODAL */}
-      {isBookingModalOpen && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <Card className="max-w-lg w-full p-6 bg-white rounded-3xl shadow-2xl relative animate-in zoom-in-95">
+      {/* 5. THOMAS COOK STYLE "CALCULATE PRICE / TRAVEL DETAILS" FULL STEP OVERLAY WIZARD */}
+      {isCalculatePriceView && (
+        <div className="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-md overflow-y-auto animate-in fade-in duration-200">
+          
+          {/* Top Wizard Navigation Header Bar (Matching Screenshot media_1789371213952.png) */}
+          <div className="bg-[#0b192c] text-white px-4 sm:px-8 py-3.5 sticky top-0 z-30 shadow-md flex items-center justify-between">
             <button
-              onClick={() => setIsBookingModalOpen(false)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 font-bold text-sm cursor-pointer p-1"
+              onClick={() => setIsCalculatePriceView(false)}
+              className="flex items-center space-x-2 text-xs font-black text-slate-200 hover:text-white transition-colors cursor-pointer"
             >
-              ✕
+              <ArrowLeft className="w-4 h-4" />
+              <span>Calculate Price</span>
             </button>
 
-            <span className="text-[10px] bg-brand-50 text-brand-700 font-black px-2.5 py-0.5 rounded-full inline-block mb-2 uppercase tracking-wider">
-              Booking Confirmation
-            </span>
-            <h3 className="font-black text-lg text-slate-900 mb-1">{pkg.name}</h3>
-            <p className="text-xs text-slate-500 mb-4">{selectedTravellers} Adults • {tourTier.toUpperCase()} Tier • Total: {formatCurrency(totalPrice)}</p>
+            {/* Step Indicators */}
+            <div className="flex items-center space-x-3 text-xs font-bold">
+              <span className="flex items-center space-x-1.5 bg-brand-600 text-white px-3 py-1 rounded-full text-xs shadow-xs">
+                <span className="w-4 h-4 rounded-full bg-white text-brand-700 text-[10px] font-black flex items-center justify-center">1</span>
+                <span>Travel Details</span>
+              </span>
+              <span className="text-slate-500 font-normal">&gt;</span>
+              <span className="flex items-center space-x-1 text-slate-400 text-xs">
+                <span className="w-4 h-4 rounded-full bg-slate-800 text-slate-400 text-[10px] font-bold flex items-center justify-center">2</span>
+                <span>Change Flight</span>
+              </span>
+            </div>
+          </div>
 
-            <form onSubmit={handleBookingSubmit} className="space-y-3 text-xs">
-              <div>
-                <label className="font-bold text-slate-700 block mb-1">Lead Traveller Full Name</label>
-                <input
-                  required
-                  type="text"
-                  placeholder="Enter full name"
-                  value={custName}
-                  onChange={(e) => setCustName(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800"
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-2">
-                <div>
-                  <label className="font-bold text-slate-700 block mb-1">Email Address</label>
-                  <input
-                    required
-                    type="email"
-                    placeholder="your.email@example.com"
-                    value={custEmail}
-                    onChange={(e) => setCustEmail(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800"
-                  />
+          <div className="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              
+              {/* Left Form: Travel Details, Room & Travellers, Contact Info */}
+              <div className="lg:col-span-8 space-y-6">
+                
+                {/* Section Title Bar */}
+                <div className="bg-brand-600 text-white p-4 rounded-2xl flex items-center justify-between shadow-xs">
+                  <h2 className="text-base font-black flex items-center space-x-2">
+                    <MapPin className="w-5 h-5 text-amber-300" />
+                    <span>Travel Details & Passenger Details</span>
+                  </h2>
+                  <ChevronUp className="w-5 h-5 text-white/80" />
                 </div>
-                <div>
-                  <label className="font-bold text-slate-700 block mb-1">Phone Number</label>
-                  <input
-                    required
-                    type="tel"
-                    placeholder="+91 9876543210"
-                    value={custPhone}
-                    onChange={(e) => setCustPhone(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800"
-                  />
-                </div>
+
+                <Card className="p-6 bg-white rounded-3xl border-slate-200 shadow-xl space-y-6">
+                  
+                  {/* Form Step 1: Joining Direct & Date of Travel */}
+                  <form onSubmit={handleCalculatePrice} className="space-y-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      
+                      {/* Departure City / Joining Location Dropdown */}
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-bold text-slate-700 block">Joining Location / Departure City</label>
+                        <div className="relative">
+                          <select
+                            value={joiningCity}
+                            onChange={(e) => { setJoiningCity(e.target.value); setIsPriceCalculated(false); }}
+                            className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-3 text-xs font-bold text-slate-900 focus:outline-none focus:border-brand-600 appearance-none pr-8 cursor-pointer"
+                          >
+                            <option value="Joining Direct">Joining Direct (Land Only Package)</option>
+                            <option value="New Delhi">New Delhi (DEL)</option>
+                            <option value="Mumbai">Mumbai (BOM)</option>
+                            <option value="Bengaluru">Bengaluru (BLR)</option>
+                            <option value="Kolkata">Kolkata (CCU)</option>
+                            <option value="Hyderabad">Hyderabad (HYD)</option>
+                            <option value="Chennai">Chennai (MAA)</option>
+                            <option value="Ahmedabad">Ahmedabad (AMD)</option>
+                          </select>
+                          <ChevronDown className="w-4 h-4 text-slate-500 absolute right-3 top-3.5 pointer-events-none" />
+                        </div>
+                      </div>
+
+                      {/* Travel Date Selection */}
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-bold text-slate-700 block">Date of Travel *</label>
+                        <div className="relative">
+                          <input
+                            required
+                            type="date"
+                            value={travelDate}
+                            onChange={(e) => { setTravelDate(e.target.value); setIsPriceCalculated(false); }}
+                            className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-bold text-slate-900 focus:outline-none focus:border-brand-600 cursor-pointer"
+                          />
+                          <Calendar className="w-4 h-4 text-slate-400 absolute right-3 top-3 pointer-events-none" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Travellers Configuration (Max 4 Rooms) */}
+                    <div className="space-y-4 pt-2 border-t border-slate-100">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h3 className="font-black text-sm text-slate-900">Travellers Breakdown</h3>
+                          <span className="text-[11px] text-slate-500">(Max. 4 Rooms per booking)</span>
+                        </div>
+                        {rooms.length < 4 && (
+                          <button
+                            type="button"
+                            onClick={addRoom}
+                            className="text-xs font-bold text-brand-600 hover:text-brand-700 border border-brand-200 bg-brand-50 px-3 py-1.5 rounded-xl transition-colors flex items-center space-x-1 cursor-pointer"
+                          >
+                            <Plus className="w-3.5 h-3.5" />
+                            <span>Add Room</span>
+                          </button>
+                        )}
+                      </div>
+
+                      {/* Room Cards Loop */}
+                      {rooms.map((room, roomIdx) => (
+                        <div key={roomIdx} className="p-4 bg-slate-50/80 rounded-2xl border border-slate-200 space-y-4">
+                          <div className="flex items-center justify-between">
+                            <span className="font-black text-xs text-brand-700 uppercase tracking-wider">
+                              Room {roomIdx + 1}
+                            </span>
+                            {rooms.length > 1 && (
+                              <button
+                                type="button"
+                                onClick={() => removeRoom(roomIdx)}
+                                className="text-[11px] text-rose-600 font-bold hover:underline"
+                              >
+                                Remove Room
+                              </button>
+                            )}
+                          </div>
+
+                          {/* 4 Counter Controls (Adult, Child Bed, Child No Bed, Infant) */}
+                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                            
+                            {/* Adult Counter */}
+                            <div className="space-y-1">
+                              <span className="font-bold text-slate-800 block text-[11px]">Adult</span>
+                              <span className="text-[10px] text-slate-400 block">12+ yrs</span>
+                              <div className="flex items-center space-x-2 bg-white p-1.5 rounded-xl border border-slate-300">
+                                <button
+                                  type="button"
+                                  onClick={() => updateRoomCount(roomIdx, 'adult', -1)}
+                                  className="w-7 h-7 rounded-lg bg-slate-100 font-black text-slate-700 flex items-center justify-center cursor-pointer hover:bg-slate-200"
+                                >
+                                  -
+                                </button>
+                                <span className="flex-1 text-center font-black text-slate-900">{room.adult}</span>
+                                <button
+                                  type="button"
+                                  onClick={() => updateRoomCount(roomIdx, 'adult', 1)}
+                                  className="w-7 h-7 rounded-lg bg-slate-100 font-black text-slate-700 flex items-center justify-center cursor-pointer hover:bg-slate-200"
+                                >
+                                  +
+                                </button>
+                              </div>
+                            </div>
+
+                            {/* Child with bed */}
+                            <div className="space-y-1">
+                              <span className="font-bold text-slate-800 block text-[11px]">Child (With bed)</span>
+                              <span className="text-[10px] text-slate-400 block">Below 12 yrs</span>
+                              <div className="flex items-center space-x-2 bg-white p-1.5 rounded-xl border border-slate-300">
+                                <button
+                                  type="button"
+                                  onClick={() => updateRoomCount(roomIdx, 'childWithBed', -1)}
+                                  className="w-7 h-7 rounded-lg bg-slate-100 font-black text-slate-700 flex items-center justify-center cursor-pointer hover:bg-slate-200"
+                                >
+                                  -
+                                </button>
+                                <span className="flex-1 text-center font-black text-slate-900">{room.childWithBed}</span>
+                                <button
+                                  type="button"
+                                  onClick={() => updateRoomCount(roomIdx, 'childWithBed', 1)}
+                                  className="w-7 h-7 rounded-lg bg-slate-100 font-black text-slate-700 flex items-center justify-center cursor-pointer hover:bg-slate-200"
+                                >
+                                  +
+                                </button>
+                              </div>
+                            </div>
+
+                            {/* Child without bed */}
+                            <div className="space-y-1">
+                              <span className="font-bold text-slate-800 block text-[11px]">Child (No bed)</span>
+                              <span className="text-[10px] text-slate-400 block">Below 12 yrs</span>
+                              <div className="flex items-center space-x-2 bg-white p-1.5 rounded-xl border border-slate-300">
+                                <button
+                                  type="button"
+                                  onClick={() => updateRoomCount(roomIdx, 'childNoBed', -1)}
+                                  className="w-7 h-7 rounded-lg bg-slate-100 font-black text-slate-700 flex items-center justify-center cursor-pointer hover:bg-slate-200"
+                                >
+                                  -
+                                </button>
+                                <span className="flex-1 text-center font-black text-slate-900">{room.childNoBed}</span>
+                                <button
+                                  type="button"
+                                  onClick={() => updateRoomCount(roomIdx, 'childNoBed', 1)}
+                                  className="w-7 h-7 rounded-lg bg-slate-100 font-black text-slate-700 flex items-center justify-center cursor-pointer hover:bg-slate-200"
+                                >
+                                  +
+                                </button>
+                              </div>
+                            </div>
+
+                            {/* Infant */}
+                            <div className="space-y-1">
+                              <span className="font-bold text-slate-800 block text-[11px]">Infant</span>
+                              <span className="text-[10px] text-slate-400 block">0-2 yrs</span>
+                              <div className="flex items-center space-x-2 bg-white p-1.5 rounded-xl border border-slate-300">
+                                <button
+                                  type="button"
+                                  onClick={() => updateRoomCount(roomIdx, 'infant', -1)}
+                                  className="w-7 h-7 rounded-lg bg-slate-100 font-black text-slate-700 flex items-center justify-center cursor-pointer hover:bg-slate-200"
+                                >
+                                  -
+                                </button>
+                                <span className="flex-1 text-center font-black text-slate-900">{room.infant}</span>
+                                <button
+                                  type="button"
+                                  onClick={() => updateRoomCount(roomIdx, 'infant', 1)}
+                                  className="w-7 h-7 rounded-lg bg-slate-100 font-black text-slate-700 flex items-center justify-center cursor-pointer hover:bg-slate-200"
+                                >
+                                  +
+                                </button>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Contact Details Input Block */}
+                    <div className="space-y-3 pt-4 border-t border-slate-100">
+                      <div>
+                        <h3 className="font-black text-sm text-slate-900">Contact Details</h3>
+                        <p className="text-[11px] text-slate-500">Your official booking vouchers and itinerary details will be sent here.</p>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <div>
+                          <label className="font-bold text-slate-700 block mb-1">Mobile No. *</label>
+                          <div className="flex rounded-xl overflow-hidden border border-slate-300 bg-slate-50">
+                            <span className="px-3 py-2.5 font-bold text-slate-500 border-r border-slate-300 bg-slate-100 text-xs flex items-center">
+                              +91
+                            </span>
+                            <input
+                              required
+                              type="tel"
+                              placeholder="Mobile No. *"
+                              value={contactPhone}
+                              onChange={(e) => setContactPhone(e.target.value)}
+                              className="flex-1 bg-white px-3 py-2.5 font-semibold text-slate-900 focus:outline-none"
+                            />
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="font-bold text-slate-700 block mb-1">Email ID *</label>
+                          <input
+                            required
+                            type="email"
+                            placeholder="Enter Mail ID *"
+                            value={contactEmail}
+                            onChange={(e) => setContactEmail(e.target.value)}
+                            className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 font-semibold text-slate-900 focus:outline-none focus:border-brand-600"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Checkbox agreement */}
+                      <label className="flex items-center space-x-2 text-xs text-slate-600 font-semibold cursor-pointer pt-1">
+                        <input
+                          type="checkbox"
+                          checked={acceptedTerms}
+                          onChange={(e) => setAcceptedTerms(e.target.checked)}
+                          className="w-4 h-4 rounded text-brand-600 focus:ring-brand-500"
+                        />
+                        <span>I accept the <a href="#" className="text-brand-600 underline">Privacy Policy</a>, and <a href="#" className="text-brand-600 underline">Terms & Conditions</a> *</span>
+                      </label>
+                    </div>
+
+                    {/* Calculate Price Button */}
+                    <div className="pt-2 flex justify-end">
+                      <Button
+                        type="submit"
+                        variant="secondary"
+                        size="lg"
+                        className="font-black px-8 py-3 bg-slate-200 hover:bg-brand-600 hover:text-white text-slate-800 text-xs rounded-xl transition-all cursor-pointer shadow-xs"
+                      >
+                        Calculate Price
+                      </Button>
+                    </div>
+                  </form>
+                </Card>
               </div>
 
-              <div className="pt-2">
-                <Button type="submit" variant="accent" size="lg" className="w-full font-black py-3 text-slate-950 text-xs cursor-pointer">
-                  PROCEED TO PAYMENT & CHECKOUT →
-                </Button>
+              {/* Right Sidebar: Dynamic Calculated Price Card */}
+              <div className="lg:col-span-4 space-y-4 sticky top-20">
+                <Card className="p-6 bg-white rounded-3xl border-slate-200 shadow-xl space-y-5">
+                  <div>
+                    <div className="flex items-center space-x-2 mb-1">
+                      <span className="text-xs text-slate-400 line-through font-semibold">
+                        {formatCurrency(originalPricePerPerson)}
+                      </span>
+                      <span className="bg-amber-100 text-amber-900 text-[10px] font-black px-2 py-0.5 rounded-full">
+                        {discountPercent}% OFF
+                      </span>
+                    </div>
+
+                    <div className="flex items-baseline space-x-1">
+                      <span className="text-3xl font-black text-slate-900">{formatCurrency(basePricePerPerson)}</span>
+                    </div>
+                    <span className="text-xs text-slate-500 font-semibold block mt-0.5">Starting price per adult</span>
+                  </div>
+
+                  {/* Reward Points */}
+                  <div className="p-2.5 bg-indigo-50/70 border border-indigo-100 rounded-xl text-xs text-indigo-800 font-bold flex items-center space-x-2">
+                    <Sparkles className="w-4 h-4 text-indigo-600 fill-indigo-400" />
+                    <span>Earn {rewardPoints} Points</span>
+                  </div>
+
+                  {/* Calculated Price Result Box */}
+                  {isPriceCalculated && (
+                    <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl space-y-2 animate-in zoom-in-95">
+                      <span className="text-[10px] font-black text-emerald-800 block uppercase tracking-wider">
+                        ✓ Calculated Total ({totalTravellersCount} Travellers)
+                      </span>
+                      <div className="text-2xl font-black text-emerald-700">
+                        {formatCurrency(calculatedTotalPrice)}
+                      </div>
+                      <span className="text-[10px] text-emerald-600 block">Includes all taxes, room fees & discounts</span>
+                    </div>
+                  )}
+
+                  {/* Book Online Button */}
+                  <Button
+                    onClick={handleProceedToCheckout}
+                    disabled={!isPriceCalculated && (!contactPhone || !contactEmail)}
+                    variant="accent"
+                    size="lg"
+                    className="w-full font-black py-4 text-slate-950 text-sm shadow-md cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    {isPriceCalculated ? 'BOOK ONLINE NOW →' : 'Book Online'}
+                  </Button>
+                </Card>
               </div>
-            </form>
-          </Card>
+
+            </div>
+          </div>
         </div>
       )}
     </div>
