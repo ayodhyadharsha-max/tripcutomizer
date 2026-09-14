@@ -8,15 +8,22 @@ import { Button } from '@/components/ui/Button';
 import { useAuth } from '@/context/AuthContext';
 import { cloudStore, CustomerBooking } from '@/lib/cloudStore';
 import { formatCurrency } from '@/lib/utils';
-import { User, Phone, Mail, MapPin, LogOut, Package, FileText, Printer, CheckCircle2, ShieldCheck, Download } from 'lucide-react';
+import { User, Phone, Mail, MapPin, LogOut, Package, FileText, Printer, CheckCircle2, ShieldCheck, AlertCircle, LogIn, UserPlus } from 'lucide-react';
 
 export default function CustomerAccountPage() {
   const { user, isLoggedIn, login, logout, updateProfile } = useAuth();
 
-  // Login form state if not logged in
-  const [emailInput, setEmailInput] = useState('');
-  const [phoneInput, setPhoneInput] = useState('');
-  const [nameInput, setNameInput] = useState('');
+  // Auth Mode: 'login' (existing user) vs 'signup' (new user)
+  const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
+
+  // Existing User Login State
+  const [loginIdentifier, setLoginIdentifier] = useState('');
+  const [loginError, setLoginError] = useState('');
+
+  // New User Signup State
+  const [signupName, setSignupName] = useState('');
+  const [signupEmail, setSignupEmail] = useState('');
+  const [signupPhone, setSignupPhone] = useState('');
 
   // Profile Edit State
   const [editing, setEditing] = useState(false);
@@ -45,9 +52,37 @@ export default function CustomerAccountPage() {
     }
   }, [user]);
 
-  const handleLoginSubmit = (e: React.FormEvent) => {
+  // Existing Customer Login Handler (only needs email or phone!)
+  const handleExistingUserLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    login(emailInput, phoneInput, nameInput);
+    setLoginError('');
+    const input = loginIdentifier.trim();
+
+    if (!input) {
+      setLoginError('Please enter your registered email or phone number.');
+      return;
+    }
+
+    // Try finding existing profile or existing booking
+    const isEmail = input.includes('@');
+    const email = isEmail ? input : `${input.replace(/\D/g, '')}@tripcustomizer-customer.com`;
+    const phone = !isEmail ? input : '+91 9876543210';
+
+    // Search existing bookings or profile to extract name
+    const allBookings = cloudStore.getBookings();
+    const existingBooking = allBookings.find(
+      (b) => b.customerEmail.toLowerCase() === input.toLowerCase() || b.customerPhone.includes(input)
+    );
+
+    const derivedName = existingBooking ? existingBooking.customerName : 'Valued Traveler';
+
+    login(email, phone, derivedName);
+  };
+
+  // New Customer Signup Handler
+  const handleNewUserSignup = (e: React.FormEvent) => {
+    e.preventDefault();
+    login(signupEmail, signupPhone, signupName);
   };
 
   const handleSaveProfile = (e: React.FormEvent) => {
@@ -71,57 +106,140 @@ export default function CustomerAccountPage() {
       <div className="bg-slate-50 min-h-screen py-14 flex items-center justify-center">
         <Container className="max-w-md">
           <Card className="p-8 bg-white rounded-3xl shadow-xl border border-slate-200 space-y-6">
+            {/* Header Title */}
             <div className="text-center space-y-2">
               <div className="w-14 h-14 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center mx-auto">
                 <User className="w-8 h-8" />
               </div>
-              <h1 className="text-2xl font-black text-slate-900">Customer Login / Signup</h1>
+              <h1 className="text-2xl font-black text-slate-900">Welcome to tripcustomizer</h1>
               <p className="text-xs text-slate-500">
-                Enter your details once. Access your booked trips, tax invoices, and e-vouchers anytime!
+                Manage your holiday bookings, e-vouchers & tax invoices.
               </p>
             </div>
 
-            <form onSubmit={handleLoginSubmit} className="space-y-4 text-xs">
-              <div>
-                <label className="font-bold text-slate-700 block mb-1">Full Name</label>
-                <input
-                  required
-                  type="text"
-                  placeholder="Enter your full name"
-                  value={nameInput}
-                  onChange={(e) => setNameInput(e.target.value)}
-                  className="w-full bg-slate-50 border rounded-xl px-3.5 py-2.5 font-semibold text-slate-800"
-                />
-              </div>
+            {/* Login vs Signup Tabs */}
+            <div className="grid grid-cols-2 gap-1 bg-slate-100 p-1 rounded-2xl text-xs font-extrabold">
+              <button
+                onClick={() => setAuthMode('login')}
+                className={`py-2.5 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+                  authMode === 'login'
+                    ? 'bg-white text-slate-900 shadow-sm'
+                    : 'text-slate-500 hover:text-slate-900'
+                }`}
+              >
+                <LogIn className="w-4 h-4 text-brand-600" />
+                <span>Existing User (Login)</span>
+              </button>
+              <button
+                onClick={() => setAuthMode('signup')}
+                className={`py-2.5 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+                  authMode === 'signup'
+                    ? 'bg-white text-slate-900 shadow-sm'
+                    : 'text-slate-500 hover:text-slate-900'
+                }`}
+              >
+                <UserPlus className="w-4 h-4 text-brand-600" />
+                <span>New User (Sign Up)</span>
+              </button>
+            </div>
 
-              <div>
-                <label className="font-bold text-slate-700 block mb-1">Email Address</label>
-                <input
-                  required
-                  type="email"
-                  placeholder="your.email@example.com"
-                  value={emailInput}
-                  onChange={(e) => setEmailInput(e.target.value)}
-                  className="w-full bg-slate-50 border rounded-xl px-3.5 py-2.5 font-semibold text-slate-800"
-                />
-              </div>
+            {/* TAB 1: Existing Customer Login (Needs ONLY email/phone) */}
+            {authMode === 'login' && (
+              <form onSubmit={handleExistingUserLogin} className="space-y-4 text-xs">
+                {loginError && (
+                  <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-rose-700 text-xs font-semibold flex items-center gap-2">
+                    <AlertCircle className="w-4 h-4 text-rose-500 shrink-0" />
+                    <span>{loginError}</span>
+                  </div>
+                )}
 
-              <div>
-                <label className="font-bold text-slate-700 block mb-1">Mobile Phone</label>
-                <input
-                  required
-                  type="tel"
-                  placeholder="+91 9876543210"
-                  value={phoneInput}
-                  onChange={(e) => setPhoneInput(e.target.value)}
-                  className="w-full bg-slate-50 border rounded-xl px-3.5 py-2.5 font-semibold text-slate-800"
-                />
-              </div>
+                <div>
+                  <label className="font-bold text-slate-700 block mb-1">
+                    Registered Mobile Number or Email Address
+                  </label>
+                  <input
+                    required
+                    type="text"
+                    placeholder="Enter Phone Number or Email"
+                    value={loginIdentifier}
+                    onChange={(e) => setLoginIdentifier(e.target.value)}
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  />
+                  <span className="text-[11px] text-slate-400 font-medium mt-1 block">
+                    Fast 1-step sign in for existing customers.
+                  </span>
+                </div>
 
-              <Button type="submit" variant="primary" size="lg" className="w-full font-black py-3">
-                SAVE PROFILE & LOGIN →
-              </Button>
-            </form>
+                <Button type="submit" variant="primary" size="lg" className="w-full font-black py-3 cursor-pointer">
+                  LOG IN TO MY ACCOUNT →
+                </Button>
+
+                <div className="text-center pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setAuthMode('signup')}
+                    className="text-brand-600 hover:underline font-bold text-xs cursor-pointer"
+                  >
+                    Don't have an account? Create New Account
+                  </button>
+                </div>
+              </form>
+            )}
+
+            {/* TAB 2: New Customer Signup */}
+            {authMode === 'signup' && (
+              <form onSubmit={handleNewUserSignup} className="space-y-4 text-xs">
+                <div>
+                  <label className="font-bold text-slate-700 block mb-1">Full Name *</label>
+                  <input
+                    required
+                    type="text"
+                    placeholder="e.g. Rahul Sharma"
+                    value={signupName}
+                    onChange={(e) => setSignupName(e.target.value)}
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="font-bold text-slate-700 block mb-1">Email Address *</label>
+                  <input
+                    required
+                    type="email"
+                    placeholder="your.email@example.com"
+                    value={signupEmail}
+                    onChange={(e) => setSignupEmail(e.target.value)}
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="font-bold text-slate-700 block mb-1">Mobile Phone Number *</label>
+                  <input
+                    required
+                    type="tel"
+                    placeholder="+91 9876543210"
+                    value={signupPhone}
+                    onChange={(e) => setSignupPhone(e.target.value)}
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  />
+                </div>
+
+                <Button type="submit" variant="primary" size="lg" className="w-full font-black py-3 cursor-pointer">
+                  CREATE ACCOUNT & SAVE PROFILE →
+                </Button>
+
+                <div className="text-center pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setAuthMode('login')}
+                    className="text-brand-600 hover:underline font-bold text-xs cursor-pointer"
+                  >
+                    Already have an account? Log In
+                  </button>
+                </div>
+              </form>
+            )}
           </Card>
         </Container>
       </div>
@@ -156,7 +274,7 @@ export default function CustomerAccountPage() {
             <Button onClick={() => setEditing(!editing)} variant="outline" size="sm" className="font-bold">
               {editing ? 'Cancel' : 'Edit Profile'}
             </Button>
-            <Button onClick={logout} variant="ghost" size="sm" className="text-rose-600 hover:bg-rose-50 font-bold flex items-center gap-1">
+            <Button onClick={logout} variant="ghost" size="sm" className="text-rose-600 hover:bg-rose-50 font-bold flex items-center gap-1 cursor-pointer">
               <LogOut className="w-4 h-4" /> Logout
             </Button>
           </div>
@@ -195,7 +313,7 @@ export default function CustomerAccountPage() {
                 />
               </div>
               <div className="sm:col-span-3 flex justify-end gap-2 pt-2">
-                <Button type="submit" variant="primary" size="sm" className="font-bold">
+                <Button type="submit" variant="primary" size="sm" className="font-bold cursor-pointer">
                   Save Changes
                 </Button>
               </div>
@@ -386,7 +504,7 @@ export default function CustomerAccountPage() {
               <ul className="space-y-1 text-slate-700 font-semibold list-disc list-inside">
                 <li>🏨 4-Star Resort Accommodations with Daily Breakfast & Dinner</li>
                 <li>🚘 Private AC Vehicle for Transfers & Full Sightseeing Tour</li>
-                <li>🎟️ Monument Entry Tickets & Glass Skywalk Access Included</li>
+                <li>🎟️ Monument Entry Tickets Included</li>
                 <li>📞 24/7 On-Tour Manager Support & Emergency Assistance</li>
               </ul>
             </div>
