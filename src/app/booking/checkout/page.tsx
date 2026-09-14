@@ -9,10 +9,67 @@ import { formatCurrency } from '@/lib/utils';
 import { CheckCircle2, ShieldCheck, ChevronRight, User } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { cloudStore, CustomerBooking } from '@/lib/cloudStore';
+import { DEMO_PACKAGES } from '@/data/packagesData';
 
 export default function BookingCheckoutPage() {
   const { user, login } = useAuth();
   const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
+
+  // Dynamic Selected Package Info
+  const [pkgInfo, setPkgInfo] = useState({
+    name: 'Ayodhya – Varanasi – Prayagraj Classic Heritage',
+    destination: 'Ayodhya & Varanasi',
+    duration: '5 Days / 4 Nights',
+    pricePerPerson: 14500,
+    travelersCount: 2,
+  });
+
+  // Extract URL Params on Client Side
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const slug = params.get('slug') || params.get('package') || params.get('destination');
+      const title = params.get('title') || params.get('name');
+      const priceStr = params.get('price');
+      const paxStr = params.get('pax');
+      const dest = params.get('dest') || params.get('location');
+
+      let matched = DEMO_PACKAGES.find((p) => {
+        if (!slug) return false;
+        const s = slug.toLowerCase();
+        return (
+          p.slug.toLowerCase() === s ||
+          p.destinationSlug.toLowerCase() === s ||
+          p.destination.toLowerCase().includes(s) ||
+          p.name.toLowerCase().includes(s)
+        );
+      });
+
+      if (!matched && title) {
+        matched = DEMO_PACKAGES.find((p) => p.name.toLowerCase().includes(title.toLowerCase()));
+      }
+
+      if (matched) {
+        setPkgInfo({
+          name: matched.name,
+          destination: matched.destination,
+          duration: `${matched.durationDays} Days / ${matched.durationNights} Nights`,
+          pricePerPerson: matched.startingPrice,
+          travelersCount: paxStr ? Math.max(1, parseInt(paxStr, 10)) : 2,
+        });
+      } else if (title || priceStr) {
+        setPkgInfo({
+          name: title || 'Customized Holiday Package',
+          destination: dest || 'India',
+          duration: '5 Days / 4 Nights',
+          pricePerPerson: priceStr ? parseInt(priceStr, 10) : 14500,
+          travelersCount: paxStr ? Math.max(1, parseInt(paxStr, 10)) : 2,
+        });
+      }
+    }
+  }, []);
+
+  const grandTotal = pkgInfo.pricePerPerson * pkgInfo.travelersCount;
 
   // Form State
   const [travellerData, setTravellerData] = useState({
@@ -42,8 +99,6 @@ export default function BookingCheckoutPage() {
 
   const [paymentMethod, setPaymentMethod] = useState<'upi' | 'card' | 'netbanking'>('upi');
 
-  const grandTotal = 48990 * 2; // 2 Adults
-
   const handleSimulatePayment = () => {
     // 1. Ensure Persistent User Session
     const fullName = `${travellerData.firstName} ${travellerData.lastName}`.trim();
@@ -54,10 +109,10 @@ export default function BookingCheckoutPage() {
       customerName: fullName || 'Valued Traveler',
       customerEmail: travellerData.email,
       customerPhone: travellerData.phone,
-      packageName: 'Dazzling Dubai & Abu Dhabi Extravaganza',
-      destination: 'Dubai',
+      packageName: pkgInfo.name,
+      destination: pkgInfo.destination,
       travelDates: '15 Oct 2026 - 20 Oct 2026',
-      travelersCount: 2,
+      travelersCount: pkgInfo.travelersCount,
       totalAmount: grandTotal,
       status: 'Confirmed',
       paymentStatus: 'Paid',
@@ -96,7 +151,20 @@ export default function BookingCheckoutPage() {
         {/* Step 1: Traveller Details */}
         {step === 1 && (
           <Card className="p-8 bg-white rounded-3xl shadow-xl border border-slate-200 space-y-6">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+            {/* Selected Package Header Banner */}
+            <div className="p-4 bg-brand-50/80 rounded-2xl border border-brand-100 flex items-center justify-between">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-brand-600 block">Selected Booking Package</span>
+                <h3 className="text-base font-black text-slate-900">{pkgInfo.name}</h3>
+                <p className="text-xs text-slate-500 font-medium">{pkgInfo.destination} • {pkgInfo.duration}</p>
+              </div>
+              <div className="text-right">
+                <span className="text-xs text-slate-400 block font-semibold">{pkgInfo.travelersCount} Travelers</span>
+                <span className="text-lg font-black text-brand-700">{formatCurrency(grandTotal)}</span>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 pt-2">
               <h2 className="text-lg font-black text-slate-900">
                 Enter Lead Traveller Information
               </h2>
@@ -185,16 +253,16 @@ export default function BookingCheckoutPage() {
             </h2>
 
             <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs space-y-2">
-              <h3 className="font-bold text-slate-900 text-sm">Dazzling Dubai & Abu Dhabi Extravaganza</h3>
-              <p className="text-slate-600">5 Nights / 6 Days • 2 Adults • 15 Oct - 20 Oct 2026</p>
-              <p className="text-slate-700 font-semibold">
+              <h3 className="font-bold text-slate-900 text-base">{pkgInfo.name}</h3>
+              <p className="text-slate-600">{pkgInfo.destination} • {pkgInfo.duration} • {pkgInfo.travelersCount} Travelers</p>
+              <p className="text-slate-700 font-semibold pt-1">
                 Lead Traveller: {travellerData.title} {travellerData.firstName} {travellerData.lastName} ({travellerData.email})
               </p>
             </div>
 
             <div className="p-4 bg-slate-100 rounded-2xl flex justify-between items-center text-sm font-black text-slate-900">
-              <span>Total Amount:</span>
-              <span className="text-xl text-brand-700">{formatCurrency(grandTotal)}</span>
+              <span>Total Amount ({pkgInfo.travelersCount} Pax):</span>
+              <span className="text-2xl text-brand-700">{formatCurrency(grandTotal)}</span>
             </div>
 
             <div className="flex space-x-3">
@@ -267,7 +335,7 @@ export default function BookingCheckoutPage() {
 
             <h2 className="text-2xl sm:text-3xl font-black text-slate-900">Booking & Payment Confirmed!</h2>
             <p className="text-xs text-slate-500 max-w-md mx-auto">
-              Thank you {travellerData.firstName}! Your booking has been confirmed. Confirmation vouchers and invoice are available in your account.
+              Thank you {travellerData.firstName}! Your booking for {createdBooking.packageName} has been confirmed. Confirmation vouchers and invoice are available in your account.
             </p>
 
             <div className="p-4 bg-slate-50 rounded-2xl text-left text-xs border border-slate-200 space-y-2 max-w-md mx-auto">

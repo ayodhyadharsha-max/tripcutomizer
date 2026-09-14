@@ -61,8 +61,8 @@ export default function PackageDetailPage({ params }: { params: { destination: s
     });
 
     setIsBookingModalOpen(false);
-    // 3. Navigate to Checkout or Account Page
-    router.push('/booking/checkout');
+    // 3. Navigate to Checkout Page with package slug & pax
+    router.push(`/booking/checkout?slug=${pkg.slug}&pax=${selectedTravellers}`);
   };
 
   return (
