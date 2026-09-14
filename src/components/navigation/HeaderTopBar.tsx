@@ -42,10 +42,6 @@ export const HeaderTopBar: React.FC = () => {
               <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
               <span>WhatsApp Us</span>
             </a>
-            <Link href="/store-locator" className="hidden lg:flex items-center space-x-1 hover:text-accent-400 transition-colors">
-              <MapPin className="w-3.5 h-3.5 text-accent-400" />
-              <span>Find Stores</span>
-            </Link>
           </div>
 
           {/* Right Links & Auth */}
