@@ -15,14 +15,19 @@ import {
   Star, Clock, MapPin, CheckCircle2, ChevronRight, ChevronDown, ChevronUp,
   Hotel, Plane, Utensils, ShieldCheck, MessageCircle, Share2, Download,
   PhoneCall, Sparkles, Tag, Check, X, Car, Info, Users, ArrowRight,
-  CheckCircle, XCircle, FileText, Plus, Minus, Calendar, ArrowLeft
+  CheckCircle, XCircle, FileText, Plus, Minus, Calendar, ArrowLeft, Baby
 } from 'lucide-react';
 
-interface RoomConfig {
-  adult: number;
-  childWithBed: number;
-  childNoBed: number;
-  infant: number;
+export type ChildAgeCategory = 'infant' | 'childNoBed' | 'childWithBed';
+
+export interface ChildConfig {
+  ageCategory: ChildAgeCategory;
+}
+
+export interface RoomConfig {
+  adults: number;
+  hasChildren: boolean;
+  children: ChildConfig[];
 }
 
 export default function PackageDetailPage({ params }: { params: { destination: string; package: string } }) {
@@ -49,8 +54,10 @@ export default function PackageDetailPage({ params }: { params: { destination: s
   const [isCalculatePriceView, setIsCalculatePriceView] = useState(false);
   const [joiningCity, setJoiningCity] = useState('Joining Direct');
   const [travelDate, setTravelDate] = useState('2026-09-25');
+  
+  // Clean & Intuitive Room Configuration State
   const [rooms, setRooms] = useState<RoomConfig[]>([
-    { adult: 2, childWithBed: 0, childNoBed: 0, infant: 0 }
+    { adults: 2, hasChildren: false, children: [] }
   ]);
 
   // Contact Details Form State
@@ -76,27 +83,50 @@ export default function PackageDetailPage({ params }: { params: { destination: s
     }
   }, [user]);
 
-  // Room & Travellers Counters Logic
-  const totalAdults = rooms.reduce((sum, r) => sum + r.adult, 0);
-  const totalChildWithBed = rooms.reduce((sum, r) => sum + r.childWithBed, 0);
-  const totalChildNoBed = rooms.reduce((sum, r) => sum + r.childNoBed, 0);
-  const totalInfants = rooms.reduce((sum, r) => sum + r.infant, 0);
-  const totalTravellersCount = totalAdults + totalChildWithBed + totalChildNoBed + totalInfants;
-
-  const updateRoomCount = (roomIdx: number, type: keyof RoomConfig, delta: number) => {
+  // Room & Children Helper Functions
+  const updateAdults = (roomIdx: number, delta: number) => {
     const updated = [...rooms];
-    const currentVal = updated[roomIdx][type];
-    const newVal = Math.max(0, currentVal + delta);
-    // Adults minimum 1 per room
-    if (type === 'adult' && newVal < 1) return;
-    updated[roomIdx][type] = newVal;
+    const newAdults = Math.max(1, Math.min(6, updated[roomIdx].adults + delta));
+    updated[roomIdx].adults = newAdults;
+    setRooms(updated);
+    setIsPriceCalculated(false);
+  };
+
+  const setHasChildren = (roomIdx: number, hasChild: boolean) => {
+    const updated = [...rooms];
+    updated[roomIdx].hasChildren = hasChild;
+    if (!hasChild) {
+      updated[roomIdx].children = [];
+    } else if (updated[roomIdx].children.length === 0) {
+      updated[roomIdx].children = [{ ageCategory: 'childWithBed' }];
+    }
+    setRooms(updated);
+    setIsPriceCalculated(false);
+  };
+
+  const setChildrenCount = (roomIdx: number, count: number) => {
+    const updated = [...rooms];
+    const currentList = updated[roomIdx].children;
+    if (count > currentList.length) {
+      const added = Array(count - currentList.length).fill(null).map(() => ({ ageCategory: 'childWithBed' as ChildAgeCategory }));
+      updated[roomIdx].children = [...currentList, ...added];
+    } else {
+      updated[roomIdx].children = currentList.slice(0, count);
+    }
+    setRooms(updated);
+    setIsPriceCalculated(false);
+  };
+
+  const updateChildAgeCategory = (roomIdx: number, childIdx: number, ageCat: ChildAgeCategory) => {
+    const updated = [...rooms];
+    updated[roomIdx].children[childIdx].ageCategory = ageCat;
     setRooms(updated);
     setIsPriceCalculated(false);
   };
 
   const addRoom = () => {
     if (rooms.length < 4) {
-      setRooms([...rooms, { adult: 2, childWithBed: 0, childNoBed: 0, infant: 0 }]);
+      setRooms([...rooms, { adults: 2, hasChildren: false, children: [] }]);
       setIsPriceCalculated(false);
     }
   };
@@ -108,13 +138,22 @@ export default function PackageDetailPage({ params }: { params: { destination: s
     }
   };
 
-  // Pricing calculations based on tier & travellers
+  // Aggregated Travellers Breakdown
+  const totalAdults = rooms.reduce((sum, r) => sum + r.adults, 0);
+  const allChildren = rooms.flatMap((r) => r.children);
+  const totalInfants = allChildren.filter((c) => c.ageCategory === 'infant').length;
+  const totalChildNoBed = allChildren.filter((c) => c.ageCategory === 'childNoBed').length;
+  const totalChildWithBed = allChildren.filter((c) => c.ageCategory === 'childWithBed').length;
+  const totalChildrenCount = allChildren.length;
+  const totalTravellersCount = totalAdults + totalChildrenCount;
+
+  // Pricing calculations based on tier & detailed child ages
   const tierMultiplier = tourTier === 'standard' ? 0.9 : tourTier === 'deluxe' ? 1.0 : 1.25;
   const basePricePerPerson = Math.round(pkg.startingPrice * tierMultiplier);
   const originalPricePerPerson = pkg.discountPrice ? Math.round(pkg.discountPrice * tierMultiplier) : Math.round(basePricePerPerson * 1.18);
   const discountPercent = Math.round(((originalPricePerPerson - basePricePerPerson) / originalPricePerPerson) * 100);
 
-  // Detailed Total Calculation: Adults + Children (70%) + Infants (20%)
+  // Dynamic Total Calculation: Adults + Child With Bed (80%) + Child No Bed (60%) + Infant (20%)
   const calculatedTotalPrice = Math.round(
     (totalAdults * basePricePerPerson) +
     (totalChildWithBed * basePricePerPerson * 0.8) +
@@ -900,7 +939,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
       {isCalculatePriceView && (
         <div className="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-md overflow-y-auto animate-in fade-in duration-200">
           
-          {/* Top Wizard Navigation Header Bar (Matching Screenshot media_1789371213952.png) */}
+          {/* Top Wizard Navigation Header Bar */}
           <div className="bg-[#0b192c] text-white px-4 sm:px-8 py-3.5 sticky top-0 z-30 shadow-md flex items-center justify-between">
             <button
               onClick={() => setIsCalculatePriceView(false)}
@@ -983,12 +1022,12 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                       </div>
                     </div>
 
-                    {/* Travellers Configuration (Max 4 Rooms) */}
+                    {/* IMPROVED CLEAN & STEP-BY-STEP ROOM & TRAVELLERS FLOW */}
                     <div className="space-y-4 pt-2 border-t border-slate-100">
                       <div className="flex items-center justify-between">
                         <div>
-                          <h3 className="font-black text-sm text-slate-900">Travellers Breakdown</h3>
-                          <span className="text-[11px] text-slate-500">(Max. 4 Rooms per booking)</span>
+                          <h3 className="font-black text-sm text-slate-900">Travellers & Room Selection</h3>
+                          <span className="text-[11px] text-slate-500">(Configure adults & children per room)</span>
                         </div>
                         {rooms.length < 4 && (
                           <button
@@ -997,17 +1036,18 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                             className="text-xs font-bold text-brand-600 hover:text-brand-700 border border-brand-200 bg-brand-50 px-3 py-1.5 rounded-xl transition-colors flex items-center space-x-1 cursor-pointer"
                           >
                             <Plus className="w-3.5 h-3.5" />
-                            <span>Add Room</span>
+                            <span>Add Extra Room</span>
                           </button>
                         )}
                       </div>
 
-                      {/* Room Cards Loop */}
+                      {/* Room Configuration Cards */}
                       {rooms.map((room, roomIdx) => (
-                        <div key={roomIdx} className="p-4 bg-slate-50/80 rounded-2xl border border-slate-200 space-y-4">
-                          <div className="flex items-center justify-between">
-                            <span className="font-black text-xs text-brand-700 uppercase tracking-wider">
-                              Room {roomIdx + 1}
+                        <div key={roomIdx} className="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-5">
+                          <div className="flex items-center justify-between border-b border-slate-200/80 pb-2">
+                            <span className="font-black text-xs text-brand-700 uppercase tracking-wider flex items-center space-x-1.5">
+                              <span>🏨 Room {roomIdx + 1}</span>
+                              <span className="text-slate-400 font-normal">({room.adults} Adults{room.hasChildren ? `, ${room.children.length} Children` : ''})</span>
                             </span>
                             {rooms.length > 1 && (
                               <button
@@ -1020,102 +1060,120 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                             )}
                           </div>
 
-                          {/* 4 Counter Controls (Adult, Child Bed, Child No Bed, Infant) */}
-                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-                            
-                            {/* Adult Counter */}
-                            <div className="space-y-1">
-                              <span className="font-bold text-slate-800 block text-[11px]">Adult</span>
-                              <span className="text-[10px] text-slate-400 block">12+ yrs</span>
-                              <div className="flex items-center space-x-2 bg-white p-1.5 rounded-xl border border-slate-300">
-                                <button
-                                  type="button"
-                                  onClick={() => updateRoomCount(roomIdx, 'adult', -1)}
-                                  className="w-7 h-7 rounded-lg bg-slate-100 font-black text-slate-700 flex items-center justify-center cursor-pointer hover:bg-slate-200"
-                                >
-                                  -
-                                </button>
-                                <span className="flex-1 text-center font-black text-slate-900">{room.adult}</span>
-                                <button
-                                  type="button"
-                                  onClick={() => updateRoomCount(roomIdx, 'adult', 1)}
-                                  className="w-7 h-7 rounded-lg bg-slate-100 font-black text-slate-700 flex items-center justify-center cursor-pointer hover:bg-slate-200"
-                                >
-                                  +
-                                </button>
-                              </div>
+                          {/* 1. Adults Selector */}
+                          <div className="space-y-2">
+                            <label className="text-xs font-bold text-slate-800 flex items-center justify-between">
+                              <span>Adults (12+ yrs)</span>
+                              <span className="text-[11px] text-slate-500 font-normal">Min 1 adult per room</span>
+                            </label>
+                            <div className="flex items-center space-x-3 bg-white p-2 rounded-xl border border-slate-300 max-w-xs">
+                              <button
+                                type="button"
+                                onClick={() => updateAdults(roomIdx, -1)}
+                                className="w-8 h-8 rounded-lg bg-slate-100 font-black text-slate-700 hover:bg-slate-200 flex items-center justify-center cursor-pointer"
+                              >
+                                -
+                              </button>
+                              <span className="flex-1 text-center font-black text-sm text-slate-900">{room.adults} Adults</span>
+                              <button
+                                type="button"
+                                onClick={() => updateAdults(roomIdx, 1)}
+                                className="w-8 h-8 rounded-lg bg-slate-100 font-black text-slate-700 hover:bg-slate-200 flex items-center justify-center cursor-pointer"
+                              >
+                                +
+                              </button>
                             </div>
-
-                            {/* Child with bed */}
-                            <div className="space-y-1">
-                              <span className="font-bold text-slate-800 block text-[11px]">Child (With bed)</span>
-                              <span className="text-[10px] text-slate-400 block">Below 12 yrs</span>
-                              <div className="flex items-center space-x-2 bg-white p-1.5 rounded-xl border border-slate-300">
-                                <button
-                                  type="button"
-                                  onClick={() => updateRoomCount(roomIdx, 'childWithBed', -1)}
-                                  className="w-7 h-7 rounded-lg bg-slate-100 font-black text-slate-700 flex items-center justify-center cursor-pointer hover:bg-slate-200"
-                                >
-                                  -
-                                </button>
-                                <span className="flex-1 text-center font-black text-slate-900">{room.childWithBed}</span>
-                                <button
-                                  type="button"
-                                  onClick={() => updateRoomCount(roomIdx, 'childWithBed', 1)}
-                                  className="w-7 h-7 rounded-lg bg-slate-100 font-black text-slate-700 flex items-center justify-center cursor-pointer hover:bg-slate-200"
-                                >
-                                  +
-                                </button>
-                              </div>
-                            </div>
-
-                            {/* Child without bed */}
-                            <div className="space-y-1">
-                              <span className="font-bold text-slate-800 block text-[11px]">Child (No bed)</span>
-                              <span className="text-[10px] text-slate-400 block">Below 12 yrs</span>
-                              <div className="flex items-center space-x-2 bg-white p-1.5 rounded-xl border border-slate-300">
-                                <button
-                                  type="button"
-                                  onClick={() => updateRoomCount(roomIdx, 'childNoBed', -1)}
-                                  className="w-7 h-7 rounded-lg bg-slate-100 font-black text-slate-700 flex items-center justify-center cursor-pointer hover:bg-slate-200"
-                                >
-                                  -
-                                </button>
-                                <span className="flex-1 text-center font-black text-slate-900">{room.childNoBed}</span>
-                                <button
-                                  type="button"
-                                  onClick={() => updateRoomCount(roomIdx, 'childNoBed', 1)}
-                                  className="w-7 h-7 rounded-lg bg-slate-100 font-black text-slate-700 flex items-center justify-center cursor-pointer hover:bg-slate-200"
-                                >
-                                  +
-                                </button>
-                              </div>
-                            </div>
-
-                            {/* Infant */}
-                            <div className="space-y-1">
-                              <span className="font-bold text-slate-800 block text-[11px]">Infant</span>
-                              <span className="text-[10px] text-slate-400 block">0-2 yrs</span>
-                              <div className="flex items-center space-x-2 bg-white p-1.5 rounded-xl border border-slate-300">
-                                <button
-                                  type="button"
-                                  onClick={() => updateRoomCount(roomIdx, 'infant', -1)}
-                                  className="w-7 h-7 rounded-lg bg-slate-100 font-black text-slate-700 flex items-center justify-center cursor-pointer hover:bg-slate-200"
-                                >
-                                  -
-                                </button>
-                                <span className="flex-1 text-center font-black text-slate-900">{room.infant}</span>
-                                <button
-                                  type="button"
-                                  onClick={() => updateRoomCount(roomIdx, 'infant', 1)}
-                                  className="w-7 h-7 rounded-lg bg-slate-100 font-black text-slate-700 flex items-center justify-center cursor-pointer hover:bg-slate-200"
-                                >
-                                  +
-                                </button>
-                              </div>
-                            </div>
-
                           </div>
+
+                          {/* 2. Are Any Children Travelling? (Yes / No Toggle) */}
+                          <div className="space-y-2 pt-2 border-t border-slate-200/60">
+                            <label className="text-xs font-bold text-slate-800 block">
+                              Are any children travelling in Room {roomIdx + 1}?
+                            </label>
+                            <div className="flex items-center space-x-2">
+                              <button
+                                type="button"
+                                onClick={() => setHasChildren(roomIdx, false)}
+                                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                                  !room.hasChildren
+                                    ? 'bg-slate-900 text-white shadow-xs'
+                                    : 'bg-white border border-slate-300 text-slate-700 hover:bg-slate-100'
+                                }`}
+                              >
+                                ❌ No Children
+                              </button>
+
+                              <button
+                                type="button"
+                                onClick={() => setHasChildren(roomIdx, true)}
+                                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                                  room.hasChildren
+                                    ? 'bg-brand-600 text-white shadow-xs'
+                                    : 'bg-white border border-slate-300 text-slate-700 hover:bg-slate-100'
+                                }`}
+                              >
+                                👶 Yes, Children Travelling
+                              </button>
+                            </div>
+                          </div>
+
+                          {/* 3. CONDITIONAL CHILD CONFIGURATION (Only shown if hasChildren === true) */}
+                          {room.hasChildren && (
+                            <div className="p-4 bg-white rounded-xl border border-brand-200 space-y-4 animate-in fade-in duration-200">
+                              
+                              {/* Step 3a: Select Number of Children */}
+                              <div className="space-y-2">
+                                <label className="text-xs font-bold text-slate-800 block">
+                                  Select Number of Children in Room {roomIdx + 1}:
+                                </label>
+                                <div className="flex items-center space-x-2">
+                                  {[1, 2, 3].map((num) => (
+                                    <button
+                                      key={num}
+                                      type="button"
+                                      onClick={() => setChildrenCount(roomIdx, num)}
+                                      className={`w-10 h-10 rounded-xl text-xs font-black transition-all cursor-pointer ${
+                                        room.children.length === num
+                                          ? 'bg-brand-600 text-white shadow-xs'
+                                          : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                                      }`}
+                                    >
+                                      {num}
+                                    </button>
+                                  ))}
+                                </div>
+                              </div>
+
+                              {/* Step 3b: Select Age Category for Each Child */}
+                              <div className="space-y-3 pt-2 border-t border-slate-100">
+                                <span className="text-xs font-extrabold text-slate-700 block">
+                                  Select Age for Each Child:
+                                </span>
+
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                  {room.children.map((child, childIdx) => (
+                                    <div key={childIdx} className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
+                                      <label className="text-[11px] font-bold text-slate-800 flex items-center justify-between">
+                                        <span>Child {childIdx + 1} Age:</span>
+                                      </label>
+
+                                      <select
+                                        value={child.ageCategory}
+                                        onChange={(e) => updateChildAgeCategory(roomIdx, childIdx, e.target.value as ChildAgeCategory)}
+                                        className="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-2 text-xs font-bold text-slate-900 focus:outline-none focus:border-brand-600 cursor-pointer"
+                                      >
+                                        <option value="infant">🍼 Below 2 yrs (Infant - 20% Fare)</option>
+                                        <option value="childNoBed">🧒 2 - 5 yrs (Child No Bed - 60% Fare)</option>
+                                        <option value="childWithBed">🛌 6 - 11 yrs (Child With Bed - 80% Fare)</option>
+                                      </select>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+
+                            </div>
+                          )}
+
                         </div>
                       ))}
                     </div>
@@ -1219,7 +1277,12 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                       <div className="text-2xl font-black text-emerald-700">
                         {formatCurrency(calculatedTotalPrice)}
                       </div>
-                      <span className="text-[10px] text-emerald-600 block">Includes all taxes, room fees & discounts</span>
+                      <div className="text-[10px] text-emerald-800 font-medium space-y-0.5 border-t border-emerald-200 pt-1 mt-1">
+                        <div>• {totalAdults} Adults</div>
+                        {totalChildWithBed > 0 && <div>• {totalChildWithBed} Children (With Bed - 80%)</div>}
+                        {totalChildNoBed > 0 && <div>• {totalChildNoBed} Children (No Bed - 60%)</div>}
+                        {totalInfants > 0 && <div>• {totalInfants} Infants (20%)</div>}
+                      </div>
                     </div>
                   )}
 
