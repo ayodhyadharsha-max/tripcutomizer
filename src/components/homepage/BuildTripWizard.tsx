@@ -6,6 +6,7 @@ import { Container } from '../ui/Container';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { cloudStore } from '@/lib/cloudStore';
+import { sendWeb3FormLead } from '@/lib/web3forms';
 
 export const BuildTripWizard: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -48,6 +49,18 @@ export const BuildTripWizard: React.FC = () => {
         travelersCount: Number(formData.adults) + Number(formData.children),
         status: 'New',
         source: 'Custom Trip Wizard',
+      });
+
+      sendWeb3FormLead({
+        subject: `[tripcustomizer] Custom Trip Inquiry: ${formData.destination || 'Selected Destination'}`,
+        name: formData.name || 'Valued Client',
+        email: formData.email,
+        phone: formData.phone,
+        destination: formData.destination,
+        budget: formData.budget,
+        travelDate: formData.travelDate,
+        travelers: `${formData.adults} Adults, ${formData.children} Children`,
+        specialRequirements: formData.specialRequirements,
       });
 
       const generatedId = `LEAD-${Math.floor(100000 + Math.random() * 900000)}`;

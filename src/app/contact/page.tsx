@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Phone, Mail, MapPin, Clock, MessageCircle, Send, CheckCircle2, ShieldCheck, Headphones } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
 import { cloudStore } from '@/lib/cloudStore';
+import { sendWeb3FormLead } from '@/lib/web3forms';
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -26,6 +27,14 @@ export default function ContactPage() {
       budget: formData.message,
       status: 'New',
       source: 'Contact Us Form',
+    });
+    sendWeb3FormLead({
+      subject: `[tripcustomizer] New Lead from Contact Us: ${formData.name}`,
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      topic: formData.subject,
+      message: formData.message,
     });
     setSubmitted(true);
   };

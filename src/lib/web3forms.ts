@@ -1,9 +1,9 @@
 'use client';
 
 /**
- * Web3Forms Helper Integration
- * Allows sending instant email alerts for leads and customer inquiries
- * powered by https://web3forms.com (1 Access Key covers all site forms!)
+ * Web3Forms Integration
+ * Automatically sends instant email lead notifications to tripcustomizer@gmail.com
+ * Access Key: c542ca79-b08a-4352-bf3e-1045518a0486
  */
 
 export interface Web3FormPayload {
@@ -18,7 +18,10 @@ export interface Web3FormPayload {
 }
 
 export const sendWeb3FormLead = async (payload: Web3FormPayload): Promise<boolean> => {
-  const apiKey = payload.access_key || process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || 'demo-access-key';
+  const apiKey =
+    payload.access_key ||
+    process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ||
+    'c542ca79-b08a-4352-bf3e-1045518a0486';
 
   try {
     const res = await fetch('https://api.web3forms.com/submit', {
@@ -37,7 +40,7 @@ export const sendWeb3FormLead = async (payload: Web3FormPayload): Promise<boolea
     const data = await res.json();
     return data.success === true;
   } catch (error) {
-    console.warn('Web3Forms email submission note:', error);
+    console.warn('Web3Forms email submission status:', error);
     return false;
   }
 };

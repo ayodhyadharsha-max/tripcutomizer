@@ -10,6 +10,7 @@ import { formatCurrency } from '@/lib/utils';
 import { CheckCircle2, ShieldCheck, ChevronRight, User, Tag, Loader2 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { cloudStore, CustomerBooking } from '@/lib/cloudStore';
+import { sendWeb3FormLead } from '@/lib/web3forms';
 import { DEMO_PACKAGES } from '@/data/packagesData';
 
 export default function BookingCheckoutPage() {
@@ -247,6 +248,18 @@ export default function BookingCheckoutPage() {
         status: 'Confirmed',
         paymentStatus: 'Paid',
         passengersList: finalPassengersList,
+      });
+
+      sendWeb3FormLead({
+        subject: `[tripcustomizer] 🎉 NEW CONFIRMED BOOKING! Ref: ${newBooking.referenceNo}`,
+        name: fullName,
+        email: travellerData.email,
+        phone: travellerData.phone,
+        referenceNo: newBooking.referenceNo,
+        package: pkgInfo.name,
+        destination: pkgInfo.destination,
+        amountPaid: `₹${grandTotal.toLocaleString()}`,
+        passengers: JSON.stringify(finalPassengersList),
       });
 
       setCreatedBooking(newBooking);

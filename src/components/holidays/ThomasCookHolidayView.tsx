@@ -10,6 +10,7 @@ import { DEMO_PACKAGES, HolidayPackage } from '@/data/packagesData';
 import { formatCurrency } from '@/lib/utils';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 import { cloudStore } from '@/lib/cloudStore';
+import { sendWeb3FormLead } from '@/lib/web3forms';
 import {
   Search,
   ChevronLeft,
@@ -887,6 +888,14 @@ export function tripcustomizerHolidayView() {
                     destination: leadForm.destination,
                     status: 'New',
                     source: 'Homepage Callback Request',
+                  });
+                  sendWeb3FormLead({
+                    subject: `[tripcustomizer] Quick Callback Request: ${leadForm.name || 'Client'} (${leadForm.destination})`,
+                    name: leadForm.name || 'Valued Client',
+                    email: leadForm.email,
+                    phone: leadForm.mobile,
+                    destination: leadForm.destination,
+                    type: leadForm.productType,
                   });
                   alert(`Thank you ${leadForm.name || 'Valued Traveler'}! Your inquiry has been received by our senior travel desk. Our expert will call you on ${leadForm.mobile} within 15 minutes.`);
                 }}
