@@ -15,7 +15,7 @@ import {
   Star, Clock, MapPin, CheckCircle2, ChevronRight, ChevronDown, ChevronUp,
   Hotel, Plane, Utensils, ShieldCheck, MessageCircle, Share2, Download,
   PhoneCall, Sparkles, Tag, Check, X, Car, Info, Users, ArrowRight,
-  CheckCircle, XCircle, FileText, Plus, Minus, Calendar, ArrowLeft, Baby
+  CheckCircle, XCircle, FileText, Plus, Minus, Calendar, ArrowLeft, Baby, UserCheck
 } from 'lucide-react';
 
 export type ChildAgeCategory = 'infant' | 'childNoBed' | 'childWithBed';
@@ -28,6 +28,13 @@ export interface RoomConfig {
   adults: number;
   hasChildren: boolean;
   children: ChildConfig[];
+}
+
+export interface PassengerData {
+  title: string;
+  fullName: string;
+  gender: string;
+  age: string;
 }
 
 export default function PackageDetailPage({ params }: { params: { destination: string; package: string } }) {
@@ -60,6 +67,9 @@ export default function PackageDetailPage({ params }: { params: { destination: s
     { adults: 2, hasChildren: false, children: [] }
   ]);
 
+  // Passenger Names & Details State
+  const [passengers, setPassengers] = useState<Record<string, PassengerData>>({});
+
   // Contact Details Form State
   const [contactPhone, setContactPhone] = useState('');
   const [contactEmail, setContactEmail] = useState('');
@@ -82,6 +92,29 @@ export default function PackageDetailPage({ params }: { params: { destination: s
       setContactPhone(user.phone || '');
     }
   }, [user]);
+
+  // Helper to update individual passenger field
+  const updatePassengerField = (key: string, field: keyof PassengerData, val: string) => {
+    setPassengers((prev) => {
+      const updated = {
+        ...prev,
+        [key]: {
+          title: prev[key]?.title || 'Mr',
+          fullName: prev[key]?.fullName || '',
+          gender: prev[key]?.gender || 'Male',
+          age: prev[key]?.age || '',
+          [field]: val,
+        },
+      };
+
+      // Auto-sync Lead Passenger (r0_adult_0) name with contactName
+      if (key === 'r0_adult_0' && field === 'fullName') {
+        setContactName(val);
+      }
+
+      return updated;
+    });
+  };
 
   // Room & Children Helper Functions
   const updateAdults = (roomIdx: number, delta: number) => {
@@ -207,10 +240,16 @@ export default function PackageDetailPage({ params }: { params: { destination: s
 
   // Proceed to Final Booking Checkout
   const handleProceedToCheckout = () => {
+    const leadName = passengers['r0_adult_0']?.fullName || contactName || 'Valued Traveller';
     if (contactEmail && contactPhone) {
-      login(contactEmail, contactPhone, contactName || 'Valued Traveller');
+      login(contactEmail, contactPhone, leadName);
     }
-    router.push(`/booking/checkout?slug=${pkg.slug}&pax=${totalTravellersCount}&tier=${tourTier}&date=${travelDate}&city=${encodeURIComponent(joiningCity)}`);
+    
+    // Pass encoded passenger list to checkout
+    const encodedPassengers = encodeURIComponent(JSON.stringify(passengers));
+    router.push(
+      `/booking/checkout?slug=${pkg.slug}&pax=${totalTravellersCount}&tier=${tourTier}&date=${travelDate}&city=${encodeURIComponent(joiningCity)}&lead=${encodeURIComponent(leadName)}&paxData=${encodedPassengers}`
+    );
   };
 
   // Handle Share Click
@@ -966,7 +1005,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
           <div className="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               
-              {/* Left Form: Travel Details, Room & Travellers, Contact Info */}
+              {/* Left Form: Travel Details, Room & Travellers, Passenger Details, Contact Info */}
               <div className="lg:col-span-8 space-y-6">
                 
                 {/* Section Title Bar */}
@@ -1022,7 +1061,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                       </div>
                     </div>
 
-                    {/* IMPROVED CLEAN & STEP-BY-STEP ROOM & TRAVELLERS FLOW */}
+                    {/* STEP 2: ROOM & TRAVELLERS CONFIGURATION */}
                     <div className="space-y-4 pt-2 border-t border-slate-100">
                       <div className="flex items-center justify-between">
                         <div>
@@ -1178,7 +1217,148 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                       ))}
                     </div>
 
-                    {/* Contact Details Input Block */}
+                    {/* STEP 3: PASSENGER NAMES & DETAILS FORM */}
+                    <div className="space-y-4 pt-4 border-t border-slate-100">
+                      <div>
+                        <h3 className="font-black text-sm text-slate-900 flex items-center space-x-2">
+                          <UserCheck className="w-4.5 h-4.5 text-brand-600" />
+                          <span>Passenger Names & Information</span>
+                        </h3>
+                        <p className="text-[11px] text-slate-500">Please enter passenger details as per official Govt. ID proof (Aadhar/Passport).</p>
+                      </div>
+
+                      {/* Loop through each room */}
+                      {rooms.map((room, roomIdx) => (
+                        <div key={roomIdx} className="space-y-3 p-4 bg-slate-50/90 rounded-2xl border border-slate-200">
+                          <span className="font-black text-xs text-slate-800 uppercase tracking-wider block border-b border-slate-200 pb-2">
+                            🏨 Room {roomIdx + 1} Passenger List
+                          </span>
+
+                          {/* Adult Passengers */}
+                          {Array.from({ length: room.adults }).map((_, adultIdx) => {
+                            const pKey = `r${roomIdx}_adult_${adultIdx}`;
+                            return (
+                              <div key={pKey} className="p-3.5 bg-white rounded-xl border border-slate-200 space-y-2 shadow-2xs">
+                                <span className="font-bold text-xs text-brand-700 flex items-center space-x-1.5">
+                                  <span>👤 Adult {adultIdx + 1} {adultIdx === 0 ? '(Lead Traveller)' : ''}</span>
+                                </span>
+
+                                <div className="grid grid-cols-12 gap-2 text-xs">
+                                  {/* Title Dropdown */}
+                                  <div className="col-span-3 sm:col-span-2">
+                                    <label className="text-[10px] font-bold text-slate-500 block mb-1">Title</label>
+                                    <select
+                                      value={passengers[pKey]?.title || 'Mr'}
+                                      onChange={(e) => updatePassengerField(pKey, 'title', e.target.value)}
+                                      className="w-full bg-slate-50 border border-slate-300 rounded-lg px-2 py-2 font-bold text-slate-800 focus:outline-none"
+                                    >
+                                      <option value="Mr">Mr.</option>
+                                      <option value="Mrs">Mrs.</option>
+                                      <option value="Ms">Ms.</option>
+                                    </select>
+                                  </div>
+
+                                  {/* Full Name */}
+                                  <div className="col-span-9 sm:col-span-6">
+                                    <label className="text-[10px] font-bold text-slate-500 block mb-1">Full Name (as on ID) *</label>
+                                    <input
+                                      required
+                                      type="text"
+                                      placeholder="Enter full name"
+                                      value={passengers[pKey]?.fullName || ''}
+                                      onChange={(e) => updatePassengerField(pKey, 'fullName', e.target.value)}
+                                      className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 font-bold text-slate-900 focus:outline-none focus:border-brand-600"
+                                    />
+                                  </div>
+
+                                  {/* Gender */}
+                                  <div className="col-span-6 sm:col-span-2">
+                                    <label className="text-[10px] font-bold text-slate-500 block mb-1">Gender</label>
+                                    <select
+                                      value={passengers[pKey]?.gender || 'Male'}
+                                      onChange={(e) => updatePassengerField(pKey, 'gender', e.target.value)}
+                                      className="w-full bg-slate-50 border border-slate-300 rounded-lg px-2 py-2 font-bold text-slate-800 focus:outline-none"
+                                    >
+                                      <option value="Male">Male</option>
+                                      <option value="Female">Female</option>
+                                    </select>
+                                  </div>
+
+                                  {/* Age */}
+                                  <div className="col-span-6 sm:col-span-2">
+                                    <label className="text-[10px] font-bold text-slate-500 block mb-1">Age (yrs)</label>
+                                    <input
+                                      type="number"
+                                      min="12"
+                                      max="100"
+                                      placeholder="Age"
+                                      value={passengers[pKey]?.age || ''}
+                                      onChange={(e) => updatePassengerField(pKey, 'age', e.target.value)}
+                                      className="w-full bg-slate-50 border border-slate-300 rounded-lg px-2.5 py-2 font-bold text-slate-900 focus:outline-none"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
+
+                          {/* Child Passengers */}
+                          {room.hasChildren && room.children.map((child, childIdx) => {
+                            const cKey = `r${roomIdx}_child_${childIdx}`;
+                            return (
+                              <div key={cKey} className="p-3.5 bg-amber-50/70 rounded-xl border border-amber-200 space-y-2 shadow-2xs">
+                                <span className="font-bold text-xs text-amber-900 flex items-center space-x-1.5">
+                                  <span>👶 Child {childIdx + 1} ({child.ageCategory === 'infant' ? 'Infant < 2 yrs' : child.ageCategory === 'childNoBed' ? '2-5 yrs No Bed' : '6-11 yrs With Bed'})</span>
+                                </span>
+
+                                <div className="grid grid-cols-12 gap-2 text-xs">
+                                  {/* Title */}
+                                  <div className="col-span-3 sm:col-span-2">
+                                    <label className="text-[10px] font-bold text-slate-500 block mb-1">Title</label>
+                                    <select
+                                      value={passengers[cKey]?.title || 'Master'}
+                                      onChange={(e) => updatePassengerField(cKey, 'title', e.target.value)}
+                                      className="w-full bg-white border border-amber-300 rounded-lg px-2 py-2 font-bold text-slate-800 focus:outline-none"
+                                    >
+                                      <option value="Master">Master</option>
+                                      <option value="Miss">Miss</option>
+                                    </select>
+                                  </div>
+
+                                  {/* Full Name */}
+                                  <div className="col-span-9 sm:col-span-7">
+                                    <label className="text-[10px] font-bold text-slate-500 block mb-1">Child Full Name *</label>
+                                    <input
+                                      required
+                                      type="text"
+                                      placeholder="Enter child full name"
+                                      value={passengers[cKey]?.fullName || ''}
+                                      onChange={(e) => updatePassengerField(cKey, 'fullName', e.target.value)}
+                                      className="w-full bg-white border border-amber-300 rounded-lg px-3 py-2 font-bold text-slate-900 focus:outline-none focus:border-brand-600"
+                                    />
+                                  </div>
+
+                                  {/* Gender */}
+                                  <div className="col-span-12 sm:col-span-3">
+                                    <label className="text-[10px] font-bold text-slate-500 block mb-1">Gender</label>
+                                    <select
+                                      value={passengers[cKey]?.gender || 'Male'}
+                                      onChange={(e) => updatePassengerField(cKey, 'gender', e.target.value)}
+                                      className="w-full bg-white border border-amber-300 rounded-lg px-2 py-2 font-bold text-slate-800 focus:outline-none"
+                                    >
+                                      <option value="Male">Male</option>
+                                      <option value="Female">Female</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* STEP 4: CONTACT DETAILS INPUT BLOCK */}
                     <div className="space-y-3 pt-4 border-t border-slate-100">
                       <div>
                         <h3 className="font-black text-sm text-slate-900">Contact Details</h3>
