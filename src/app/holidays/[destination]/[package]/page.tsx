@@ -1,28 +1,69 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { notFound } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Container } from '@/components/ui/Container';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 import { DEMO_PACKAGES } from '@/data/packagesData';
 import { formatCurrency } from '@/lib/utils';
+import { useAuth } from '@/context/AuthContext';
+import { cloudStore } from '@/lib/cloudStore';
 import {
-  Star, Clock, MapPin, CheckCircle2, XCircle, ChevronRight, ChevronDown, ChevronUp,
-  Hotel, Plane, Utensils, Calendar, ShieldCheck, MessageCircle, Phone, Send, Info
+  Star, Clock, MapPin, CheckCircle2, ChevronRight, ChevronDown, ChevronUp,
+  Hotel, Plane, Utensils, Calendar, ShieldCheck, MessageCircle, Phone, User
 } from 'lucide-react';
 
 export default function PackageDetailPage({ params }: { params: { destination: string; package: string } }) {
+  const router = useRouter();
+  const { user, login } = useAuth();
   const pkg = DEMO_PACKAGES.find((p) => p.slug === params.package) || DEMO_PACKAGES[0];
 
   const [openDay, setOpenDay] = useState<number | null>(1);
   const [selectedTravellers, setSelectedTravellers] = useState(2);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
+  // Form State in Modal
+  const [custName, setCustName] = useState('');
+  const [custEmail, setCustEmail] = useState('');
+  const [custPhone, setCustPhone] = useState('');
+
+  useEffect(() => {
+    if (user) {
+      setCustName(user.name || '');
+      setCustEmail(user.email || '');
+      setCustPhone(user.phone || '');
+    }
+  }, [user]);
+
   const totalPrice = pkg.startingPrice * selectedTravellers;
+
+  const handleBookingSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // 1. Login/Save Customer Profile
+    login(custEmail, custPhone, custName);
+
+    // 2. Save Booking to Cloud DB
+    cloudStore.saveBooking({
+      customerName: custName,
+      customerEmail: custEmail,
+      customerPhone: custPhone,
+      packageName: pkg.name,
+      destination: pkg.destination,
+      travelDates: 'Flexible / Dates to be confirmed',
+      travelersCount: selectedTravellers,
+      totalAmount: totalPrice,
+      status: 'Pending',
+      paymentStatus: 'Pending',
+    });
+
+    setIsBookingModalOpen(false);
+    // 3. Navigate to Checkout or Account Page
+    router.push('/booking/checkout');
+  };
 
   return (
     <div className="bg-slate-50 min-h-screen py-8 pb-24">
@@ -64,200 +105,126 @@ export default function PackageDetailPage({ params }: { params: { destination: s
             </span>
             <span className="flex items-center space-x-1 text-amber-500 font-bold">
               <Star className="w-4 h-4 fill-amber-400" />
-              <span>{pkg.rating} ({pkg.reviewsCount} verified reviews)</span>
+              <span>{pkg.rating} ({pkg.reviewsCount} Customer Reviews)</span>
             </span>
           </div>
         </div>
 
-        {/* Photo Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-10 rounded-3xl overflow-hidden shadow-lg border border-slate-200">
-          <div className="md:col-span-2 relative h-72 sm:h-96 bg-slate-200">
-            <Image src={pkg.heroImage} alt={pkg.name} fill className="object-cover" />
-          </div>
-          <div className="hidden md:grid grid-rows-2 gap-3">
-            {pkg.gallery.slice(0, 2).map((img, i) => (
-              <div key={i} className="relative h-full w-full bg-slate-200">
-                <Image src={img} alt={`Gallery ${i}`} fill className="object-cover" />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Main Content Layout (Itinerary & Details + Sticky Pricing Sidebar) */}
+        {/* Main Grid: Images & Itinerary vs Pricing Card */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Left Column: Details, Highlights, Itinerary, Hotels */}
+          {/* Left Column: Photos & Details */}
           <div className="lg:col-span-8 space-y-8">
-            {/* Key Highlights */}
-            <Card className="p-6 border-slate-200 bg-white">
-              <h2 className="text-base font-bold text-slate-900 mb-4 pb-2 border-b border-slate-100">
-                Key Trip Highlights
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {pkg.highlights.map((h, i) => (
-                  <div key={i} className="flex items-start space-x-2.5 text-xs text-slate-700 font-semibold">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                    <span>{h}</span>
+            {/* Hero Image Gallery */}
+            <div className="relative h-72 sm:h-96 w-full rounded-3xl overflow-hidden shadow-lg bg-slate-200">
+              <Image
+                src={pkg.heroImage}
+                alt={pkg.name}
+                fill
+                unoptimized
+                className="object-cover"
+              />
+              <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white font-bold text-xs px-3 py-1 rounded-full">
+                📸 Verified Package Photography
+              </div>
+            </div>
+
+            {/* Inclusions Highlights */}
+            <Card className="p-6 bg-white rounded-3xl border-slate-200 shadow-sm space-y-4">
+              <h2 className="text-lg font-black text-slate-900">Key Inclusions</h2>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
+                <div className="p-3 bg-slate-50 rounded-2xl flex items-center space-x-2">
+                  <Hotel className="w-5 h-5 text-brand-600" />
+                  <div>
+                    <span className="font-bold text-slate-900 block">Accommodations</span>
+                    <span className="text-[10px] text-slate-500">{pkg.hotelCategory} Hotels</span>
                   </div>
-                ))}
-              </div>
-            </Card>
-
-            {/* Inclusions & Exclusions */}
-            <Card className="p-6 border-slate-200 bg-white">
-              <h2 className="text-base font-bold text-slate-900 mb-4 pb-2 border-b border-slate-100">
-                Package Inclusions & Exclusions
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs">
-                {/* Inclusions */}
-                <div>
-                  <h3 className="font-bold text-emerald-700 uppercase tracking-wider mb-3">What's Included</h3>
-                  <ul className="space-y-2">
-                    {pkg.inclusions.map((inc, i) => (
-                      <li key={i} className="flex items-start space-x-2 text-slate-700">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-                        <span>{inc}</span>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
-
-                {/* Exclusions */}
-                <div>
-                  <h3 className="font-bold text-rose-700 uppercase tracking-wider mb-3">What's Excluded</h3>
-                  <ul className="space-y-2">
-                    {pkg.exclusions.map((exc, i) => (
-                      <li key={i} className="flex items-start space-x-2 text-slate-500">
-                        <XCircle className="w-3.5 h-3.5 text-rose-500 shrink-0 mt-0.5" />
-                        <span>{exc}</span>
-                      </li>
-                    ))}
-                  </ul>
+                <div className="p-3 bg-slate-50 rounded-2xl flex items-center space-x-2">
+                  <Utensils className="w-5 h-5 text-brand-600" />
+                  <div>
+                    <span className="font-bold text-slate-900 block">Meals Included</span>
+                    <span className="text-[10px] text-slate-500">Daily Breakfast & Dinners</span>
+                  </div>
+                </div>
+                <div className="p-3 bg-slate-50 rounded-2xl flex items-center space-x-2">
+                  <Plane className="w-5 h-5 text-brand-600" />
+                  <div>
+                    <span className="font-bold text-slate-900 block">Transfers</span>
+                    <span className="text-[10px] text-slate-500">Private Cab & Sightseeing</span>
+                  </div>
+                </div>
+                <div className="p-3 bg-slate-50 rounded-2xl flex items-center space-x-2">
+                  <ShieldCheck className="w-5 h-5 text-brand-600" />
+                  <div>
+                    <span className="font-bold text-slate-900 block">24/7 Support</span>
+                    <span className="text-[10px] text-slate-500">Dedicated Tour Manager</span>
+                  </div>
                 </div>
               </div>
             </Card>
 
-            {/* Day-Wise Expandable Timeline Itinerary */}
-            <Card className="p-6 border-slate-200 bg-white">
-              <h2 className="text-base font-bold text-slate-900 mb-2">
-                Day-by-Day Detailed Itinerary
-              </h2>
-              <p className="text-xs text-slate-500 mb-6">Click on any day to view activities, meals, transfers and stay info.</p>
-
+            {/* Day-wise Detailed Itinerary */}
+            <div className="space-y-4">
+              <h2 className="text-xl font-black text-slate-900">Day-wise Detailed Itinerary</h2>
               <div className="space-y-3">
-                {pkg.itinerary.map((day) => {
-                  const isOpen = openDay === day.dayNumber;
+                {pkg.itinerary.map((dayItem) => {
+                  const isOpen = openDay === dayItem.dayNumber;
                   return (
-                    <div
-                      key={day.dayNumber}
-                      className="border border-slate-200 rounded-2xl overflow-hidden transition-all"
-                    >
+                    <Card key={dayItem.dayNumber} className="bg-white border-slate-200 rounded-2xl overflow-hidden shadow-xs">
                       <button
-                        onClick={() => setOpenDay(isOpen ? null : day.dayNumber)}
-                        className={`w-full p-4 text-left flex items-center justify-between transition-colors cursor-pointer ${
-                          isOpen ? 'bg-brand-50/70 border-b border-brand-100' : 'bg-slate-50 hover:bg-slate-100'
-                        }`}
+                        onClick={() => setOpenDay(isOpen ? null : dayItem.dayNumber)}
+                        className="w-full p-4 flex items-center justify-between text-left hover:bg-slate-50 transition-colors"
                       >
                         <div className="flex items-center space-x-3">
-                          <span className="bg-brand-500 text-white text-xs font-black px-3 py-1 rounded-xl">
-                            Day {day.dayNumber}
+                          <span className="w-8 h-8 rounded-xl bg-brand-50 text-brand-700 font-extrabold text-xs flex items-center justify-center shrink-0">
+                            Day {dayItem.dayNumber}
                           </span>
-                          <span className="font-bold text-slate-900 text-xs sm:text-sm">{day.title}</span>
+                          <span className="font-bold text-sm text-slate-900">{dayItem.title}</span>
                         </div>
-                        {isOpen ? <ChevronUp className="w-4 h-4 text-brand-600" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
+                        {isOpen ? <ChevronUp className="w-4 h-4 text-slate-400" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
                       </button>
 
                       {isOpen && (
-                        <div className="p-5 bg-white space-y-4 text-xs">
-                          <p className="text-slate-600 leading-relaxed">{day.description}</p>
-
-                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3 bg-slate-50 rounded-xl font-semibold text-slate-700">
-                            <div className="flex items-center space-x-2">
-                              <Utensils className="w-4 h-4 text-brand-500" />
-                              <span>Meals: {day.meals.join(', ')}</span>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <Hotel className="w-4 h-4 text-accent-500" />
-                              <span>Hotel: {day.hotel}</span>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <Plane className="w-4 h-4 text-emerald-500" />
-                              <span>Transfers: {day.transfers}</span>
-                            </div>
+                        <div className="px-5 pb-5 pt-1 text-xs text-slate-600 leading-relaxed border-t border-slate-100 bg-slate-50/50 space-y-2">
+                          <p>{dayItem.description}</p>
+                          <div className="flex gap-3 text-[11px] font-semibold text-brand-700 pt-1">
+                            <span>🏨 Stay: {dayItem.hotel || '4-Star Resort'}</span>
+                            <span>🍽️ Meals: {dayItem.meals?.join(', ') || 'Breakfast & Dinner'}</span>
                           </div>
                         </div>
                       )}
-                    </div>
+                    </Card>
                   );
                 })}
               </div>
-            </Card>
-
-            {/* Hotel Accommodation Specs */}
-            <Card className="p-6 border-slate-200 bg-white">
-              <h2 className="text-base font-bold text-slate-900 mb-4 pb-2 border-b border-slate-100">
-                Hotel Stays Included
-              </h2>
-              <div className="space-y-3">
-                {pkg.hotels.map((h, i) => (
-                  <div key={i} className="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between text-xs">
-                    <div>
-                      <h3 className="font-bold text-slate-900 text-sm">{h.name}</h3>
-                      <p className="text-slate-500 mt-0.5">{h.city} • {h.rating}</p>
-                    </div>
-                    <span className="bg-brand-50 text-brand-700 font-bold px-3 py-1 rounded-xl">
-                      {h.nights} Nights Stay
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </Card>
-
-            {/* FAQs */}
-            <Card className="p-6 border-slate-200 bg-white">
-              <h2 className="text-base font-bold text-slate-900 mb-4 pb-2 border-b border-slate-100">
-                Frequently Asked Questions
-              </h2>
-              <div className="space-y-3">
-                {pkg.faqs.map((faq, i) => (
-                  <div key={i} className="p-3.5 bg-slate-50 rounded-xl space-y-1 text-xs">
-                    <p className="font-bold text-slate-900">Q: {faq.question}</p>
-                    <p className="text-slate-600">{faq.answer}</p>
-                  </div>
-                ))}
-              </div>
-            </Card>
+            </div>
           </div>
 
-          {/* Right Column: Sticky Pricing & Booking Box */}
-          <div className="lg:col-span-4">
-            <Card className="p-6 border-slate-200 bg-white sticky top-24 shadow-xl space-y-6">
-              <div className="pb-4 border-b border-slate-100">
-                <span className="text-xs text-slate-400 font-bold block uppercase">Starting Price</span>
+          {/* Right Column: Pricing & Booking Widget */}
+          <div className="lg:col-span-4 space-y-6">
+            <Card className="p-6 bg-white rounded-3xl border-slate-200 shadow-xl sticky top-24 space-y-5">
+              <div>
+                <span className="text-xs font-bold text-slate-400 block uppercase tracking-wider">Starting Price</span>
                 <div className="flex items-baseline space-x-2">
-                  <span className="text-3xl font-black text-brand-700">{formatCurrency(pkg.startingPrice)}</span>
+                  <span className="text-3xl font-black text-slate-900">{formatCurrency(pkg.startingPrice)}</span>
                   <span className="text-xs text-slate-500 font-medium">/ person</span>
                 </div>
-                {pkg.discountPrice && (
-                  <p className="text-xs text-emerald-600 font-bold mt-1">
-                    Special Offer: Save {formatCurrency(pkg.discountPrice - pkg.startingPrice)} per person!
-                  </p>
-                )}
               </div>
 
-              {/* Travellers Counter */}
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-700 block">Number of Travellers</label>
+              {/* Traveller Quantity Counter */}
+              <div className="space-y-1.5 text-xs">
+                <label className="font-bold text-slate-700 block">Number of Adults</label>
                 <div className="flex items-center space-x-3 bg-slate-50 p-2 rounded-xl border border-slate-200">
                   <button
                     onClick={() => setSelectedTravellers(Math.max(1, selectedTravellers - 1))}
-                    className="w-8 h-8 rounded-lg bg-white border font-bold text-slate-700 shadow-xs"
+                    className="w-8 h-8 rounded-lg bg-white border font-bold text-slate-700 shadow-xs cursor-pointer"
                   >
                     -
                   </button>
                   <span className="flex-1 text-center font-bold text-sm text-slate-900">{selectedTravellers} Adults</span>
                   <button
                     onClick={() => setSelectedTravellers(selectedTravellers + 1)}
-                    className="w-8 h-8 rounded-lg bg-white border font-bold text-slate-700 shadow-xs"
+                    className="w-8 h-8 rounded-lg bg-white border font-bold text-slate-700 shadow-xs cursor-pointer"
                   >
                     +
                   </button>
@@ -271,7 +238,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                   <span className="font-semibold text-slate-900">{formatCurrency(totalPrice)}</span>
                 </div>
                 <div className="flex justify-between text-slate-600">
-                  <span>Taxes & Fees:</span>
+                  <span>Taxes & GST:</span>
                   <span className="font-semibold text-emerald-600">INCLUDED</span>
                 </div>
                 <div className="pt-2 border-t border-slate-200 flex justify-between items-center text-slate-900">
@@ -288,7 +255,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                   size="lg"
                   className="w-full font-black py-3 text-slate-950 text-sm shadow-md"
                 >
-                  BOOK THIS HOLIDAY NOW
+                  BOOK THIS HOLIDAY NOW →
                 </Button>
 
                 <a
@@ -297,7 +264,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                   rel="noreferrer"
                   className="w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-300 font-bold text-xs py-2.5 rounded-xl flex items-center justify-center space-x-2 transition-colors"
                 >
-                  <MessageCircle className="w-4 h-4" />
+                  <MessageCircle className="w-4 h-4 text-emerald-600" />
                   <span>Chat on WhatsApp</span>
                 </a>
               </div>
@@ -328,36 +295,48 @@ export default function PackageDetailPage({ params }: { params: { destination: s
             <h3 className="font-black text-lg text-slate-900 mb-1">{pkg.name}</h3>
             <p className="text-xs text-slate-500 mb-4">{selectedTravellers} Adults • Total Amount: {formatCurrency(totalPrice)}</p>
 
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                alert(`Booking initiated! Reference: TB-${Math.floor(100000 + Math.random() * 900000)}. Proceeding to payment phase.`);
-                setIsBookingModalOpen(false);
-              }}
-              className="space-y-3 text-xs"
-            >
+            <form onSubmit={handleBookingSubmit} className="space-y-3 text-xs">
               <div>
                 <label className="font-bold text-slate-700 block mb-1">Lead Traveller Name</label>
-                <input required type="text" placeholder="John Doe" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold focus:outline-none" />
+                <input
+                  required
+                  type="text"
+                  placeholder="Enter your full name"
+                  value={custName}
+                  onChange={(e) => setCustName(e.target.value)}
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800"
+                />
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <div>
                   <label className="font-bold text-slate-700 block mb-1">Email Address</label>
-                  <input required type="email" placeholder="john@example.com" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold focus:outline-none" />
+                  <input
+                    required
+                    type="email"
+                    placeholder="your.email@example.com"
+                    value={custEmail}
+                    onChange={(e) => setCustEmail(e.target.value)}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800"
+                  />
                 </div>
                 <div>
                   <label className="font-bold text-slate-700 block mb-1">Phone Number</label>
-                  <input required type="tel" placeholder="+91 9876543210" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold focus:outline-none" />
+                  <input
+                    required
+                    type="tel"
+                    placeholder="+91 9876543210"
+                    value={custPhone}
+                    onChange={(e) => setCustPhone(e.target.value)}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold text-slate-800"
+                  />
                 </div>
               </div>
 
-              <div className="p-3 bg-brand-50 text-brand-800 rounded-xl font-medium text-[11px]">
-                Payment will be processed via secure payment gateway in Phase 4.
+              <div className="pt-2">
+                <Button type="submit" variant="accent" size="lg" className="w-full font-black py-3 text-slate-950 text-xs">
+                  PROCEED TO PAYMENT & SAVE TO CLOUD →
+                </Button>
               </div>
-
-              <Button type="submit" variant="accent" size="lg" className="w-full font-black py-3 text-slate-950 mt-2">
-                CONFIRM & PROCEED TO BOOKING →
-              </Button>
             </form>
           </Card>
         </div>
