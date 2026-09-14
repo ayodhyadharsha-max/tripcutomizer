@@ -287,6 +287,22 @@ export default function BookingCheckoutPage() {
   return (
     <div className="bg-slate-50 min-h-screen py-10">
       <Container className="max-w-4xl">
+        {/* Mobile Top Fare Summary Header Bar (Instantly visible on phone screens without scrolling) */}
+        {step < 4 && (
+          <div className="md:hidden bg-gradient-to-r from-slate-900 via-brand-950 to-slate-900 text-white p-4 rounded-2xl mb-4 border border-brand-800 shadow-md flex items-center justify-between">
+            <div className="space-y-0.5">
+              <span className="text-[10px] text-amber-400 font-black uppercase tracking-wider block">Booking Fare Summary</span>
+              <h4 className="text-xs font-black text-white truncate max-w-[190px]">{pkgInfo.name}</h4>
+              <p className="text-[10px] text-slate-300 font-semibold">{pkgInfo.travelersCount} Travelers • {pkgInfo.destination}</p>
+            </div>
+            <div className="text-right">
+              <span className="text-[10px] text-slate-400 font-bold block">Total Amount</span>
+              <span className="text-base font-black text-amber-300">{formatCurrency(grandTotal)}</span>
+              <span className="text-[9px] text-emerald-400 font-extrabold block">Incl. 5% GST</span>
+            </div>
+          </div>
+        )}
+
         {/* Stepper Header Bar */}
         <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs mb-8 flex items-center justify-around text-xs font-bold text-slate-700">
           <div className={`flex items-center space-x-1.5 ${step >= 1 ? 'text-brand-600 font-black' : 'text-slate-400'}`}>
@@ -643,6 +659,23 @@ export default function BookingCheckoutPage() {
                 ) : (
                   `PAY & CONFIRM BOOKING (${formatCurrency(grandTotal)})`
                 )}
+              </Button>
+            </div>
+
+            {/* Mobile Fixed Bottom Checkout Bar (Instant 1-Tap Payment on Mobile) */}
+            <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-slate-950 border-t border-slate-800 p-3 text-white shadow-2xl flex items-center justify-between animate-in slide-in-from-bottom duration-200">
+              <div>
+                <span className="text-[10px] text-slate-400 font-bold block uppercase">Payable Total</span>
+                <span className="text-base font-black text-amber-300">{formatCurrency(grandTotal)}</span>
+              </div>
+              <Button
+                onClick={handleSimulatePayment}
+                disabled={isProcessingPayment}
+                variant="accent"
+                size="md"
+                className="font-black text-xs py-2.5 px-5 text-slate-950 shadow-md cursor-pointer disabled:opacity-75"
+              >
+                {isProcessingPayment ? 'Processing...' : 'PAY & CONFIRM →'}
               </Button>
             </div>
           </Card>

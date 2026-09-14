@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Container } from '../ui/Container';
-import { ShieldCheck, Lock, Award, Heart, Mail, CheckCircle2, ArrowRight } from 'lucide-react';
+import { ShieldCheck, Lock, Award, Heart, Mail, CheckCircle2, ArrowRight, ChevronDown } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -87,8 +87,72 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* 6-Column Footer Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 pb-12 text-slate-400">
+          {/* Mobile Collapsible Accordion (Shown on small screens sm:hidden to eliminate long scrolling) */}
+          <div className="sm:hidden space-y-3 pb-8 text-slate-400">
+            <details className="group border-b border-brand-800/80 pb-3">
+              <summary className="font-extrabold text-white text-xs flex justify-between items-center cursor-pointer list-none uppercase tracking-wider py-1">
+                <span>About the Site</span>
+                <ChevronDown className="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" />
+              </summary>
+              <ul className="space-y-2 pt-2.5 pl-1 text-xs">
+                <li><Link href="/about" className="hover:text-white transition-colors block py-0.5">About Us</Link></li>
+                <li><Link href="/contact" className="hover:text-white transition-colors block py-0.5">Contact Us</Link></li>
+                <li><Link href="/terms" className="hover:text-white transition-colors block py-0.5">Terms of Use</Link></li>
+                <li><Link href="/disclaimer" className="hover:text-white transition-colors block py-0.5">Disclaimer</Link></li>
+                <li><Link href="/privacy" className="hover:text-white transition-colors block py-0.5">Privacy Policy</Link></li>
+                <li><Link href="/careers" className="hover:text-white transition-colors block py-0.5">Careers</Link></li>
+                <li><Link href="/cookie-policy" className="hover:text-white transition-colors block py-0.5">Cookie Policy</Link></li>
+              </ul>
+            </details>
+
+            <details className="group border-b border-brand-800/80 pb-3">
+              <summary className="font-extrabold text-white text-xs flex justify-between items-center cursor-pointer list-none uppercase tracking-wider py-1">
+                <span>Products & Services</span>
+                <ChevronDown className="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" />
+              </summary>
+              <ul className="space-y-2 pt-2.5 pl-1 text-xs">
+                <li><Link href="/holidays" className="hover:text-white transition-colors block py-0.5">Holidays</Link></li>
+                <li><Link href="/honeymoon" className="hover:text-white transition-colors block py-0.5">Honeymoon Packages</Link></li>
+                <li><Link href="/mice" className="hover:text-white transition-colors block py-0.5">Meetings & MICE</Link></li>
+                <li><Link href="/gift-cards" className="hover:text-white transition-colors block py-0.5">Gift Cards</Link></li>
+                <li><Link href="/flights" className="hover:text-white transition-colors block py-0.5">Flights</Link></li>
+                <li><Link href="/hotels" className="hover:text-white transition-colors block py-0.5">Hotels</Link></li>
+                <li><Link href="/blog" className="hover:text-white transition-colors block py-0.5">Travel Blog</Link></li>
+                <li><Link href="/corporate-travel" className="hover:text-white transition-colors block py-0.5">Corporate Travel</Link></li>
+              </ul>
+            </details>
+
+            <details className="group border-b border-brand-800/80 pb-3">
+              <summary className="font-extrabold text-white text-xs flex justify-between items-center cursor-pointer list-none uppercase tracking-wider py-1">
+                <span>Quick Links & Offers</span>
+                <ChevronDown className="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" />
+              </summary>
+              <ul className="space-y-2 pt-2.5 pl-1 text-xs">
+                <li><Link href="/brochure" className="hover:text-white transition-colors block py-0.5">Travel e-brochure</Link></li>
+                <li><Link href="/agent/login" className="hover:text-white transition-colors block py-0.5">Staff / Agent Login</Link></li>
+                <li><Link href="/offers" className="hover:text-white transition-colors block py-0.5">Offers & Discounts</Link></li>
+                <li><Link href="/mobile-app" className="hover:text-white transition-colors block py-0.5">Holiday App</Link></li>
+                <li><Link href="/customize-trip" className="hover:text-white transition-colors block py-0.5">Customize Trip</Link></li>
+              </ul>
+            </details>
+
+            <details className="group border-b border-brand-800/80 pb-3">
+              <summary className="font-extrabold text-white text-xs flex justify-between items-center cursor-pointer list-none uppercase tracking-wider py-1">
+                <span>Sitemaps & Guidelines</span>
+                <ChevronDown className="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" />
+              </summary>
+              <ul className="space-y-2 pt-2.5 pl-1 text-xs">
+                <li><Link href="/sitemap" className="hover:text-white transition-colors block py-0.5">Sitemap</Link></li>
+                <li><Link href="/holidays/india" className="hover:text-white transition-colors block py-0.5">Domestic Packages from City</Link></li>
+                <li><Link href="/holidays/international" className="hover:text-white transition-colors block py-0.5">International Packages from City</Link></li>
+                <li><Link href="/safe-travel" className="hover:text-white transition-colors block py-0.5">Assured Safe Travel Program</Link></li>
+                <li><Link href="/guidelines" className="hover:text-white transition-colors block py-0.5">COVID 19 Certification</Link></li>
+              </ul>
+            </details>
+          </div>
+
+          {/* 6-Column Footer Grid (Shown on tablet/desktop sm:grid) */}
+          <div className="hidden sm:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 pb-12 text-slate-400">
             {/* Column 1: About the Site */}
             <div>
               <h4 className="font-extrabold text-white text-xs mb-3.5 uppercase tracking-wider">About the Site</h4>

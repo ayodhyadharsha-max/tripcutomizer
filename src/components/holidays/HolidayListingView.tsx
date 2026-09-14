@@ -307,18 +307,94 @@ export function HolidayListingView({
           </div>
         </div>
 
-        {/* Mobile Filter Toggle Button */}
-        <div className="lg:hidden mb-4 flex items-center justify-between bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs">
-          <button
-            onClick={() => setIsMobileFilterOpen(true)}
-            className="flex items-center space-x-2 bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold text-xs px-4 py-2 rounded-xl transition-all"
-          >
-            <SlidersHorizontal className="w-4 h-4" />
-            <span>Filter & Sort Packages ({filteredPackages.length})</span>
-          </button>
-          <span className="text-xs text-slate-500 font-bold">
-            {filteredPackages.length} Results
-          </span>
+        {/* Mobile Quick Filter Chips & Full Drawer Toggle Button */}
+        <div className="lg:hidden mb-6 space-y-3">
+          <div className="flex items-center justify-between bg-white p-3 rounded-2xl border border-slate-200 shadow-xs">
+            <button
+              onClick={() => setIsMobileFilterOpen(true)}
+              className="flex items-center space-x-2 bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold text-xs px-3.5 py-2 rounded-xl transition-all border border-brand-200"
+            >
+              <SlidersHorizontal className="w-4 h-4" />
+              <span>All Filters ({filteredPackages.length})</span>
+            </button>
+            <span className="text-xs text-slate-500 font-bold">
+              Showing {filteredPackages.length} Packages
+            </span>
+          </div>
+
+          {/* 1-Tap Horizontal Quick Filter Chips */}
+          <div className="flex items-center space-x-2 overflow-x-auto pb-1 no-scrollbar text-xs font-bold text-slate-700">
+            <button
+              onClick={() => { setSelectedCategory('ALL'); setSelectedHotelCategory('ALL'); setSelectedTheme('ALL'); setSelectedDuration('ALL'); setMaxPrice(200000); }}
+              className={`px-3.5 py-1.5 rounded-full shrink-0 border transition-all ${
+                selectedCategory === 'ALL' && selectedHotelCategory === 'ALL' && selectedTheme === 'ALL'
+                  ? 'bg-brand-600 text-white border-brand-600 shadow-xs'
+                  : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
+              }`}
+            >
+              🔥 All ({initialPackages.length})
+            </button>
+            <button
+              onClick={() => setSelectedCategory('INDIA')}
+              className={`px-3.5 py-1.5 rounded-full shrink-0 border transition-all ${
+                selectedCategory === 'INDIA'
+                  ? 'bg-brand-600 text-white border-brand-600 shadow-xs'
+                  : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
+              }`}
+            >
+              🇮🇳 Domestic India
+            </button>
+            <button
+              onClick={() => setSelectedCategory('INTERNATIONAL')}
+              className={`px-3.5 py-1.5 rounded-full shrink-0 border transition-all ${
+                selectedCategory === 'INTERNATIONAL'
+                  ? 'bg-brand-600 text-white border-brand-600 shadow-xs'
+                  : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
+              }`}
+            >
+              🌏 International
+            </button>
+            <button
+              onClick={() => setSelectedHotelCategory(selectedHotelCategory === '4 Star' ? 'ALL' : '4 Star')}
+              className={`px-3.5 py-1.5 rounded-full shrink-0 border transition-all ${
+                selectedHotelCategory === '4 Star' || selectedHotelCategory === '5 Star'
+                  ? 'bg-amber-500 text-slate-950 border-amber-500 shadow-xs font-black'
+                  : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
+              }`}
+            >
+              ⭐ 4-5 Star Hotels
+            </button>
+            <button
+              onClick={() => setSelectedTheme(selectedTheme === 'Spiritual' ? 'ALL' : 'Spiritual')}
+              className={`px-3.5 py-1.5 rounded-full shrink-0 border transition-all ${
+                selectedTheme === 'Spiritual'
+                  ? 'bg-brand-600 text-white border-brand-600 shadow-xs'
+                  : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
+              }`}
+            >
+              🙏 Spiritual Yatra
+            </button>
+            <button
+              onClick={() => setMaxPrice(maxPrice === 30000 ? 200000 : 30000)}
+              className={`px-3.5 py-1.5 rounded-full shrink-0 border transition-all ${
+                maxPrice === 30000
+                  ? 'bg-emerald-600 text-white border-emerald-600 shadow-xs'
+                  : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
+              }`}
+            >
+              💰 Under ₹30,000
+            </button>
+            <button
+              onClick={() => setSelectedDuration(selectedDuration === 'short' ? 'ALL' : 'short')}
+              className={`px-3.5 py-1.5 rounded-full shrink-0 border transition-all ${
+                selectedDuration === 'short'
+                  ? 'bg-brand-600 text-white border-brand-600 shadow-xs'
+                  : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
+              }`}
+            >
+              ⏱️ 1-4 Days
+            </button>
+          </div>
         </div>
 
         {/* Mobile Filter Drawer Overlay */}
