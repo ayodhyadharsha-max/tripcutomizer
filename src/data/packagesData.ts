@@ -3365,6 +3365,504 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "answer": "Yes, complete Lakshadweep Administration entry permit clearance handled by us."
       }
     ]
+  },
+  {
+    "id": "pkg-intl-dubai",
+    "name": "Dubai Luxury Desert & Skyline Extravaganza 5N/6D",
+    "slug": "dubai-luxury-desert-skyline-extravaganza",
+    "destination": "Dubai",
+    "destinationSlug": "dubai",
+    "country": "United Arab Emirates",
+    "region": "Middle East",
+    "isInternational": true,
+    "durationDays": 6,
+    "durationNights": 5,
+    "startingPrice": 34500,
+    "discountPrice": 42500,
+    "rating": 4.9,
+    "reviewsCount": 380,
+    "heroImage": "/destinations/dubai.jpg",
+    "gallery": ["/destinations/dubai.jpg"],
+    "highlights": [
+      "Burj Khalifa 124th Floor Observation Deck",
+      "Desert Safari with BBQ Dinner & Belly Dance",
+      "Dhow Cruise Dinner at Dubai Marina",
+      "Miracle Garden & Global Village Tour"
+    ],
+    "inclusions": [
+      "5N 4-Star Hotel Stay with Breakfast",
+      "Airport Transfers & Sightseeing in AC Coach",
+      "Burj Khalifa & Desert Safari Passes",
+      "Dubai Tourist Visa Assistance"
+    ],
+    "exclusions": [
+      "Personal Expenses & Tourism Dirham Fee"
+    ],
+    "theme": "Luxury",
+    "hotelCategory": "4 Star",
+    "mealPlan": "Breakfast Included",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Delhi / Mumbai / Bengaluru",
+    "hotels": [
+      { "name": "Citymax Hotel Bur Dubai", "city": "Dubai", "rating": "4 Star", "nights": 5 }
+    ],
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival in Dubai & Marina Dhow Cruise",
+        "description": "Arrive at Dubai International Airport. Check-in to hotel. Evening Dhow Cruise with buffet dinner.",
+        "meals": ["Dinner"],
+        "activities": ["Dubai Marina Dhow Cruise"],
+        "hotel": "Citymax Bur Dubai",
+        "transfers": "Private AC Vehicle"
+      }
+    ],
+    "faqs": [
+      { "question": "Is visa included?", "answer": "Yes, standard Dubai 30-day tourist visa assistance is included." }
+    ]
+  },
+  {
+    "id": "pkg-intl-bali",
+    "name": "Bali Tropical Paradise & Private Pool Villa 5N/6D",
+    "slug": "bali-tropical-paradise-private-pool-villa",
+    "destination": "Bali",
+    "destinationSlug": "bali",
+    "country": "Indonesia",
+    "region": "Asia",
+    "isInternational": true,
+    "durationDays": 6,
+    "durationNights": 5,
+    "startingPrice": 42500,
+    "discountPrice": 51000,
+    "rating": 4.9,
+    "reviewsCount": 420,
+    "heroImage": "/destinations/bali.jpg",
+    "gallery": ["/destinations/bali.jpg"],
+    "highlights": [
+      "2N Private Pool Villa Stay in Seminyak",
+      "Kintamani Volcano & Ubud Monkey Forest Tour",
+      "Tanah Lot Temple Sunset View",
+      "Nusa Penida Island Day Trip with Snorkeling"
+    ],
+    "inclusions": [
+      "3N 4-Star Resort + 2N Private Pool Villa",
+      "Daily Breakfast & Floating Breakfast Experience",
+      "Private AC Car for All Sightseeing",
+      "Speedboat Transfers to Nusa Penida"
+    ],
+    "exclusions": [
+      "Personal Spa Expenses & Flights"
+    ],
+    "theme": "Honeymoon",
+    "hotelCategory": "4 Star Villa",
+    "mealPlan": "Breakfast Included",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Delhi / Mumbai / Chennai",
+    "hotels": [
+      { "name": "Aksari Resort Ubud & Aksari Villa Seminyak", "city": "Bali", "rating": "5 Star", "nights": 5 }
+    ],
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival in Bali & Transfer to Villa",
+        "description": "Welcome to Bali. Transfer to your luxury villa in Seminyak with flower decoration.",
+        "meals": ["Breakfast"],
+        "activities": ["Relaxation & Beach Walk"],
+        "hotel": "Seminyak Villa",
+        "transfers": "Private AC Vehicle"
+      }
+    ],
+    "faqs": [
+      { "question": "Is visa on arrival available?", "answer": "Yes, Bali provides instant Visa on Arrival for Indian citizens." }
+    ]
+  },
+  {
+    "id": "pkg-intl-thailand",
+    "name": "Thailand Exotic Phuket & Krabi Island Hopping 6N/7D",
+    "slug": "thailand-exotic-phuket-krabi-island-hopping",
+    "destination": "Thailand",
+    "destinationSlug": "thailand",
+    "country": "Thailand",
+    "region": "Asia",
+    "isInternational": true,
+    "durationDays": 7,
+    "durationNights": 6,
+    "startingPrice": 29800,
+    "discountPrice": 36500,
+    "rating": 4.8,
+    "reviewsCount": 350,
+    "heroImage": "/destinations/thailand.jpg",
+    "gallery": ["/destinations/thailand.jpg"],
+    "highlights": [
+      "Phi Phi Island Speedboat Tour with Lunch",
+      "4 Islands Tour in Krabi with Snorkeling",
+      "Phuket Fantasea Cultural Show",
+      "James Bond Island & Phang Nga Bay"
+    ],
+    "inclusions": [
+      "3N Phuket 4-Star Resort + 3N Krabi Beach Resort",
+      "Island Speedboat Transfers & Lunch",
+      "Airport Transfers in AC Coach"
+    ],
+    "exclusions": [
+      "National Park Entry Fees"
+    ],
+    "theme": "Beach & Adventure",
+    "hotelCategory": "4 Star",
+    "mealPlan": "Breakfast Included",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Delhi / Kolkata / Mumbai",
+    "hotels": [
+      { "name": "Deevana Patong Resort Phuket", "city": "Phuket", "rating": "4 Star", "nights": 3 }
+    ],
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival in Phuket & Patong Beach",
+        "description": "Land in Phuket. Check-in to hotel and enjoy Patong nightlife.",
+        "meals": ["Breakfast"],
+        "activities": ["Patong Beach Promenade"],
+        "hotel": "Deevana Phuket",
+        "transfers": "Shared Coach"
+      }
+    ],
+    "faqs": [
+      { "question": "Is Thailand visa free?", "answer": "Yes, Thailand offers visa-free entry for Indian passport holders." }
+    ]
+  },
+  {
+    "id": "pkg-intl-singapore",
+    "name": "Singapore Marina Bay & Sentosa Universal Spectacular 4N/5D",
+    "slug": "singapore-marina-bay-sentosa-universal-spectacular",
+    "destination": "Singapore",
+    "destinationSlug": "singapore",
+    "country": "Singapore",
+    "region": "Asia",
+    "isInternational": true,
+    "durationDays": 5,
+    "durationNights": 4,
+    "startingPrice": 37800,
+    "discountPrice": 46000,
+    "rating": 4.9,
+    "reviewsCount": 290,
+    "heroImage": "/destinations/singapore.jpg",
+    "gallery": ["/destinations/singapore.jpg"],
+    "highlights": [
+      "Universal Studios Full Day Pass",
+      "Gardens by the Bay Supertree Grove & Cloud Forest",
+      "Sentosa Cable Car & Wings of Time Night Show",
+      "Night Safari Wildlife Experience"
+    ],
+    "inclusions": [
+      "4N 4-Star Hotel Stay with Breakfast",
+      "Universal Studios & Gardens by the Bay Tickets",
+      "Airport & Attraction Transfers"
+    ],
+    "exclusions": [
+      "Personal Expenses"
+    ],
+    "theme": "Family & Entertainment",
+    "hotelCategory": "4 Star",
+    "mealPlan": "Breakfast Included",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Delhi / Chennai / Mumbai",
+    "hotels": [
+      { "name": "Hotel Boss Singapore", "city": "Singapore", "rating": "4 Star", "nights": 4 }
+    ],
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival in Singapore & Night Safari",
+        "description": "Land at Changi Airport. Transfer to hotel. Evening Night Safari tram ride.",
+        "meals": ["Breakfast"],
+        "activities": ["Night Safari Tram Ride"],
+        "hotel": "Hotel Boss",
+        "transfers": "AC Private Coach"
+      }
+    ],
+    "faqs": [
+      { "question": "How long is Singapore visa approval?", "answer": "E-visa process takes 3-4 working days." }
+    ]
+  },
+  {
+    "id": "pkg-intl-maldives",
+    "name": "Maldives Luxury Overwater Water Villa Retreat 4N/5D",
+    "slug": "maldives-luxury-overwater-water-villa-retreat",
+    "destination": "Maldives",
+    "destinationSlug": "maldives",
+    "country": "Maldives",
+    "region": "Asia",
+    "isInternational": true,
+    "durationDays": 5,
+    "durationNights": 4,
+    "startingPrice": 75000,
+    "discountPrice": 92000,
+    "rating": 5.0,
+    "reviewsCount": 210,
+    "heroImage": "/destinations/maldives.jpg",
+    "gallery": ["/destinations/maldives.jpg"],
+    "highlights": [
+      "2N Beach Villa + 2N Overwater Villa",
+      "All-Inclusive Dining & Unlimited Beverages",
+      "Speedboat / Seaplane Airport Transfers",
+      "Snorkeling & Coral Reef Exploration"
+    ],
+    "inclusions": [
+      "4N Luxury 5-Star Resort Stay",
+      "All Meals (Breakfast, Lunch & Dinner)",
+      "Speedboat Transfers to Resort",
+      "Green Tax Included"
+    ],
+    "exclusions": [
+      "Scuba Diving Certification"
+    ],
+    "theme": "Luxury Honeymoon",
+    "hotelCategory": "5 Star Resort",
+    "mealPlan": "All Inclusive",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Delhi / Bengaluru / Mumbai",
+    "hotels": [
+      { "name": "Adaaran Select Hudhuranfushi", "city": "Maldives", "rating": "5 Star", "nights": 4 }
+    ],
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival in Male & Speedboat to Resort",
+        "description": "Arrive at Velana International Airport. Scenic speedboat transfer to luxury resort.",
+        "meals": ["Dinner"],
+        "activities": ["Sunset Beach Walk"],
+        "hotel": "Adaaran Maldives",
+        "transfers": "Speedboat"
+      }
+    ],
+    "faqs": [
+      { "question": "Is visa needed for Maldives?", "answer": "Free 30-day Visa on Arrival is granted for all Indian tourists." }
+    ]
+  },
+  {
+    "id": "pkg-intl-switzerland",
+    "name": "Grand Europe & Swiss Alps Panorama Tour 7N/8D",
+    "slug": "grand-europe-swiss-alps-panorama-tour",
+    "destination": "Switzerland Europe",
+    "destinationSlug": "switzerland",
+    "country": "Switzerland",
+    "region": "Europe",
+    "isInternational": true,
+    "durationDays": 8,
+    "durationNights": 7,
+    "startingPrice": 137200,
+    "discountPrice": 158000,
+    "rating": 4.9,
+    "reviewsCount": 180,
+    "heroImage": "/destinations/switzerland.jpg",
+    "gallery": ["/destinations/switzerland.jpg"],
+    "highlights": [
+      "Mount Titlis Cable Car with Ice Flyer",
+      "Jungfraujoch Top of Europe Train Excursion",
+      "Lucerne Lake Cruise & Chapel Bridge",
+      "Paris Eiffel Tower 2nd Level & Seine River Cruise"
+    ],
+    "inclusions": [
+      "7N 4-Star Hotel Stay with Indian Dinners",
+      "Swiss Travel Pass & Mountain Excursions",
+      "Schengen Visa Assistance"
+    ],
+    "exclusions": [
+      "City Tourist Tax (CHF 4/night)"
+    ],
+    "theme": "Scenic & Heritage",
+    "hotelCategory": "4 Star",
+    "mealPlan": "Breakfast & Indian Dinner",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Delhi / Mumbai",
+    "hotels": [
+      { "name": "Hotel Astoria Lucerne & Hotel Novotel Zurich", "city": "Lucerne", "rating": "4 Star", "nights": 7 }
+    ],
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival in Zurich & Transfer to Lucerne",
+        "description": "Welcome to Switzerland. Board scenic Swiss Rail to Lucerne.",
+        "meals": ["Dinner"],
+        "activities": ["Lucerne Old Town Walk"],
+        "hotel": "Lucerne Hotel",
+        "transfers": "Swiss Rail Pass"
+      }
+    ],
+    "faqs": [
+      { "question": "Do you provide Schengen visa processing?", "answer": "Yes, full Schengen visa documentation & appointment assistance is provided." }
+    ]
+  },
+  {
+    "id": "pkg-intl-vietnam",
+    "name": "Vietnam Ha Long Bay Cruise & Hanoi Heritage 5N/6D",
+    "slug": "vietnam-ha-long-bay-hanoi-heritage",
+    "destination": "Vietnam",
+    "destinationSlug": "vietnam",
+    "country": "Vietnam",
+    "region": "Asia",
+    "isInternational": true,
+    "durationDays": 6,
+    "durationNights": 5,
+    "startingPrice": 32000,
+    "discountPrice": 39000,
+    "rating": 4.8,
+    "reviewsCount": 160,
+    "heroImage": "/destinations/vietnam.jpg",
+    "gallery": ["/destinations/vietnam.jpg"],
+    "highlights": [
+      "1N Overnight Luxury Cruise in Ha Long Bay",
+      "Hanoi Old Quarter & Hoan Kiem Lake",
+      "Da Nang Ba Na Hills & Golden Hands Bridge",
+      "Hoi An Ancient Lantern Town Walk"
+    ],
+    "inclusions": [
+      "4N 4-Star Hotels + 1N 5-Star Ha Long Cruise",
+      "Full Board Meals on Cruise",
+      "Ba Na Hills Cable Car Pass"
+    ],
+    "exclusions": [
+      "E-Visa Stamping Fee"
+    ],
+    "theme": "Cultural & Cruise",
+    "hotelCategory": "4 Star Cruise",
+    "mealPlan": "Breakfast & Cruise Meals",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Delhi / Kolkata",
+    "hotels": [
+      { "name": "Paradise Elegance Ha Long Cruise", "city": "Ha Long", "rating": "5 Star", "nights": 1 }
+    ],
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival in Hanoi",
+        "description": "Land in Hanoi. Check-in to hotel. Evening street food walk.",
+        "meals": ["Dinner"],
+        "activities": ["Hanoi Street Food Tour"],
+        "hotel": "Hanoi Golden Hotel",
+        "transfers": "Private Vehicle"
+      }
+    ],
+    "faqs": [
+      { "question": "Is Vietnam e-visa easy?", "answer": "Yes, Vietnam e-visa approval takes 3 working days online." }
+    ]
+  },
+  {
+    "id": "pkg-intl-japan",
+    "name": "Japan Cherry Blossom & Tokyo Mt. Fuji Express 6N/7D",
+    "slug": "japan-cherry-blossom-tokyo-express",
+    "destination": "Japan",
+    "destinationSlug": "japan",
+    "country": "Japan",
+    "region": "Asia",
+    "isInternational": true,
+    "durationDays": 7,
+    "durationNights": 6,
+    "startingPrice": 125000,
+    "discountPrice": 145000,
+    "rating": 5.0,
+    "reviewsCount": 140,
+    "heroImage": "/destinations/japan.jpg",
+    "gallery": ["/destinations/japan.jpg"],
+    "highlights": [
+      "Shinkansen Bullet Train Experience",
+      "Mount Fuji 5th Station & Lake Kawaguchiko",
+      "Tokyo Skytree & Sensoji Temple",
+      "Kyoto Arashiyama Bamboo Grove & Fushimi Inari"
+    ],
+    "inclusions": [
+      "6N 4-Star Hotel Stay with Breakfast",
+      "7-Day JR Rail Pass Included",
+      "Japan Visa Assistance"
+    ],
+    "exclusions": [
+      "Personal Expenses"
+    ],
+    "theme": "Heritage & Tech",
+    "hotelCategory": "4 Star",
+    "mealPlan": "Breakfast Included",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Delhi / Mumbai",
+    "hotels": [
+      { "name": "Shinjuku Granbell Hotel Tokyo", "city": "Tokyo", "rating": "4 Star", "nights": 4 }
+    ],
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival in Tokyo",
+        "description": "Land at Tokyo Narita Airport. Transfer to Shinjuku hotel.",
+        "meals": ["Dinner"],
+        "activities": ["Shinjuku Evening Walk"],
+        "hotel": "Tokyo Hotel",
+        "transfers": "Airport Limousine Bus"
+      }
+    ],
+    "faqs": [
+      { "question": "Is Japan visa required?", "answer": "Yes, Japan e-visa assistance is provided." }
+    ]
+  },
+  {
+    "id": "pkg-intl-australia",
+    "name": "Australia Sydney & Great Barrier Reef Wonders 7N/8D",
+    "slug": "australia-sydney-great-barrier-reef-wonders",
+    "destination": "Australia",
+    "destinationSlug": "australia",
+    "country": "Australia",
+    "region": "Oceania",
+    "isInternational": true,
+    "durationDays": 8,
+    "durationNights": 7,
+    "startingPrice": 185000,
+    "discountPrice": 210000,
+    "rating": 4.9,
+    "reviewsCount": 120,
+    "heroImage": "/destinations/australia.jpg",
+    "gallery": ["/destinations/australia.jpg"],
+    "highlights": [
+      "Sydney Opera House Guided Inside Tour",
+      "Sydney Harbour Dinner Cruise",
+      "Cairns Great Barrier Reef Catamaran Cruise",
+      "Melbourne Great Ocean Road Scenic Drive"
+    ],
+    "inclusions": [
+      "7N 4-Star Hotel Stay with Breakfast",
+      "Great Barrier Reef Reef Magic Cruise with Buffet",
+      "Australia Visa Assistance"
+    ],
+    "exclusions": [
+      "Domestic Flights in Australia"
+    ],
+    "theme": "Wildlife & Nature",
+    "hotelCategory": "4 Star",
+    "mealPlan": "Breakfast Included",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Delhi / Mumbai / Singapore",
+    "hotels": [
+      { "name": "Rydges World Square Sydney", "city": "Sydney", "rating": "4 Star", "nights": 4 }
+    ],
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival in Sydney & Harbour Cruise",
+        "description": "Arrive in Sydney. Transfer to hotel. Evening Harbour dinner cruise.",
+        "meals": ["Dinner"],
+        "activities": ["Sydney Harbour Cruise"],
+        "hotel": "Rydges Sydney",
+        "transfers": "Private AC Vehicle"
+      }
+    ],
+    "faqs": [
+      { "question": "Is Australia visa process online?", "answer": "Yes, 100% online Subclass 600 tourist visa processed." }
+    ]
   }
 ];
 

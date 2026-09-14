@@ -12,6 +12,10 @@ export default function DestinationListingPage({ params }: { params: { destinati
     const region = p.region.toLowerCase();
     const country = p.country.toLowerCase();
 
+    // Category match
+    if (rawSlug === 'international' && p.isInternational) return true;
+    if (rawSlug === 'india' && !p.isInternational) return true;
+
     // Direct match
     if (
       dSlug === rawSlug ||
