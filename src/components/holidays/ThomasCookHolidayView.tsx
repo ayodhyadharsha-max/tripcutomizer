@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/Button';
 import { DEMO_PACKAGES, HolidayPackage } from '@/data/packagesData';
 import { formatCurrency } from '@/lib/utils';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
+import { cloudStore } from '@/lib/cloudStore';
 import {
   Search,
   ChevronLeft,
@@ -879,7 +880,15 @@ export function tripcustomizerHolidayView() {
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  alert(`Thank you ${leadForm.name}! Our travel expert will call you on ${leadForm.mobile} shortly.`);
+                  cloudStore.saveLead({
+                    name: leadForm.name || 'Valued Client',
+                    email: leadForm.email,
+                    phone: leadForm.mobile,
+                    destination: leadForm.destination,
+                    status: 'New',
+                    source: 'Homepage Callback Request',
+                  });
+                  alert(`Thank you ${leadForm.name || 'Valued Traveler'}! Your inquiry has been received by our senior travel desk. Our expert will call you on ${leadForm.mobile} within 15 minutes.`);
                 }}
                 className="space-y-4 text-xs font-semibold"
               >

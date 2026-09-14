@@ -5,6 +5,7 @@ import { Send, CheckCircle2, User, Phone, Mail, MapPin, Calendar, Users, Wallet,
 import { Container } from '../ui/Container';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
+import { cloudStore } from '@/lib/cloudStore';
 
 export const BuildTripWizard: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -37,6 +38,18 @@ export const BuildTripWizard: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setTimeout(() => {
+      cloudStore.saveLead({
+        name: formData.name || 'Valued Client',
+        email: formData.email,
+        phone: formData.phone,
+        destination: formData.destination || 'Custom Trip',
+        budget: formData.budget,
+        travelDates: formData.travelDate,
+        travelersCount: Number(formData.adults) + Number(formData.children),
+        status: 'New',
+        source: 'Custom Trip Wizard',
+      });
+
       const generatedId = `LEAD-${Math.floor(100000 + Math.random() * 900000)}`;
       const agents = ['Rahul Sharma (Senior Travel Specialist)', 'Priya Mehta (International Tour Manager)', 'Amitabh Roy (Europe Specialist)'];
       const randomAgent = agents[Math.floor(Math.random() * agents.length)];

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Phone, Mail, MapPin, Clock, MessageCircle, Send, CheckCircle2, ShieldCheck, Headphones } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
+import { cloudStore } from '@/lib/cloudStore';
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -17,6 +18,15 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    cloudStore.saveLead({
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      destination: formData.subject,
+      budget: formData.message,
+      status: 'New',
+      source: 'Contact Us Form',
+    });
     setSubmitted(true);
   };
 

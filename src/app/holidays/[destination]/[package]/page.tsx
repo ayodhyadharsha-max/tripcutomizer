@@ -388,6 +388,14 @@ export default function PackageDetailPage({ params }: { params: { destination: s
   const handleCallbackSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!callbackPhone) return;
+    cloudStore.saveLead({
+      name: callbackName || 'Valued Client',
+      phone: callbackPhone,
+      email: '',
+      destination: pkg.name,
+      status: 'New',
+      source: `Package Detail Page (${pkg.destination})`,
+    });
     setCallbackSuccess(true);
     setTimeout(() => {
       setCallbackSuccess(false);
