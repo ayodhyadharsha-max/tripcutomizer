@@ -338,7 +338,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
   const discountPercent = Math.round(((originalPricePerPerson - basePricePerPerson) / originalPricePerPerson) * 100);
 
   // Dynamic Total Calculation
-  const calculatedTotalPrice = Math.round(
+  const subtotalBeforeGst = Math.round(
     (effectiveAdultsCount * basePricePerPerson) +
     (totalAge15to17 * basePricePerPerson * 0.8) +
     (totalAge10to14 * basePricePerPerson * 0.8) +
@@ -346,15 +346,18 @@ export default function PackageDetailPage({ params }: { params: { destination: s
     (totalUnder5 * 0)
   );
 
+  const gstAmount = Math.round(subtotalBeforeGst * 0.05); // 5% Govt GST Tax
+  const calculatedTotalPriceWithGst = subtotalBeforeGst + gstAmount;
+
   let couponDiscountAmount = 0;
   if (appliedCoupon) {
     if (appliedCoupon.percent) {
-      couponDiscountAmount = Math.round((calculatedTotalPrice * appliedCoupon.percent) / 100);
+      couponDiscountAmount = Math.round((calculatedTotalPriceWithGst * appliedCoupon.percent) / 100);
     } else if (appliedCoupon.amount) {
-      couponDiscountAmount = Math.min(calculatedTotalPrice, appliedCoupon.amount);
+      couponDiscountAmount = Math.min(calculatedTotalPriceWithGst, appliedCoupon.amount);
     }
   }
-  const finalPayablePrice = Math.max(0, calculatedTotalPrice - couponDiscountAmount);
+  const finalPayablePrice = Math.max(0, calculatedTotalPriceWithGst - couponDiscountAmount);
 
   const rewardPoints = Math.round(basePricePerPerson * 0.01);
 
@@ -1811,7 +1814,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                         {formatCurrency(finalPayablePrice)}
                         {couponDiscountAmount > 0 && (
                           <span className="text-xs font-bold text-slate-400 line-through ml-2">
-                            {formatCurrency(calculatedTotalPrice)}
+                            {formatCurrency(calculatedTotalPriceWithGst)}
                           </span>
                         )}
                       </div>
@@ -1846,6 +1849,19 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                             <span>FREE ₹0</span>
                           </div>
                         )}
+
+                        {/* Subtotal Package Fare */}
+                        <div className="flex justify-between border-t border-emerald-200/60 pt-1 font-bold text-slate-700">
+                          <span>• Subtotal Package Fare:</span>
+                          <span>{formatCurrency(subtotalBeforeGst)}</span>
+                        </div>
+
+                        {/* 5% GST Tax Line */}
+                        <div className="flex justify-between text-amber-900 font-bold bg-amber-100/70 px-2 py-0.5 rounded-md">
+                          <span>• GST (5% Govt. Tour Service Tax):</span>
+                          <span>+{formatCurrency(gstAmount)}</span>
+                        </div>
+
                         {couponDiscountAmount > 0 && (
                           <div className="flex justify-between text-emerald-800 font-extrabold bg-emerald-100/90 px-2 py-1 rounded-md">
                             <span>• Coupon Savings ({appliedCoupon?.code}):</span>
@@ -1853,7 +1869,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                           </div>
                         )}
                         <div className="pt-1.5 border-t border-emerald-200/80 flex justify-between font-black text-emerald-900 text-xs">
-                          <span>Final Total Payable:</span>
+                          <span>Final Total Payable (Incl. 5% GST):</span>
                           <span className="text-emerald-700 font-black">{formatCurrency(finalPayablePrice)}</span>
                         </div>
                       </div>
