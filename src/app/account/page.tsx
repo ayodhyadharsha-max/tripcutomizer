@@ -38,7 +38,7 @@ export default function CustomerAccountPage() {
       const filtered = allBookings.filter(
         (b) => b.customerEmail.toLowerCase() === user.email.toLowerCase() || b.customerPhone === user.phone
       );
-      setUserBookings(filtered.length > 0 ? filtered : allBookings); // fallback to demo list if new
+      setUserBookings(filtered);
     }
   }, [user]);
 
