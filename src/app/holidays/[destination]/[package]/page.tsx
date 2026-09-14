@@ -141,9 +141,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
 
   useEffect(() => {
     const userCo = user ? cloudStore.getCoTravellers(user.uid) : [];
-    const fallbackCo = cloudStore.getCoTravellers();
-    const finalCo = userCo.length > 0 ? userCo : fallbackCo;
-    setSavedCoTravellers(finalCo);
+    setSavedCoTravellers(userCo);
 
     if (user) {
       setContactName(user.name || '');

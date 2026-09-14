@@ -90,19 +90,9 @@ export default function CustomerAccountPage() {
       setProfilePhone(user.phone || '');
       setProfileCity(user.city || '');
 
-      // Load co-travellers dynamically from persistent cloudStore
+      // Load co-travellers strictly for logged-in user UID
       const userCo = cloudStore.getCoTravellers(user.uid);
-      const fallbackCo = cloudStore.getCoTravellers();
-      if (userCo && userCo.length > 0) {
-        setCoTravellers(userCo);
-      } else if (fallbackCo && fallbackCo.length > 0) {
-        setCoTravellers(fallbackCo);
-      } else {
-        setCoTravellers([
-          { id: 'cot-1', name: 'Priya Sharma', age: 28, gender: 'Female', relation: 'Spouse' },
-          { id: 'cot-2', name: 'Aarav Sharma Jr.', age: 6, gender: 'Male', relation: 'Son' },
-        ]);
-      }
+      setCoTravellers(userCo);
 
       const normalizeDigits = (str: string) => str.replace(/\D/g, '').slice(-10);
       const userEmailLower = (user.email || '').toLowerCase();
@@ -122,10 +112,7 @@ export default function CustomerAccountPage() {
       });
       setUserBookings(filtered);
     } else {
-      const fallbackCo = cloudStore.getCoTravellers();
-      if (fallbackCo && fallbackCo.length > 0) {
-        setCoTravellers(fallbackCo);
-      }
+      setCoTravellers([]);
     }
   }, [user]);
 

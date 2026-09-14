@@ -225,24 +225,22 @@ export const cloudStore = {
     setStoredData(STORAGE_KEYS.CURRENT_USER, user);
   },
 
-  // --- CO-TRAVELLERS PERSISTENT STORAGE ---
+  // --- CO-TRAVELLERS PERSISTENT STORAGE (STRICT USER ISOLATION) ---
   getCoTravellers: (uid?: string): CoTraveller[] => {
-    const key = uid ? `tc_cotravellers_${uid}` : STORAGE_KEYS.CO_TRAVELLERS;
-    return getStoredData<CoTraveller[]>(key, []);
+    if (!uid) return [];
+    return getStoredData<CoTraveller[]>(`tc_cotravellers_${uid}`, []);
   },
 
   saveCoTravellers: (list: CoTraveller[], uid?: string): void => {
-    const key = uid ? `tc_cotravellers_${uid}` : STORAGE_KEYS.CO_TRAVELLERS;
-    setStoredData(key, list);
-    if (uid) {
-      setStoredData(STORAGE_KEYS.CO_TRAVELLERS, list);
-    }
+    if (!uid) return;
+    setStoredData(`tc_cotravellers_${uid}`, list);
   },
 
   syncPassengersToCoTravellers: (
     passengersList: Array<{ fullName: string; age?: string | number; gender?: string; relation?: string }>,
     uid?: string
   ): void => {
+    if (!uid) return;
     const existing = cloudStore.getCoTravellers(uid);
     const updated = [...existing];
 
