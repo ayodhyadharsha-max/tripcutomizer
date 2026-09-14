@@ -29,28 +29,14 @@ export default function AdminDashboardPage() {
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-black text-slate-900 tracking-tight">Executive Cloud Dashboard & Realtime Analytics</h1>
           <p className="text-xs text-slate-500 mt-1">Real-time overview of customer bookings, sales CRM leads, and active revenue.</p>
         </div>
-        <div className="flex items-center space-x-3">
-          <button
-            onClick={() => {
-              if (confirm('Are you sure you want to clear all test leads & bookings to start 100% fresh?')) {
-                cloudStore.clearAllStoreData();
-                setBookings([]);
-                setLeads([]);
-              }
-            }}
-            className="bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold text-xs px-3.5 py-1.5 rounded-full border border-rose-200 transition-colors cursor-pointer"
-          >
-            🗑️ Clear All Test Data (Fresh Start)
-          </button>
-          <span className="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-3.5 py-1.5 rounded-full flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span> Live Cloud Data Active
-          </span>
-        </div>
+        <span className="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-3.5 py-1.5 rounded-full flex items-center gap-1.5">
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span> Live Cloud Data Active
+        </span>
       </div>
 
       {/* Metrics Cards */}
