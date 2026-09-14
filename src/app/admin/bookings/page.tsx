@@ -1,268 +1,278 @@
 'use client';
 
-import React, { useState } from 'react';
-import { ShoppingBag, Search, Filter, CheckCircle2, Clock, XCircle, FileText, Download, Eye } from 'lucide-react';
-
-interface BookingRecord {
-  id: string;
-  customerName: string;
-  email: string;
-  phone: string;
-  type: 'Holiday Package' | 'Flight' | 'Hotel' | 'Forex Card' | 'Visa';
-  details: string;
-  amount: number;
-  paymentStatus: 'PAID' | 'PENDING' | 'REFUNDED' | 'FAILED';
-  bookingStatus: 'CONFIRMED' | 'PROCESSING' | 'CANCELLED';
-  date: string;
-  pnr: string;
-}
-
-const mockBookings: BookingRecord[] = [
-  { id: 'BK-98421', customerName: 'Rajesh Sharma', email: 'rajesh.s@example.com', phone: '+91 98765 43210', type: 'Holiday Package', details: 'European Magic Grand Tour (10D/9N)', amount: 379998, paymentStatus: 'PAID', bookingStatus: 'CONFIRMED', date: '2026-09-12', pnr: 'TC-EUR-4821' },
-  { id: 'BK-98422', customerName: 'Priya Patel', email: 'priya.p@example.com', phone: '+91 98123 45678', type: 'Flight', details: 'DEL -> SIN (Singapore Airlines SQ-403)', amount: 48500, paymentStatus: 'PAID', bookingStatus: 'CONFIRMED', date: '2026-09-12', pnr: 'PNR-SQ892A' },
-  { id: 'BK-98423', customerName: 'Vikram Sengupta', email: 'vikram.s@example.com', phone: '+91 99887 76655', type: 'Forex Card', details: 'Borderless Multicurrency Card ($3,000 USD)', amount: 252000, paymentStatus: 'PAID', bookingStatus: 'PROCESSING', date: '2026-09-11', pnr: 'FX-ORD-7741' },
-  { id: 'BK-98424', customerName: 'Ananya Roy', email: 'ananya.r@example.com', phone: '+91 97112 33445', type: 'Visa', details: 'Schengen Business Tourist Express Visa', amount: 14500, paymentStatus: 'PENDING', bookingStatus: 'PROCESSING', date: '2026-09-11', pnr: 'VSA-SCH-1092' },
-  { id: 'BK-98425', customerName: 'Amitabh Verma', email: 'averma@example.com', phone: '+91 98220 11223', type: 'Hotel', details: 'Taj Mahal Palace Mumbai (Luxury Sea View)', amount: 72000, paymentStatus: 'PAID', bookingStatus: 'CONFIRMED', date: '2026-09-10', pnr: 'HTL-TAJ-992' },
-  { id: 'BK-98426', customerName: 'Sunita Reddy', email: 'sunita.r@example.com', phone: '+91 94400 55667', type: 'Holiday Package', details: 'Kerala Serenade & Houseboat Stay (6D/5N)', amount: 64998, paymentStatus: 'REFUNDED', bookingStatus: 'CANCELLED', date: '2026-09-09', pnr: 'TC-KER-3312' }
-];
+import React, { useState, useEffect } from 'react';
+import { ShoppingBag, Search, Filter, CheckCircle2, Clock, XCircle, Eye, RefreshCw, Phone, Mail } from 'lucide-react';
+import { cloudStore, CustomerBooking } from '@/lib/cloudStore';
+import { formatCurrency } from '@/lib/utils';
 
 export default function AdminBookingsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('ALL');
-  const [typeFilter, setTypeFilter] = useState<string>('ALL');
-  const [selectedBooking, setSelectedBooking] = useState<BookingRecord | null>(null);
+  const [bookings, setBookings] = useState<CustomerBooking[]>([]);
+  const [selectedBooking, setSelectedBooking] = useState<CustomerBooking | null>(null);
 
-  const filteredBookings = mockBookings.filter((b) => {
+  const loadBookings = () => {
+    setBookings(cloudStore.getBookings());
+  };
+
+  useEffect(() => {
+    loadBookings();
+    // Listen for cloud storage updates across tabs
+    const handleStorageChange = () => loadBookings();
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
+
+  const handleUpdateStatus = (id: string, status: CustomerBooking['status']) => {
+    cloudStore.updateBookingStatus(id, status);
+    loadBookings();
+    if (selectedBooking && selectedBooking.id === id) {
+      setSelectedBooking({ ...selectedBooking, status });
+    }
+  };
+
+  const filteredBookings = bookings.filter((b) => {
     const matchesSearch =
       b.customerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      b.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      b.pnr.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      b.email.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = statusFilter === 'ALL' || b.bookingStatus === statusFilter;
-    const matchesType = typeFilter === 'ALL' || b.type === typeFilter;
-    return matchesSearch && matchesStatus && matchesType;
+      b.referenceNo.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      b.customerEmail.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      b.customerPhone.includes(searchTerm) ||
+      b.packageName.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesStatus = statusFilter === 'ALL' || b.status === statusFilter;
+    return matchesSearch && matchesStatus;
   });
+
+  const totalRevenue = bookings.reduce((sum, b) => (b.status !== 'Cancelled' ? sum + b.totalAmount : sum), 0);
 
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-6">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
-            <ShoppingBag className="w-6 h-6 text-brand-600" />
-            Bookings & Reservations Operations Desk
-          </h1>
+          <div className="flex items-center gap-2">
+            <h1 className="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+              <ShoppingBag className="w-6 h-6 text-brand-600" />
+              Cloud Live Bookings Operations Desk
+            </h1>
+            <span className="bg-emerald-100 text-emerald-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Cloud DB Live
+            </span>
+          </div>
           <p className="text-xs text-slate-500 mt-1">
-            Monitor real-time reservations, confirm fulfillments, issue tax invoices, and process refunds.
+            Realtime stream of customer package bookings, contact details, payment statuses, and instant confirmation control.
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs px-3 py-1.5 rounded-lg font-bold">
-            Total Revenue Today: ₹8,31,996
+          <button
+            onClick={loadBookings}
+            className="flex items-center gap-1 text-xs font-bold text-slate-700 bg-white border border-slate-300 px-3 py-2 rounded-xl hover:bg-slate-50 cursor-pointer shadow-xs"
+          >
+            <RefreshCw className="w-3.5 h-3.5" /> Refresh Cloud Data
+          </button>
+          <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs px-3 py-2 rounded-xl font-bold">
+            Total Confirmed Value: {formatCurrency(totalRevenue)}
           </div>
         </div>
       </div>
 
       {/* Filters Bar */}
-      <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
-        <div className="relative w-full md:w-80">
+      <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
+        <div className="relative w-full md:w-96">
           <Search className="w-4 h-4 absolute left-3 top-3 text-slate-400" />
           <input
             type="text"
-            placeholder="Search Booking ID, Customer or PNR..."
+            placeholder="Search Reference No, Customer Name, Phone, Email..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full text-xs pl-9 pr-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
+            className="w-full text-xs pl-9 pr-4 py-2.5 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800 font-medium"
           />
         </div>
 
-        <div className="flex items-center gap-3 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
-          <div className="flex items-center gap-1.5 text-xs text-slate-600 font-semibold">
-            <Filter className="w-3.5 h-3.5" /> Filter Status:
-          </div>
-          <select
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-            className="text-xs bg-slate-50 border border-slate-300 rounded-lg px-3 py-1.5 font-medium"
-          >
-            <option value="ALL">All Statuses</option>
-            <option value="CONFIRMED">Confirmed</option>
-            <option value="PROCESSING">Processing</option>
-            <option value="CANCELLED">Cancelled</option>
-          </select>
-
-          <select
-            value={typeFilter}
-            onChange={(e) => setTypeFilter(e.target.value)}
-            className="text-xs bg-slate-50 border border-slate-300 rounded-lg px-3 py-1.5 font-medium"
-          >
-            <option value="ALL">All Product Types</option>
-            <option value="Holiday Package">Holiday Package</option>
-            <option value="Flight">Flight</option>
-            <option value="Hotel">Hotel</option>
-            <option value="Forex Card">Forex Card</option>
-            <option value="Visa">Visa</option>
-          </select>
+        <div className="flex items-center gap-2 text-xs font-bold">
+          <Filter className="w-4 h-4 text-slate-400" />
+          <span className="text-slate-500">Filter Status:</span>
+          {['ALL', 'Pending', 'Confirmed', 'Completed', 'Cancelled'].map((st) => (
+            <button
+              key={st}
+              onClick={() => setStatusFilter(st)}
+              className={`px-3 py-1.5 rounded-lg cursor-pointer transition-all ${
+                statusFilter === st ? 'bg-brand-600 text-white shadow-xs' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+              }`}
+            >
+              {st}
+            </button>
+          ))}
         </div>
       </div>
 
       {/* Bookings Table */}
-      <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs text-slate-700">
-            <thead className="bg-slate-50 text-slate-600 font-bold border-b border-slate-200 uppercase tracking-wider">
+            <thead className="bg-slate-50 border-b border-slate-200 text-slate-500 font-extrabold uppercase text-[10px]">
               <tr>
-                <th className="py-3.5 px-4">Booking Ref & PNR</th>
-                <th className="py-3.5 px-4">Customer Details</th>
-                <th className="py-3.5 px-4">Product Category</th>
-                <th className="py-3.5 px-4">Details</th>
-                <th className="py-3.5 px-4">Amount</th>
-                <th className="py-3.5 px-4">Payment</th>
-                <th className="py-3.5 px-4">Status</th>
-                <th className="py-3.5 px-4 text-right">Actions</th>
+                <th className="py-3 px-4">Ref No & Date</th>
+                <th className="py-3 px-4">Customer Info</th>
+                <th className="py-3 px-4">Package / Destination</th>
+                <th className="py-3 px-4">Travelers & Dates</th>
+                <th className="py-3 px-4">Total Price</th>
+                <th className="py-3 px-4">Status</th>
+                <th className="py-3 px-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
-              {filteredBookings.map((b) => (
-                <tr key={b.id} className="hover:bg-slate-50 transition-colors">
-                  <td className="py-3.5 px-4">
-                    <span className="font-extrabold text-slate-900 block">{b.id}</span>
-                    <span className="text-[10px] text-slate-400 font-mono">PNR: {b.pnr}</span>
-                  </td>
-                  <td className="py-3.5 px-4">
-                    <span className="font-bold text-slate-900 block">{b.customerName}</span>
-                    <span className="text-[10px] text-slate-500 block">{b.email}</span>
-                    <span className="text-[10px] text-slate-500">{b.phone}</span>
-                  </td>
-                  <td className="py-3.5 px-4 font-semibold text-slate-800">
-                    <span className="inline-block bg-slate-100 border border-slate-200 rounded px-2 py-0.5 text-[10px] font-bold">
-                      {b.type}
-                    </span>
-                  </td>
-                  <td className="py-3.5 px-4 font-medium max-w-xs text-slate-800 line-clamp-1">
-                    {b.details}
-                  </td>
-                  <td className="py-3.5 px-4 font-black text-slate-900">
-                    ₹{b.amount.toLocaleString('en-IN')}
-                  </td>
-                  <td className="py-3.5 px-4">
-                    <span
-                      className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                        b.paymentStatus === 'PAID'
-                          ? 'bg-emerald-100 text-emerald-800'
-                          : b.paymentStatus === 'PENDING'
-                          ? 'bg-amber-100 text-amber-800'
-                          : 'bg-red-100 text-red-800'
-                      }`}
-                    >
-                      {b.paymentStatus}
-                    </span>
-                  </td>
-                  <td className="py-3.5 px-4">
-                    <span
-                      className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                        b.bookingStatus === 'CONFIRMED'
-                          ? 'bg-emerald-50 text-emerald-700 border border-emerald-300'
-                          : b.bookingStatus === 'PROCESSING'
-                          ? 'bg-blue-50 text-blue-700 border border-blue-300'
-                          : 'bg-rose-50 text-rose-700 border border-rose-300'
-                      }`}
-                    >
-                      {b.bookingStatus}
-                    </span>
-                  </td>
-                  <td className="py-3.5 px-4 text-right space-x-2">
-                    <button
-                      onClick={() => setSelectedBooking(b)}
-                      className="p-1.5 text-slate-600 hover:text-brand-600 hover:bg-slate-100 rounded-lg transition-colors"
-                      title="View Invoice & Details"
-                    >
-                      <Eye className="w-4 h-4" />
-                    </button>
-                    <button
-                      onClick={() => alert(`Issuing PDF Tax Invoice for ${b.id}...`)}
-                      className="p-1.5 text-slate-600 hover:text-emerald-600 hover:bg-slate-100 rounded-lg transition-colors"
-                      title="Download Tax Invoice"
-                    >
-                      <Download className="w-4 h-4" />
-                    </button>
+            <tbody className="divide-y divide-slate-100 font-medium">
+              {filteredBookings.length === 0 ? (
+                <tr>
+                  <td colSpan={7} className="py-8 text-center text-slate-400 font-semibold">
+                    No bookings found matching filters.
                   </td>
                 </tr>
-              ))}
+              ) : (
+                filteredBookings.map((b) => (
+                  <tr key={b.id} className="hover:bg-slate-50/80 transition-colors">
+                    <td className="py-3.5 px-4">
+                      <span className="font-extrabold text-brand-700 block">{b.referenceNo}</span>
+                      <span className="text-[10px] text-slate-400">{new Date(b.createdAt).toLocaleDateString('en-IN')}</span>
+                    </td>
+                    <td className="py-3.5 px-4">
+                      <div className="font-extrabold text-slate-900">{b.customerName}</div>
+                      <div className="text-[11px] text-slate-500 flex items-center gap-1">
+                        <Phone className="w-3 h-3 text-slate-400" /> {b.customerPhone}
+                      </div>
+                      <div className="text-[11px] text-slate-500 flex items-center gap-1">
+                        <Mail className="w-3 h-3 text-slate-400" /> {b.customerEmail}
+                      </div>
+                    </td>
+                    <td className="py-3.5 px-4 max-w-xs">
+                      <div className="font-bold text-slate-800 truncate">{b.packageName}</div>
+                      <span className="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-semibold">
+                        {b.destination}
+                      </span>
+                    </td>
+                    <td className="py-3.5 px-4">
+                      <div className="font-semibold text-slate-800">{b.travelersCount} Travelers</div>
+                      <div className="text-[11px] text-slate-500">{b.travelDates}</div>
+                    </td>
+                    <td className="py-3.5 px-4 font-black text-slate-900 text-sm">
+                      {formatCurrency(b.totalAmount)}
+                    </td>
+                    <td className="py-3.5 px-4">
+                      <span
+                        className={`inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-full ${
+                          b.status === 'Confirmed'
+                            ? 'bg-emerald-100 text-emerald-800'
+                            : b.status === 'Pending'
+                            ? 'bg-amber-100 text-amber-800'
+                            : b.status === 'Completed'
+                            ? 'bg-blue-100 text-blue-800'
+                            : 'bg-rose-100 text-rose-800'
+                        }`}
+                      >
+                        {b.status === 'Confirmed' && <CheckCircle2 className="w-3 h-3" />}
+                        {b.status === 'Pending' && <Clock className="w-3 h-3" />}
+                        {b.status === 'Cancelled' && <XCircle className="w-3 h-3" />}
+                        {b.status}
+                      </span>
+                    </td>
+                    <td className="py-3.5 px-4 text-right">
+                      <div className="flex items-center justify-end gap-1">
+                        {b.status === 'Pending' && (
+                          <button
+                            onClick={() => handleUpdateStatus(b.id, 'Confirmed')}
+                            className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] px-2.5 py-1 rounded-lg cursor-pointer"
+                          >
+                            Confirm
+                          </button>
+                        )}
+                        {b.status === 'Confirmed' && (
+                          <button
+                            onClick={() => handleUpdateStatus(b.id, 'Completed')}
+                            className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-[11px] px-2.5 py-1 rounded-lg cursor-pointer"
+                          >
+                            Complete
+                          </button>
+                        )}
+                        <button
+                          onClick={() => setSelectedBooking(b)}
+                          className="bg-slate-100 hover:bg-slate-200 text-slate-800 p-1.5 rounded-lg cursor-pointer"
+                          title="View Full Booking Voucher"
+                        >
+                          <Eye className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>
       </div>
 
-      {/* Invoice Detail Modal */}
+      {/* Modal Detail View */}
       {selectedBooking && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-xl w-full p-6 space-y-6 shadow-2xl border border-slate-200">
-            <div className="flex items-center justify-between border-b pb-4">
+        <div className="fixed inset-0 z-50 bg-slate-950/50 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl p-6 max-w-lg w-full space-y-4 shadow-2xl border border-slate-200">
+            <div className="flex justify-between items-center pb-3 border-b border-slate-100">
               <div>
-                <h3 className="font-extrabold text-lg text-slate-900">Tax Invoice & Fulfill Summary</h3>
-                <p className="text-xs text-slate-500">Booking Ref: {selectedBooking.id}</p>
+                <span className="text-xs font-bold text-brand-600">{selectedBooking.referenceNo}</span>
+                <h3 className="text-lg font-black text-slate-900">{selectedBooking.packageName}</h3>
               </div>
               <button
                 onClick={() => setSelectedBooking(null)}
-                className="text-slate-400 hover:text-slate-700 font-bold text-lg"
+                className="text-slate-400 hover:text-slate-600 font-bold text-sm"
               >
                 ✕
               </button>
             </div>
 
-            <div className="space-y-4 text-xs">
-              <div className="bg-slate-50 p-4 rounded-xl space-y-2 border border-slate-100">
-                <div className="flex justify-between font-bold">
-                  <span className="text-slate-500">Customer:</span>
-                  <span className="text-slate-900">{selectedBooking.customerName}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Email & Phone:</span>
-                  <span className="text-slate-800">{selectedBooking.email} | {selectedBooking.phone}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Booking Date:</span>
-                  <span className="text-slate-800">{selectedBooking.date}</span>
-                </div>
-                <div className="flex justify-between font-bold">
-                  <span className="text-slate-500">PNR / Vendor Ref:</span>
-                  <span className="text-brand-600 font-mono">{selectedBooking.pnr}</span>
-                </div>
+            <div className="space-y-3 text-xs">
+              <div className="p-3 bg-slate-50 rounded-xl space-y-1">
+                <p className="font-extrabold text-slate-900 text-sm">{selectedBooking.customerName}</p>
+                <p className="text-slate-600 flex items-center gap-1"><Phone className="w-3 h-3 text-brand-500" /> Phone: {selectedBooking.customerPhone}</p>
+                <p className="text-slate-600 flex items-center gap-1"><Mail className="w-3 h-3 text-brand-500" /> Email: {selectedBooking.customerEmail}</p>
               </div>
 
-              <div className="border border-slate-200 rounded-xl p-4 space-y-2">
-                <p className="font-extrabold text-slate-900 text-sm">{selectedBooking.details}</p>
-                <div className="flex justify-between pt-2 border-t text-slate-800">
-                  <span>Base Amount:</span>
-                  <span>₹{(selectedBooking.amount * 0.85).toLocaleString('en-IN')}</span>
+              <div className="grid grid-cols-2 gap-3 p-3 bg-slate-50 rounded-xl">
+                <div>
+                  <span className="text-slate-400 font-bold block uppercase text-[10px]">Travel Dates</span>
+                  <span className="font-bold text-slate-800">{selectedBooking.travelDates}</span>
                 </div>
-                <div className="flex justify-between text-slate-800">
-                  <span>GST / Tax (15%):</span>
-                  <span>₹{(selectedBooking.amount * 0.15).toLocaleString('en-IN')}</span>
+                <div>
+                  <span className="text-slate-400 font-bold block uppercase text-[10px]">Travelers</span>
+                  <span className="font-bold text-slate-800">{selectedBooking.travelersCount} Pax</span>
                 </div>
-                <div className="flex justify-between font-black text-sm text-slate-900 pt-2 border-t">
-                  <span>Total Amount Paid:</span>
-                  <span className="text-emerald-700">₹{selectedBooking.amount.toLocaleString('en-IN')}</span>
+                <div>
+                  <span className="text-slate-400 font-bold block uppercase text-[10px]">Total Amount</span>
+                  <span className="font-black text-brand-700 text-sm">{formatCurrency(selectedBooking.totalAmount)}</span>
+                </div>
+                <div>
+                  <span className="text-slate-400 font-bold block uppercase text-[10px]">Booking Status</span>
+                  <span className="font-bold text-slate-800">{selectedBooking.status}</span>
                 </div>
               </div>
             </div>
 
-            <div className="flex justify-end gap-3 pt-2">
+            <div className="flex justify-between items-center pt-3 border-t border-slate-100">
+              <div className="flex gap-2">
+                <button
+                  onClick={() => handleUpdateStatus(selectedBooking.id, 'Confirmed')}
+                  className="bg-emerald-600 text-white font-bold text-xs px-3 py-1.5 rounded-xl hover:bg-emerald-700 cursor-pointer"
+                >
+                  Mark Confirmed
+                </button>
+                <button
+                  onClick={() => handleUpdateStatus(selectedBooking.id, 'Cancelled')}
+                  className="bg-rose-600 text-white font-bold text-xs px-3 py-1.5 rounded-xl hover:bg-rose-700 cursor-pointer"
+                >
+                  Cancel Booking
+                </button>
+              </div>
               <button
                 onClick={() => setSelectedBooking(null)}
-                className="px-4 py-2 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-xl"
+                className="bg-slate-100 text-slate-700 font-bold text-xs px-4 py-1.5 rounded-xl hover:bg-slate-200 cursor-pointer"
               >
                 Close
-              </button>
-              <button
-                onClick={() => {
-                  alert(`Emailing invoice to ${selectedBooking.email}`);
-                  setSelectedBooking(null);
-                }}
-                className="px-4 py-2 text-xs font-bold bg-brand-600 text-white hover:bg-brand-700 rounded-xl"
-              >
-                Send Invoice Email
               </button>
             </div>
           </div>

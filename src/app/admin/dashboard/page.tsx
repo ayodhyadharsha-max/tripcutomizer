@@ -1,31 +1,42 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
 import { formatCurrency } from '@/lib/utils';
-import { TrendingUp, ShoppingBag, Users, DollarSign, FileCheck, Shield, ArrowUpRight } from 'lucide-react';
+import { TrendingUp, ShoppingBag, Users, DollarSign, ArrowUpRight } from 'lucide-react';
+import { cloudStore, CustomerBooking, CustomerLead } from '@/lib/cloudStore';
 
 export default function AdminDashboardPage() {
-  const metrics = [
-    { title: 'Total Revenue (MTD)', value: '₹1.84 Cr', change: '+14.2%', icon: TrendingUp, color: 'text-emerald-600 bg-emerald-50' },
-    { title: 'Active Bookings', value: '342', change: '+8.4%', icon: ShoppingBag, color: 'text-brand-600 bg-brand-50' },
-    { title: 'CRM Leads Queue', value: '88', change: '12 New', icon: Users, color: 'text-accent-600 bg-accent-50' },
-    { title: 'Forex Orders Volume', value: '$450K USD', change: '5 Pending KYC', icon: DollarSign, color: 'text-purple-600 bg-purple-50' },
-  ];
+  const [bookings, setBookings] = useState<CustomerBooking[]>([]);
+  const [leads, setLeads] = useState<CustomerLead[]>([]);
 
-  const recentBookings = [
-    { ref: 'TB-984210', customer: 'Rishabh Jaiswal', product: 'Dubai 5N Package', amount: 97980, status: 'CONFIRMED' },
-    { ref: 'TB-412093', customer: 'Ananya Jaiswal', product: 'Forex Card USD 1,000', amount: 84450, status: 'PAID' },
-    { ref: 'TB-102941', customer: 'Vikram Sethi', product: 'Europe Group Tour 9D', amount: 290000, status: 'PROCESSING' },
+  useEffect(() => {
+    setBookings(cloudStore.getBookings());
+    setLeads(cloudStore.getLeads());
+  }, []);
+
+  const totalRevenue = bookings.reduce((sum, b) => (b.status !== 'Cancelled' ? sum + b.totalAmount : sum), 0);
+  const activeBookingsCount = bookings.filter((b) => b.status === 'Confirmed' || b.status === 'Pending').length;
+  const newLeadsCount = leads.filter((l) => l.status === 'New').length;
+
+  const metrics = [
+    { title: 'Total Revenue (Cloud Live)', value: formatCurrency(totalRevenue), change: 'Live DB', icon: TrendingUp, color: 'text-emerald-600 bg-emerald-50' },
+    { title: 'Active Bookings', value: activeBookingsCount.toString(), change: `${bookings.length} Total`, icon: ShoppingBag, color: 'text-brand-600 bg-brand-50' },
+    { title: 'CRM Leads Queue', value: leads.length.toString(), change: `${newLeadsCount} New`, icon: Users, color: 'text-amber-600 bg-amber-50' },
+    { title: 'Registered Customers', value: (bookings.length + leads.length).toString(), change: 'Auto-saved', icon: DollarSign, color: 'text-purple-600 bg-purple-50' },
   ];
 
   return (
     <div className="space-y-8">
-      <div>
-        <h1 className="text-2xl font-black text-slate-900 tracking-tight">Executive Dashboard & Analytics</h1>
-        <p className="text-xs text-slate-500 mt-1">Real-time overview of revenue, sales pipeline, forex orders & booking performance.</p>
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-2xl font-black text-slate-900 tracking-tight">Executive Cloud Dashboard & Realtime Analytics</h1>
+          <p className="text-xs text-slate-500 mt-1">Real-time overview of customer bookings, sales CRM leads, and active revenue.</p>
+        </div>
+        <span className="bg-emerald-100 text-emerald-800 text-xs font-extrabold px-3.5 py-1.5 rounded-full flex items-center gap-1.5">
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span> Live Cloud Data Active
+        </span>
       </div>
 
       {/* Metrics Cards */}
@@ -33,12 +44,12 @@ export default function AdminDashboardPage() {
         {metrics.map((m, i) => {
           const Icon = m.icon;
           return (
-            <Card key={i} className="p-5 bg-white border-slate-200">
+            <Card key={i} className="p-5 bg-white border-slate-200 shadow-sm rounded-2xl">
               <div className="flex items-center justify-between mb-3">
                 <div className={`p-3 rounded-2xl ${m.color}`}>
                   <Icon className="w-5 h-5" />
                 </div>
-                <span className="text-[10px] font-bold bg-slate-100 text-slate-700 px-2 py-0.5 rounded">
+                <span className="text-[10px] font-bold bg-slate-100 text-slate-700 px-2 py-0.5 rounded-full">
                   {m.change}
                 </span>
               </div>
@@ -52,34 +63,38 @@ export default function AdminDashboardPage() {
       {/* Recent Transactions & Leads Table */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div className="lg:col-span-8">
-          <Card className="p-6 bg-white border-slate-200 space-y-4">
+          <Card className="p-6 bg-white border-slate-200 space-y-4 shadow-sm rounded-2xl">
             <div className="flex justify-between items-center pb-3 border-b border-slate-100">
-              <h2 className="font-bold text-slate-900 text-sm">Recent Booking Transactions</h2>
-              <Link href="/admin/bookings" className="text-xs font-bold text-brand-500 hover:underline">
-                View All →
+              <h2 className="font-bold text-slate-900 text-sm">Recent Cloud Customer Bookings</h2>
+              <Link href="/admin/bookings" className="text-xs font-bold text-brand-600 hover:underline flex items-center gap-1">
+                <span>View Full Operations</span> <ArrowUpRight className="w-3.5 h-3.5" />
               </Link>
             </div>
 
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="border-b border-slate-200 text-slate-400 font-bold uppercase text-[10px]">
-                    <th className="py-2">Ref ID</th>
-                    <th className="py-2">Customer</th>
-                    <th className="py-2">Product</th>
-                    <th className="py-2">Amount</th>
-                    <th className="py-2 text-right">Status</th>
+                  <tr className="border-b border-slate-200 text-slate-400 font-extrabold uppercase text-[10px]">
+                    <th className="py-2.5 px-2">Ref ID</th>
+                    <th className="py-2.5 px-2">Customer</th>
+                    <th className="py-2.5 px-2">Product</th>
+                    <th className="py-2.5 px-2">Amount</th>
+                    <th className="py-2.5 px-2">Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 font-semibold text-slate-700">
-                  {recentBookings.map((b) => (
-                    <tr key={b.ref} className="hover:bg-slate-50">
-                      <td className="py-3 font-bold text-brand-600">{b.ref}</td>
-                      <td className="py-3 font-bold text-slate-900">{b.customer}</td>
-                      <td className="py-3">{b.product}</td>
-                      <td className="py-3 font-black text-slate-900">{formatCurrency(b.amount)}</td>
-                      <td className="py-3 text-right">
-                        <span className="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded text-[10px]">
+                  {bookings.slice(0, 5).map((b) => (
+                    <tr key={b.id} className="hover:bg-slate-50">
+                      <td className="py-3 px-2 font-bold text-brand-600">{b.referenceNo}</td>
+                      <td className="py-3 px-2 text-slate-900 font-bold">{b.customerName}</td>
+                      <td className="py-3 px-2 text-slate-700">{b.packageName}</td>
+                      <td className="py-3 px-2 font-black text-slate-900">{formatCurrency(b.totalAmount)}</td>
+                      <td className="py-3 px-2">
+                        <span
+                          className={`font-bold px-2 py-0.5 rounded text-[10px] ${
+                            b.status === 'Confirmed' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
+                          }`}
+                        >
                           {b.status}
                         </span>
                       </td>
@@ -91,23 +106,24 @@ export default function AdminDashboardPage() {
           </Card>
         </div>
 
-        {/* Popular Category Performance */}
+        {/* Quick Actions / Status Column */}
         <div className="lg:col-span-4 space-y-4">
-          <Card className="p-6 bg-white border-slate-200 space-y-3 text-xs">
-            <h3 className="font-bold text-slate-900">Top Performing Verticals</h3>
-            <div className="space-y-2 font-medium">
-              <div className="flex justify-between">
-                <span>International Holidays:</span>
-                <span className="font-bold text-brand-700">₹92 Lakhs</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Forex Cash & Cards:</span>
-                <span className="font-bold text-emerald-700">₹48 Lakhs</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Domestic India Tours:</span>
-                <span className="font-bold text-accent-700">₹24 Lakhs</span>
-              </div>
+          <Card className="p-6 bg-gradient-to-br from-brand-900 to-slate-900 text-white rounded-2xl space-y-4 shadow-xl">
+            <h3 className="font-extrabold text-base text-amber-300">tripcustomizer Operations</h3>
+            <p className="text-xs text-slate-300 leading-relaxed">
+              Customer details and booking vouchers are automatically stored in the cloud. Access customer phone numbers & emails directly in Admin Operations.
+            </p>
+            <div className="space-y-2 pt-2">
+              <Link href="/admin/bookings">
+                <button className="w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs py-2.5 rounded-xl cursor-pointer shadow-md">
+                  MANAGE BOOKINGS →
+                </button>
+              </Link>
+              <Link href="/admin/leads">
+                <button className="w-full bg-white/10 hover:bg-white/20 text-white font-bold text-xs py-2.5 rounded-xl cursor-pointer">
+                  MANAGE CRM LEADS →
+                </button>
+              </Link>
             </div>
           </Card>
         </div>

@@ -2,11 +2,13 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Phone, MapPin, User, ChevronDown, MessageCircle, HelpCircle, ShieldCheck, LogIn, UserPlus, Briefcase, FileText } from 'lucide-react';
+import { Phone, MapPin, User, ChevronDown, MessageCircle, HelpCircle, LogOut, ShieldCheck, ShoppingBag } from 'lucide-react';
 import { Container } from '../ui/Container';
+import { useAuth } from '@/context/AuthContext';
 
 export const HeaderTopBar: React.FC = () => {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const { user, isLoggedIn, logout } = useAuth();
 
   return (
     <div className="bg-brand-800 text-slate-200 text-xs py-2 border-b border-brand-700/50">
@@ -48,50 +50,56 @@ export const HeaderTopBar: React.FC = () => {
               className="flex items-center space-x-1.5 bg-brand-700/60 hover:bg-brand-700 px-3 py-1 rounded-full text-white font-medium transition-all"
             >
               <User className="w-3.5 h-3.5 text-accent-400" />
-              <span>Account / Login</span>
+              <span>{isLoggedIn ? user?.name || 'My Account' : 'Account / Login'}</span>
               <ChevronDown className="w-3 h-3 text-slate-300" />
             </button>
 
             {isAuthOpen && (
-              <div className="absolute right-0 mt-2 w-56 bg-white text-slate-800 rounded-xl shadow-2xl border border-slate-100 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+              <div className="absolute right-0 mt-2 w-60 bg-white text-slate-800 rounded-2xl shadow-2xl border border-slate-100 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                 <div className="px-4 py-2 border-b border-slate-100">
-                  <p className="text-xs font-semibold text-slate-900">Welcome to tripcustomizer</p>
-                  <p className="text-[11px] text-slate-500">Access bookings, wishlist & rewards</p>
+                  <p className="text-xs font-bold text-slate-900">
+                    {isLoggedIn ? `Logged in as ${user?.name}` : 'Welcome to tripcustomizer'}
+                  </p>
+                  <p className="text-[11px] text-slate-500">
+                    {isLoggedIn ? user?.email : 'Cloud saved profile & live bookings'}
+                  </p>
                 </div>
 
-                <Link
-                  href="/login"
-                  className="flex items-center space-x-2.5 px-4 py-2 hover:bg-slate-50 text-slate-700 font-medium transition-colors"
-                >
-                  <LogIn className="w-4 h-4 text-brand-500" />
-                  <span>Customer Login</span>
-                </Link>
+                <div className="py-1 text-xs">
+                  <Link
+                    href="/account"
+                    className="flex items-center space-x-2 px-4 py-2 hover:bg-slate-50 text-slate-700 font-semibold"
+                  >
+                    <User className="w-4 h-4 text-brand-600" />
+                    <span>My Saved Account & Profile</span>
+                  </Link>
 
-                <Link
-                  href="/register"
-                  className="flex items-center space-x-2.5 px-4 py-2 hover:bg-slate-50 text-slate-700 font-medium transition-colors"
-                >
-                  <UserPlus className="w-4 h-4 text-accent-500" />
-                  <span>Register Account</span>
-                </Link>
+                  <Link
+                    href="/account"
+                    className="flex items-center space-x-2 px-4 py-2 hover:bg-slate-50 text-slate-700 font-semibold"
+                  >
+                    <ShoppingBag className="w-4 h-4 text-brand-600" />
+                    <span>My Bookings & Cloud Vouchers</span>
+                  </Link>
 
-                <Link
-                  href="/manage-booking"
-                  className="flex items-center space-x-2.5 px-4 py-2 hover:bg-slate-50 text-slate-700 font-medium transition-colors"
-                >
-                  <FileText className="w-4 h-4 text-emerald-500" />
-                  <span>Manage Bookings</span>
-                </Link>
+                  <Link
+                    href="/admin/dashboard"
+                    className="flex items-center space-x-2 px-4 py-2 hover:bg-amber-50 text-amber-900 font-bold border-t border-slate-100"
+                  >
+                    <ShieldCheck className="w-4 h-4 text-amber-600" />
+                    <span>Admin Operations Desk</span>
+                  </Link>
 
-                <div className="border-t border-slate-100 my-1"></div>
-
-                <Link
-                  href="/agent/login"
-                  className="flex items-center space-x-2.5 px-4 py-2 hover:bg-slate-50 text-brand-700 font-semibold transition-colors"
-                >
-                  <Briefcase className="w-4 h-4 text-brand-700" />
-                  <span>Travel Agent SSO Portal</span>
-                </Link>
+                  {isLoggedIn && (
+                    <button
+                      onClick={logout}
+                      className="w-full flex items-center space-x-2 px-4 py-2 text-rose-600 hover:bg-rose-50 font-bold border-t border-slate-100 text-left"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      <span>Logout</span>
+                    </button>
+                  )}
+                </div>
               </div>
             )}
           </div>

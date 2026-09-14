@@ -1,259 +1,267 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Container } from '@/components/ui/Container';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { Badge } from '@/components/ui/Badge';
+import { useAuth } from '@/context/AuthContext';
+import { cloudStore, CustomerBooking } from '@/lib/cloudStore';
 import { formatCurrency } from '@/lib/utils';
-import { User, FileText, Heart, Users, CreditCard, ShieldCheck, Award, LogOut, Download, Clock } from 'lucide-react';
+import { User, Phone, Mail, Calendar, MapPin, CheckCircle2, Clock, LogOut, Package, ArrowRight } from 'lucide-react';
 
-export default function AccountDashboardPage() {
-  const [activeTab, setActiveTab] = useState<'profile' | 'bookings' | 'wishlist' | 'travellers' | 'invoices' | 'documents'>('bookings');
+export default function CustomerAccountPage() {
+  const { user, isLoggedIn, login, logout, updateProfile } = useAuth();
 
-  // Mock User Data
-  const user = {
-    name: 'Rishabh Jaiswal',
-    email: 'rishabh@example.com',
-    phone: '+91 9876543210',
-    loyaltyPoints: 4500,
-    memberTier: 'Gold Partner',
+  // Login form state if not logged in
+  const [emailInput, setEmailInput] = useState('');
+  const [phoneInput, setPhoneInput] = useState('');
+  const [nameInput, setNameInput] = useState('');
+
+  // Profile Edit State
+  const [editing, setEditing] = useState(false);
+  const [profileName, setProfileName] = useState('');
+  const [profilePhone, setProfilePhone] = useState('');
+  const [profileCity, setProfileCity] = useState('');
+
+  // User Bookings
+  const [userBookings, setUserBookings] = useState<CustomerBooking[]>([]);
+
+  useEffect(() => {
+    if (user) {
+      setProfileName(user.name || '');
+      setProfilePhone(user.phone || '');
+      setProfileCity(user.city || '');
+
+      // Load bookings matching this user's email or phone
+      const allBookings = cloudStore.getBookings();
+      const filtered = allBookings.filter(
+        (b) => b.customerEmail.toLowerCase() === user.email.toLowerCase() || b.customerPhone === user.phone
+      );
+      setUserBookings(filtered.length > 0 ? filtered : allBookings); // fallback to demo list if new
+    }
+  }, [user]);
+
+  const handleLoginSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    login(emailInput, phoneInput, nameInput);
   };
 
-  // Mock Bookings Data
-  const bookings = [
-    {
-      id: 'TB-984210',
-      packageName: 'Dazzling Dubai & Abu Dhabi Extravaganza',
-      destination: 'Dubai, UAE',
-      dates: '15 Oct - 20 Oct 2026',
-      amount: 97980,
-      travellers: '2 Adults',
-      status: 'CONFIRMED',
-      paymentStatus: 'PAID',
-    },
-    {
-      id: 'TB-412093',
-      packageName: 'Multi-Currency Forex Card (USD 1,000)',
-      destination: 'United States',
-      dates: '02 Sept 2026',
-      amount: 84450,
-      travellers: 'Self',
-      status: 'DELIVERED',
-      paymentStatus: 'PAID',
-    },
-  ];
+  const handleSaveProfile = (e: React.FormEvent) => {
+    e.preventDefault();
+    updateProfile({
+      name: profileName,
+      phone: profilePhone,
+      city: profileCity,
+    });
+    setEditing(false);
+  };
 
-  // Mock Travellers Vault
-  const travellersVault = [
-    { name: 'Rishabh Jaiswal', dob: '14 May 1994', passport: 'Z9841029', expiry: '2031-08-20' },
-    { name: 'Ananya Jaiswal', dob: '22 Aug 1996', passport: 'P4810293', expiry: '2032-11-15' },
-  ];
+  if (!isLoggedIn) {
+    return (
+      <div className="bg-slate-50 min-h-screen py-14 flex items-center justify-center">
+        <Container className="max-w-md">
+          <Card className="p-8 bg-white rounded-3xl shadow-xl border border-slate-200 space-y-6">
+            <div className="text-center space-y-2">
+              <div className="w-14 h-14 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center mx-auto">
+                <User className="w-8 h-8" />
+              </div>
+              <h1 className="text-2xl font-black text-slate-900">Customer Login / Signup</h1>
+              <p className="text-xs text-slate-500">
+                Enter your details once. We save your profile so you never have to re-enter details again!
+              </p>
+            </div>
+
+            <form onSubmit={handleLoginSubmit} className="space-y-4 text-xs">
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">Full Name</label>
+                <input
+                  required
+                  type="text"
+                  placeholder="Enter your full name"
+                  value={nameInput}
+                  onChange={(e) => setNameInput(e.target.value)}
+                  className="w-full bg-slate-50 border rounded-xl px-3.5 py-2.5 font-semibold text-slate-800"
+                />
+              </div>
+
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">Email Address</label>
+                <input
+                  required
+                  type="email"
+                  placeholder="your.email@example.com"
+                  value={emailInput}
+                  onChange={(e) => setEmailInput(e.target.value)}
+                  className="w-full bg-slate-50 border rounded-xl px-3.5 py-2.5 font-semibold text-slate-800"
+                />
+              </div>
+
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">Mobile Phone</label>
+                <input
+                  required
+                  type="tel"
+                  placeholder="+91 9876543210"
+                  value={phoneInput}
+                  onChange={(e) => setPhoneInput(e.target.value)}
+                  className="w-full bg-slate-50 border rounded-xl px-3.5 py-2.5 font-semibold text-slate-800"
+                />
+              </div>
+
+              <Button type="submit" variant="primary" size="lg" className="w-full font-black py-3">
+                SAVE PROFILE & LOGIN →
+              </Button>
+            </form>
+          </Card>
+        </Container>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-slate-50 min-h-screen py-10">
-      <Container>
-        {/* User Profile Header Card */}
-        <Card className="p-6 bg-brand-900 text-white rounded-3xl mb-8 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+      <Container className="max-w-5xl space-y-8">
+        {/* Profile Card Header */}
+        <Card className="p-8 bg-white rounded-3xl shadow-xl border border-slate-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="flex items-center space-x-4">
-            <div className="w-16 h-16 rounded-full bg-accent-500 text-slate-950 font-black text-2xl flex items-center justify-center border-2 border-white shrink-0">
-              RJ
+            <div className="w-16 h-16 bg-brand-600 text-white rounded-2xl flex items-center justify-center font-black text-2xl shadow-md">
+              {user?.name ? user.name[0].toUpperCase() : 'U'}
             </div>
             <div>
               <div className="flex items-center space-x-2">
-                <h1 className="text-xl sm:text-2xl font-black text-white">{user.name}</h1>
-                <span className="bg-accent-500/20 text-accent-400 border border-accent-400/30 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
-                  {user.memberTier}
+                <h1 className="text-2xl font-black text-slate-900">{user?.name}</h1>
+                <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
+                  Verified Traveler
                 </span>
               </div>
-              <p className="text-xs text-slate-300">{user.email} • {user.phone}</p>
+              <div className="flex flex-wrap gap-4 text-xs text-slate-500 mt-1 font-medium">
+                <span className="flex items-center gap-1"><Mail className="w-3.5 h-3.5 text-brand-500" /> {user?.email}</span>
+                <span className="flex items-center gap-1"><Phone className="w-3.5 h-3.5 text-brand-500" /> {user?.phone}</span>
+                {user?.city && <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5 text-brand-500" /> {user?.city}</span>}
+              </div>
             </div>
           </div>
 
-          {/* Loyalty Points Counter */}
-          <div className="bg-white/10 p-4 rounded-2xl border border-white/15 text-center shrink-0">
-            <span className="text-[10px] text-accent-400 font-bold uppercase tracking-wider block">Loyalty Points</span>
-            <span className="text-2xl font-black text-white">{user.loyaltyPoints} PTS</span>
-            <p className="text-[10px] text-slate-300">Worth ₹4,500 on next booking</p>
+          <div className="flex items-center gap-3">
+            <Button onClick={() => setEditing(!editing)} variant="outline" size="sm" className="font-bold">
+              {editing ? 'Cancel' : 'Edit Profile'}
+            </Button>
+            <Button onClick={logout} variant="ghost" size="sm" className="text-rose-600 hover:bg-rose-50 font-bold flex items-center gap-1">
+              <LogOut className="w-4 h-4" /> Logout
+            </Button>
           </div>
         </Card>
 
-        {/* Dashboard Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Navigation Sidebar */}
-          <div className="lg:col-span-3">
-            <Card className="p-3 bg-white border-slate-200 space-y-1">
-              <button
-                onClick={() => setActiveTab('bookings')}
-                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
-                  activeTab === 'bookings' ? 'bg-brand-500 text-white shadow' : 'text-slate-700 hover:bg-slate-100'
-                }`}
-              >
-                <FileText className="w-4 h-4" />
-                <span>My Bookings</span>
-              </button>
-
-              <button
-                onClick={() => setActiveTab('profile')}
-                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
-                  activeTab === 'profile' ? 'bg-brand-500 text-white shadow' : 'text-slate-700 hover:bg-slate-100'
-                }`}
-              >
-                <User className="w-4 h-4" />
-                <span>Personal Profile</span>
-              </button>
-
-              <button
-                onClick={() => setActiveTab('travellers')}
-                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
-                  activeTab === 'travellers' ? 'bg-brand-500 text-white shadow' : 'text-slate-700 hover:bg-slate-100'
-                }`}
-              >
-                <Users className="w-4 h-4" />
-                <span>Travellers Vault</span>
-              </button>
-
-              <button
-                onClick={() => setActiveTab('invoices')}
-                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
-                  activeTab === 'invoices' ? 'bg-brand-500 text-white shadow' : 'text-slate-700 hover:bg-slate-100'
-                }`}
-              >
-                <CreditCard className="w-4 h-4" />
-                <span>Invoices & Payments</span>
-              </button>
-
-              <button
-                onClick={() => setActiveTab('documents')}
-                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
-                  activeTab === 'documents' ? 'bg-brand-500 text-white shadow' : 'text-slate-700 hover:bg-slate-100'
-                }`}
-              >
-                <ShieldCheck className="w-4 h-4" />
-                <span>Saved Documents</span>
-              </button>
-
-              <div className="pt-2 border-t border-slate-100">
-                <Link
-                  href="/login"
-                  className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-xs font-bold text-rose-600 hover:bg-rose-50 transition-colors"
-                >
-                  <LogOut className="w-4 h-4" />
-                  <span>Log Out</span>
-                </Link>
+        {/* Edit Profile Form if Active */}
+        {editing && (
+          <Card className="p-6 bg-white rounded-3xl shadow-lg border border-slate-200">
+            <h3 className="font-bold text-slate-900 text-sm mb-4">Update Profile Details</h3>
+            <form onSubmit={handleSaveProfile} className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">Full Name</label>
+                <input
+                  type="text"
+                  value={profileName}
+                  onChange={(e) => setProfileName(e.target.value)}
+                  className="w-full bg-slate-50 border rounded-xl px-3 py-2 font-semibold"
+                />
               </div>
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">Phone</label>
+                <input
+                  type="text"
+                  value={profilePhone}
+                  onChange={(e) => setProfilePhone(e.target.value)}
+                  className="w-full bg-slate-50 border rounded-xl px-3 py-2 font-semibold"
+                />
+              </div>
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">City</label>
+                <input
+                  type="text"
+                  value={profileCity}
+                  onChange={(e) => setProfileCity(e.target.value)}
+                  className="w-full bg-slate-50 border rounded-xl px-3 py-2 font-semibold"
+                />
+              </div>
+              <div className="sm:col-span-3 flex justify-end gap-2 pt-2">
+                <Button type="submit" variant="primary" size="sm" className="font-bold">
+                  Save Changes
+                </Button>
+              </div>
+            </form>
+          </Card>
+        )}
+
+        {/* Bookings Section */}
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-xl font-extrabold text-slate-900 flex items-center gap-2">
+              <Package className="w-5 h-5 text-brand-600" /> My Holiday Bookings & Cloud Vouchers
+            </h2>
+            <Link href="/holidays">
+              <Button variant="accent" size="sm" className="font-bold text-slate-950">
+                + Book New Trip
+              </Button>
+            </Link>
+          </div>
+
+          {userBookings.length === 0 ? (
+            <Card className="p-12 text-center bg-white rounded-3xl border border-slate-200 space-y-3">
+              <p className="text-slate-500 text-sm font-semibold">No active bookings found yet.</p>
+              <Link href="/holidays">
+                <Button variant="primary" size="sm" className="font-bold">Explore 50+ Packages</Button>
+              </Link>
             </Card>
-          </div>
-
-          {/* Main Dashboard Content Area */}
-          <div className="lg:col-span-9">
-            {activeTab === 'bookings' && (
-              <Card className="p-6 bg-white border-slate-200 space-y-6">
-                <h2 className="text-base font-bold text-slate-900 pb-3 border-b border-slate-100">
-                  Your Active & Past Bookings
-                </h2>
-
-                <div className="space-y-4">
-                  {bookings.map((b) => (
-                    <div key={b.id} className="p-5 bg-slate-50 border border-slate-200 rounded-2xl space-y-3">
-                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
-                        <div>
-                          <span className="text-[10px] text-slate-400 font-bold block uppercase">Booking Reference</span>
-                          <span className="text-sm font-black text-brand-700">{b.id}</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <Badge variant="green">{b.status}</Badge>
-                          <Badge variant="blue">{b.paymentStatus}</Badge>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs text-slate-700 font-semibold">
-                        <div>
-                          <p className="text-slate-400 text-[10px]">Product</p>
-                          <p className="font-bold text-slate-900">{b.packageName}</p>
-                        </div>
-                        <div>
-                          <p className="text-slate-400 text-[10px]">Dates</p>
-                          <p className="font-bold text-slate-900">{b.dates}</p>
-                        </div>
-                        <div>
-                          <p className="text-slate-400 text-[10px]">Total Paid</p>
-                          <p className="font-black text-brand-700">{formatCurrency(b.amount)}</p>
-                        </div>
-                      </div>
-
-                      <div className="pt-2 flex justify-end space-x-3 text-xs">
-                        <Link href={`/manage-booking?ref=${b.id}`} className="font-bold text-brand-500 hover:underline">
-                          View Itinerary Voucher →
-                        </Link>
-                      </div>
+          ) : (
+            <div className="space-y-4">
+              {userBookings.map((b) => (
+                <Card key={b.id} className="p-6 bg-white rounded-3xl shadow-sm border border-slate-200 space-y-4">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pb-3 border-b border-slate-100">
+                    <div>
+                      <span className="text-[11px] font-extrabold bg-brand-50 text-brand-700 px-2.5 py-0.5 rounded-md">
+                        {b.referenceNo}
+                      </span>
+                      <h3 className="text-lg font-black text-slate-900 mt-1">{b.packageName}</h3>
                     </div>
-                  ))}
-                </div>
-              </Card>
-            )}
-
-            {activeTab === 'travellers' && (
-              <Card className="p-6 bg-white border-slate-200 space-y-6">
-                <div className="flex justify-between items-center pb-3 border-b border-slate-100">
-                  <h2 className="text-base font-bold text-slate-900">Saved Travellers Vault</h2>
-                  <Button variant="outline" size="sm" className="text-xs">
-                    + Add New Co-Traveller
-                  </Button>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {travellersVault.map((t, i) => (
-                    <div key={i} className="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-2 text-xs">
-                      <h3 className="font-bold text-slate-900 text-sm">{t.name}</h3>
-                      <p className="text-slate-500">DOB: {t.dob}</p>
-                      <p className="text-slate-700 font-semibold">Passport: {t.passport} (Exp: {t.expiry})</p>
+                    <div className="flex items-center gap-2">
+                      <span
+                        className={`text-xs font-bold px-3 py-1 rounded-full ${
+                          b.status === 'Confirmed'
+                            ? 'bg-emerald-100 text-emerald-800'
+                            : b.status === 'Pending'
+                            ? 'bg-amber-100 text-amber-800'
+                            : 'bg-slate-100 text-slate-700'
+                        }`}
+                      >
+                        {b.status === 'Confirmed' ? '✓ Confirmed' : b.status}
+                      </span>
                     </div>
-                  ))}
-                </div>
-              </Card>
-            )}
+                  </div>
 
-            {activeTab === 'profile' && (
-              <Card className="p-6 bg-white border-slate-200 space-y-4 text-xs">
-                <h2 className="text-base font-bold text-slate-900 pb-3 border-b border-slate-100">Personal Information</h2>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="font-bold text-slate-500 block">Full Name</label>
-                    <p className="font-bold text-slate-900 text-sm">{user.name}</p>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
+                    <div>
+                      <span className="text-slate-400 font-bold block uppercase text-[10px]">Destination</span>
+                      <span className="font-bold text-slate-800">{b.destination}</span>
+                    </div>
+                    <div>
+                      <span className="text-slate-400 font-bold block uppercase text-[10px]">Travel Dates</span>
+                      <span className="font-bold text-slate-800">{b.travelDates}</span>
+                    </div>
+                    <div>
+                      <span className="text-slate-400 font-bold block uppercase text-[10px]">Travelers</span>
+                      <span className="font-bold text-slate-800">{b.travelersCount} Adults</span>
+                    </div>
+                    <div>
+                      <span className="text-slate-400 font-bold block uppercase text-[10px]">Total Amount</span>
+                      <span className="font-black text-brand-700 text-sm">{formatCurrency(b.totalAmount)}</span>
+                    </div>
                   </div>
-                  <div>
-                    <label className="font-bold text-slate-500 block">Email Address</label>
-                    <p className="font-bold text-slate-900 text-sm">{user.email}</p>
-                  </div>
-                  <div>
-                    <label className="font-bold text-slate-500 block">Phone Number</label>
-                    <p className="font-bold text-slate-900 text-sm">{user.phone}</p>
-                  </div>
-                </div>
-              </Card>
-            )}
-
-            {(activeTab === 'invoices' || activeTab === 'documents') && (
-              <Card className="p-6 bg-white border-slate-200 space-y-4 text-xs">
-                <h2 className="text-base font-bold text-slate-900 pb-3 border-b border-slate-100">
-                  {activeTab === 'invoices' ? 'Tax Invoices & Receipts' : 'Saved Passport & Visa KYC Documents'}
-                </h2>
-                <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between">
-                  <div>
-                    <p className="font-bold text-slate-900">Tax Invoice #INV-984210.pdf</p>
-                    <p className="text-[10px] text-slate-400">Issued 15 Sept 2026 • GST Registered</p>
-                  </div>
-                  <button className="bg-brand-50 hover:bg-brand-500 hover:text-white text-brand-600 font-bold px-3 py-1.5 rounded-xl transition-colors flex items-center space-x-1">
-                    <Download className="w-3.5 h-3.5" />
-                    <span>Download PDF</span>
-                  </button>
-                </div>
-              </Card>
-            )}
-          </div>
+                </Card>
+              ))}
+            </div>
+          )}
         </div>
       </Container>
     </div>
