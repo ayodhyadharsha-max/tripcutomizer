@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Send, CheckCircle2, User, Phone, Mail, MapPin, Calendar, Users, Wallet, Sparkles } from 'lucide-react';
+import { Send, CheckCircle2, User, Phone, Mail, MapPin, Calendar, Users, Wallet, Sparkles, Loader2 } from 'lucide-react';
 import { Container } from '../ui/Container';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
@@ -31,17 +31,23 @@ export const BuildTripWizard: React.FC = () => {
     summary: string;
   } | null>(null);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const generatedId = `LEAD-${Math.floor(100000 + Math.random() * 900000)}`;
-    const agents = ['Rahul Sharma (Senior Travel Specialist)', 'Priya Mehta (International Tour Manager)', 'Amitabh Roy (Europe Specialist)'];
-    const randomAgent = agents[Math.floor(Math.random() * agents.length)];
+    setIsSubmitting(true);
+    setTimeout(() => {
+      const generatedId = `LEAD-${Math.floor(100000 + Math.random() * 900000)}`;
+      const agents = ['Rahul Sharma (Senior Travel Specialist)', 'Priya Mehta (International Tour Manager)', 'Amitabh Roy (Europe Specialist)'];
+      const randomAgent = agents[Math.floor(Math.random() * agents.length)];
 
-    setLeadResult({
-      leadId: generatedId,
-      assignedAgent: randomAgent,
-      summary: `Custom Trip to ${formData.destination || 'Selected Destination'} for ${formData.adults} Adults, ${formData.children} Children starting ${formData.travelDate || 'Upcoming Dates'}.`,
-    });
+      setLeadResult({
+        leadId: generatedId,
+        assignedAgent: randomAgent,
+        summary: `Custom Trip to ${formData.destination || 'Selected Destination'} for ${formData.adults} Adults, ${formData.children} Children starting ${formData.travelDate || 'Upcoming Dates'}.`,
+      });
+      setIsSubmitting(false);
+    }, 600);
   };
 
   return (
@@ -254,8 +260,17 @@ export const BuildTripWizard: React.FC = () => {
                 </div>
               </div>
 
-              <Button type="submit" variant="accent" size="lg" className="w-full py-4 text-slate-950 font-black text-base shadow-xl">
-                <Send className="w-5 h-5 mr-2" /> BUILD MY TRIP & GET FREE QUOTE
+              <Button type="submit" disabled={isSubmitting} variant="accent" size="lg" className="w-full py-4 text-slate-950 font-black text-base shadow-xl flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75">
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin text-slate-950" />
+                    <span>Curating Your Itinerary & Free Quote...</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-5 h-5 mr-2" /> BUILD MY TRIP & GET FREE QUOTE
+                  </>
+                )}
               </Button>
             </form>
           </Card>

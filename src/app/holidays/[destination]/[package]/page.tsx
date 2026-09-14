@@ -16,7 +16,7 @@ import {
   Star, Clock, MapPin, CheckCircle2, ChevronRight, ChevronDown, ChevronUp,
   Hotel, Plane, Utensils, ShieldCheck, MessageCircle, Share2, Download,
   PhoneCall, Sparkles, Tag, Check, X, Car, Info, Users, ArrowRight,
-  CheckCircle, XCircle, FileText, Plus, Minus, Calendar, ArrowLeft, Baby, UserCheck, AlertTriangle
+  CheckCircle, XCircle, FileText, Plus, Minus, Calendar, ArrowLeft, Baby, UserCheck, AlertTriangle, Loader2
 } from 'lucide-react';
 
 export type ChildAgeCategory = 'under5' | 'age5to9' | 'age10to14' | 'age15to17' | 'age18plus';
@@ -402,8 +402,12 @@ export default function PackageDetailPage({ params }: { params: { destination: s
     setIsPriceCalculated(true);
   };
 
+  // Loading state for smooth UX
+  const [isNavigatingToCheckout, setIsNavigatingToCheckout] = useState(false);
+
   // Proceed to Final Booking Checkout & Auto-Sync Passenger Names into User Profile / Co-Travellers
   const handleProceedToCheckout = () => {
+    setIsNavigatingToCheckout(true);
     const leadName = passengers['r0_adult_0']?.fullName || contactName || 'Valued Traveller';
     let loggedUser = user;
     if (contactEmail && contactPhone) {
@@ -1877,12 +1881,21 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                   {/* Book Online Button */}
                   <Button
                     onClick={handleProceedToCheckout}
-                    disabled={!isPriceCalculated && (!contactPhone || !contactEmail)}
+                    disabled={isNavigatingToCheckout || (!isPriceCalculated && (!contactPhone || !contactEmail))}
                     variant="accent"
                     size="lg"
-                    className="w-full font-black py-4 text-slate-950 text-sm shadow-md cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="w-full font-black py-4 text-slate-950 text-sm shadow-md cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   >
-                    {isPriceCalculated ? 'BOOK ONLINE NOW →' : 'Book Online'}
+                    {isNavigatingToCheckout ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin text-slate-950" />
+                        <span>Preparing Secure Checkout...</span>
+                      </>
+                    ) : isPriceCalculated ? (
+                      'BOOK ONLINE NOW →'
+                    ) : (
+                      'Book Online'
+                    )}
                   </Button>
                 </Card>
               </div>

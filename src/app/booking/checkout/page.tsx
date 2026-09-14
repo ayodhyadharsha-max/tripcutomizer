@@ -7,7 +7,7 @@ import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 import { formatCurrency } from '@/lib/utils';
-import { CheckCircle2, ShieldCheck, ChevronRight, User, Tag } from 'lucide-react';
+import { CheckCircle2, ShieldCheck, ChevronRight, User, Tag, Loader2 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { cloudStore, CustomerBooking } from '@/lib/cloudStore';
 import { DEMO_PACKAGES } from '@/data/packagesData';
@@ -177,37 +177,42 @@ export default function BookingCheckoutPage() {
   }, [user]);
 
   const [paymentMethod, setPaymentMethod] = useState<'upi' | 'card' | 'netbanking'>('upi');
+  const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
   const handleSimulatePayment = () => {
-    // 1. Ensure Persistent User Session
-    const fullName = `${travellerData.firstName} ${travellerData.lastName}`.trim();
-    const loggedUser = login(travellerData.email, travellerData.phone, fullName);
+    setIsProcessingPayment(true);
+    setTimeout(() => {
+      // 1. Ensure Persistent User Session
+      const fullName = `${travellerData.firstName} ${travellerData.lastName}`.trim();
+      const loggedUser = login(travellerData.email, travellerData.phone, fullName);
 
-    if (fullName) {
-      cloudStore.syncPassengersToCoTravellers([{ fullName }], loggedUser.uid);
-    }
+      if (fullName) {
+        cloudStore.syncPassengersToCoTravellers([{ fullName }], loggedUser.uid);
+      }
 
-    const finalPassengersList = parsedPassengersList.length > 0
-      ? parsedPassengersList
-      : [{ name: fullName || 'Lead Traveller', type: 'Lead Adult' }];
+      const finalPassengersList = parsedPassengersList.length > 0
+        ? parsedPassengersList
+        : [{ name: fullName || 'Lead Traveller', type: 'Lead Adult' }];
 
-    // 2. Save Booking to Database
-    const newBooking = cloudStore.saveBooking({
-      customerName: fullName || 'Valued Traveler',
-      customerEmail: travellerData.email,
-      customerPhone: travellerData.phone,
-      packageName: pkgInfo.name,
-      destination: pkgInfo.destination,
-      travelDates: '15 Oct 2026 - 20 Oct 2026',
-      travelersCount: pkgInfo.travelersCount,
-      totalAmount: grandTotal,
-      status: 'Confirmed',
-      paymentStatus: 'Paid',
-      passengersList: finalPassengersList,
-    });
+      // 2. Save Booking to Database
+      const newBooking = cloudStore.saveBooking({
+        customerName: fullName || 'Valued Traveler',
+        customerEmail: travellerData.email,
+        customerPhone: travellerData.phone,
+        packageName: pkgInfo.name,
+        destination: pkgInfo.destination,
+        travelDates: '15 Oct 2026 - 20 Oct 2026',
+        travelersCount: pkgInfo.travelersCount,
+        totalAmount: grandTotal,
+        status: 'Confirmed',
+        paymentStatus: 'Paid',
+        passengersList: finalPassengersList,
+      });
 
-    setCreatedBooking(newBooking);
-    setStep(4);
+      setCreatedBooking(newBooking);
+      setStep(4);
+      setIsProcessingPayment(false);
+    }, 800);
   };
 
   return (
@@ -458,11 +463,19 @@ export default function BookingCheckoutPage() {
 
               <Button
                 onClick={handleSimulatePayment}
+                disabled={isProcessingPayment}
                 variant="accent"
                 size="lg"
-                className="w-full max-w-sm mx-auto font-black py-3 text-slate-950 text-sm shadow-xl cursor-pointer"
+                className="w-full max-w-sm mx-auto font-black py-3 text-slate-950 text-sm shadow-xl cursor-pointer disabled:opacity-75 flex items-center justify-center gap-2"
               >
-                PAY & CONFIRM BOOKING ({formatCurrency(grandTotal)})
+                {isProcessingPayment ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin text-slate-950" />
+                    <span>Verifying & Confirming Payment...</span>
+                  </>
+                ) : (
+                  `PAY & CONFIRM BOOKING (${formatCurrency(grandTotal)})`
+                )}
               </Button>
             </div>
           </Card>

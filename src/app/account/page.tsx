@@ -28,6 +28,7 @@ import {
   Calendar,
   Sparkles,
   Lock,
+  Loader2,
 } from 'lucide-react';
 
 interface CoTraveller {
@@ -73,6 +74,12 @@ export default function CustomerAccountPage() {
   const [newCoAge, setNewCoAge] = useState('');
   const [newCoGender, setNewCoGender] = useState('Male');
   const [newCoRelation, setNewCoRelation] = useState('Family');
+
+  // Loading States for Smooth User Feedback
+  const [isSendingOtp, setIsSendingOtp] = useState(false);
+  const [isVerifyingOtp, setIsVerifyingOtp] = useState(false);
+  const [isSavingProfile, setIsSavingProfile] = useState(false);
+  const [isSavingCo, setIsSavingCo] = useState(false);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -123,9 +130,13 @@ export default function CustomerAccountPage() {
       return;
     }
     setErrorMsg('');
-    setOtp(['', '', '', '', '', '']);
-    setStep('otp');
-    setResendTimer(57);
+    setIsSendingOtp(true);
+    setTimeout(() => {
+      setOtp(['', '', '', '', '', '']);
+      setStep('otp');
+      setResendTimer(57);
+      setIsSendingOtp(false);
+    }, 400);
   };
 
   const handleOtpChange = (index: number, value: string) => {
@@ -142,55 +153,67 @@ export default function CustomerAccountPage() {
 
   const handleVerifyOtp = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
+    setIsVerifyingOtp(true);
 
-    const normalizeDigits = (str: string) => str.replace(/\D/g, '').slice(-10);
-    const isEmail = identifier.includes('@');
-    const inputVal = identifier.trim();
-    const inputDigits = normalizeDigits(inputVal);
+    setTimeout(() => {
+      const normalizeDigits = (str: string) => str.replace(/\D/g, '').slice(-10);
+      const isEmail = identifier.includes('@');
+      const inputVal = identifier.trim();
+      const inputDigits = normalizeDigits(inputVal);
 
-    const allBookings = cloudStore.getBookings();
-    const existingBooking = allBookings.find((b) => {
-      const bEmail = (b.customerEmail || '').toLowerCase();
-      const bDigits = normalizeDigits(b.customerPhone || '');
-      return (isEmail && bEmail === inputVal.toLowerCase()) || (!isEmail && inputDigits && bDigits === inputDigits);
-    });
+      const allBookings = cloudStore.getBookings();
+      const existingBooking = allBookings.find((b) => {
+        const bEmail = (b.customerEmail || '').toLowerCase();
+        const bDigits = normalizeDigits(b.customerPhone || '');
+        return (isEmail && bEmail === inputVal.toLowerCase()) || (!isEmail && inputDigits && bDigits === inputDigits);
+      });
 
-    const email = isEmail ? inputVal : `${inputDigits || inputVal.replace(/\D/g, '')}@tripcustomizer-customer.com`;
-    const phone = !isEmail ? inputVal : '+91 9876543210';
-    const name = fullName.trim() || (existingBooking ? existingBooking.customerName : isEmail ? inputVal.split('@')[0] : `Traveler ${inputVal.slice(-4)}`);
+      const email = isEmail ? inputVal : `${inputDigits || inputVal.replace(/\D/g, '')}@tripcustomizer-customer.com`;
+      const phone = !isEmail ? inputVal : '+91 9876543210';
+      const name = fullName.trim() || (existingBooking ? existingBooking.customerName : isEmail ? inputVal.split('@')[0] : `Traveler ${inputVal.slice(-4)}`);
 
-    login(email, phone, name);
+      login(email, phone, name);
+      setIsVerifyingOtp(false);
+    }, 500);
   };
 
   const handleSaveProfile = (e: React.FormEvent) => {
     e.preventDefault();
-    updateProfile({
-      name: profileName,
-      phone: profilePhone,
-      city: profileCity,
-    });
-    setEditing(false);
+    setIsSavingProfile(true);
+    setTimeout(() => {
+      updateProfile({
+        name: profileName,
+        phone: profilePhone,
+        city: profileCity,
+      });
+      setEditing(false);
+      setIsSavingProfile(false);
+    }, 400);
   };
 
   const handleAddCoTraveller = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newCoName.trim()) return;
 
-    const newTraveller: CoTraveller = {
-      id: `cot-${Date.now()}`,
-      name: newCoName.trim(),
-      age: parseInt(newCoAge, 10) || 25,
-      gender: newCoGender,
-      relation: newCoRelation,
-    };
+    setIsSavingCo(true);
+    setTimeout(() => {
+      const newTraveller: CoTraveller = {
+        id: `cot-${Date.now()}`,
+        name: newCoName.trim(),
+        age: parseInt(newCoAge, 10) || 25,
+        gender: newCoGender,
+        relation: newCoRelation,
+      };
 
-    const updated = [...coTravellers, newTraveller];
-    setCoTravellers(updated);
-    cloudStore.saveCoTravellers(updated, user?.uid);
+      const updated = [...coTravellers, newTraveller];
+      setCoTravellers(updated);
+      cloudStore.saveCoTravellers(updated, user?.uid);
 
-    setNewCoName('');
-    setNewCoAge('');
-    setShowAddCoModal(false);
+      setNewCoName('');
+      setNewCoAge('');
+      setShowAddCoModal(false);
+      setIsSavingCo(false);
+    }, 400);
   };
 
   const handleRemoveCoTraveller = (id: string) => {
@@ -269,9 +292,17 @@ export default function CustomerAccountPage() {
 
                       <button
                         type="submit"
-                        className="w-full bg-slate-200 hover:bg-amber-400 hover:text-slate-950 text-slate-700 font-bold py-3 rounded-xl text-xs transition-all shadow-xs cursor-pointer active:scale-98"
+                        disabled={isSendingOtp}
+                        className="w-full bg-slate-200 hover:bg-amber-400 hover:text-slate-950 text-slate-700 font-bold py-3 rounded-xl text-xs transition-all shadow-xs cursor-pointer active:scale-98 disabled:opacity-70 flex items-center justify-center gap-2"
                       >
-                        Log In
+                        {isSendingOtp ? (
+                          <>
+                            <Loader2 className="w-4 h-4 animate-spin text-slate-950" />
+                            <span>Sending OTP...</span>
+                          </>
+                        ) : (
+                          'Log In'
+                        )}
                       </button>
                     </form>
                   </div>
@@ -318,9 +349,17 @@ export default function CustomerAccountPage() {
 
                       <button
                         type="submit"
-                        className="w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-black py-3 rounded-xl text-xs transition-all shadow-md cursor-pointer active:scale-98"
+                        disabled={isVerifyingOtp}
+                        className="w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-black py-3 rounded-xl text-xs transition-all shadow-md cursor-pointer active:scale-98 disabled:opacity-70 flex items-center justify-center gap-2"
                       >
-                        Verify & Log In →
+                        {isVerifyingOtp ? (
+                          <>
+                            <Loader2 className="w-4 h-4 animate-spin text-slate-950" />
+                            <span>Verifying & Signing In...</span>
+                          </>
+                        ) : (
+                          'Verify & Log In →'
+                        )}
                       </button>
                     </form>
                   </div>
@@ -680,8 +719,15 @@ export default function CustomerAccountPage() {
                         />
                       </div>
                       <div className="sm:col-span-3 flex justify-end gap-2 pt-2">
-                        <Button type="submit" variant="primary" size="sm" className="font-bold cursor-pointer">
-                          Save Changes
+                        <Button type="submit" disabled={isSavingProfile} variant="primary" size="sm" className="font-bold cursor-pointer flex items-center gap-1.5 disabled:opacity-70">
+                          {isSavingProfile ? (
+                            <>
+                              <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                              <span>Saving...</span>
+                            </>
+                          ) : (
+                            'Save Changes'
+                          )}
                         </Button>
                       </div>
                     </form>
@@ -812,8 +858,15 @@ export default function CustomerAccountPage() {
                 <Button type="button" onClick={() => setShowAddCoModal(false)} variant="outline" size="sm">
                   Cancel
                 </Button>
-                <Button type="submit" variant="primary" size="sm" className="font-bold cursor-pointer">
-                  Save Co-Traveller
+                <Button type="submit" disabled={isSavingCo} variant="primary" size="sm" className="font-bold cursor-pointer flex items-center gap-1.5 disabled:opacity-70">
+                  {isSavingCo ? (
+                    <>
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                      <span>Saving...</span>
+                    </>
+                  ) : (
+                    'Save Co-Traveller'
+                  )}
                 </Button>
               </div>
             </form>
