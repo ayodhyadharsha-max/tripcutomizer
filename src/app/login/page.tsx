@@ -60,7 +60,12 @@ export default function LoginPage() {
         const confirmation = await signInWithPhoneNumber(auth, formattedPhone, (window as any).recaptchaVerifier);
         setConfirmationResult(confirmation);
       } catch (err: any) {
-        console.warn('Firebase SMS trigger info:', err?.message || err);
+        console.error('Firebase SMS Error:', err);
+        if (err?.code === 'auth/unauthorized-domain') {
+          setErrorMsg('Firebase Error: Domain tripcutomizer.vercel.app is not added in Firebase Authorized Domains.');
+        } else if (err?.message) {
+          setErrorMsg(`Firebase Info: ${err.message}`);
+        }
       }
     }
 
