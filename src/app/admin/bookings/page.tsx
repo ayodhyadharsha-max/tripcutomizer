@@ -13,12 +13,17 @@ export default function AdminBookingsPage() {
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const loadBookings = () => {
-    setBookings(cloudStore.getBookings());
+    const fresh = cloudStore.getBookings();
+    setBookings((prev) => {
+      if (JSON.stringify(prev) === JSON.stringify(fresh)) return prev;
+      return fresh;
+    });
   };
 
   const handleRefresh = () => {
     setIsRefreshing(true);
-    loadBookings();
+    const fresh = cloudStore.getBookings();
+    setBookings(fresh);
     setTimeout(() => setIsRefreshing(false), 600);
   };
 
@@ -28,7 +33,8 @@ export default function AdminBookingsPage() {
     const handleStorageChange = () => loadBookings();
     window.addEventListener('storage', handleStorageChange);
     window.addEventListener('cloudstore_update', handleStorageChange);
-    const pollTimer = setInterval(loadBookings, 2000);
+    // Background interval check with zero-flicker guard
+    const pollTimer = setInterval(loadBookings, 3000);
     return () => {
       window.removeEventListener('storage', handleStorageChange);
       window.removeEventListener('cloudstore_update', handleStorageChange);

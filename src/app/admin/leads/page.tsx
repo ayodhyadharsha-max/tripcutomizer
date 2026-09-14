@@ -12,12 +12,17 @@ export default function AdminLeadsPage() {
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const loadLeads = () => {
-    setLeads(cloudStore.getLeads());
+    const fresh = cloudStore.getLeads();
+    setLeads((prev) => {
+      if (JSON.stringify(prev) === JSON.stringify(fresh)) return prev;
+      return fresh;
+    });
   };
 
   const handleRefresh = () => {
     setIsRefreshing(true);
-    loadLeads();
+    const fresh = cloudStore.getLeads();
+    setLeads(fresh);
     setTimeout(() => setIsRefreshing(false), 600);
   };
 
@@ -25,7 +30,7 @@ export default function AdminLeadsPage() {
     loadLeads();
     window.addEventListener('storage', loadLeads);
     window.addEventListener('cloudstore_update', loadLeads);
-    const pollTimer = setInterval(loadLeads, 2000);
+    const pollTimer = setInterval(loadLeads, 3000);
     return () => {
       window.removeEventListener('storage', loadLeads);
       window.removeEventListener('cloudstore_update', loadLeads);

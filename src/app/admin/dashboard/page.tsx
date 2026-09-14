@@ -13,13 +13,22 @@ export default function AdminDashboardPage() {
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const loadData = () => {
-    setBookings(cloudStore.getBookings());
-    setLeads(cloudStore.getLeads());
+    const freshBookings = cloudStore.getBookings();
+    const freshLeads = cloudStore.getLeads();
+    setBookings((prev) => {
+      if (JSON.stringify(prev) === JSON.stringify(freshBookings)) return prev;
+      return freshBookings;
+    });
+    setLeads((prev) => {
+      if (JSON.stringify(prev) === JSON.stringify(freshLeads)) return prev;
+      return freshLeads;
+    });
   };
 
   const handleRefresh = () => {
     setIsRefreshing(true);
-    loadData();
+    setBookings(cloudStore.getBookings());
+    setLeads(cloudStore.getLeads());
     setTimeout(() => setIsRefreshing(false), 600);
   };
 
@@ -27,7 +36,7 @@ export default function AdminDashboardPage() {
     loadData();
     window.addEventListener('storage', loadData);
     window.addEventListener('cloudstore_update', loadData);
-    const pollTimer = setInterval(loadData, 2000);
+    const pollTimer = setInterval(loadData, 3000);
     return () => {
       window.removeEventListener('storage', loadData);
       window.removeEventListener('cloudstore_update', loadData);
