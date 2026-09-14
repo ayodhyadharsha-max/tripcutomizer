@@ -38,6 +38,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
       return;
     }
     setErrorMsg('');
+    setOtp(['1', '2', '3', '4', '5', '6']);
     setStep('otp');
     setResendTimer(57);
   };
@@ -167,11 +168,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
 
             {/* STEP 2: OTP Verification */}
             {step === 'otp' && (
-              <div className="space-y-6 pt-2">
+              <div className="space-y-5 pt-2">
                 <div>
                   <h3 className="text-xl font-black text-slate-900">OTP verification</h3>
                   <div className="flex items-center space-x-1 text-xs text-slate-500 font-medium mt-1">
-                    <span>Enter OTP sent to <strong className="text-slate-800">{identifier}</strong></span>
+                    <span>OTP code sent to <strong className="text-slate-800">{identifier}</strong></span>
                     <button
                       onClick={() => setStep('input')}
                       className="text-brand-600 hover:text-brand-700 p-0.5 cursor-pointer"
@@ -182,7 +183,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                   </div>
                 </div>
 
-                <form onSubmit={handleVerifyOtp} className="space-y-5">
+                {/* Instant Verification Code Hint */}
+                <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl text-amber-900 text-xs font-bold flex items-center justify-between">
+                  <span>⚡ Instant Code: <strong>123456</strong> (Auto-filled)</span>
+                </div>
+
+                <form onSubmit={handleVerifyOtp} className="space-y-4">
                   {/* 6 OTP Boxes */}
                   <div className="flex justify-between gap-1.5 sm:gap-2">
                     {otp.map((digit, idx) => (
@@ -198,24 +204,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                     ))}
                   </div>
 
-                  <div className="flex items-center justify-between text-[11px] text-slate-500 font-bold">
-                    <span>Resend OTP in {resendTimer} seconds</span>
-                    {resendTimer === 0 && (
-                      <button
-                        type="button"
-                        onClick={() => setResendTimer(57)}
-                        className="text-brand-600 hover:underline cursor-pointer"
-                      >
-                        Resend OTP
-                      </button>
-                    )}
-                  </div>
-
                   <button
                     type="submit"
                     className="w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-black py-3 rounded-xl text-xs transition-all shadow-md cursor-pointer active:scale-98"
                   >
-                    Verify & Log In
+                    Verify & Log In →
                   </button>
                 </form>
               </div>
