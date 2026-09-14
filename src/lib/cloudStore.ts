@@ -95,7 +95,12 @@ const getStoredData = <T>(key: string, fallback: T): T => {
 const setStoredData = <T>(key: string, data: T): void => {
   if (typeof window === 'undefined') return;
   try {
-    localStorage.setItem(key, JSON.stringify(data));
+    const rawExisting = localStorage.getItem(key);
+    const serializedNew = JSON.stringify(data);
+    // Crucial anti-flicker guard: Only update & emit events if data actually changed
+    if (rawExisting === serializedNew) return;
+
+    localStorage.setItem(key, serializedNew);
     // Trigger window events for instant cross-tab & same-tab realtime sync
     window.dispatchEvent(new Event('storage'));
     window.dispatchEvent(new CustomEvent('cloudstore_update', { detail: { key, data } }));
@@ -210,6 +215,11 @@ const initCloudFirestoreListeners = () => {
   // Immediate sync from Server API
   syncFromServerApi();
 
+  // Periodic background sync from Server API every 4s
+  setInterval(() => {
+    syncFromServerApi();
+  }, 4000);
+
   if (db) {
     try {
       // Listen to live Bookings collection in Cloud Firestore
@@ -268,7 +278,6 @@ export const cloudStore = {
   // --- BOOKINGS ---
   getBookings: (): CustomerBooking[] => {
     initCloudFirestoreListeners();
-    syncFromServerApi();
     return getStoredData<CustomerBooking[]>(STORAGE_KEYS.BOOKINGS, DEFAULT_BOOKINGS);
   },
 
@@ -342,7 +351,6 @@ export const cloudStore = {
   // --- LEADS / ENQUIRIES ---
   getLeads: (): CustomerLead[] => {
     initCloudFirestoreListeners();
-    syncFromServerApi();
     return getStoredData<CustomerLead[]>(STORAGE_KEYS.LEADS, DEFAULT_LEADS);
   },
 
