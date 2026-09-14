@@ -15,10 +15,10 @@ import {
   Star, Clock, MapPin, CheckCircle2, ChevronRight, ChevronDown, ChevronUp,
   Hotel, Plane, Utensils, ShieldCheck, MessageCircle, Share2, Download,
   PhoneCall, Sparkles, Tag, Check, X, Car, Info, Users, ArrowRight,
-  CheckCircle, XCircle, FileText, Plus, Minus, Calendar, ArrowLeft, Baby, UserCheck, Train, Bus
+  CheckCircle, XCircle, FileText, Plus, Minus, Calendar, ArrowLeft, Baby, UserCheck, AlertTriangle
 } from 'lucide-react';
 
-export type ChildAgeCategory = 'infant' | 'childNoBed' | 'childWithBed';
+export type ChildAgeCategory = 'under5' | 'age5to9' | 'age10to14' | 'age15to17' | 'age18plus';
 
 export interface ChildConfig {
   ageCategory: ChildAgeCategory;
@@ -140,7 +140,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
     if (!hasChild) {
       updated[roomIdx].children = [];
     } else if (updated[roomIdx].children.length === 0) {
-      updated[roomIdx].children = [{ ageCategory: 'childWithBed' }];
+      updated[roomIdx].children = [{ ageCategory: 'age5to9' }];
     }
     setRooms(updated);
     setIsPriceCalculated(false);
@@ -150,7 +150,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
     const updated = [...rooms];
     const currentList = updated[roomIdx].children;
     if (count > currentList.length) {
-      const added = Array(count - currentList.length).fill(null).map(() => ({ ageCategory: 'childWithBed' as ChildAgeCategory }));
+      const added = Array(count - currentList.length).fill(null).map(() => ({ ageCategory: 'age5to9' as ChildAgeCategory }));
       updated[roomIdx].children = [...currentList, ...added];
     } else {
       updated[roomIdx].children = currentList.slice(0, count);
@@ -183,9 +183,15 @@ export default function PackageDetailPage({ params }: { params: { destination: s
   // Aggregated Travellers Breakdown
   const totalAdults = rooms.reduce((sum, r) => sum + r.adults, 0);
   const allChildren = rooms.flatMap((r) => r.children);
-  const totalInfants = allChildren.filter((c) => c.ageCategory === 'infant').length;
-  const totalChildNoBed = allChildren.filter((c) => c.ageCategory === 'childNoBed').length;
-  const totalChildWithBed = allChildren.filter((c) => c.ageCategory === 'childWithBed').length;
+
+  // Exact Age Categories Breakdown
+  const totalUnder5 = allChildren.filter((c) => c.ageCategory === 'under5').length; // FREE (0%)
+  const totalAge5to9 = allChildren.filter((c) => c.ageCategory === 'age5to9').length; // 50%
+  const totalAge10to14 = allChildren.filter((c) => c.ageCategory === 'age10to14').length; // 80% (Child with bed)
+  const totalAge15to17 = allChildren.filter((c) => c.ageCategory === 'age15to17').length; // 80%
+  const totalAge18plus = allChildren.filter((c) => c.ageCategory === 'age18plus').length; // 100% (Full Adult)
+
+  const effectiveAdultsCount = totalAdults + totalAge18plus;
   const totalChildrenCount = allChildren.length;
   const totalTravellersCount = totalAdults + totalChildrenCount;
 
@@ -195,12 +201,18 @@ export default function PackageDetailPage({ params }: { params: { destination: s
   const originalPricePerPerson = pkg.discountPrice ? Math.round(pkg.discountPrice * tierMultiplier) : Math.round(basePricePerPerson * 1.18);
   const discountPercent = Math.round(((originalPricePerPerson - basePricePerPerson) / originalPricePerPerson) * 100);
 
-  // Dynamic Total Calculation: Adults + Child With Bed (80%) + Child No Bed (60%) + Infant (20%)
+  // Dynamic Total Calculation:
+  // Below 5 = FREE (0%)
+  // 5 to 9 = 50%
+  // 10 to 14 = 80%
+  // 15 to 17 = 80%
+  // 18+ = 100% (Full Adult Fare)
   const calculatedTotalPrice = Math.round(
-    (totalAdults * basePricePerPerson) +
-    (totalChildWithBed * basePricePerPerson * 0.8) +
-    (totalChildNoBed * basePricePerPerson * 0.6) +
-    (totalInfants * basePricePerPerson * 0.2)
+    (effectiveAdultsCount * basePricePerPerson) +
+    (totalAge15to17 * basePricePerPerson * 0.8) +
+    (totalAge10to14 * basePricePerPerson * 0.8) +
+    (totalAge5to9 * basePricePerPerson * 0.5) +
+    (totalUnder5 * 0)
   );
   const rewardPoints = Math.round(basePricePerPerson * 0.01);
 
@@ -1032,7 +1044,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                   <form onSubmit={handleCalculatePrice} className="space-y-6">
                     <div className="grid grid-cols-1 space-y-3">
                       
-                      {/* Departure City / Joining Location Dropdown (DYNAMIC DESTINATION OPTIONS) */}
+                      {/* Departure City / Joining Location Dropdown */}
                       <div className="space-y-1.5">
                         <label className="text-xs font-bold text-slate-700 block">Joining Location / Departure City</label>
                         <div className="relative">
@@ -1109,140 +1121,164 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                       </div>
 
                       {/* Room Configuration Cards */}
-                      {rooms.map((room, roomIdx) => (
-                        <div key={roomIdx} className="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-5">
-                          <div className="flex items-center justify-between border-b border-slate-200/80 pb-2">
-                            <span className="font-black text-xs text-brand-700 uppercase tracking-wider flex items-center space-x-1.5">
-                              <span>🏨 Room {roomIdx + 1}</span>
-                              <span className="text-slate-400 font-normal">({room.adults} Adults{room.hasChildren ? `, ${room.children.length} Children` : ''})</span>
-                            </span>
-                            {rooms.length > 1 && (
-                              <button
-                                type="button"
-                                onClick={() => removeRoom(roomIdx)}
-                                className="text-[11px] text-rose-600 font-bold hover:underline"
-                              >
-                                Remove Room
-                              </button>
+                      {rooms.map((room, roomIdx) => {
+                        const olderTeensCount = room.children.filter((c) => c.ageCategory === 'age15to17' || c.ageCategory === 'age18plus').length;
+                        const requiresSecondRoom = olderTeensCount >= 2;
+
+                        return (
+                          <div key={roomIdx} className="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-5">
+                            <div className="flex items-center justify-between border-b border-slate-200/80 pb-2">
+                              <span className="font-black text-xs text-brand-700 uppercase tracking-wider flex items-center space-x-1.5">
+                                <span>🏨 Room {roomIdx + 1}</span>
+                                <span className="text-slate-400 font-normal">({room.adults} Adults{room.hasChildren ? `, ${room.children.length} Children` : ''})</span>
+                              </span>
+                              {rooms.length > 1 && (
+                                <button
+                                  type="button"
+                                  onClick={() => removeRoom(roomIdx)}
+                                  className="text-[11px] text-rose-600 font-bold hover:underline"
+                                >
+                                  Remove Room
+                                </button>
+                              )}
+                            </div>
+
+                            {/* 2nd Room Recommendation Notice for 2+ older kids (17+ yrs) */}
+                            {requiresSecondRoom && (
+                              <div className="p-3 bg-amber-100/90 border border-amber-300 rounded-xl text-xs font-semibold text-amber-950 flex items-start space-x-2 animate-in fade-in">
+                                <AlertTriangle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+                                <div>
+                                  <strong>Hotel Occupancy Policy:</strong> You have selected 2 older children (15-17+ yrs) in Room {roomIdx + 1}. Hotel rules mandate adding a <strong>2nd Room</strong> for extra bed & occupancy limits.
+                                  <button
+                                    type="button"
+                                    onClick={addRoom}
+                                    className="block font-black underline text-brand-700 mt-1 cursor-pointer"
+                                  >
+                                    + Click here to add 2nd Room →
+                                  </button>
+                                </div>
+                              </div>
                             )}
-                          </div>
 
-                          {/* 1. Adults Selector */}
-                          <div className="space-y-2">
-                            <label className="text-xs font-bold text-slate-800 flex items-center justify-between">
-                              <span>Adults (12+ yrs)</span>
-                              <span className="text-[11px] text-slate-500 font-normal">Min 1 adult per room</span>
-                            </label>
-                            <div className="flex items-center space-x-3 bg-white p-2 rounded-xl border border-slate-300 max-w-xs">
-                              <button
-                                type="button"
-                                onClick={() => updateAdults(roomIdx, -1)}
-                                className="w-8 h-8 rounded-lg bg-slate-100 font-black text-slate-700 hover:bg-slate-200 flex items-center justify-center cursor-pointer"
-                              >
-                                -
-                              </button>
-                              <span className="flex-1 text-center font-black text-sm text-slate-900">{room.adults} Adults</span>
-                              <button
-                                type="button"
-                                onClick={() => updateAdults(roomIdx, 1)}
-                                className="w-8 h-8 rounded-lg bg-slate-100 font-black text-slate-700 hover:bg-slate-200 flex items-center justify-center cursor-pointer"
-                              >
-                                +
-                              </button>
-                            </div>
-                          </div>
-
-                          {/* 2. Are Any Children Travelling? (Yes / No Toggle) */}
-                          <div className="space-y-2 pt-2 border-t border-slate-200/60">
-                            <label className="text-xs font-bold text-slate-800 block">
-                              Are any children travelling in Room {roomIdx + 1}?
-                            </label>
-                            <div className="flex items-center space-x-2">
-                              <button
-                                type="button"
-                                onClick={() => setHasChildren(roomIdx, false)}
-                                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                                  !room.hasChildren
-                                    ? 'bg-slate-900 text-white shadow-xs'
-                                    : 'bg-white border border-slate-300 text-slate-700 hover:bg-slate-100'
-                                }`}
-                              >
-                                ❌ No Children
-                              </button>
-
-                              <button
-                                type="button"
-                                onClick={() => setHasChildren(roomIdx, true)}
-                                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                                  room.hasChildren
-                                    ? 'bg-brand-600 text-white shadow-xs'
-                                    : 'bg-white border border-slate-300 text-slate-700 hover:bg-slate-100'
-                                }`}
-                              >
-                                👶 Yes, Children Travelling
-                              </button>
-                            </div>
-                          </div>
-
-                          {/* 3. CONDITIONAL CHILD CONFIGURATION (Only shown if hasChildren === true) */}
-                          {room.hasChildren && (
-                            <div className="p-4 bg-white rounded-xl border border-brand-200 space-y-4 animate-in fade-in duration-200">
-                              
-                              {/* Step 3a: Select Number of Children */}
-                              <div className="space-y-2">
-                                <label className="text-xs font-bold text-slate-800 block">
-                                  Select Number of Children in Room {roomIdx + 1}:
-                                </label>
-                                <div className="flex items-center space-x-2">
-                                  {[1, 2, 3].map((num) => (
-                                    <button
-                                      key={num}
-                                      type="button"
-                                      onClick={() => setChildrenCount(roomIdx, num)}
-                                      className={`w-10 h-10 rounded-xl text-xs font-black transition-all cursor-pointer ${
-                                        room.children.length === num
-                                          ? 'bg-brand-600 text-white shadow-xs'
-                                          : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-                                      }`}
-                                    >
-                                      {num}
-                                    </button>
-                                  ))}
-                                </div>
+                            {/* 1. Adults Selector */}
+                            <div className="space-y-2">
+                              <label className="text-xs font-bold text-slate-800 flex items-center justify-between">
+                                <span>Adults (12+ yrs)</span>
+                                <span className="text-[11px] text-slate-500 font-normal">Min 1 adult per room</span>
+                              </label>
+                              <div className="flex items-center space-x-3 bg-white p-2 rounded-xl border border-slate-300 max-w-xs">
+                                <button
+                                  type="button"
+                                  onClick={() => updateAdults(roomIdx, -1)}
+                                  className="w-8 h-8 rounded-lg bg-slate-100 font-black text-slate-700 hover:bg-slate-200 flex items-center justify-center cursor-pointer"
+                                >
+                                  -
+                                </button>
+                                <span className="flex-1 text-center font-black text-sm text-slate-900">{room.adults} Adults</span>
+                                <button
+                                  type="button"
+                                  onClick={() => updateAdults(roomIdx, 1)}
+                                  className="w-8 h-8 rounded-lg bg-slate-100 font-black text-slate-700 hover:bg-slate-200 flex items-center justify-center cursor-pointer"
+                                >
+                                  +
+                                </button>
                               </div>
+                            </div>
 
-                              {/* Step 3b: Select Age Category for Each Child */}
-                              <div className="space-y-3 pt-2 border-t border-slate-100">
-                                <span className="text-xs font-extrabold text-slate-700 block">
-                                  Select Age for Each Child:
-                                </span>
+                            {/* 2. Are Any Children Travelling? (Yes / No Toggle) */}
+                            <div className="space-y-2 pt-2 border-t border-slate-200/60">
+                              <label className="text-xs font-bold text-slate-800 block">
+                                Are any children travelling in Room {roomIdx + 1}?
+                              </label>
+                              <div className="flex items-center space-x-2">
+                                <button
+                                  type="button"
+                                  onClick={() => setHasChildren(roomIdx, false)}
+                                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                                    !room.hasChildren
+                                      ? 'bg-slate-900 text-white shadow-xs'
+                                      : 'bg-white border border-slate-300 text-slate-700 hover:bg-slate-100'
+                                  }`}
+                                >
+                                  ❌ No Children
+                                </button>
 
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                  {room.children.map((child, childIdx) => (
-                                    <div key={childIdx} className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
-                                      <label className="text-[11px] font-bold text-slate-800 flex items-center justify-between">
-                                        <span>Child {childIdx + 1} Age:</span>
-                                      </label>
+                                <button
+                                  type="button"
+                                  onClick={() => setHasChildren(roomIdx, true)}
+                                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                                    room.hasChildren
+                                      ? 'bg-brand-600 text-white shadow-xs'
+                                      : 'bg-white border border-slate-300 text-slate-700 hover:bg-slate-100'
+                                  }`}
+                                >
+                                  👶 Yes, Children Travelling
+                                </button>
+                              </div>
+                            </div>
 
-                                      <select
-                                        value={child.ageCategory}
-                                        onChange={(e) => updateChildAgeCategory(roomIdx, childIdx, e.target.value as ChildAgeCategory)}
-                                        className="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-2 text-xs font-bold text-slate-900 focus:outline-none focus:border-brand-600 cursor-pointer"
+                            {/* 3. CONDITIONAL CHILD CONFIGURATION (Only shown if hasChildren === true) */}
+                            {room.hasChildren && (
+                              <div className="p-4 bg-white rounded-xl border border-brand-200 space-y-4 animate-in fade-in duration-200">
+                                
+                                {/* Step 3a: Select Number of Children */}
+                                <div className="space-y-2">
+                                  <label className="text-xs font-bold text-slate-800 block">
+                                    Select Number of Children in Room {roomIdx + 1}:
+                                  </label>
+                                  <div className="flex items-center space-x-2">
+                                    {[1, 2, 3].map((num) => (
+                                      <button
+                                        key={num}
+                                        type="button"
+                                        onClick={() => setChildrenCount(roomIdx, num)}
+                                        className={`w-10 h-10 rounded-xl text-xs font-black transition-all cursor-pointer ${
+                                          room.children.length === num
+                                            ? 'bg-brand-600 text-white shadow-xs'
+                                            : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                                        }`}
                                       >
-                                        <option value="infant">🍼 Below 2 yrs (Infant - 20% Fare)</option>
-                                        <option value="childNoBed">🧒 2 - 5 yrs (Child No Bed - 60% Fare)</option>
-                                        <option value="childWithBed">🛌 6 - 11 yrs (Child With Bed - 80% Fare)</option>
-                                      </select>
-                                    </div>
-                                  ))}
+                                        {num}
+                                      </button>
+                                    ))}
+                                  </div>
                                 </div>
+
+                                {/* Step 3b: Select Age Category for Each Child */}
+                                <div className="space-y-3 pt-2 border-t border-slate-100">
+                                  <span className="text-xs font-extrabold text-slate-700 block">
+                                    Select Age Category for Each Child:
+                                  </span>
+
+                                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    {room.children.map((child, childIdx) => (
+                                      <div key={childIdx} className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
+                                        <label className="text-[11px] font-bold text-slate-800 flex items-center justify-between">
+                                          <span>Child {childIdx + 1} Age:</span>
+                                        </label>
+
+                                        <select
+                                          value={child.ageCategory}
+                                          onChange={(e) => updateChildAgeCategory(roomIdx, childIdx, e.target.value as ChildAgeCategory)}
+                                          className="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-2 text-xs font-bold text-slate-900 focus:outline-none focus:border-brand-600 cursor-pointer"
+                                        >
+                                          <option value="under5">🍼 Below 5 yrs (No Fare - FREE)</option>
+                                          <option value="age5to9">🧒 5 - 9 yrs (50% Fare - Child No Bed)</option>
+                                          <option value="age10to14">🛌 10 - 14 yrs (80% Fare - Extra Bed)</option>
+                                          <option value="age15to17">🧑 15 - 17 yrs (80% Fare - Teenager)</option>
+                                          <option value="age18plus">👤 18+ yrs (Full Adult Fare - 100%)</option>
+                                        </select>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+
                               </div>
+                            )}
 
-                            </div>
-                          )}
-
-                        </div>
-                      ))}
+                          </div>
+                        );
+                      })}
                     </div>
 
                     {/* STEP 3: PASSENGER NAMES & DETAILS FORM */}
@@ -1336,7 +1372,13 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                             return (
                               <div key={cKey} className="p-3.5 bg-amber-50/70 rounded-xl border border-amber-200 space-y-2 shadow-2xs">
                                 <span className="font-bold text-xs text-amber-900 flex items-center space-x-1.5">
-                                  <span>👶 Child {childIdx + 1} ({child.ageCategory === 'infant' ? 'Infant < 2 yrs' : child.ageCategory === 'childNoBed' ? '2-5 yrs No Bed' : '6-11 yrs With Bed'})</span>
+                                  <span>👶 Child {childIdx + 1} ({
+                                    child.ageCategory === 'under5' ? 'Below 5 yrs (FREE)' :
+                                    child.ageCategory === 'age5to9' ? '5-9 yrs (50% Fare)' :
+                                    child.ageCategory === 'age10to14' ? '10-14 yrs (80% Fare)' :
+                                    child.ageCategory === 'age15to17' ? '15-17 yrs (80% Fare)' :
+                                    '18+ yrs (Full Adult)'
+                                  })</span>
                                 </span>
 
                                 <div className="grid grid-cols-12 gap-2 text-xs">
@@ -1485,11 +1527,12 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                       <div className="text-2xl font-black text-emerald-700">
                         {formatCurrency(calculatedTotalPrice)}
                       </div>
-                      <div className="text-[10px] text-emerald-800 font-medium space-y-0.5 border-t border-emerald-200 pt-1 mt-1">
-                        <div>• {totalAdults} Adults</div>
-                        {totalChildWithBed > 0 && <div>• {totalChildWithBed} Children (With Bed - 80%)</div>}
-                        {totalChildNoBed > 0 && <div>• {totalChildNoBed} Children (No Bed - 60%)</div>}
-                        {totalInfants > 0 && <div>• {totalInfants} Infants (20%)</div>}
+                      <div className="text-[10px] text-emerald-900 font-medium space-y-0.5 border-t border-emerald-200 pt-1 mt-1">
+                        <div>• {effectiveAdultsCount} Adults / 18+ yrs</div>
+                        {totalAge15to17 > 0 && <div>• {totalAge15to17} Teens 15-17 yrs (80% Fare)</div>}
+                        {totalAge10to14 > 0 && <div>• {totalAge10to14} Children 10-14 yrs (80% Fare - Extra Bed)</div>}
+                        {totalAge5to9 > 0 && <div>• {totalAge5to9} Children 5-9 yrs (50% Fare)</div>}
+                        {totalUnder5 > 0 && <div className="text-emerald-700 font-bold">• {totalUnder5} Children Below 5 yrs (FREE - 0% Fare)</div>}
                       </div>
                     </div>
                   )}
