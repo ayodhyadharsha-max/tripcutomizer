@@ -1,125 +1,213 @@
 'use client';
 
-import React, { useState } from 'react';
-import Link from 'next/link';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Container } from '@/components/ui/Container';
 import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
-import { User, Lock, Phone, Mail, ShieldCheck, ArrowRight, Briefcase } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
+import { cloudStore } from '@/lib/cloudStore';
+import { Pencil, ShieldCheck } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
-  const [loginMethod, setLoginMethod] = useState<'password' | 'otp'>('password');
-  const [identifier, setIdentifier] = useState('demo@tripcustomizer.com');
-  const [password, setPassword] = useState('password123');
-  const [otpSent, setOtpSent] = useState(false);
-  const [otpCode, setOtpCode] = useState('');
+  const { login, isLoggedIn } = useAuth();
+  const [step, setStep] = useState<'input' | 'otp'>('input');
+  const [identifier, setIdentifier] = useState('');
+  const [otp, setOtp] = useState(['', '', '', '', '', '']);
+  const [resendTimer, setResendTimer] = useState(57);
+  const [errorMsg, setErrorMsg] = useState('');
 
-  const handleLogin = (e: React.FormEvent) => {
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push('/account');
+    }
+  }, [isLoggedIn, router]);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (step === 'otp' && resendTimer > 0) {
+      timer = setInterval(() => {
+        setResendTimer((prev) => prev - 1);
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+  }, [step, resendTimer]);
+
+  const handleSendOtp = (e: React.FormEvent) => {
     e.preventDefault();
-    if (loginMethod === 'otp' && !otpSent) {
-      setOtpSent(true);
+    if (!identifier.trim()) {
+      setErrorMsg('Please enter a valid Mobile No. or Email.');
       return;
     }
-    // Simulate successful customer login
+    setErrorMsg('');
+    setStep('otp');
+    setResendTimer(57);
+  };
+
+  const handleOtpChange = (index: number, value: string) => {
+    if (value.length > 1) value = value[value.length - 1];
+    const newOtp = [...otp];
+    newOtp[index] = value;
+    setOtp(newOtp);
+
+    if (value && index < 5) {
+      const nextInput = document.getElementById(`login-otp-${index + 1}`);
+      if (nextInput) nextInput.focus();
+    }
+  };
+
+  const handleVerifyOtp = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+
+    const normalizeDigits = (str: string) => str.replace(/\D/g, '').slice(-10);
+    const isEmail = identifier.includes('@');
+    const inputVal = identifier.trim();
+    const inputDigits = normalizeDigits(inputVal);
+
+    const allBookings = cloudStore.getBookings();
+    const existingBooking = allBookings.find((b) => {
+      const bEmail = (b.customerEmail || '').toLowerCase();
+      const bDigits = normalizeDigits(b.customerPhone || '');
+      return (isEmail && bEmail === inputVal.toLowerCase()) || (!isEmail && inputDigits && bDigits === inputDigits);
+    });
+
+    const email = isEmail ? inputVal : `${inputDigits || inputVal.replace(/\D/g, '')}@tripcustomizer-customer.com`;
+    const phone = !isEmail ? inputVal : '+91 9876543210';
+    const name = existingBooking ? existingBooking.customerName : isEmail ? inputVal.split('@')[0] : `Traveler ${inputVal.slice(-4)}`;
+
+    login(email, phone, name);
     router.push('/account');
   };
 
   return (
-    <div className="bg-slate-50 min-h-screen py-12 flex items-center justify-center">
-      <Container className="max-w-md w-full">
-        <Card className="p-8 bg-white rounded-3xl shadow-2xl border border-slate-200">
-          <div className="text-center mb-6">
-            <div className="w-12 h-12 bg-brand-500 text-white font-black text-xl rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-md">
-              TB
-            </div>
-            <h1 className="text-2xl font-black text-slate-900 tracking-tight">Login to tripcustomizer</h1>
-            <p className="text-xs text-slate-500 mt-1">Manage your holiday bookings, forex cards & saved wishlist</p>
-          </div>
-
-          {/* Login Method Toggle */}
-          <div className="grid grid-cols-2 gap-1 bg-slate-100 p-1 rounded-xl mb-6 text-xs font-bold text-center">
-            <button
-              onClick={() => { setLoginMethod('password'); setOtpSent(false); }}
-              className={`py-2 rounded-lg transition-colors cursor-pointer ${loginMethod === 'password' ? 'bg-white text-slate-900 shadow' : 'text-slate-600'}`}
-            >
-              Password
-            </button>
-            <button
-              onClick={() => setLoginMethod('otp')}
-              className={`py-2 rounded-lg transition-colors cursor-pointer ${loginMethod === 'otp' ? 'bg-white text-slate-900 shadow' : 'text-slate-600'}`}
-            >
-              Mobile / Email OTP
-            </button>
-          </div>
-
-          <form onSubmit={handleLogin} className="space-y-4 text-xs">
-            <div>
-              <label className="font-bold text-slate-700 block mb-1">Email ID or Mobile Number</label>
-              <div className="relative">
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. demo@tripcustomizer.com or +91 9876543210"
-                  value={identifier}
-                  onChange={(e) => setIdentifier(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3 py-2.5 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500"
-                />
-                <User className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+    <div className="bg-slate-50 min-h-screen py-14 flex items-center justify-center p-4 font-sans">
+      <Container className="max-w-3xl">
+        <Card className="bg-white rounded-3xl overflow-hidden shadow-2xl border border-slate-200 grid grid-cols-1 md:grid-cols-12">
+          {/* Left Graphic Banner (Thomas Cook Style) */}
+          <div className="md:col-span-6 bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 p-8 flex flex-col justify-between text-slate-950 min-h-[360px] relative overflow-hidden">
+            <div className="flex items-center space-x-2 z-10">
+              <div className="bg-slate-950 text-white font-black text-xs px-2.5 py-1 rounded-xl shadow-md">
+                TC
               </div>
+              <span className="font-black text-lg text-slate-950 tracking-tight">tripcustomizer</span>
             </div>
 
-            {loginMethod === 'password' ? (
-              <div>
-                <label className="font-bold text-slate-700 block mb-1">Password</label>
-                <div className="relative">
-                  <input
-                    type="password"
-                    required
-                    placeholder="Enter password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3 py-2.5 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500"
-                  />
-                  <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
-                </div>
-              </div>
-            ) : (
-              otpSent && (
-                <div>
-                  <label className="font-bold text-slate-700 block mb-1">Enter 6-Digit OTP</label>
-                  <input
-                    type="text"
-                    required
-                    maxLength={6}
-                    placeholder="123456"
-                    value={otpCode}
-                    onChange={(e) => setOtpCode(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-center font-bold tracking-widest text-base focus:outline-none focus:ring-2 focus:ring-brand-500"
-                  />
-                  <p className="text-[10px] text-emerald-600 font-bold mt-1">OTP sent to your registered mobile/email (Use 123456 for demo)</p>
-                </div>
-              )
-            )}
+            <div className="space-y-3 z-10 py-6">
+              <h2 className="text-2xl sm:text-3xl font-black leading-tight tracking-tight text-slate-950">
+                Login Now & Create Your Dream Bucket list 🏖️
+              </h2>
+              <p className="text-xs font-bold text-slate-900/80">
+                Access your booked trips, tax invoices, e-vouchers & member discounts.
+              </p>
+            </div>
 
-            <Button type="submit" variant="primary" size="lg" className="w-full font-bold py-3 text-sm shadow-md">
-              {loginMethod === 'otp' && !otpSent ? 'SEND OTP CODE' : 'LOGIN TO ACCOUNT'}
-            </Button>
-          </form>
-
-          <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold">
-            <span className="text-slate-500">Don't have an account?</span>
-            <Link href="/register" className="text-brand-600 hover:underline">
-              Create Account →
-            </Link>
+            <div className="z-10 text-[11px] font-bold text-slate-900 flex items-center space-x-1">
+              <ShieldCheck className="w-4 h-4 text-slate-950" />
+              <span>100% Safe & Secure Verified Access</span>
+            </div>
           </div>
 
-          <div className="mt-4 p-3 bg-brand-50 rounded-xl border border-brand-100 flex items-center space-x-2 text-[11px]">
-            <Briefcase className="w-4 h-4 text-brand-600 shrink-0" />
+          {/* Right Form */}
+          <div className="md:col-span-6 p-6 sm:p-8 flex flex-col justify-between bg-white text-slate-800">
             <div>
-              <span className="text-brand-900 font-bold">Are you a Travel Agent / Franchisee?</span>{' '}
-              <Link href="/agent/login" className="text-brand-600 underline font-bold">Agent SSO Login Desk</Link>
+              {/* STEP 1: Log In Input */}
+              {step === 'input' && (
+                <div className="space-y-6 pt-2">
+                  <div>
+                    <h3 className="text-xl font-black text-slate-900">Log In</h3>
+                    <p className="text-xs text-slate-500 font-medium">Welcome back!</p>
+                  </div>
+
+                  {errorMsg && (
+                    <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-rose-700 text-xs font-bold">
+                      {errorMsg}
+                    </div>
+                  )}
+
+                  <form onSubmit={handleSendOtp} className="space-y-4">
+                    <div>
+                      <label className="text-xs font-bold text-slate-700 block mb-1.5">
+                        Mobile No. or Email
+                      </label>
+                      <input
+                        required
+                        type="text"
+                        placeholder="Mobile No. or Email"
+                        value={identifier}
+                        onChange={(e) => setIdentifier(e.target.value)}
+                        className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:bg-white transition-all"
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="w-full bg-slate-200 hover:bg-amber-400 hover:text-slate-950 text-slate-700 font-bold py-3 rounded-xl text-xs transition-all shadow-xs cursor-pointer active:scale-98"
+                    >
+                      Log In
+                    </button>
+                  </form>
+                </div>
+              )}
+
+              {/* STEP 2: OTP Verification */}
+              {step === 'otp' && (
+                <div className="space-y-6 pt-2">
+                  <div>
+                    <h3 className="text-xl font-black text-slate-900">OTP verification</h3>
+                    <div className="flex items-center space-x-1 text-xs text-slate-500 font-medium mt-1">
+                      <span>Enter OTP sent to <strong className="text-slate-800">{identifier}</strong></span>
+                      <button
+                        onClick={() => setStep('input')}
+                        className="text-brand-600 hover:text-brand-700 p-0.5 cursor-pointer"
+                        title="Edit Mobile/Email"
+                      >
+                        <Pencil className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+
+                  <form onSubmit={handleVerifyOtp} className="space-y-5">
+                    {/* 6 OTP Boxes */}
+                    <div className="flex justify-between gap-1 sm:gap-1.5">
+                      {otp.map((digit, idx) => (
+                        <input
+                          key={idx}
+                          id={`login-otp-${idx}`}
+                          type="text"
+                          maxLength={1}
+                          value={digit}
+                          onChange={(e) => handleOtpChange(idx, e.target.value)}
+                          className="w-10 h-12 bg-slate-50 border border-slate-300 rounded-xl text-center font-black text-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:bg-white transition-all"
+                        />
+                      ))}
+                    </div>
+
+                    <div className="flex items-center justify-between text-[11px] text-slate-500 font-bold">
+                      <span>Resend OTP in {resendTimer} seconds</span>
+                      {resendTimer === 0 && (
+                        <button
+                          type="button"
+                          onClick={() => setResendTimer(57)}
+                          className="text-brand-600 hover:underline cursor-pointer"
+                        >
+                          Resend OTP
+                        </button>
+                      )}
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-black py-3 rounded-xl text-xs transition-all shadow-md cursor-pointer active:scale-98"
+                    >
+                      Verify & Log In
+                    </button>
+                  </form>
+                </div>
+              )}
+            </div>
+
+            <div className="pt-6 border-t border-slate-100 text-center">
+              <span className="text-[10px] text-slate-400 font-semibold">© tripcustomizer 2026</span>
             </div>
           </div>
         </Card>

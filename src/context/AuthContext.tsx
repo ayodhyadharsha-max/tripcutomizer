@@ -28,14 +28,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const login = (email: string, phone: string, name: string): UserProfile => {
-    const uid = `usr_${email.replace(/[^a-zA-Z0-9]/g, '_')}`;
+    const cleanEmail = email.trim().toLowerCase();
+    const cleanPhone = phone.trim();
+    const uid = `usr_${cleanEmail.replace(/[^a-zA-Z0-9]/g, '_')}`;
     const existingProfile = cloudStore.getUserProfile(uid);
 
-    const profile: UserProfile = existingProfile || {
+    const profile: UserProfile = {
       uid,
-      name: name || 'Valued Traveler',
-      email,
-      phone,
+      name: name.trim() || existingProfile?.name || 'Valued Traveler',
+      email: cleanEmail || existingProfile?.email || '',
+      phone: cleanPhone || existingProfile?.phone || '',
+      city: existingProfile?.city || '',
       updatedAt: new Date().toISOString(),
     };
 

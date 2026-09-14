@@ -58,16 +58,20 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
   const handleVerifyOtp = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
 
+    const normalizeDigits = (str: string) => str.replace(/\D/g, '').slice(-10);
     const isEmail = identifier.includes('@');
     const inputVal = identifier.trim();
+    const inputDigits = normalizeDigits(inputVal);
 
     // Search if this user exists in cloud store to restore their exact name
     const allBookings = cloudStore.getBookings();
-    const existingBooking = allBookings.find(
-      (b) => b.customerEmail.toLowerCase() === inputVal.toLowerCase() || b.customerPhone.includes(inputVal)
-    );
+    const existingBooking = allBookings.find((b) => {
+      const bEmail = (b.customerEmail || '').toLowerCase();
+      const bDigits = normalizeDigits(b.customerPhone || '');
+      return (isEmail && bEmail === inputVal.toLowerCase()) || (!isEmail && inputDigits && bDigits === inputDigits);
+    });
 
-    const email = isEmail ? inputVal : `${inputVal.replace(/\D/g, '')}@tripcustomizer-customer.com`;
+    const email = isEmail ? inputVal : `${inputDigits || inputVal.replace(/\D/g, '')}@tripcustomizer-customer.com`;
     const phone = !isEmail ? inputVal : '+91 9876543210';
     const name = existingBooking ? existingBooking.customerName : isEmail ? inputVal.split('@')[0] : `Traveler ${inputVal.slice(-4)}`;
 

@@ -16,6 +16,7 @@ export default function CustomerAccountPage() {
   // OTP Login Flow State
   const [step, setStep] = useState<'input' | 'otp'>('input');
   const [identifier, setIdentifier] = useState('');
+  const [fullName, setFullName] = useState('');
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [resendTimer, setResendTimer] = useState(57);
   const [errorMsg, setErrorMsg] = useState('');
@@ -48,11 +49,22 @@ export default function CustomerAccountPage() {
       setProfilePhone(user.phone || '');
       setProfileCity(user.city || '');
 
-      // Strict user booking isolation
+      const normalizeDigits = (str: string) => str.replace(/\D/g, '').slice(-10);
+      const userEmailLower = (user.email || '').toLowerCase();
+      const userPhoneDigits = normalizeDigits(user.phone || '');
+
+      // Strict user booking isolation with smart 10-digit phone and email matching
       const allBookings = cloudStore.getBookings();
-      const filtered = allBookings.filter(
-        (b) => b.customerEmail.toLowerCase() === user.email.toLowerCase() || b.customerPhone === user.phone
-      );
+      const filtered = allBookings.filter((b) => {
+        const bEmail = (b.customerEmail || '').toLowerCase();
+        const bPhoneDigits = normalizeDigits(b.customerPhone || '');
+
+        return (
+          (userEmailLower && bEmail === userEmailLower) ||
+          (userPhoneDigits && bPhoneDigits && bPhoneDigits === userPhoneDigits) ||
+          (user.name && user.name !== 'Valued Traveler' && b.customerName.toLowerCase() === user.name.toLowerCase())
+        );
+      });
       setUserBookings(filtered);
     }
   }, [user]);
@@ -83,17 +95,21 @@ export default function CustomerAccountPage() {
   const handleVerifyOtp = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
 
+    const normalizeDigits = (str: string) => str.replace(/\D/g, '').slice(-10);
     const isEmail = identifier.includes('@');
     const inputVal = identifier.trim();
+    const inputDigits = normalizeDigits(inputVal);
 
     const allBookings = cloudStore.getBookings();
-    const existingBooking = allBookings.find(
-      (b) => b.customerEmail.toLowerCase() === inputVal.toLowerCase() || b.customerPhone.includes(inputVal)
-    );
+    const existingBooking = allBookings.find((b) => {
+      const bEmail = (b.customerEmail || '').toLowerCase();
+      const bDigits = normalizeDigits(b.customerPhone || '');
+      return (isEmail && bEmail === inputVal.toLowerCase()) || (!isEmail && inputDigits && bDigits === inputDigits);
+    });
 
-    const email = isEmail ? inputVal : `${inputVal.replace(/\D/g, '')}@tripcustomizer-customer.com`;
+    const email = isEmail ? inputVal : `${inputDigits || inputVal.replace(/\D/g, '')}@tripcustomizer-customer.com`;
     const phone = !isEmail ? inputVal : '+91 9876543210';
-    const name = existingBooking ? existingBooking.customerName : isEmail ? inputVal.split('@')[0] : `Traveler ${inputVal.slice(-4)}`;
+    const name = fullName.trim() || (existingBooking ? existingBooking.customerName : isEmail ? inputVal.split('@')[0] : `Traveler ${inputVal.slice(-4)}`);
 
     login(email, phone, name);
   };
