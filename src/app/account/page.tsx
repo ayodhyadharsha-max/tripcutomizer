@@ -8,22 +8,17 @@ import { Button } from '@/components/ui/Button';
 import { useAuth } from '@/context/AuthContext';
 import { cloudStore, CustomerBooking } from '@/lib/cloudStore';
 import { formatCurrency } from '@/lib/utils';
-import { User, Phone, Mail, MapPin, LogOut, Package, FileText, Printer, CheckCircle2, ShieldCheck, AlertCircle, LogIn, UserPlus } from 'lucide-react';
+import { User, Phone, Mail, MapPin, LogOut, Package, FileText, Printer, CheckCircle2, ShieldCheck, Pencil } from 'lucide-react';
 
 export default function CustomerAccountPage() {
   const { user, isLoggedIn, login, logout, updateProfile } = useAuth();
 
-  // Auth Mode: 'login' (existing user) vs 'signup' (new user)
-  const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
-
-  // Existing User Login State
-  const [loginIdentifier, setLoginIdentifier] = useState('');
-  const [loginError, setLoginError] = useState('');
-
-  // New User Signup State
-  const [signupName, setSignupName] = useState('');
-  const [signupEmail, setSignupEmail] = useState('');
-  const [signupPhone, setSignupPhone] = useState('');
+  // OTP Login Flow State
+  const [step, setStep] = useState<'input' | 'otp'>('input');
+  const [identifier, setIdentifier] = useState('');
+  const [otp, setOtp] = useState(['', '', '', '', '', '']);
+  const [resendTimer, setResendTimer] = useState(57);
+  const [errorMsg, setErrorMsg] = useState('');
 
   // Profile Edit State
   const [editing, setEditing] = useState(false);
@@ -36,6 +31,16 @@ export default function CustomerAccountPage() {
 
   // Selected Booking for Detailed Tax Invoice Modal
   const [selectedInvoice, setSelectedInvoice] = useState<CustomerBooking | null>(null);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (step === 'otp' && resendTimer > 0) {
+      timer = setInterval(() => {
+        setResendTimer((prev) => prev - 1);
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+  }, [step, resendTimer]);
 
   useEffect(() => {
     if (user) {
@@ -52,37 +57,45 @@ export default function CustomerAccountPage() {
     }
   }, [user]);
 
-  // Existing Customer Login Handler (only needs email or phone!)
-  const handleExistingUserLogin = (e: React.FormEvent) => {
+  const handleSendOtp = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoginError('');
-    const input = loginIdentifier.trim();
-
-    if (!input) {
-      setLoginError('Please enter your registered email or phone number.');
+    if (!identifier.trim()) {
+      setErrorMsg('Please enter a valid Mobile No. or Email.');
       return;
     }
-
-    // Try finding existing profile or existing booking
-    const isEmail = input.includes('@');
-    const email = isEmail ? input : `${input.replace(/\D/g, '')}@tripcustomizer-customer.com`;
-    const phone = !isEmail ? input : '+91 9876543210';
-
-    // Search existing bookings or profile to extract name
-    const allBookings = cloudStore.getBookings();
-    const existingBooking = allBookings.find(
-      (b) => b.customerEmail.toLowerCase() === input.toLowerCase() || b.customerPhone.includes(input)
-    );
-
-    const derivedName = existingBooking ? existingBooking.customerName : 'Valued Traveler';
-
-    login(email, phone, derivedName);
+    setErrorMsg('');
+    setStep('otp');
+    setResendTimer(57);
   };
 
-  // New Customer Signup Handler
-  const handleNewUserSignup = (e: React.FormEvent) => {
-    e.preventDefault();
-    login(signupEmail, signupPhone, signupName);
+  const handleOtpChange = (index: number, value: string) => {
+    if (value.length > 1) value = value[value.length - 1];
+    const newOtp = [...otp];
+    newOtp[index] = value;
+    setOtp(newOtp);
+
+    if (value && index < 5) {
+      const nextInput = document.getElementById(`acc-otp-${index + 1}`);
+      if (nextInput) nextInput.focus();
+    }
+  };
+
+  const handleVerifyOtp = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+
+    const isEmail = identifier.includes('@');
+    const inputVal = identifier.trim();
+
+    const allBookings = cloudStore.getBookings();
+    const existingBooking = allBookings.find(
+      (b) => b.customerEmail.toLowerCase() === inputVal.toLowerCase() || b.customerPhone.includes(inputVal)
+    );
+
+    const email = isEmail ? inputVal : `${inputVal.replace(/\D/g, '')}@tripcustomizer-customer.com`;
+    const phone = !isEmail ? inputVal : '+91 9876543210';
+    const name = existingBooking ? existingBooking.customerName : isEmail ? inputVal.split('@')[0] : `Traveler ${inputVal.slice(-4)}`;
+
+    login(email, phone, name);
   };
 
   const handleSaveProfile = (e: React.FormEvent) => {
@@ -101,145 +114,139 @@ export default function CustomerAccountPage() {
     }
   };
 
+  // Logged-out Thomas Cook Style Login Screen
   if (!isLoggedIn) {
     return (
-      <div className="bg-slate-50 min-h-screen py-14 flex items-center justify-center">
-        <Container className="max-w-md">
-          <Card className="p-8 bg-white rounded-3xl shadow-xl border border-slate-200 space-y-6">
-            {/* Header Title */}
-            <div className="text-center space-y-2">
-              <div className="w-14 h-14 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center mx-auto">
-                <User className="w-8 h-8" />
+      <div className="bg-slate-50 min-h-screen py-14 flex items-center justify-center p-4 font-sans">
+        <Container className="max-w-3xl">
+          <Card className="bg-white rounded-3xl overflow-hidden shadow-2xl border border-slate-200 grid grid-cols-1 md:grid-cols-12">
+            {/* Left Graphic Banner */}
+            <div className="md:col-span-6 bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 p-8 flex flex-col justify-between text-slate-950 min-h-[340px] relative overflow-hidden">
+              <div className="flex items-center space-x-2 z-10">
+                <div className="bg-slate-950 text-white font-black text-xs px-2.5 py-1 rounded-xl shadow-md">
+                  TC
+                </div>
+                <span className="font-black text-lg text-slate-950 tracking-tight">tripcustomizer</span>
               </div>
-              <h1 className="text-2xl font-black text-slate-900">Welcome to tripcustomizer</h1>
-              <p className="text-xs text-slate-500">
-                Manage your holiday bookings, e-vouchers & tax invoices.
-              </p>
+
+              <div className="space-y-3 z-10 py-6">
+                <h2 className="text-2xl sm:text-3xl font-black leading-tight tracking-tight text-slate-950">
+                  Login Now & Create Your Dream Bucket list 🏖️
+                </h2>
+                <p className="text-xs font-bold text-slate-900/80">
+                  Access your booked trips, tax invoices, e-vouchers & exclusive deals.
+                </p>
+              </div>
+
+              <div className="z-10 text-[11px] font-bold text-slate-900 flex items-center space-x-1">
+                <ShieldCheck className="w-4 h-4 text-slate-950" />
+                <span>100% Safe & Secure Verified Access</span>
+              </div>
             </div>
 
-            {/* Login vs Signup Tabs */}
-            <div className="grid grid-cols-2 gap-1 bg-slate-100 p-1 rounded-2xl text-xs font-extrabold">
-              <button
-                onClick={() => setAuthMode('login')}
-                className={`py-2.5 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
-                  authMode === 'login'
-                    ? 'bg-white text-slate-900 shadow-sm'
-                    : 'text-slate-500 hover:text-slate-900'
-                }`}
-              >
-                <LogIn className="w-4 h-4 text-brand-600" />
-                <span>Existing User (Login)</span>
-              </button>
-              <button
-                onClick={() => setAuthMode('signup')}
-                className={`py-2.5 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
-                  authMode === 'signup'
-                    ? 'bg-white text-slate-900 shadow-sm'
-                    : 'text-slate-500 hover:text-slate-900'
-                }`}
-              >
-                <UserPlus className="w-4 h-4 text-brand-600" />
-                <span>New User (Sign Up)</span>
-              </button>
-            </div>
+            {/* Right Form */}
+            <div className="md:col-span-6 p-6 sm:p-8 flex flex-col justify-between bg-white text-slate-800">
+              <div>
+                {/* STEP 1: Log In Input */}
+                {step === 'input' && (
+                  <div className="space-y-6 pt-2">
+                    <div>
+                      <h3 className="text-xl font-black text-slate-900">Log In</h3>
+                      <p className="text-xs text-slate-500 font-medium">Welcome back!</p>
+                    </div>
 
-            {/* TAB 1: Existing Customer Login (Needs ONLY email/phone) */}
-            {authMode === 'login' && (
-              <form onSubmit={handleExistingUserLogin} className="space-y-4 text-xs">
-                {loginError && (
-                  <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-rose-700 text-xs font-semibold flex items-center gap-2">
-                    <AlertCircle className="w-4 h-4 text-rose-500 shrink-0" />
-                    <span>{loginError}</span>
+                    {errorMsg && (
+                      <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-rose-700 text-xs font-bold">
+                        {errorMsg}
+                      </div>
+                    )}
+
+                    <form onSubmit={handleSendOtp} className="space-y-4">
+                      <div>
+                        <label className="text-xs font-bold text-slate-700 block mb-1.5">
+                          Mobile No. or Email
+                        </label>
+                        <input
+                          required
+                          type="text"
+                          placeholder="Mobile No. or Email"
+                          value={identifier}
+                          onChange={(e) => setIdentifier(e.target.value)}
+                          className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:bg-white transition-all"
+                        />
+                      </div>
+
+                      <button
+                        type="submit"
+                        className="w-full bg-slate-200 hover:bg-amber-400 hover:text-slate-950 text-slate-700 font-bold py-3 rounded-xl text-xs transition-all shadow-xs cursor-pointer active:scale-98"
+                      >
+                        Log In
+                      </button>
+                    </form>
                   </div>
                 )}
 
-                <div>
-                  <label className="font-bold text-slate-700 block mb-1">
-                    Registered Mobile Number or Email Address
-                  </label>
-                  <input
-                    required
-                    type="text"
-                    placeholder="Enter Phone Number or Email"
-                    value={loginIdentifier}
-                    onChange={(e) => setLoginIdentifier(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500"
-                  />
-                  <span className="text-[11px] text-slate-400 font-medium mt-1 block">
-                    Fast 1-step sign in for existing customers.
-                  </span>
-                </div>
+                {/* STEP 2: OTP Verification */}
+                {step === 'otp' && (
+                  <div className="space-y-6 pt-2">
+                    <div>
+                      <h3 className="text-xl font-black text-slate-900">OTP verification</h3>
+                      <div className="flex items-center space-x-1 text-xs text-slate-500 font-medium mt-1">
+                        <span>Enter OTP sent to <strong className="text-slate-800">{identifier}</strong></span>
+                        <button
+                          onClick={() => setStep('input')}
+                          className="text-brand-600 hover:text-brand-700 p-0.5 cursor-pointer"
+                          title="Edit Mobile/Email"
+                        >
+                          <Pencil className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
 
-                <Button type="submit" variant="primary" size="lg" className="w-full font-black py-3 cursor-pointer">
-                  LOG IN TO MY ACCOUNT →
-                </Button>
+                    <form onSubmit={handleVerifyOtp} className="space-y-5">
+                      {/* 6 OTP Boxes */}
+                      <div className="flex justify-between gap-1 sm:gap-1.5">
+                        {otp.map((digit, idx) => (
+                          <input
+                            key={idx}
+                            id={`acc-otp-${idx}`}
+                            type="text"
+                            maxLength={1}
+                            value={digit}
+                            onChange={(e) => handleOtpChange(idx, e.target.value)}
+                            className="w-10 h-12 bg-slate-50 border border-slate-300 rounded-xl text-center font-black text-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:bg-white transition-all"
+                          />
+                        ))}
+                      </div>
 
-                <div className="text-center pt-2">
-                  <button
-                    type="button"
-                    onClick={() => setAuthMode('signup')}
-                    className="text-brand-600 hover:underline font-bold text-xs cursor-pointer"
-                  >
-                    Don't have an account? Create New Account
-                  </button>
-                </div>
-              </form>
-            )}
+                      <div className="flex items-center justify-between text-[11px] text-slate-500 font-bold">
+                        <span>Resend OTP in {resendTimer} seconds</span>
+                        {resendTimer === 0 && (
+                          <button
+                            type="button"
+                            onClick={() => setResendTimer(57)}
+                            className="text-brand-600 hover:underline cursor-pointer"
+                          >
+                            Resend OTP
+                          </button>
+                        )}
+                      </div>
 
-            {/* TAB 2: New Customer Signup */}
-            {authMode === 'signup' && (
-              <form onSubmit={handleNewUserSignup} className="space-y-4 text-xs">
-                <div>
-                  <label className="font-bold text-slate-700 block mb-1">Full Name *</label>
-                  <input
-                    required
-                    type="text"
-                    placeholder="e.g. Rahul Sharma"
-                    value={signupName}
-                    onChange={(e) => setSignupName(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500"
-                  />
-                </div>
+                      <button
+                        type="submit"
+                        className="w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-black py-3 rounded-xl text-xs transition-all shadow-md cursor-pointer active:scale-98"
+                      >
+                        Verify & Log In
+                      </button>
+                    </form>
+                  </div>
+                )}
+              </div>
 
-                <div>
-                  <label className="font-bold text-slate-700 block mb-1">Email Address *</label>
-                  <input
-                    required
-                    type="email"
-                    placeholder="your.email@example.com"
-                    value={signupEmail}
-                    onChange={(e) => setSignupEmail(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500"
-                  />
-                </div>
-
-                <div>
-                  <label className="font-bold text-slate-700 block mb-1">Mobile Phone Number *</label>
-                  <input
-                    required
-                    type="tel"
-                    placeholder="+91 9876543210"
-                    value={signupPhone}
-                    onChange={(e) => setSignupPhone(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500"
-                  />
-                </div>
-
-                <Button type="submit" variant="primary" size="lg" className="w-full font-black py-3 cursor-pointer">
-                  CREATE ACCOUNT & SAVE PROFILE →
-                </Button>
-
-                <div className="text-center pt-2">
-                  <button
-                    type="button"
-                    onClick={() => setAuthMode('login')}
-                    className="text-brand-600 hover:underline font-bold text-xs cursor-pointer"
-                  >
-                    Already have an account? Log In
-                  </button>
-                </div>
-              </form>
-            )}
+              <div className="pt-6 border-t border-slate-100 text-center">
+                <span className="text-[10px] text-slate-400 font-semibold">© tripcustomizer 2026</span>
+              </div>
+            </div>
           </Card>
         </Container>
       </div>
@@ -413,7 +420,6 @@ export default function CustomerAccountPage() {
       {selectedInvoice && (
         <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
           <div className="bg-white rounded-3xl p-6 sm:p-8 max-w-2xl w-full space-y-6 shadow-2xl border border-slate-200 relative my-8">
-            {/* Close Button */}
             <button
               onClick={() => setSelectedInvoice(null)}
               className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 font-bold text-base cursor-pointer"
@@ -421,7 +427,6 @@ export default function CustomerAccountPage() {
               ✕
             </button>
 
-            {/* Print Header */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-4 border-b-2 border-slate-200 gap-4">
               <div>
                 <div className="flex items-center space-x-2">
@@ -437,7 +442,6 @@ export default function CustomerAccountPage() {
               </div>
             </div>
 
-            {/* Company & Customer Details */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs">
               <div className="space-y-1">
                 <span className="font-extrabold text-slate-400 uppercase text-[10px] block">Issued By (Service Provider)</span>
@@ -454,7 +458,6 @@ export default function CustomerAccountPage() {
               </div>
             </div>
 
-            {/* Package & Trip Particulars Table */}
             <div className="space-y-2">
               <h4 className="font-black text-slate-900 text-xs uppercase tracking-wider">Booked Package Details</h4>
               <div className="border border-slate-200 rounded-2xl overflow-hidden text-xs">
@@ -482,7 +485,6 @@ export default function CustomerAccountPage() {
               </div>
             </div>
 
-            {/* Tax Breakdown Table */}
             <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs space-y-2">
               <div className="flex justify-between text-slate-600">
                 <span>Base Tour Package Fare:</span>
@@ -498,7 +500,6 @@ export default function CustomerAccountPage() {
               </div>
             </div>
 
-            {/* Voucher Inclusions List */}
             <div className="p-4 bg-brand-50/70 border border-brand-100 rounded-2xl text-xs space-y-2">
               <span className="font-extrabold text-brand-900 uppercase text-[10px] block">Voucher Inclusions & Voucher Benefits</span>
               <ul className="space-y-1 text-slate-700 font-semibold list-disc list-inside">
@@ -509,7 +510,6 @@ export default function CustomerAccountPage() {
               </ul>
             </div>
 
-            {/* Modal Actions */}
             <div className="flex justify-between items-center pt-2">
               <Button
                 onClick={handlePrintInvoice}
