@@ -1,5 +1,12 @@
 'use client';
 
+export interface PassengerDetail {
+  name: string;
+  age?: number | string;
+  gender?: string;
+  type?: string;
+}
+
 export interface CustomerBooking {
   id: string;
   referenceNo: string;
@@ -16,6 +23,7 @@ export interface CustomerBooking {
   paymentStatus: 'Paid' | 'Partial' | 'Pending';
   createdAt: string;
   notes?: string;
+  passengersList?: PassengerDetail[];
 }
 
 export interface CustomerLead {
@@ -75,6 +83,12 @@ const DEFAULT_BOOKINGS: CustomerBooking[] = [
     status: 'Confirmed',
     paymentStatus: 'Paid',
     createdAt: new Date(Date.now() - 3600000 * 24 * 2).toISOString(),
+    passengersList: [
+      { name: 'Aarav Sharma', age: 34, gender: 'Male', type: 'Adult (Lead)' },
+      { name: 'Priya Sharma', age: 31, gender: 'Female', type: 'Adult' },
+      { name: 'Aarav Sharma Jr.', age: 6, gender: 'Male', type: 'Child (5-9 yrs)' },
+      { name: 'Ananya Sharma', age: 4, gender: 'Female', type: 'Child (Below 5 yrs)' },
+    ],
   },
 ];
 

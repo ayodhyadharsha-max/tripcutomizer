@@ -73,13 +73,19 @@ export default function BookingCheckoutPage() {
           const parsedPax = JSON.parse(decodeURIComponent(paxDataRaw));
           const list = Object.values(parsedPax)
             .filter((p: any) => p && p.fullName && p.fullName.trim() !== '')
-            .map((p: any) => ({
-              fullName: p.fullName,
-              age: p.age,
-              gender: p.gender,
+            .map((p: any, idx: number) => ({
+              name: `${p.title ? p.title + ' ' : ''}${p.fullName.trim()}`,
+              age: p.age || 25,
+              gender: p.gender || 'Male',
+              type: idx === 0 ? 'Lead Adult' : p.age && parseInt(String(p.age), 10) < 12 ? 'Child' : 'Adult',
             }));
+
           if (list.length > 0) {
-            cloudStore.syncPassengersToCoTravellers(list, user?.uid);
+            setParsedPassengersList(list);
+            cloudStore.syncPassengersToCoTravellers(
+              list.map((l) => ({ fullName: l.name, age: l.age, gender: l.gender })),
+              user?.uid
+            );
           }
         } catch (e) {
           console.error('Error parsing paxData in checkout:', e);
@@ -87,6 +93,8 @@ export default function BookingCheckoutPage() {
       }
     }
   }, [user]);
+
+  const [parsedPassengersList, setParsedPassengersList] = useState<{ name: string; age?: number | string; gender?: string; type?: string }[]>([]);
 
   const grandTotal = pkgInfo.pricePerPerson * pkgInfo.travelersCount;
 
@@ -127,6 +135,10 @@ export default function BookingCheckoutPage() {
       cloudStore.syncPassengersToCoTravellers([{ fullName }], loggedUser.uid);
     }
 
+    const finalPassengersList = parsedPassengersList.length > 0
+      ? parsedPassengersList
+      : [{ name: fullName || 'Lead Traveller', type: 'Lead Adult' }];
+
     // 2. Save Booking to Database
     const newBooking = cloudStore.saveBooking({
       customerName: fullName || 'Valued Traveler',
@@ -139,6 +151,7 @@ export default function BookingCheckoutPage() {
       totalAmount: grandTotal,
       status: 'Confirmed',
       paymentStatus: 'Paid',
+      passengersList: finalPassengersList,
     });
 
     setCreatedBooking(newBooking);

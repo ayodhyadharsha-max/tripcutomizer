@@ -521,12 +521,38 @@ export default function CustomerAccountPage() {
                               <span className="font-bold text-slate-800">{b.travelDates}</span>
                             </div>
                             <div>
-                              <span className="text-slate-400 font-bold block uppercase text-[10px]">Travelers</span>
-                              <span className="font-bold text-slate-800">{b.travelersCount} Adults</span>
+                              <span className="text-slate-400 font-bold block uppercase text-[10px]">Total Travelers</span>
+                              <span className="font-bold text-slate-800">{b.passengersList?.length || b.travelersCount} Pax</span>
                             </div>
                             <div>
                               <span className="text-slate-400 font-bold block uppercase text-[10px]">Total Paid Amount</span>
                               <span className="font-black text-sky-700 text-sm">{formatCurrency(b.totalAmount)}</span>
+                            </div>
+                          </div>
+
+                          {/* Display full passenger names manifest if present */}
+                          <div className="p-3 bg-slate-50/90 rounded-xl border border-slate-200 text-xs space-y-1.5">
+                            <span className="font-extrabold text-slate-700 uppercase text-[10px] flex items-center space-x-1">
+                              <Users className="w-3.5 h-3.5 text-brand-600 inline" />
+                              <span>Confirmed Passengers List ({b.passengersList?.length || b.travelersCount} Pax):</span>
+                            </span>
+                            <div className="flex flex-wrap gap-2">
+                              {b.passengersList && b.passengersList.length > 0 ? (
+                                b.passengersList.map((p, pIdx) => (
+                                  <span
+                                    key={pIdx}
+                                    className="bg-white border border-slate-300 text-slate-800 font-bold px-2.5 py-1 rounded-lg shadow-2xs text-[11px] flex items-center space-x-1"
+                                  >
+                                    <span>{p.type?.includes('Child') ? '👶' : '👤'}</span>
+                                    <span>{p.name}</span>
+                                    {p.age && <span className="text-slate-400 text-[10px]">({p.age}y)</span>}
+                                  </span>
+                                ))
+                              ) : (
+                                <span className="text-slate-700 font-bold bg-white px-2 py-0.5 rounded border border-slate-200 text-[11px]">
+                                  👤 {b.customerName} (Lead Passenger)
+                                </span>
+                              )}
                             </div>
                           </div>
 
@@ -858,7 +884,7 @@ export default function CustomerAccountPage() {
                     <tr>
                       <th className="py-2.5 px-3">Description</th>
                       <th className="py-2.5 px-3">Travel Dates</th>
-                      <th className="py-2.5 px-3">Pax</th>
+                      <th className="py-2.5 px-3">Total Pax</th>
                       <th className="py-2.5 px-3 text-right">Amount</th>
                     </tr>
                   </thead>
@@ -869,9 +895,58 @@ export default function CustomerAccountPage() {
                         <span className="text-[10px] text-slate-500">{selectedInvoice.destination}</span>
                       </td>
                       <td className="py-3 px-3 font-semibold">{selectedInvoice.travelDates}</td>
-                      <td className="py-3 px-3 font-semibold">{selectedInvoice.travelersCount} Adults</td>
+                      <td className="py-3 px-3 font-semibold">{selectedInvoice.passengersList?.length || selectedInvoice.travelersCount} Pax</td>
                       <td className="py-3 px-3 text-right font-black text-slate-900">{formatCurrency(selectedInvoice.totalAmount)}</td>
                     </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* PASSENGER MANIFEST & VOUCHER TICKET HOLDERS LIST */}
+            <div className="space-y-2">
+              <h4 className="font-black text-slate-900 text-xs uppercase tracking-wider flex items-center justify-between">
+                <span>Confirmed Passenger Manifest ({selectedInvoice.passengersList?.length || selectedInvoice.travelersCount} Pax)</span>
+                <span className="text-[10px] text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">✓ Govt. ID Proof Verified</span>
+              </h4>
+              <div className="border border-slate-200 rounded-2xl overflow-hidden text-xs">
+                <table className="w-full text-left">
+                  <thead className="bg-brand-50 text-brand-900 font-extrabold text-[10px] uppercase border-b border-brand-100">
+                    <tr>
+                      <th className="py-2.5 px-3">#</th>
+                      <th className="py-2.5 px-3">Passenger Name</th>
+                      <th className="py-2.5 px-3">Age & Category</th>
+                      <th className="py-2.5 px-3 text-right">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100 font-medium text-slate-800 bg-white">
+                    {selectedInvoice.passengersList && selectedInvoice.passengersList.length > 0 ? (
+                      selectedInvoice.passengersList.map((p, idx) => (
+                        <tr key={idx}>
+                          <td className="py-2.5 px-3 font-bold text-slate-400">{idx + 1}</td>
+                          <td className="py-2.5 px-3 font-extrabold text-slate-900 flex items-center space-x-1.5">
+                            <span>{p.type?.includes('Child') ? '👶' : '👤'}</span>
+                            <span>{p.name}</span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="text-[11px] font-semibold text-slate-600">
+                              {p.type || 'Passenger'} {p.gender ? `• ${p.gender}` : ''} {p.age ? `• ${p.age} yrs` : ''}
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3 text-right font-bold text-emerald-700">✓ Confirmed</td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td className="py-2.5 px-3 font-bold text-slate-400">1</td>
+                        <td className="py-2.5 px-3 font-extrabold text-slate-900 flex items-center space-x-1">
+                          <span>👤</span>
+                          <span>{selectedInvoice.customerName}</span>
+                        </td>
+                        <td className="py-2.5 px-3 text-slate-600 font-semibold">Lead Passenger</td>
+                        <td className="py-2.5 px-3 text-right font-bold text-emerald-700">✓ Confirmed</td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>

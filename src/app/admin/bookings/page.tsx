@@ -239,8 +239,8 @@ export default function AdminBookingsPage() {
                   <span className="font-bold text-slate-800">{selectedBooking.travelDates}</span>
                 </div>
                 <div>
-                  <span className="text-slate-400 font-bold block uppercase text-[10px]">Travelers</span>
-                  <span className="font-bold text-slate-800">{selectedBooking.travelersCount} Pax</span>
+                  <span className="text-slate-400 font-bold block uppercase text-[10px]">Total Travelers</span>
+                  <span className="font-bold text-slate-800">{selectedBooking.passengersList?.length || selectedBooking.travelersCount} Pax</span>
                 </div>
                 <div>
                   <span className="text-slate-400 font-bold block uppercase text-[10px]">Total Amount</span>
@@ -249,6 +249,29 @@ export default function AdminBookingsPage() {
                 <div>
                   <span className="text-slate-400 font-bold block uppercase text-[10px]">Booking Status</span>
                   <span className="font-bold text-slate-800">{selectedBooking.status}</span>
+                </div>
+              </div>
+
+              {/* All Confirmed Passenger Names */}
+              <div className="p-3 bg-brand-50/60 border border-brand-100 rounded-xl space-y-1.5">
+                <span className="font-extrabold text-brand-900 uppercase text-[10px] block">
+                  👥 Confirmed Passengers Manifest ({selectedBooking.passengersList?.length || selectedBooking.travelersCount} Pax)
+                </span>
+                <div className="space-y-1">
+                  {selectedBooking.passengersList && selectedBooking.passengersList.length > 0 ? (
+                    selectedBooking.passengersList.map((p, pIdx) => (
+                      <div key={pIdx} className="bg-white p-2 rounded-lg border border-brand-200 flex items-center justify-between text-[11px] font-bold text-slate-800">
+                        <span>{p.type?.includes('Child') ? '👶' : '👤'} {p.name}</span>
+                        <span className="text-slate-500 font-semibold text-[10px]">
+                          {p.type || 'Passenger'} {p.age ? `(${p.age}y)` : ''} {p.gender ? `• ${p.gender}` : ''}
+                        </span>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="bg-white p-2 rounded-lg border border-brand-200 text-[11px] font-bold text-slate-800">
+                      👤 {selectedBooking.customerName} (Lead Passenger)
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
