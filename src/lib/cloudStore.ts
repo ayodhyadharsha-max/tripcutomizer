@@ -131,6 +131,11 @@ const setStoredData = <T>(key: string, data: T): void => {
   }
 };
 
+// Helper to strip common honorific titles for smart deduplication
+const stripTitle = (name: string): string => {
+  return name.replace(/^(Mr|Mrs|Ms|Dr|Master|Miss)\.?\s+/i, '').trim().toLowerCase();
+};
+
 export const cloudStore = {
   // --- BOOKINGS ---
   getBookings: (): CustomerBooking[] => {
@@ -225,7 +230,7 @@ export const cloudStore = {
     setStoredData(STORAGE_KEYS.CURRENT_USER, user);
   },
 
-  // --- CO-TRAVELLERS PERSISTENT STORAGE (STRICT USER ISOLATION) ---
+  // --- CO-TRAVELLERS PERSISTENT STORAGE (STRICT USER ISOLATION & DEDUPLICATION) ---
   getCoTravellers: (uid?: string): CoTraveller[] => {
     if (typeof window !== 'undefined') {
       try {
@@ -233,7 +238,34 @@ export const cloudStore = {
       } catch (e) {}
     }
     if (!uid) return [];
-    return getStoredData<CoTraveller[]>(`tc_cotravellers_${uid}`, []);
+    const rawList = getStoredData<CoTraveller[]>(`tc_cotravellers_${uid}`, []);
+    const userProfile = cloudStore.getUserProfile(uid);
+    const userBaseName = userProfile?.name ? stripTitle(userProfile.name) : '';
+
+    const cleanList: CoTraveller[] = [];
+    const seenBaseNames = new Set<string>();
+
+    if (userBaseName) {
+      seenBaseNames.add(userBaseName);
+    }
+
+    rawList.forEach((item) => {
+      if (!item.name || !item.name.trim()) return;
+      const baseName = stripTitle(item.name);
+      if (!baseName) return;
+
+      if (!seenBaseNames.has(baseName)) {
+        seenBaseNames.add(baseName);
+        cleanList.push(item);
+      } else {
+        const existingIdx = cleanList.findIndex((c) => stripTitle(c.name) === baseName);
+        if (existingIdx !== -1 && item.name.length > cleanList[existingIdx].name.length) {
+          cleanList[existingIdx] = item;
+        }
+      }
+    });
+
+    return cleanList;
   },
 
   saveCoTravellers: (list: CoTraveller[], uid?: string): void => {
@@ -253,16 +285,33 @@ export const cloudStore = {
     if (!uid) return;
     const existing = cloudStore.getCoTravellers(uid);
     const updated = [...existing];
+    const userProfile = cloudStore.getUserProfile(uid);
+    const userBaseName = userProfile?.name ? stripTitle(userProfile.name) : '';
 
     passengersList.forEach((p) => {
       if (!p.fullName || !p.fullName.trim()) return;
-      const cleanName = p.fullName.trim();
-      const exists = updated.some((item) => item.name.toLowerCase() === cleanName.toLowerCase());
-      if (!exists) {
+      const rawName = p.fullName.trim();
+      const baseName = stripTitle(rawName);
+
+      // Skip if this passenger is the primary user account holder
+      if (userBaseName && baseName === userBaseName) return;
+
+      const existingIdx = updated.findIndex((item) => stripTitle(item.name) === baseName);
+      if (existingIdx !== -1) {
+        if (rawName.length > updated[existingIdx].name.length) {
+          updated[existingIdx].name = rawName;
+        }
+        if (p.age) {
+          updated[existingIdx].age = typeof p.age === 'number' ? p.age : parseInt(String(p.age), 10) || 25;
+        }
+        if (p.gender) {
+          updated[existingIdx].gender = p.gender;
+        }
+      } else {
         updated.push({
           id: `cot-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
-          name: cleanName,
-          age: typeof p.age === 'number' ? p.age : parseInt(p.age || '25', 10) || 25,
+          name: rawName,
+          age: typeof p.age === 'number' ? p.age : parseInt(String(p.age || '25'), 10) || 25,
           gender: p.gender || 'Male',
           relation: p.relation || 'Co-Traveller',
         });
