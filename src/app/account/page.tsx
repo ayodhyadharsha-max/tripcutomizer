@@ -220,16 +220,10 @@ export default function CustomerAccountPage() {
                       </div>
                     </div>
 
-                    {/* Real SMS OTP Instructions */}
-                    <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-900 text-xs font-bold flex items-center justify-between">
-                      <span>📲 SMS Code sent! Check mobile inbox.</span>
-                      <button
-                        type="button"
-                        onClick={() => setOtp(['1', '2', '3', '4', '5', '6'])}
-                        className="text-[10px] text-amber-800 underline font-semibold cursor-pointer"
-                      >
-                        (Demo: 123456)
-                      </button>
+                    {/* Real Customer OTP Instructions */}
+                    <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-900 text-xs font-bold flex items-center space-x-2">
+                      <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                      <span>Enter the 6-digit verification code sent to your mobile.</span>
                     </div>
 
                     <form onSubmit={handleVerifyOtp} className="space-y-4">
