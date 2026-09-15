@@ -47,7 +47,7 @@ let memoryBookings: ServerBooking[] = [
     totalAmount: 27405,
     status: 'Confirmed',
     paymentStatus: 'Paid',
-    createdAt: new Date().toISOString(),
+    createdAt: '2026-09-13T10:00:00.000Z',
     passengersList: [
       { name: 'Mr rishabh jais', age: 34, gender: 'Male', type: 'Lead Adult' },
       { name: 'Mrs khushi jais', age: 33, gender: 'Female', type: 'Adult' }

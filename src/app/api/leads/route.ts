@@ -28,7 +28,7 @@ let memoryLeads: ServerLead[] = [
     travelDates: '15 Oct 2026 - 20 Oct 2026',
     travelersCount: 2,
     status: 'Converted',
-    createdAt: new Date().toISOString(),
+    createdAt: '2026-09-13T10:00:00.000Z',
     source: 'Confirmed Online Booking'
   }
 ];
