@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 import { hotelService, HotelResult } from '@/services/hotelAdapter';
 import { formatCurrency } from '@/lib/utils';
-import { Hotel, Search, Filter, Star, MapPin, CheckCircle2, ShieldCheck, ChevronRight } from 'lucide-react';
+import { Hotel, Search, Filter, Star, MapPin, CheckCircle2, ShieldCheck, ChevronRight, Clock } from 'lucide-react';
 
 export default function HotelSearchPage() {
   const [location, setLocation] = useState('Dubai');
@@ -38,10 +38,16 @@ export default function HotelSearchPage() {
 
 
         {/* Hotel Search Engine Header */}
-        <Card className="p-6 bg-brand-900 text-white rounded-3xl mb-8 shadow-xl">
-          <div className="flex items-center space-x-2 text-accent-400 font-bold text-xs uppercase tracking-wider mb-3">
-            <Hotel className="w-4 h-4" />
-            <span>Luxury Hotels & Beach Resorts Directory</span>
+        <Card className="p-6 bg-brand-900 text-white rounded-3xl mb-8 shadow-xl relative overflow-hidden">
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-4 border-b border-white/10 pb-4">
+            <div className="flex items-center space-x-2 text-accent-400 font-bold text-xs uppercase tracking-wider">
+              <Hotel className="w-4 h-4" />
+              <span>Luxury Hotels & Beach Resorts Directory</span>
+            </div>
+            <span className="bg-amber-400 text-slate-950 font-black text-[10px] sm:text-xs px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5 shadow-md animate-pulse">
+              <Clock className="w-3.5 h-3.5 text-slate-950" />
+              <span>COMING SOON • LIVE HOTEL TARIFF API INTEGRATION IN PROGRESS</span>
+            </span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-slate-900">

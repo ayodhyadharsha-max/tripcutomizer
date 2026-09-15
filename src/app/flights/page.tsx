@@ -41,10 +41,16 @@ export default function FlightSearchPage() {
 
 
         {/* Flight Search Engine Header */}
-        <Card className="p-6 bg-brand-900 text-white rounded-3xl mb-8 shadow-xl">
-          <div className="flex items-center space-x-2 text-brand-400 font-bold text-xs uppercase tracking-wider mb-3">
-            <Plane className="w-4 h-4" />
-            <span>IATA Certified Flight Booking Desk</span>
+        <Card className="p-6 bg-brand-900 text-white rounded-3xl mb-8 shadow-xl relative overflow-hidden">
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-4 border-b border-white/10 pb-4">
+            <div className="flex items-center space-x-2 text-brand-400 font-bold text-xs uppercase tracking-wider">
+              <Plane className="w-4 h-4" />
+              <span>IATA Certified Flight Booking Desk</span>
+            </div>
+            <span className="bg-amber-400 text-slate-950 font-black text-[10px] sm:text-xs px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5 shadow-md animate-pulse">
+              <Clock className="w-3.5 h-3.5 text-slate-950" />
+              <span>COMING SOON • LIVE AIRLINE GDS INTEGRATION IN PROGRESS</span>
+            </span>
           </div>
 
           {/* Trip Type Tabs */}

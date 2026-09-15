@@ -70,19 +70,23 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
               </Link>
 
               <Link href="/flights" onClick={onClose} className="flex items-center justify-between p-2.5 rounded-lg hover:bg-slate-100">
-                <div className="flex items-center space-x-3 text-brand-500">
+                <div className="flex items-center space-x-3 text-brand-500 font-semibold">
                   <Plane className="w-4 h-4" />
                   <span>Flight Search</span>
                 </div>
-                <ChevronRight className="w-4 h-4 text-slate-400" />
+                <span className="bg-amber-400 text-slate-950 font-black text-[9px] px-2 py-0.5 rounded-md uppercase tracking-wider">
+                  COMING SOON
+                </span>
               </Link>
 
               <Link href="/hotels" onClick={onClose} className="flex items-center justify-between p-2.5 rounded-lg hover:bg-slate-100">
-                <div className="flex items-center space-x-3 text-accent-600">
+                <div className="flex items-center space-x-3 text-accent-600 font-semibold">
                   <Hotel className="w-4 h-4" />
                   <span>Hotel Stays</span>
                 </div>
-                <ChevronRight className="w-4 h-4 text-slate-400" />
+                <span className="bg-amber-400 text-slate-950 font-black text-[9px] px-2 py-0.5 rounded-md uppercase tracking-wider">
+                  COMING SOON
+                </span>
               </Link>
             </div>
           </div>

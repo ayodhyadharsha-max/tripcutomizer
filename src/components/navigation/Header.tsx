@@ -61,8 +61,11 @@ export const Header: React.FC = () => {
           {/* Flights */}
           <Link
             href="/flights"
-            className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg hover:text-brand-500 hover:bg-slate-50 transition-colors"
+            className="relative flex items-center space-x-1.5 px-3 py-1.5 rounded-lg hover:text-brand-500 hover:bg-slate-50 transition-colors"
           >
+            <span className="absolute -top-1.5 -right-1 bg-amber-400 text-slate-950 font-black text-[8px] px-1 py-0.2 rounded uppercase tracking-wider shadow-xs">
+              SOON
+            </span>
             <Plane className="w-4 h-4 text-brand-400" />
             <span>Flights</span>
           </Link>
@@ -70,8 +73,11 @@ export const Header: React.FC = () => {
           {/* Hotels */}
           <Link
             href="/hotels"
-            className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg hover:text-accent-600 hover:bg-slate-50 transition-colors"
+            className="relative flex items-center space-x-1.5 px-3 py-1.5 rounded-lg hover:text-accent-600 hover:bg-slate-50 transition-colors"
           >
+            <span className="absolute -top-1.5 -right-1 bg-amber-400 text-slate-950 font-black text-[8px] px-1 py-0.2 rounded uppercase tracking-wider shadow-xs">
+              SOON
+            </span>
             <Hotel className="w-4 h-4 text-accent-500" />
             <span>Hotels</span>
           </Link>
