@@ -475,7 +475,7 @@ export function HolidayListingView({
             ) : (
               /* Packages Listing Array */
               <div className="space-y-6">
-                {filteredPackages.map((pkg) => (
+                {filteredPackages.map((pkg, idx) => (
                   <Card
                     key={pkg.id}
                     hoverable
@@ -488,6 +488,8 @@ export function HolidayListingView({
                           src={pkg.heroImage}
                           alt={pkg.name}
                           fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
+                          priority={idx < 4}
                           className="object-cover group-hover:scale-105 transition-transform duration-500"
                         />
                         <div className="absolute top-3 left-3 bg-brand-900/90 backdrop-blur-xs text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-xs">

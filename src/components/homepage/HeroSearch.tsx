@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { ChevronLeft, ChevronRight, Search } from 'lucide-react';
 
 interface HeroSlide {
@@ -107,11 +108,19 @@ export const HeroSearch: React.FC = () => {
         {slides.map((slide, idx) => (
           <div
             key={slide.id}
-            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out ${
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
               idx === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
             }`}
-            style={{ backgroundImage: `url('${slide.bgImage}')` }}
           >
+            <Image
+              src={slide.bgImage}
+              alt={slide.mainTitle}
+              fill
+              priority={idx === 0}
+              sizes="100vw"
+              quality={80}
+              className="object-cover"
+            />
             {/* Dark overlay gradient for text legibility */}
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/40 to-slate-950/50" />
           </div>
