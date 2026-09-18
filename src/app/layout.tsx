@@ -130,6 +130,18 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://www.tripcustomizer.com',
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/icon.png', type: 'image/png' },
+      { url: '/logo.png', type: 'image/png' },
+    ],
+    shortcut: ['/favicon.ico'],
+    apple: [
+      { url: '/apple-icon.png' },
+      { url: '/logo.png' },
+    ],
+  },
   openGraph: {
     title: 'tripcustomizer — Tailor-Made Holidays & Global Travel Solutions',
     description:

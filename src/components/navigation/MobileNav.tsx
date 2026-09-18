@@ -22,8 +22,8 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
       <div className="fixed inset-y-0 left-0 w-4/5 max-w-sm bg-white shadow-2xl flex flex-col z-50 animate-in slide-in-from-left duration-200">
         {/* Header */}
         <div className="p-4 bg-brand-800 text-white flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <div className="bg-brand-500 p-1.5 rounded-lg text-white font-black text-sm">TB</div>
+          <div className="flex items-center space-x-2.5">
+            <img src="/logo.png" alt="tripcustomizer" className="h-9 w-auto object-contain bg-white/10 p-1 rounded-lg" />
             <div>
               <span className="font-bold text-sm block tracking-wide">tripcustomizer</span>
               <span className="text-[10px] text-slate-300">Holidays, Flights & Hotels</span>

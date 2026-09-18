@@ -240,7 +240,10 @@ export const Footer: React.FC = () => {
 
           {/* Bottom Copyright Bar */}
           <div className="pt-8 border-t border-brand-800/80 text-center text-[11px] text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p>© 2026 tripcustomizer. All rights reserved. Enterprise Travel Commerce Platform.</p>
+            <div className="flex items-center space-x-3">
+              <img src="/logo.png" alt="tripcustomizer" className="h-7 w-auto object-contain opacity-90 bg-white/10 p-0.5 rounded" />
+              <p>© 2026 tripcustomizer. All rights reserved. Enterprise Travel Commerce Platform.</p>
+            </div>
             <div className="flex space-x-4 font-semibold text-slate-400">
               <Link href="/terms" className="hover:text-white">Terms</Link>
               <Link href="/privacy" className="hover:text-white">Privacy</Link>

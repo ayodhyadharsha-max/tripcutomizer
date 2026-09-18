@@ -22,9 +22,11 @@ export const Header: React.FC = () => {
       <Container className="flex items-center justify-between h-16">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center space-x-2.5 group">
-          <div className="bg-brand-700 text-white font-black text-xl px-2.5 py-1 rounded-xl shadow-md group-hover:bg-brand-800 transition-colors">
-            TC
-          </div>
+          <img
+            src="/logo.png"
+            alt="tripcustomizer"
+            className="h-10 sm:h-11 w-auto object-contain transition-transform group-hover:scale-105"
+          />
           <div>
             <span className="font-black text-xl tracking-tight text-brand-900 block leading-tight">
               trip<span className="text-brand-600 font-extrabold">customizer</span>
