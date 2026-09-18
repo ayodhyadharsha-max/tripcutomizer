@@ -27,7 +27,7 @@ const slides: HeroSlide[] = [
     subtitle: 'Spiritual Yatra, Honeymoon Escapes & Custom Group Tours starting @ ₹ 14,999.00',
     priceTag: '₹ 14,999.00',
     badgeType: 'discount',
-    discountBadgeText: 'Flat 15% OFF on Tailor-Made India & Global Packages',
+    discountBadgeText: 'Customized India & Global Holiday Packages',
   },
   {
     id: 2,
