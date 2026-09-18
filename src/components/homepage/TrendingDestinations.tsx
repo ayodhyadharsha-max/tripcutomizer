@@ -37,8 +37,8 @@ const internationalDestinations: DestinationCard[] = [
     slug: 'bali',
     image: '/destinations/bali.jpg',
     startingPrice: 35500,
-    textColor: 'text-emerald-950',
-    fontStyle: 'font-serif font-bold',
+    textColor: 'text-amber-300',
+    fontStyle: 'font-sans font-black tracking-widest uppercase',
   },
   {
     name: 'Sri Lanka',
