@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     'customized tour packages',
     'holiday packages india',
     'international tour packages',
-    // Image 1: International Honeymoon Packages
+    // 1. Trending International Honeymoon Packages
     'Maldives honeymoon packages',
     'Bali honeymoon packages',
     'Mauritius honeymoon packages',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     'Paris honeymoon packages',
     'Thailand honeymoon packages',
     'Seychelles honeymoon packages',
-    // Image 2: Domestic Tour Packages
+    // 2. Trending Destinations in India
     'Kerala tour packages',
     'Kashmir tour packages',
     'Goa tour packages',
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     'Uttarakhand tour packages',
     'Coorg Ooty packages',
     'Manali tour packages',
-    // Image 3: Domestic Honeymoon Packages
+    // 3. Trending India Honeymoon Packages
     'Kerala honeymoon packages',
     'Kashmir honeymoon packages',
     'Manali honeymoon packages',
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     'Coorg honeymoon packages',
     'Udaipur honeymoon packages',
     'Andaman honeymoon packages',
-    // Image 4: Spiritual & Pilgrimage Tour Packages
+    // 4. Most Popular Spiritual Tour Packages
     'Char Dham Yatra packages',
     'Kedarnath tour packages',
     'Badrinath tour packages',
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     'Golden Temple Amritsar package',
     'Vaishno Devi Yatra',
     'Dwarka Somnath package',
-    // Image 5: International Tour Packages
+    // 5. Trending International Tour Packages
     'Turkey tour packages',
     'Singapore tour packages',
     'Malaysia tour packages',
@@ -83,6 +83,46 @@ export const metadata: Metadata = {
     'Baku tour packages',
     'Georgia tour packages',
     'Kazakhstan tour packages',
+    // 6. Trending Travel Themes
+    'Luxury Cruise packages',
+    'Escorted Group Tours',
+    'Adventure & Trekking',
+    'Beach Escapes',
+    'Wildlife Safari packages',
+    'Heritage & Cultural tours',
+    'Self-Drive Holidays',
+    'Winter Snow Tours',
+    // 7. Most Popular India Tourism
+    'Gods Own Country Kerala',
+    'Paradise on Earth Kashmir',
+    'Golden Triangle India',
+    'Royal Rajasthan Heritage',
+    'Spiritual Varanasi Ghats',
+    'Lakes & Palaces Udaipur',
+    'Snow Slopes Gulmarg',
+    // 8. Most Popular International Tourism
+    'Europe Tourism',
+    'Thailand Tourism',
+    'Dubai Tourism',
+    'Singapore Tourism',
+    'Bali Tourism',
+    'Maldives Tourism',
+    'Vietnam Tourism',
+    'Australia Tourism',
+    // 9. Trending International Flights Routes
+    'Delhi to Dubai Flights',
+    'Mumbai to Singapore Flights',
+    'Bengaluru to London Flights',
+    'Delhi to Bangkok Flights',
+    'Mumbai to Abu Dhabi Flights',
+    'Kolkata to Dubai Flights',
+    // 10. Trending Domestic Flights Routes
+    'Delhi to Mumbai Flights',
+    'Bengaluru to Delhi Flights',
+    'Mumbai to Goa Flights',
+    'Delhi to Srinagar Flights',
+    'Kolkata to Bengaluru Flights',
+    'Chennai to Delhi Flights',
   ],
   authors: [{ name: 'tripcustomizer Senior Travel Desk' }],
   creator: 'tripcustomizer',

@@ -117,15 +117,15 @@ export const SEOTagDirectory: React.FC = () => {
 
         {/* Tabbed Directory Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left Vertical Tab Menu */}
-          <div className="lg:col-span-4 space-y-1.5 border-r border-slate-200 pr-6">
+          {/* Left / Top Tab Navigation */}
+          <div className="lg:col-span-4 flex lg:flex-col overflow-x-auto lg:overflow-x-visible pb-3 lg:pb-0 gap-1.5 border-b lg:border-b-0 lg:border-r border-slate-200 pr-0 lg:pr-6 scrollbar-none">
             {categories.map((cat, idx) => (
               <button
                 key={idx}
                 onClick={() => setActiveTab(idx)}
-                className={`w-full text-left px-4 py-3 rounded-lg text-xs transition-all flex items-center justify-between cursor-pointer ${
+                className={`whitespace-nowrap lg:whitespace-normal w-auto lg:w-full text-left px-4 py-3 rounded-lg text-xs transition-all flex items-center justify-between cursor-pointer shrink-0 ${
                   activeTab === idx
-                    ? 'border-l-4 border-brand-600 bg-white text-brand-600 font-black shadow-sm'
+                    ? 'border-b-2 lg:border-b-0 lg:border-l-4 border-brand-600 bg-white text-brand-600 font-black shadow-sm'
                     : 'text-slate-600 font-bold hover:text-slate-900 hover:bg-slate-100/80'
                 }`}
               >
@@ -136,15 +136,21 @@ export const SEOTagDirectory: React.FC = () => {
 
           {/* Right Area: Pill Buttons Cloud */}
           <div className="lg:col-span-8 flex flex-wrap gap-3 pt-1">
-            {categories[activeTab].tags.map((tag, idx) => (
-              <Link
-                key={idx}
-                href={`/holidays?search=${encodeURIComponent(tag.replace(/ (packages|tour|yatra)/i, '').trim())}`}
-                className="px-5 py-2.5 bg-white text-blue-600 border-2 border-blue-500 hover:border-blue-600 hover:bg-blue-50 rounded-full text-xs sm:text-sm font-bold shadow-xs transition-all cursor-pointer inline-block"
-              >
-                {tag}
-              </Link>
-            ))}
+            {categories[activeTab].tags.map((tag, idx) => {
+              const isFlight = tag.toLowerCase().includes('flights');
+              const searchKeyword = tag.replace(/ (packages|tour|yatra|tourism|ghats|heritage|palaces|slopes)/i, '').trim();
+              const targetUrl = isFlight ? '/flights' : `/holidays?search=${encodeURIComponent(searchKeyword)}`;
+
+              return (
+                <Link
+                  key={idx}
+                  href={targetUrl}
+                  className="px-5 py-2.5 bg-white text-blue-600 border-2 border-blue-500 hover:border-blue-600 hover:bg-blue-50 rounded-full text-xs sm:text-sm font-bold shadow-xs transition-all cursor-pointer inline-block"
+                >
+                  {tag}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </Container>
