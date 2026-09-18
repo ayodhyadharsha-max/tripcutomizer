@@ -3863,6 +3863,62 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "faqs": [
       { "question": "Is Australia visa process online?", "answer": "Yes, 100% online Subclass 600 tourist visa processed." }
     ]
+  },
+  {
+    "id": "pkg-intl-malaysia",
+    "name": "Kuala Lumpur & Genting Highlands Malaysia Explorer 4N/5D",
+    "slug": "kuala-lumpur-genting-highlands-malaysia-explorer",
+    "destination": "Malaysia",
+    "destinationSlug": "malaysia",
+    "country": "Malaysia",
+    "region": "South East Asia",
+    "isInternational": true,
+    "durationDays": 5,
+    "durationNights": 4,
+    "startingPrice": 29800,
+    "discountPrice": 36500,
+    "rating": 4.8,
+    "reviewsCount": 210,
+    "heroImage": "/destinations/malaysia.jpg",
+    "gallery": ["/destinations/malaysia.jpg"],
+    "highlights": [
+      "Petronas Twin Towers Skybridge & Observation Deck Ticket",
+      "Genting Highlands Cable Car (Awana SkyWay)",
+      "Batu Caves Lord Murugan Temple Tour",
+      "Sunway Lagoon Theme Park Day Pass"
+    ],
+    "inclusions": [
+      "4N 4-Star Hotel Stay with Daily Breakfast",
+      "Kuala Lumpur City Tour & Batu Caves Transfer",
+      "Genting Cable Car Return Tickets",
+      "Malaysia eVISA / Entry Pass Assistance"
+    ],
+    "exclusions": [
+      "Tourism Tax paid directly at hotel"
+    ],
+    "theme": "City Escapes & Theme Parks",
+    "hotelCategory": "4 Star",
+    "mealPlan": "Breakfast Included",
+    "flightsIncluded": true,
+    "transfersIncluded": true,
+    "departureCity": "Delhi / Mumbai / Chennai",
+    "hotels": [
+      { "name": "Mercure Kuala Lumpur Shaw Parade", "city": "Kuala Lumpur", "rating": "4 Star", "nights": 4 }
+    ],
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival in Kuala Lumpur & Night View",
+        "description": "Arrive at KLIA. Private transfer to hotel. Evening view of illuminated Petronas Twin Towers.",
+        "meals": ["Welcome Drink"],
+        "activities": ["Petronas Towers Photo Stop"],
+        "hotel": "Mercure Kuala Lumpur",
+        "transfers": "Private AC Vehicle"
+      }
+    ],
+    "faqs": [
+      { "question": "Do Indian passport holders get Visa Free Entry to Malaysia?", "answer": "Yes, Malaysia offers Visa-Free entry for Indian citizens for up to 30 days." }
+    ]
   }
 ];
 

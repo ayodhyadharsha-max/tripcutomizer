@@ -59,10 +59,10 @@ const internationalDestinations: DestinationCard[] = [
   {
     name: 'MALAYSIA',
     slug: 'malaysia',
-    image: '/destinations/singapore.jpg',
+    image: '/destinations/malaysia.jpg',
     startingPrice: 29800,
-    textColor: 'text-white',
-    fontStyle: 'font-sans font-black italic tracking-widest',
+    textColor: 'text-amber-300',
+    fontStyle: 'font-sans font-black tracking-widest uppercase',
   },
   {
     name: 'Singapore',
