@@ -135,12 +135,12 @@ export const SEOTagDirectory: React.FC = () => {
           </div>
 
           {/* Right Area: Pill Buttons Cloud */}
-          <div className="lg:col-span-8 flex flex-wrap gap-2.5 pt-1">
+          <div className="lg:col-span-8 flex flex-wrap gap-3 pt-1">
             {categories[activeTab].tags.map((tag, idx) => (
               <Link
                 key={idx}
-                href={`/holidays?search=${encodeURIComponent(tag.split(' ')[0])}`}
-                className="px-4 py-2 bg-white text-brand-600 border border-brand-500/80 rounded-2xl text-xs font-semibold hover:bg-brand-50 hover:border-brand-600 transition-all shadow-xs"
+                href={`/holidays?search=${encodeURIComponent(tag.replace(/ (packages|tour|yatra)/i, '').trim())}`}
+                className="px-5 py-2.5 bg-white text-blue-600 border-2 border-blue-500 hover:border-blue-600 hover:bg-blue-50 rounded-full text-xs sm:text-sm font-bold shadow-xs transition-all cursor-pointer inline-block"
               >
                 {tag}
               </Link>
