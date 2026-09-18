@@ -91,10 +91,10 @@ const internationalDestinations: DestinationCard[] = [
   {
     name: 'Thailand',
     slug: 'thailand',
-    image: '/destinations/hero-beach.jpg',
+    image: '/destinations/thailand.jpg',
     startingPrice: 24900,
-    textColor: 'text-yellow-100',
-    fontStyle: 'font-sans font-bold',
+    textColor: 'text-amber-300',
+    fontStyle: 'font-sans font-black tracking-widest uppercase',
   },
 ];
 
