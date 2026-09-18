@@ -5,8 +5,69 @@ import { Footer } from '@/components/navigation/Footer';
 import { ClientProviders } from '@/components/providers/ClientProviders';
 
 export const metadata: Metadata = {
-  title: 'tripcustomizer — Customized Holidays, Flights, Hotels, Visa & Travel Insurance',
-  description: 'Book international & domestic India holiday packages, flights, luxury hotels, visa assistance & travel insurance with 24x7 support.',
+  metadataBase: new URL('https://www.tripcustomizer.com'),
+  title: {
+    default: 'tripcustomizer — Tailor-Made Holidays, Flights, Hotels, Visas & Travel Insurance',
+    template: '%s | tripcustomizer',
+  },
+  description:
+    'Book customized international & domestic holiday packages across 40+ countries. 4-Star hotels, flights, visa assistance, 5% GST tax compliance, and 24x7 travel desk support.',
+  keywords: [
+    'tripcustomizer',
+    'customized tour packages',
+    'holiday packages india',
+    'international tour packages',
+    'ayodhya tour package',
+    'varanasi prayagraj classic heritage',
+    'kashmir tour packages',
+    'switzerland honeymoon packages',
+    'dubai holiday deals',
+    'bali tour packages',
+    'cheap flight booking',
+    'luxury hotels booking',
+    'travel visa assistance',
+  ],
+  authors: [{ name: 'tripcustomizer Senior Travel Desk' }],
+  creator: 'tripcustomizer',
+  publisher: 'tripcustomizer',
+  alternates: {
+    canonical: 'https://www.tripcustomizer.com',
+  },
+  openGraph: {
+    title: 'tripcustomizer — Tailor-Made Holidays & Global Travel Solutions',
+    description:
+      'Book customized international & domestic holiday packages with flights, 4-star hotels, visas & 24x7 expert support.',
+    url: 'https://www.tripcustomizer.com',
+    siteName: 'tripcustomizer',
+    images: [
+      {
+        url: 'https://www.tripcustomizer.com/destinations/hero-holidays.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'tripcustomizer Global Holiday Packages',
+      },
+    ],
+    locale: 'en_IN',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'tripcustomizer — Tailor-Made Holidays & Global Travel Solutions',
+    description:
+      'Book customized international & domestic holiday packages with flights, 4-star hotels, visas & 24x7 expert support.',
+    images: ['https://www.tripcustomizer.com/destinations/hero-holidays.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -14,8 +75,54 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const jsonLdSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'TravelAgency',
+    name: 'tripcustomizer',
+    image: 'https://www.tripcustomizer.com/destinations/hero-holidays.jpg',
+    '@id': 'https://www.tripcustomizer.com',
+    url: 'https://www.tripcustomizer.com',
+    telephone: '+91 8881299358',
+    priceRange: '₹₹',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Ram Path, Near Ram Janmabhoomi Complex',
+      addressLocality: 'Ayodhya',
+      addressRegion: 'Uttar Pradesh',
+      postalCode: '224123',
+      addressCountry: 'IN',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 26.7922,
+      longitude: 82.1998,
+    },
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: '00:00',
+      closes: '23:59',
+    },
+    sameAs: [
+      'https://www.facebook.com/tripcustomizer',
+      'https://www.instagram.com/tripcustomizer',
+      'https://twitter.com/tripcustomizer',
+    ],
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.9',
+      reviewCount: '12480',
+    },
+  };
+
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}
+        />
+      </head>
       <body className="flex flex-col min-h-screen bg-white text-slate-900 font-sans antialiased">
         {/* WCAG 2.1 Accessibility Skip Link */}
         <a

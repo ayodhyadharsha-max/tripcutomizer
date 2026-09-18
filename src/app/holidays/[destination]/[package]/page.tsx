@@ -466,8 +466,66 @@ export default function PackageDetailPage({ params }: { params: { destination: s
     }
   };
 
+  const touristTripSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'TouristTrip',
+    name: pkg.name,
+    description: `${pkg.durationDays} Days / ${pkg.durationNights} Nights customized holiday package to ${pkg.destination} featuring 4-Star hotels, breakfasts, sightseeing, and AC transfers.`,
+    touristType: [pkg.isInternational ? 'International Travel' : 'Domestic India Pilgrimage & Cultural Tour', pkg.theme],
+    itinerary: pkg.itinerary.map((item) => ({
+      '@type': 'City',
+      name: item.title,
+      description: item.description,
+    })),
+    offers: {
+      '@type': 'Offer',
+      price: pkg.startingPrice,
+      priceCurrency: 'INR',
+      availability: 'https://schema.org/InStock',
+      url: typeof window !== 'undefined' ? window.location.href : `https://www.tripcustomizer.com/holidays/${pkg.destinationSlug}/${pkg.slug}`,
+      validFrom: '2026-01-01',
+    },
+    provider: {
+      '@type': 'TravelAgency',
+      name: 'tripcustomizer',
+      url: 'https://www.tripcustomizer.com',
+    },
+  };
+
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: pkg.faqs
+      ? pkg.faqs.map((f) => ({
+          '@type': 'Question',
+          name: f.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: f.answer,
+          },
+        }))
+      : [
+          {
+            '@type': 'Question',
+            name: `What is included in ${pkg.name}?`,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: `${pkg.name} includes 4-star hotel stays, daily breakfast, AC transport transfers, sightseeing vouchers, and 24x7 trip support.`,
+            },
+          },
+        ],
+  };
+
   return (
     <div className="bg-slate-50 min-h-screen py-6 pb-24 text-slate-800">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(touristTripSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <Container>
         {/* Toast Notification */}
         {shareToast && (
