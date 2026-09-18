@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { Send, CheckCircle2, User, Phone, Mail, MapPin, Calendar, Users, Wallet, Sparkles, Loader2 } from 'lucide-react';
 import { Container } from '../ui/Container';
 import { Card } from '../ui/Card';
@@ -77,10 +78,23 @@ export const BuildTripWizard: React.FC = () => {
   };
 
   return (
-    <section className="py-16 bg-gradient-to-br from-brand-900 via-brand-800 to-slate-900 text-white relative overflow-hidden">
+    <section className="py-16 sm:py-20 text-white relative overflow-hidden bg-slate-950">
+      {/* Background Travel Photo Image with Rich Gradient Overlay */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Image
+          src="/destinations/hero-holidays.jpg"
+          alt="Tailor-Made Holidays Background"
+          fill
+          sizes="100vw"
+          className="object-cover object-center opacity-45 scale-105"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-900/85 to-slate-950/95" />
+      </div>
+
       <Container className="relative z-10">
         <div className="max-w-4xl mx-auto text-center mb-10">
-          <span className="inline-flex items-center space-x-1.5 bg-accent-500/20 text-accent-400 border border-accent-500/30 text-xs font-bold px-3.5 py-1 rounded-full uppercase tracking-wider mb-3">
+          <span className="inline-flex items-center space-x-1.5 bg-accent-500/20 text-accent-400 border border-accent-500/30 text-xs font-bold px-3.5 py-1 rounded-full uppercase tracking-wider mb-3 shadow-sm">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Tailor-Made Holidays</span>
           </span>
