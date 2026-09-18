@@ -21,19 +21,19 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
       {/* Drawer */}
       <div className="fixed inset-y-0 left-0 w-4/5 max-w-sm bg-white shadow-2xl flex flex-col z-50 animate-in slide-in-from-left duration-200">
         {/* Header */}
-        <div className="p-4 bg-brand-900 text-white flex items-center justify-between border-b border-brand-800">
+        <div className="p-4 bg-brand-950 text-white flex items-center justify-between border-b border-brand-800/80 shadow-md">
           <Link href="/" onClick={onClose} className="flex items-center space-x-3">
-            <img src="/logo.png" alt="tripcustomizer" className="h-10 w-auto object-contain bg-white/10 p-1 rounded-xl shadow-xs" />
-            <div className="flex flex-col justify-center border-l border-white/20 pl-2.5">
-              <span className="font-black text-base tracking-tight text-white block leading-none">
-                trip<span className="text-amber-400 font-extrabold">customizer</span>
+            <img src="/logo.png" alt="TripCustomizer" className="h-10 w-auto object-contain bg-white/10 p-1 rounded-xl shadow-xs" />
+            <div className="flex flex-col justify-center border-l-2 border-amber-400/30 pl-3">
+              <span className="font-black text-lg tracking-tight text-white block leading-none">
+                Trip<span className="text-amber-400 font-black">Customizer</span>
               </span>
-              <span className="text-[9px] font-extrabold text-amber-300 tracking-wider block mt-1 uppercase">
+              <span className="text-[9px] font-black text-amber-300 tracking-wider block mt-1 uppercase bg-amber-400/10 px-2 py-0.5 rounded-full border border-amber-400/20">
                 Holidays • Flights • Hotels
               </span>
             </div>
           </Link>
-          <button onClick={onClose} className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/10">
+          <button onClick={onClose} className="p-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-colors">
             <X className="w-6 h-6" />
           </button>
         </div>

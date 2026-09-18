@@ -7,8 +7,8 @@ import { ClientProviders } from '@/components/providers/ClientProviders';
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.tripcustomizer.com'),
   title: {
-    default: 'tripcustomizer — Tailor-Made Holidays, Flights, Hotels, Visas & Travel Insurance',
-    template: '%s | tripcustomizer',
+    default: 'TripCustomizer — Tailor-Made Holidays, Flights, Hotels, Visas & Travel Insurance',
+    template: '%s | TripCustomizer',
   },
   description:
     'Book customized international & domestic holiday packages across 40+ countries. 4-Star hotels, flights, visa assistance, 5% GST tax compliance, and 24x7 travel desk support.',
