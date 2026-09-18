@@ -159,7 +159,7 @@ export default function BookingCheckoutPage() {
       setAppliedCouponName(code);
       setCheckoutCouponError('');
     } else {
-      setCheckoutCouponError(`Invalid coupon code. Try TCTAJ10, EUROPE15K, FESTIVE15, or EARLYBIRD.`);
+      setCheckoutCouponError(`Invalid coupon code. Try FESTIVE15, EUROPE15K, or EARLYBIRD.`);
     }
   };
 
@@ -468,7 +468,7 @@ export default function BookingCheckoutPage() {
                 <form onSubmit={handleApplyCheckoutCoupon} className="flex gap-2">
                   <input
                     type="text"
-                    placeholder="Enter coupon code (e.g. TCTAJ10)"
+                    placeholder="Enter coupon code (e.g. FESTIVE15)"
                     value={couponCode}
                     onChange={(e) => setCouponCode(e.target.value)}
                     className="flex-1 bg-white border border-amber-300 rounded-xl px-3.5 py-2 text-xs font-bold text-slate-900 uppercase tracking-wider focus:outline-none"

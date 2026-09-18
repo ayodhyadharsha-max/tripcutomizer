@@ -97,15 +97,11 @@ export default function PackageDetailPage({ params }: { params: { destination: s
   const [shareToast, setShareToast] = useState(false);
 
   // Coupon / Promo Code State & Interactive Coupons Registry
-  const [promoInput, setPromoInput] = useState('TCTAJ10');
-  const [appliedCoupon, setAppliedCoupon] = useState<{ code: string; percent?: number; amount?: number } | null>({
-    code: 'TCTAJ10',
-    percent: 10,
-  });
+  const [promoInput, setPromoInput] = useState('');
+  const [appliedCoupon, setAppliedCoupon] = useState<{ code: string; percent?: number; amount?: number } | null>(null);
   const [couponError, setCouponError] = useState('');
 
   const VALID_COUPONS: Record<string, { percent?: number; amount?: number; label: string }> = {
-    TCTAJ10: { percent: 10, label: '10% Instant Discount' },
     FESTIVE15: { percent: 15, label: '15% Festive Special Discount' },
     EARLYBIRD: { amount: 2000, label: '₹2,000 Flat Early Bird Bonus' },
     HOLIDAY5000: { amount: 5000, label: '₹5,000 Flat Mega Holiday Saver' },
@@ -127,7 +123,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
       });
       setCouponError('');
     } else {
-      setCouponError(`Invalid code "${cleanCode}". Try TCTAJ10, FESTIVE15, or EARLYBIRD.`);
+      setCouponError(`Invalid code "${cleanCode}". Try FESTIVE15 or EARLYBIRD.`);
     }
   };
 
@@ -1182,7 +1178,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                   <form onSubmit={handleApplyCoupon} className="flex gap-2">
                     <input
                       type="text"
-                      placeholder="e.g. TCTAJ10, FESTIVE15"
+                      placeholder="e.g. FESTIVE15, EARLYBIRD"
                       value={promoInput}
                       onChange={(e) => setPromoInput(e.target.value)}
                       className="flex-1 bg-white border border-amber-300 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-900 uppercase tracking-wider focus:outline-none focus:border-brand-600"
@@ -1203,13 +1199,6 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                 {!appliedCoupon && (
                   <div className="flex flex-wrap gap-1.5 pt-1">
                     <span className="text-[10px] text-slate-500 font-semibold block w-full">Available Codes:</span>
-                    <button
-                      type="button"
-                      onClick={() => { setPromoInput('TCTAJ10'); setAppliedCoupon({ code: 'TCTAJ10', percent: 10 }); setCouponError(''); }}
-                      className="text-[10px] bg-white border border-amber-300 text-amber-900 font-bold px-2 py-0.5 rounded-md hover:bg-amber-100 cursor-pointer"
-                    >
-                      TCTAJ10 (-10%)
-                    </button>
                     <button
                       type="button"
                       onClick={() => { setPromoInput('FESTIVE15'); setAppliedCoupon({ code: 'FESTIVE15', percent: 15 }); setCouponError(''); }}
