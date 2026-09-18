@@ -36,7 +36,8 @@ const slides: HeroSlide[] = [
     mainTitle: 'Experience Europe Beyond the Postcards',
     subtitle: 'Packages starting @ ₹ 2,33,000.00',
     priceTag: '₹ 2,33,000.00',
-    badgeType: 'hdfc',
+    badgeType: 'discount',
+    discountBadgeText: 'Curated Europe Escapes & Escorted Group Tours',
   },
   {
     id: 3,
