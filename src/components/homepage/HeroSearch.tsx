@@ -21,6 +21,16 @@ interface HeroSlide {
 const slides: HeroSlide[] = [
   {
     id: 1,
+    bgImage: '/hero-banner.webp',
+    taglineHeading: 'MAKING EVERY JOURNEY MEMORABLE • CUSTOM HOLIDAYS',
+    mainTitle: 'Crafted Tour Packages Across India & Worldwide',
+    subtitle: 'Spiritual Yatra, Honeymoon Escapes & Custom Group Tours starting @ ₹ 14,999.00',
+    priceTag: '₹ 14,999.00',
+    badgeType: 'discount',
+    discountBadgeText: 'Flat 15% OFF on Tailor-Made India & Global Packages',
+  },
+  {
+    id: 2,
     bgImage: 'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?q=80&w=2000&auto=format&fit=crop',
     taglineHeading: 'CHASE THE AURORA. CRUISE THE COAST. MEET SANTA CLAUS.',
     mainTitle: 'Experience Europe Beyond the Postcards',
@@ -29,7 +39,7 @@ const slides: HeroSlide[] = [
     badgeType: 'hdfc',
   },
   {
-    id: 2,
+    id: 3,
     bgImage: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2000&auto=format&fit=crop',
     mainTitle: 'Unforgettable Taj experiences across India',
     subtitle: 'Holiday packages starting at ₹ 20,700.00',
@@ -39,7 +49,7 @@ const slides: HeroSlide[] = [
     couponText: 'Unlock an Extra 10% OFF',
   },
   {
-    id: 3,
+    id: 4,
     bgImage: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2000&auto=format&fit=crop',
     taglineHeading: 'EXOTIC TROPICAL ISLAND ESCAPES',
     mainTitle: 'Luxury Overwater Villa Resorts & Beach Holidays',
