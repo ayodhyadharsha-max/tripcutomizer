@@ -12,7 +12,7 @@ export const TourismBoardSection: React.FC = () => {
     {
       name: 'Dubai Economy & Tourism',
       country: 'UAE',
-      image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800&auto=format&fit=crop',
+      image: '/destinations/dubai.jpg',
       desc: 'Experience luxury shopping, desert safaris, theme parks and architectural marvels.',
       slug: 'dubai',
     },
