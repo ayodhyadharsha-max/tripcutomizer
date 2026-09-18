@@ -69,8 +69,8 @@ const internationalDestinations: DestinationCard[] = [
     slug: 'singapore',
     image: '/destinations/singapore.jpg',
     startingPrice: 37900,
-    textColor: 'text-blue-950',
-    fontStyle: 'font-serif italic font-bold',
+    textColor: 'text-amber-300',
+    fontStyle: 'font-sans font-black tracking-widest uppercase',
   },
   {
     name: 'UAE',

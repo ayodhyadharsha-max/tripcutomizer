@@ -26,7 +26,7 @@ export const TourismBoardSection: React.FC = () => {
     {
       name: 'Singapore Tourism Board',
       country: 'Singapore',
-      image: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?q=80&w=800&auto=format&fit=crop',
+      image: '/destinations/singapore.jpg',
       desc: 'Discover futuristic Gardens by the Bay, Sentosa Island & world-class dining.',
       slug: 'singapore',
     },
