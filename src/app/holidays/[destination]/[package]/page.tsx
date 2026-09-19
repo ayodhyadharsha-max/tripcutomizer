@@ -394,7 +394,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
       source: `Package Detail Page (${pkg.destination})`,
     });
     sendWeb3FormLead({
-      subject: `[tripcustomizer] 📞 Quick Callback Request: ${callbackName || 'Valued Client'} (${pkg.name})`,
+      subject: `[Trip Customizer] 📞 Quick Callback Request: ${callbackName || 'Valued Client'} (${pkg.name})`,
       name: callbackName || 'Valued Client',
       email: '',
       phone: callbackPhone,
@@ -483,7 +483,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
     },
     provider: {
       '@type': 'TravelAgency',
-      name: 'tripcustomizer',
+      name: 'Trip Customizer',
       url: 'https://www.tripcustomizer.com',
     },
   };
@@ -1220,7 +1220,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
               {/* Reward Points Badge */}
               <div className="flex items-center space-x-2 text-[11px] text-indigo-700 bg-indigo-50/70 p-2.5 rounded-xl border border-indigo-100 font-bold">
                 <Sparkles className="w-4 h-4 text-indigo-600 fill-indigo-400" />
-                <span>Earn {rewardPoints} tripcustomizer Rewards Points</span>
+                <span>Earn {rewardPoints} Trip Customizer Rewards Points</span>
               </div>
 
               {/* Primary Action Button: Calculate Price & Enter Travel Details */}

@@ -10,7 +10,7 @@ export const WhyChooseUs: React.FC = () => {
       <Container>
         <div className="mb-8">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-            Why tripcustomizer ?
+            Why Trip Customizer?
           </h2>
         </div>
 
@@ -19,7 +19,7 @@ export const WhyChooseUs: React.FC = () => {
           {/* Background Image */}
           <Image
             src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=1600&auto=format&fit=crop"
-            alt="Why tripcustomizer"
+            alt="Why Trip Customizer"
             fill
             className="object-cover"
           />

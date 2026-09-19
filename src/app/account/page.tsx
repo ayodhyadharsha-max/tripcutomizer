@@ -240,7 +240,7 @@ export default function CustomerAccountPage() {
                 <div className="bg-slate-950 text-white font-black text-xs px-2.5 py-1 rounded-xl shadow-md">
                   TC
                 </div>
-                <span className="font-black text-lg text-slate-950 tracking-tight">tripcustomizer</span>
+                <span className="font-black text-lg text-slate-950 tracking-tight">Trip Customizer</span>
               </div>
 
               <div className="space-y-3 z-10 py-6">
@@ -367,7 +367,7 @@ export default function CustomerAccountPage() {
               </div>
 
               <div className="pt-6 border-t border-slate-100 text-center">
-                <span className="text-[10px] text-slate-400 font-semibold">© tripcustomizer 2026</span>
+                <span className="text-[10px] text-slate-400 font-semibold">© 2026 Trip Customizer</span>
               </div>
             </div>
           </Card>
@@ -889,7 +889,7 @@ export default function CustomerAccountPage() {
               <div>
                 <div className="flex items-center space-x-2">
                   <div className="bg-brand-700 text-white font-black text-sm px-2 py-0.5 rounded-lg">TC</div>
-                  <span className="font-black text-xl text-brand-900 tracking-tight">tripcustomizer</span>
+                  <span className="font-black text-xl text-brand-900 tracking-tight">Trip Customizer</span>
                 </div>
                 <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-1">Official Tax Invoice & Travel Voucher</p>
               </div>
@@ -903,7 +903,7 @@ export default function CustomerAccountPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-200 text-xs">
               <div className="space-y-1">
                 <span className="font-extrabold text-slate-400 uppercase text-[10px] block">Issued By (Service Provider)</span>
-                <p className="font-black text-slate-900 text-sm">tripcustomizer Travels Pvt. Ltd.</p>
+                <p className="font-black text-slate-900 text-sm">Trip Customizer Travels Pvt. Ltd.</p>
                 <p className="text-slate-600">GSTIN: 07AAAAA0000A1Z5</p>
                 <p className="text-slate-600">Toll Free: 1800-2099-100</p>
                 <p className="text-slate-600">Support: support@tripcustomizer.com</p>

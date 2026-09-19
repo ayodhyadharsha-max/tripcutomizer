@@ -7,12 +7,14 @@ import { ClientProviders } from '@/components/providers/ClientProviders';
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.tripcustomizer.com'),
   title: {
-    default: 'TripCustomizer™ | Book Customized Holiday Packages, Flights & 4-Star Hotels',
-    template: '%s | TripCustomizer',
+    default: 'Trip Customizer™ | Book Customized Holiday Packages, Flights & 4-Star Hotels',
+    template: '%s | Trip Customizer',
   },
   description:
     'Book customized international & domestic tour packages across 40+ countries. 4-Star hotels, flights, visa assistance, 5% GST tax compliance, and 24x7 expert travel desk support.',
   keywords: [
+    'Trip Customizer',
+    'trip customizer',
     'tripcustomizer',
     'customized tour packages',
     'holiday packages india',
@@ -154,9 +156,9 @@ export const metadata: Metadata = {
     'Kolkata to Bengaluru Flights',
     'Chennai to Delhi Flights',
   ],
-  authors: [{ name: 'tripcustomizer Senior Travel Desk' }],
-  creator: 'tripcustomizer',
-  publisher: 'tripcustomizer',
+  authors: [{ name: 'Trip Customizer Senior Travel Desk' }],
+  creator: 'Trip Customizer',
+  publisher: 'Trip Customizer',
   alternates: {
     canonical: 'https://www.tripcustomizer.com',
   },
@@ -173,17 +175,17 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: 'TripCustomizer™ — Tailor-Made Holidays, Flights & 4-Star Hotels',
+    title: 'Trip Customizer™ — Tailor-Made Holidays, Flights & 4-Star Hotels',
     description:
       'Book customized international & domestic holiday packages with flights, 4-star hotels, visas & 24x7 expert travel assistance.',
     url: 'https://www.tripcustomizer.com',
-    siteName: 'TripCustomizer',
+    siteName: 'Trip Customizer',
     images: [
       {
         url: 'https://www.tripcustomizer.com/destinations/hero-holidays.jpg',
         width: 1200,
         height: 630,
-        alt: 'TripCustomizer Global Holiday Packages',
+        alt: 'Trip Customizer Global Holiday Packages',
       },
     ],
     locale: 'en_IN',
@@ -191,7 +193,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'TripCustomizer™ — Tailor-Made Holidays, Flights & 4-Star Hotels',
+    title: 'Trip Customizer™ — Tailor-Made Holidays, Flights & 4-Star Hotels',
     description:
       'Book customized international & domestic holiday packages with flights, 4-star hotels, visas & 24x7 expert travel assistance.',
     images: ['https://www.tripcustomizer.com/destinations/hero-holidays.jpg'],
@@ -218,7 +220,7 @@ export default function RootLayout({
     {
       '@context': 'https://schema.org',
       '@type': 'TravelAgency',
-      name: 'TripCustomizer',
+      name: 'Trip Customizer',
       image: 'https://www.tripcustomizer.com/destinations/hero-holidays.jpg',
       '@id': 'https://www.tripcustomizer.com',
       url: 'https://www.tripcustomizer.com',
@@ -308,7 +310,7 @@ export default function RootLayout({
     {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
-      name: 'TripCustomizer',
+      name: 'Trip Customizer',
       url: 'https://www.tripcustomizer.com',
       potentialAction: {
         '@type': 'SearchAction',
@@ -322,15 +324,15 @@ export default function RootLayout({
       mainEntity: [
         {
           '@type': 'Question',
-          name: 'What services does tripcustomizer offer?',
+          name: 'What services does Trip Customizer offer?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'TripCustomizer is a leading travel solutions provider offering international and domestic holiday packages, flight bookings, hotel reservations, customized itineraries, and 24/7 expert travel assistance.',
+            text: 'Trip Customizer is a leading travel solutions provider offering international and domestic holiday packages, flight bookings, hotel reservations, customized itineraries, and 24/7 expert travel assistance.',
           },
         },
         {
           '@type': 'Question',
-          name: 'How to book customized holiday packages in India?',
+          name: 'How to book customized holiday packages in India with Trip Customizer?',
           acceptedAnswer: {
             '@type': 'Answer',
             text: 'Select your preferred destination on TripCustomizer.com, choose your budget and dates, and our senior travel architects will curate a personalized itinerary within 2 hours.',
@@ -338,10 +340,10 @@ export default function RootLayout({
         },
         {
           '@type': 'Question',
-          name: 'What are the top spiritual and pilgrimage tour packages available?',
+          name: 'What are the top spiritual and pilgrimage tour packages available on Trip Customizer?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'TripCustomizer offers specialized pilgrimage packages including Char Dham Yatra, Kedarnath, Badrinath, Ayodhya, Varanasi, Kailash Mansarovar, Dwarka Somnath, and Mathura Vrindavan.',
+            text: 'Trip Customizer offers specialized pilgrimage packages including Char Dham Yatra, Kedarnath, Badrinath, Ayodhya, Varanasi, Kailash Mansarovar, Dwarka Somnath, and Mathura Vrindavan.',
           },
         },
       ],

@@ -12,7 +12,7 @@ export const MegaMenuMore: React.FC = () => {
     { title: 'Corporate Travel Desk', href: '/corporate-travel', desc: 'Enterprise business travel management', icon: Building2 },
     { title: 'MICE & Corporate Events', href: '/mice', desc: 'Meetings, Incentives, Conferences & Exhibitions', icon: Users },
     { title: 'Travel Blog & Articles', href: '/blog', desc: 'Destination guides, tips & expert insights', icon: BookOpen },
-    { title: 'Careers at tripcustomizer', href: '/careers', desc: 'Join our team of travel architects', icon: Briefcase },
+    { title: 'Careers at Trip Customizer', href: '/careers', desc: 'Join our team of travel architects', icon: Briefcase },
     { title: 'About Us', href: '/about', desc: 'Our legacy, vision & travel heritage', icon: Info },
     { title: 'Contact Us', href: '/contact', desc: 'Get in touch with customer care', icon: Mail },
   ];

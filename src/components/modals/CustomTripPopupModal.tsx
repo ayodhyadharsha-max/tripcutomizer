@@ -70,7 +70,7 @@ export const CustomTripPopupModal: React.FC = () => {
       });
 
       sendWeb3FormLead({
-        subject: `[TripCustomizer] 1-Min Popup Inquiry: ${formData.destination || 'Selected Destination'}`,
+        subject: `[Trip Customizer] 1-Min Popup Inquiry: ${formData.destination || 'Selected Destination'}`,
         name: formData.name || 'Valued Client',
         email: formData.email,
         phone: formData.phone,

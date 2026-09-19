@@ -39,19 +39,19 @@ export const TestimonialsMetrics: React.FC = () => {
 
   const faqs = [
     {
-      q: 'What services does tripcustomizer offer?',
-      a: 'tripcustomizer is a leading travel solutions provider offering a wide range of services including international and domestic holiday packages, flight bookings, hotel bookings, customized tour itineraries, and corporate travel management.',
+      q: 'What services does Trip Customizer offer?',
+      a: 'Trip Customizer is a leading travel solutions provider offering a wide range of services including international and domestic holiday packages, flight bookings, hotel bookings, customized tour itineraries, and corporate travel management.',
     },
     {
-      q: 'How to book holiday packages in India with tripcustomizer?',
+      q: 'How to book holiday packages in India with Trip Customizer?',
       a: 'You can search for holiday packages on our website by selecting your destination, travel dates, and preferences. Once you select a package, click on "Book Now" or use "Customize Trip" to connect with our travel experts.',
     },
     {
-      q: 'Do tripcustomizer offer customizable tour packages?',
+      q: 'Does Trip Customizer offer customizable tour packages?',
       a: 'Yes, we specialize in fully customized tour packages! You can use our "Customize Trip" wizard or speak with our senior travel architects to tailor flights, hotels, activities, and duration to your exact preferences.',
     },
     {
-      q: 'What are the best holiday packages offered by tripcustomizer?',
+      q: 'What are the best holiday packages offered by Trip Customizer?',
       a: 'Our top-rated packages include European Highlights, Exotic Bali Escapes, Char Dham Yatra, Kerala Serenade, Kashmir Paradise, and Luxury Maldives Honeymoon Resorts.',
     },
     {
@@ -70,7 +70,7 @@ export const TestimonialsMetrics: React.FC = () => {
           {/* Header */}
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-serif text-amber-900 tracking-tight">
-              Why Customers Love tripcustomizer
+              Why Customers Love Trip Customizer
             </h2>
           </div>
 

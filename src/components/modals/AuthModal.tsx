@@ -157,7 +157,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
             <div className="bg-slate-950 text-white font-black text-xs px-2.5 py-1 rounded-xl shadow-md">
               TC
             </div>
-            <span className="font-black text-lg text-slate-950 tracking-tight">tripcustomizer</span>
+            <span className="font-black text-lg text-slate-950 tracking-tight">Trip Customizer</span>
           </div>
 
           {/* Main Hero Banner Text */}
@@ -212,7 +212,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
               <div className="space-y-4">
                 <div>
                   <h3 className="text-xl font-black text-slate-900">
-                    {authMode === 'login' ? 'Log In to Your Account' : 'Sign Up & Join tripcustomizer'}
+                    {authMode === 'login' ? 'Log In to Your Account' : 'Sign Up & Join Trip Customizer'}
                   </h3>
                   <p className="text-xs text-slate-500 font-medium mt-0.5">
                     {authMode === 'login' ? 'Enter registered Mobile No. or Email to receive OTP code.' : 'Fill in your details to create a new traveler account.'}
@@ -341,7 +341,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
           </div>
 
           <div className="pt-4 border-t border-slate-100 text-center">
-            <span className="text-[10px] text-slate-400 font-semibold">© tripcustomizer 2026</span>
+            <span className="text-[10px] text-slate-400 font-semibold">© 2026 Trip Customizer</span>
           </div>
         </div>
       </div>

@@ -241,11 +241,11 @@ export function tripcustomizerHolidayView() {
   // FAQs
   const faqs = [
     {
-      q: 'What are the best holiday packages offered by tripcustomizer?',
+      q: 'What are the best holiday packages offered by Trip Customizer?',
       a: 'We offer a complete list of holiday packages, including India spiritual tours, international trip packages, and honeymoon escapes. Popular picks include Kerala backwaters, Bali beach holidays, and Dubai family tours.',
     },
     {
-      q: 'How to book holiday packages in India with tripcustomizer?',
+      q: 'How to book holiday packages in India with Trip Customizer?',
       a: 'You can easily browse packages on our website, select your preferred travel dates, and request an instant callback or complete your booking online with our travel experts.',
     },
     {
@@ -661,7 +661,7 @@ export function tripcustomizerHolidayView() {
             <div>
               <span className="text-xs font-extrabold text-brand-600 uppercase tracking-wider block mb-1">CURATED EXPERIENCES</span>
               <h2 className="text-2xl sm:text-3xl font-black text-slate-900">
-                tripcustomizer Specials
+                Trip Customizer Specials
               </h2>
             </div>
             <button
@@ -776,7 +776,7 @@ export function tripcustomizerHolidayView() {
                 <h4 className="font-extrabold text-sm sm:text-base leading-snug text-white">
                   Book your holiday in minutes just the way you want
                 </h4>
-                <p className="text-[11px] text-slate-300 mt-1">tripcustomizer</p>
+                <p className="text-[11px] text-slate-300 mt-1">Trip Customizer</p>
               </div>
 
               {/* YouTube Play Overlay Icon */}
@@ -890,7 +890,7 @@ export function tripcustomizerHolidayView() {
                     source: 'Homepage Callback Request',
                   });
                   sendWeb3FormLead({
-                    subject: `[tripcustomizer] Quick Callback Request: ${leadForm.name || 'Client'} (${leadForm.destination})`,
+                    subject: `[Trip Customizer] Quick Callback Request: ${leadForm.name || 'Client'} (${leadForm.destination})`,
                     name: leadForm.name || 'Valued Client',
                     email: leadForm.email,
                     phone: leadForm.mobile,
@@ -1063,7 +1063,7 @@ export function tripcustomizerHolidayView() {
         {/* SECTION 10: WHY TRIPCUSTOMIZER ? (AIRPORT LOUNGE FAMILY BACKDROP & 5 CARDS) */}
         <div className="space-y-6 sm:space-y-8">
           <h2 className="text-xl sm:text-3xl font-black text-slate-900">
-            Why tripcustomizer ?
+            Why Trip Customizer?
           </h2>
 
           <div className="relative rounded-3xl sm:rounded-[40px] overflow-hidden shadow-xl min-h-[360px] sm:h-[420px] bg-slate-900 p-5 sm:p-10 flex flex-col justify-end">
@@ -1108,7 +1108,7 @@ export function tripcustomizerHolidayView() {
         {/* SECTION 11: WHY CUSTOMERS LOVE TRIPCUSTOMIZER (LEGACY STATS & TESTIMONIALS) */}
         <div className="bg-amber-50/50 border border-amber-200/60 rounded-3xl sm:rounded-[40px] p-6 sm:p-12 shadow-sm text-center">
           <h2 className="text-2xl sm:text-5xl font-black text-amber-950 font-serif mb-6 sm:mb-10">
-            Why Customers Love tripcustomizer
+            Why Customers Love Trip Customizer
           </h2>
 
           {/* Stat Pillars */}

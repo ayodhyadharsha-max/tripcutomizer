@@ -102,7 +102,7 @@ export const SEOTagDirectory: React.FC = () => {
         {/* SEO Title & Paragraph */}
         <div className="mb-10 space-y-3">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-            Tours and Travel Agency – tripcustomizer
+            Tours and Travel Agency – Trip Customizer
           </h2>
           <div className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-5xl">
             <p>
@@ -110,7 +110,7 @@ export const SEOTagDirectory: React.FC = () => {
             </p>
             {isExpanded && (
               <p className="mt-2 text-slate-500 animate-in fade-in duration-200">
-                Whether you are seeking a serene house-boat stay in Kerala, a romantic water villa in the Maldives, an escorted group tour across European castles, or a sacred Char Dham Yatra, tripcustomizer ensures seamless booking and 24x7 dedicated travel assistance.
+                Whether you are seeking a serene house-boat stay in Kerala, a romantic water villa in the Maldives, an escorted group tour across European castles, or a sacred Char Dham Yatra, Trip Customizer ensures seamless booking and 24x7 dedicated travel assistance.
               </p>
             )}
             <button

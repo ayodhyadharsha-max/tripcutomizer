@@ -137,7 +137,7 @@ export default function LoginPage() {
               <div className="bg-slate-950 text-white font-black text-xs px-2.5 py-1 rounded-xl shadow-md">
                 TC
               </div>
-              <span className="font-black text-lg text-slate-950 tracking-tight">tripcustomizer</span>
+              <span className="font-black text-lg text-slate-950 tracking-tight">Trip Customizer</span>
             </div>
 
             <div className="space-y-3 z-10 py-6">
@@ -257,7 +257,7 @@ export default function LoginPage() {
             </div>
 
             <div className="pt-6 border-t border-slate-100 text-center">
-              <span className="text-[10px] text-slate-400 font-semibold">© tripcustomizer 2026</span>
+              <span className="text-[10px] text-slate-400 font-semibold">© 2026 Trip Customizer</span>
             </div>
           </div>
         </Card>
