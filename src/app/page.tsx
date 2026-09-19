@@ -4,7 +4,6 @@ import { RecentSearches } from '@/components/homepage/RecentSearches';
 import { TrendingDestinations } from '@/components/homepage/TrendingDestinations';
 import { OffersSection } from '@/components/homepage/OffersSection';
 import { TourismBoardSection } from '@/components/homepage/TourismBoardSection';
-import { BuildTripWizard } from '@/components/homepage/BuildTripWizard';
 import { FlightPromotions } from '@/components/homepage/FlightPromotions';
 import { HotelStaysSection } from '@/components/homepage/HotelStaysSection';
 import { SpecialsSection } from '@/components/homepage/SpecialsSection';
@@ -33,9 +32,6 @@ export default function Home() {
 
       {/* Curated Specials */}
       <SpecialsSection />
-
-      {/* Build Your Own Itinerary */}
-      <BuildTripWizard />
 
       {/* Top Flight Routes */}
       <FlightPromotions />
