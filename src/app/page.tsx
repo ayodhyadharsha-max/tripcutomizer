@@ -1,4 +1,5 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import { HeroSearch } from '@/components/homepage/HeroSearch';
 import { RecentSearches } from '@/components/homepage/RecentSearches';
 import { TrendingDestinations } from '@/components/homepage/TrendingDestinations';
@@ -11,6 +12,15 @@ import { WhyChooseUs } from '@/components/homepage/WhyChooseUs';
 import { TravelInsights } from '@/components/homepage/TravelInsights';
 import { SEOTagDirectory } from '@/components/homepage/SEOTagDirectory';
 import { TestimonialsMetrics } from '@/components/homepage/TestimonialsMetrics';
+
+export const metadata: Metadata = {
+  title: 'Trip Customizer™ | Book Customized Holiday Packages, Flights & 4-Star Hotels',
+  description:
+    'Book customized international & domestic tour packages across 40+ countries. 4-Star hotels, flights, visa assistance, 5% GST tax compliance, and 24x7 expert travel desk support.',
+  alternates: {
+    canonical: 'https://www.tripcustomizer.com',
+  },
+};
 
 export default function Home() {
   return (
