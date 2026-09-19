@@ -93,15 +93,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // 2. Destination Landing Pages (Including all 22 Target SEO Keywords)
+  // 2. Destination Landing Pages (Including 22 International + 43 Spiritual Yatra Target Keywords)
   const targetIntlKeywords = [
     'turkey', 'singapore', 'malaysia', 'bali', 'dubai', 'mauritius',
     'maldives', 'vietnam', 'cambodia', 'seychelles', 'australia', 'europe',
     'south-africa', 'egypt', 'spain', 'usa', 'japan', 'thailand',
     'azerbaijan', 'baku', 'georgia', 'kazakhstan'
   ];
+  const targetSpiritualKeywords = [
+    'ayodhya', 'varanasi', 'kedarnath', 'char-dham', 'badrinath', 'amarnath',
+    'dwarka-somnath', 'mathura-vrindavan', 'amritsar', 'puri', 'rameshwaram',
+    'tirupati', 'shirdi', 'vaishno-devi', 'kailash-mansarovar', 'do-dham',
+    'haridwar', 'rishikesh', 'prayagraj', 'ujjain', 'omkareshwar', 'kumbh-mela',
+    'bodhgaya', 'bhubaneswar', 'konark', 'madurai', 'kanchipuram', 'kumbakonam',
+    'sabrimala', 'velankanni', 'ajmer', 'pushkar', 'guptkashi', 'dharamsala',
+    'khajuraho', 'maheshwar', 'mandu', 'tawang', 'somnath', 'dwarka', 'mathura', 'spiritual'
+  ];
   const demoSlugs = DEMO_PACKAGES.map((p) => p.destinationSlug);
-  const destinationSlugs = Array.from(new Set([...targetIntlKeywords, ...demoSlugs]));
+  const destinationSlugs = Array.from(new Set([...targetIntlKeywords, ...targetSpiritualKeywords, ...demoSlugs]));
 
   const destinationPages: MetadataRoute.Sitemap = destinationSlugs.map((slug) => ({
     url: `${baseUrl}/holidays/${slug}`,

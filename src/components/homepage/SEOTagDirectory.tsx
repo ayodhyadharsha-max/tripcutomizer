@@ -22,11 +22,19 @@ export const SEOTagDirectory: React.FC = () => {
       ]
     },
     {
-      name: 'Most Popular Spiritual Tour Packages',
+      name: 'Most Popular Spiritual & Pilgrimage Yatra Packages',
       tags: [
-        'Char Dham Yatra packages', 'Kedarnath tour packages', 'Badrinath tour packages', 'Do Dham Yatra packages',
-        'Varanasi Kashi tour', 'Rameswaram Temple tour', 'Tirupati Balaji Darshan', 'Amarnath Yatra packages',
-        'Shirdi Sai Baba package', 'Golden Temple Amritsar package', 'Vaishno Devi Yatra', 'Dwarka Somnath package'
+        'Ayodhya Tour Packages', 'Varanasi Tour Packages', 'Kedarnath Tour Packages', 'Char Dham Tour Packages',
+        'Badrinath Tour Packages', 'Amarnath Tour Packages', 'Dwarka Somnath tour package', 'Mathura Vrindavan tour package',
+        'Amritsar Tour Packages', 'Puri Tour Packages', 'Rameshwaram Tour Packages', 'Tirupati Tour Packages',
+        'Shirdi Tour Packages', 'Vaishno Devi Tour Packages', 'Kailash Mansarovar Yatra package', 'Do Dham Tour Packages',
+        'Haridwar Tour Packages', 'Rishikesh Tour Packages', 'Prayagraj Tour Packages', 'Ujjain Tour Packages',
+        'Omkareshwar Tour Packages', 'Kumbh Mela Tour Packages', 'Bodhgaya Tour Packages', 'Bhubaneswar Tour Packages',
+        'Konark Tour Packages', 'Madurai Tour Packages', 'Kanchipuram Tour Packages', 'Kumbakonam Tour Packages',
+        'Sabrimala Tour Packages', 'Velankanni Tour Packages', 'Ajmer Tour Packages', 'Pushkar Tour Packages',
+        'Guptkashi Tour Packages', 'Dharamsala Tour Packages', 'Khajuraho Tour Packages', 'Maheshwar Tour Packages',
+        'Mandu Tour Packages', 'Tawang Tour Packages', 'Somnath Tour Packages', 'Dwarka Tour Packages',
+        'Mathura Tour Packages', 'Spiritual Tour Packages', 'Spiritual Journey in India'
       ]
     },
     {
