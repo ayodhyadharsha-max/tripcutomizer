@@ -7,11 +7,11 @@ import { ClientProviders } from '@/components/providers/ClientProviders';
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.tripcustomizer.com'),
   title: {
-    default: 'TripCustomizer — Tailor-Made Holidays, Flights, Hotels, Visas & Travel Insurance',
+    default: 'TripCustomizer™ | Book Customized Holiday Packages, Flights & 4-Star Hotels',
     template: '%s | TripCustomizer',
   },
   description:
-    'Book customized international & domestic holiday packages across 40+ countries. 4-Star hotels, flights, visa assistance, 5% GST tax compliance, and 24x7 travel desk support.',
+    'Book customized international & domestic tour packages across 40+ countries. 4-Star hotels, flights, visa assistance, 5% GST tax compliance, and 24x7 expert travel desk support.',
   keywords: [
     'tripcustomizer',
     'customized tour packages',
@@ -173,17 +173,17 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: 'tripcustomizer — Tailor-Made Holidays & Global Travel Solutions',
+    title: 'TripCustomizer™ — Tailor-Made Holidays, Flights & 4-Star Hotels',
     description:
-      'Book customized international & domestic holiday packages with flights, 4-star hotels, visas & 24x7 expert support.',
+      'Book customized international & domestic holiday packages with flights, 4-star hotels, visas & 24x7 expert travel assistance.',
     url: 'https://www.tripcustomizer.com',
-    siteName: 'tripcustomizer',
+    siteName: 'TripCustomizer',
     images: [
       {
         url: 'https://www.tripcustomizer.com/destinations/hero-holidays.jpg',
         width: 1200,
         height: 630,
-        alt: 'tripcustomizer Global Holiday Packages',
+        alt: 'TripCustomizer Global Holiday Packages',
       },
     ],
     locale: 'en_IN',
@@ -191,9 +191,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'tripcustomizer — Tailor-Made Holidays & Global Travel Solutions',
+    title: 'TripCustomizer™ — Tailor-Made Holidays, Flights & 4-Star Hotels',
     description:
-      'Book customized international & domestic holiday packages with flights, 4-star hotels, visas & 24x7 expert support.',
+      'Book customized international & domestic holiday packages with flights, 4-star hotels, visas & 24x7 expert travel assistance.',
     images: ['https://www.tripcustomizer.com/destinations/hero-holidays.jpg'],
   },
   robots: {
@@ -214,103 +214,146 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const jsonLdSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'TravelAgency',
-    name: 'tripcustomizer',
-    image: 'https://www.tripcustomizer.com/destinations/hero-holidays.jpg',
-    '@id': 'https://www.tripcustomizer.com',
-    url: 'https://www.tripcustomizer.com',
-    telephone: '+91 8881299358',
-    priceRange: '₹₹',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Ram Path, Near Ram Janmabhoomi Complex',
-      addressLocality: 'Ayodhya',
-      addressRegion: 'Uttar Pradesh',
-      postalCode: '224123',
-      addressCountry: 'IN',
-    },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: 26.7922,
-      longitude: 82.1998,
-    },
-    openingHoursSpecification: {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-      opens: '00:00',
-      closes: '23:59',
-    },
-    sameAs: [
-      'https://www.facebook.com/tripcustomizer',
-      'https://www.instagram.com/tripcustomizer',
-      'https://twitter.com/tripcustomizer',
-    ],
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: '12480',
-    },
-    hasOfferCatalog: [
-      {
-        '@type': 'OfferCatalog',
-        name: 'Trending International Tour Packages',
-        itemListElement: [
-          { '@type': 'Offer', name: 'Turkey tour packages', url: 'https://www.tripcustomizer.com/holidays/turkey' },
-          { '@type': 'Offer', name: 'Singapore tour packages', url: 'https://www.tripcustomizer.com/holidays/singapore' },
-          { '@type': 'Offer', name: 'Malaysia tour packages', url: 'https://www.tripcustomizer.com/holidays/malaysia' },
-          { '@type': 'Offer', name: 'Bali tour packages', url: 'https://www.tripcustomizer.com/holidays/bali' },
-          { '@type': 'Offer', name: 'Dubai tour packages', url: 'https://www.tripcustomizer.com/holidays/dubai' },
-          { '@type': 'Offer', name: 'Mauritius tour packages', url: 'https://www.tripcustomizer.com/holidays/mauritius' },
-          { '@type': 'Offer', name: 'Maldives tour packages', url: 'https://www.tripcustomizer.com/holidays/maldives' },
-          { '@type': 'Offer', name: 'Vietnam tour packages', url: 'https://www.tripcustomizer.com/holidays/vietnam' },
-          { '@type': 'Offer', name: 'Cambodia tour packages', url: 'https://www.tripcustomizer.com/holidays/cambodia' },
-          { '@type': 'Offer', name: 'Seychelles tour packages', url: 'https://www.tripcustomizer.com/holidays/seychelles' },
-          { '@type': 'Offer', name: 'Australia tour packages', url: 'https://www.tripcustomizer.com/holidays/australia' },
-          { '@type': 'Offer', name: 'Europe tour packages', url: 'https://www.tripcustomizer.com/holidays/europe' },
-          { '@type': 'Offer', name: 'South Africa tour packages', url: 'https://www.tripcustomizer.com/holidays/south-africa' },
-          { '@type': 'Offer', name: 'Egypt tour packages', url: 'https://www.tripcustomizer.com/holidays/egypt' },
-          { '@type': 'Offer', name: 'Spain tour packages', url: 'https://www.tripcustomizer.com/holidays/spain' },
-          { '@type': 'Offer', name: 'USA tour packages', url: 'https://www.tripcustomizer.com/holidays/usa' },
-          { '@type': 'Offer', name: 'Japan tour packages', url: 'https://www.tripcustomizer.com/holidays/japan' },
-          { '@type': 'Offer', name: 'Thailand tour packages', url: 'https://www.tripcustomizer.com/holidays/thailand' },
-          { '@type': 'Offer', name: 'Azerbaijan tour packages', url: 'https://www.tripcustomizer.com/holidays/azerbaijan' },
-          { '@type': 'Offer', name: 'Baku tour packages', url: 'https://www.tripcustomizer.com/holidays/baku' },
-          { '@type': 'Offer', name: 'Georgia tour packages', url: 'https://www.tripcustomizer.com/holidays/georgia' },
-          { '@type': 'Offer', name: 'Kazakhstan tour packages', url: 'https://www.tripcustomizer.com/holidays/kazakhstan' },
-        ],
+  const jsonLdSchemas = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'TravelAgency',
+      name: 'TripCustomizer',
+      image: 'https://www.tripcustomizer.com/destinations/hero-holidays.jpg',
+      '@id': 'https://www.tripcustomizer.com',
+      url: 'https://www.tripcustomizer.com',
+      telephone: '+91 8881299358',
+      priceRange: '₹₹',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Ram Path, Near Ram Janmabhoomi Complex',
+        addressLocality: 'Ayodhya',
+        addressRegion: 'Uttar Pradesh',
+        postalCode: '224123',
+        addressCountry: 'IN',
       },
-      {
-        '@type': 'OfferCatalog',
-        name: 'Spiritual & Pilgrimage Tour Packages India',
-        itemListElement: [
-          { '@type': 'Offer', name: 'Ayodhya Tour Packages', url: 'https://www.tripcustomizer.com/holidays/ayodhya' },
-          { '@type': 'Offer', name: 'Varanasi Tour Packages', url: 'https://www.tripcustomizer.com/holidays/varanasi' },
-          { '@type': 'Offer', name: 'Char Dham Tour Packages', url: 'https://www.tripcustomizer.com/holidays/char-dham' },
-          { '@type': 'Offer', name: 'Kedarnath Tour Packages', url: 'https://www.tripcustomizer.com/holidays/kedarnath' },
-          { '@type': 'Offer', name: 'Badrinath Tour Packages', url: 'https://www.tripcustomizer.com/holidays/badrinath' },
-          { '@type': 'Offer', name: 'Amarnath Tour Packages', url: 'https://www.tripcustomizer.com/holidays/amarnath' },
-          { '@type': 'Offer', name: 'Dwarka Somnath tour package', url: 'https://www.tripcustomizer.com/holidays/dwarka-somnath' },
-          { '@type': 'Offer', name: 'Mathura Vrindavan tour package', url: 'https://www.tripcustomizer.com/holidays/mathura-vrindavan' },
-          { '@type': 'Offer', name: 'Amritsar Tour Packages', url: 'https://www.tripcustomizer.com/holidays/amritsar' },
-          { '@type': 'Offer', name: 'Puri Tour Packages', url: 'https://www.tripcustomizer.com/holidays/puri' },
-          { '@type': 'Offer', name: 'Rameshwaram Tour Packages', url: 'https://www.tripcustomizer.com/holidays/rameshwaram' },
-          { '@type': 'Offer', name: 'Tirupati Tour Packages', url: 'https://www.tripcustomizer.com/holidays/tirupati' },
-          { '@type': 'Offer', name: 'Shirdi Tour Packages', url: 'https://www.tripcustomizer.com/holidays/shirdi' },
-          { '@type': 'Offer', name: 'Vaishno Devi Tour Packages', url: 'https://www.tripcustomizer.com/holidays/vaishno-devi' },
-          { '@type': 'Offer', name: 'Kailash Mansarovar Yatra package', url: 'https://www.tripcustomizer.com/holidays/kailash-mansarovar' },
-        ],
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 26.7922,
+        longitude: 82.1998,
       },
-    ],
-  };
+      openingHoursSpecification: {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        opens: '00:00',
+        closes: '23:59',
+      },
+      sameAs: [
+        'https://www.facebook.com/tripcustomizer',
+        'https://www.instagram.com/tripcustomizer',
+        'https://twitter.com/tripcustomizer',
+      ],
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '4.9',
+        reviewCount: '12480',
+      },
+      hasOfferCatalog: [
+        {
+          '@type': 'OfferCatalog',
+          name: 'Trending International Tour Packages',
+          itemListElement: [
+            { '@type': 'Offer', name: 'Turkey tour packages', url: 'https://www.tripcustomizer.com/holidays/turkey' },
+            { '@type': 'Offer', name: 'Singapore tour packages', url: 'https://www.tripcustomizer.com/holidays/singapore' },
+            { '@type': 'Offer', name: 'Malaysia tour packages', url: 'https://www.tripcustomizer.com/holidays/malaysia' },
+            { '@type': 'Offer', name: 'Bali tour packages', url: 'https://www.tripcustomizer.com/holidays/bali' },
+            { '@type': 'Offer', name: 'Dubai tour packages', url: 'https://www.tripcustomizer.com/holidays/dubai' },
+            { '@type': 'Offer', name: 'Mauritius tour packages', url: 'https://www.tripcustomizer.com/holidays/mauritius' },
+            { '@type': 'Offer', name: 'Maldives tour packages', url: 'https://www.tripcustomizer.com/holidays/maldives' },
+            { '@type': 'Offer', name: 'Vietnam tour packages', url: 'https://www.tripcustomizer.com/holidays/vietnam' },
+            { '@type': 'Offer', name: 'Cambodia tour packages', url: 'https://www.tripcustomizer.com/holidays/cambodia' },
+            { '@type': 'Offer', name: 'Seychelles tour packages', url: 'https://www.tripcustomizer.com/holidays/seychelles' },
+            { '@type': 'Offer', name: 'Australia tour packages', url: 'https://www.tripcustomizer.com/holidays/australia' },
+            { '@type': 'Offer', name: 'Europe tour packages', url: 'https://www.tripcustomizer.com/holidays/europe' },
+            { '@type': 'Offer', name: 'South Africa tour packages', url: 'https://www.tripcustomizer.com/holidays/south-africa' },
+            { '@type': 'Offer', name: 'Egypt tour packages', url: 'https://www.tripcustomizer.com/holidays/egypt' },
+            { '@type': 'Offer', name: 'Spain tour packages', url: 'https://www.tripcustomizer.com/holidays/spain' },
+            { '@type': 'Offer', name: 'USA tour packages', url: 'https://www.tripcustomizer.com/holidays/usa' },
+            { '@type': 'Offer', name: 'Japan tour packages', url: 'https://www.tripcustomizer.com/holidays/japan' },
+            { '@type': 'Offer', name: 'Thailand tour packages', url: 'https://www.tripcustomizer.com/holidays/thailand' },
+            { '@type': 'Offer', name: 'Azerbaijan tour packages', url: 'https://www.tripcustomizer.com/holidays/azerbaijan' },
+            { '@type': 'Offer', name: 'Baku tour packages', url: 'https://www.tripcustomizer.com/holidays/baku' },
+            { '@type': 'Offer', name: 'Georgia tour packages', url: 'https://www.tripcustomizer.com/holidays/georgia' },
+            { '@type': 'Offer', name: 'Kazakhstan tour packages', url: 'https://www.tripcustomizer.com/holidays/kazakhstan' },
+          ],
+        },
+        {
+          '@type': 'OfferCatalog',
+          name: 'Spiritual & Pilgrimage Tour Packages India',
+          itemListElement: [
+            { '@type': 'Offer', name: 'Ayodhya Tour Packages', url: 'https://www.tripcustomizer.com/holidays/ayodhya' },
+            { '@type': 'Offer', name: 'Varanasi Tour Packages', url: 'https://www.tripcustomizer.com/holidays/varanasi' },
+            { '@type': 'Offer', name: 'Char Dham Tour Packages', url: 'https://www.tripcustomizer.com/holidays/char-dham' },
+            { '@type': 'Offer', name: 'Kedarnath Tour Packages', url: 'https://www.tripcustomizer.com/holidays/kedarnath' },
+            { '@type': 'Offer', name: 'Badrinath Tour Packages', url: 'https://www.tripcustomizer.com/holidays/badrinath' },
+            { '@type': 'Offer', name: 'Amarnath Tour Packages', url: 'https://www.tripcustomizer.com/holidays/amarnath' },
+            { '@type': 'Offer', name: 'Dwarka Somnath tour package', url: 'https://www.tripcustomizer.com/holidays/dwarka-somnath' },
+            { '@type': 'Offer', name: 'Mathura Vrindavan tour package', url: 'https://www.tripcustomizer.com/holidays/mathura-vrindavan' },
+            { '@type': 'Offer', name: 'Amritsar Tour Packages', url: 'https://www.tripcustomizer.com/holidays/amritsar' },
+            { '@type': 'Offer', name: 'Puri Tour Packages', url: 'https://www.tripcustomizer.com/holidays/puri' },
+            { '@type': 'Offer', name: 'Rameshwaram Tour Packages', url: 'https://www.tripcustomizer.com/holidays/rameshwaram' },
+            { '@type': 'Offer', name: 'Tirupati Tour Packages', url: 'https://www.tripcustomizer.com/holidays/tirupati' },
+            { '@type': 'Offer', name: 'Shirdi Tour Packages', url: 'https://www.tripcustomizer.com/holidays/shirdi' },
+            { '@type': 'Offer', name: 'Vaishno Devi Tour Packages', url: 'https://www.tripcustomizer.com/holidays/vaishno-devi' },
+            { '@type': 'Offer', name: 'Kailash Mansarovar Yatra package', url: 'https://www.tripcustomizer.com/holidays/kailash-mansarovar' },
+          ],
+        },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'TripCustomizer',
+      url: 'https://www.tripcustomizer.com',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: 'https://www.tripcustomizer.com/holidays?search={search_term_string}',
+        'query-input': 'required name=search_term_string',
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'What services does tripcustomizer offer?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'TripCustomizer is a leading travel solutions provider offering international and domestic holiday packages, flight bookings, hotel reservations, customized itineraries, and 24/7 expert travel assistance.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'How to book customized holiday packages in India?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Select your preferred destination on TripCustomizer.com, choose your budget and dates, and our senior travel architects will curate a personalized itinerary within 2 hours.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'What are the top spiritual and pilgrimage tour packages available?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'TripCustomizer offers specialized pilgrimage packages including Char Dham Yatra, Kedarnath, Badrinath, Ayodhya, Varanasi, Kailash Mansarovar, Dwarka Somnath, and Mathura Vrindavan.',
+          },
+        },
+      ],
+    },
+  ];
 
   return (
     <html lang="en">
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchemas) }}
         />
       </head>
       <body className="flex flex-col min-h-screen bg-white text-slate-900 font-sans antialiased">
