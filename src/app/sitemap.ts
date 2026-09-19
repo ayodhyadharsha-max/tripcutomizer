@@ -93,12 +93,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // 2. Destination Landing Pages
-  const destinationSlugs = Array.from(new Set(DEMO_PACKAGES.map((p) => p.destinationSlug)));
+  // 2. Destination Landing Pages (Including all 22 Target SEO Keywords)
+  const targetIntlKeywords = [
+    'turkey', 'singapore', 'malaysia', 'bali', 'dubai', 'mauritius',
+    'maldives', 'vietnam', 'cambodia', 'seychelles', 'australia', 'europe',
+    'south-africa', 'egypt', 'spain', 'usa', 'japan', 'thailand',
+    'azerbaijan', 'baku', 'georgia', 'kazakhstan'
+  ];
+  const demoSlugs = DEMO_PACKAGES.map((p) => p.destinationSlug);
+  const destinationSlugs = Array.from(new Set([...targetIntlKeywords, ...demoSlugs]));
+
   const destinationPages: MetadataRoute.Sitemap = destinationSlugs.map((slug) => ({
     url: `${baseUrl}/holidays/${slug}`,
     lastModified: currentDate,
-    changeFrequency: 'weekly',
+    changeFrequency: 'daily',
     priority: 0.9,
   }));
 
