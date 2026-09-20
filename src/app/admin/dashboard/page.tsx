@@ -12,23 +12,42 @@ export default function AdminDashboardPage() {
   const [leads, setLeads] = useState<CustomerLead[]>([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
+  const fetchDirectFromApi = async () => {
+    try {
+      const [resB, resL] = await Promise.all([
+        fetch('/api/bookings'),
+        fetch('/api/leads')
+      ]);
+      if (resB.ok) {
+        const dB = await resB.json();
+        if (dB.success && Array.isArray(dB.bookings) && dB.bookings.length > 0) {
+          setBookings(dB.bookings);
+        }
+      }
+      if (resL.ok) {
+        const dL = await resL.json();
+        if (dL.success && Array.isArray(dL.leads) && dL.leads.length > 0) {
+          setLeads(dL.leads);
+        }
+      }
+    } catch (e) {}
+  };
+
   const loadData = () => {
     const freshBookings = cloudStore.getBookings();
     const freshLeads = cloudStore.getLeads();
-    setBookings((prev) => {
-      if (JSON.stringify(prev) === JSON.stringify(freshBookings)) return prev;
-      return freshBookings;
-    });
-    setLeads((prev) => {
-      if (JSON.stringify(prev) === JSON.stringify(freshLeads)) return prev;
-      return freshLeads;
-    });
+    if (freshBookings.length > 0) setBookings(freshBookings);
+    if (freshLeads.length > 0) setLeads(freshLeads);
+    fetchDirectFromApi();
   };
 
   const handleRefresh = () => {
     setIsRefreshing(true);
-    setBookings(cloudStore.getBookings());
-    setLeads(cloudStore.getLeads());
+    fetchDirectFromApi();
+    const freshBookings = cloudStore.getBookings();
+    const freshLeads = cloudStore.getLeads();
+    if (freshBookings.length > 0) setBookings(freshBookings);
+    if (freshLeads.length > 0) setLeads(freshLeads);
     setTimeout(() => setIsRefreshing(false), 600);
   };
 

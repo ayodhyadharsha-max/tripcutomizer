@@ -249,71 +249,83 @@ const syncFromCloud = async () => {
 
   // 1. Fetch from Supabase PostgreSQL first if configured
   try {
-    if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
-      const { data: supaBookings, error: supaErr } = await supabase
-        .from('bookings')
-        .select('*')
-        .order('created_at', { ascending: false });
+    const { data: supaBookings, error: supaErr } = await supabase
+      .from('bookings')
+      .select('*')
+      .order('created_at', { ascending: false });
 
-      if (!supaErr && Array.isArray(supaBookings) && supaBookings.length > 0) {
-        const mapped: CustomerBooking[] = supaBookings.map((b: any) => ({
-          id: b.id,
-          referenceNo: b.reference_no,
-          userId: b.user_id,
-          customerName: b.customer_name,
-          customerPhone: b.customer_phone,
-          customerEmail: b.customer_email || '',
-          packageName: b.package_name,
-          destination: b.destination,
-          travelDates: b.travel_dates,
-          travelersCount: b.travelers_count,
-          hotelCategory: b.hotel_category,
-          basePrice: Number(b.base_price) || 0,
-          gstAmount: Number(b.gst_amount) || 0,
-          discountAmount: Number(b.discount_amount) || 0,
-          couponApplied: b.coupon_applied,
-          paymentMethod: b.payment_method,
-          transactionId: b.transaction_id,
-          specialRequests: b.special_requests,
-          totalAmount: Number(b.total_amount) || 0,
-          status: b.status,
-          paymentStatus: b.payment_status,
-          createdAt: b.created_at,
-          notes: b.notes,
-          passengersList: b.passengers_list || [],
-        }));
+    if (!supaErr && Array.isArray(supaBookings) && supaBookings.length > 0) {
+      const mapped: CustomerBooking[] = supaBookings.map((b: any) => ({
+        id: b.id || `bk-${Date.now()}`,
+        referenceNo: b.reference_no || b.referenceNo || b.ref_no || `TC-BK-${(b.id || '').slice(0, 5)}`,
+        userId: b.user_id || b.userId || '',
+        customerName: b.customer_name || b.customerName || b.name || b.full_name || 'Valued Traveler',
+        customerPhone: b.customer_phone || b.customerPhone || b.phone || b.mobile || '',
+        customerEmail: b.customer_email || b.customerEmail || b.email || '',
+        packageName: b.package_name || b.packageName || b.destination || b.tour_name || 'Holiday Tour',
+        destination: b.destination || 'India',
+        travelDates: b.travel_dates || b.travelDates || b.dates || 'Upcoming',
+        travelersCount: Number(b.travelers_count || b.travelersCount || b.pax || 1),
+        hotelCategory: b.hotel_category || b.hotelCategory || '4-Star Premium Deluxe Hotel & Resort',
+        basePrice: Number(b.base_price || b.basePrice || 0),
+        gstAmount: Number(b.gst_amount || b.gstAmount || 0),
+        discountAmount: Number(b.discount_amount || b.discountAmount || 0),
+        couponApplied: b.coupon_applied || b.couponApplied || '',
+        paymentMethod: b.payment_method || b.paymentMethod || 'Online PG (Cashfree / UPI)',
+        transactionId: b.transaction_id || b.transactionId || '',
+        specialRequests: b.special_requests || b.specialRequests || '',
+        totalAmount: Number(b.total_amount || b.totalAmount || b.amount || b.price || 0),
+        status: b.status || 'Confirmed',
+        paymentStatus: b.payment_status || b.paymentStatus || 'Paid',
+        createdAt: b.created_at || b.createdAt || new Date().toISOString(),
+        notes: b.notes || '',
+        passengersList: b.passengers_list || b.passengersList || [],
+      }));
 
-        setStoredData(STORAGE_KEYS.BOOKINGS, mapped);
-      }
+      const existingLocal = getStoredData<CustomerBooking[]>(STORAGE_KEYS.BOOKINGS, []);
+      const bMap = new Map<string, CustomerBooking>();
+      existingLocal.forEach((b) => bMap.set(b.id, b));
+      mapped.forEach((b) => bMap.set(b.id, b));
+      const merged = Array.from(bMap.values()).sort(
+        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
+      setStoredData(STORAGE_KEYS.BOOKINGS, merged);
+    }
 
-      const { data: supaLeads, error: leadErr } = await supabase
-        .from('leads')
-        .select('*')
-        .order('created_at', { ascending: false });
+    const { data: supaLeads, error: leadErr } = await supabase
+      .from('leads')
+      .select('*')
+      .order('created_at', { ascending: false });
 
-      if (!leadErr && Array.isArray(supaLeads) && supaLeads.length > 0) {
-        const mappedLeads: CustomerLead[] = supaLeads.map((l: any) => ({
-          id: l.id,
-          name: l.name,
-          phone: l.phone,
-          email: l.email || '',
-          destination: l.destination,
-          budget: l.budget,
-          travelDates: l.travel_dates,
-          travelersCount: l.travelers_count,
-          status: l.status,
-          source: l.source,
-          createdAt: l.created_at,
-        }));
+    if (!leadErr && Array.isArray(supaLeads) && supaLeads.length > 0) {
+      const mappedLeads: CustomerLead[] = supaLeads.map((l: any) => ({
+        id: l.id || `lead-${Date.now()}`,
+        name: l.name || l.customer_name || l.customerName || 'Valued Client',
+        phone: l.phone || l.customer_phone || l.customerPhone || l.mobile || '',
+        email: l.email || l.customer_email || l.customerEmail || '',
+        destination: l.destination || l.package_name || l.packageName || 'Holiday Package',
+        budget: l.budget || '',
+        travelDates: l.travel_dates || l.travelDates || '',
+        travelersCount: Number(l.travelers_count || l.travelersCount || 1),
+        status: l.status || 'New',
+        source: l.source || 'Website',
+        createdAt: l.created_at || l.createdAt || new Date().toISOString(),
+      }));
 
-        setStoredData(STORAGE_KEYS.LEADS, mappedLeads);
-      }
+      const existingLocalLeads = getStoredData<CustomerLead[]>(STORAGE_KEYS.LEADS, []);
+      const lMap = new Map<string, CustomerLead>();
+      existingLocalLeads.forEach((l) => lMap.set(l.id, l));
+      mappedLeads.forEach((l) => lMap.set(l.id, l));
+      const merged = Array.from(lMap.values()).sort(
+        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
+      setStoredData(STORAGE_KEYS.LEADS, merged);
     }
   } catch (e) {
     console.warn('Supabase fetch info:', e);
   }
 
-  // 2. Fetch from Next.js Server API fallback
+  // 2. Fetch from Next.js Server API (which queries Supabase + JSON backup on server)
   try {
     const resBookings = await fetch('/api/bookings');
     if (resBookings.ok) {

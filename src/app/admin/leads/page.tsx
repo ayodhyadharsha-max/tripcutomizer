@@ -11,18 +11,29 @@ export default function AdminLeadsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [isRefreshing, setIsRefreshing] = useState(false);
 
+  const fetchDirectFromApi = async () => {
+    try {
+      const res = await fetch('/api/leads');
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && Array.isArray(data.leads) && data.leads.length > 0) {
+          setLeads(data.leads);
+        }
+      }
+    } catch (e) {}
+  };
+
   const loadLeads = () => {
     const fresh = cloudStore.getLeads();
-    setLeads((prev) => {
-      if (JSON.stringify(prev) === JSON.stringify(fresh)) return prev;
-      return fresh;
-    });
+    if (fresh.length > 0) setLeads(fresh);
+    fetchDirectFromApi();
   };
 
   const handleRefresh = () => {
     setIsRefreshing(true);
+    fetchDirectFromApi();
     const fresh = cloudStore.getLeads();
-    setLeads(fresh);
+    if (fresh.length > 0) setLeads(fresh);
     setTimeout(() => setIsRefreshing(false), 600);
   };
 

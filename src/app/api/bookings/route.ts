@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import getSupabaseServer from '@/lib/supabaseServer';
 
 export interface ServerBooking {
   id: string;
@@ -95,8 +96,59 @@ const saveBookingsToFile = (bookings: ServerBooking[]) => {
 };
 
 export async function GET() {
-  const bookings = loadBookingsFromFile();
-  return NextResponse.json({ success: true, bookings });
+  let fileBookings = loadBookingsFromFile();
+  let supabaseBookings: ServerBooking[] = [];
+
+  try {
+    const supabaseServer = getSupabaseServer();
+    if (supabaseServer) {
+      const { data, error } = await supabaseServer
+        .from('bookings')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (!error && Array.isArray(data) && data.length > 0) {
+        supabaseBookings = data.map((b: any) => ({
+          id: b.id || `bk-${Date.now()}`,
+          referenceNo: b.reference_no || b.referenceNo || b.ref_no || `TC-BK-${(b.id || '').slice(0, 5)}`,
+          userId: b.user_id || b.userId || '',
+          customerName: b.customer_name || b.customerName || b.name || b.full_name || 'Valued Traveler',
+          customerPhone: b.customer_phone || b.customerPhone || b.phone || b.mobile || '',
+          customerEmail: b.customer_email || b.customerEmail || b.email || '',
+          packageName: b.package_name || b.packageName || b.destination || b.tour_name || 'Holiday Tour',
+          destination: b.destination || 'India',
+          travelDates: b.travel_dates || b.travelDates || b.dates || 'Upcoming',
+          travelersCount: Number(b.travelers_count || b.travelersCount || b.pax || 1),
+          hotelCategory: b.hotel_category || b.hotelCategory || '4-Star Premium Deluxe Hotel & Resort',
+          basePrice: Number(b.base_price || b.basePrice || 0),
+          gstAmount: Number(b.gst_amount || b.gstAmount || 0),
+          discountAmount: Number(b.discount_amount || b.discountAmount || 0),
+          couponApplied: b.coupon_applied || b.couponApplied || '',
+          paymentMethod: b.payment_method || b.paymentMethod || 'Online PG (Cashfree / UPI)',
+          transactionId: b.transaction_id || b.transactionId || '',
+          specialRequests: b.special_requests || b.specialRequests || '',
+          totalAmount: Number(b.total_amount || b.totalAmount || b.amount || b.price || 0),
+          status: b.status || 'Confirmed',
+          paymentStatus: b.payment_status || b.paymentStatus || 'Paid',
+          createdAt: b.created_at || b.createdAt || new Date().toISOString(),
+          notes: b.notes || '',
+          passengersList: b.passengers_list || b.passengersList || []
+        }));
+      }
+    }
+  } catch (err) {
+    console.warn('[API Bookings] Supabase GET info:', err);
+  }
+
+  const bookingMap = new Map<string, ServerBooking>();
+  fileBookings.forEach((b) => bookingMap.set(b.id, b));
+  supabaseBookings.forEach((b) => bookingMap.set(b.id, b));
+
+  const merged = Array.from(bookingMap.values()).sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
+
+  return NextResponse.json({ success: true, bookings: merged });
 }
 
 export async function POST(req: Request) {

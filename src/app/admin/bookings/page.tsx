@@ -12,28 +12,37 @@ export default function AdminBookingsPage() {
   const [selectedBooking, setSelectedBooking] = useState<CustomerBooking | null>(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
+  const fetchDirectFromApi = async () => {
+    try {
+      const res = await fetch('/api/bookings');
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && Array.isArray(data.bookings) && data.bookings.length > 0) {
+          setBookings(data.bookings);
+        }
+      }
+    } catch (e) {}
+  };
+
   const loadBookings = () => {
     const fresh = cloudStore.getBookings();
-    setBookings((prev) => {
-      if (JSON.stringify(prev) === JSON.stringify(fresh)) return prev;
-      return fresh;
-    });
+    if (fresh.length > 0) setBookings(fresh);
+    fetchDirectFromApi();
   };
 
   const handleRefresh = () => {
     setIsRefreshing(true);
+    fetchDirectFromApi();
     const fresh = cloudStore.getBookings();
-    setBookings(fresh);
+    if (fresh.length > 0) setBookings(fresh);
     setTimeout(() => setIsRefreshing(false), 600);
   };
 
   useEffect(() => {
     loadBookings();
-    // Listen for cloud storage updates across tabs & same tab
     const handleStorageChange = () => loadBookings();
     window.addEventListener('storage', handleStorageChange);
     window.addEventListener('cloudstore_update', handleStorageChange);
-    // Background interval check with zero-flicker guard
     const pollTimer = setInterval(loadBookings, 3000);
     return () => {
       window.removeEventListener('storage', handleStorageChange);

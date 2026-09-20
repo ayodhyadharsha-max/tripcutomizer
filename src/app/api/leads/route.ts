@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import getSupabaseServer from '@/lib/supabaseServer';
 
 export interface ServerLead {
   id: string;
@@ -73,8 +74,46 @@ const saveLeadsToFile = (leads: ServerLead[]) => {
 };
 
 export async function GET() {
-  const leads = loadLeadsFromFile();
-  return NextResponse.json({ success: true, leads });
+  let fileLeads = loadLeadsFromFile();
+  let supabaseLeads: ServerLead[] = [];
+
+  try {
+    const supabaseServer = getSupabaseServer();
+    if (supabaseServer) {
+      const { data, error } = await supabaseServer
+        .from('leads')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (!error && Array.isArray(data) && data.length > 0) {
+        supabaseLeads = data.map((l: any) => ({
+          id: l.id || `lead-${Date.now()}`,
+          name: l.name || l.customer_name || l.customerName || 'Valued Client',
+          phone: l.phone || l.customer_phone || l.customerPhone || l.mobile || '',
+          email: l.email || l.customer_email || l.customerEmail || '',
+          destination: l.destination || l.package_name || l.packageName || 'Holiday Package',
+          budget: l.budget || '',
+          travelDates: l.travel_dates || l.travelDates || '',
+          travelersCount: Number(l.travelers_count || l.travelersCount || 1),
+          status: l.status || 'New',
+          createdAt: l.created_at || l.createdAt || new Date().toISOString(),
+          source: l.source || 'Website Lead Form'
+        }));
+      }
+    }
+  } catch (err) {
+    console.warn('[API Leads] Supabase GET info:', err);
+  }
+
+  const leadMap = new Map<string, ServerLead>();
+  fileLeads.forEach((l) => leadMap.set(l.id, l));
+  supabaseLeads.forEach((l) => leadMap.set(l.id, l));
+
+  const merged = Array.from(leadMap.values()).sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
+
+  return NextResponse.json({ success: true, leads: merged });
 }
 
 export async function POST(req: Request) {
