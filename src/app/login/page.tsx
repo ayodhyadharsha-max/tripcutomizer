@@ -9,11 +9,13 @@ import { cloudStore } from '@/lib/cloudStore';
 import { auth } from '@/lib/firebase';
 import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from 'firebase/auth';
 import { Pencil, ShieldCheck, Loader2, AlertCircle } from 'lucide-react';
+import { COUNTRY_CODES, DEFAULT_COUNTRY, CountryCode } from '@/lib/countryCodes';
 
 export default function LoginPage() {
   const router = useRouter();
   const { login, isLoggedIn } = useAuth();
   const [step, setStep] = useState<'input' | 'otp'>('input');
+  const [selectedCountry, setSelectedCountry] = useState<CountryCode>(DEFAULT_COUNTRY);
   const [phoneNumber, setPhoneNumber] = useState('');
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [resendTimer, setResendTimer] = useState(57);
@@ -43,14 +45,14 @@ export default function LoginPage() {
     e.preventDefault();
     setErrorMsg('');
 
-    const cleanPhone = phoneNumber.replace(/\D/g, '').slice(-10);
-    if (!cleanPhone || cleanPhone.length !== 10) {
-      setErrorMsg('Please enter a valid 10-digit Indian Mobile Number.');
+    const cleanPhone = phoneNumber.replace(/\D/g, '');
+    if (!cleanPhone || cleanPhone.length < 5 || cleanPhone.length > 15) {
+      setErrorMsg(`Please enter a valid mobile number for ${selectedCountry.name}.`);
       return;
     }
 
     setIsSendingOtp(true);
-    const formattedPhone = `+91${cleanPhone}`;
+    const formattedPhone = `${selectedCountry.dialCode}${cleanPhone}`;
 
     if (typeof window !== 'undefined') {
       try {
@@ -85,7 +87,7 @@ export default function LoginPage() {
 
         const code = err?.code || '';
         if (code === 'auth/invalid-phone-number') {
-          setErrorMsg('Invalid mobile number format. Please check your 10-digit number.');
+          setErrorMsg('Invalid mobile number format.');
           return;
         }
 
@@ -138,15 +140,15 @@ export default function LoginPage() {
       }
     }
 
-    const cleanDigits = phoneNumber.replace(/\D/g, '').slice(-10);
+    const cleanDigits = phoneNumber.replace(/\D/g, '');
     const allBookings = cloudStore.getBookings();
     const existingBooking = allBookings.find((b) => {
-      const bDigits = (b.customerPhone || '').replace(/\D/g, '').slice(-10);
-      return bDigits === cleanDigits;
+      const bDigits = (b.customerPhone || '').replace(/\D/g, '');
+      return bDigits.endsWith(cleanDigits) || cleanDigits.endsWith(bDigits);
     });
 
     const email = `${cleanDigits || Date.now()}@tripcustomizer-customer.com`;
-    const phone = `+91 ${cleanDigits}`;
+    const phone = `${selectedCountry.dialCode} ${cleanDigits}`;
     const name = existingBooking ? existingBooking.customerName : `Traveler ${cleanDigits.slice(-4)}`;
 
     const userUid = firebaseUid || `usr_${cleanDigits || Date.now()}`;
@@ -202,7 +204,7 @@ export default function LoginPage() {
                   <div>
                     <h3 className="text-xl font-black text-slate-900">Sign In to Your Account</h3>
                     <p className="text-xs text-slate-500 font-medium mt-1">
-                      Enter your 10-digit mobile number to receive OTP.
+                      Select your country code & enter your mobile number to receive live OTP.
                     </p>
                   </div>
 
@@ -219,18 +221,33 @@ export default function LoginPage() {
                         Mobile Number *
                       </label>
                       <div className="flex items-center space-x-2">
-                        <div className="flex items-center space-x-1 bg-slate-100 border border-slate-300 rounded-xl px-3 py-2.5 text-xs font-bold text-slate-700 shrink-0 select-none">
-                          <span>🇮🇳</span>
-                          <span>+91</span>
+                        <div className="relative shrink-0">
+                          <select
+                            value={selectedCountry.code}
+                            onChange={(e) => {
+                              const found = COUNTRY_CODES.find((c) => c.code === e.target.value);
+                              if (found) setSelectedCountry(found);
+                            }}
+                            className="appearance-none bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-xl pl-3 pr-7 py-2.5 text-xs font-bold text-slate-900 cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all max-w-[130px] sm:max-w-[140px] truncate"
+                          >
+                            {COUNTRY_CODES.map((c) => (
+                              <option key={c.code} value={c.code}>
+                                {c.flag} {c.dialCode} ({c.name})
+                              </option>
+                            ))}
+                          </select>
+                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-500 text-[10px]">
+                            ▼
+                          </div>
                         </div>
                         <input
                           required
                           type="tel"
                           inputMode="numeric"
-                          maxLength={10}
-                          placeholder="10-Digit Mobile Number"
+                          maxLength={15}
+                          placeholder={`e.g. ${selectedCountry.example}`}
                           value={phoneNumber}
-                          onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, '').slice(0, 10))}
+                          onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ''))}
                           className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-bold text-slate-900 tracking-wider focus:outline-none focus:ring-2 focus:ring-amber-500 focus:bg-white transition-all"
                         />
                       </div>
@@ -259,7 +276,7 @@ export default function LoginPage() {
                   <div>
                     <h3 className="text-xl font-black text-slate-900">OTP Verification</h3>
                     <div className="flex items-center space-x-1 text-xs text-slate-500 font-medium mt-1">
-                      <span>OTP sent to <strong className="text-slate-800">+91 {phoneNumber}</strong></span>
+                      <span>OTP sent to <strong className="text-slate-800">{selectedCountry.dialCode} {phoneNumber}</strong></span>
                       <button
                         onClick={() => setStep('input')}
                         className="text-amber-600 hover:text-amber-700 p-0.5 cursor-pointer ml-1 inline-flex items-center"

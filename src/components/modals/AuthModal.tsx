@@ -6,6 +6,7 @@ import { cloudStore } from '@/lib/cloudStore';
 import { auth } from '@/lib/firebase';
 import { RecaptchaVerifier, signInWithPhoneNumber, ConfirmationResult } from 'firebase/auth';
 import { Pencil, ShieldCheck, Loader2, AlertCircle } from 'lucide-react';
+import { COUNTRY_CODES, DEFAULT_COUNTRY, CountryCode } from '@/lib/countryCodes';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -24,6 +25,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
   const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
   const [step, setStep] = useState<'input' | 'otp'>('input');
   const [fullName, setFullName] = useState('');
+  const [selectedCountry, setSelectedCountry] = useState<CountryCode>(DEFAULT_COUNTRY);
   const [phoneNumber, setPhoneNumber] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
@@ -98,13 +100,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
     if (e) e.preventDefault();
     setErrorMsg('');
 
-    const cleanPhone = phoneNumber.replace(/\D/g, '').slice(-10);
-    if (!cleanPhone || cleanPhone.length !== 10) {
-      setErrorMsg('Please enter a valid 10-digit Indian Mobile Number.');
+    const cleanPhone = phoneNumber.replace(/\D/g, '');
+    if (!cleanPhone || cleanPhone.length < 5 || cleanPhone.length > 15) {
+      setErrorMsg(`Please enter a valid mobile number for ${selectedCountry.name}.`);
       return;
     }
+    const fullSearchPhone = `${selectedCountry.dialCode}${cleanPhone}`;
     // Prevent duplicate signups if user already exists
-    const existingUser = cloudStore.findUserProfileByPhoneOrEmail(phoneNumber);
+    const existingUser = cloudStore.findUserProfileByPhoneOrEmail(fullSearchPhone) || cloudStore.findUserProfileByPhoneOrEmail(cleanPhone);
     if (authMode === 'signup' && existingUser) {
       setAuthMode('login');
       if (existingUser.name && !fullName) {
@@ -125,7 +128,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
     }
 
     setIsSendingOtp(true);
-    const formattedPhone = `+91${cleanPhone}`;
+    const formattedPhone = `${selectedCountry.dialCode}${cleanPhone}`;
 
     try {
       const confirmation = await signInWithPhoneNumber(auth, formattedPhone, appVerifier);
@@ -197,15 +200,15 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
       return;
     }
 
-    const cleanPhone = phoneNumber.replace(/\D/g, '').slice(-10);
-    const finalPhone = `+91 ${cleanPhone}`;
+    const cleanPhone = phoneNumber.replace(/\D/g, '');
+    const finalPhone = `${selectedCountry.dialCode} ${cleanPhone}`;
     const finalEmail =
       emailInput.trim() || `${cleanPhone}@tripcustomizer-customer.com`;
 
     const allBookings = cloudStore.getBookings();
     const existingBooking = allBookings.find((b) => {
-      const bDigits = (b.customerPhone || '').replace(/\D/g, '').slice(-10);
-      return bDigits === cleanPhone;
+      const bDigits = (b.customerPhone || '').replace(/\D/g, '');
+      return bDigits.endsWith(cleanPhone) || cleanPhone.endsWith(bDigits);
     });
 
     const finalName =
@@ -264,7 +267,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
 
           <div className="z-10 text-[11px] font-bold text-slate-900 flex items-center space-x-1.5 bg-amber-300/40 p-2 rounded-xl border border-amber-300/60">
             <ShieldCheck className="w-4 h-4 text-slate-950 shrink-0" />
-            <span>100% Verified Secure Account System</span>
+            <span>100% Verified Global Security System</span>
           </div>
         </div>
 
@@ -307,7 +310,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                     {authMode === 'login' ? 'Log In with Mobile' : 'Join Trip Customizer'}
                   </h3>
                   <p className="text-xs text-slate-500 font-medium mt-0.5">
-                    Enter your 10-digit Indian mobile number to receive live SMS OTP.
+                    Select your country code & enter your mobile number to receive live SMS OTP.
                   </p>
                 </div>
 
@@ -340,18 +343,33 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                       Mobile Number *
                     </label>
                     <div className="flex items-center space-x-2">
-                      <div className="flex items-center space-x-1 bg-slate-100 border border-slate-300 rounded-xl px-3 py-2.5 text-xs font-bold text-slate-700 shrink-0 select-none">
-                        <span>🇮🇳</span>
-                        <span>+91</span>
+                      <div className="relative shrink-0">
+                        <select
+                          value={selectedCountry.code}
+                          onChange={(e) => {
+                            const found = COUNTRY_CODES.find((c) => c.code === e.target.value);
+                            if (found) setSelectedCountry(found);
+                          }}
+                          className="appearance-none bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-xl pl-3 pr-7 py-2.5 text-xs font-bold text-slate-900 cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all max-w-[140px] sm:max-w-[150px] truncate"
+                        >
+                          {COUNTRY_CODES.map((c) => (
+                            <option key={c.code} value={c.code}>
+                              {c.flag} {c.dialCode} ({c.name})
+                            </option>
+                          ))}
+                        </select>
+                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-500 text-[10px]">
+                          ▼
+                        </div>
                       </div>
                       <input
                         required
                         type="tel"
                         inputMode="numeric"
-                        maxLength={10}
-                        placeholder="10-Digit Mobile Number"
+                        maxLength={15}
+                        placeholder={`e.g. ${selectedCountry.example}`}
                         value={phoneNumber}
-                        onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, '').slice(0, 10))}
+                        onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ''))}
                         className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-bold text-slate-900 tracking-wider focus:outline-none focus:ring-2 focus:ring-amber-500 focus:bg-white transition-all"
                       />
                     </div>
@@ -402,7 +420,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                 <div>
                   <h3 className="text-xl font-black text-slate-900">Enter OTP Verification Code</h3>
                   <div className="flex items-center space-x-1 text-xs text-slate-500 font-medium mt-1">
-                    <span>SMS code sent to <strong className="text-slate-800">+91 {phoneNumber}</strong></span>
+                    <span>SMS code sent to <strong className="text-slate-800">{selectedCountry.dialCode} {phoneNumber}</strong></span>
                     <button
                       onClick={() => { setStep('input'); setErrorMsg(''); }}
                       className="text-brand-600 hover:text-brand-700 p-0.5 cursor-pointer ml-1 inline-flex items-center"
