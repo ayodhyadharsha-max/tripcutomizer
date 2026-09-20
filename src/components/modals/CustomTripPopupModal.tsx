@@ -2,13 +2,18 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { X, Sparkles, CheckCircle2, Loader2, Send } from 'lucide-react';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 import { cloudStore } from '@/lib/cloudStore';
 import { sendWeb3FormLead } from '@/lib/web3forms';
+import { useAuth } from '@/context/AuthContext';
 
 export const CustomTripPopupModal: React.FC = () => {
+  const pathname = usePathname() || '';
+  const { isLoggedIn } = useAuth();
+
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [leadResult, setLeadResult] = useState<{
@@ -34,22 +39,62 @@ export const CustomTripPopupModal: React.FC = () => {
     email: '',
   });
 
-  // 1 Minute (60 Seconds) Pop-up Timer
+  // Strict page filtering & timing control
+  const isAdminPage = pathname.startsWith('/admin');
+  const isAuthOrAccountPage = pathname.startsWith('/login') || pathname.startsWith('/account') || pathname.startsWith('/manage-booking');
+  const isImportantTravelPage =
+    pathname === '/' ||
+    pathname.startsWith('/holidays') ||
+    pathname.startsWith('/customize-trip') ||
+    pathname.startsWith('/flights') ||
+    pathname.startsWith('/hotels') ||
+    pathname.startsWith('/visa') ||
+    pathname.startsWith('/blog');
+
   useEffect(() => {
-    // Check if dismissed in this session
-    const isDismissed = sessionStorage.getItem('custom_trip_modal_dismissed');
-    if (isDismissed) return;
+    // 1. NEVER show on admin pages, login/account pages, or for logged-in users
+    if (isAdminPage || isAuthOrAccountPage || isLoggedIn || !isImportantTravelPage) {
+      setIsOpen(false);
+      return;
+    }
 
-    const popupTimer = setTimeout(() => {
+    // 2. Check 7-day dismissal window & session dismissal
+    const dismissedUntil = localStorage.getItem('tc_popup_dismissed_until');
+    if (dismissedUntil && Date.now() < Number(dismissedUntil)) {
+      return;
+    }
+
+    if (sessionStorage.getItem('custom_trip_modal_dismissed')) {
+      return;
+    }
+
+    // 3. Smart Trigger: 60s timer OR 40% scroll depth on important travel pages
+    let timer: NodeJS.Timeout;
+
+    const handleScroll = () => {
+      const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      if (scrollPercent > 40) {
+        setIsOpen(true);
+        window.removeEventListener('scroll', handleScroll);
+      }
+    };
+
+    timer = setTimeout(() => {
       setIsOpen(true);
-    }, 60000); // 60,000 ms = 1 Minute
+    }, 60000); // 60 Seconds
 
-    return () => clearTimeout(popupTimer);
-  }, []);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [pathname, isLoggedIn, isAdminPage, isAuthOrAccountPage, isImportantTravelPage]);
 
   const handleClose = () => {
     setIsOpen(false);
     sessionStorage.setItem('custom_trip_modal_dismissed', 'true');
+    localStorage.setItem('tc_popup_dismissed_until', String(Date.now() + 7 * 24 * 60 * 60 * 1000));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -96,10 +141,11 @@ export const CustomTripPopupModal: React.FC = () => {
 
       setIsSubmitting(false);
       sessionStorage.setItem('custom_trip_modal_dismissed', 'true');
+      localStorage.setItem('tc_popup_dismissed_until', String(Date.now() + 7 * 24 * 60 * 60 * 1000));
     }, 600);
   };
 
-  if (!isOpen) return null;
+  if (!isOpen || isAdminPage || isAuthOrAccountPage || isLoggedIn || !isImportantTravelPage) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/75 backdrop-blur-md animate-in fade-in duration-200">

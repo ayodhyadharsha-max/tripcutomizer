@@ -535,6 +535,47 @@ export const cloudStore = {
     return getStoredData<UserProfile | null>(STORAGE_KEYS.CURRENT_USER, null);
   },
 
+  findUserProfileByPhoneOrEmail: (input: string): UserProfile | null => {
+    if (!input || !input.trim()) return null;
+    const cleanInput = input.trim().toLowerCase();
+    const normalizeDigits = (str: string) => str.replace(/\D/g, '').slice(-10);
+    const isEmail = cleanInput.includes('@');
+    const inputDigits = normalizeDigits(cleanInput);
+
+    const profiles = getStoredData<Record<string, UserProfile>>(STORAGE_KEYS.PROFILES, {});
+    for (const uid in profiles) {
+      const p = profiles[uid];
+      if (isEmail && p.email && p.email.toLowerCase() === cleanInput) {
+        return p;
+      }
+      if (!isEmail && p.phone) {
+        const pDigits = normalizeDigits(p.phone);
+        if (inputDigits && pDigits && pDigits === inputDigits) {
+          return p;
+        }
+      }
+    }
+
+    const bookings = cloudStore.getBookings();
+    const booking = bookings.find((b) => {
+      const bEmail = (b.customerEmail || '').toLowerCase();
+      const bDigits = normalizeDigits(b.customerPhone || '');
+      return (isEmail && bEmail === cleanInput) || (!isEmail && inputDigits && bDigits === inputDigits);
+    });
+
+    if (booking) {
+      return {
+        uid: `usr_${(booking.customerEmail || cleanInput).replace(/[^a-zA-Z0-9]/g, '_')}`,
+        name: booking.customerName || 'Valued Traveler',
+        email: booking.customerEmail || '',
+        phone: booking.customerPhone || cleanInput,
+        updatedAt: booking.createdAt,
+      };
+    }
+
+    return null;
+  },
+
   setPersistedUser: (user: UserProfile | null): void => {
     setStoredData(STORAGE_KEYS.CURRENT_USER, user);
   },

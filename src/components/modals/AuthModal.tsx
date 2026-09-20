@@ -103,6 +103,15 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
       setErrorMsg('Please enter a valid 10-digit Indian Mobile Number.');
       return;
     }
+    // Prevent duplicate signups if user already exists
+    const existingUser = cloudStore.findUserProfileByPhoneOrEmail(phoneNumber);
+    if (authMode === 'signup' && existingUser) {
+      setAuthMode('login');
+      if (existingUser.name && !fullName) {
+        setFullName(existingUser.name);
+      }
+      setErrorMsg(`Notice: Account already exists for this Mobile Number (${existingUser.name}). Switched to Log In!`);
+    }
 
     if (authMode === 'signup' && !fullName.trim()) {
       setErrorMsg('Please enter your Full Name.');
