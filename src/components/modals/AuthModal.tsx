@@ -33,6 +33,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
   const [isVerifying, setIsVerifying] = useState(false);
   const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
 
+  // Timer for Resend
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (step === 'otp' && resendTimer > 0) {
@@ -43,15 +44,53 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
     return () => clearInterval(timer);
   }, [step, resendTimer]);
 
-  // Clean up verifier on modal close
+  // Mount reCAPTCHA immediately when modal opens
   useEffect(() => {
-    if (!isOpen && typeof window !== 'undefined' && window.recaptchaVerifier) {
+    if (!isOpen || typeof window === 'undefined') return;
+
+    const timer = setTimeout(() => {
       try {
-        window.recaptchaVerifier.clear();
+        const container = document.getElementById('recaptcha-visible-box');
+        if (container) {
+          container.innerHTML = '';
+          if (window.recaptchaVerifier) {
+            try {
+              window.recaptchaVerifier.clear();
+            } catch (e) {}
+            window.recaptchaVerifier = null;
+          }
+
+          const verifier = new RecaptchaVerifier(auth, 'recaptcha-visible-box', {
+            size: 'normal',
+            callback: () => {
+              setErrorMsg('');
+            },
+            'expired-callback': () => {
+              setErrorMsg('reCAPTCHA expired. Please re-verify the checkbox.');
+            },
+          });
+
+          verifier.render().then(() => {
+            window.recaptchaVerifier = verifier;
+          }).catch((err) => {
+            console.warn('reCAPTCHA render error:', err);
+          });
+        }
+      } catch (e) {
+        console.warn('reCAPTCHA init error:', e);
+      }
+    }, 250);
+
+    return () => {
+      clearTimeout(timer);
+      if (typeof window !== 'undefined' && window.recaptchaVerifier) {
+        try {
+          window.recaptchaVerifier.clear();
+        } catch (e) {}
         window.recaptchaVerifier = null;
-      } catch (e) {}
-    }
-  }, [isOpen]);
+      }
+    };
+  }, [isOpen, step, authMode]);
 
   if (!isOpen) return null;
 
@@ -70,53 +109,26 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
       return;
     }
 
+    const appVerifier = window.recaptchaVerifier;
+    if (!appVerifier) {
+      setErrorMsg('Please wait for the security checkbox to load, or refresh the page.');
+      return;
+    }
+
     setIsSendingOtp(true);
     const formattedPhone = `+91${cleanPhone}`;
 
     try {
-      if (typeof window !== 'undefined') {
-        if (window.recaptchaVerifier) {
-          try {
-            window.recaptchaVerifier.clear();
-          } catch (e) {}
-          window.recaptchaVerifier = null;
-        }
+      const confirmation = await signInWithPhoneNumber(auth, formattedPhone, appVerifier);
+      setConfirmationResult(confirmation);
 
-        const container = document.getElementById('recaptcha-visible-box');
-        if (container) container.innerHTML = '';
-
-        // Initialize normal size checkbox (Guaranteed to pass)
-        const verifier = new RecaptchaVerifier(auth, 'recaptcha-visible-box', {
-          size: 'normal',
-          callback: () => {
-            // Checkbox verified
-          },
-          'expired-callback': () => {
-            setErrorMsg('reCAPTCHA expired. Please verify the checkbox again.');
-          },
-        });
-
-        window.recaptchaVerifier = verifier;
-        await verifier.render();
-
-        const confirmation = await signInWithPhoneNumber(auth, formattedPhone, verifier);
-        setConfirmationResult(confirmation);
-
-        setOtp(['', '', '', '', '', '']);
-        setStep('otp');
-        setResendTimer(57);
-        setIsSendingOtp(false);
-      }
+      setOtp(['', '', '', '', '', '']);
+      setStep('otp');
+      setResendTimer(57);
+      setIsSendingOtp(false);
     } catch (err: any) {
       console.error('Firebase SMS Sending Error:', err);
       setIsSendingOtp(false);
-
-      if (typeof window !== 'undefined' && window.recaptchaVerifier) {
-        try {
-          window.recaptchaVerifier.clear();
-          window.recaptchaVerifier = null;
-        } catch (e) {}
-      }
 
       const code = err?.code || '';
       if (code === 'auth/invalid-phone-number') {
@@ -127,8 +139,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
         setErrorMsg('Too many OTP attempts from this device. Please wait 2 minutes.');
       } else if (code === 'auth/billing-not-enabled') {
         setErrorMsg('Firebase Blaze plan required for sending live carrier SMS.');
+      } else if (code === 'auth/captcha-check-failed') {
+        setErrorMsg('Please tick the "I am not a robot" checkbox before clicking Send OTP.');
       } else {
-        setErrorMsg(err?.message || 'Could not send SMS OTP. Please check your network and try again.');
+        setErrorMsg(err?.message || 'Could not send SMS OTP. Please try again.');
       }
     }
   };
@@ -191,7 +205,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
 
     const userUid = firebaseUid || `usr_${cleanPhone}`;
 
-    // 1. Sync User Profile to Supabase & Local Database
+    // Sync User Profile to Supabase & Local Database
     cloudStore.saveUserProfile({
       uid: userUid,
       name: finalName,
@@ -200,9 +214,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
       updatedAt: new Date().toISOString(),
     });
 
-    // 2. Log in session in AuthContext
     login(finalEmail, finalPhone, finalName);
-
     setIsVerifying(false);
     onClose();
     if (onSuccess) onSuccess();
@@ -219,7 +231,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
           Close ✕
         </button>
 
-        {/* Left Side Graphic Banner */}
+        {/* Left Side Banner */}
         <div className="md:col-span-5 bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 p-8 flex flex-col justify-between text-slate-950 min-h-[380px] relative overflow-hidden">
           <div className="absolute -top-10 -left-10 w-40 h-40 bg-white/20 rounded-full blur-2xl pointer-events-none" />
           <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-amber-300/40 rounded-full blur-xl pointer-events-none" />
@@ -351,9 +363,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                     </div>
                   )}
 
-                  {/* Visible Recaptcha Box (100% Reliable Checkbox) */}
-                  <div className="my-2 flex justify-center">
-                    <div id="recaptcha-visible-box"></div>
+                  {/* Visible Recaptcha Box */}
+                  <div className="my-2.5 flex flex-col items-center justify-center bg-slate-50 p-2 rounded-xl border border-slate-200">
+                    <div id="recaptcha-visible-box" className="min-h-[78px] flex items-center justify-center"></div>
+                    <span className="text-[10px] text-slate-400 font-medium mt-1">Please tick the box above to verify</span>
                   </div>
 
                   <button
