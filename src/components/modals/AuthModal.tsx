@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { cloudStore } from '@/lib/cloudStore';
 import { auth } from '@/lib/firebase';
@@ -11,6 +11,13 @@ interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSuccess?: () => void;
+}
+
+declare global {
+  interface Window {
+    recaptchaVerifier: any;
+    recaptchaWidgetId: any;
+  }
 }
 
 export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess }) => {
@@ -26,8 +33,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
   const [isSendingOtp, setIsSendingOtp] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
   const [confirmationResult, setConfirmationResult] = useState<ConfirmationResult | null>(null);
-  const recaptchaContainerRef = useRef<HTMLDivElement>(null);
 
+  // Countdown timer for Resend OTP
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (step === 'otp' && resendTimer > 0) {
@@ -38,7 +45,53 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
     return () => clearInterval(timer);
   }, [step, resendTimer]);
 
+  // Clean up verifier on modal close
+  useEffect(() => {
+    if (!isOpen && typeof window !== 'undefined' && window.recaptchaVerifier) {
+      try {
+        window.recaptchaVerifier.clear();
+        window.recaptchaVerifier = null;
+      } catch (e) {}
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
+
+  // Initialize or get clean Recaptcha Verifier
+  const setupRecaptcha = () => {
+    if (typeof window === 'undefined') return null;
+
+    try {
+      if (window.recaptchaVerifier) {
+        try {
+          window.recaptchaVerifier.clear();
+        } catch (e) {}
+        window.recaptchaVerifier = null;
+      }
+
+      // Container element in DOM
+      const container = document.getElementById('recaptcha-anchor-box');
+      if (!container) return null;
+
+      container.innerHTML = '';
+
+      const verifier = new RecaptchaVerifier(auth, 'recaptcha-anchor-box', {
+        size: 'invisible',
+        callback: () => {
+          // reCAPTCHA solved
+        },
+        'expired-callback': () => {
+          setErrorMsg('reCAPTCHA expired. Please tap Send OTP again.');
+        },
+      });
+
+      window.recaptchaVerifier = verifier;
+      return verifier;
+    } catch (e: any) {
+      console.error('Recaptcha init error:', e);
+      return null;
+    }
+  };
 
   const handleSendOtp = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -58,51 +111,50 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
     setIsSendingOtp(true);
     const formattedPhone = `+91${cleanPhone}`;
 
-    if (typeof window !== 'undefined') {
-      try {
-        // Clean previous verifier if exists
-        if ((window as any).recaptchaVerifier) {
-          try {
-            (window as any).recaptchaVerifier.clear();
-            (window as any).recaptchaVerifier = null;
-          } catch (e) {}
-        }
-
-        const appVerifier = new RecaptchaVerifier(auth, 'firebase-recaptcha-anchor', {
-          size: 'invisible',
-          callback: () => {},
-          'expired-callback': () => {
-            setErrorMsg('reCAPTCHA security check expired. Please try sending OTP again.');
-          },
-        });
-
-        (window as any).recaptchaVerifier = appVerifier;
-
-        // Send REAL SMS via Firebase
-        const confirmation = await signInWithPhoneNumber(auth, formattedPhone, appVerifier);
-        setConfirmationResult(confirmation);
-
-        // Advance to OTP input step only on genuine SMS dispatch
-        setOtp(['', '', '', '', '', '']);
-        setStep('otp');
-        setResendTimer(57);
+    try {
+      const verifier = setupRecaptcha();
+      if (!verifier) {
+        setErrorMsg('Security check initialization failed. Please refresh the page.');
         setIsSendingOtp(false);
-      } catch (err: any) {
-        console.error('Firebase Real SMS Dispatch Error:', err);
-        setIsSendingOtp(false);
+        return;
+      }
 
-        const code = err?.code || '';
-        if (code === 'auth/invalid-phone-number') {
-          setErrorMsg('Invalid phone number. Please enter a valid 10-digit mobile number.');
-        } else if (code === 'auth/quota-exceeded' || code === 'auth/too-many-requests') {
-          setErrorMsg('Daily SMS limit reached. Please try again after some time.');
-        } else if (code === 'auth/billing-not-enabled') {
-          setErrorMsg('Firebase Blaze plan / billing required for carrier SMS delivery.');
-        } else if (code === 'auth/captcha-check-failed') {
-          setErrorMsg('reCAPTCHA verification failed. Please refresh the page and try again.');
-        } else {
-          setErrorMsg(`SMS Dispatch Error: ${err?.message || 'Could not send SMS OTP.'}`);
-        }
+      // Render verifier widget explicitly before dispatching SMS
+      await verifier.render();
+
+      // Trigger genuine carrier SMS from Google/Firebase
+      const confirmation = await signInWithPhoneNumber(auth, formattedPhone, verifier);
+      setConfirmationResult(confirmation);
+
+      setOtp(['', '', '', '', '', '']);
+      setStep('otp');
+      setResendTimer(57);
+      setIsSendingOtp(false);
+    } catch (err: any) {
+      console.error('Firebase SMS Sending Error:', err);
+      setIsSendingOtp(false);
+
+      // Clean up verifier on error so subsequent attempts start fresh
+      if (typeof window !== 'undefined' && window.recaptchaVerifier) {
+        try {
+          window.recaptchaVerifier.clear();
+          window.recaptchaVerifier = null;
+        } catch (e) {}
+      }
+
+      const code = err?.code || '';
+      if (code === 'auth/invalid-phone-number') {
+        setErrorMsg('Invalid mobile number format. Please check the 10 digits.');
+      } else if (code === 'auth/quota-exceeded') {
+        setErrorMsg('SMS quota limit reached. Please try again after some time.');
+      } else if (code === 'auth/too-many-requests') {
+        setErrorMsg('Too many OTP attempts from this device. Please wait 2 minutes.');
+      } else if (code === 'auth/captcha-check-failed') {
+        setErrorMsg('Security verification check failed. Please tap Send OTP again.');
+      } else if (code === 'auth/billing-not-enabled') {
+        setErrorMsg('Firebase Blaze plan / billing required in Firebase console for real SMS.');
+      } else {
+        setErrorMsg(err?.message || 'Could not send SMS OTP. Please try again.');
       }
     }
   };
@@ -125,12 +177,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
     const code = otp.join('');
 
     if (code.length < 6) {
-      setErrorMsg('Please enter the complete 6-digit OTP code received on your phone.');
+      setErrorMsg('Please enter the complete 6-digit OTP received in your SMS.');
       return;
     }
 
     if (!confirmationResult) {
-      setErrorMsg('Session expired. Please click resend OTP to get a new code.');
+      setErrorMsg('Session expired. Please request a new OTP code.');
       return;
     }
 
@@ -139,14 +191,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
 
     let firebaseUid = '';
 
-    // 100% REAL Firebase OTP confirmation
+    // Verify SMS Code with Firebase
     try {
       const userCredential = await confirmationResult.confirm(code);
       firebaseUid = userCredential.user?.uid || '';
     } catch (err: any) {
-      console.error('Firebase Real OTP Verification Failed:', err);
+      console.error('Firebase OTP verification failed:', err);
       setIsVerifying(false);
-      setErrorMsg('Incorrect OTP code entered. Please check your SMS and enter the exact 6-digit code.');
+      setErrorMsg('Incorrect OTP code entered. Please check your SMS and enter the exact 6 digits.');
       return;
     }
 
@@ -155,7 +207,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
     const finalEmail =
       emailInput.trim() || `${cleanPhone}@tripcustomizer-customer.com`;
 
-    // Search if this user exists in cloud store to restore their exact name
+    // Search existing bookings to restore name if present
     const allBookings = cloudStore.getBookings();
     const existingBooking = allBookings.find((b) => {
       const bDigits = (b.customerPhone || '').replace(/\D/g, '').slice(-10);
@@ -188,8 +240,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
   return (
     <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
       <div className="bg-white rounded-3xl overflow-hidden shadow-2xl max-w-3xl w-full grid grid-cols-1 md:grid-cols-12 relative animate-in zoom-in-95 border border-slate-200">
-        {/* Invisible Recaptcha Anchor */}
-        <div id="firebase-recaptcha-anchor" ref={recaptchaContainerRef}></div>
+        {/* Recaptcha DOM Anchor */}
+        <div id="recaptcha-anchor-box"></div>
 
         {/* Close Button */}
         <button
@@ -199,7 +251,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
           Close ✕
         </button>
 
-        {/* Left Side Banner */}
+        {/* Left Side Graphic Banner */}
         <div className="md:col-span-5 bg-gradient-to-br from-amber-400 via-amber-500 to-amber-600 p-8 flex flex-col justify-between text-slate-950 min-h-[380px] relative overflow-hidden">
           <div className="absolute -top-10 -left-10 w-40 h-40 bg-white/20 rounded-full blur-2xl pointer-events-none" />
           <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-amber-300/40 rounded-full blur-xl pointer-events-none" />
@@ -212,7 +264,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
             <span className="font-black text-lg text-slate-950 tracking-tight">Trip Customizer</span>
           </div>
 
-          {/* Main Hero Banner Text */}
           <div className="space-y-3 z-10 py-6">
             <h2 className="text-2xl sm:text-3xl font-black leading-tight tracking-tight text-slate-950 drop-shadow-xs">
               {authMode === 'login' ? 'Welcome Back Traveler 🏖️' : 'Create Your Account ✨'}
@@ -259,7 +310,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
               </div>
             )}
 
-            {/* STEP 1: Log In / Sign Up Inputs */}
+            {/* STEP 1: Inputs */}
             {step === 'input' && (
               <div className="space-y-4">
                 <div>
@@ -267,7 +318,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                     {authMode === 'login' ? 'Log In with Mobile' : 'Join Trip Customizer'}
                   </h3>
                   <p className="text-xs text-slate-500 font-medium mt-0.5">
-                    {authMode === 'login' ? 'Enter 10-digit mobile number to receive live SMS OTP.' : 'Enter your details to create a new traveler account.'}
+                    Enter your 10-digit Indian mobile number to receive live SMS OTP.
                   </p>
                 </div>
 
@@ -295,7 +346,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                     </div>
                   )}
 
-                  {/* Clean 10-Digit Mobile Input with Flag/Code Badge */}
                   <div>
                     <label className="text-xs font-bold text-slate-700 block mb-1">
                       Mobile Number *
@@ -357,7 +407,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                 <div>
                   <h3 className="text-xl font-black text-slate-900">Enter OTP Verification Code</h3>
                   <div className="flex items-center space-x-1 text-xs text-slate-500 font-medium mt-1">
-                    <span>Live SMS code sent to <strong className="text-slate-800">+91 {phoneNumber}</strong></span>
+                    <span>SMS OTP sent to <strong className="text-slate-800">+91 {phoneNumber}</strong></span>
                     <button
                       onClick={() => { setStep('input'); setErrorMsg(''); }}
                       className="text-brand-600 hover:text-brand-700 p-0.5 cursor-pointer ml-1 inline-flex items-center"
@@ -414,7 +464,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                     {isVerifying ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin text-slate-900" />
-                        <span>Verifying Live SMS Code...</span>
+                        <span>Verifying SMS OTP...</span>
                       </>
                     ) : (
                       <span>{authMode === 'signup' ? 'Verify OTP & Finish Sign Up →' : 'Verify OTP & Access Account →'}</span>
