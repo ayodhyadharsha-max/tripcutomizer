@@ -1,5 +1,6 @@
 import { db } from '@/lib/firebase';
 import { collection, doc, setDoc, onSnapshot } from 'firebase/firestore';
+import { supabase } from '@/lib/supabase';
 
 export interface PassengerDetail {
   name: string;
@@ -76,7 +77,7 @@ const STORAGE_KEYS = {
   CO_TRAVELLERS: 'tc_cloud_co_travellers_v1',
 };
 
-// Initial Seed Data - Empty by default for fresh production/demo state
+// Initial Seed Data
 const DEFAULT_BOOKINGS: CustomerBooking[] = [];
 const DEFAULT_LEADS: CustomerLead[] = [];
 
@@ -97,11 +98,9 @@ const setStoredData = <T>(key: string, data: T): void => {
   try {
     const rawExisting = localStorage.getItem(key);
     const serializedNew = JSON.stringify(data);
-    // Crucial anti-flicker guard: Only update & emit events if data actually changed
     if (rawExisting === serializedNew) return;
 
     localStorage.setItem(key, serializedNew);
-    // Trigger window events for instant cross-tab & same-tab realtime sync
     window.dispatchEvent(new Event('storage'));
     window.dispatchEvent(new CustomEvent('cloudstore_update', { detail: { key, data } }));
   } catch (e) {
@@ -109,21 +108,57 @@ const setStoredData = <T>(key: string, data: T): void => {
   }
 };
 
-// Async helper to sync booking to Cloud Server API & Firestore DB
-const syncBookingToFirestore = async (booking: CustomerBooking) => {
+// --- SYNC HELPERS (SUPABASE + FIRESTORE + SERVER API) ---
+
+// 1. Sync Booking to Supabase PostgreSQL & Firestore DB
+const syncBookingToCloud = async (booking: CustomerBooking) => {
   if (typeof window === 'undefined') return;
 
-  // 1. Post to Server-Side API endpoint (works across all devices & Incognito mode)
+  // A. Sync to Supabase PostgreSQL Table
+  try {
+    if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
+      await supabase.from('bookings').upsert({
+        id: booking.id,
+        reference_no: booking.referenceNo,
+        user_id: booking.userId || null,
+        customer_name: booking.customerName,
+        customer_phone: booking.customerPhone,
+        customer_email: booking.customerEmail || null,
+        package_name: booking.packageName,
+        destination: booking.destination,
+        travel_dates: booking.travelDates,
+        travelers_count: booking.travelersCount || 1,
+        hotel_category: booking.hotelCategory || null,
+        base_price: booking.basePrice || 0,
+        gst_amount: booking.gstAmount || 0,
+        discount_amount: booking.discountAmount || 0,
+        coupon_applied: booking.couponApplied || null,
+        payment_method: booking.paymentMethod || null,
+        transaction_id: booking.transactionId || null,
+        special_requests: booking.specialRequests || null,
+        total_amount: booking.totalAmount || 0,
+        status: booking.status || 'Pending',
+        payment_status: booking.paymentStatus || 'Pending',
+        passengers_list: booking.passengersList || [],
+        notes: booking.notes || null,
+        created_at: booking.createdAt,
+      });
+    }
+  } catch (err) {
+    console.warn('Supabase booking sync note:', err);
+  }
+
+  // B. Post to Next.js Server API
   try {
     fetch('/api/bookings', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(booking),
-    }).catch((e) => console.warn('Server API booking POST note:', e));
+    }).catch(() => {});
   } catch (e) {}
 
-  // 2. Also sync to Cloud Firestore DB
-  if (db) {
+  // C. Sync to Cloud Firestore DB
+  if (db && process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
     try {
       await setDoc(doc(db, 'bookings', booking.id), booking, { merge: true });
     } catch (e) {
@@ -132,21 +167,42 @@ const syncBookingToFirestore = async (booking: CustomerBooking) => {
   }
 };
 
-// Async helper to sync lead to Cloud Server API & Firestore DB
-const syncLeadToFirestore = async (lead: CustomerLead) => {
+// 2. Sync Lead / Custom Inquiry to Supabase & Firestore
+const syncLeadToCloud = async (lead: CustomerLead) => {
   if (typeof window === 'undefined') return;
 
-  // 1. Post to Server-Side API endpoint (works across all devices & Incognito mode)
+  // A. Sync to Supabase PostgreSQL Table
+  try {
+    if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
+      await supabase.from('leads').upsert({
+        id: lead.id,
+        name: lead.name,
+        phone: lead.phone,
+        email: lead.email || null,
+        destination: lead.destination,
+        budget: lead.budget || null,
+        travel_dates: lead.travelDates || null,
+        travelers_count: lead.travelersCount || 1,
+        status: lead.status || 'New',
+        source: lead.source || 'Website',
+        created_at: lead.createdAt,
+      });
+    }
+  } catch (err) {
+    console.warn('Supabase lead sync note:', err);
+  }
+
+  // B. Post to Server API
   try {
     fetch('/api/leads', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(lead),
-    }).catch((e) => console.warn('Server API lead POST note:', e));
+    }).catch(() => {});
   } catch (e) {}
 
-  // 2. Also sync to Cloud Firestore DB
-  if (db) {
+  // C. Sync to Cloud Firestore
+  if (db && process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
     try {
       await setDoc(doc(db, 'leads', lead.id), lead, { merge: true });
     } catch (e) {
@@ -155,19 +211,109 @@ const syncLeadToFirestore = async (lead: CustomerLead) => {
   }
 };
 
-// Async helper to sync user profile to Cloud Firestore DB
-const syncProfileToFirestore = async (profile: UserProfile) => {
-  if (typeof window === 'undefined' || !db) return;
+// 3. Sync User Profile to Supabase & Firestore
+const syncProfileToCloud = async (profile: UserProfile) => {
+  if (typeof window === 'undefined') return;
+
+  // A. Sync to Supabase PostgreSQL 'customers' table
   try {
-    await setDoc(doc(db, 'profiles', profile.uid), profile, { merge: true });
-  } catch (e) {
-    console.warn('Firestore profile sync note:', e);
+    if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
+      await supabase.from('customers').upsert({
+        id: profile.uid,
+        name: profile.name,
+        phone: profile.phone || null,
+        email: profile.email || null,
+        city: profile.city || null,
+        address: profile.address || null,
+        saved_travelers: profile.savedTravelers || [],
+        updated_at: profile.updatedAt || new Date().toISOString(),
+      });
+    }
+  } catch (err) {
+    console.warn('Supabase profile sync note:', err);
+  }
+
+  // B. Sync to Cloud Firestore
+  if (db && process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
+    try {
+      await setDoc(doc(db, 'profiles', profile.uid), profile, { merge: true });
+    } catch (e) {
+      console.warn('Firestore profile sync note:', e);
+    }
   }
 };
 
-// Fetch latest global bookings & leads from Next.js Server API
-const syncFromServerApi = async () => {
+// Fetch latest global bookings & leads from Supabase / Server API
+const syncFromCloud = async () => {
   if (typeof window === 'undefined') return;
+
+  // 1. Fetch from Supabase PostgreSQL first if configured
+  try {
+    if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
+      const { data: supaBookings, error: supaErr } = await supabase
+        .from('bookings')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (!supaErr && Array.isArray(supaBookings) && supaBookings.length > 0) {
+        const mapped: CustomerBooking[] = supaBookings.map((b: any) => ({
+          id: b.id,
+          referenceNo: b.reference_no,
+          userId: b.user_id,
+          customerName: b.customer_name,
+          customerPhone: b.customer_phone,
+          customerEmail: b.customer_email || '',
+          packageName: b.package_name,
+          destination: b.destination,
+          travelDates: b.travel_dates,
+          travelersCount: b.travelers_count,
+          hotelCategory: b.hotel_category,
+          basePrice: Number(b.base_price) || 0,
+          gstAmount: Number(b.gst_amount) || 0,
+          discountAmount: Number(b.discount_amount) || 0,
+          couponApplied: b.coupon_applied,
+          paymentMethod: b.payment_method,
+          transactionId: b.transaction_id,
+          specialRequests: b.special_requests,
+          totalAmount: Number(b.total_amount) || 0,
+          status: b.status,
+          paymentStatus: b.payment_status,
+          createdAt: b.created_at,
+          notes: b.notes,
+          passengersList: b.passengers_list || [],
+        }));
+
+        setStoredData(STORAGE_KEYS.BOOKINGS, mapped);
+      }
+
+      const { data: supaLeads, error: leadErr } = await supabase
+        .from('leads')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (!leadErr && Array.isArray(supaLeads) && supaLeads.length > 0) {
+        const mappedLeads: CustomerLead[] = supaLeads.map((l: any) => ({
+          id: l.id,
+          name: l.name,
+          phone: l.phone,
+          email: l.email || '',
+          destination: l.destination,
+          budget: l.budget,
+          travelDates: l.travel_dates,
+          travelersCount: l.travelers_count,
+          status: l.status,
+          source: l.source,
+          createdAt: l.created_at,
+        }));
+
+        setStoredData(STORAGE_KEYS.LEADS, mappedLeads);
+      }
+    }
+  } catch (e) {
+    console.warn('Supabase fetch info:', e);
+  }
+
+  // 2. Fetch from Next.js Server API fallback
   try {
     const resBookings = await fetch('/api/bookings');
     if (resBookings.ok) {
@@ -205,24 +351,20 @@ const syncFromServerApi = async () => {
   } catch (e) {}
 };
 
-// Initialize Realtime Cloud Firestore listeners & Server API Polling
-let isFirestoreListenerInitialized = false;
+// Initialize listeners
+let isCloudListenerInitialized = false;
 
-const initCloudFirestoreListeners = () => {
-  if (typeof window === 'undefined' || isFirestoreListenerInitialized) return;
-  isFirestoreListenerInitialized = true;
+const initCloudListeners = () => {
+  if (typeof window === 'undefined' || isCloudListenerInitialized) return;
+  isCloudListenerInitialized = true;
 
-  // Immediate sync from Server API
-  syncFromServerApi();
-
-  // Periodic background sync from Server API every 4s
+  syncFromCloud();
   setInterval(() => {
-    syncFromServerApi();
+    syncFromCloud();
   }, 4000);
 
-  if (db) {
+  if (db && process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
     try {
-      // Listen to live Bookings collection in Cloud Firestore
       onSnapshot(collection(db, 'bookings'), (snapshot) => {
         if (!snapshot.empty) {
           const cloudBookings: CustomerBooking[] = [];
@@ -238,12 +380,10 @@ const initCloudFirestoreListeners = () => {
           const merged = Array.from(bookingMap.values()).sort(
             (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
           );
-
           setStoredData(STORAGE_KEYS.BOOKINGS, merged);
         }
-      }, (err) => console.warn('Firestore bookings snapshot info:', err));
+      }, () => {});
 
-      // Listen to live Leads collection in Cloud Firestore
       onSnapshot(collection(db, 'leads'), (snapshot) => {
         if (!snapshot.empty) {
           const cloudLeads: CustomerLead[] = [];
@@ -259,17 +399,13 @@ const initCloudFirestoreListeners = () => {
           const merged = Array.from(leadMap.values()).sort(
             (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
           );
-
           setStoredData(STORAGE_KEYS.LEADS, merged);
         }
-      }, (err) => console.warn('Firestore leads snapshot info:', err));
-    } catch (e) {
-      console.warn('Firestore listener init info:', e);
-    }
+      }, () => {});
+    } catch (e) {}
   }
 };
 
-// Helper to strip common honorific titles for smart deduplication
 const stripTitle = (name: string): string => {
   return name.replace(/^(Mr|Mrs|Ms|Dr|Master|Miss)\.?\s+/i, '').trim().toLowerCase();
 };
@@ -277,7 +413,7 @@ const stripTitle = (name: string): string => {
 export const cloudStore = {
   // --- BOOKINGS ---
   getBookings: (): CustomerBooking[] => {
-    initCloudFirestoreListeners();
+    initCloudListeners();
     return getStoredData<CustomerBooking[]>(STORAGE_KEYS.BOOKINGS, DEFAULT_BOOKINGS);
   },
 
@@ -306,7 +442,7 @@ export const cloudStore = {
 
     const updated = [newBooking, ...existing];
     setStoredData(STORAGE_KEYS.BOOKINGS, updated);
-    syncBookingToFirestore(newBooking);
+    syncBookingToCloud(newBooking);
 
     // Also auto-sync as CRM Lead so admin sees it in both /admin/bookings and /admin/leads
     try {
@@ -326,9 +462,7 @@ export const cloudStore = {
           source: 'Confirmed Online Booking',
         });
       }
-    } catch (e) {
-      console.warn('Lead sync skipped:', e);
-    }
+    } catch (e) {}
 
     return newBooking;
   },
@@ -338,7 +472,8 @@ export const cloudStore = {
     const updated = existing.map((b) => (b.id === id ? { ...b, status } : b));
     setStoredData(STORAGE_KEYS.BOOKINGS, updated);
     const matched = updated.find((b) => b.id === id);
-    if (matched) syncBookingToFirestore(matched);
+    if (matched) syncBookingToCloud(matched);
+
     try {
       fetch('/api/bookings', {
         method: 'PATCH',
@@ -350,7 +485,7 @@ export const cloudStore = {
 
   // --- LEADS / ENQUIRIES ---
   getLeads: (): CustomerLead[] => {
-    initCloudFirestoreListeners();
+    initCloudListeners();
     return getStoredData<CustomerLead[]>(STORAGE_KEYS.LEADS, DEFAULT_LEADS);
   },
 
@@ -363,7 +498,7 @@ export const cloudStore = {
     };
     const updated = [newLead, ...existing];
     setStoredData(STORAGE_KEYS.LEADS, updated);
-    syncLeadToFirestore(newLead);
+    syncLeadToCloud(newLead);
     return newLead;
   },
 
@@ -372,7 +507,8 @@ export const cloudStore = {
     const updated = existing.map((l) => (l.id === id ? { ...l, status } : l));
     setStoredData(STORAGE_KEYS.LEADS, updated);
     const matched = updated.find((l) => l.id === id);
-    if (matched) syncLeadToFirestore(matched);
+    if (matched) syncLeadToCloud(matched);
+
     try {
       fetch('/api/leads', {
         method: 'PATCH',
@@ -392,7 +528,7 @@ export const cloudStore = {
     const profiles = getStoredData<Record<string, UserProfile>>(STORAGE_KEYS.PROFILES, {});
     profiles[profile.uid] = { ...profile, updatedAt: new Date().toISOString() };
     setStoredData(STORAGE_KEYS.PROFILES, profiles);
-    syncProfileToFirestore(profile);
+    syncProfileToCloud(profile);
   },
 
   getPersistedUser: (): UserProfile | null => {
@@ -403,7 +539,7 @@ export const cloudStore = {
     setStoredData(STORAGE_KEYS.CURRENT_USER, user);
   },
 
-  // --- CO-TRAVELLERS PERSISTENT STORAGE (STRICT USER ISOLATION & DEDUPLICATION) ---
+  // --- CO-TRAVELLERS PERSISTENT STORAGE ---
   getCoTravellers: (uid?: string): CoTraveller[] => {
     if (typeof window !== 'undefined') {
       try {
@@ -497,7 +633,6 @@ export const cloudStore = {
   },
 };
 
-// Purge legacy global key on module load in client environment
 if (typeof window !== 'undefined') {
   try {
     localStorage.removeItem(STORAGE_KEYS.CO_TRAVELLERS);
