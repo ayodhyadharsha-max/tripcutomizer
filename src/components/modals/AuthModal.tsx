@@ -60,7 +60,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
 
     if (typeof window !== 'undefined') {
       try {
-        // Safe Recaptcha Verifier Initialization
+        // Clean previous verifier if exists
         if ((window as any).recaptchaVerifier) {
           try {
             (window as any).recaptchaVerifier.clear();
@@ -70,9 +70,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
 
         const appVerifier = new RecaptchaVerifier(auth, 'firebase-recaptcha-anchor', {
           size: 'invisible',
-          callback: () => {
-            // reCAPTCHA solved
-          },
+          callback: () => {},
           'expired-callback': () => {
             setErrorMsg('reCAPTCHA security check expired. Please try sending OTP again.');
           },
@@ -80,39 +78,31 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
 
         (window as any).recaptchaVerifier = appVerifier;
 
-        // Trigger SMS
+        // Send REAL SMS via Firebase
         const confirmation = await signInWithPhoneNumber(auth, formattedPhone, appVerifier);
         setConfirmationResult(confirmation);
 
+        // Advance to OTP input step only on genuine SMS dispatch
         setOtp(['', '', '', '', '', '']);
         setStep('otp');
         setResendTimer(57);
         setIsSendingOtp(false);
-        return;
       } catch (err: any) {
-        console.warn('Firebase Phone Auth info:', err);
+        console.error('Firebase Real SMS Dispatch Error:', err);
         setIsSendingOtp(false);
 
         const code = err?.code || '';
         if (code === 'auth/invalid-phone-number') {
-          setErrorMsg('Invalid mobile number format. Please check your 10-digit number.');
-          return;
+          setErrorMsg('Invalid phone number. Please enter a valid 10-digit mobile number.');
         } else if (code === 'auth/quota-exceeded' || code === 'auth/too-many-requests') {
-          setErrorMsg('SMS quota limit reached. You can use your configured Test OTP to login.');
+          setErrorMsg('Daily SMS limit reached. Please try again after some time.');
         } else if (code === 'auth/billing-not-enabled') {
-          setErrorMsg('Firebase billing / Blaze plan required for real SMS.');
+          setErrorMsg('Firebase Blaze plan / billing required for carrier SMS delivery.');
         } else if (code === 'auth/captcha-check-failed') {
-          setErrorMsg('reCAPTCHA verification issue. Retrying...');
+          setErrorMsg('reCAPTCHA verification failed. Please refresh the page and try again.');
         } else {
-          // If live carrier SMS failed, advance to OTP step so test numbers / fallback works
-          console.log('Falling back to test OTP verification');
+          setErrorMsg(`SMS Dispatch Error: ${err?.message || 'Could not send SMS OTP.'}`);
         }
-
-        // Allow entering verification code even if carrier SMS had network issue
-        setOtp(['', '', '', '', '', '']);
-        setStep('otp');
-        setResendTimer(57);
-        setIsSendingOtp(false);
       }
     }
   };
@@ -135,7 +125,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
     const code = otp.join('');
 
     if (code.length < 6) {
-      setErrorMsg('Please enter the complete 6-digit OTP code.');
+      setErrorMsg('Please enter the complete 6-digit OTP code received on your phone.');
+      return;
+    }
+
+    if (!confirmationResult) {
+      setErrorMsg('Session expired. Please click resend OTP to get a new code.');
       return;
     }
 
@@ -144,26 +139,21 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
 
     let firebaseUid = '';
 
-    // Verify with Firebase Confirmation Result if present
-    if (confirmationResult) {
-      try {
-        const userCredential = await confirmationResult.confirm(code);
-        firebaseUid = userCredential.user?.uid || '';
-      } catch (err: any) {
-        console.warn('Firebase OTP confirmation error:', err);
-        // If code is not 969696 or valid, show error
-        if (code !== '969696' && code !== '123456') {
-          setErrorMsg('Invalid OTP code or expired. Please check and re-enter.');
-          setIsVerifying(false);
-          return;
-        }
-      }
+    // 100% REAL Firebase OTP confirmation
+    try {
+      const userCredential = await confirmationResult.confirm(code);
+      firebaseUid = userCredential.user?.uid || '';
+    } catch (err: any) {
+      console.error('Firebase Real OTP Verification Failed:', err);
+      setIsVerifying(false);
+      setErrorMsg('Incorrect OTP code entered. Please check your SMS and enter the exact 6-digit code.');
+      return;
     }
 
     const cleanPhone = phoneNumber.replace(/\D/g, '').slice(-10);
     const finalPhone = `+91 ${cleanPhone}`;
     const finalEmail =
-      emailInput.trim() || `${cleanPhone || Date.now()}@tripcustomizer-customer.com`;
+      emailInput.trim() || `${cleanPhone}@tripcustomizer-customer.com`;
 
     // Search if this user exists in cloud store to restore their exact name
     const allBookings = cloudStore.getBookings();
@@ -176,7 +166,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
       fullName.trim() ||
       (existingBooking ? existingBooking.customerName : `Traveler ${cleanPhone.slice(-4)}`);
 
-    const userUid = firebaseUid || `usr_${cleanPhone || Date.now()}`;
+    const userUid = firebaseUid || `usr_${cleanPhone}`;
 
     // 1. Sync User Profile to Supabase & Local Database
     cloudStore.saveUserProfile({
@@ -277,7 +267,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                     {authMode === 'login' ? 'Log In with Mobile' : 'Join Trip Customizer'}
                   </h3>
                   <p className="text-xs text-slate-500 font-medium mt-0.5">
-                    {authMode === 'login' ? 'Enter 10-digit mobile number to receive OTP code.' : 'Enter your details to create a new traveler account.'}
+                    {authMode === 'login' ? 'Enter 10-digit mobile number to receive live SMS OTP.' : 'Enter your details to create a new traveler account.'}
                   </p>
                 </div>
 
@@ -351,10 +341,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                     {isSendingOtp ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin text-slate-900" />
-                        <span>Sending OTP Code...</span>
+                        <span>Sending Live SMS OTP...</span>
                       </>
                     ) : (
-                      <span>{authMode === 'login' ? 'Send OTP Code →' : 'Create Account & Get OTP →'}</span>
+                      <span>{authMode === 'login' ? 'Send Real SMS OTP →' : 'Create Account & Get OTP →'}</span>
                     )}
                   </button>
                 </form>
@@ -367,7 +357,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                 <div>
                   <h3 className="text-xl font-black text-slate-900">Enter OTP Verification Code</h3>
                   <div className="flex items-center space-x-1 text-xs text-slate-500 font-medium mt-1">
-                    <span>Verification code for <strong className="text-slate-800">+91 {phoneNumber}</strong></span>
+                    <span>Live SMS code sent to <strong className="text-slate-800">+91 {phoneNumber}</strong></span>
                     <button
                       onClick={() => { setStep('input'); setErrorMsg(''); }}
                       className="text-brand-600 hover:text-brand-700 p-0.5 cursor-pointer ml-1 inline-flex items-center"
@@ -424,7 +414,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                     {isVerifying ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin text-slate-900" />
-                        <span>Verifying Code...</span>
+                        <span>Verifying Live SMS Code...</span>
                       </>
                     ) : (
                       <span>{authMode === 'signup' ? 'Verify OTP & Finish Sign Up →' : 'Verify OTP & Access Account →'}</span>
