@@ -97,10 +97,6 @@ export default function CustomerAccountPage() {
       setProfilePhone(user.phone || '');
       setProfileCity(user.city || '');
 
-      // Load co-travellers strictly for logged-in user UID
-      const userCo = cloudStore.getCoTravellers(user.uid);
-      setCoTravellers(userCo);
-
       const normalizeDigits = (str: string) => str.replace(/\D/g, '').slice(-10);
       const userEmailLower = (user.email || '').toLowerCase();
       const userPhoneDigits = normalizeDigits(user.phone || '');
@@ -118,6 +114,10 @@ export default function CustomerAccountPage() {
         );
       });
       setUserBookings(filtered);
+
+      // Load co-travellers with auto-population from user bookings & profile
+      const userCo = cloudStore.getCoTravellers(user.uid, user.phone, user.email, user.name);
+      setCoTravellers(userCo);
     } else {
       setCoTravellers([]);
     }

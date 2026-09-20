@@ -593,14 +593,62 @@ export const cloudStore = {
   },
 
   // --- CO-TRAVELLERS PERSISTENT STORAGE ---
-  getCoTravellers: (uid?: string): CoTraveller[] => {
-    if (typeof window !== 'undefined') {
-      try {
-        localStorage.removeItem(STORAGE_KEYS.CO_TRAVELLERS);
-      } catch (e) {}
+  getCoTravellers: (uid?: string, phone?: string, email?: string, name?: string): CoTraveller[] => {
+    const rawList: CoTraveller[] = [];
+
+    const keysToTry: string[] = [];
+    if (uid) {
+      keysToTry.push(`tc_cotravellers_${uid}`);
+      keysToTry.push(`tc_cotravellers_${uid.replace(/[^a-zA-Z0-9]/g, '_')}`);
     }
-    if (!uid) return [];
-    const rawList = getStoredData<CoTraveller[]>(`tc_cotravellers_${uid}`, []);
+    if (phone) {
+      const cleanPhone = phone.replace(/\D/g, '');
+      if (cleanPhone) keysToTry.push(`tc_cotravellers_${cleanPhone}`);
+    }
+    if (email) {
+      keysToTry.push(`tc_cotravellers_${email.trim().toLowerCase()}`);
+    }
+    keysToTry.push(STORAGE_KEYS.CO_TRAVELLERS);
+
+    keysToTry.forEach((k) => {
+      const items = getStoredData<CoTraveller[]>(k, []);
+      if (Array.isArray(items)) {
+        rawList.push(...items);
+      }
+    });
+
+    // AUTO-POPULATE: Extract co-travellers from past/active customer bookings
+    const normalizeDigits = (str: string) => str.replace(/\D/g, '').slice(-10);
+    const userEmailLower = (email || '').toLowerCase();
+    const userPhoneDigits = normalizeDigits(phone || '');
+    const userNameClean = (name || '').toLowerCase();
+
+    const allBookings = getStoredData<CustomerBooking[]>(STORAGE_KEYS.BOOKINGS, []);
+    const matchingBookings = allBookings.filter((b) => {
+      const bEmail = (b.customerEmail || '').toLowerCase();
+      const bPhoneDigits = normalizeDigits(b.customerPhone || '');
+      return (
+        (userEmailLower && bEmail === userEmailLower) ||
+        (userPhoneDigits && bPhoneDigits && bPhoneDigits === userPhoneDigits) ||
+        (userNameClean && userNameClean !== 'valued traveler' && b.customerName.toLowerCase() === userNameClean)
+      );
+    });
+
+    matchingBookings.forEach((b) => {
+      if (Array.isArray(b.passengersList)) {
+        b.passengersList.forEach((p) => {
+          if (p.name && p.name.trim()) {
+            rawList.push({
+              id: `cot_b_${p.name.replace(/\D/g, '') || Date.now()}`,
+              name: p.name.trim(),
+              age: typeof p.age === 'number' ? p.age : parseInt(String(p.age || '25'), 10) || 25,
+              gender: p.gender || 'Male',
+              relation: p.type || 'Co-Traveller',
+            });
+          }
+        });
+      }
+    });
 
     const cleanList: CoTraveller[] = [];
     const seenBaseNames = new Set<string>();
@@ -625,13 +673,11 @@ export const cloudStore = {
   },
 
   saveCoTravellers: (list: CoTraveller[], uid?: string): void => {
-    if (typeof window !== 'undefined') {
-      try {
-        localStorage.removeItem(STORAGE_KEYS.CO_TRAVELLERS);
-      } catch (e) {}
+    if (uid) {
+      setStoredData(`tc_cotravellers_${uid}`, list);
+      setStoredData(`tc_cotravellers_${uid.replace(/[^a-zA-Z0-9]/g, '_')}`, list);
     }
-    if (!uid) return;
-    setStoredData(`tc_cotravellers_${uid}`, list);
+    setStoredData(STORAGE_KEYS.CO_TRAVELLERS, list);
   },
 
   syncPassengersToCoTravellers: (
