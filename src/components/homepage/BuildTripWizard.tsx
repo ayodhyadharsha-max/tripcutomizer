@@ -114,7 +114,7 @@ export const BuildTripWizard: React.FC = () => {
             <span className="bg-brand-50 text-brand-700 font-bold text-xs px-3 py-1 rounded-full inline-block mb-2">
               Lead ID: {leadResult.leadId}
             </span>
-            <h3 className="text-2xl font-black text-slate-900 mb-2">Request Submitted Successfully!</h3>
+            <h3 className="text-2xl font-black text-slate-900 mb-2">Thank You! Our Senior Travel Expert will call you within 2 hours.</h3>
             <p className="text-slate-600 text-sm mb-6">{leadResult.summary}</p>
 
             <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl text-left text-xs space-y-2 mb-6">

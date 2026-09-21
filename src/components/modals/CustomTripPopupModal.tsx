@@ -198,7 +198,7 @@ export const CustomTripPopupModal: React.FC = () => {
               <span className="bg-brand-50 text-brand-700 font-bold text-xs px-3 py-1 rounded-full inline-block">
                 Lead ID: {leadResult.leadId}
               </span>
-              <h4 className="text-2xl font-black text-slate-900">Itinerary Request Submitted!</h4>
+              <h4 className="text-2xl font-black text-slate-900">Thank You! Our Senior Travel Expert will call you within 2 hours.</h4>
               <p className="text-slate-600 text-xs sm:text-sm max-w-md mx-auto">{leadResult.summary}</p>
 
               <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl text-left text-xs space-y-1.5 max-w-md mx-auto">
