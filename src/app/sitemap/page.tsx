@@ -53,7 +53,7 @@ export default function SitemapPage() {
               Website Index
             </span>
             <h1 className="text-3xl md:text-5xl font-black mt-3 tracking-tight leading-tight">
-              tripcustomizer HTML Sitemap
+              Trip Customizer HTML Sitemap
             </h1>
             <p className="text-slate-300 text-sm md:text-base mt-3 leading-relaxed">
               Complete directory of holiday package categories, domestic/international destinations, and customer support pages.

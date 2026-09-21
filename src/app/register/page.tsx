@@ -31,7 +31,7 @@ export default function RegisterPage() {
       <Container className="max-w-lg w-full">
         <Card className="p-8 bg-white rounded-3xl shadow-2xl border border-slate-200">
           <div className="text-center mb-6">
-            <h1 className="text-2xl font-black text-slate-900 tracking-tight">Create tripcustomizer Account</h1>
+            <h1 className="text-2xl font-black text-slate-900 tracking-tight">Create Trip Customizer Account</h1>
             <p className="text-xs text-slate-500 mt-1">Unlock exclusive member deals, forex cards & saved itineraries</p>
           </div>
 
@@ -121,7 +121,7 @@ export default function RegisterPage() {
                 onChange={(e) => setFormData({ ...formData, agreeTerms: e.target.checked })}
                 className="rounded text-brand-500"
               />
-              <span>I agree to tripcustomizer Terms of Service & Privacy Policy.</span>
+              <span>I agree to Trip Customizer Terms of Service & Privacy Policy.</span>
             </label>
 
             <Button type="submit" variant="accent" size="lg" className="w-full font-bold py-3 text-slate-950 text-sm shadow-md">

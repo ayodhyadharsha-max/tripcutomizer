@@ -24,7 +24,7 @@ export default function LoyaltyPage() {
         <div className="bg-gradient-to-r from-amber-900 via-brand-900 to-slate-900 text-white rounded-3xl p-8 mb-8 shadow-xl">
           <div className="flex items-center space-x-2 text-accent-400 font-bold text-xs uppercase tracking-wider mb-2">
             <Award className="w-4 h-4 text-accent-400" />
-            <span>tripcustomizer Loyalty Club</span>
+            <span>Trip Customizer Loyalty Club</span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-black">Earn Rewards On Every Journey</h1>
           <p className="text-slate-300 text-sm mt-2 max-w-2xl">

@@ -51,7 +51,7 @@ export default function CareersPage() {
         <Container>
           <div className="max-w-3xl">
             <span className="bg-amber-400/20 text-amber-300 border border-amber-400/40 text-xs font-black uppercase px-3 py-1 rounded-full tracking-wider">
-              Careers at tripcustomizer
+              Careers at Trip Customizer
             </span>
             <h1 className="text-3xl md:text-5xl font-black mt-3 tracking-tight leading-tight">
               Build the Future of Travel With Us

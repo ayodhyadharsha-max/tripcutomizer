@@ -42,7 +42,7 @@ export default function AdminLoginPage() {
           <div className="w-14 h-14 bg-brand-600 text-white rounded-2xl flex items-center justify-center mx-auto shadow-lg">
             <Shield className="w-8 h-8" />
           </div>
-          <h1 className="text-2xl font-black text-white tracking-tight">tripcustomizer Admin Portal</h1>
+          <h1 className="text-2xl font-black text-white tracking-tight">Trip Customizer Admin Portal</h1>
           <p className="text-xs text-slate-400">
             Protected Enterprise Operations Desk. Authorized Admin personnel only.
           </p>

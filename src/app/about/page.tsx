@@ -13,13 +13,13 @@ export default function AboutPage() {
         <Container>
           <div className="max-w-3xl">
             <span className="bg-amber-400/20 text-amber-300 border border-amber-400/40 text-xs font-black uppercase px-3 py-1 rounded-full tracking-wider">
-              About tripcustomizer
+              About Trip Customizer
             </span>
             <h1 className="text-3xl md:text-5xl font-black mt-3 tracking-tight leading-tight">
               India&apos;s Most Trusted Customized Holiday Platform
             </h1>
             <p className="text-slate-300 text-sm md:text-base mt-3 leading-relaxed font-normal">
-              For over a decade, tripcustomizer has empowered travelers to craft personalized, stress-free vacation itineraries across 50+ domestic and international destinations.
+              For over a decade, Trip Customizer has empowered travelers to craft personalized, stress-free vacation itineraries across 50+ domestic and international destinations.
             </p>
           </div>
         </Container>
@@ -90,7 +90,7 @@ export default function AboutPage() {
               Making World-Class Travel Accessible & Seamless
             </h2>
             <p className="text-xs md:text-sm text-slate-600 leading-relaxed font-medium">
-              Founded with a passion for wanderlust, tripcustomizer connects travelers directly with local destination experts, premium hotel chains, and trusted transport partners. Whether it&apos;s a spiritual Char Dham yatra, a romantic Bali honeymoon, or a European family vacation, we handle every detail with extreme precision.
+              Founded with a passion for wanderlust, Trip Customizer connects travelers directly with local destination experts, premium hotel chains, and trusted transport partners. Whether it&apos;s a spiritual Char Dham yatra, a romantic Bali honeymoon, or a European family vacation, we handle every detail with extreme precision.
             </p>
             <ul className="space-y-2 text-xs font-bold text-slate-800">
               <li className="flex items-center space-x-2">
