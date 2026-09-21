@@ -16,13 +16,13 @@ export const metadata: Metadata = {
     'Trip Customizer Char Dham',
   ],
   alternates: {
-    canonical: 'https://www.tripcustomizer.com/char-dham',
+    canonical: 'https://www.tripcustomizer.com/holidays/char-dham',
   },
   openGraph: {
     title: 'Char Dham Yatra Sacred Tour Package 2026 (Ayodhya & Delhi Departure) | Trip Customizer',
     description:
       'Book 10N/11D Char Dham Yatra divine tour package covering Yamunotri, Gangotri, Kedarnath & Badrinath. Includes AC transport, hotel stays, puja assistance & meals.',
-    url: 'https://www.tripcustomizer.com/char-dham',
+    url: 'https://www.tripcustomizer.com/holidays/char-dham',
     siteName: 'Trip Customizer',
     images: [
       {
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function CharDhamPage() {
+export default function HolidaysCharDhamPage() {
   const matchedPackages = DEMO_PACKAGES.filter((p) =>
     p.destinationSlug.toLowerCase().includes('char-dham') ||
     p.destinationSlug.toLowerCase().includes('kedarnath') ||

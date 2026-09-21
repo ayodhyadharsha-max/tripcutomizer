@@ -16,9 +16,41 @@ import { TestimonialsMetrics } from '@/components/homepage/TestimonialsMetrics';
 export const metadata: Metadata = {
   title: 'Trip Customizer™ | Book Customized Holiday Packages, Flights & 4-Star Hotels',
   description:
-    'Book customized international & domestic tour packages across 40+ countries. 4-Star hotels, flights, visa assistance, 5% GST tax compliance, and 24x7 expert travel desk support.',
+    'Book customized international & domestic tour packages across 40+ countries. 4-Star hotels, flights, visa assistance, 5% GST tax compliance, and 24x7 travel desk support.',
+  keywords: [
+    'Trip Customizer',
+    'customized tour packages',
+    'international tour packages',
+    'bali honeymoon package',
+    'dubai tour package',
+    'char dham yatra package',
+  ],
   alternates: {
     canonical: 'https://www.tripcustomizer.com',
+  },
+  openGraph: {
+    title: 'Trip Customizer™ | Book Customized Holiday Packages, Flights & 4-Star Hotels',
+    description:
+      'Book customized international & domestic tour packages across 40+ countries. 4-Star hotels, flights, visa assistance, 5% GST tax compliance, and 24x7 travel desk support.',
+    url: 'https://www.tripcustomizer.com',
+    siteName: 'Trip Customizer',
+    images: [
+      {
+        url: 'https://www.tripcustomizer.com/destinations/hero-holidays.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Trip Customizer Customized Holiday Packages',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Trip Customizer™ | Book Customized Holiday Packages, Flights & 4-Star Hotels',
+    description:
+      'Book customized international & domestic tour packages across 40+ countries. 4-Star hotels, flights, visa assistance, 5% GST tax compliance, and 24x7 travel desk support.',
+    images: ['https://www.tripcustomizer.com/destinations/hero-holidays.jpg'],
   },
 };
 
