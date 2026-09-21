@@ -224,7 +224,7 @@ export default function RootLayout({
       image: 'https://www.tripcustomizer.com/destinations/hero-holidays.jpg',
       '@id': 'https://www.tripcustomizer.com',
       url: 'https://www.tripcustomizer.com',
-      telephone: '+91 8881299358',
+      telephone: '+91 7408763401',
       priceRange: '₹₹',
       address: {
         '@type': 'PostalAddress',

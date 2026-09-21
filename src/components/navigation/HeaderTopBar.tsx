@@ -34,7 +34,7 @@ export const HeaderTopBar: React.FC = () => {
               <span className="hidden md:inline text-slate-400 font-normal">(Toll Free 9 AM - 9 PM)</span>
             </a>
             <a
-              href="https://wa.me/918291901377"
+              href="https://wa.me/917408763401"
               target="_blank"
               rel="noreferrer"
               className="hidden sm:flex items-center space-x-1 hover:text-emerald-400 transition-colors"

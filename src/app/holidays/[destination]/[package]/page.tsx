@@ -1235,7 +1235,7 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                 </Button>
 
                 <a
-                  href="https://wa.me/918291901377"
+                  href="https://wa.me/917408763401"
                   target="_blank"
                   rel="noreferrer"
                   className="w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-300 font-bold text-xs py-2.5 rounded-xl flex items-center justify-center space-x-2 transition-colors"

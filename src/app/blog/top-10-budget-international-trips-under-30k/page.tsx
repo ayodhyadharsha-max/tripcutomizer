@@ -233,7 +233,7 @@ export default function ViralBudgetTripPage() {
                       </Button>
                     </Link>
                     <a
-                      href={`https://wa.me/918291901377?text=Hi%20Trip%20Customizer%2C%20I%20am%20interested%20in%20the%20${encodeURIComponent(item.name)}%20package.`}
+                      href={`https://wa.me/917408763401?text=Hi%20Trip%20Customizer%2C%20I%20am%20interested%20in%20the%20${encodeURIComponent(item.name)}%20package.`}
                       target="_blank"
                       rel="noreferrer"
                       className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-1.5 shadow-sm transition-all shrink-0"

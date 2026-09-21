@@ -85,12 +85,12 @@ export default function ContactPage() {
                   <h3 className="font-bold text-slate-900 text-sm">WhatsApp Instant Chat</h3>
                   <p className="text-xs text-slate-500 font-medium mt-0.5">Instant quotes & custom itineraries</p>
                   <a
-                    href="https://wa.me/918291901377"
+                    href="https://wa.me/917408763401"
                     target="_blank"
                     rel="noreferrer"
                     className="text-emerald-600 font-black text-sm hover:underline block mt-1"
                   >
-                    +91 82919 01377 →
+                    +91 7408763401 →
                   </a>
                 </div>
               </div>

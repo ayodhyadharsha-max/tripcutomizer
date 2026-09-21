@@ -84,7 +84,7 @@ export default function BookingSuccessPage() {
               <span>Print / Save PDF</span>
             </Button>
             <a
-              href={`https://wa.me/918881299358?text=Hi%20TripCustomizer!%20My%20Booking%20Ref%20is%20${bookingRef}.%20Please%20send%20trip%20itinerary.`}
+              href={`https://wa.me/917408763401?text=Hi%20TripCustomizer!%20My%20Booking%20Ref%20is%20${bookingRef}.%20Please%20send%20trip%20itinerary.`}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow-sm transition-all"
@@ -200,7 +200,7 @@ export default function BookingSuccessPage() {
             <ul className="text-slate-600 space-y-1 list-disc list-inside">
               <li>Our dedicated holiday manager will call you within 2 hours to finalize hotel preferences and custom flight add-ons.</li>
               <li>Your official detailed PDF itinerary and hotel booking vouchers will be dispatched to <strong className="text-slate-900">{customerEmail}</strong>.</li>
-              <li>For immediate assistance or changes, reach us anytime on <strong className="text-slate-900">+91 8881299358</strong> or email <strong className="text-slate-900">tripcustomizer@gmail.com</strong>.</li>
+              <li>For immediate assistance or changes, reach us anytime on <strong className="text-slate-900">+91 7408763401</strong> or email <strong className="text-slate-900">tripcustomizer@gmail.com</strong>.</li>
             </ul>
           </div>
 

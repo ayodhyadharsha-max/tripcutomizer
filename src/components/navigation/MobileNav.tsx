@@ -129,9 +129,9 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
             <Phone className="w-4 h-4 text-accent-500" />
             <span>1800-2099-100 (Toll Free)</span>
           </a>
-          <a href="https://wa.me/918291901377" target="_blank" rel="noreferrer" className="flex items-center space-x-2 text-emerald-700 font-semibold">
+          <a href="https://wa.me/917408763401" target="_blank" rel="noreferrer" className="flex items-center space-x-2 text-emerald-700 font-semibold">
             <MessageCircle className="w-4 h-4 text-emerald-500" />
-            <span>WhatsApp Support</span>
+            <span>WhatsApp Support (+91 7408763401)</span>
           </a>
         </div>
       </div>

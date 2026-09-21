@@ -77,7 +77,7 @@ export default function StoreLocatorPage() {
               <Phone className="w-4 h-4" /> Call 1800-2099-100
             </a>
             <a
-              href="https://wa.me/918291901377"
+              href="https://wa.me/917408763401"
               target="_blank"
               rel="noreferrer"
               className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs px-5 py-3 rounded-2xl shadow-md cursor-pointer flex items-center gap-1.5"
