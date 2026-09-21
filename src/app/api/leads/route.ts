@@ -138,6 +138,57 @@ export async function POST(req: Request) {
     const updated = [newLead, ...existing.filter(l => l.id !== newLead.id)];
     saveLeadsToFile(updated);
 
+    // 1. Sync to Supabase Central Database (Server Side)
+    try {
+      const supabaseServer = getSupabaseServer();
+      if (supabaseServer) {
+        await supabaseServer.from('leads').upsert({
+          id: newLead.id,
+          name: newLead.name,
+          phone: newLead.phone,
+          email: newLead.email || null,
+          destination: newLead.destination,
+          budget: newLead.budget || null,
+          travel_dates: newLead.travelDates || null,
+          travelers_count: newLead.travelersCount || 1,
+          status: newLead.status || 'New',
+          source: newLead.source || 'Website',
+          created_at: newLead.createdAt,
+        });
+      }
+    } catch (supaErr) {
+      console.warn('[API Leads POST] Supabase sync info:', supaErr);
+    }
+
+    // 2. Instant Email Notification to tripcustomizer@gmail.com via Web3Forms
+    try {
+      const apiKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || 'c542ca79-b08a-4352-bf3e-1045518a0486';
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: apiKey,
+          subject: `⚡ INSTANT CUSTOMER TRIP ENQUIRY: ${newLead.name} - ${newLead.destination}`,
+          from_name: 'tripcustomizer Platform Alert',
+          to_email: 'tripcustomizer@gmail.com',
+          customer_name: newLead.name,
+          phone_number: newLead.phone,
+          email_address: newLead.email || 'Not Provided',
+          destination: newLead.destination,
+          budget: newLead.budget || 'Custom Quote Requested',
+          travel_dates: newLead.travelDates || 'Flexible',
+          travelers_count: newLead.travelersCount || 1,
+          lead_source: newLead.source || 'Website Lead Form',
+          submitted_at: newLead.createdAt,
+        }),
+      });
+    } catch (emailErr) {
+      console.warn('[API Leads POST] Email alert info:', emailErr);
+    }
+
     return NextResponse.json({ success: true, lead: newLead, leads: updated });
   } catch (e: any) {
     return NextResponse.json({ success: false, error: e.message }, { status: 500 });

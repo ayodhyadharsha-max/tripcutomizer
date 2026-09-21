@@ -192,6 +192,74 @@ export async function POST(req: Request) {
     const updated = [newBooking, ...existing.filter(b => b.id !== newBooking.id)];
     saveBookingsToFile(updated);
 
+    // 1. Sync to Supabase Central Database (Server Side)
+    try {
+      const supabaseServer = getSupabaseServer();
+      if (supabaseServer) {
+        await supabaseServer.from('bookings').upsert({
+          id: newBooking.id,
+          reference_no: newBooking.referenceNo,
+          user_id: newBooking.userId || null,
+          customer_name: newBooking.customerName,
+          customer_phone: newBooking.customerPhone,
+          customer_email: newBooking.customerEmail || null,
+          package_name: newBooking.packageName,
+          destination: newBooking.destination,
+          travel_dates: newBooking.travelDates,
+          travelers_count: newBooking.travelersCount || 1,
+          hotel_category: newBooking.hotelCategory || null,
+          base_price: newBooking.basePrice || 0,
+          gst_amount: newBooking.gstAmount || 0,
+          discount_amount: newBooking.discountAmount || 0,
+          coupon_applied: newBooking.couponApplied || null,
+          payment_method: newBooking.paymentMethod || null,
+          transaction_id: newBooking.transactionId || null,
+          special_requests: newBooking.specialRequests || null,
+          total_amount: newBooking.totalAmount || 0,
+          status: newBooking.status || 'Confirmed',
+          payment_status: newBooking.paymentStatus || 'Paid',
+          passengers_list: newBooking.passengersList || [],
+          notes: newBooking.notes || null,
+          created_at: newBooking.createdAt,
+        });
+      }
+    } catch (supaErr) {
+      console.warn('[API Bookings POST] Supabase sync info:', supaErr);
+    }
+
+    // 2. Instant Email Notification to tripcustomizer@gmail.com via Web3Forms
+    try {
+      const apiKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || 'c542ca79-b08a-4352-bf3e-1045518a0486';
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: apiKey,
+          subject: `🚨 INSTANT BOOKING ALERT: ${newBooking.referenceNo} - ${newBooking.customerName}`,
+          from_name: 'tripcustomizer Platform Alert',
+          to_email: 'tripcustomizer@gmail.com',
+          reference_number: newBooking.referenceNo,
+          customer_name: newBooking.customerName,
+          phone_number: newBooking.customerPhone,
+          email_address: newBooking.customerEmail || 'Not Provided',
+          package_name: newBooking.packageName,
+          destination: newBooking.destination,
+          travel_dates: newBooking.travelDates,
+          total_amount: `₹${newBooking.totalAmount.toLocaleString('en-IN')}`,
+          passengers_count: newBooking.travelersCount,
+          hotel_category: newBooking.hotelCategory,
+          payment_status: newBooking.paymentStatus,
+          transaction_id: newBooking.transactionId,
+          submitted_at: newBooking.createdAt,
+        }),
+      });
+    } catch (emailErr) {
+      console.warn('[API Bookings POST] Email alert info:', emailErr);
+    }
+
     return NextResponse.json({ success: true, booking: newBooking, bookings: updated });
   } catch (e: any) {
     return NextResponse.json({ success: false, error: e.message }, { status: 500 });

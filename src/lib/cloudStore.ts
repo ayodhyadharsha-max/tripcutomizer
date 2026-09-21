@@ -1,6 +1,7 @@
 import { db } from '@/lib/firebase';
 import { collection, doc, setDoc, onSnapshot } from 'firebase/firestore';
 import { supabase } from '@/lib/supabase';
+import { sendWeb3FormLead } from '@/lib/web3forms';
 
 export interface PassengerDetail {
   name: string;
@@ -456,6 +457,26 @@ export const cloudStore = {
     setStoredData(STORAGE_KEYS.BOOKINGS, updated);
     syncBookingToCloud(newBooking);
 
+    // Instant Email Notification to tripcustomizer@gmail.com
+    try {
+      sendWeb3FormLead({
+        subject: `🚨 NEW BOOKING CONFIRMED: ${refNum} - ${newBooking.customerName}`,
+        name: newBooking.customerName,
+        phone: newBooking.customerPhone,
+        email: newBooking.customerEmail || 'Not Provided',
+        destination: newBooking.destination,
+        package_name: newBooking.packageName,
+        total_amount: `₹${newBooking.totalAmount.toLocaleString('en-IN')}`,
+        travelers_count: newBooking.travelersCount,
+        travel_dates: newBooking.travelDates,
+        hotel_category: newBooking.hotelCategory,
+        payment_method: newBooking.paymentMethod,
+        transaction_id: newBooking.transactionId,
+        passengers_list: JSON.stringify(newBooking.passengersList || []),
+        source: 'Website Checkout',
+      });
+    } catch (e) {}
+
     // Also auto-sync as CRM Lead so admin sees it in both /admin/bookings and /admin/leads
     try {
       const existingLeads = cloudStore.getLeads();
@@ -511,6 +532,22 @@ export const cloudStore = {
     const updated = [newLead, ...existing];
     setStoredData(STORAGE_KEYS.LEADS, updated);
     syncLeadToCloud(newLead);
+
+    // Instant Email Notification to tripcustomizer@gmail.com
+    try {
+      sendWeb3FormLead({
+        subject: `⚡ NEW CUSTOMER ENQUIRY: ${newLead.name} - ${newLead.destination}`,
+        name: newLead.name,
+        phone: newLead.phone,
+        email: newLead.email || 'Not Provided',
+        destination: newLead.destination,
+        budget: newLead.budget || 'Custom Quote Requested',
+        travel_dates: newLead.travelDates || 'Flexible',
+        travelers_count: newLead.travelersCount || 1,
+        source: newLead.source || 'Website Form',
+      });
+    } catch (e) {}
+
     return newLead;
   },
 
