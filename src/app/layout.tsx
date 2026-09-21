@@ -320,6 +320,26 @@ export default function RootLayout({
     },
     {
       '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'Trip Customizer',
+      url: 'https://www.tripcustomizer.com',
+      logo: 'https://www.tripcustomizer.com/destinations/hero-holidays.jpg',
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: '+91 7408763401',
+        contactType: 'customer service',
+        areaServed: ['IN', 'US', 'AE', 'GB', 'CA', 'AU', 'SG'],
+        availableLanguage: ['English', 'Hindi'],
+      },
+      email: 'tripcustomizer@gmail.com',
+      sameAs: [
+        'https://www.facebook.com/tripcustomizer',
+        'https://www.instagram.com/tripcustomizer',
+        'https://twitter.com/tripcustomizer',
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
       '@type': 'FAQPage',
       mainEntity: [
         {
@@ -327,15 +347,15 @@ export default function RootLayout({
           name: 'What services does Trip Customizer offer?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Trip Customizer is a leading travel solutions provider offering international and domestic holiday packages, flight bookings, hotel reservations, customized itineraries, and 24/7 expert travel assistance.',
+            text: 'Trip Customizer is a premier travel agency offering tailor-made international and domestic holiday packages, 4-star & 5-star hotel bookings, flights, visa assistance, and 24/7 expert travel support.',
           },
         },
         {
           '@type': 'Question',
-          name: 'How to book customized holiday packages in India with Trip Customizer?',
+          name: 'How to book customized holiday packages on Trip Customizer?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Select your preferred destination on TripCustomizer.com, choose your budget and dates, and our senior travel architects will curate a personalized itinerary within 2 hours.',
+            text: 'Visit TripCustomizer.com, select your target destination or fill out the 1-Minute Custom Trip Wizard with your budget and travel dates. Our senior travel specialists will send a complete day-by-day itinerary and quote within 2 hours.',
           },
         },
         {
@@ -343,7 +363,15 @@ export default function RootLayout({
           name: 'What are the top spiritual and pilgrimage tour packages available on Trip Customizer?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Trip Customizer offers specialized pilgrimage packages including Char Dham Yatra, Kedarnath, Badrinath, Ayodhya, Varanasi, Kailash Mansarovar, Dwarka Somnath, and Mathura Vrindavan.',
+            text: 'Trip Customizer offers specialized pilgrimage tours including Char Dham Yatra, Kedarnath, Badrinath, Ayodhya Ram Mandir VIP Darshan, Varanasi Heritage Ghats, Kailash Mansarovar, Dwarka Somnath, and Mathura Vrindavan.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'How to contact Trip Customizer customer support directly?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'You can contact Trip Customizer 24x7 via WhatsApp or Phone at +91 7408763401, email at tripcustomizer@gmail.com, or visit our head office on Ram Path, Ayodhya.',
           },
         },
       ],
