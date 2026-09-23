@@ -7,12 +7,8 @@ export async function POST(req: Request) {
     const body = await req.json().catch(() => ({}));
     const { amount, currency = 'INR', receipt, packageName, customerName, customerEmail, customerPhone } = body;
 
-    const keyId = process.env.RAZORPAY_KEY_ID || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
-    const keySecret = process.env.RAZORPAY_KEY_SECRET;
-
-    if (!keyId || !keySecret) {
-      return NextResponse.json({ success: false, error: 'Razorpay API credentials not configured' }, { status: 401 });
-    }
+    const keyId = process.env.RAZORPAY_KEY_ID || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_test_TfNoGuhXf8yXWP';
+    const keySecret = process.env.RAZORPAY_KEY_SECRET || 'gvYHUjt68ufGQTNdLF51wkva';
 
     // Convert to paise if amount is provided in rupees
     let amountInPaise = amount;

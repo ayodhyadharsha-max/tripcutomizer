@@ -211,7 +211,7 @@ export default function BookingCheckoutPage() {
     }
   }, [user]);
 
-  const [paymentMethod, setPaymentMethod] = useState<'cashfree' | 'upi' | 'card' | 'netbanking'>('cashfree');
+  const [paymentMethod, setPaymentMethod] = useState<'razorpay'>('razorpay');
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
   const loadRazorpaySDK = (): Promise<boolean> => {
@@ -645,13 +645,16 @@ export default function BookingCheckoutPage() {
           </Card>
         )}
 
-        {/* Step 3: Payment Gateway */}
+        {/* Step 3: Razorpay Payment Gateway */}
         {step === 3 && (
           <Card className="p-8 bg-white rounded-3xl shadow-xl border border-slate-200 space-y-6">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <div>
-                <h2 className="text-lg font-black text-slate-900">Secure Payment Gateway</h2>
-                <p className="text-xs text-slate-500 font-medium">Powered by Cashfree Payments (SSL Encrypted)</p>
+                <h2 className="text-lg font-black text-slate-900 flex items-center gap-2">
+                  <ShieldCheck className="w-5 h-5 text-emerald-600" />
+                  Razorpay Secure Checkout
+                </h2>
+                <p className="text-xs text-slate-500 font-medium">100% Secure SSL & PCI-DSS Compliant Payment Gateway</p>
               </div>
               <div className="text-right">
                 <span className="text-[10px] text-slate-400 font-bold block uppercase">Payable Total</span>
@@ -659,118 +662,39 @@ export default function BookingCheckoutPage() {
               </div>
             </div>
 
-            {/* Gateway Selection Tabs */}
-            <div className="grid grid-cols-4 gap-2 bg-slate-100 p-1.5 rounded-2xl text-xs font-bold text-center">
-              <button
-                type="button"
-                onClick={() => setPaymentMethod('cashfree')}
-                className={`py-2.5 rounded-xl cursor-pointer transition-all ${paymentMethod === 'cashfree' ? 'bg-brand-600 text-white shadow-sm font-black' : 'text-slate-600 hover:text-slate-900'}`}
-              >
-                Cashfree Gateway
-              </button>
-              <button
-                type="button"
-                onClick={() => setPaymentMethod('upi')}
-                className={`py-2.5 rounded-xl cursor-pointer transition-all ${paymentMethod === 'upi' ? 'bg-white text-brand-700 shadow-sm font-black' : 'text-slate-600 hover:text-slate-900'}`}
-              >
-                UPI / QR
-              </button>
-              <button
-                type="button"
-                onClick={() => setPaymentMethod('card')}
-                className={`py-2.5 rounded-xl cursor-pointer transition-all ${paymentMethod === 'card' ? 'bg-white text-brand-700 shadow-sm font-black' : 'text-slate-600 hover:text-slate-900'}`}
-              >
-                Cards
-              </button>
-              <button
-                type="button"
-                onClick={() => setPaymentMethod('netbanking')}
-                className={`py-2.5 rounded-xl cursor-pointer transition-all ${paymentMethod === 'netbanking' ? 'bg-white text-brand-700 shadow-sm font-black' : 'text-slate-600 hover:text-slate-900'}`}
-              >
-                NetBanking
-              </button>
-            </div>
-
-            {/* Payment Method Details Box */}
-            <div className="p-6 bg-slate-50 border border-slate-200/90 rounded-2xl space-y-4 text-xs">
-              {paymentMethod === 'cashfree' && (
-                <div className="space-y-3 text-center py-2">
-                  <span className="bg-emerald-100 text-emerald-800 font-extrabold text-[11px] px-3.5 py-1 rounded-full inline-block">
-                    ✓ Official Cashfree Payment Gateway Selected
+            {/* Official Razorpay Card Box */}
+            <div className="p-6 bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950 rounded-2xl text-white space-y-5 shadow-lg border border-slate-800">
+              <div className="flex items-center justify-between">
+                <div className="space-y-1">
+                  <span className="bg-blue-500/20 text-blue-300 font-black text-[10px] uppercase tracking-wider px-3 py-1 rounded-full border border-blue-400/30 inline-block">
+                    ✓ Official Razorpay Gateway
                   </span>
-                  <p className="text-slate-600 max-w-md mx-auto leading-relaxed">
-                    Pay securely using Cashfree (UPI, Cards, NetBanking, Paytm, EMI & Wallet options). 
-                  </p>
-                  <div className="p-3 bg-white rounded-xl border border-slate-200 text-[11px] text-slate-500 font-medium max-w-sm mx-auto">
-                    🔒 Cashfree API credentials integration slot is ready. Direct redirect & SDK popup configured.
-                  </div>
+                  <h3 className="text-base font-black text-white">Instant Payment Options</h3>
                 </div>
-              )}
-              {paymentMethod === 'upi' && (
-                <div className="space-y-3 text-center">
-                  <span className="bg-emerald-100 text-emerald-800 font-bold text-[11px] px-3 py-1 rounded-full inline-block">
-                    Instant 0% Convenience Fee via UPI
-                  </span>
-                  <div className="max-w-xs mx-auto space-y-2">
-                    <label className="block text-left font-bold text-slate-700">Enter UPI VPA ID</label>
-                    <input
-                      type="text"
-                      placeholder="e.g. mobile@upi or name@okaxis"
-                      className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-semibold focus:outline-hidden focus:ring-2 focus:ring-brand-500"
-                    />
-                  </div>
-                  <p className="text-[11px] text-slate-500">Supported: PhonePe, Google Pay, Paytm, BHIM, Cred UPI</p>
-                </div>
-              )}
+                <Badge variant="gold" className="text-xs font-black">256-Bit Encrypted</Badge>
+              </div>
 
-              {paymentMethod === 'card' && (
-                <div className="space-y-3 max-w-md mx-auto">
-                  <div>
-                    <label className="block font-bold text-slate-700 mb-1">Card Number</label>
-                    <input
-                      type="text"
-                      placeholder="4532 •••• •••• 8921"
-                      className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-semibold focus:outline-hidden"
-                    />
-                  </div>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div>
-                      <label className="block font-bold text-slate-700 mb-1">Expiry (MM/YY)</label>
-                      <input
-                        type="text"
-                        placeholder="08/28"
-                        className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-semibold focus:outline-hidden"
-                      />
-                    </div>
-                    <div>
-                      <label className="block font-bold text-slate-700 mb-1">CVV / CVC</label>
-                      <input
-                        type="password"
-                        maxLength={4}
-                        placeholder="•••"
-                        className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-semibold focus:outline-hidden"
-                      />
-                    </div>
-                  </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2 text-slate-200 text-xs font-bold">
+                <div className="p-3 bg-white/5 backdrop-blur-xs rounded-xl border border-white/10 text-center space-y-1">
+                  <span className="text-amber-400 text-sm font-black block">📱 UPI / QR</span>
+                  <span className="text-[10px] text-slate-300 block font-normal">GPay, PhonePe, Paytm, BHIM</span>
                 </div>
-              )}
-
-              {paymentMethod === 'netbanking' && (
-                <div className="space-y-3 max-w-md mx-auto">
-                  <label className="block font-bold text-slate-700">Select Bank</label>
-                  <select className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs font-semibold">
-                    <option value="HDFC">HDFC Bank</option>
-                    <option value="ICICI">ICICI Bank</option>
-                    <option value="SBI">State Bank of India (SBI)</option>
-                    <option value="AXIS">Axis Bank</option>
-                    <option value="KOTAK">Kotak Mahindra Bank</option>
-                  </select>
+                <div className="p-3 bg-white/5 backdrop-blur-xs rounded-xl border border-white/10 text-center space-y-1">
+                  <span className="text-blue-400 text-sm font-black block">💳 Cards</span>
+                  <span className="text-[10px] text-slate-300 block font-normal">Visa, Mastercard, RuPay, Amex</span>
                 </div>
-              )}
+                <div className="p-3 bg-white/5 backdrop-blur-xs rounded-xl border border-white/10 text-center space-y-1">
+                  <span className="text-emerald-400 text-sm font-black block">🏦 NetBanking</span>
+                  <span className="text-[10px] text-slate-300 block font-normal">SBI, HDFC, ICICI, Axis +50 Banks</span>
+                </div>
+                <div className="p-3 bg-white/5 backdrop-blur-xs rounded-xl border border-white/10 text-center space-y-1">
+                  <span className="text-purple-400 text-sm font-black block">👛 Wallets / EMI</span>
+                  <span className="text-[10px] text-slate-300 block font-normal">Mobikwik, Freecharge, No-Cost EMI</span>
+                </div>
+              </div>
 
-              <div className="pt-3 border-t border-slate-200 flex items-center justify-center space-x-2 text-[11px] text-slate-500 font-medium">
-                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>256-Bit SSL Encrypted Payment Authorization</span>
+              <div className="p-3 bg-blue-900/30 rounded-xl border border-blue-500/20 text-[11px] text-blue-200 font-medium text-center">
+                🔒 Clicking the button below opens the official Razorpay modal popup for seamless payment authorization.
               </div>
 
               <Button
@@ -778,15 +702,15 @@ export default function BookingCheckoutPage() {
                 disabled={isProcessingPayment}
                 variant="accent"
                 size="lg"
-                className="w-full max-w-md mx-auto font-black py-3.5 text-slate-950 text-sm shadow-xl cursor-pointer disabled:opacity-75 flex items-center justify-center gap-2"
+                className="w-full font-black py-4 text-slate-950 text-base shadow-xl cursor-pointer disabled:opacity-75 flex items-center justify-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 transition-all border-none"
               >
                 {isProcessingPayment ? (
                   <>
                     <Loader2 className="w-5 h-5 animate-spin text-slate-950" />
-                    <span>Authorizing Payment & Syncing Lead...</span>
+                    <span>Opening Razorpay Secure Checkout...</span>
                   </>
                 ) : (
-                  `PAY & CONFIRM BOOKING (${formatCurrency(grandTotal)})`
+                  `PROCEED TO PAY WITH RAZORPAY (${formatCurrency(grandTotal)}) →`
                 )}
               </Button>
             </div>

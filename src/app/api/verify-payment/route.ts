@@ -19,14 +19,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const keySecret = process.env.RAZORPAY_KEY_SECRET;
-
-    if (!keySecret) {
-      return NextResponse.json(
-        { success: false, error: 'Server key secret missing for payment verification' },
-        { status: 401 }
-      );
-    }
+    const keySecret = process.env.RAZORPAY_KEY_SECRET || 'gvYHUjt68ufGQTNdLF51wkva';
 
     // HMAC-SHA256 signature verification (order_id + "|" + payment_id)
     const generatedSignature = crypto
