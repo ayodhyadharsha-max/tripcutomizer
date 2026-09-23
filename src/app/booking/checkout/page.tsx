@@ -649,18 +649,15 @@ export default function BookingCheckoutPage() {
         {step === 3 && (
           <div className="space-y-6 animate-in fade-in duration-300">
             {/* Top MakeMyTrip Style Safe Header */}
-            <div className="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-xs flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <span className="text-xl font-black text-slate-900 tracking-tight">
-                  Trip <span className="text-brand-600">Customizer</span>
-                </span>
-                <span className="text-xs bg-emerald-50 text-emerald-700 font-bold px-2.5 py-0.5 rounded-md border border-emerald-200">
-                  Payments
+            <div className="bg-white p-4 rounded-xl border border-slate-200/90 shadow-2xs flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <span className="text-xl font-black text-rose-600 tracking-tighter uppercase">
+                  trip <span className="text-slate-900">customizer</span>
                 </span>
               </div>
-              <div className="flex items-center space-x-1.5 text-xs font-black text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200">
-                <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                <span>SAFE & SECURED</span>
+              <div className="flex items-center space-x-1.5 text-xs font-bold text-emerald-600">
+                <span className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-[10px]">✓</span>
+                <span className="tracking-wider text-slate-600 uppercase text-[11px]">SAFE & SECURED</span>
               </div>
             </div>
 
@@ -668,152 +665,156 @@ export default function BookingCheckoutPage() {
               {/* Left 2 Columns: Guest Info, Offers & Payment Options Accordion */}
               <div className="lg:col-span-2 space-y-5">
                 {/* Card 1: Booking & Guest Summary Box */}
-                <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-xs space-y-3">
+                <div className="bg-white p-5 rounded-xl border border-slate-200/90 shadow-2xs space-y-3">
                   <div className="flex items-start justify-between">
                     <div>
-                      <h3 className="text-base font-black text-slate-900">{pkgInfo.name}</h3>
-                      <p className="text-xs text-slate-500 font-medium mt-0.5 flex items-center gap-2">
+                      <h3 className="text-base font-bold text-slate-900">{pkgInfo.name}</h3>
+                      <p className="text-xs text-slate-500 font-medium mt-1 flex items-center gap-2">
                         <span>📅 15 Oct'26 - 20 Oct'26</span>
                         <span>•</span>
-                        <span>🛏️ {pkgInfo.duration} ({pkgInfo.travelersCount} Adults)</span>
+                        <span>🛏️ {pkgInfo.duration} | {pkgInfo.travelersCount} Adults</span>
                       </p>
                     </div>
                     <button
                       type="button"
                       onClick={() => setStep(2)}
-                      className="text-xs font-bold text-brand-600 hover:text-brand-700 hover:underline cursor-pointer"
+                      className="text-xs font-bold text-amber-600 hover:underline cursor-pointer uppercase flex items-center gap-1"
                     >
-                      VIEW DETAILS ⌵
+                      VIEW DETAILS <span className="text-[9px]">▼</span>
                     </button>
                   </div>
-                  <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-600 font-semibold">
-                    <span className="flex items-center gap-1 text-slate-800">
-                      👤 <span className="font-bold">{travellerData.firstName} {travellerData.lastName}</span> (Primary)
-                    </span>
+                  <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-600 font-medium">
+                    <span>👤 <span className="font-bold text-slate-800">{travellerData.firstName} {travellerData.lastName}</span> (Primary)</span>
                     <span>✉️ {travellerData.email}</span>
                     <span>📱 {travellerData.phone}</span>
                   </div>
                 </div>
 
-                {/* Card 2: Gift Cards & Promo Offers Row */}
-                <div className="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-xs flex items-center justify-between">
+                {/* Card 2: Gift Cards Row */}
+                <div className="bg-white p-4 rounded-xl border border-slate-200/90 shadow-2xs flex items-center justify-between">
                   <div className="flex items-center space-x-3">
-                    <div className="w-9 h-9 bg-amber-100 rounded-xl flex items-center justify-center text-amber-600 font-bold">
-                      👛
-                    </div>
-                    <div>
-                      <h4 className="text-xs font-black text-slate-900">Gift Cards & Promo Offers</h4>
-                      <p className="text-[11px] text-slate-500">
-                        {appliedCouponName ? `Applied Promo: ${appliedCouponName} (-${formatCurrency(appliedDiscountAmount)})` : 'Have a coupon code or gift card?'}
-                      </p>
-                    </div>
+                    <span className="text-lg">👛</span>
+                    <h4 className="text-sm font-bold text-slate-900">Gift Cards</h4>
                   </div>
                   <button
                     type="button"
                     onClick={() => setStep(2)}
-                    className="text-xs font-bold text-brand-600 hover:underline cursor-pointer"
+                    className="text-xs font-bold text-amber-600 hover:underline cursor-pointer uppercase flex items-center gap-1"
                   >
-                    {appliedCouponName ? 'CHANGE ⌵' : 'APPLY `'}
+                    VIEW ALL <span className="text-[9px]">▼</span>
                   </button>
                 </div>
 
-                {/* Card 3: Payment Options (MakeMyTrip Vertical Accordion List) */}
-                <div className="bg-white rounded-2xl border border-slate-200/90 shadow-xs overflow-hidden">
-                  <div className="p-4 bg-slate-50/80 border-b border-slate-100 flex items-center justify-between">
-                    <h3 className="text-sm font-black text-slate-900">Payment Options</h3>
-                    <span className="text-[11px] text-slate-500 font-medium">Powered by Razorpay</span>
+                {/* Card 3: Payment Options Box */}
+                <div className="bg-white rounded-xl border border-slate-200/90 shadow-2xs overflow-hidden">
+                  <div className="p-4 border-b border-slate-100">
+                    <h3 className="text-base font-bold text-slate-900">Payment Options</h3>
                   </div>
 
                   <div className="divide-y divide-slate-100">
-                    {/* UPI Option */}
+                    {/* 1. UPI Options */}
                     <div
                       onClick={handleSimulatePayment}
-                      className="p-5 hover:bg-brand-50/40 transition-all cursor-pointer group flex items-center justify-between"
+                      className="p-5 hover:bg-slate-50 transition-all cursor-pointer group flex items-center justify-between"
                     >
                       <div className="flex items-center space-x-4">
-                        <div className="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 text-lg font-black group-hover:scale-110 transition-transform">
-                          📱
+                        <div className="w-8 h-8 rounded-lg bg-orange-50 border border-orange-200 flex items-center justify-center shrink-0">
+                          <span className="text-xs font-black text-orange-600">UPI</span>
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-bold text-slate-900 group-hover:text-amber-600">UPI Options</h4>
+                          <p className="text-xs text-slate-500 mt-0.5">Pay Directly From Your Bank Account</p>
+                        </div>
+                      </div>
+                      <span className="text-amber-600 font-bold text-lg group-hover:translate-x-1 transition-transform">›</span>
+                    </div>
+
+                    {/* 2. Credit & Debit Cards */}
+                    <div
+                      onClick={handleSimulatePayment}
+                      className="p-5 hover:bg-slate-50 transition-all cursor-pointer group flex items-center justify-between"
+                    >
+                      <div className="flex items-center space-x-4">
+                        <div className="w-8 h-8 rounded-lg bg-rose-50 border border-rose-200 flex items-center justify-center shrink-0">
+                          <span className="text-xs font-black text-rose-600">💳</span>
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-bold text-slate-900 group-hover:text-amber-600">Credit & Debit Cards</h4>
+                          <p className="text-xs text-slate-500 mt-0.5">Visa, Mastercard, Amex, Rupay and more</p>
+                        </div>
+                      </div>
+                      <span className="text-amber-600 font-bold text-lg group-hover:translate-x-1 transition-transform">›</span>
+                    </div>
+
+                    {/* 3. Pay Later */}
+                    <div
+                      onClick={handleSimulatePayment}
+                      className="p-5 hover:bg-slate-50 transition-all cursor-pointer group flex items-center justify-between"
+                    >
+                      <div className="flex items-center space-x-4">
+                        <div className="w-8 h-8 rounded-lg bg-amber-50 border border-amber-200 flex items-center justify-center shrink-0">
+                          <span className="text-xs font-black text-amber-600">⏰</span>
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-bold text-slate-900 group-hover:text-amber-600">Pay Later</h4>
+                          <p className="text-xs text-slate-500 mt-0.5">Lazypay, Amazon</p>
+                        </div>
+                      </div>
+                      <span className="text-amber-600 font-bold text-lg group-hover:translate-x-1 transition-transform">›</span>
+                    </div>
+
+                    {/* 4. Net Banking */}
+                    <div
+                      onClick={handleSimulatePayment}
+                      className="p-5 hover:bg-slate-50 transition-all cursor-pointer group flex items-center justify-between"
+                    >
+                      <div className="flex items-center space-x-4">
+                        <div className="w-8 h-8 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center shrink-0">
+                          <span className="text-xs font-black text-blue-600">🏦</span>
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-bold text-slate-900 group-hover:text-amber-600">Net Banking</h4>
+                          <p className="text-xs text-slate-500 mt-0.5">40+ Banks Available</p>
+                        </div>
+                      </div>
+                      <span className="text-amber-600 font-bold text-lg group-hover:translate-x-1 transition-transform">›</span>
+                    </div>
+
+                    {/* 5. Gift Cards & e-wallets */}
+                    <div
+                      onClick={handleSimulatePayment}
+                      className="p-5 hover:bg-slate-50 transition-all cursor-pointer group flex items-center justify-between"
+                    >
+                      <div className="flex items-center space-x-4">
+                        <div className="w-8 h-8 rounded-lg bg-indigo-50 border border-indigo-200 flex items-center justify-center shrink-0">
+                          <span className="text-xs font-black text-indigo-600">👛</span>
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-bold text-slate-900 group-hover:text-amber-600">Gift Cards & e-wallets</h4>
+                          <p className="text-xs text-slate-500 mt-0.5">Trip Customizer Gift cards & Amazon Pay</p>
+                        </div>
+                      </div>
+                      <span className="text-amber-600 font-bold text-lg group-hover:translate-x-1 transition-transform">›</span>
+                    </div>
+
+                    {/* 6. EMI */}
+                    <div
+                      onClick={handleSimulatePayment}
+                      className="p-5 hover:bg-slate-50 transition-all cursor-pointer group flex items-center justify-between"
+                    >
+                      <div className="flex items-center space-x-4">
+                        <div className="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center shrink-0">
+                          <span className="text-xs font-black text-emerald-600">⚡</span>
                         </div>
                         <div>
                           <div className="flex items-center space-x-2">
-                            <h4 className="text-sm font-black text-slate-900 group-hover:text-brand-600">UPI Options</h4>
-                            <span className="text-[9px] bg-emerald-100 text-emerald-800 font-black px-2 py-0.5 rounded-full">INSTANT</span>
+                            <h4 className="text-sm font-bold text-slate-900 group-hover:text-amber-600">EMI</h4>
+                            <span className="text-[9px] bg-emerald-100 text-emerald-800 font-extrabold px-2 py-0.5 rounded-full uppercase">NO COST EMI</span>
                           </div>
-                          <p className="text-xs text-slate-500 font-medium mt-0.5">Pay Directly From Your Bank Account (GPay, PhonePe, Paytm, BHIM)</p>
+                          <p className="text-xs text-slate-500 mt-0.5">Credit/Bajaj Card and Cardless EMI available</p>
                         </div>
                       </div>
-                      <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-brand-600 group-hover:translate-x-1 transition-all" />
-                    </div>
-
-                    {/* Credit & Debit Cards Option */}
-                    <div
-                      onClick={handleSimulatePayment}
-                      className="p-5 hover:bg-brand-50/40 transition-all cursor-pointer group flex items-center justify-between"
-                    >
-                      <div className="flex items-center space-x-4">
-                        <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 text-lg font-black group-hover:scale-110 transition-transform">
-                          💳
-                        </div>
-                        <div>
-                          <h4 className="text-sm font-black text-slate-900 group-hover:text-brand-600">Credit & Debit Cards</h4>
-                          <p className="text-xs text-slate-500 font-medium mt-0.5">Visa, Mastercard, Amex, RuPay and more</p>
-                        </div>
-                      </div>
-                      <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-brand-600 group-hover:translate-x-1 transition-all" />
-                    </div>
-
-                    {/* Pay Later & EMI */}
-                    <div
-                      onClick={handleSimulatePayment}
-                      className="p-5 hover:bg-brand-50/40 transition-all cursor-pointer group flex items-center justify-between"
-                    >
-                      <div className="flex items-center space-x-4">
-                        <div className="w-10 h-10 bg-purple-50 rounded-xl flex items-center justify-center text-purple-600 text-lg font-black group-hover:scale-110 transition-transform">
-                          ⏰
-                        </div>
-                        <div>
-                          <div className="flex items-center space-x-2">
-                            <h4 className="text-sm font-black text-slate-900 group-hover:text-brand-600">Pay Later / EMI</h4>
-                            <span className="text-[9px] bg-emerald-100 text-emerald-800 font-black px-2 py-0.5 rounded-full">NO COST EMI</span>
-                          </div>
-                          <p className="text-xs text-slate-500 font-medium mt-0.5">Lazypay, Amazon Pay, Credit/Bajaj Cardless EMI</p>
-                        </div>
-                      </div>
-                      <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-brand-600 group-hover:translate-x-1 transition-all" />
-                    </div>
-
-                    {/* Net Banking */}
-                    <div
-                      onClick={handleSimulatePayment}
-                      className="p-5 hover:bg-brand-50/40 transition-all cursor-pointer group flex items-center justify-between"
-                    >
-                      <div className="flex items-center space-x-4">
-                        <div className="w-10 h-10 bg-amber-50 rounded-xl flex items-center justify-center text-amber-600 text-lg font-black group-hover:scale-110 transition-transform">
-                          🏦
-                        </div>
-                        <div>
-                          <h4 className="text-sm font-black text-slate-900 group-hover:text-brand-600">Net Banking</h4>
-                          <p className="text-xs text-slate-500 font-medium mt-0.5">HDFC, ICICI, SBI, Axis + 40 Banks Available</p>
-                        </div>
-                      </div>
-                      <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-brand-600 group-hover:translate-x-1 transition-all" />
-                    </div>
-
-                    {/* Gift Cards & Wallets */}
-                    <div
-                      onClick={handleSimulatePayment}
-                      className="p-5 hover:bg-brand-50/40 transition-all cursor-pointer group flex items-center justify-between"
-                    >
-                      <div className="flex items-center space-x-4">
-                        <div className="w-10 h-10 bg-rose-50 rounded-xl flex items-center justify-center text-rose-600 text-lg font-black group-hover:scale-110 transition-transform">
-                          🎁
-                        </div>
-                        <div>
-                          <h4 className="text-sm font-black text-slate-900 group-hover:text-brand-600">Gift Cards & Wallets</h4>
-                          <p className="text-xs text-slate-500 font-medium mt-0.5">Trip Customizer Vouchers, Mobikwik, Paytm Wallet</p>
-                        </div>
-                      </div>
-                      <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-brand-600 group-hover:translate-x-1 transition-all" />
+                      <span className="text-amber-600 font-bold text-lg group-hover:translate-x-1 transition-transform">›</span>
                     </div>
                   </div>
                 </div>
@@ -822,106 +823,81 @@ export default function BookingCheckoutPage() {
               {/* Right Column: Sticky Fare Breakdown & Scan to Pay QR Box */}
               <div className="space-y-5 lg:sticky lg:top-24">
                 {/* Total Due Card */}
-                <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-xs space-y-4">
-                  <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-                    <span className="text-base font-black text-slate-900">Total Due</span>
-                    <span className="text-2xl font-black text-emerald-600">{formatCurrency(grandTotal)}</span>
+                <div className="bg-white p-5 rounded-xl border border-slate-200/90 shadow-2xs space-y-4">
+                  <div className="flex items-baseline justify-between pb-3 border-b border-slate-100">
+                    <h3 className="text-lg font-bold text-slate-900">Total Due</h3>
+                    <span className="text-2xl font-black text-teal-600">₹ {grandTotal.toLocaleString('en-IN')}</span>
                   </div>
-                  <div className="space-y-2 text-xs text-slate-600 font-medium">
+                  <div className="space-y-2 text-xs text-slate-600">
                     <div className="flex justify-between">
-                      <span>Package Base Fare ({pkgInfo.travelersCount} Pax):</span>
-                      <span>{formatCurrency(subtotal)}</span>
+                      <span>Package Fare</span>
+                      <span className="font-semibold text-slate-800">₹ {subtotal.toLocaleString('en-IN')}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>Taxes & 5% Service Charge:</span>
-                      <span className="text-emerald-700 font-bold">+{formatCurrency(gstTax)}</span>
+                      <span>Taxes & Service Charge</span>
+                      <span className="font-semibold text-slate-800">₹ {gstTax.toLocaleString('en-IN')}</span>
                     </div>
                     {appliedDiscountAmount > 0 && (
                       <div className="flex justify-between text-emerald-700 font-bold">
-                        <span>Coupon Savings ({appliedCouponName}):</span>
-                        <span>-{formatCurrency(appliedDiscountAmount)}</span>
+                        <span>Discount Applied</span>
+                        <span>-₹ {appliedDiscountAmount.toLocaleString('en-IN')}</span>
                       </div>
                     )}
                   </div>
                 </div>
 
-                {/* Scan to Pay QR Box */}
-                <div className="bg-gradient-to-br from-slate-900 via-slate-950 to-brand-950 p-5 rounded-2xl border border-slate-800 text-white space-y-4 shadow-md text-center">
+                {/* Scan to Pay QR Card */}
+                <div className="bg-white p-5 rounded-xl border border-slate-200/90 shadow-2xs space-y-3 text-center">
                   <div>
-                    <h4 className="text-sm font-black text-white">Scan to Pay</h4>
-                    <p className="text-[11px] text-slate-300 font-medium">Instant Refund & High Success Rate</p>
+                    <h4 className="text-base font-bold text-slate-900 text-left">Scan to Pay</h4>
+                    <p className="text-xs text-slate-500 text-left mt-0.5">Instant Refund & High Success Rate</p>
                   </div>
 
-                  {/* QR Box Container */}
+                  {/* Brand Logos Row */}
+                  <div className="flex items-center justify-start space-x-1.5 pt-1">
+                    <span className="bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded text-[10px] font-black">BHIM</span>
+                    <span className="bg-blue-50 text-blue-800 px-1.5 py-0.5 rounded text-[10px] font-bold">G Pay</span>
+                    <span className="bg-sky-100 text-sky-800 px-1.5 py-0.5 rounded text-[10px] font-bold">Paytm</span>
+                    <span className="bg-purple-100 text-purple-800 px-1.5 py-0.5 rounded text-[10px] font-bold">PhonePe</span>
+                    <span className="bg-slate-900 text-white px-1.5 py-0.5 rounded text-[10px] font-bold">CRED</span>
+                  </div>
+
+                  {/* QR Code Container with Red VIEW QR Overlay Button */}
                   <div
                     onClick={handleSimulatePayment}
-                    className="p-4 bg-white rounded-xl cursor-pointer hover:opacity-95 transition-opacity max-w-[200px] mx-auto space-y-2 group shadow-lg"
+                    className="relative p-3 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer hover:border-orange-500 transition-all max-w-[210px] mx-auto group shadow-2xs"
                   >
-                    <div className="w-32 h-32 bg-slate-900 rounded-lg mx-auto flex flex-col items-center justify-center p-2 text-center text-amber-400 border-2 border-brand-500">
-                      <span className="text-2xl font-black">📱 QR</span>
-                      <span className="text-[9px] text-white font-bold mt-1">SCAN WITH ANY UPI APP</span>
+                    <div className="w-36 h-36 bg-slate-900 rounded-lg mx-auto p-2 flex flex-col items-center justify-center text-white space-y-1 relative overflow-hidden">
+                      <div className="absolute inset-0 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:8px_8px] opacity-20"></div>
+                      <span className="text-2xl font-black text-amber-400 z-10">📱</span>
+                      <span className="text-[10px] font-bold z-10">SCAN & PAY</span>
+                      <div className="absolute inset-x-2 bottom-6 bg-gradient-to-r from-orange-500 to-rose-500 text-white font-black text-xs py-1.5 rounded shadow-md group-hover:scale-105 transition-transform z-20">
+                        VIEW QR
+                      </div>
                     </div>
-                    <Button variant="accent" size="sm" className="w-full text-xs font-black py-1.5 text-slate-950">
-                      {isProcessingPayment ? 'OPENING...' : 'PAY WITH UPI →'}
-                    </Button>
-                  </div>
-
-                  <div className="flex items-center justify-center space-x-2 text-[10px] text-slate-400 font-semibold pt-1">
-                    <span>GPay</span> • <span>PhonePe</span> • <span>Paytm</span> • <span>BHIM</span>
                   </div>
                 </div>
-
-                {/* Big Action Button */}
-                <Button
-                  onClick={handleSimulatePayment}
-                  disabled={isProcessingPayment}
-                  variant="accent"
-                  size="lg"
-                  className="w-full font-black py-4 text-slate-950 text-base shadow-xl cursor-pointer disabled:opacity-75 flex items-center justify-center gap-2 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 transition-all border-none"
-                >
-                  {isProcessingPayment ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin text-slate-950" />
-                      <span>Opening Razorpay Secure Checkout...</span>
-                    </>
-                  ) : (
-                    `PROCEED TO PAY (${formatCurrency(grandTotal)}) →`
-                  )}
-                </Button>
               </div>
             </div>
 
-            {/* MakeMyTrip Trust & RBI Compliance Footer */}
-            <div className="pt-6 border-t border-slate-200/80 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-medium">
-              <div className="flex items-center space-x-2">
-                <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0" />
+            {/* Footer Trust Bar */}
+            <div className="pt-6 border-t border-slate-200/80 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+              <div className="flex items-center space-x-2 shrink-0">
+                <div className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center font-black text-xs">✓</div>
                 <div>
-                  <span className="font-extrabold text-slate-800">TRIP CUSTOMIZER IS SECURED</span>
-                  <span className="block text-[11px] text-slate-500">100% RBI & PCI-DSS Compliant Payment Gateway</span>
+                  <span className="font-extrabold text-slate-800 tracking-tight block">TRIPCUSTOMIZER IS SECURED</span>
+                  <span className="text-[11px] text-slate-500 font-medium">100% RBI Compliant</span>
                 </div>
               </div>
-              <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-wider text-slate-600">
-                <span className="bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">PCI DSS</span>
-                <span className="bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">VISA</span>
-                <span className="bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">MasterCard</span>
-                <span className="bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">SafeKey</span>
+              <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-slate-600 shrink-0">
+                <span className="bg-slate-200/60 px-2 py-0.5 rounded">PCI DSS</span>
+                <span className="bg-slate-200/60 px-2 py-0.5 rounded">Verified by VISA</span>
+                <span className="bg-slate-200/60 px-2 py-0.5 rounded">MasterCard SecureCode</span>
+                <span className="bg-slate-200/60 px-2 py-0.5 rounded">SafeKey</span>
               </div>
-            </div>
-            {/* Mobile Fixed Bottom Checkout Bar (Instant 1-Tap Payment on Mobile) */}
-            <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-slate-950 border-t border-slate-800 p-3 text-white shadow-2xl flex items-center justify-between animate-in slide-in-from-bottom duration-200">
-              <div>
-                <span className="text-[10px] text-slate-400 font-bold block uppercase">Payable Total</span>
-                <span className="text-base font-black text-amber-300">{formatCurrency(grandTotal)}</span>
-              </div>
-              <Button
-                onClick={handleSimulatePayment}
-                disabled={isProcessingPayment}
-                variant="accent"
-                size="md"
-                className="font-black text-xs py-2.5 px-5 text-slate-950 shadow-md cursor-pointer disabled:opacity-75"
-              >
-                {isProcessingPayment ? 'Processing...' : 'PAY & CONFIRM →'}
-              </Button>
+              <p className="text-[10px] text-slate-400 max-w-xs text-right leading-tight font-medium">
+                By continuing to pay, I understand and agree with the Terms of Service, Privacy Policy and User Agreement of Trip Customizer.
+              </p>
             </div>
           </div>
         )}
