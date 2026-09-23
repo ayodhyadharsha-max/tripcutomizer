@@ -415,7 +415,7 @@ export default function BookingCheckoutPage() {
 
   return (
     <div className="bg-slate-50 min-h-screen py-10">
-      <Container className="max-w-4xl">
+      <Container className={step === 3 ? "max-w-6xl" : "max-w-4xl"}>
         {/* Mobile Top Fare Summary Header Bar (Instantly visible on phone screens without scrolling) */}
         {step < 4 && (
           <div className="md:hidden bg-gradient-to-r from-slate-900 via-brand-950 to-slate-900 text-white p-4 rounded-2xl mb-4 border border-brand-800 shadow-md flex items-center justify-between">
@@ -645,76 +645,268 @@ export default function BookingCheckoutPage() {
           </Card>
         )}
 
-        {/* Step 3: Razorpay Payment Gateway */}
+        {/* Step 3: MakeMyTrip Style Razorpay Payment Gateway */}
         {step === 3 && (
-          <Card className="p-8 bg-white rounded-3xl shadow-xl border border-slate-200 space-y-6">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <div>
-                <h2 className="text-lg font-black text-slate-900 flex items-center gap-2">
-                  <ShieldCheck className="w-5 h-5 text-emerald-600" />
-                  Razorpay Secure Checkout
-                </h2>
-                <p className="text-xs text-slate-500 font-medium">100% Secure SSL & PCI-DSS Compliant Payment Gateway</p>
+          <div className="space-y-6 animate-in fade-in duration-300">
+            {/* Top MakeMyTrip Style Safe Header */}
+            <div className="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-xs flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <span className="text-xl font-black text-slate-900 tracking-tight">
+                  Trip <span className="text-brand-600">Customizer</span>
+                </span>
+                <span className="text-xs bg-emerald-50 text-emerald-700 font-bold px-2.5 py-0.5 rounded-md border border-emerald-200">
+                  Payments
+                </span>
               </div>
-              <div className="text-right">
-                <span className="text-[10px] text-slate-400 font-bold block uppercase">Payable Total</span>
-                <span className="text-xl font-black text-brand-700">{formatCurrency(grandTotal)}</span>
+              <div className="flex items-center space-x-1.5 text-xs font-black text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200">
+                <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                <span>SAFE & SECURED</span>
               </div>
             </div>
 
-            {/* Official Razorpay Card Box */}
-            <div className="p-6 bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950 rounded-2xl text-white space-y-5 shadow-lg border border-slate-800">
-              <div className="flex items-center justify-between">
-                <div className="space-y-1">
-                  <span className="bg-blue-500/20 text-blue-300 font-black text-[10px] uppercase tracking-wider px-3 py-1 rounded-full border border-blue-400/30 inline-block">
-                    ✓ Official Razorpay Gateway
-                  </span>
-                  <h3 className="text-base font-black text-white">Instant Payment Options</h3>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+              {/* Left 2 Columns: Guest Info, Offers & Payment Options Accordion */}
+              <div className="lg:col-span-2 space-y-5">
+                {/* Card 1: Booking & Guest Summary Box */}
+                <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-xs space-y-3">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <h3 className="text-base font-black text-slate-900">{pkgInfo.name}</h3>
+                      <p className="text-xs text-slate-500 font-medium mt-0.5 flex items-center gap-2">
+                        <span>📅 15 Oct'26 - 20 Oct'26</span>
+                        <span>•</span>
+                        <span>🛏️ {pkgInfo.duration} ({pkgInfo.travelersCount} Adults)</span>
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setStep(2)}
+                      className="text-xs font-bold text-brand-600 hover:text-brand-700 hover:underline cursor-pointer"
+                    >
+                      VIEW DETAILS ⌵
+                    </button>
+                  </div>
+                  <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-600 font-semibold">
+                    <span className="flex items-center gap-1 text-slate-800">
+                      👤 <span className="font-bold">{travellerData.firstName} {travellerData.lastName}</span> (Primary)
+                    </span>
+                    <span>✉️ {travellerData.email}</span>
+                    <span>📱 {travellerData.phone}</span>
+                  </div>
                 </div>
-                <Badge variant="gold" className="text-xs font-black">256-Bit Encrypted</Badge>
+
+                {/* Card 2: Gift Cards & Promo Offers Row */}
+                <div className="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-xs flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-9 h-9 bg-amber-100 rounded-xl flex items-center justify-center text-amber-600 font-bold">
+                      👛
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-black text-slate-900">Gift Cards & Promo Offers</h4>
+                      <p className="text-[11px] text-slate-500">
+                        {appliedCouponName ? `Applied Promo: ${appliedCouponName} (-${formatCurrency(appliedDiscountAmount)})` : 'Have a coupon code or gift card?'}
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setStep(2)}
+                    className="text-xs font-bold text-brand-600 hover:underline cursor-pointer"
+                  >
+                    {appliedCouponName ? 'CHANGE ⌵' : 'APPLY `'}
+                  </button>
+                </div>
+
+                {/* Card 3: Payment Options (MakeMyTrip Vertical Accordion List) */}
+                <div className="bg-white rounded-2xl border border-slate-200/90 shadow-xs overflow-hidden">
+                  <div className="p-4 bg-slate-50/80 border-b border-slate-100 flex items-center justify-between">
+                    <h3 className="text-sm font-black text-slate-900">Payment Options</h3>
+                    <span className="text-[11px] text-slate-500 font-medium">Powered by Razorpay</span>
+                  </div>
+
+                  <div className="divide-y divide-slate-100">
+                    {/* UPI Option */}
+                    <div
+                      onClick={handleSimulatePayment}
+                      className="p-5 hover:bg-brand-50/40 transition-all cursor-pointer group flex items-center justify-between"
+                    >
+                      <div className="flex items-center space-x-4">
+                        <div className="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 text-lg font-black group-hover:scale-110 transition-transform">
+                          📱
+                        </div>
+                        <div>
+                          <div className="flex items-center space-x-2">
+                            <h4 className="text-sm font-black text-slate-900 group-hover:text-brand-600">UPI Options</h4>
+                            <span className="text-[9px] bg-emerald-100 text-emerald-800 font-black px-2 py-0.5 rounded-full">INSTANT</span>
+                          </div>
+                          <p className="text-xs text-slate-500 font-medium mt-0.5">Pay Directly From Your Bank Account (GPay, PhonePe, Paytm, BHIM)</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-brand-600 group-hover:translate-x-1 transition-all" />
+                    </div>
+
+                    {/* Credit & Debit Cards Option */}
+                    <div
+                      onClick={handleSimulatePayment}
+                      className="p-5 hover:bg-brand-50/40 transition-all cursor-pointer group flex items-center justify-between"
+                    >
+                      <div className="flex items-center space-x-4">
+                        <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 text-lg font-black group-hover:scale-110 transition-transform">
+                          💳
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-black text-slate-900 group-hover:text-brand-600">Credit & Debit Cards</h4>
+                          <p className="text-xs text-slate-500 font-medium mt-0.5">Visa, Mastercard, Amex, RuPay and more</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-brand-600 group-hover:translate-x-1 transition-all" />
+                    </div>
+
+                    {/* Pay Later & EMI */}
+                    <div
+                      onClick={handleSimulatePayment}
+                      className="p-5 hover:bg-brand-50/40 transition-all cursor-pointer group flex items-center justify-between"
+                    >
+                      <div className="flex items-center space-x-4">
+                        <div className="w-10 h-10 bg-purple-50 rounded-xl flex items-center justify-center text-purple-600 text-lg font-black group-hover:scale-110 transition-transform">
+                          ⏰
+                        </div>
+                        <div>
+                          <div className="flex items-center space-x-2">
+                            <h4 className="text-sm font-black text-slate-900 group-hover:text-brand-600">Pay Later / EMI</h4>
+                            <span className="text-[9px] bg-emerald-100 text-emerald-800 font-black px-2 py-0.5 rounded-full">NO COST EMI</span>
+                          </div>
+                          <p className="text-xs text-slate-500 font-medium mt-0.5">Lazypay, Amazon Pay, Credit/Bajaj Cardless EMI</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-brand-600 group-hover:translate-x-1 transition-all" />
+                    </div>
+
+                    {/* Net Banking */}
+                    <div
+                      onClick={handleSimulatePayment}
+                      className="p-5 hover:bg-brand-50/40 transition-all cursor-pointer group flex items-center justify-between"
+                    >
+                      <div className="flex items-center space-x-4">
+                        <div className="w-10 h-10 bg-amber-50 rounded-xl flex items-center justify-center text-amber-600 text-lg font-black group-hover:scale-110 transition-transform">
+                          🏦
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-black text-slate-900 group-hover:text-brand-600">Net Banking</h4>
+                          <p className="text-xs text-slate-500 font-medium mt-0.5">HDFC, ICICI, SBI, Axis + 40 Banks Available</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-brand-600 group-hover:translate-x-1 transition-all" />
+                    </div>
+
+                    {/* Gift Cards & Wallets */}
+                    <div
+                      onClick={handleSimulatePayment}
+                      className="p-5 hover:bg-brand-50/40 transition-all cursor-pointer group flex items-center justify-between"
+                    >
+                      <div className="flex items-center space-x-4">
+                        <div className="w-10 h-10 bg-rose-50 rounded-xl flex items-center justify-center text-rose-600 text-lg font-black group-hover:scale-110 transition-transform">
+                          🎁
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-black text-slate-900 group-hover:text-brand-600">Gift Cards & Wallets</h4>
+                          <p className="text-xs text-slate-500 font-medium mt-0.5">Trip Customizer Vouchers, Mobikwik, Paytm Wallet</p>
+                        </div>
+                      </div>
+                      <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-brand-600 group-hover:translate-x-1 transition-all" />
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2 text-slate-200 text-xs font-bold">
-                <div className="p-3 bg-white/5 backdrop-blur-xs rounded-xl border border-white/10 text-center space-y-1">
-                  <span className="text-amber-400 text-sm font-black block">📱 UPI / QR</span>
-                  <span className="text-[10px] text-slate-300 block font-normal">GPay, PhonePe, Paytm, BHIM</span>
+              {/* Right Column: Sticky Fare Breakdown & Scan to Pay QR Box */}
+              <div className="space-y-5 lg:sticky lg:top-24">
+                {/* Total Due Card */}
+                <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-xs space-y-4">
+                  <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                    <span className="text-base font-black text-slate-900">Total Due</span>
+                    <span className="text-2xl font-black text-emerald-600">{formatCurrency(grandTotal)}</span>
+                  </div>
+                  <div className="space-y-2 text-xs text-slate-600 font-medium">
+                    <div className="flex justify-between">
+                      <span>Package Base Fare ({pkgInfo.travelersCount} Pax):</span>
+                      <span>{formatCurrency(subtotal)}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Taxes & 5% Service Charge:</span>
+                      <span className="text-emerald-700 font-bold">+{formatCurrency(gstTax)}</span>
+                    </div>
+                    {appliedDiscountAmount > 0 && (
+                      <div className="flex justify-between text-emerald-700 font-bold">
+                        <span>Coupon Savings ({appliedCouponName}):</span>
+                        <span>-{formatCurrency(appliedDiscountAmount)}</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <div className="p-3 bg-white/5 backdrop-blur-xs rounded-xl border border-white/10 text-center space-y-1">
-                  <span className="text-blue-400 text-sm font-black block">💳 Cards</span>
-                  <span className="text-[10px] text-slate-300 block font-normal">Visa, Mastercard, RuPay, Amex</span>
-                </div>
-                <div className="p-3 bg-white/5 backdrop-blur-xs rounded-xl border border-white/10 text-center space-y-1">
-                  <span className="text-emerald-400 text-sm font-black block">🏦 NetBanking</span>
-                  <span className="text-[10px] text-slate-300 block font-normal">SBI, HDFC, ICICI, Axis +50 Banks</span>
-                </div>
-                <div className="p-3 bg-white/5 backdrop-blur-xs rounded-xl border border-white/10 text-center space-y-1">
-                  <span className="text-purple-400 text-sm font-black block">👛 Wallets / EMI</span>
-                  <span className="text-[10px] text-slate-300 block font-normal">Mobikwik, Freecharge, No-Cost EMI</span>
-                </div>
-              </div>
 
-              <div className="p-3 bg-blue-900/30 rounded-xl border border-blue-500/20 text-[11px] text-blue-200 font-medium text-center">
-                🔒 Clicking the button below opens the official Razorpay modal popup for seamless payment authorization.
-              </div>
+                {/* Scan to Pay QR Box */}
+                <div className="bg-gradient-to-br from-slate-900 via-slate-950 to-brand-950 p-5 rounded-2xl border border-slate-800 text-white space-y-4 shadow-md text-center">
+                  <div>
+                    <h4 className="text-sm font-black text-white">Scan to Pay</h4>
+                    <p className="text-[11px] text-slate-300 font-medium">Instant Refund & High Success Rate</p>
+                  </div>
 
-              <Button
-                onClick={handleSimulatePayment}
-                disabled={isProcessingPayment}
-                variant="accent"
-                size="lg"
-                className="w-full font-black py-4 text-slate-950 text-base shadow-xl cursor-pointer disabled:opacity-75 flex items-center justify-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 transition-all border-none"
-              >
-                {isProcessingPayment ? (
-                  <>
-                    <Loader2 className="w-5 h-5 animate-spin text-slate-950" />
-                    <span>Opening Razorpay Secure Checkout...</span>
-                  </>
-                ) : (
-                  `PROCEED TO PAY WITH RAZORPAY (${formatCurrency(grandTotal)}) →`
-                )}
-              </Button>
+                  {/* QR Box Container */}
+                  <div
+                    onClick={handleSimulatePayment}
+                    className="p-4 bg-white rounded-xl cursor-pointer hover:opacity-95 transition-opacity max-w-[200px] mx-auto space-y-2 group shadow-lg"
+                  >
+                    <div className="w-32 h-32 bg-slate-900 rounded-lg mx-auto flex flex-col items-center justify-center p-2 text-center text-amber-400 border-2 border-brand-500">
+                      <span className="text-2xl font-black">📱 QR</span>
+                      <span className="text-[9px] text-white font-bold mt-1">SCAN WITH ANY UPI APP</span>
+                    </div>
+                    <Button variant="accent" size="sm" className="w-full text-xs font-black py-1.5 text-slate-950">
+                      {isProcessingPayment ? 'OPENING...' : 'PAY WITH UPI →'}
+                    </Button>
+                  </div>
+
+                  <div className="flex items-center justify-center space-x-2 text-[10px] text-slate-400 font-semibold pt-1">
+                    <span>GPay</span> • <span>PhonePe</span> • <span>Paytm</span> • <span>BHIM</span>
+                  </div>
+                </div>
+
+                {/* Big Action Button */}
+                <Button
+                  onClick={handleSimulatePayment}
+                  disabled={isProcessingPayment}
+                  variant="accent"
+                  size="lg"
+                  className="w-full font-black py-4 text-slate-950 text-base shadow-xl cursor-pointer disabled:opacity-75 flex items-center justify-center gap-2 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 hover:from-amber-300 hover:to-amber-400 transition-all border-none"
+                >
+                  {isProcessingPayment ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin text-slate-950" />
+                      <span>Opening Razorpay Secure Checkout...</span>
+                    </>
+                  ) : (
+                    `PROCEED TO PAY (${formatCurrency(grandTotal)}) →`
+                  )}
+                </Button>
+              </div>
             </div>
 
+            {/* MakeMyTrip Trust & RBI Compliance Footer */}
+            <div className="pt-6 border-t border-slate-200/80 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-medium">
+              <div className="flex items-center space-x-2">
+                <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0" />
+                <div>
+                  <span className="font-extrabold text-slate-800">TRIP CUSTOMIZER IS SECURED</span>
+                  <span className="block text-[11px] text-slate-500">100% RBI & PCI-DSS Compliant Payment Gateway</span>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-wider text-slate-600">
+                <span className="bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">PCI DSS</span>
+                <span className="bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">VISA</span>
+                <span className="bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">MasterCard</span>
+                <span className="bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">SafeKey</span>
+              </div>
+            </div>
             {/* Mobile Fixed Bottom Checkout Bar (Instant 1-Tap Payment on Mobile) */}
             <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-slate-950 border-t border-slate-800 p-3 text-white shadow-2xl flex items-center justify-between animate-in slide-in-from-bottom duration-200">
               <div>
@@ -731,7 +923,7 @@ export default function BookingCheckoutPage() {
                 {isProcessingPayment ? 'Processing...' : 'PAY & CONFIRM →'}
               </Button>
             </div>
-          </Card>
+          </div>
         )}
 
         {/* Step 4: Confirmed Invoice & Voucher */}
