@@ -862,16 +862,18 @@ export default function BookingCheckoutPage() {
                     <span className="bg-slate-900 text-white px-1.5 py-0.5 rounded text-[10px] font-bold">CRED</span>
                   </div>
 
-                  {/* QR Code Container with Red VIEW QR Overlay Button */}
+                  {/* QR Code Container displaying the exact uploaded UPI QR Code */}
                   <div
                     onClick={handleSimulatePayment}
-                    className="relative p-3 bg-slate-50 border border-slate-200 rounded-xl cursor-pointer hover:border-orange-500 transition-all max-w-[210px] mx-auto group shadow-2xs"
+                    className="relative p-2.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-orange-500 transition-all max-w-[210px] mx-auto group shadow-2xs"
                   >
-                    <div className="w-36 h-36 bg-slate-900 rounded-lg mx-auto p-2 flex flex-col items-center justify-center text-white space-y-1 relative overflow-hidden">
-                      <div className="absolute inset-0 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:8px_8px] opacity-20"></div>
-                      <span className="text-2xl font-black text-amber-400 z-10">📱</span>
-                      <span className="text-[10px] font-bold z-10">SCAN & PAY</span>
-                      <div className="absolute inset-x-2 bottom-6 bg-gradient-to-r from-orange-500 to-rose-500 text-white font-black text-xs py-1.5 rounded shadow-md group-hover:scale-105 transition-transform z-20">
+                    <div className="w-40 h-40 bg-white rounded-lg mx-auto p-1.5 flex items-center justify-center relative overflow-hidden border border-slate-100">
+                      <img
+                        src="/upi-qr-code.png"
+                        alt="Scan UPI QR Code to Pay"
+                        className="w-full h-full object-contain rounded"
+                      />
+                      <div className="absolute inset-x-3 bottom-2 bg-gradient-to-r from-orange-500 to-rose-500 text-white font-black text-xs py-1.5 rounded-lg shadow-md group-hover:scale-105 transition-transform text-center">
                         VIEW QR
                       </div>
                     </div>
