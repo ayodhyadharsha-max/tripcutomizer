@@ -8,6 +8,15 @@ import { BookOpen, User, Calendar, ArrowRight } from 'lucide-react';
 export default function BlogHubPage() {
   const blogs = [
     {
+      slug: 'top-7-spiritual-yatras-in-india-2026',
+      title: 'Top 7 Spiritual Yatras in India 2026: Char Dham, Ayodhya Ram Mandir & Kashi 🕉️',
+      category: '🕉️ Divine Guide 2026',
+      author: 'Trip Customizer Spiritual Desk',
+      date: 'Sept 23, 2026',
+      image: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=600&auto=format&fit=crop',
+      summary: 'Explore the top 7 sacred spiritual yatras in India for 2026. Complete travel guide for Char Dham, Ayodhya Ram Mandir VIP Darshan, Kashi, Kedarnath & Badrinath.',
+    },
+    {
       slug: 'top-10-budget-international-trips-under-30k',
       title: 'Top 10 Budget International Holiday Packages Under ₹30,000 (Visa-Free for Indians) ✈️',
       category: '🔥 Viral Deal 2026',
