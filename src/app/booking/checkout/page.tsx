@@ -896,7 +896,11 @@ export default function BookingCheckoutPage() {
                 <span className="bg-slate-200/60 px-2 py-0.5 rounded">SafeKey</span>
               </div>
               <p className="text-[10px] text-slate-400 max-w-xs text-right leading-tight font-medium">
-                By continuing to pay, I understand and agree with the Terms of Service, Privacy Policy and User Agreement of Trip Customizer.
+                By continuing to pay, I understand and agree with the{' '}
+                <Link href="/terms" className="underline hover:text-amber-600 font-bold">Terms of Use</Link>,{' '}
+                <Link href="/refund-policy" className="underline hover:text-amber-600 font-bold">Refund Policy</Link>,{' '}
+                <Link href="/cancellation-policy" className="underline hover:text-amber-600 font-bold">Cancellation Policy</Link>, and{' '}
+                <Link href="/privacy" className="underline hover:text-amber-600 font-bold">Privacy Policy</Link> of Trip Customizer.
               </p>
             </div>
           </div>

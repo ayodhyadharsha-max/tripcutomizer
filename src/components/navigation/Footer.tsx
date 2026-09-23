@@ -170,10 +170,11 @@ export const Footer: React.FC = () => {
                 <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
                 <li><Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
                 <li><Link href="/terms" className="hover:text-white transition-colors">Terms of Use</Link></li>
-                <li><Link href="/disclaimer" className="hover:text-white transition-colors">Disclaimer</Link></li>
+                <li><Link href="/refund-policy" className="hover:text-white transition-colors text-amber-400 font-bold">Refund Policy</Link></li>
+                <li><Link href="/cancellation-policy" className="hover:text-white transition-colors text-amber-400 font-bold">Cancellation Policy</Link></li>
                 <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/disclaimer" className="hover:text-white transition-colors">Disclaimer</Link></li>
                 <li><Link href="/careers" className="hover:text-white transition-colors">Careers</Link></li>
-                <li><Link href="/cookie-policy" className="hover:text-white transition-colors">Cookie Policy</Link></li>
               </ul>
             </div>
 
@@ -249,8 +250,10 @@ export const Footer: React.FC = () => {
                 <span className="text-[10px] text-slate-400 font-medium">© 2026 Trip Customizer. All rights reserved. Enterprise Travel Commerce Platform.</span>
               </div>
             </div>
-            <div className="flex space-x-4 font-semibold text-slate-400">
+            <div className="flex flex-wrap justify-center space-x-4 font-semibold text-slate-400">
               <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
+              <Link href="/refund-policy" className="hover:text-white transition-colors text-amber-400 font-bold">Refund Policy</Link>
+              <Link href="/cancellation-policy" className="hover:text-white transition-colors text-amber-400 font-bold">Cancellation Policy</Link>
               <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
               <Link href="/sitemap" className="hover:text-white transition-colors">Sitemap</Link>
             </div>
