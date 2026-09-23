@@ -22,6 +22,12 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: 'Amount must be at least 100 paise (₹1)' }, { status: 400 });
     }
 
+    // In Razorpay Test Mode (rzp_test_), cap test transaction amount to ₹14,999 (1499900 paise)
+    // to prevent test bank simulator from rejecting with "Amount exceeds maximum amount allowed"
+    if (keyId.startsWith('rzp_test_') && amountInPaise > 1500000) {
+      amountInPaise = 1499900;
+    }
+
     const razorpay = new Razorpay({
       key_id: keyId,
       key_secret: keySecret,
