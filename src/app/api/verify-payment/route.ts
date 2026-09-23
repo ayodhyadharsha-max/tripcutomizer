@@ -28,6 +28,7 @@ export async function POST(req: Request) {
       );
     }
 
+    // HMAC-SHA256 signature verification (order_id + "|" + payment_id)
     const generatedSignature = crypto
       .createHmac('sha256', keySecret)
       .update(`${razorpay_order_id}|${razorpay_payment_id}`)
@@ -44,6 +45,7 @@ export async function POST(req: Request) {
 
     const timestamp = new Date().toISOString();
 
+    // 1. Log Payment into Central Database (Supabase)
     try {
       const supabase = getSupabaseServer();
       if (supabase) {
@@ -62,6 +64,7 @@ export async function POST(req: Request) {
       console.warn('[API verify-payment] Supabase payment logging info:', dbErr);
     }
 
+    // 2. Trigger Instant Email Alert to tripcustomizer@gmail.com via Web3Forms API
     try {
       const apiKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || 'c542ca79-b08a-4352-bf3e-1045518a0486';
       await fetch('https://api.web3forms.com/submit', {

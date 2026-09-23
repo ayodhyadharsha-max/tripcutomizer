@@ -233,30 +233,78 @@ export default function BookingCheckoutPage() {
       return;
     }
 
+    if (grandTotal <= 0) {
+      alert('Invalid booking total. Amount must be at least ₹1 (100 paise).');
+      return;
+    }
+
     setIsProcessingPayment(true);
 
     try {
-      // 1. Create Payment Order on Central API Route
-      const orderRes = await fetch('/api/payment/create-order', {
+      // 1. Create Payment Order on Backend API Route (/api/create-order)
+      const orderRes = await fetch('/api/create-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          amount: grandTotal,
+          amount: Math.round(grandTotal * 100), // amount in paise
           currency: 'INR',
           packageName: pkgInfo.name,
           customerName: fullName,
           customerEmail: travellerData.email,
           customerPhone: travellerData.phone,
+          receipt: `rcpt_${Date.now()}`,
         }),
       });
 
       const orderData = await orderRes.json();
-      const orderId = orderData.orderId || `order_${Date.now()}`;
 
-      // 2. Load Razorpay SDK dynamically if available
+      if (!orderRes.ok || !orderData.success) {
+        alert(`Order Creation Failed: ${orderData.error || 'Unable to create Razorpay order'}`);
+        setIsProcessingPayment(false);
+        return;
+      }
+
+      const orderId = orderData.order_id || orderData.orderId;
+      const razorpayKeyId = orderData.key_id || orderData.keyId || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_test_TfNoGuhXf8yXWP';
+
+      // 2. Load Razorpay Web Checkout JS SDK dynamically
       const isSDKLoaded = await loadRazorpaySDK();
 
+      if (!isSDKLoaded || !(window as any).Razorpay) {
+        alert('Razorpay Checkout SDK failed to load. Please check your internet connection.');
+        setIsProcessingPayment(false);
+        return;
+      }
+
       const completeBookingAndVerify = async (paymentId: string, signature?: string) => {
+        // Verify payment signature on backend (/api/verify-payment)
+        const verifyRes = await fetch('/api/verify-payment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            razorpay_order_id: orderId,
+            razorpay_payment_id: paymentId,
+            razorpay_signature: signature || '',
+            bookingData: {
+              customerName: fullName,
+              customerEmail: travellerData.email,
+              customerPhone: travellerData.phone,
+              packageName: pkgInfo.name,
+              destination: pkgInfo.destination,
+              totalAmount: grandTotal,
+            },
+          }),
+        });
+
+        const verifyData = await verifyRes.json();
+
+        if (!verifyRes.ok || !verifyData.success) {
+          alert(`Payment Verification Failed: ${verifyData.error || 'Signature mismatch'}`);
+          setIsProcessingPayment(false);
+          return;
+        }
+
+        // Signature verified successfully -> Save Booking & Login User
         const loggedUser = login(travellerData.email, travellerData.phone, fullName);
         const finalPassengersList = parsedPassengersList.length > 0
           ? parsedPassengersList
@@ -294,7 +342,7 @@ export default function BookingCheckoutPage() {
           gstAmount: gstTax,
           discountAmount: appliedDiscountAmount,
           couponApplied: appliedCouponName,
-          paymentMethod: paymentMethod === 'cashfree' ? 'Cashfree/Razorpay PG (UPI/Cards)' : paymentMethod.toUpperCase(),
+          paymentMethod: 'Razorpay Standard Checkout',
           transactionId: paymentId,
           totalAmount: grandTotal,
           status: 'Confirmed',
@@ -302,23 +350,8 @@ export default function BookingCheckoutPage() {
           passengersList: finalPassengersList,
         });
 
-        // Verify payment signature & trigger server email alert
-        await fetch('/api/payment/verify', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            razorpay_order_id: orderId,
-            razorpay_payment_id: paymentId,
-            razorpay_signature: signature || '',
-            bookingData: {
-              ...newBooking,
-              passengersList: finalPassengersList,
-            },
-          }),
-        }).catch(() => {});
-
         sendWeb3FormLead({
-          subject: `[tripcustomizer] 🎉 NEW CONFIRMED BOOKING! Ref: ${newBooking.referenceNo}`,
+          subject: `[Trip Customizer] 🎉 NEW CONFIRMED BOOKING! Ref: ${newBooking.referenceNo}`,
           name: fullName,
           email: travellerData.email,
           phone: travellerData.phone,
@@ -337,43 +370,45 @@ export default function BookingCheckoutPage() {
         window.location.href = `/booking/success?order_id=${orderId}&ref=${newBooking.referenceNo}`;
       };
 
-      if (isSDKLoaded && (window as any).Razorpay && orderData.keyId && !orderData.keyId.includes('mock')) {
-        const rzp = new (window as any).Razorpay({
-          key: orderData.keyId,
-          amount: orderData.amount,
-          currency: orderData.currency || 'INR',
-          name: 'tripcustomizer',
-          description: pkgInfo.name,
-          order_id: orderId,
-          prefill: {
-            name: fullName,
-            email: travellerData.email,
-            contact: travellerData.phone,
+      // 3. Launch Razorpay Standard Web Checkout Modal
+      const rzpOptions = {
+        key: razorpayKeyId,
+        amount: orderData.amount,
+        currency: orderData.currency || 'INR',
+        name: 'Trip Customizer',
+        description: pkgInfo.name,
+        order_id: orderId,
+        prefill: {
+          name: fullName,
+          email: travellerData.email,
+          contact: travellerData.phone,
+        },
+        theme: {
+          color: '#0f172a',
+        },
+        handler: async function (response: any) {
+          await completeBookingAndVerify(
+            response.razorpay_payment_id,
+            response.razorpay_signature
+          );
+        },
+        modal: {
+          ondismiss: function () {
+            setIsProcessingPayment(false);
+            console.log('Razorpay payment modal closed by user.');
           },
-          theme: {
-            color: '#0f172a',
-          },
-          handler: async function (response: any) {
-            await completeBookingAndVerify(
-              response.razorpay_payment_id || `pay_${Date.now()}`,
-              response.razorpay_signature
-            );
-          },
-          modal: {
-            ondismiss: function () {
-              setIsProcessingPayment(false);
-            },
-          },
-        });
-        rzp.open();
-      } else {
-        // Instant verified processing fallback when key is pending or in test mode
-        setTimeout(async () => {
-          await completeBookingAndVerify(`pay_${Date.now()}_${Math.floor(Math.random() * 10000)}`);
-        }, 600);
-      }
-    } catch (err) {
-      console.warn('Payment processing exception:', err);
+        },
+      };
+
+      const rzp = new (window as any).Razorpay(rzpOptions);
+      rzp.on('payment.failed', function (response: any) {
+        setIsProcessingPayment(false);
+        alert(`Payment Failed: ${response.error?.description || 'Transaction declined by bank'}`);
+      });
+      rzp.open();
+    } catch (err: any) {
+      console.error('Razorpay Checkout exception:', err);
+      alert(`Payment Error: ${err.message || 'An unexpected error occurred'}`);
       setIsProcessingPayment(false);
     }
   };

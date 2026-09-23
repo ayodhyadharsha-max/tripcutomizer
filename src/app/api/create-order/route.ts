@@ -14,6 +14,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: 'Razorpay API credentials not configured' }, { status: 401 });
     }
 
+    // Convert to paise if amount is provided in rupees
     let amountInPaise = amount;
     if (typeof amount === 'number' && amount < 100) {
       amountInPaise = Math.round(amount * 100);
@@ -44,6 +45,7 @@ export async function POST(req: Request) {
 
     const order = await razorpay.orders.create(orderOptions);
 
+    // Save order record to Supabase payments table if configured
     try {
       const supabase = getSupabaseServer();
       if (supabase) {
