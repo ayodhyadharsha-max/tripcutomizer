@@ -74,6 +74,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/blog/top-10-best-international-honeymoon-packages-2026`,
+      lastModified: currentDate,
+      changeFrequency: 'daily',
+      priority: 0.98,
+    },
+    {
       url: `${baseUrl}/blog/top-7-spiritual-yatras-in-india-2026`,
       lastModified: currentDate,
       changeFrequency: 'daily',

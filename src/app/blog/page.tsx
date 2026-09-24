@@ -8,6 +8,15 @@ import { BookOpen, User, Calendar, ArrowRight } from 'lucide-react';
 export default function BlogHubPage() {
   const blogs = [
     {
+      slug: 'top-10-best-international-honeymoon-packages-2026',
+      title: 'Top 10 Best International Honeymoon Packages for Couples 2026: Bali, Maldives, Dubai & Europe 💑',
+      category: '💑 Honeymoon Special 2026',
+      author: 'Senior Travel Desk',
+      date: 'Sept 24, 2026',
+      image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=600&auto=format&fit=crop',
+      summary: 'Customized international honeymoon tour packages across 40+ countries. 4-Star private pool villas, flights, visa assistance, 5% GST tax compliance & 24x7 travel desk support.',
+    },
+    {
       slug: 'top-7-spiritual-yatras-in-india-2026',
       title: 'Top 7 Spiritual Yatras in India 2026: Char Dham, Ayodhya Ram Mandir & Kashi 🕉️',
       category: '🕉️ Divine Guide 2026',
