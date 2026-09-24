@@ -38,15 +38,15 @@ export const MakeMyTripBottomNav: React.FC = () => {
         <span>My Trips</span>
       </Link>
 
-      {/* 3. Center Elevated Floating Blue Sphere (MakeMyTrip Search Button) */}
+      {/* 3. Center Elevated Floating Red/Amber Sphere (MakeMyTrip Customize Button) */}
       <Link
         href="/customize-trip"
         className="flex flex-col items-center justify-center -mt-6 group focus:outline-none"
       >
-        <div className="w-13 h-13 rounded-full bg-gradient-to-r from-sky-400 via-brand-500 to-indigo-600 text-white flex items-center justify-center shadow-lg border-3 border-white transform group-hover:scale-105 active:scale-95 transition-all">
+        <div className="w-13 h-13 rounded-full bg-gradient-to-r from-rose-500 via-rose-600 to-amber-500 text-white flex items-center justify-center shadow-lg border-3 border-white transform group-hover:scale-105 active:scale-95 transition-all">
           <Search className="w-6 h-6 text-white stroke-[2.5]" />
         </div>
-        <span className="text-[10px] font-black text-brand-600 mt-0.5">Customize</span>
+        <span className="text-[10px] font-black text-rose-600 mt-0.5">Customize</span>
       </Link>
 
       {/* 4. Wishlists Tab */}
