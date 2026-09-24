@@ -38,4 +38,16 @@ next-env.d.ts
 # OS / Editor
 .DS_Store
 *.pem
-EOF
+
+# Android build outputs
+/app/
+/*.keystore
+/twa-manifest.json
+/manifest-checksum.txt
+/store_icon.png
+/build.gradle
+/settings.gradle
+/gradle.properties
+/gradlew
+/gradlew.bat
+/gradle/
