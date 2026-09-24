@@ -90,85 +90,101 @@ export const AppDownloadBanner: React.FC = () => {
             <div className="md:col-span-6 relative flex justify-end items-center h-60 sm:h-64">
               <div className="relative flex items-center justify-center w-full max-w-sm h-full">
 
-                {/* Left Back Phone (Hotels Screen) */}
+                {/* Left Back Phone (Holidays Screen) */}
                 <div className="absolute left-1 sm:left-4 top-4 w-26 sm:w-30 aspect-[9/18] bg-slate-950 rounded-[20px] border-2 border-slate-800 shadow-xl p-1 overflow-hidden transform -rotate-12 hover:-rotate-6 transition-all duration-300">
-                  <div className="w-full h-full bg-slate-900 rounded-[16px] overflow-hidden flex flex-col text-white text-[7px]">
-                    <div className="bg-brand-600 p-1 flex items-center justify-between">
-                      <span className="font-bold text-[7px]">🏨 Hotels</span>
-                      <span className="text-[5px] text-amber-300 font-bold">4-Star Stay</span>
+                  <div className="w-full h-full bg-slate-900 rounded-[16px] overflow-hidden flex flex-col text-white text-[7px] relative">
+                    <div className="bg-brand-600 p-1 flex items-center justify-between z-10">
+                      <span className="font-extrabold text-[7px]">🏖️ Holidays</span>
+                      <span className="text-[5px] text-amber-300 font-bold bg-white/10 px-1 py-0.2 rounded">Maldives & Bali</span>
                     </div>
-                    <div className="p-1 space-y-1 flex-1 bg-slate-950">
-                      <div className="bg-slate-900 p-1 rounded border border-slate-800 space-y-0.5">
-                        <span className="text-[5px] text-slate-400 block">DESTINATION</span>
-                        <span className="font-bold block text-white text-[6px]">Goa Beach Resort</span>
-                      </div>
-                      <div className="bg-slate-900 p-1 rounded border border-slate-800 space-y-0.5">
-                        <span className="text-[5px] text-slate-400 block">DATES</span>
-                        <span className="font-bold block text-amber-400 text-[6px]">24 Oct - 28 Oct</span>
-                      </div>
-                      <div className="bg-brand-600 p-1 rounded text-center font-black text-[6px] text-white">
-                        Search Hotels
+                    {/* Tropical Photo Screen */}
+                    <div className="relative flex-1 overflow-hidden">
+                      <img
+                        src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=400&auto=format&fit=crop"
+                        alt="Holidays Screen"
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent p-1 flex flex-col justify-end">
+                        <span className="font-black text-white text-[6px] leading-tight">Tropical Villa Escape</span>
+                        <span className="text-amber-300 font-extrabold text-[6px]">₹ 35,500.00</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Right Back Phone (Flights / Custom Trip Screen) */}
+                {/* Right Back Phone (Flights / Europe Screen) */}
                 <div className="absolute right-1 sm:right-4 top-4 w-26 sm:w-30 aspect-[9/18] bg-slate-950 rounded-[20px] border-2 border-slate-800 shadow-xl p-1 overflow-hidden transform rotate-12 hover:rotate-6 transition-all duration-300">
-                  <div className="w-full h-full bg-slate-900 rounded-[16px] overflow-hidden flex flex-col text-white text-[7px]">
-                    <div className="bg-brand-600 p-1 flex items-center justify-between">
-                      <span className="font-bold text-[7px]">✈️ Flights</span>
-                      <span className="text-[5px] text-emerald-400 font-bold">Best Fares</span>
+                  <div className="w-full h-full bg-slate-900 rounded-[16px] overflow-hidden flex flex-col text-white text-[7px] relative">
+                    <div className="bg-brand-600 p-1 flex items-center justify-between z-10">
+                      <span className="font-extrabold text-[7px]">✈️ Europe Tours</span>
+                      <span className="text-[5px] text-emerald-400 font-bold bg-white/10 px-1 py-0.2 rounded">Aurora</span>
                     </div>
-                    <div className="p-1 space-y-1 flex-1 bg-slate-950">
-                      <div className="bg-slate-900 p-1 rounded border border-slate-800 space-y-0.5">
-                        <span className="text-[5px] text-slate-400 block">FROM / TO</span>
-                        <span className="font-bold block text-white text-[6px]">DEL ➔ DPS (Bali)</span>
-                      </div>
-                      <div className="bg-emerald-500/20 text-emerald-400 p-1 rounded border border-emerald-500/40 text-[5px] font-bold">
-                        ✓ INSTANT VOUCHER
+                    {/* Europe Photo Screen */}
+                    <div className="relative flex-1 overflow-hidden">
+                      <img
+                        src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?q=80&w=400&auto=format&fit=crop"
+                        alt="Europe Screen"
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent p-1 flex flex-col justify-end">
+                        <span className="font-black text-white text-[6px] leading-tight">Europe Beyond Postcards</span>
+                        <span className="text-emerald-400 font-extrabold text-[6px]">✓ INSTANT E-VOUCHER</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Center Front Phone (Trip Customizer Main App Screen) */}
+                {/* Center Front Phone (Main Website Home Screen) */}
                 <div className="relative z-20 w-30 sm:w-34 aspect-[9/18] bg-slate-950 rounded-[24px] border-3 border-slate-800 shadow-2xl p-1 overflow-hidden transform hover:scale-105 transition-transform duration-300">
                   <div className="w-full h-full bg-white rounded-[18px] overflow-hidden flex flex-col text-slate-900">
-                    {/* Header Bar */}
-                    <div className="bg-white p-1 flex items-center justify-between border-b border-slate-100 shadow-2xs">
+                    {/* Mobile Header Bar */}
+                    <div className="bg-white p-1 flex items-center justify-between border-b border-slate-100 shadow-2xs shrink-0">
                       <div className="flex items-center space-x-1">
-                        <img src="/logo-header.png" alt="Trip Customizer" className="h-3 w-auto object-contain" />
+                        <img src="/logo-header.png" alt="Trip Customizer" className="h-3.5 w-auto object-contain" />
                         <span className="font-black text-[7px] text-slate-900">Trip Customizer</span>
                       </div>
+                      <span className="bg-brand-600 text-white text-[5px] font-black px-1 py-0.2 rounded uppercase">
+                        APP LIVE
+                      </span>
                     </div>
 
-                    {/* App Screen Highlights */}
+                    {/* App Main Home Screen Content with Real Taj Banner */}
                     <div className="p-1 space-y-1 flex-1 bg-slate-50 overflow-hidden text-[6px]">
                       {/* Search Bar */}
                       <div className="bg-white p-0.5 px-1.5 rounded-full border border-slate-200 text-slate-400 text-[5px] font-semibold shadow-2xs flex items-center justify-between">
-                        <span>Enter Destination...</span>
+                        <span>Search "Europe"...</span>
                         <span className="text-brand-600 font-black">🔍</span>
                       </div>
 
-                      {/* Promo Offer Card */}
-                      <div className="bg-gradient-to-r from-brand-600 to-sky-600 p-1 rounded-md text-white shadow-xs">
-                        <span className="text-[5px] font-bold text-amber-300 uppercase block">TIME TO TRAVEL</span>
-                        <span className="font-black text-[7px] block">SPECIAL OFFER 50% OFF</span>
+                      {/* Main Taj Experiences Banner */}
+                      <div className="relative rounded-md overflow-hidden h-16 shadow-xs border border-slate-200">
+                        <img
+                          src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=400&auto=format&fit=crop"
+                          alt="Unforgettable Taj"
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent p-1 flex flex-col justify-end text-white">
+                          <span className="font-black text-[6px] leading-tight text-white">Unforgettable Taj experiences</span>
+                          <span className="text-amber-300 font-extrabold text-[5px]">From ₹ 20,700.00</span>
+                        </div>
                       </div>
 
-                      {/* Package Card */}
-                      <div className="bg-white p-1 rounded-md border border-slate-200 space-y-0.5 shadow-2xs">
-                        <span className="font-black text-slate-900 text-[6px] block">Bali 5D4N Luxury Villa</span>
-                        <span className="text-brand-600 font-extrabold text-[6px] block">₹38,999/person</span>
+                      {/* Mini Category Cards */}
+                      <div className="grid grid-cols-2 gap-1 pt-0.5">
+                        <div className="bg-white p-0.5 rounded border border-slate-200 text-center font-extrabold text-[5px] text-slate-800">
+                          🏖️ Global Packages
+                        </div>
+                        <div className="bg-amber-50 p-0.5 rounded border border-amber-200 text-center font-extrabold text-[5px] text-amber-900">
+                          ⚡ Coupon: TCTAJ10
+                        </div>
                       </div>
                     </div>
 
                     {/* Bottom Nav Bar */}
-                    <div className="bg-white p-0.5 flex justify-around items-center border-t border-slate-200 text-[5px] font-bold text-slate-500">
+                    <div className="bg-white p-0.5 flex justify-around items-center border-t border-slate-200 text-[5px] font-bold text-slate-500 shrink-0">
                       <span className="text-amber-500 font-black">Home</span>
                       <span>Trips</span>
-                      <div className="w-3 h-3 rounded-full bg-brand-600 text-white flex items-center justify-center -mt-1 shadow-xs text-[5px]">
+                      <div className="w-3.5 h-3.5 rounded-full bg-brand-600 text-white flex items-center justify-center -mt-1 shadow-xs text-[6px] font-bold">
                         +
                       </div>
                       <span>Wishlist</span>
