@@ -31,7 +31,7 @@ export const AppDownloadBanner: React.FC = () => {
     <section className="hidden lg:block py-6 bg-slate-50">
       <Container>
         <div className="relative overflow-hidden rounded-3xl bg-[#edf5ff] border border-sky-100 shadow-sm p-6 sm:p-8 text-slate-900">
-          {/* Right Colorful Abstract Background Shapes */}
+          {/* Right Colorful Background Accent Shapes */}
           <div className="absolute right-0 top-0 bottom-0 w-7/12 pointer-events-none overflow-hidden hidden md:block">
             <div className="absolute -right-16 -top-16 w-96 h-96 bg-brand-500 rounded-full opacity-90" />
             <div className="absolute right-24 -bottom-28 w-80 h-80 bg-amber-400 rounded-full opacity-90" />
@@ -81,118 +81,263 @@ export const AppDownloadBanner: React.FC = () => {
                     <span className="text-xs font-black text-slate-900 block leading-tight">
                       Scan QR
                     </span>
+                    <span className="text-[9px] text-slate-500 font-medium block">
+                      To Install App
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Right Overlapping 3D Smartphones Mockups for Trip Customizer */}
-            <div className="md:col-span-6 relative flex justify-end items-center h-60 sm:h-64">
+            {/* Right Overlapping 3D Smartphones Mockups - Real App Screens */}
+            <div className="md:col-span-6 relative flex justify-end items-center h-64 sm:h-72">
               <div className="relative flex items-center justify-center w-full max-w-sm h-full">
 
                 {/* Left Back Phone (Holidays Screen) */}
-                <div className="absolute left-1 sm:left-4 top-4 w-26 sm:w-30 aspect-[9/18] bg-slate-950 rounded-[20px] border-2 border-slate-800 shadow-xl p-1 overflow-hidden transform -rotate-12 hover:-rotate-6 transition-all duration-300">
-                  <div className="w-full h-full bg-slate-900 rounded-[16px] overflow-hidden flex flex-col text-white text-[7px] relative">
-                    <div className="bg-brand-600 p-1 flex items-center justify-between z-10 shrink-0">
-                      <span className="font-extrabold text-[7px]">🏖️ Holidays</span>
-                      <span className="text-[5px] text-amber-300 font-bold bg-white/10 px-1 py-0.2 rounded">Maldives</span>
+                <div className="absolute -left-2 sm:left-2 top-3 w-28 sm:w-32 aspect-[9/18] bg-slate-900 rounded-[22px] border-2 border-slate-700 shadow-xl p-1 overflow-hidden transform -rotate-12 hover:-rotate-6 transition-all duration-300">
+                  <div className="w-full h-full bg-slate-50 rounded-[18px] overflow-hidden flex flex-col text-slate-900 text-[6px]">
+                    {/* Status Bar */}
+                    <div className="bg-slate-900 text-white px-1.5 py-0.5 flex justify-between items-center text-[5px] font-mono shrink-0">
+                      <span>9:41</span>
+                      <div className="flex items-center space-x-1">
+                        <span>5G</span>
+                        <div className="w-2 h-1 bg-emerald-400 rounded-xs" />
+                      </div>
                     </div>
-                    {/* Local Maldives Photo Screen */}
-                    <div className="relative flex-1 overflow-hidden">
-                      <img
-                        src="/destinations/maldives.jpg"
-                        alt="Maldives Holidays"
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent p-1 flex flex-col justify-end">
-                        <span className="font-black text-white text-[6px] leading-tight">Maldives Villa Escape</span>
-                        <span className="text-amber-300 font-extrabold text-[6px]">₹ 45,500.00</span>
+
+                    {/* Header */}
+                    <div className="bg-white px-1.5 py-1 border-b border-slate-200 flex items-center justify-between shrink-0 shadow-2xs">
+                      <span className="font-extrabold text-[7px] text-slate-900 flex items-center gap-1">
+                        <span>🏖️</span> Holidays
+                      </span>
+                      <span className="bg-brand-50 text-brand-700 font-bold text-[5px] px-1 py-0.2 rounded border border-brand-200">
+                        120+ Packages
+                      </span>
+                    </div>
+
+                    {/* Filter Pills */}
+                    <div className="flex gap-1 p-1 bg-slate-100 overflow-x-auto shrink-0 scrollbar-none">
+                      <span className="bg-brand-600 text-white px-1.5 py-0.3 rounded-full font-bold text-[5px]">Honeymoon</span>
+                      <span className="bg-white text-slate-600 border border-slate-200 px-1.5 py-0.3 rounded-full font-medium text-[5px]">Luxury</span>
+                      <span className="bg-white text-slate-600 border border-slate-200 px-1.5 py-0.3 rounded-full font-medium text-[5px]">Beach</span>
+                    </div>
+
+                    {/* Main Screen Content */}
+                    <div className="p-1 space-y-1 overflow-hidden flex-1">
+                      {/* Package Card 1 */}
+                      <div className="bg-white rounded-lg border border-slate-200 overflow-hidden shadow-2xs">
+                        <div className="relative h-12">
+                          <img src="/destinations/switzerland.jpg" alt="Swiss" className="w-full h-full object-cover" />
+                          <span className="absolute top-1 left-1 bg-amber-400 text-slate-950 font-black text-[5px] px-1 rounded shadow-2xs">
+                            Top Rated
+                          </span>
+                        </div>
+                        <div className="p-1">
+                          <div className="font-bold text-slate-900 text-[6px] truncate">Switzerland Alpine Magic</div>
+                          <div className="flex justify-between items-center mt-0.5">
+                            <span className="text-slate-500 text-[5px]">5 Nights / 6 Days</span>
+                            <span className="font-black text-brand-600 text-[6.5px]">₹ 89,999</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Package Card 2 */}
+                      <div className="bg-white rounded-lg border border-slate-200 overflow-hidden shadow-2xs">
+                        <div className="relative h-11">
+                          <img src="/destinations/maldives.jpg" alt="Maldives" className="w-full h-full object-cover" />
+                          <span className="absolute top-1 left-1 bg-emerald-500 text-white font-black text-[5px] px-1 rounded shadow-2xs">
+                            Water Villa
+                          </span>
+                        </div>
+                        <div className="p-1">
+                          <div className="font-bold text-slate-900 text-[6px] truncate">Maldives Premium Stay</div>
+                          <div className="flex justify-between items-center mt-0.5">
+                            <span className="text-slate-500 text-[5px]">4 Nights All Inc.</span>
+                            <span className="font-black text-brand-600 text-[6.5px]">₹ 45,500</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Bottom CTA */}
+                    <div className="p-1 bg-white border-t border-slate-200 shrink-0">
+                      <div className="bg-brand-600 text-white text-[6px] font-black py-0.8 text-center rounded-md shadow-xs">
+                        Explore Holiday Deals →
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Right Back Phone (Flights / Europe Screen) */}
-                <div className="absolute right-1 sm:right-4 top-4 w-26 sm:w-30 aspect-[9/18] bg-slate-950 rounded-[20px] border-2 border-slate-800 shadow-xl p-1 overflow-hidden transform rotate-12 hover:rotate-6 transition-all duration-300">
-                  <div className="w-full h-full bg-slate-900 rounded-[16px] overflow-hidden flex flex-col text-white text-[7px] relative">
-                    <div className="bg-brand-600 p-1 flex items-center justify-between z-10 shrink-0">
-                      <span className="font-extrabold text-[7px]">✈️ Europe</span>
-                      <span className="text-[5px] text-emerald-400 font-bold bg-white/10 px-1 py-0.2 rounded">Swiss Alps</span>
+                {/* Right Back Phone (Flight & Custom Trip Builder Screen) */}
+                <div className="absolute -right-2 sm:right-2 top-3 w-28 sm:w-32 aspect-[9/18] bg-slate-900 rounded-[22px] border-2 border-slate-700 shadow-xl p-1 overflow-hidden transform rotate-12 hover:rotate-6 transition-all duration-300">
+                  <div className="w-full h-full bg-slate-50 rounded-[18px] overflow-hidden flex flex-col text-slate-900 text-[6px]">
+                    {/* Status Bar */}
+                    <div className="bg-slate-900 text-white px-1.5 py-0.5 flex justify-between items-center text-[5px] font-mono shrink-0">
+                      <span>9:41</span>
+                      <div className="flex items-center space-x-1">
+                        <span>5G</span>
+                        <div className="w-2 h-1 bg-emerald-400 rounded-xs" />
+                      </div>
                     </div>
-                    {/* Local Switzerland Photo Screen */}
-                    <div className="relative flex-1 overflow-hidden">
-                      <img
-                        src="/destinations/switzerland.jpg"
-                        alt="Switzerland Escapes"
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent p-1 flex flex-col justify-end">
-                        <span className="font-black text-white text-[6px] leading-tight">Swiss Alps Packages</span>
-                        <span className="text-emerald-400 font-extrabold text-[6px]">✓ INSTANT E-VOUCHER</span>
+
+                    {/* Header */}
+                    <div className="bg-white px-1.5 py-1 border-b border-slate-200 flex items-center justify-between shrink-0 shadow-2xs">
+                      <span className="font-extrabold text-[7px] text-slate-900 flex items-center gap-1">
+                        <span>✈️</span> Flight & Trip
+                      </span>
+                      <span className="bg-emerald-50 text-emerald-700 font-bold text-[5px] px-1 py-0.2 rounded border border-emerald-200">
+                        ✓ Instant Booking
+                      </span>
+                    </div>
+
+                    {/* Screen Content */}
+                    <div className="p-1 space-y-1 overflow-hidden flex-1">
+                      {/* Flight Route Box */}
+                      <div className="bg-white p-1.5 rounded-lg border border-slate-200 shadow-2xs">
+                        <div className="flex justify-between items-center border-b border-slate-100 pb-1">
+                          <div>
+                            <span className="font-black text-slate-900 text-[7px] block">DEL</span>
+                            <span className="text-[5px] text-slate-500">New Delhi</span>
+                          </div>
+                          <div className="flex flex-col items-center">
+                            <span className="text-[5px] text-brand-600 font-bold">✈️ Non-Stop</span>
+                            <span className="text-[4.5px] text-slate-400">5h 30m</span>
+                          </div>
+                          <div className="text-right">
+                            <span className="font-black text-slate-900 text-[7px] block">DPS</span>
+                            <span className="text-[5px] text-slate-500">Bali</span>
+                          </div>
+                        </div>
+                        <div className="flex justify-between items-center pt-1">
+                          <span className="text-[5.5px] font-semibold text-slate-600">24 Oct - 29 Oct</span>
+                          <span className="font-extrabold text-emerald-600 text-[6.5px]">₹ 22,400</span>
+                        </div>
+                      </div>
+
+                      {/* Included Hotel Card */}
+                      <div className="bg-white rounded-lg border border-slate-200 overflow-hidden shadow-2xs">
+                        <div className="relative h-11">
+                          <img src="/destinations/dubai.jpg" alt="Dubai Hotel" className="w-full h-full object-cover" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent p-1 flex items-end">
+                            <span className="text-white font-extrabold text-[5.5px]">5★ Beach Resort Included</span>
+                          </div>
+                        </div>
+                        <div className="p-1 flex justify-between items-center">
+                          <span className="text-slate-500 text-[5px]">Breakfast + Transfer</span>
+                          <span className="bg-brand-100 text-brand-800 font-bold text-[5px] px-1 py-0.2 rounded">Included</span>
+                        </div>
+                      </div>
+
+                      {/* Customization Note */}
+                      <div className="bg-amber-50 border border-amber-200 p-1 rounded-md text-amber-900 text-[5px]">
+                        <span className="font-bold">✨ Customize Itinerary:</span> Add extra days, flights or activities easily.
+                      </div>
+                    </div>
+
+                    {/* Bottom CTA */}
+                    <div className="p-1 bg-white border-t border-slate-200 shrink-0">
+                      <div className="bg-slate-900 text-white text-[6px] font-black py-0.8 text-center rounded-md shadow-xs">
+                        Get Custom PDF Quote
                       </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Center Front Phone (Main Website Home Screen) */}
-                <div className="relative z-20 w-30 sm:w-34 aspect-[9/18] bg-slate-950 rounded-[24px] border-3 border-slate-800 shadow-2xl p-1 overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                  <div className="w-full h-full bg-white rounded-[18px] overflow-hidden flex flex-col text-slate-900">
+                <div className="relative z-20 w-32 sm:w-36 aspect-[9/18] bg-slate-950 rounded-[26px] border-3 border-slate-800 shadow-2xl p-1 overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                  <div className="w-full h-full bg-white rounded-[20px] overflow-hidden flex flex-col text-slate-900 text-[6.5px]">
+
+                    {/* Notch & Status Bar */}
+                    <div className="bg-white px-2 py-0.5 flex justify-between items-center text-[5px] font-mono shrink-0 border-b border-slate-100">
+                      <span className="font-bold text-slate-900">9:41</span>
+                      <div className="w-8 h-2 bg-slate-950 rounded-b-md mx-auto -mt-1 shadow-2xs" />
+                      <div className="flex items-center space-x-1">
+                        <span className="font-bold text-slate-900">5G</span>
+                        <div className="w-2 h-1 bg-slate-900 rounded-xs" />
+                      </div>
+                    </div>
+
                     {/* Mobile Header Bar */}
-                    <div className="bg-white p-1 flex items-center justify-between border-b border-slate-100 shadow-2xs shrink-0">
+                    <div className="bg-white px-1.5 py-1 flex items-center justify-between border-b border-slate-100 shadow-2xs shrink-0">
                       <div className="flex items-center space-x-1">
                         <img src="/logo-header.png" alt="Trip Customizer" className="h-3.5 w-auto object-contain" />
-                        <span className="font-black text-[7px] text-slate-900">Trip Customizer</span>
+                        <span className="font-black text-[7.5px] text-slate-950 tracking-tight">Trip Customizer</span>
                       </div>
-                      <span className="bg-brand-600 text-white text-[5px] font-black px-1 py-0.2 rounded uppercase">
-                        LIVE APP
+                      <span className="bg-brand-600 text-white text-[5px] font-black px-1.5 py-0.3 rounded-full uppercase shadow-2xs">
+                        APP LIVE
                       </span>
                     </div>
 
-                    {/* App Main Home Screen Content with Real Honeymoon Hero Photo */}
+                    {/* App Main Home Screen Content */}
                     <div className="p-1 space-y-1 flex-1 bg-slate-50 overflow-hidden text-[6px]">
                       {/* Search Bar */}
-                      <div className="bg-white p-0.5 px-1.5 rounded-full border border-slate-200 text-slate-400 text-[5px] font-semibold shadow-2xs flex items-center justify-between">
-                        <span>Search "Europe", "Bali"...</span>
-                        <span className="text-brand-600 font-black">🔍</span>
+                      <div className="bg-white p-1 px-1.5 rounded-full border border-slate-200 text-slate-400 text-[5.5px] font-semibold shadow-2xs flex items-center justify-between">
+                        <span>Search "Europe", "Bali", "Dubai"...</span>
+                        <span className="text-brand-600 font-black text-[7px]">🔍</span>
                       </div>
 
-                      {/* Main Hero Banner with Local Honeymoon Hero Photo */}
-                      <div className="relative rounded-md overflow-hidden h-16 shadow-xs border border-slate-200">
+                      {/* Category Icons Row */}
+                      <div className="grid grid-cols-4 gap-1 text-center text-[5px] font-extrabold text-slate-700 py-0.5">
+                        <div className="bg-white p-1 rounded-md border border-slate-200 shadow-2xs">🏖️ Holidays</div>
+                        <div className="bg-white p-1 rounded-md border border-slate-200 shadow-2xs">✈️ Flights</div>
+                        <div className="bg-white p-1 rounded-md border border-slate-200 shadow-2xs">🏨 Hotels</div>
+                        <div className="bg-white p-1 rounded-md border border-slate-200 shadow-2xs">✨ Custom</div>
+                      </div>
+
+                      {/* Main Hero Banner with Real Honeymoon Photo */}
+                      <div className="relative rounded-lg overflow-hidden h-16 shadow-xs border border-slate-200">
                         <img
                           src="/destinations/honeymoon-hero.jpg"
                           alt="Crafted Tour Packages"
                           className="w-full h-full object-cover"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent p-1 flex flex-col justify-end text-white">
-                          <span className="font-black text-[6px] leading-tight text-white">Crafted Tour Packages</span>
-                          <span className="text-amber-300 font-extrabold text-[5px]">Packages @ ₹ 14,999.00</span>
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent p-1.5 flex flex-col justify-end text-white">
+                          <span className="bg-amber-400 text-slate-950 font-black text-[4.5px] px-1 py-0.2 rounded w-max mb-0.5">
+                            SPECIAL OFFER 30% OFF
+                          </span>
+                          <span className="font-black text-[7px] leading-tight text-white">Crafted Tour Packages</span>
+                          <span className="text-amber-300 font-extrabold text-[6px]">Starting @ ₹ 14,999</span>
                         </div>
                       </div>
 
                       {/* Featured Bali Package Card */}
-                      <div className="relative rounded-md overflow-hidden h-10 border border-slate-200 shadow-2xs flex items-center">
+                      <div className="bg-white rounded-lg border border-slate-200 overflow-hidden shadow-2xs p-1 flex items-center space-x-1.5">
                         <img
                           src="/destinations/bali.jpg"
                           alt="Bali Villa"
-                          className="w-full h-full object-cover"
+                          className="w-9 h-9 rounded-md object-cover shrink-0"
                         />
-                        <div className="absolute inset-0 bg-slate-950/70 p-1 flex items-center justify-between text-white">
-                          <span className="font-black text-[6px]">Bali 5D4N Villa</span>
-                          <span className="text-emerald-400 font-extrabold text-[6px]">₹ 38,999</span>
+                        <div className="flex-1 overflow-hidden">
+                          <div className="font-black text-[6.5px] text-slate-900 truncate">Bali 5D4N Villa & Spa</div>
+                          <div className="text-[5px] text-slate-500 font-medium">Flight + 4★ Hotel + Sightseeing</div>
+                          <div className="text-brand-600 font-black text-[6.5px] mt-0.5">₹ 38,999 <span className="text-slate-400 line-through text-[5px] font-normal">₹ 49,999</span></div>
                         </div>
                       </div>
                     </div>
 
-                    {/* Bottom Nav Bar */}
-                    <div className="bg-white p-0.5 flex justify-around items-center border-t border-slate-200 text-[5px] font-bold text-slate-500 shrink-0">
-                      <span className="text-amber-500 font-black">Home</span>
-                      <span>Trips</span>
-                      <div className="w-3.5 h-3.5 rounded-full bg-brand-600 text-white flex items-center justify-center -mt-1 shadow-xs text-[6px] font-bold">
+                    {/* Bottom App Navigation Bar */}
+                    <div className="bg-white px-1 py-1 flex justify-around items-center border-t border-slate-200 text-[5px] font-bold text-slate-500 shrink-0">
+                      <div className="flex flex-col items-center text-brand-600">
+                        <span>🏠</span>
+                        <span className="font-black text-[4.5px]">Home</span>
+                      </div>
+                      <div className="flex flex-col items-center">
+                        <span>🏖️</span>
+                        <span className="text-[4.5px]">Trips</span>
+                      </div>
+                      <div className="w-4 h-4 rounded-full bg-brand-600 text-white flex items-center justify-center -mt-2 shadow-sm text-[7px] font-black border-2 border-white">
                         +
                       </div>
-                      <span>Wishlist</span>
-                      <span>Account</span>
+                      <div className="flex flex-col items-center">
+                        <span>❤️</span>
+                        <span className="text-[4.5px]">Saved</span>
+                      </div>
+                      <div className="flex flex-col items-center">
+                        <span>👤</span>
+                        <span className="text-[4.5px]">Account</span>
+                      </div>
                     </div>
+
                   </div>
                 </div>
 
