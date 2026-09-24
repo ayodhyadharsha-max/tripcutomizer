@@ -47,9 +47,9 @@ export const PWAInstallButton: React.FC<{ variant?: 'header' | 'banner' | 'foote
       }
       setDeferredPrompt(null);
     } else {
-      // Direct APK download link or PWA prompt instructions
+      // Direct APK API stream download link
       const link = document.createElement('a');
-      link.href = '/TripCustomizer.apk';
+      link.href = '/api/download-app';
       link.download = 'TripCustomizer.apk';
       document.body.appendChild(link);
       link.click();
