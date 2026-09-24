@@ -93,20 +93,20 @@ export const AppDownloadBanner: React.FC = () => {
                 {/* Left Back Phone (Holidays Screen) */}
                 <div className="absolute left-1 sm:left-4 top-4 w-26 sm:w-30 aspect-[9/18] bg-slate-950 rounded-[20px] border-2 border-slate-800 shadow-xl p-1 overflow-hidden transform -rotate-12 hover:-rotate-6 transition-all duration-300">
                   <div className="w-full h-full bg-slate-900 rounded-[16px] overflow-hidden flex flex-col text-white text-[7px] relative">
-                    <div className="bg-brand-600 p-1 flex items-center justify-between z-10">
+                    <div className="bg-brand-600 p-1 flex items-center justify-between z-10 shrink-0">
                       <span className="font-extrabold text-[7px]">🏖️ Holidays</span>
-                      <span className="text-[5px] text-amber-300 font-bold bg-white/10 px-1 py-0.2 rounded">Maldives & Bali</span>
+                      <span className="text-[5px] text-amber-300 font-bold bg-white/10 px-1 py-0.2 rounded">Maldives</span>
                     </div>
-                    {/* Tropical Photo Screen */}
+                    {/* Local Maldives Photo Screen */}
                     <div className="relative flex-1 overflow-hidden">
                       <img
-                        src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=400&auto=format&fit=crop"
-                        alt="Holidays Screen"
+                        src="/destinations/maldives.jpg"
+                        alt="Maldives Holidays"
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent p-1 flex flex-col justify-end">
-                        <span className="font-black text-white text-[6px] leading-tight">Tropical Villa Escape</span>
-                        <span className="text-amber-300 font-extrabold text-[6px]">₹ 35,500.00</span>
+                        <span className="font-black text-white text-[6px] leading-tight">Maldives Villa Escape</span>
+                        <span className="text-amber-300 font-extrabold text-[6px]">₹ 45,500.00</span>
                       </div>
                     </div>
                   </div>
@@ -115,19 +115,19 @@ export const AppDownloadBanner: React.FC = () => {
                 {/* Right Back Phone (Flights / Europe Screen) */}
                 <div className="absolute right-1 sm:right-4 top-4 w-26 sm:w-30 aspect-[9/18] bg-slate-950 rounded-[20px] border-2 border-slate-800 shadow-xl p-1 overflow-hidden transform rotate-12 hover:rotate-6 transition-all duration-300">
                   <div className="w-full h-full bg-slate-900 rounded-[16px] overflow-hidden flex flex-col text-white text-[7px] relative">
-                    <div className="bg-brand-600 p-1 flex items-center justify-between z-10">
-                      <span className="font-extrabold text-[7px]">✈️ Europe Tours</span>
-                      <span className="text-[5px] text-emerald-400 font-bold bg-white/10 px-1 py-0.2 rounded">Aurora</span>
+                    <div className="bg-brand-600 p-1 flex items-center justify-between z-10 shrink-0">
+                      <span className="font-extrabold text-[7px]">✈️ Europe</span>
+                      <span className="text-[5px] text-emerald-400 font-bold bg-white/10 px-1 py-0.2 rounded">Swiss Alps</span>
                     </div>
-                    {/* Europe Photo Screen */}
+                    {/* Local Switzerland Photo Screen */}
                     <div className="relative flex-1 overflow-hidden">
                       <img
-                        src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?q=80&w=400&auto=format&fit=crop"
-                        alt="Europe Screen"
+                        src="/destinations/switzerland.jpg"
+                        alt="Switzerland Escapes"
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent p-1 flex flex-col justify-end">
-                        <span className="font-black text-white text-[6px] leading-tight">Europe Beyond Postcards</span>
+                        <span className="font-black text-white text-[6px] leading-tight">Swiss Alps Packages</span>
                         <span className="text-emerald-400 font-extrabold text-[6px]">✓ INSTANT E-VOUCHER</span>
                       </div>
                     </div>
@@ -144,38 +144,41 @@ export const AppDownloadBanner: React.FC = () => {
                         <span className="font-black text-[7px] text-slate-900">Trip Customizer</span>
                       </div>
                       <span className="bg-brand-600 text-white text-[5px] font-black px-1 py-0.2 rounded uppercase">
-                        APP LIVE
+                        LIVE APP
                       </span>
                     </div>
 
-                    {/* App Main Home Screen Content with Real Taj Banner */}
+                    {/* App Main Home Screen Content with Real Honeymoon Hero Photo */}
                     <div className="p-1 space-y-1 flex-1 bg-slate-50 overflow-hidden text-[6px]">
                       {/* Search Bar */}
                       <div className="bg-white p-0.5 px-1.5 rounded-full border border-slate-200 text-slate-400 text-[5px] font-semibold shadow-2xs flex items-center justify-between">
-                        <span>Search "Europe"...</span>
+                        <span>Search "Europe", "Bali"...</span>
                         <span className="text-brand-600 font-black">🔍</span>
                       </div>
 
-                      {/* Main Taj Experiences Banner */}
+                      {/* Main Hero Banner with Local Honeymoon Hero Photo */}
                       <div className="relative rounded-md overflow-hidden h-16 shadow-xs border border-slate-200">
                         <img
-                          src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=400&auto=format&fit=crop"
-                          alt="Unforgettable Taj"
+                          src="/destinations/honeymoon-hero.jpg"
+                          alt="Crafted Tour Packages"
                           className="w-full h-full object-cover"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent p-1 flex flex-col justify-end text-white">
-                          <span className="font-black text-[6px] leading-tight text-white">Unforgettable Taj experiences</span>
-                          <span className="text-amber-300 font-extrabold text-[5px]">From ₹ 20,700.00</span>
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent p-1 flex flex-col justify-end text-white">
+                          <span className="font-black text-[6px] leading-tight text-white">Crafted Tour Packages</span>
+                          <span className="text-amber-300 font-extrabold text-[5px]">Packages @ ₹ 14,999.00</span>
                         </div>
                       </div>
 
-                      {/* Mini Category Cards */}
-                      <div className="grid grid-cols-2 gap-1 pt-0.5">
-                        <div className="bg-white p-0.5 rounded border border-slate-200 text-center font-extrabold text-[5px] text-slate-800">
-                          🏖️ Global Packages
-                        </div>
-                        <div className="bg-amber-50 p-0.5 rounded border border-amber-200 text-center font-extrabold text-[5px] text-amber-900">
-                          ⚡ Coupon: TCTAJ10
+                      {/* Featured Bali Package Card */}
+                      <div className="relative rounded-md overflow-hidden h-10 border border-slate-200 shadow-2xs flex items-center">
+                        <img
+                          src="/destinations/bali.jpg"
+                          alt="Bali Villa"
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-slate-950/70 p-1 flex items-center justify-between text-white">
+                          <span className="font-black text-[6px]">Bali 5D4N Villa</span>
+                          <span className="text-emerald-400 font-extrabold text-[6px]">₹ 38,999</span>
                         </div>
                       </div>
                     </div>
