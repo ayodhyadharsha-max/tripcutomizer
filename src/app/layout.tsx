@@ -198,6 +198,7 @@ export const metadata: Metadata = {
       'Book customized international & domestic holiday packages with flights, 4-star hotels, visas & 24x7 expert travel assistance.',
     images: ['https://www.tripcustomizer.com/destinations/hero-holidays.jpg'],
   },
+  manifest: '/manifest.json',
   robots: {
     index: true,
     follow: true,
@@ -381,6 +382,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#0284c7" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
         <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
@@ -390,6 +393,24 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchemas) }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                  navigator.serviceWorker.register('/sw.js').then(
+                    function(reg) {
+                      console.log('SW registered successfully:', reg.scope);
+                    },
+                    function(err) {
+                      console.log('SW registration failed:', err);
+                    }
+                  );
+                });
+              }
+            `,
+          }}
         />
       </head>
       <body className="flex flex-col min-h-screen bg-white text-slate-900 font-sans antialiased">
