@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.tripcustomizer.twa",
+      "sha256_cert_fingerprints": [
+        "12:AF:40:A4:01:B2:8D:1F:FE:CD:94:71:C9:5E:C8:5E:7F:CA:54:74:17:D9:9D:4A:56:1F:F3:8F:0D:CD:C9:F7"
+      ]
+    }
+  }
+]

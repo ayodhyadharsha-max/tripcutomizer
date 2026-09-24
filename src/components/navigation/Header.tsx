@@ -118,9 +118,8 @@ export const Header: React.FC = () => {
           <PWAInstallButton variant="header" />
         </nav>
 
-        {/* Mobile App Button & Hamburger Toggle */}
-        <div className="lg:hidden flex items-center space-x-2">
-          <PWAInstallButton variant="header" />
+        {/* Mobile Hamburger Toggle */}
+        <div className="lg:hidden flex items-center">
           <button
             onClick={() => setIsMobileOpen(true)}
             className="p-2 text-slate-700 hover:bg-slate-100 rounded-lg"
