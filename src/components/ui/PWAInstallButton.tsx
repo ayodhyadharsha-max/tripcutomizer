@@ -13,8 +13,14 @@ export const PWAInstallButton: React.FC<{ variant?: 'header' | 'banner' | 'foote
 }) => {
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [isInstalled, setIsInstalled] = useState(false);
+  const [isIOSDevice, setIsIOSDevice] = useState(false);
 
   useEffect(() => {
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    if (isIOS) {
+      setIsIOSDevice(true);
+    }
+
     const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault();
       setDeferredPrompt(e as BeforeInstallPromptEvent);
@@ -56,6 +62,8 @@ export const PWAInstallButton: React.FC<{ variant?: 'header' | 'banner' | 'foote
       document.body.removeChild(link);
     }
   };
+
+  if (isIOSDevice) return null;
 
   if (isInstalled) {
     return (

@@ -4,6 +4,8 @@ import { Header } from '@/components/navigation/Header';
 import { Footer } from '@/components/navigation/Footer';
 import { ClientProviders } from '@/components/providers/ClientProviders';
 import { StickyMobileInstallBar } from '@/components/ui/StickyMobileInstallBar';
+import { AppSplashScreen } from '@/components/ui/AppSplashScreen';
+import { MakeMyTripBottomNav } from '@/components/navigation/MakeMyTripBottomNav';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.tripcustomizer.com'),
@@ -415,6 +417,7 @@ export default function RootLayout({
         />
       </head>
       <body className="flex flex-col min-h-screen bg-white text-slate-900 font-sans antialiased">
+        <AppSplashScreen />
         {/* WCAG 2.1 Accessibility Skip Link */}
         <a
           href="#main-content"
@@ -424,11 +427,11 @@ export default function RootLayout({
         </a>
         <ClientProviders>
           <Header />
-          <main id="main-content" className="flex-1 focus:outline-none" tabIndex={-1}>
+          <main id="main-content" className="flex-1 focus:outline-none pb-14 lg:pb-0" tabIndex={-1}>
             {children}
           </main>
           <Footer />
-          <StickyMobileInstallBar />
+          <MakeMyTripBottomNav />
         </ClientProviders>
       </body>
     </html>
