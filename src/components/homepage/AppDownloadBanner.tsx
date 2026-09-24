@@ -58,24 +58,6 @@ export const AppDownloadBanner: React.FC = () => {
 
               {/* Badges & QR Code Row */}
               <div className="flex flex-wrap items-center gap-3.5 pt-1">
-                {/* App Store Button */}
-                <button
-                  onClick={handleDownloadAPK}
-                  className="flex items-center space-x-2.5 bg-slate-950 hover:bg-slate-900 text-white px-4 py-2.5 rounded-xl shadow-md transition-all active:scale-95"
-                >
-                  <svg className="w-5 h-5 fill-current text-white" viewBox="0 0 384 512">
-                    <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-92.1-61.7-92.1zM273.8 80.6c23.6-28.5 38.6-67.6 34.3-106.6-33.6 1.8-74.6 22.7-98.2 50.8-21 24.3-39.7 64.2-34.8 102.1 37.6 2.9 75.1-17.8 98.7-46.3z" />
-                  </svg>
-                  <div className="text-left">
-                    <span className="text-[8px] text-slate-400 font-bold uppercase tracking-wider block leading-none">
-                      Download on the
-                    </span>
-                    <span className="text-xs font-black text-white block leading-tight mt-0.5">
-                      App Store
-                    </span>
-                  </div>
-                </button>
-
                 {/* Google Play / Android APK Button */}
                 <button
                   onClick={handleDownloadAPK}
@@ -110,39 +92,78 @@ export const AppDownloadBanner: React.FC = () => {
               </div>
             </div>
 
-            {/* Right Overlapping Mobile Phones Artwork */}
-            <div className="md:col-span-5 relative flex justify-end items-center h-44 sm:h-52">
+            {/* Right Mobile Phone Mockup Artwork */}
+            <div className="md:col-span-5 relative flex justify-end items-center h-48">
               <div className="relative flex items-center justify-end w-full max-w-sm">
-                {/* Secondary Phone Mockup */}
-                <div className="absolute right-28 top-4 w-36 aspect-[9/18] bg-slate-900 rounded-[24px] border-2 border-slate-700 shadow-xl p-1 overflow-hidden transform -rotate-6">
-                  <div className="w-full h-full bg-slate-950 rounded-[20px] overflow-hidden p-2 text-white text-[8px]">
-                    <div className="bg-brand-600 p-1.5 rounded-lg text-center font-bold">
-                      Hotels & Flights
-                    </div>
-                    <div className="mt-2 space-y-1">
-                      <div className="h-2 bg-slate-800 rounded" />
-                      <div className="h-2 bg-slate-800 rounded w-3/4" />
+                {/* Secondary Back Phone */}
+                <div className="absolute right-24 top-2 w-32 aspect-[9/18] bg-slate-900 rounded-[22px] border-2 border-slate-700 shadow-lg p-1 overflow-hidden transform -rotate-6 opacity-80">
+                  <div className="w-full h-full bg-slate-950 rounded-[18px] p-2 text-white text-[7px] space-y-1.5">
+                    <div className="bg-brand-600 p-1 rounded font-bold text-center">Customize Trip</div>
+                    <div className="bg-slate-900 p-1 rounded border border-slate-800">
+                      <div className="h-1.5 bg-amber-400 rounded w-2/3" />
                     </div>
                   </div>
                 </div>
 
-                {/* Primary Phone Mockup (Front) */}
-                <div className="relative z-10 w-44 aspect-[9/18] bg-slate-950 rounded-[28px] border-3 border-slate-800 shadow-2xl p-1.5 overflow-hidden transform rotate-2 hover:rotate-0 transition-transform">
-                  <div className="w-full h-full bg-slate-900 rounded-[24px] overflow-hidden flex flex-col text-white">
-                    {/* App Header */}
-                    <div className="bg-brand-900 p-2 flex items-center space-x-1 border-b border-brand-800">
-                      <img src="/logo-dark.png" alt="Logo" className="h-4 w-auto object-contain" />
+                {/* Primary Front Phone showing Live Home Page */}
+                <div className="relative z-10 w-36 sm:w-40 aspect-[9/18] bg-slate-950 rounded-[28px] border-3 border-slate-800 shadow-2xl p-1.5 overflow-hidden transform rotate-2 hover:rotate-0 transition-transform">
+                  <div className="w-full h-full bg-white rounded-[22px] overflow-hidden flex flex-col text-slate-900">
+                    {/* Mobile Header Bar */}
+                    <div className="bg-white p-1.5 flex items-center justify-between border-b border-slate-100 shadow-2xs">
+                      <div className="flex items-center space-x-1">
+                        <img src="/logo-header.png" alt="Logo" className="h-3.5 w-auto object-contain" />
+                        <span className="font-black text-[8px] text-slate-900">Trip Customizer</span>
+                      </div>
+                      <span className="bg-brand-600 text-white text-[6px] font-black px-1 py-0.2 rounded uppercase">
+                        LIVE APP
+                      </span>
                     </div>
-                    {/* App Screen Content */}
-                    <div className="p-2 space-y-2 flex-1 bg-slate-950">
-                      <div className="bg-gradient-to-r from-brand-600 to-sky-600 p-2 rounded-lg text-[9px]">
-                        <span className="font-black block">Custom Holidays</span>
-                        <span className="text-[7px] text-amber-300 block">50+ Countries</span>
+
+                    {/* Live Home Page Mockup Content */}
+                    <div className="p-1.5 space-y-1.5 flex-1 bg-slate-50 overflow-hidden text-[7px]">
+                      {/* Mini Hero Banner */}
+                      <div className="bg-gradient-to-r from-slate-900 via-brand-950 to-slate-900 p-2 rounded-lg text-white shadow-xs relative overflow-hidden">
+                        <span className="text-[6px] font-bold text-amber-300 block uppercase">CUSTOM HOLIDAYS</span>
+                        <span className="font-black text-[8px] block leading-tight mt-0.5">Crafted Packages Worldwide</span>
+                        <div className="mt-1 bg-white text-slate-900 px-1.5 py-0.5 rounded-full font-bold text-[6px] inline-block">
+                          Search "Europe"...
+                        </div>
                       </div>
-                      <div className="bg-slate-900 p-1.5 rounded border border-slate-800 text-[8px] flex items-center justify-between">
-                        <span>Instant Voucher</span>
-                        <span className="text-emerald-400 font-bold">Active</span>
+
+                      {/* Mini Category Chips */}
+                      <div className="grid grid-cols-3 gap-1">
+                        <div className="bg-white p-1 rounded border border-slate-200 text-center font-extrabold text-[6px]">
+                          🏖️ Holidays
+                        </div>
+                        <div className="bg-white p-1 rounded border border-slate-200 text-center font-extrabold text-[6px]">
+                          ✈️ Flights
+                        </div>
+                        <div className="bg-white p-1 rounded border border-slate-200 text-center font-extrabold text-[6px]">
+                          🏨 Hotels
+                        </div>
                       </div>
+
+                      {/* Featured Package Card */}
+                      <div className="bg-white p-1.5 rounded-lg border border-slate-200 shadow-2xs space-y-1">
+                        <div className="flex items-center justify-between">
+                          <span className="font-black text-slate-900">Bali 5D4N Villa</span>
+                          <span className="text-emerald-600 font-bold">₹38,999</span>
+                        </div>
+                        <div className="h-1 bg-slate-100 rounded-full overflow-hidden">
+                          <div className="w-4/5 h-full bg-brand-500 rounded-full" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Mini Bottom Navigation Bar */}
+                    <div className="bg-white p-1 flex justify-around items-center border-t border-slate-200 text-[6px] font-bold text-slate-500">
+                      <span className="text-amber-500 font-black">Home</span>
+                      <span>Trips</span>
+                      <div className="w-3.5 h-3.5 rounded-full bg-brand-600 text-white flex items-center justify-center -mt-2 shadow-xs">
+                        +
+                      </div>
+                      <span>Wishlist</span>
+                      <span>Account</span>
                     </div>
                   </div>
                 </div>
