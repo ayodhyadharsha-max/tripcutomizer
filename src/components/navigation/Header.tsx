@@ -7,6 +7,7 @@ import { MegaMenuHolidays } from './MegaMenuHolidays';
 import { MegaMenuMore } from './MegaMenuMore';
 import { MobileNav } from './MobileNav';
 import { Container } from '../ui/Container';
+import { PWAInstallButton } from '../ui/PWAInstallButton';
 import { Compass, Plane, Hotel, Sparkles, ChevronDown, Menu } from 'lucide-react';
 
 export const Header: React.FC = () => {
@@ -112,16 +113,22 @@ export const Header: React.FC = () => {
               </div>
             )}
           </div>
+
+          {/* App Install Button */}
+          <PWAInstallButton variant="header" />
         </nav>
 
-        {/* Mobile Hamburger Toggle */}
-        <button
-          onClick={() => setIsMobileOpen(true)}
-          className="lg:hidden p-2 text-slate-700 hover:bg-slate-100 rounded-lg"
-          aria-label="Open navigation menu"
-        >
-          <Menu className="w-6 h-6" />
-        </button>
+        {/* Mobile App Button & Hamburger Toggle */}
+        <div className="lg:hidden flex items-center space-x-2">
+          <PWAInstallButton variant="header" />
+          <button
+            onClick={() => setIsMobileOpen(true)}
+            className="p-2 text-slate-700 hover:bg-slate-100 rounded-lg"
+            aria-label="Open navigation menu"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
+        </div>
       </Container>
 
       {/* Mobile Drawer */}
