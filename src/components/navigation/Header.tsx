@@ -22,19 +22,13 @@ export const Header: React.FC = () => {
       {/* Main Navigation Bar */}
       <Container className="flex items-center justify-between h-16">
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center space-x-3.5 group py-1">
-          <img
-            src="/logo.png"
-            alt="Trip Customizer Logo"
-            className="h-10 sm:h-12 w-auto object-contain transition-transform group-hover:scale-105 drop-shadow-xs"
-          />
-          <div className="flex flex-col justify-center border-l-2 border-brand-500/20 pl-3 py-0.5">
-            <span className="font-black text-xl sm:text-2xl tracking-tight text-slate-900 block leading-none font-sans">
-              Trip <span className="text-brand-600 font-black">Customizer</span>
-            </span>
-            <span className="text-[9px] sm:text-[10px] font-black text-brand-600 tracking-wider block mt-1 uppercase bg-brand-50/80 px-2 py-0.5 rounded-full border border-brand-200/60 shadow-2xs">
-              Holidays • Flights • Hotels
-            </span>
+        <Link href="/" className="flex items-center space-x-3 group py-1">
+          <div className="bg-slate-950 hover:bg-slate-900 px-3.5 py-1.5 rounded-2xl border border-slate-800 shadow-md flex items-center transition-all group-hover:scale-[1.02]">
+            <img
+              src="/logo.png"
+              alt="Trip Customizer Official Logo"
+              className="h-9 sm:h-11 w-auto object-contain rounded-lg drop-shadow-md"
+            />
           </div>
         </Link>
 

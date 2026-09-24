@@ -241,14 +241,11 @@ export const Footer: React.FC = () => {
 
           {/* Bottom Copyright Bar */}
           <div className="pt-8 border-t border-brand-800/80 text-center text-[11px] text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center space-x-3">
-              <img src="/logo.png" alt="Trip Customizer" className="h-8 w-auto object-contain bg-white/10 p-1 rounded-lg" />
-              <div className="flex flex-col text-left">
-                <span className="font-black text-sm block tracking-tight text-white">
-                  Trip <span className="text-amber-400 font-black">Customizer</span>
-                </span>
-                <span className="text-[10px] text-slate-400 font-medium">© 2026 Trip Customizer. All rights reserved. Enterprise Travel Commerce Platform.</span>
+            <div className="flex flex-col sm:flex-row items-center gap-3">
+              <div className="bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800 shadow-sm flex items-center shrink-0">
+                <img src="/logo.png" alt="Trip Customizer" className="h-8 w-auto object-contain rounded-lg" />
               </div>
+              <span className="text-[10px] text-slate-400 font-medium">© 2026 Trip Customizer. All rights reserved. Enterprise Travel Commerce Platform.</span>
             </div>
             <div className="flex flex-wrap justify-center space-x-4 font-semibold text-slate-400">
               <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
