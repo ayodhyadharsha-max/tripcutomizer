@@ -5,6 +5,17 @@ import { Download, QrCode, Smartphone, Sparkles, CheckCircle2, ShieldCheck } fro
 import { Container } from '../ui/Container';
 
 export const AppDownloadBanner: React.FC = () => {
+  const [isIOSDevice, setIsIOSDevice] = React.useState(false);
+
+  React.useEffect(() => {
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    if (isIOS) {
+      setIsIOSDevice(true);
+    }
+  }, []);
+
+  if (isIOSDevice) return null;
+
   const handleDownloadAPK = () => {
     const link = document.createElement('a');
     link.href = '/TripCustomizer.apk';

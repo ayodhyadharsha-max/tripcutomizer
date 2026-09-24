@@ -7,13 +7,19 @@ export const StickyMobileInstallBar: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [isInstalled, setIsInstalled] = useState(false);
 
+  const [isIOSDevice, setIsIOSDevice] = useState(false);
+
   useEffect(() => {
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    if (isIOS) {
+      setIsIOSDevice(true);
+    }
     if (window.matchMedia('(display-mode: standalone)').matches) {
       setIsInstalled(true);
     }
   }, []);
 
-  if (!isVisible || isInstalled) return null;
+  if (!isVisible || isInstalled || isIOSDevice) return null;
 
   const handleDownload = () => {
     const link = document.createElement('a');
