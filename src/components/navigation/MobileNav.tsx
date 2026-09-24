@@ -23,9 +23,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
         {/* Header */}
         <div className="p-4 bg-brand-950 text-white flex items-center justify-between border-b border-brand-800/80 shadow-md">
           <Link href="/" onClick={onClose} className="flex items-center">
-            <div className="bg-slate-950 px-3 py-1.5 rounded-2xl border border-slate-800 shadow-sm flex items-center">
-              <img src="/logo.png" alt="Trip Customizer" className="h-9 w-auto object-contain rounded-lg" />
-            </div>
+            <img src="/logo-dark.png" alt="Trip Customizer" className="h-9 w-auto object-contain" />
           </Link>
           <button onClick={onClose} className="p-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-colors">
             <X className="w-6 h-6" />
