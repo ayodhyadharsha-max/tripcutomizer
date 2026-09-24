@@ -3,6 +3,7 @@ import './globals.css';
 import { Header } from '@/components/navigation/Header';
 import { Footer } from '@/components/navigation/Footer';
 import { ClientProviders } from '@/components/providers/ClientProviders';
+import { StickyMobileInstallBar } from '@/components/ui/StickyMobileInstallBar';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.tripcustomizer.com'),
@@ -427,6 +428,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <StickyMobileInstallBar />
         </ClientProviders>
       </body>
     </html>
