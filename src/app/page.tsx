@@ -4,6 +4,7 @@ import { HeroSearch } from '@/components/homepage/HeroSearch';
 import { RecentSearches } from '@/components/homepage/RecentSearches';
 import { TrendingDestinations } from '@/components/homepage/TrendingDestinations';
 import { OffersSection } from '@/components/homepage/OffersSection';
+import { AppDownloadBanner } from '@/components/homepage/AppDownloadBanner';
 import { TourismBoardSection } from '@/components/homepage/TourismBoardSection';
 import { FlightPromotions } from '@/components/homepage/FlightPromotions';
 import { HotelStaysSection } from '@/components/homepage/HotelStaysSection';
@@ -85,6 +86,9 @@ export default function Home() {
 
       {/* Offers For You */}
       <OffersSection />
+
+      {/* Download App Banner with Scanner & APK Download Buttons */}
+      <AppDownloadBanner />
 
       {/* Tourism Board Recommends */}
       <TourismBoardSection />
