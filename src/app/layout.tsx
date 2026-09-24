@@ -3,8 +3,6 @@ import './globals.css';
 import { Header } from '@/components/navigation/Header';
 import { Footer } from '@/components/navigation/Footer';
 import { ClientProviders } from '@/components/providers/ClientProviders';
-import { StickyMobileInstallBar } from '@/components/ui/StickyMobileInstallBar';
-import { AppSplashScreen } from '@/components/ui/AppSplashScreen';
 import { MakeMyTripBottomNav } from '@/components/navigation/MakeMyTripBottomNav';
 
 export const metadata: Metadata = {
@@ -417,7 +415,6 @@ export default function RootLayout({
         />
       </head>
       <body className="flex flex-col min-h-screen bg-white text-slate-900 font-sans antialiased">
-        <AppSplashScreen />
         {/* WCAG 2.1 Accessibility Skip Link */}
         <a
           href="#main-content"

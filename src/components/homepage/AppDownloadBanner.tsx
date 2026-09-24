@@ -5,16 +5,17 @@ import { Download, QrCode, Smartphone, Sparkles, CheckCircle2, ShieldCheck } fro
 import { Container } from '../ui/Container';
 
 export const AppDownloadBanner: React.FC = () => {
-  const [isIOSDevice, setIsIOSDevice] = React.useState(false);
+  const [isMobileDevice, setIsMobileDevice] = React.useState(false);
 
   React.useEffect(() => {
-    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-    if (isIOS) {
-      setIsIOSDevice(true);
+    const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+    if (isMobile || isStandalone) {
+      setIsMobileDevice(true);
     }
   }, []);
 
-  if (isIOSDevice) return null;
+  if (isMobileDevice) return null;
 
   const handleDownloadAPK = () => {
     const link = document.createElement('a');
@@ -28,7 +29,7 @@ export const AppDownloadBanner: React.FC = () => {
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://www.tripcustomizer.com/TripCustomizer.apk`;
 
   return (
-    <section className="py-10 bg-slate-50">
+    <section className="hidden lg:block py-10 bg-slate-50">
       <Container>
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-brand-950 to-slate-900 border border-brand-800/40 shadow-2xl p-6 sm:p-10 text-white">
           {/* Decorative Glowing Orbs & Waves */}
