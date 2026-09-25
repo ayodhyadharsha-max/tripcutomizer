@@ -223,7 +223,8 @@ export default function RootLayout({
       '@context': 'https://schema.org',
       '@type': 'TravelAgency',
       name: 'Trip Customizer',
-      image: 'https://www.tripcustomizer.com/destinations/hero-holidays.jpg',
+      image: 'https://www.tripcustomizer.com/logo-square.png',
+      logo: 'https://www.tripcustomizer.com/logo-square.png',
       '@id': 'https://www.tripcustomizer.com',
       url: 'https://www.tripcustomizer.com',
       telephone: '+91 7408763401',
@@ -325,7 +326,7 @@ export default function RootLayout({
       '@type': 'Organization',
       name: 'Trip Customizer',
       url: 'https://www.tripcustomizer.com',
-      logo: 'https://www.tripcustomizer.com/destinations/hero-holidays.jpg',
+      logo: 'https://www.tripcustomizer.com/logo-square.png',
       contactPoint: {
         '@type': 'ContactPoint',
         telephone: '+91 7408763401',
