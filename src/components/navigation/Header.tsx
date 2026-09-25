@@ -7,7 +7,6 @@ import { MegaMenuHolidays } from './MegaMenuHolidays';
 import { MegaMenuMore } from './MegaMenuMore';
 import { MobileNav } from './MobileNav';
 import { Container } from '../ui/Container';
-import { PWAInstallButton } from '../ui/PWAInstallButton';
 import { Compass, Plane, Hotel, Sparkles, ChevronDown, Menu } from 'lucide-react';
 
 export const Header: React.FC = () => {
@@ -113,9 +112,6 @@ export const Header: React.FC = () => {
               </div>
             )}
           </div>
-
-          {/* App Install Button */}
-          <PWAInstallButton variant="header" />
         </nav>
 
         {/* Mobile Hamburger Toggle */}
