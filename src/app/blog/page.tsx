@@ -75,13 +75,15 @@ export default function BlogHubPage() {
   return (
     <div className="bg-slate-50 min-h-screen py-8">
       <Container>
-        <div className="bg-slate-950 text-white rounded-3xl p-8 mb-8 shadow-xl">
-          <div className="flex items-center space-x-2 text-brand-400 font-bold text-xs uppercase tracking-wider mb-2">
-            <BookOpen className="w-4 h-4" />
+        <div className="bg-white rounded-3xl p-8 mb-8 shadow-md border border-slate-200 text-slate-900">
+          <div className="flex items-center space-x-2 text-brand-600 font-bold text-xs uppercase tracking-wider mb-2">
+            <BookOpen className="w-4 h-4 text-brand-600" />
             <span>Expert Travel Editorial</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-black">Travel Guides & Destination Insights</h1>
-          <p className="text-slate-300 text-sm mt-2 max-w-2xl">
+          <h1 className="text-3xl sm:text-5xl font-black text-slate-950">
+            Travel Guides & <span className="text-brand-600">Destination Insights</span>
+          </h1>
+          <p className="text-slate-600 text-sm mt-2 max-w-2xl font-medium">
             Curated travel stories, forex advice, visa tips and day-by-day itinerary blueprints written by senior travel architects.
           </p>
         </div>

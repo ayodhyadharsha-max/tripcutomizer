@@ -73,35 +73,35 @@ export default function ViralVisaFreeCountriesPage() {
         </div>
 
         {/* Hero Article Header */}
-        <div className="bg-slate-950 text-white rounded-3xl p-6 sm:p-12 shadow-2xl mb-10 border border-slate-800">
+        <div className="bg-white rounded-3xl p-6 sm:p-10 shadow-md border border-slate-200 text-slate-900 mb-10">
           <div className="flex flex-wrap items-center gap-3 mb-4">
-            <span className="bg-amber-400 text-slate-950 font-black text-xs px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+            <span className="bg-amber-400 text-slate-950 font-black text-xs px-3 py-1 rounded-full uppercase tracking-wider shadow-2xs">
               🔥 ULTIMATE 3,000+ WORD MASTER GUIDE 2026
             </span>
-            <span className="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
-              <Globe2 className="w-3.5 h-3.5" /> 60+ Visa-Free Destinations
+            <span className="bg-brand-50 text-brand-700 border border-brand-200 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
+              <Globe2 className="w-3.5 h-3.5 text-brand-600" /> 60+ Visa-Free Destinations
             </span>
           </div>
 
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black leading-tight tracking-tight max-w-4xl">
-            Top 10 Visa-Free & Visa-On-Arrival Countries for Indian Passport Holders in 2026: Complete Master Guide 🛂✈️
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-slate-950 leading-tight tracking-tight max-w-4xl">
+            Top 10 Visa-Free & Visa-On-Arrival Countries for Indian Passport Holders in 2026: <span className="text-brand-600 font-black">Complete Master Guide 🛂✈️</span>
           </h1>
 
-          <p className="text-slate-300 text-sm sm:text-base mt-4 max-w-3xl leading-relaxed">
+          <p className="text-slate-600 text-sm sm:text-base mt-4 max-w-3xl leading-relaxed font-medium">
             Tired of long visa queues, tedious bank statements, and costly VFS application fees? In 2026, the Indian passport offers hassle-free entry to over 60 incredible destinations worldwide. Read this 3,000+ word definitive travel blueprint covering day-by-day itineraries, flight hacks, budget breakdowns, and instant package customizations!
           </p>
 
-          <div className="flex flex-wrap items-center gap-6 mt-6 pt-6 border-t border-slate-800 text-xs text-slate-300 font-medium">
+          <div className="flex flex-wrap items-center gap-6 mt-6 pt-6 border-t border-slate-100 text-xs text-slate-500 font-semibold">
             <div className="flex items-center space-x-2">
-              <User className="w-4 h-4 text-brand-400" />
-              <span>Trip Customizer Senior Travel Architects</span>
+              <User className="w-4 h-4 text-brand-600" />
+              <span className="text-slate-900 font-bold">Trip Customizer Senior Travel Architects</span>
             </div>
             <div className="flex items-center space-x-2">
-              <Calendar className="w-4 h-4 text-amber-400" />
+              <Calendar className="w-4 h-4 text-amber-500" />
               <span>Updated: Sept 25, 2026</span>
             </div>
             <div className="flex items-center space-x-2">
-              <Clock className="w-4 h-4 text-emerald-400" />
+              <Clock className="w-4 h-4 text-emerald-600" />
               <span>15 Min Comprehensive Read</span>
             </div>
           </div>
