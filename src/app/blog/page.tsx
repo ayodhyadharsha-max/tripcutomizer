@@ -75,7 +75,7 @@ export default function BlogHubPage() {
   return (
     <div className="bg-slate-50 min-h-screen py-8">
       <Container>
-        <div className="bg-brand-900 text-white rounded-3xl p-8 mb-8 shadow-xl">
+        <div className="bg-slate-950 text-white rounded-3xl p-8 mb-8 shadow-xl">
           <div className="flex items-center space-x-2 text-brand-400 font-bold text-xs uppercase tracking-wider mb-2">
             <BookOpen className="w-4 h-4" />
             <span>Expert Travel Editorial</span>

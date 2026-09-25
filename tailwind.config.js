@@ -19,6 +19,7 @@ module.exports = {
           700: '#003bbb',
           800: '#0a2540', // Deep Navy
           900: '#051424',
+          950: '#020a12',
         },
         accent: {
           50: '#fffbeb',

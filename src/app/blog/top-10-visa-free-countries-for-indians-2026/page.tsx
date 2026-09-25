@@ -73,7 +73,7 @@ export default function ViralVisaFreeCountriesPage() {
         </div>
 
         {/* Hero Article Header */}
-        <div className="bg-gradient-to-r from-brand-950 via-slate-900 to-brand-900 text-white rounded-3xl p-6 sm:p-12 shadow-2xl mb-10 border border-brand-800">
+        <div className="bg-slate-950 text-white rounded-3xl p-6 sm:p-12 shadow-2xl mb-10 border border-slate-800">
           <div className="flex flex-wrap items-center gap-3 mb-4">
             <span className="bg-amber-400 text-slate-950 font-black text-xs px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
               🔥 ULTIMATE 3,000+ WORD MASTER GUIDE 2026
