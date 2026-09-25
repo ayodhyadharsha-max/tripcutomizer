@@ -378,6 +378,30 @@ export default function RootLayout({
         },
       ],
     },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://www.tripcustomizer.com',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Holidays',
+          item: 'https://www.tripcustomizer.com/holidays',
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: 'Customize Trip',
+          item: 'https://www.tripcustomizer.com/customize-trip',
+        },
+      ],
+    },
   ];
 
   return (
