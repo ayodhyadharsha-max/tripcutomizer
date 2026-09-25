@@ -8,6 +8,15 @@ import { BookOpen, User, Calendar, ArrowRight } from 'lucide-react';
 export default function BlogHubPage() {
   const blogs = [
     {
+      slug: 'top-10-visa-free-countries-for-indians-2026',
+      title: 'Top 10 Visa-Free Countries for Indian Passport Holders in 2026: Complete Travel & Budget Guide 🛂✈️',
+      category: '🔥 Viral Guide 2026',
+      author: 'Senior Travel Desk',
+      date: 'Sept 25, 2026',
+      image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop',
+      summary: 'Hassle-free international trips without visa paperwork! Discover Thailand, Vietnam, Bali, Malaysia, Sri Lanka, Kazakhstan & Mauritius starting @ ₹14,999.',
+    },
+    {
       slug: 'top-10-best-international-honeymoon-packages-2026',
       title: 'Top 10 Best International Honeymoon Packages for Couples 2026: Bali, Maldives, Dubai & Europe 💑',
       category: '💑 Honeymoon Special 2026',
