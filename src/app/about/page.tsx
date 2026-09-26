@@ -1,13 +1,74 @@
-'use client';
-
 import React from 'react';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Award, Users, ShieldCheck, Globe, Star, Compass, CheckCircle2, HeartHandshake } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
 
+export const metadata: Metadata = {
+  title: 'About Trip Customizer: India’s Leading Customized Travel Desk',
+  description:
+    'Learn about Trip Customizer, headquartered on Ram Path, Ayodhya. Over 12,000+ happy travelers, 40+ countries covered, 4-star hotel vouchers, and 24x7 expert travel support.',
+  keywords: [
+    'about Trip Customizer',
+    'travel agency ayodhya',
+    'best travel company india',
+    'customized tour operator',
+    'Trip Customizer team',
+  ],
+  alternates: {
+    canonical: 'https://www.tripcustomizer.com/about',
+  },
+  openGraph: {
+    title: 'About Trip Customizer: India’s Leading Customized Travel Desk',
+    description: 'Learn about Trip Customizer, headquartered in Ayodhya. Over 12,000+ happy travelers & 40+ countries covered.',
+    url: 'https://www.tripcustomizer.com/about',
+    images: ['https://www.tripcustomizer.com/destinations/hero-holidays.jpg'],
+  },
+};
+
 export default function AboutPage() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    mainEntity: {
+      '@type': 'TravelAgency',
+      name: 'Trip Customizer',
+      url: 'https://www.tripcustomizer.com',
+      logo: 'https://www.tripcustomizer.com/logo-square.png',
+      telephone: '+91 7408763401',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Ram Path, Near Ram Janmabhoomi Complex',
+        addressLocality: 'Ayodhya',
+        addressRegion: 'Uttar Pradesh',
+        postalCode: '224123',
+        addressCountry: 'IN',
+      },
+    },
+  };
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://www.tripcustomizer.com',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'About Us',
+        item: 'https://www.tripcustomizer.com/about',
+      },
+    ],
+  };
   return (
     <div className="bg-slate-50 min-h-screen pb-16">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       {/* Hero Header */}
       <div className="bg-gradient-to-r from-brand-950 via-brand-900 to-slate-900 text-white py-16 shadow-md">
         <Container>

@@ -1,11 +1,67 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Container } from '@/components/ui/Container';
 import { Card } from '@/components/ui/Card';
 import { FileCheck, ShieldCheck, Clock, CheckCircle2, ChevronRight, Search } from 'lucide-react';
 
+export const metadata: Metadata = {
+  title: 'Tourist Visa Assistance & E-Visa Services 2026 | Trip Customizer',
+  description:
+    'Hassle-free tourist visa assistance for Schengen, USA, UK, Dubai, Vietnam, Japan, Singapore & Australia. 99.4% visa approval success rate with expert document verification.',
+  keywords: [
+    'tourist visa assistance india',
+    'dubai e visa for indians',
+    'singapore visa online',
+    'schengen visa consultancy',
+    'uk visa guidance india',
+    'vietnam e visa',
+    'Trip Customizer',
+  ],
+  alternates: {
+    canonical: 'https://www.tripcustomizer.com/visa',
+  },
+  openGraph: {
+    title: 'Tourist Visa Assistance & E-Visa Services 2026 | Trip Customizer',
+    description: 'Apply online for Dubai, Schengen, Singapore, UK & USA tourist visas with 99.4% approval rate.',
+    url: 'https://www.tripcustomizer.com/visa',
+    images: ['https://www.tripcustomizer.com/destinations/hero-holidays.jpg'],
+  },
+};
+
 export default function VisaHubPage() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Tourist Visa Assistance Desk',
+    provider: {
+      '@type': 'TravelAgency',
+      name: 'Trip Customizer',
+      url: 'https://www.tripcustomizer.com',
+      logo: 'https://www.tripcustomizer.com/logo-square.png',
+    },
+    serviceType: 'Visa Consultation',
+    description: 'Hassle-free tourist visa guidance, document checking, appointment booking, and e-visa filing for Indian travelers.',
+  };
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://www.tripcustomizer.com',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Visa Services',
+        item: 'https://www.tripcustomizer.com/visa',
+      },
+    ],
+  };
   const visaCountries = [
     { country: 'Dubai (UAE)', flag: '🇦🇪', type: 'E-Visa (30 Days Tourist)', processing: '24-48 Hours', price: 6500, slug: 'dubai' },
     { country: 'Singapore', flag: '🇸🇬', type: 'E-Visa (30 Days Multi Entry)', processing: '3-4 Working Days', price: 3800, slug: 'singapore' },
@@ -19,6 +75,8 @@ export default function VisaHubPage() {
 
   return (
     <div className="bg-slate-50 min-h-screen py-8">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <Container>
         {/* Breadcrumb */}
         <div className="flex items-center space-x-2 text-xs text-slate-500 mb-4">
