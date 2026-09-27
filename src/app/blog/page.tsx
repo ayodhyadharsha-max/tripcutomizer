@@ -8,6 +8,15 @@ import { BookOpen, User, Calendar, ArrowRight } from 'lucide-react';
 export default function BlogHubPage() {
   const blogs = [
     {
+      slug: 'top-10-best-winter-destinations-2026',
+      title: 'Top 10 Best Winter Holiday Destinations 2026: Kashmir, Dubai, Vietnam, Bali & Manali ❄️🌴',
+      category: '❄️ Winter Special 2026',
+      author: 'Senior Travel Desk',
+      date: 'Sept 27, 2026',
+      image: 'https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?q=80&w=600&auto=format&fit=crop',
+      summary: 'Explore 2026 winter wonderlands and tropical beach escapes! Kashmir skiing, Dubai shopping festival, Vietnam cruises, Bali & Kerala backwaters starting @ ₹14,999.',
+    },
+    {
       slug: 'top-10-visa-free-countries-for-indians-2026',
       title: 'Top 10 Visa-Free Countries for Indian Passport Holders in 2026: Complete Travel & Budget Guide 🛂✈️',
       category: '🔥 Viral Guide 2026',
