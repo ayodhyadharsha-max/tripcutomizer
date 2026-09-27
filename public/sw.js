@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tripcustomizer-v1';
+const CACHE_NAME = 'tripcustomizer-v4';
 const PRECACHE_ASSETS = [
   '/',
   '/manifest.json',

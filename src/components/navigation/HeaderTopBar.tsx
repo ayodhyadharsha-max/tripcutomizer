@@ -24,7 +24,7 @@ export const HeaderTopBar: React.FC = () => {
 
   return (
     <>
-      <div className="bg-brand-800 text-slate-200 text-xs py-2 border-b border-brand-700/50">
+      <div className="hidden lg:block bg-brand-800 text-slate-200 text-xs py-2 border-b border-brand-700/50">
         <Container className="flex justify-between items-center">
           {/* Left Links */}
           <div className="flex items-center space-x-6">
