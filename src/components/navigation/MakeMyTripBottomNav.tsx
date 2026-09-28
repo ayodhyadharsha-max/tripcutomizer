@@ -20,10 +20,10 @@ export const MakeMyTripBottomNav: React.FC = () => {
       <Link
         href="/"
         className={`flex flex-col items-center justify-center py-1 px-3 text-[10px] font-bold transition-all ${
-          isActive('/') ? 'text-amber-500' : 'text-slate-500 hover:text-slate-800'
+          isActive('/') ? 'text-brand-600' : 'text-slate-500 hover:text-slate-800'
         }`}
       >
-        <Home className={`w-5 h-5 mb-0.5 ${isActive('/') ? 'text-amber-500 fill-amber-400/20' : 'text-slate-500'}`} />
+        <Home className={`w-5 h-5 mb-0.5 ${isActive('/') ? 'text-brand-600 fill-brand-500/20' : 'text-slate-500'}`} />
         <span>Home</span>
       </Link>
 
@@ -31,10 +31,10 @@ export const MakeMyTripBottomNav: React.FC = () => {
       <Link
         href="/account"
         className={`flex flex-col items-center justify-center py-1 px-3 text-[10px] font-bold transition-all ${
-          isActive('/account') ? 'text-amber-500' : 'text-slate-500 hover:text-slate-800'
+          isActive('/account') ? 'text-brand-600' : 'text-slate-500 hover:text-slate-800'
         }`}
       >
-        <ShoppingBag className={`w-5 h-5 mb-0.5 ${isActive('/account') ? 'text-amber-500 fill-amber-400/20' : 'text-slate-500'}`} />
+        <ShoppingBag className={`w-5 h-5 mb-0.5 ${isActive('/account') ? 'text-brand-600 fill-brand-500/20' : 'text-slate-500'}`} />
         <span>My Trips</span>
       </Link>
 
@@ -53,10 +53,10 @@ export const MakeMyTripBottomNav: React.FC = () => {
       <Link
         href="/holidays"
         className={`flex flex-col items-center justify-center py-1 px-3 text-[10px] font-bold transition-all ${
-          isActive('/holidays') ? 'text-amber-500' : 'text-slate-500 hover:text-slate-800'
+          isActive('/holidays') ? 'text-brand-600' : 'text-slate-500 hover:text-slate-800'
         }`}
       >
-        <Heart className={`w-5 h-5 mb-0.5 ${isActive('/holidays') ? 'text-amber-500 fill-amber-400/20' : 'text-slate-500'}`} />
+        <Heart className={`w-5 h-5 mb-0.5 ${isActive('/holidays') ? 'text-brand-600 fill-brand-500/20' : 'text-slate-500'}`} />
         <span>Wishlists</span>
       </Link>
 
