@@ -3,17 +3,24 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import {
-  COMPETITOR_KEYWORDS_CATEGORY,
-  THRILLOPHILIA_SPIRITUAL_KEYWORDS,
-  THRILLOPHILIA_GUJARAT_KEYWORDS,
-  THRILLOPHILIA_DOMESTIC_KEYWORDS,
-  THRILLOPHILIA_INTERNATIONAL_KEYWORDS,
-  THRILLOPHILIA_ALL_MASTER_SLUGS,
-  TOTAL_THRILLOPHILIA_KEYWORD_COUNT,
-} from '@/lib/competitorKeywords';
-import { Sparkles, Globe, Compass, MapPin } from 'lucide-react';
+  MASTER_SEARCH_CATEGORIES,
+  SPIRITUAL_KEYWORDS_INDEX,
+  GUJARAT_KEYWORDS_INDEX,
+  DOMESTIC_KEYWORDS_INDEX,
+  INTERNATIONAL_KEYWORDS_INDEX,
+  ALL_MASTER_KEYWORD_SLUGS,
+  TOTAL_MASTER_KEYWORD_COUNT,
+} from '@/lib/searchKeywordsIndex';
+import { Sparkles } from 'lucide-react';
 
-export const CompetitorKeywordFooter: React.FC = () => {
+const formatTitleCase = (str: string) => {
+  return str
+    .split(' ')
+    .map((w) => (w ? w.charAt(0).toUpperCase() + w.slice(1) : ''))
+    .join(' ');
+};
+
+export const PopularKeywordsFooter: React.FC = () => {
   const [activeTab, setActiveTab] = useState<
     'spiritual' | 'gujarat' | 'domestic' | 'international' | 'dubai' | 'master29k'
   >('spiritual');
@@ -103,68 +110,74 @@ export const CompetitorKeywordFooter: React.FC = () => {
         {/* Keyword Links Cloud Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 text-[11px] max-h-96 overflow-y-auto custom-scrollbar pr-2">
           {activeTab === 'spiritual' &&
-            THRILLOPHILIA_SPIRITUAL_KEYWORDS.filter((kw) => kw.toLowerCase().includes(keywordSearch.toLowerCase())).map((kw, i) => (
+            SPIRITUAL_KEYWORDS_INDEX.filter((kw) => kw.toLowerCase().includes(keywordSearch.toLowerCase())).map((kw, i) => (
               <Link
                 key={i}
                 href={`/holidays/ayodhya?q=${encodeURIComponent(kw)}`}
                 className="hover:text-amber-300 truncate text-slate-400 transition-colors block py-0.5"
+                title={kw}
               >
-                • {kw}
+                • {formatTitleCase(kw)}
               </Link>
             ))}
 
           {activeTab === 'gujarat' &&
-            THRILLOPHILIA_GUJARAT_KEYWORDS.filter((kw) => kw.toLowerCase().includes(keywordSearch.toLowerCase())).map((kw, i) => (
+            GUJARAT_KEYWORDS_INDEX.filter((kw) => kw.toLowerCase().includes(keywordSearch.toLowerCase())).map((kw, i) => (
               <Link
                 key={i}
                 href={`/holidays/gujarat?q=${encodeURIComponent(kw)}`}
                 className="hover:text-amber-300 truncate text-slate-400 transition-colors block py-0.5"
+                title={kw}
               >
-                • {kw}
+                • {formatTitleCase(kw)}
               </Link>
             ))}
 
           {activeTab === 'domestic' &&
-            THRILLOPHILIA_DOMESTIC_KEYWORDS.filter((kw) => kw.toLowerCase().includes(keywordSearch.toLowerCase())).map((kw, i) => (
+            DOMESTIC_KEYWORDS_INDEX.filter((kw) => kw.toLowerCase().includes(keywordSearch.toLowerCase())).map((kw, i) => (
               <Link
                 key={i}
                 href={`/holidays/india?q=${encodeURIComponent(kw)}`}
                 className="hover:text-amber-300 truncate text-slate-400 transition-colors block py-0.5"
+                title={kw}
               >
-                • {kw}
+                • {formatTitleCase(kw)}
               </Link>
             ))}
 
           {activeTab === 'international' &&
-            THRILLOPHILIA_INTERNATIONAL_KEYWORDS.filter((kw) => kw.toLowerCase().includes(keywordSearch.toLowerCase())).map((kw, i) => (
+            INTERNATIONAL_KEYWORDS_INDEX.filter((kw) => kw.toLowerCase().includes(keywordSearch.toLowerCase())).map((kw, i) => (
               <Link
                 key={i}
                 href={`/holidays/international?q=${encodeURIComponent(kw)}`}
                 className="hover:text-amber-300 truncate text-slate-400 transition-colors block py-0.5"
+                title={kw}
               >
-                • {kw}
+                • {formatTitleCase(kw)}
               </Link>
             ))}
 
           {activeTab === 'dubai' &&
-            COMPETITOR_KEYWORDS_CATEGORY.dubaiUae.filter((kw) => kw.toLowerCase().includes(keywordSearch.toLowerCase())).map((kw, i) => (
+            MASTER_SEARCH_CATEGORIES.dubaiUae.filter((kw) => kw.toLowerCase().includes(keywordSearch.toLowerCase())).map((kw, i) => (
               <Link
                 key={i}
                 href={`/holidays/dubai?q=${encodeURIComponent(kw)}`}
                 className="hover:text-amber-300 truncate text-slate-400 transition-colors block py-0.5"
+                title={kw}
               >
-                • {kw}
+                • {formatTitleCase(kw)}
               </Link>
             ))}
 
           {activeTab === 'master29k' &&
-            THRILLOPHILIA_ALL_MASTER_SLUGS.slice(0, 1000).filter((kw) => kw.toLowerCase().includes(keywordSearch.toLowerCase())).map((kw, i) => (
+            ALL_MASTER_KEYWORD_SLUGS.slice(0, 1000).filter((kw) => kw.toLowerCase().includes(keywordSearch.toLowerCase())).map((kw, i) => (
               <Link
                 key={i}
                 href={`/holidays?q=${encodeURIComponent(kw)}`}
                 className="hover:text-amber-300 truncate text-slate-400 transition-colors block py-0.5"
+                title={kw}
               >
-                • {kw}
+                • {formatTitleCase(kw)}
               </Link>
             ))}
         </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { DEMO_PACKAGES } from '@/data/packagesData';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
@@ -155,12 +155,14 @@ export default function DestinationListingPage({ params }: { params: { destinati
     .join(' ');
 
   return (
-    <HolidayListingView
-      initialPackages={displayPackages}
-      title={`${destName} Tour Packages`}
-      subtitle={`Explore handcrafted ${destName} holiday packages with flights, luxury hotels, private cabs & 24x7 travel support.`}
-      badgeText={`${destName} Verified Itineraries`}
-      defaultDestinationSlug={rawSlug}
-    />
+    <Suspense fallback={<div className="min-h-screen bg-slate-900 py-20 text-center text-white font-bold">Loading holiday packages...</div>}>
+      <HolidayListingView
+        initialPackages={displayPackages}
+        title={`${destName} Tour Packages`}
+        subtitle={`Explore handcrafted ${destName} holiday packages with flights, luxury hotels, private cabs & 24x7 travel support.`}
+        badgeText={`${destName} Verified Itineraries`}
+        defaultDestinationSlug={rawSlug}
+      />
+    </Suspense>
   );
 }

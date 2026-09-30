@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import type { Metadata } from 'next';
 import { ThomasCookHolidayView } from '@/components/holidays/ThomasCookHolidayView';
 
@@ -80,7 +80,9 @@ export default function HolidayListingPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
-      <ThomasCookHolidayView />
+      <Suspense fallback={<div className="min-h-screen bg-slate-900 py-20 text-center text-white font-bold">Loading holiday packages...</div>}>
+        <ThomasCookHolidayView />
+      </Suspense>
     </>
   );
 }

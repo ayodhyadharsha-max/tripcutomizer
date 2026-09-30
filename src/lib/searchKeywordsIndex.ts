@@ -1,14 +1,14 @@
-// TRIP CUSTOMIZER SEARCH KEYWORDS MASTER INDEX
+// TRIP CUSTOMIZER MASTER SEARCH KEYWORDS INDEX
 import {
-  THRILLOPHILIA_SPIRITUAL_KEYWORDS,
-  THRILLOPHILIA_GUJARAT_KEYWORDS,
-  THRILLOPHILIA_DOMESTIC_KEYWORDS,
-  THRILLOPHILIA_INTERNATIONAL_KEYWORDS,
-  THRILLOPHILIA_ALL_MASTER_SLUGS,
-  TOTAL_THRILLOPHILIA_KEYWORD_COUNT,
-} from './thrillophiliaMasterKeywords';
+  SPIRITUAL_KEYWORDS_INDEX,
+  GUJARAT_KEYWORDS_INDEX,
+  DOMESTIC_KEYWORDS_INDEX,
+  INTERNATIONAL_KEYWORDS_INDEX,
+  ALL_MASTER_KEYWORD_SLUGS,
+  TOTAL_MASTER_KEYWORD_COUNT,
+} from './masterKeywordsIndex';
 
-export const COMPETITOR_KEYWORDS_CATEGORY = {
+export const MASTER_SEARCH_CATEGORIES = {
   dubaiUae: [
     'dubai tour package from ahmedabad',
     'dubai tour packages from vadodara',
@@ -60,8 +60,8 @@ export const COMPETITOR_KEYWORDS_CATEGORY = {
     'polo forest gujarat tour package',
     'himachal shimla kullu manali tour package',
   ],
-  spiritualYatras: THRILLOPHILIA_SPIRITUAL_KEYWORDS.slice(0, 40),
-  topDomesticIndia: THRILLOPHILIA_DOMESTIC_KEYWORDS.slice(0, 50),
+  spiritualYatras: SPIRITUAL_KEYWORDS_INDEX.slice(0, 40),
+  topDomesticIndia: DOMESTIC_KEYWORDS_INDEX.slice(0, 50),
   adventureBiking: [
     'leh ladakh bike trip package',
     'lahaul spiti biking tour package',
@@ -76,7 +76,7 @@ export const COMPETITOR_KEYWORDS_CATEGORY = {
     'spiti valley tour package from delhi',
     'kinnaur valley tour from chandigarh',
   ],
-  internationalOutbound: THRILLOPHILIA_INTERNATIONAL_KEYWORDS.slice(0, 60),
+  internationalOutbound: INTERNATIONAL_KEYWORDS_INDEX.slice(0, 60),
   specialTourTypes: [
     'new zealand fixed departure special package',
     'australia fixed departure itinerary special package',
@@ -94,10 +94,10 @@ export const COMPETITOR_KEYWORDS_CATEGORY = {
 };
 
 export {
-  THRILLOPHILIA_SPIRITUAL_KEYWORDS,
-  THRILLOPHILIA_GUJARAT_KEYWORDS,
-  THRILLOPHILIA_DOMESTIC_KEYWORDS,
-  THRILLOPHILIA_INTERNATIONAL_KEYWORDS,
-  THRILLOPHILIA_ALL_MASTER_SLUGS,
-  TOTAL_THRILLOPHILIA_KEYWORD_COUNT,
+  SPIRITUAL_KEYWORDS_INDEX,
+  GUJARAT_KEYWORDS_INDEX,
+  DOMESTIC_KEYWORDS_INDEX,
+  INTERNATIONAL_KEYWORDS_INDEX,
+  ALL_MASTER_KEYWORD_SLUGS,
+  TOTAL_MASTER_KEYWORD_COUNT,
 };

@@ -6,7 +6,7 @@ import { Container } from '../ui/Container';
 import { ShieldCheck, Lock, Award, Heart, Mail, CheckCircle2, ArrowRight, ChevronDown } from 'lucide-react';
 
 import { cloudStore } from '@/lib/cloudStore';
-import { CompetitorKeywordFooter } from './CompetitorKeywordFooter';
+import { PopularKeywordsFooter } from './PopularKeywordsFooter';
 
 export const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -240,8 +240,8 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Competitor Keywords Index Footer Cloud */}
-          <CompetitorKeywordFooter />
+          {/* Popular Keywords Index Footer Cloud */}
+          <PopularKeywordsFooter />
 
           {/* Bottom Copyright Bar */}
           <div className="pt-8 border-t border-brand-800/80 text-center text-[11px] text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-4">

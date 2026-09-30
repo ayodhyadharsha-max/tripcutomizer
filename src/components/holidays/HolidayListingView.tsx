@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Container } from '@/components/ui/Container';
@@ -42,8 +43,18 @@ export function HolidayListingView({
   defaultRegion = 'ALL',
   defaultDestinationSlug,
 }: HolidayListingViewProps) {
+  const searchParams = useSearchParams();
+  const urlQuery = searchParams ? searchParams.get('q') || '' : '';
+
   // Filter States
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(urlQuery);
+
+  useEffect(() => {
+    if (urlQuery) {
+      setSearchTerm(urlQuery);
+    }
+  }, [urlQuery]);
+
   const [selectedCategory, setSelectedCategory] = useState(defaultCategory);
   const [selectedRegion, setSelectedRegion] = useState(defaultRegion);
   const [selectedTheme, setSelectedTheme] = useState('ALL');
@@ -70,63 +81,88 @@ export function HolidayListingView({
   };
 
   const filteredPackages = useMemo(() => {
-    return initialPackages
-      .filter((pkg) => {
-        // Search filter
-        const query = searchTerm.toLowerCase().trim();
-        const matchesSearch =
-          !query ||
-          pkg.name.toLowerCase().includes(query) ||
-          pkg.destination.toLowerCase().includes(query) ||
-          pkg.country.toLowerCase().includes(query) ||
-          pkg.region.toLowerCase().includes(query) ||
-          pkg.highlights.some((h) => h.toLowerCase().includes(query));
+    const rawQuery = searchTerm.toLowerCase().trim();
 
-        // Category filter
-        const matchesCategory =
-          selectedCategory === 'ALL' ||
-          (selectedCategory === 'INTERNATIONAL' && pkg.isInternational) ||
-          (selectedCategory === 'INDIA' && !pkg.isInternational);
+    // Common stop words to extract core destination tokens
+    const stopWords = new Set([
+      'tour', 'tours', 'package', 'packages', 'from', 'with', 'for', 'and', 'the', 'to', 'in', 'of',
+      '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', 'days', 'nights', 'night', 'day', 'deal', 'deals', 'trip', 'trips', 'holiday', 'holidays', 'vacation'
+    ]);
 
-        // Region filter
-        const matchesRegion =
-          selectedRegion === 'ALL' ||
-          pkg.region.toLowerCase().includes(selectedRegion.toLowerCase());
+    const tokens = rawQuery
+      .split(/[\s\-_,]+/)
+      .filter((t) => t.length > 1 && !stopWords.has(t));
 
-        // Theme filter
-        const matchesTheme =
-          selectedTheme === 'ALL' ||
-          pkg.theme.toLowerCase().includes(selectedTheme.toLowerCase());
+    const matches = initialPackages.filter((pkg) => {
+      // 1. Search filter
+      let matchesSearch = true;
+      if (rawQuery) {
+        const pkgText = `${pkg.name} ${pkg.destination} ${pkg.country} ${pkg.region} ${pkg.theme} ${pkg.highlights.join(' ')} ${pkg.inclusions.join(' ')}`.toLowerCase();
 
-        // Hotel category filter
-        const matchesHotelCat =
-          selectedHotelCategory === 'ALL' || pkg.hotelCategory === selectedHotelCategory;
+        if (pkgText.includes(rawQuery)) {
+          matchesSearch = true;
+        } else if (tokens.length > 0) {
+          matchesSearch = tokens.some((token) => pkgText.includes(token));
+        } else {
+          matchesSearch = true;
+        }
+      }
 
-        // Price filter
-        const matchesPrice = pkg.startingPrice <= maxPrice;
+      // 2. Category filter
+      const matchesCategory =
+        selectedCategory === 'ALL' ||
+        (selectedCategory === 'INTERNATIONAL' && pkg.isInternational) ||
+        (selectedCategory === 'INDIA' && !pkg.isInternational);
 
-        // Duration filter
-        let matchesDuration = true;
-        if (selectedDuration === 'short') matchesDuration = pkg.durationDays <= 4;
-        else if (selectedDuration === 'medium') matchesDuration = pkg.durationDays >= 5 && pkg.durationDays <= 7;
-        else if (selectedDuration === 'long') matchesDuration = pkg.durationDays >= 8;
+      // 3. Region filter
+      const matchesRegion =
+        selectedRegion === 'ALL' ||
+        pkg.region.toLowerCase().includes(selectedRegion.toLowerCase());
 
-        return (
-          matchesSearch &&
-          matchesCategory &&
-          matchesRegion &&
-          matchesTheme &&
-          matchesHotelCat &&
-          matchesPrice &&
-          matchesDuration
-        );
-      })
-      .sort((a, b) => {
-        if (sortBy === 'price-asc') return a.startingPrice - b.startingPrice;
-        if (sortBy === 'price-desc') return b.startingPrice - a.startingPrice;
-        if (sortBy === 'rating') return b.rating - a.rating;
-        return 0; // recommended
+      // 4. Theme filter
+      const matchesTheme =
+        selectedTheme === 'ALL' ||
+        pkg.theme.toLowerCase().includes(selectedTheme.toLowerCase());
+
+      // 5. Hotel category filter
+      const matchesHotelCat =
+        selectedHotelCategory === 'ALL' || pkg.hotelCategory === selectedHotelCategory;
+
+      // 6. Price filter
+      const matchesPrice = pkg.startingPrice <= maxPrice;
+
+      // 7. Duration filter
+      let matchesDuration = true;
+      if (selectedDuration === 'short') matchesDuration = pkg.durationDays <= 4;
+      else if (selectedDuration === 'medium') matchesDuration = pkg.durationDays >= 5 && pkg.durationDays <= 7;
+      else if (selectedDuration === 'long') matchesDuration = pkg.durationDays >= 8;
+
+      return (
+        matchesSearch &&
+        matchesCategory &&
+        matchesRegion &&
+        matchesTheme &&
+        matchesHotelCat &&
+        matchesPrice &&
+        matchesDuration
+      );
+    });
+
+    // Fallback: If query was passed but yielded 0 results, return top packages in selected category so screen is never empty
+    if (rawQuery && matches.length === 0) {
+      return initialPackages.filter((pkg) => {
+        if (selectedCategory === 'INTERNATIONAL') return pkg.isInternational;
+        if (selectedCategory === 'INDIA') return !pkg.isInternational;
+        return true;
       });
+    }
+
+    return matches.sort((a, b) => {
+      if (sortBy === 'price-asc') return a.startingPrice - b.startingPrice;
+      if (sortBy === 'price-desc') return b.startingPrice - a.startingPrice;
+      if (sortBy === 'rating') return b.rating - a.rating;
+      return 0; // recommended
+    });
   }, [
     initialPackages,
     searchTerm,

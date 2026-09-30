@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Container } from '@/components/ui/Container';
@@ -58,8 +59,19 @@ export function tripcustomizerHolidayView() {
   // State for Specials Banner Slide
   const [specialsSlide, setSpecialsSlide] = useState(0);
 
+  const searchParams = useSearchParams();
+  const queryFromUrl = searchParams ? searchParams.get('q') || '' : '';
+
   // Filter view toggle (Show all 50+ packages with filters vs tripcustomizer homepage layout)
-  const [activeTab, setActiveTab] = useState<'HOME' | 'ALL_PACKAGES'>('HOME');
+  const [activeTab, setActiveTab] = useState<'HOME' | 'ALL_PACKAGES'>(
+    queryFromUrl ? 'ALL_PACKAGES' : 'HOME'
+  );
+
+  useEffect(() => {
+    if (queryFromUrl) {
+      setActiveTab('ALL_PACKAGES');
+    }
+  }, [queryFromUrl]);
 
   // FAQ Active Accordion
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
