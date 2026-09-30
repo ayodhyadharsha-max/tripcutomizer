@@ -1111,18 +1111,18 @@ export function tripcustomizerHolidayView() {
             Why Customers Love Trip Customizer
           </h2>
 
-          {/* Stat Pillars spanning 100% width */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12 border-b border-amber-200/80 pb-6 sm:pb-10">
-            <div>
-              <span className="text-2xl sm:text-5xl font-black text-amber-900 block mb-0.5 sm:mb-1">7+</span>
+          {/* Stat Pillars: Always 3 Equal Columns on Mobile & Desktop */}
+          <div className="grid grid-cols-3 gap-2 sm:gap-6 mb-8 sm:mb-12 border-b border-amber-200/80 pb-6 sm:pb-10 text-center">
+            <div className="flex flex-col items-center justify-center">
+              <span className="text-xl sm:text-4xl lg:text-5xl font-black text-amber-900 block mb-0.5 sm:mb-1">7+</span>
               <span className="text-[10px] sm:text-xs font-bold text-amber-800 uppercase tracking-wider">Years of legacy</span>
             </div>
-            <div className="md:border-l md:border-amber-200">
-              <span className="text-2xl sm:text-5xl font-black text-amber-900 block mb-0.5 sm:mb-1">500+</span>
+            <div className="flex flex-col items-center justify-center border-l border-amber-200">
+              <span className="text-xl sm:text-4xl lg:text-5xl font-black text-amber-900 block mb-0.5 sm:mb-1">500+</span>
               <span className="text-[10px] sm:text-xs font-bold text-amber-800 uppercase tracking-wider">Tours Conducted</span>
             </div>
-            <div className="md:border-l md:border-amber-200">
-              <span className="text-2xl sm:text-5xl font-black text-amber-900 block mb-0.5 sm:mb-1">1.2L+</span>
+            <div className="flex flex-col items-center justify-center border-l border-amber-200">
+              <span className="text-xl sm:text-4xl lg:text-5xl font-black text-amber-900 block mb-0.5 sm:mb-1">1.2L+</span>
               <span className="text-[10px] sm:text-xs font-bold text-amber-800 uppercase tracking-wider">Happy Travelers</span>
             </div>
           </div>
