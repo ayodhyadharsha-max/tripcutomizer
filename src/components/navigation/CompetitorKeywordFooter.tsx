@@ -3,10 +3,12 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { COMPETITOR_KEYWORDS_CATEGORY } from '@/lib/competitorKeywords';
-import { ChevronDown, Compass, MapPin, Sparkles } from 'lucide-react';
+import { Compass, MapPin, Sparkles } from 'lucide-react';
 
 export const CompetitorKeywordFooter: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'dubai' | 'gujarat' | 'spiritual' | 'india' | 'international'>('dubai');
+  const [activeTab, setActiveTab] = useState<
+    'dubai' | 'gujarat' | 'spiritual' | 'india' | 'adventure' | 'international' | 'thingsToDo'
+  >('dubai');
 
   return (
     <div className="bg-brand-950 text-slate-300 py-10 border-t border-brand-800/80">
@@ -14,7 +16,7 @@ export const CompetitorKeywordFooter: React.FC = () => {
         <div className="flex items-center gap-2 mb-6">
           <Sparkles className="w-5 h-5 text-amber-400" />
           <h3 className="text-base sm:text-lg font-black text-white uppercase tracking-wider">
-            Popular Tour Searches & Competitor Packages Index
+            AksharTours & Thrillophilia Competitor Search Keywords Index (965+ Master List)
           </h3>
         </div>
 
@@ -26,7 +28,7 @@ export const CompetitorKeywordFooter: React.FC = () => {
               activeTab === 'dubai' ? 'bg-amber-400 text-slate-950 shadow-md' : 'bg-brand-900 text-slate-300 hover:text-white'
             }`}
           >
-            Dubai & UAE (19+)
+            Dubai & UAE (30+)
           </button>
 
           <button
@@ -53,7 +55,16 @@ export const CompetitorKeywordFooter: React.FC = () => {
               activeTab === 'india' ? 'bg-amber-400 text-slate-950 shadow-md' : 'bg-brand-900 text-slate-300 hover:text-white'
             }`}
           >
-            Top India Destinations (65+)
+            Top India & Himalayas (70+)
+          </button>
+
+          <button
+            onClick={() => setActiveTab('adventure')}
+            className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
+              activeTab === 'adventure' ? 'bg-amber-400 text-slate-950 shadow-md' : 'bg-brand-900 text-slate-300 hover:text-white'
+            }`}
+          >
+            Adventure & Biking (15+)
           </button>
 
           <button
@@ -62,7 +73,16 @@ export const CompetitorKeywordFooter: React.FC = () => {
               activeTab === 'international' ? 'bg-amber-400 text-slate-950 shadow-md' : 'bg-brand-900 text-slate-300 hover:text-white'
             }`}
           >
-            International Outbound (100+)
+            International Outbound (120+)
+          </button>
+
+          <button
+            onClick={() => setActiveTab('thingsToDo')}
+            className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
+              activeTab === 'thingsToDo' ? 'bg-amber-400 text-slate-950 shadow-md' : 'bg-brand-900 text-slate-300 hover:text-white'
+            }`}
+          >
+            City Things to Do (30+)
           </button>
         </div>
 
@@ -112,11 +132,33 @@ export const CompetitorKeywordFooter: React.FC = () => {
               </Link>
             ))}
 
+          {activeTab === 'adventure' &&
+            COMPETITOR_KEYWORDS_CATEGORY.adventureBiking.map((kw, i) => (
+              <Link
+                key={i}
+                href={`/holidays/india?q=${encodeURIComponent(kw)}`}
+                className="hover:text-amber-300 truncate text-slate-400 transition-colors block py-0.5"
+              >
+                • {kw}
+              </Link>
+            ))}
+
           {activeTab === 'international' &&
             COMPETITOR_KEYWORDS_CATEGORY.internationalOutbound.map((kw, i) => (
               <Link
                 key={i}
                 href={`/holidays/international?q=${encodeURIComponent(kw)}`}
+                className="hover:text-amber-300 truncate text-slate-400 transition-colors block py-0.5"
+              >
+                • {kw}
+              </Link>
+            ))}
+
+          {activeTab === 'thingsToDo' &&
+            COMPETITOR_KEYWORDS_CATEGORY.cityThingsToDo.map((kw, i) => (
+              <Link
+                key={i}
+                href={`/holidays?q=${encodeURIComponent(kw)}`}
                 className="hover:text-amber-300 truncate text-slate-400 transition-colors block py-0.5"
               >
                 • {kw}
