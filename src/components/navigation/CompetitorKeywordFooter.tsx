@@ -26,21 +26,16 @@ export const CompetitorKeywordFooter: React.FC = () => {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <div className="flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-amber-400 shrink-0" />
-            <div>
-              <h3 className="text-base sm:text-lg font-black text-white uppercase tracking-wider">
-                Thrillophilia & AksharTours 29,769+ Master Search Keywords Index
-              </h3>
-              <span className="text-[10px] text-amber-300/80 font-bold block">
-                Total Extracted & Indexed Keywords: {TOTAL_THRILLOPHILIA_KEYWORD_COUNT.toLocaleString()} Slugs
-              </span>
-            </div>
+            <h3 className="text-base sm:text-lg font-black text-white uppercase tracking-wider">
+              Popular Tour Searches & Package Index
+            </h3>
           </div>
 
           {/* Quick Keyword Filter Input */}
           <div className="bg-brand-900 border border-brand-700/80 rounded-full px-4 py-1.5 flex items-center max-w-xs shadow-inner">
             <input
               type="text"
-              placeholder="Search 29,769+ keywords..."
+              placeholder="Search packages & destinations..."
               value={keywordSearch}
               onChange={(e) => setKeywordSearch(e.target.value)}
               className="bg-transparent text-xs text-white placeholder-slate-400 focus:outline-none w-full"
@@ -101,7 +96,7 @@ export const CompetitorKeywordFooter: React.FC = () => {
               activeTab === 'master29k' ? 'bg-amber-400 text-slate-950 shadow-md' : 'bg-brand-900 text-slate-300 hover:text-white'
             }`}
           >
-            29,769 Master Slugs Cloud
+            All Package Searches
           </button>
         </div>
 
