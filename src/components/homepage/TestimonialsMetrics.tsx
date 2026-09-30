@@ -73,8 +73,8 @@ export const TestimonialsMetrics: React.FC = () => {
             </h2>
           </div>
 
-          {/* 4 Stats Metrics Row with Vertical Dividers */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-8 mb-12 border-y border-amber-200/60 text-center">
+          {/* 3 Stats Metrics Row with Vertical Dividers spanning 100% width */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-8 mb-12 border-y border-amber-200/60 text-center">
             {metrics.map((m, idx) => (
               <div key={idx} className={`space-y-1 ${idx !== 0 ? 'md:border-l md:border-amber-200/60' : ''}`}>
                 <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-amber-950 block">
