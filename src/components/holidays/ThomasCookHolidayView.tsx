@@ -1112,22 +1112,18 @@ export function tripcustomizerHolidayView() {
           </h2>
 
           {/* Stat Pillars */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12 border-b border-amber-200/80 pb-6 sm:pb-10">
+          <div className="grid grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12 border-b border-amber-200/80 pb-6 sm:pb-10">
             <div>
-              <span className="text-2xl sm:text-5xl font-black text-amber-900 block mb-0.5 sm:mb-1">140+</span>
+              <span className="text-2xl sm:text-5xl font-black text-amber-900 block mb-0.5 sm:mb-1">7+</span>
               <span className="text-[10px] sm:text-xs font-bold text-amber-800 uppercase tracking-wider">Years of legacy</span>
             </div>
             <div className="border-l border-amber-200">
-              <span className="text-2xl sm:text-5xl font-black text-amber-900 block mb-0.5 sm:mb-1">4,000+</span>
-              <span className="text-[10px] sm:text-xs font-bold text-amber-800 uppercase tracking-wider">Tours</span>
+              <span className="text-2xl sm:text-5xl font-black text-amber-900 block mb-0.5 sm:mb-1">500+</span>
+              <span className="text-[10px] sm:text-xs font-bold text-amber-800 uppercase tracking-wider">Tours Conducted</span>
             </div>
             <div className="border-l border-amber-200">
-              <span className="text-2xl sm:text-5xl font-black text-amber-900 block mb-0.5 sm:mb-1">1M+</span>
+              <span className="text-2xl sm:text-5xl font-black text-amber-900 block mb-0.5 sm:mb-1">1.2L+</span>
               <span className="text-[10px] sm:text-xs font-bold text-amber-800 uppercase tracking-wider">Happy Travelers</span>
-            </div>
-            <div className="border-l border-amber-200">
-              <span className="text-2xl sm:text-5xl font-black text-amber-900 block mb-0.5 sm:mb-1">50+</span>
-              <span className="text-[10px] sm:text-xs font-bold text-amber-800 uppercase tracking-wider">Awards</span>
             </div>
           </div>
 

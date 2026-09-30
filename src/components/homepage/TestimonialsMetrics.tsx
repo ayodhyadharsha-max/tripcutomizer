@@ -10,10 +10,9 @@ export const TestimonialsMetrics: React.FC = () => {
   const [showAllFaqs, setShowAllFaqs] = useState(false);
 
   const metrics = [
-    { label: 'Years of legacy', value: '15+' },
-    { label: 'Tours Conducted', value: '4,000+' },
-    { label: 'Happy Travelers', value: '1M+' },
-    { label: 'Awards Won', value: '50+' },
+    { label: 'Years of legacy', value: '7+' },
+    { label: 'Tours Conducted', value: '500+' },
+    { label: 'Happy Travelers', value: '1.2L+' },
   ];
 
   const testimonials = [
