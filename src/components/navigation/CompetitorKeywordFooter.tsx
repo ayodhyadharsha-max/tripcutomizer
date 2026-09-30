@@ -2,33 +2,61 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { COMPETITOR_KEYWORDS_CATEGORY } from '@/lib/competitorKeywords';
-import { Compass, MapPin, Sparkles } from 'lucide-react';
+import {
+  COMPETITOR_KEYWORDS_CATEGORY,
+  THRILLOPHILIA_SPIRITUAL_KEYWORDS,
+  THRILLOPHILIA_GUJARAT_KEYWORDS,
+  THRILLOPHILIA_DOMESTIC_KEYWORDS,
+  THRILLOPHILIA_INTERNATIONAL_KEYWORDS,
+  THRILLOPHILIA_ALL_MASTER_SLUGS,
+  TOTAL_THRILLOPHILIA_KEYWORD_COUNT,
+} from '@/lib/competitorKeywords';
+import { Sparkles, Globe, Compass, MapPin } from 'lucide-react';
 
 export const CompetitorKeywordFooter: React.FC = () => {
   const [activeTab, setActiveTab] = useState<
-    'dubai' | 'gujarat' | 'spiritual' | 'india' | 'adventure' | 'international' | 'thingsToDo'
-  >('dubai');
+    'spiritual' | 'gujarat' | 'domestic' | 'international' | 'dubai' | 'master29k'
+  >('spiritual');
+
+  const [keywordSearch, setKeywordSearch] = useState('');
 
   return (
     <div className="bg-brand-950 text-slate-300 py-10 border-t border-brand-800/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-2 mb-6">
-          <Sparkles className="w-5 h-5 text-amber-400" />
-          <h3 className="text-base sm:text-lg font-black text-white uppercase tracking-wider">
-            AksharTours & Thrillophilia Competitor Search Keywords Index (965+ Master List)
-          </h3>
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+          <div className="flex items-center gap-2">
+            <Sparkles className="w-5 h-5 text-amber-400 shrink-0" />
+            <div>
+              <h3 className="text-base sm:text-lg font-black text-white uppercase tracking-wider">
+                Thrillophilia & AksharTours 29,769+ Master Search Keywords Index
+              </h3>
+              <span className="text-[10px] text-amber-300/80 font-bold block">
+                Total Extracted & Indexed Keywords: {TOTAL_THRILLOPHILIA_KEYWORD_COUNT.toLocaleString()} Slugs
+              </span>
+            </div>
+          </div>
+
+          {/* Quick Keyword Filter Input */}
+          <div className="bg-brand-900 border border-brand-700/80 rounded-full px-4 py-1.5 flex items-center max-w-xs shadow-inner">
+            <input
+              type="text"
+              placeholder="Search 29,769+ keywords..."
+              value={keywordSearch}
+              onChange={(e) => setKeywordSearch(e.target.value)}
+              className="bg-transparent text-xs text-white placeholder-slate-400 focus:outline-none w-full"
+            />
+          </div>
         </div>
 
         {/* Category Tabs */}
         <div className="flex flex-wrap gap-2 mb-8 border-b border-brand-800 pb-4">
           <button
-            onClick={() => setActiveTab('dubai')}
+            onClick={() => setActiveTab('spiritual')}
             className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
-              activeTab === 'dubai' ? 'bg-amber-400 text-slate-950 shadow-md' : 'bg-brand-900 text-slate-300 hover:text-white'
+              activeTab === 'spiritual' ? 'bg-amber-400 text-slate-950 shadow-md' : 'bg-brand-900 text-slate-300 hover:text-white'
             }`}
           >
-            Dubai & UAE (30+)
+            Spiritual & Yatras (365+)
           </button>
 
           <button
@@ -37,34 +65,16 @@ export const CompetitorKeywordFooter: React.FC = () => {
               activeTab === 'gujarat' ? 'bg-amber-400 text-slate-950 shadow-md' : 'bg-brand-900 text-slate-300 hover:text-white'
             }`}
           >
-            Gujarat & Teerth (45+)
+            Gujarat & Teerth (685+)
           </button>
 
           <button
-            onClick={() => setActiveTab('spiritual')}
+            onClick={() => setActiveTab('domestic')}
             className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
-              activeTab === 'spiritual' ? 'bg-amber-400 text-slate-950 shadow-md' : 'bg-brand-900 text-slate-300 hover:text-white'
+              activeTab === 'domestic' ? 'bg-amber-400 text-slate-950 shadow-md' : 'bg-brand-900 text-slate-300 hover:text-white'
             }`}
           >
-            Sacred Spiritual Yatras (40+)
-          </button>
-
-          <button
-            onClick={() => setActiveTab('india')}
-            className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
-              activeTab === 'india' ? 'bg-amber-400 text-slate-950 shadow-md' : 'bg-brand-900 text-slate-300 hover:text-white'
-            }`}
-          >
-            Top India & Himalayas (70+)
-          </button>
-
-          <button
-            onClick={() => setActiveTab('adventure')}
-            className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
-              activeTab === 'adventure' ? 'bg-amber-400 text-slate-950 shadow-md' : 'bg-brand-900 text-slate-300 hover:text-white'
-            }`}
-          >
-            Adventure & Biking (15+)
+            Domestic India (2,824+)
           </button>
 
           <button
@@ -73,45 +83,32 @@ export const CompetitorKeywordFooter: React.FC = () => {
               activeTab === 'international' ? 'bg-amber-400 text-slate-950 shadow-md' : 'bg-brand-900 text-slate-300 hover:text-white'
             }`}
           >
-            International Outbound (120+)
+            International Outbound (3,485+)
           </button>
 
           <button
-            onClick={() => setActiveTab('thingsToDo')}
+            onClick={() => setActiveTab('dubai')}
             className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
-              activeTab === 'thingsToDo' ? 'bg-amber-400 text-slate-950 shadow-md' : 'bg-brand-900 text-slate-300 hover:text-white'
+              activeTab === 'dubai' ? 'bg-amber-400 text-slate-950 shadow-md' : 'bg-brand-900 text-slate-300 hover:text-white'
             }`}
           >
-            City Things to Do (30+)
+            Dubai & UAE Special (30+)
+          </button>
+
+          <button
+            onClick={() => setActiveTab('master29k')}
+            className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
+              activeTab === 'master29k' ? 'bg-amber-400 text-slate-950 shadow-md' : 'bg-brand-900 text-slate-300 hover:text-white'
+            }`}
+          >
+            29,769 Master Slugs Cloud
           </button>
         </div>
 
         {/* Keyword Links Cloud Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 text-[11px]">
-          {activeTab === 'dubai' &&
-            COMPETITOR_KEYWORDS_CATEGORY.dubaiUae.map((kw, i) => (
-              <Link
-                key={i}
-                href={`/holidays/dubai?q=${encodeURIComponent(kw)}`}
-                className="hover:text-amber-300 truncate text-slate-400 transition-colors block py-0.5"
-              >
-                • {kw}
-              </Link>
-            ))}
-
-          {activeTab === 'gujarat' &&
-            COMPETITOR_KEYWORDS_CATEGORY.gujaratSpecialTeerth.map((kw, i) => (
-              <Link
-                key={i}
-                href={`/holidays/gujarat?q=${encodeURIComponent(kw)}`}
-                className="hover:text-amber-300 truncate text-slate-400 transition-colors block py-0.5"
-              >
-                • {kw}
-              </Link>
-            ))}
-
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 text-[11px] max-h-96 overflow-y-auto custom-scrollbar pr-2">
           {activeTab === 'spiritual' &&
-            COMPETITOR_KEYWORDS_CATEGORY.spiritualYatras.map((kw, i) => (
+            THRILLOPHILIA_SPIRITUAL_KEYWORDS.filter((kw) => kw.toLowerCase().includes(keywordSearch.toLowerCase())).map((kw, i) => (
               <Link
                 key={i}
                 href={`/holidays/ayodhya?q=${encodeURIComponent(kw)}`}
@@ -121,19 +118,19 @@ export const CompetitorKeywordFooter: React.FC = () => {
               </Link>
             ))}
 
-          {activeTab === 'india' &&
-            COMPETITOR_KEYWORDS_CATEGORY.topDomesticIndia.map((kw, i) => (
+          {activeTab === 'gujarat' &&
+            THRILLOPHILIA_GUJARAT_KEYWORDS.filter((kw) => kw.toLowerCase().includes(keywordSearch.toLowerCase())).map((kw, i) => (
               <Link
                 key={i}
-                href={`/holidays/india?q=${encodeURIComponent(kw)}`}
+                href={`/holidays/gujarat?q=${encodeURIComponent(kw)}`}
                 className="hover:text-amber-300 truncate text-slate-400 transition-colors block py-0.5"
               >
                 • {kw}
               </Link>
             ))}
 
-          {activeTab === 'adventure' &&
-            COMPETITOR_KEYWORDS_CATEGORY.adventureBiking.map((kw, i) => (
+          {activeTab === 'domestic' &&
+            THRILLOPHILIA_DOMESTIC_KEYWORDS.filter((kw) => kw.toLowerCase().includes(keywordSearch.toLowerCase())).map((kw, i) => (
               <Link
                 key={i}
                 href={`/holidays/india?q=${encodeURIComponent(kw)}`}
@@ -144,7 +141,7 @@ export const CompetitorKeywordFooter: React.FC = () => {
             ))}
 
           {activeTab === 'international' &&
-            COMPETITOR_KEYWORDS_CATEGORY.internationalOutbound.map((kw, i) => (
+            THRILLOPHILIA_INTERNATIONAL_KEYWORDS.filter((kw) => kw.toLowerCase().includes(keywordSearch.toLowerCase())).map((kw, i) => (
               <Link
                 key={i}
                 href={`/holidays/international?q=${encodeURIComponent(kw)}`}
@@ -154,8 +151,19 @@ export const CompetitorKeywordFooter: React.FC = () => {
               </Link>
             ))}
 
-          {activeTab === 'thingsToDo' &&
-            COMPETITOR_KEYWORDS_CATEGORY.cityThingsToDo.map((kw, i) => (
+          {activeTab === 'dubai' &&
+            COMPETITOR_KEYWORDS_CATEGORY.dubaiUae.filter((kw) => kw.toLowerCase().includes(keywordSearch.toLowerCase())).map((kw, i) => (
+              <Link
+                key={i}
+                href={`/holidays/dubai?q=${encodeURIComponent(kw)}`}
+                className="hover:text-amber-300 truncate text-slate-400 transition-colors block py-0.5"
+              >
+                • {kw}
+              </Link>
+            ))}
+
+          {activeTab === 'master29k' &&
+            THRILLOPHILIA_ALL_MASTER_SLUGS.slice(0, 1000).filter((kw) => kw.toLowerCase().includes(keywordSearch.toLowerCase())).map((kw, i) => (
               <Link
                 key={i}
                 href={`/holidays?q=${encodeURIComponent(kw)}`}
