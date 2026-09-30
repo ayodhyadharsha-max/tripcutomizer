@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -40,6 +40,17 @@ import {
   ThumbsUp
 } from 'lucide-react';
 
+function SearchTabSync({ onQueryFound }: { onQueryFound: () => void }) {
+  const searchParams = useSearchParams();
+  const q = searchParams ? searchParams.get('q') || '' : '';
+  useEffect(() => {
+    if (q) {
+      onQueryFound();
+    }
+  }, [q, onQueryFound]);
+  return null;
+}
+
 export function tripcustomizerHolidayView() {
   // State for Trending Destinations toggle
   const [trendingCategory, setTrendingCategory] = useState<'INTERNATIONAL' | 'INDIA'>('INTERNATIONAL');
@@ -59,19 +70,8 @@ export function tripcustomizerHolidayView() {
   // State for Specials Banner Slide
   const [specialsSlide, setSpecialsSlide] = useState(0);
 
-  const searchParams = useSearchParams();
-  const queryFromUrl = searchParams ? searchParams.get('q') || '' : '';
-
   // Filter view toggle (Show all 50+ packages with filters vs tripcustomizer homepage layout)
-  const [activeTab, setActiveTab] = useState<'HOME' | 'ALL_PACKAGES'>(
-    queryFromUrl ? 'ALL_PACKAGES' : 'HOME'
-  );
-
-  useEffect(() => {
-    if (queryFromUrl) {
-      setActiveTab('ALL_PACKAGES');
-    }
-  }, [queryFromUrl]);
+  const [activeTab, setActiveTab] = useState<'HOME' | 'ALL_PACKAGES'>('HOME');
 
   // FAQ Active Accordion
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
@@ -323,6 +323,9 @@ export function tripcustomizerHolidayView() {
 
   return (
     <div className="bg-slate-50 min-h-screen">
+      <Suspense fallback={null}>
+        <SearchTabSync onQueryFound={() => setActiveTab('ALL_PACKAGES')} />
+      </Suspense>
       {/* SECTION 1: HERO BANNER (Full-width cliff/beach ocean backdrop with centered search) */}
       <div className="relative w-full h-[340px] sm:h-[480px] bg-slate-900 flex items-center justify-center overflow-hidden">
         <Image

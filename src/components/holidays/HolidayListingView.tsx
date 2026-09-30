@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -24,6 +24,17 @@ import {
   PhoneCall
 } from 'lucide-react';
 
+function SearchQuerySync({ onQueryFound }: { onQueryFound: (q: string) => void }) {
+  const searchParams = useSearchParams();
+  const q = searchParams ? searchParams.get('q') || '' : '';
+  React.useEffect(() => {
+    if (q) {
+      onQueryFound(q);
+    }
+  }, [q, onQueryFound]);
+  return null;
+}
+
 interface HolidayListingViewProps {
   initialPackages: HolidayPackage[];
   title: string;
@@ -43,17 +54,8 @@ export function HolidayListingView({
   defaultRegion = 'ALL',
   defaultDestinationSlug,
 }: HolidayListingViewProps) {
-  const searchParams = useSearchParams();
-  const urlQuery = searchParams ? searchParams.get('q') || '' : '';
-
   // Filter States
-  const [searchTerm, setSearchTerm] = useState(urlQuery);
-
-  useEffect(() => {
-    if (urlQuery) {
-      setSearchTerm(urlQuery);
-    }
-  }, [urlQuery]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const [selectedCategory, setSelectedCategory] = useState(defaultCategory);
   const [selectedRegion, setSelectedRegion] = useState(defaultRegion);
@@ -313,6 +315,9 @@ export function HolidayListingView({
 
   return (
     <div className="bg-slate-50 min-h-screen py-8">
+      <Suspense fallback={null}>
+        <SearchQuerySync onQueryFound={setSearchTerm} />
+      </Suspense>
       <Container>
         {/* Breadcrumbs */}
         <div className="flex items-center space-x-2 text-xs text-slate-500 mb-4">
