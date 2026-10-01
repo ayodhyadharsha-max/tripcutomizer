@@ -199,13 +199,13 @@ export function HolidayListingView({
               pkgCountry.includes('japan') ||
               anyIn(pkgDest, ['japan', 'tokyo', 'osaka', 'kyoto', 'nara', 'sapporo', 'hokkaido']) ||
               anyIn(pkgName, ['japan', 'tokyo', 'osaka', 'kyoto', 'nara', 'sapporo', 'hokkaido']));
-        } else if (selReg === 'europe' || selReg.includes('europe')) {
+        } else if (selReg === 'europe' || selReg.includes('europe') || selReg === 'switzerland' || selReg.includes('switzerland')) {
           matchesRegion =
             pkg.isInternational &&
             (pkgReg.includes('europe') ||
               anyIn(pkgCountry, ['europe', 'switzerland', 'france', 'italy', 'uk', 'united kingdom', 'germany', 'austria', 'belgium', 'netherlands', 'vatican', 'liechtenstein']) ||
-              anyIn(pkgDest, ['paris', 'rome', 'london', 'zurich', 'interlaken', 'amsterdam', 'brussels', 'venice', 'florence', 'geneva']) ||
-              anyIn(pkgName, ['europe', 'switzerland', 'france', 'italy', 'london', 'paris', 'rome', 'zurich', 'interlaken', 'amsterdam']));
+              anyIn(pkgDest, ['switzerland', 'paris', 'rome', 'london', 'zurich', 'interlaken', 'amsterdam', 'brussels', 'venice', 'florence', 'geneva']) ||
+              (anyIn(pkgName, ['europe', 'switzerland', 'france', 'italy', 'london', 'paris', 'rome', 'zurich', 'interlaken', 'amsterdam']) && pkg.isInternational));
         } else if (selReg === 'caucasus' || selReg.includes('caucasus') || selReg.includes('central asia')) {
           matchesRegion =
             pkg.isInternational &&
@@ -222,11 +222,20 @@ export function HolidayListingView({
               anyIn(pkgDest, ['kathmandu', 'pokhara', 'muktinath', 'colombo', 'kandy', 'nuwara eliya', 'bentota', 'sigiriya', 'thimphu', 'paro']) ||
               anyIn(pkgName, ['nepal', 'sri lanka', 'bhutan', 'kathmandu', 'pokhara', 'muktinath', 'colombo', 'kandy']));
         } else {
-          matchesRegion =
-            pkgReg.includes(selReg) ||
-            pkgCountry.includes(selReg) ||
-            pkgDest.includes(selReg) ||
-            pkgName.includes(selReg);
+          const isIntlKeyword = ['switzerland', 'europe', 'france', 'italy', 'uk', 'london', 'germany', 'austria', 'dubai', 'uae', 'cairo', 'egypt', 'bali', 'indonesia', 'thailand', 'singapore', 'maldives', 'georgia', 'japan', 'malaysia', 'nepal', 'armenia', 'azerbaijan', 'baku', 'almaty', 'kazakhstan'].some((k) => selReg.includes(k));
+          const isDomKeyword = ['india', 'auli', 'chopta', 'nainital', 'manali', 'shimla', 'kashmir', 'ladakh', 'ayodhya', 'varanasi', 'kedarnath', 'rajasthan', 'goa', 'kerala', 'meghalaya', 'sikkim', 'gujarat', 'uttarakhand', 'himachal', 'spiti', 'dharamshala'].some((k) => selReg.includes(k));
+
+          if (isIntlKeyword && !pkg.isInternational) {
+            matchesRegion = false;
+          } else if (isDomKeyword && pkg.isInternational) {
+            matchesRegion = false;
+          } else {
+            matchesRegion =
+              pkgReg.includes(selReg) ||
+              pkgCountry.includes(selReg) ||
+              pkgDest.includes(selReg) ||
+              (pkgName.includes(selReg) && (pkg.isInternational ? isIntlKeyword : isDomKeyword));
+          }
         }
       }
 
