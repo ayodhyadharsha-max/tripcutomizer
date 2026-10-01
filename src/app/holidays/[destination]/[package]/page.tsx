@@ -43,8 +43,54 @@ export default function PackageDetailPage({ params }: { params: { destination: s
   const router = useRouter();
   const { user, login } = useAuth();
 
-  // Resolve package data or fallback
-  const pkg: HolidayPackage = DEMO_PACKAGES.find((p) => p.slug === params.package) || DEMO_PACKAGES[0];
+  const decodedPkgParam = decodeURIComponent(params.package || '').toLowerCase().trim();
+  const decodedDestParam = decodeURIComponent(params.destination || '').toLowerCase().trim();
+
+  // Multi-tier package lookup:
+  // 1. Exact slug match
+  let matchedPkg = DEMO_PACKAGES.find((p) => p.slug.toLowerCase() === decodedPkgParam);
+
+  // 2. Exact ID match (e.g., "pkg-up-1" or "pkg-dubai-winter-sale-4n5d")
+  if (!matchedPkg) {
+    matchedPkg = DEMO_PACKAGES.find((p) => p.id.toLowerCase() === decodedPkgParam);
+  }
+
+  // 3. Match ID with "pkg-" prefix added
+  if (!matchedPkg) {
+    matchedPkg = DEMO_PACKAGES.find((p) => p.id.toLowerCase() === `pkg-${decodedPkgParam}`);
+  }
+
+  // 4. Match slug or ID with "pkg-" prefix stripped
+  if (!matchedPkg) {
+    const strippedParam = decodedPkgParam.replace(/^pkg-/, '');
+    matchedPkg = DEMO_PACKAGES.find(
+      (p) => p.slug.toLowerCase() === strippedParam || p.id.toLowerCase().replace(/^pkg-/, '') === strippedParam
+    );
+  }
+
+  // 5. Substring match on slug, name, or ID
+  if (!matchedPkg) {
+    matchedPkg = DEMO_PACKAGES.find(
+      (p) =>
+        p.slug.toLowerCase().includes(decodedPkgParam) ||
+        decodedPkgParam.includes(p.slug.toLowerCase()) ||
+        p.name.toLowerCase().includes(decodedPkgParam)
+    );
+  }
+
+  // 6. Destination match fallback: match first package of target destination
+  if (!matchedPkg && decodedDestParam) {
+    matchedPkg = DEMO_PACKAGES.find(
+      (p) =>
+        p.destinationSlug.toLowerCase() === decodedDestParam ||
+        p.destination.toLowerCase().includes(decodedDestParam) ||
+        decodedDestParam.includes(p.destinationSlug.toLowerCase()) ||
+        p.name.toLowerCase().includes(decodedDestParam)
+    );
+  }
+
+  // 7. Guaranteed non-null fallback
+  const pkg: HolidayPackage = matchedPkg || DEMO_PACKAGES[0];
 
   // Active Main Sub-Tab State
   const [activeTab, setActiveTab] = useState<'itinerary' | 'inclusions' | 'summary' | 'highlights'>('itinerary');
