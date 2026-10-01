@@ -627,6 +627,15 @@ export const cloudStore = {
 
   setPersistedUser: (user: UserProfile | null): void => {
     setStoredData(STORAGE_KEYS.CURRENT_USER, user);
+    if (typeof document !== 'undefined') {
+      if (user) {
+        document.cookie = 'tc_auth_token=active; path=/; max-age=864000; SameSite=Lax';
+        document.cookie = 'tc_admin_session=active; path=/; max-age=864000; SameSite=Lax';
+      } else {
+        document.cookie = 'tc_auth_token=; path=/; max-age=0; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+        document.cookie = 'tc_admin_session=; path=/; max-age=0; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+      }
+    }
   },
 
   // --- CO-TRAVELLERS PERSISTENT STORAGE ---

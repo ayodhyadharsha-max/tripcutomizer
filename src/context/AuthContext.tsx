@@ -23,6 +23,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const savedUser = cloudStore.getPersistedUser();
     if (savedUser) {
       setUser(savedUser);
+      if (typeof document !== 'undefined') {
+        document.cookie = 'tc_auth_token=active; path=/; max-age=864000; SameSite=Lax';
+        document.cookie = 'tc_admin_session=active; path=/; max-age=864000; SameSite=Lax';
+      }
     }
     setIsLoading(false);
   }, []);

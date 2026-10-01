@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.tripcustomizer.com'),
   title: {
     default: 'Trip Customizer™ | Book Customized Holiday Packages, Flights & 4-Star Hotels',
-    template: '%s | Trip Customizer',
+    template: '%s',
   },
   description:
     'Book customized international & domestic tour packages across 40+ countries. 4-Star hotels, flights, visa assistance, 5% GST tax compliance, and 24x7 expert travel desk support.',
