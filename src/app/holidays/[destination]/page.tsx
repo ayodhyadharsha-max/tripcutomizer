@@ -1,6 +1,56 @@
 import React, { Suspense } from 'react';
+import type { Metadata } from 'next';
 import { DEMO_PACKAGES } from '@/data/packagesData';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
+
+export async function generateMetadata({ params }: { params: { destination: string } }): Promise<Metadata> {
+  const rawSlug = params.destination.toLowerCase().trim();
+  const destName = rawSlug
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+
+  const title = `${destName} Tour Packages 2026 | Trip Customizer`;
+  const description = `Book customized ${destName} holiday packages with 4-star hotels, flights, private transfers, visa assistance, and 24x7 expert desk support. Best prices starting @ ₹14,999.`;
+  const canonicalUrl = `https://www.tripcustomizer.com/holidays/${rawSlug}`;
+
+  return {
+    title,
+    description,
+    keywords: [
+      `${destName} tour packages`,
+      `${destName} holiday package`,
+      `${destName} tourism 2026`,
+      `${destName} honeymoon packages`,
+      `customized ${destName} itinerary`,
+      'Trip Customizer',
+    ],
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      siteName: 'Trip Customizer',
+      type: 'website',
+      images: [
+        {
+          url: 'https://www.tripcustomizer.com/destinations/hero-holidays.jpg',
+          width: 1200,
+          height: 630,
+          alt: `${destName} Holiday Packages`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['https://www.tripcustomizer.com/destinations/hero-holidays.jpg'],
+    },
+  };
+}
 
 export default function DestinationListingPage({ params }: { params: { destination: string } }) {
   const rawSlug = params.destination.toLowerCase().trim();
@@ -179,15 +229,63 @@ export default function DestinationListingPage({ params }: { params: { destinati
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
 
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://www.tripcustomizer.com',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Holidays',
+        item: 'https://www.tripcustomizer.com/holidays',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: `${destName} Tour Packages`,
+        item: `https://www.tripcustomizer.com/holidays/${rawSlug}`,
+      },
+    ],
+  };
+
+  const itemListJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: `${destName} Holiday Tour Packages 2026`,
+    numberOfItems: displayPackages.length,
+    itemListElement: displayPackages.map((p, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      name: p.name,
+      url: `https://www.tripcustomizer.com/holidays/${p.destinationSlug}/${p.slug}`,
+    })),
+  };
+
   return (
-    <Suspense fallback={<div className="min-h-screen bg-slate-900 py-20 text-center text-white font-bold">Loading holiday packages...</div>}>
-      <HolidayListingView
-        initialPackages={displayPackages}
-        title={`${destName} Tour Packages`}
-        subtitle={`Explore handcrafted ${destName} holiday packages with flights, luxury hotels, private cabs & 24x7 travel support.`}
-        badgeText={`${destName} Verified Itineraries`}
-        defaultDestinationSlug={rawSlug}
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-    </Suspense>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+      />
+      <Suspense fallback={<div className="min-h-screen bg-slate-900 py-20 text-center text-white font-bold">Loading holiday packages...</div>}>
+        <HolidayListingView
+          initialPackages={displayPackages}
+          title={`${destName} Tour Packages`}
+          subtitle={`Explore handcrafted ${destName} holiday packages with flights, luxury hotels, private cabs & 24x7 travel support.`}
+          badgeText={`${destName} Verified Itineraries`}
+          defaultDestinationSlug={rawSlug}
+        />
+      </Suspense>
+    </>
   );
 }
