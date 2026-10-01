@@ -6320,6 +6320,2313 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "answer": "Price is \u20b951,000 per person (increased by \u20b95k from flyer rate \u20b946,000) for min 4 pax."
       }
     ]
+  },
+
+  {
+    "id": "pkg-srilanka-4n5d-classic",
+    "name": "Magic of Sri Lanka: Sigiriya, Kandy, Nuwara Eliya & Bentota (4N/5D)",
+    "slug": "srilanka-magic-classic-4n5d-tour-package",
+    "destination": "Sigiriya, Kandy, Nuwara Eliya, Bentota",
+    "destinationSlug": "sri-lanka",
+    "country": "Sri Lanka",
+    "region": "South Asia",
+    "isInternational": true,
+    "durationDays": 5,
+    "durationNights": 4,
+    "startingPrice": 38500,
+    "discountPrice": 46999,
+    "rating": 4.92,
+    "reviewsCount": 240,
+    "heroImage": "/destinations/bhutan.jpg",
+    "gallery": [
+      "/destinations/bhutan.jpg",
+      "/destinations/kerala.jpg"
+    ],
+    "highlights": [
+      "Ancient Sigiriya Rock Fortress & Heritage Exploration",
+      "Sacred Temple of the Tooth Relic in Kandy",
+      "Nuwara Eliya Cool Hill Country & Tea Plantations",
+      "Bentota Golden Beaches & Water Sports",
+      "MAP Plan: Daily Breakfast & Dinner Included",
+      "Private Tour with Expert Guide Support (Min 4 Pax)"
+    ],
+    "inclusions": [
+      "4 Nights Accommodation in Comfortable 3\u2605/4\u2605 Hotels",
+      "Daily Breakfast & Dinner (MAP Plan)",
+      "Private Transfers in AC Vehicle for Whole Tour",
+      "Sightseeing as per Itinerary with Expert Guide",
+      "All Driver Allowances, Tolls & Parking Charges"
+    ],
+    "exclusions": [
+      "International Flights & Sri Lanka ETA Visa Fees",
+      "Entrance Fees to Monuments",
+      "Personal Expenses"
+    ],
+    "theme": "Heritage & Hill Country",
+    "hotelCategory": "3 Star / 4 Star",
+    "mealPlan": "MAP (Breakfast + Dinner)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Airport to Sigiriya (150 Kms / 4 Hrs+)",
+        "description": "Arrive at Bandaranaike International Airport (CMB), meet private guide and drive to Sigiriya. Check in hotel and relax.",
+        "meals": [
+          "Dinner"
+        ],
+        "activities": [
+          "Airport Welcome",
+          "Scenic Countryside Drive"
+        ],
+        "hotel": "Sigiriya Hotel 3\u2605/4\u2605",
+        "transfers": "Private AC Vehicle"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Sigiriya Rock Fortress to Kandy (100 Kms / 3 Hrs+)",
+        "description": "Climb 5th-century Sigiriya Rock Fortress. Drive to Kandy visiting Spice Garden enroute. Visit Temple of the Sacred Tooth Relic.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Sigiriya Fortress Climb",
+          "Tooth Relic Temple"
+        ],
+        "hotel": "Kandy Hotel 3\u2605/4\u2605",
+        "transfers": "Private AC Vehicle"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Kandy to Nuwara Eliya (85 Kms / 3 Hrs+)",
+        "description": "Drive through tea plantations and waterfalls to Nuwara Eliya ('Little England'). Visit Ceylon Tea Factory and Gregory Lake.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Tea Plantation Visit",
+          "Gregory Lake Walk"
+        ],
+        "hotel": "Nuwara Eliya Hotel 3\u2605/4\u2605",
+        "transfers": "Private AC Vehicle"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Nuwara Eliya to Bentota Beach (240 Kms / 7 Hrs+)",
+        "description": "Descend hill country towards Bentota golden beaches. Evening leisure at beach resort.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Beach Relaxation"
+        ],
+        "hotel": "Bentota Beach Resort 3\u2605/4\u2605",
+        "transfers": "Private AC Vehicle"
+      },
+      {
+        "dayNumber": 5,
+        "title": "Bentota to Colombo City Tour & Airport (60 Kms / 2 Hrs+)",
+        "description": "Morning Madu River boat safari or water sports. Short Colombo city tour and transfer to airport for departure flight.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Colombo City Tour",
+          "Airport Transfer"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private AC Vehicle"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Sigiriya Village Resort 3\u2605",
+        "city": "Sigiriya",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Kandy Citadel 3\u2605",
+        "city": "Kandy",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Nuwara Eliya Heritage 3\u2605",
+        "city": "Nuwara Eliya",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Bentota Beach Resort 3\u2605",
+        "city": "Bentota",
+        "rating": "3 Star",
+        "nights": 1
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the package price?",
+        "answer": "Price is \u20b938,500 per person MAP Plan (increased by \u20b95k from flyer rate \u20b933,500) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-srilanka-5n6d-wildlife",
+    "name": "Sri Lanka Grand Explorer: Sigiriya, Kandy, Nuwara Eliya, Yala & Bentota (5N/6D)",
+    "slug": "srilanka-grand-wildlife-5n6d-tour-package",
+    "destination": "Sigiriya, Kandy, Nuwara Eliya, Yala, Bentota",
+    "destinationSlug": "sri-lanka",
+    "country": "Sri Lanka",
+    "region": "South Asia",
+    "isInternational": true,
+    "durationDays": 6,
+    "durationNights": 5,
+    "startingPrice": 44000,
+    "discountPrice": 53999,
+    "rating": 4.95,
+    "reviewsCount": 290,
+    "heroImage": "/destinations/bhutan.jpg",
+    "gallery": [
+      "/destinations/bhutan.jpg",
+      "/destinations/kerala.jpg"
+    ],
+    "highlights": [
+      "Sigiriya Lion Rock & Sacred Kandy Temple",
+      "Nuwara Eliya Tea Gardens & Waterfalls",
+      "Yala National Park Wildlife Jeep Safari (Leopards & Elephants)",
+      "Bentota Beach Resort Stay & Water Sports",
+      "MAP Plan: Daily Breakfast & Dinner Included (Min 4 Pax)"
+    ],
+    "inclusions": [
+      "5 Nights Hotel Stay (MAP Plan Breakfast + Dinner)",
+      "Private Transfers in Dedicated AC Vehicle",
+      "Full Sightseeing as per Itinerary with Expert Guide",
+      "All Taxes, Tolls & Parking Charges"
+    ],
+    "exclusions": [
+      "Airfare & Visa",
+      "Yala Safari Jeep Ticket",
+      "Personal Expenses"
+    ],
+    "theme": "Wildlife & Nature",
+    "hotelCategory": "3 Star / 4 Star",
+    "mealPlan": "MAP (Breakfast + Dinner)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Airport to Sigiriya",
+        "description": "Arrival, private transfer to Sigiriya.",
+        "meals": [
+          "Dinner"
+        ],
+        "activities": [
+          "Scenic Drive"
+        ],
+        "hotel": "Sigiriya Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Sigiriya Rock to Kandy",
+        "description": "Visit Sigiriya Rock and Temple of the Tooth in Kandy.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Sigiriya Fortress",
+          "Tooth Temple"
+        ],
+        "hotel": "Kandy Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Kandy to Nuwara Eliya",
+        "description": "Drive through tea estates and Ramboda Waterfalls to Nuwara Eliya.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Tea Factory Tour"
+        ],
+        "hotel": "Nuwara Eliya Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Nuwara Eliya to Yala National Park",
+        "description": "Drive to Yala. Afternoon 4x4 Jeep Safari to spot leopards and wild elephants.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Yala Safari"
+        ],
+        "hotel": "Yala Safari Resort 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 5,
+        "title": "Yala to Bentota Beach",
+        "description": "Drive to Bentota. Enjoy beach sunset and water sports.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Bentota Beach"
+        ],
+        "hotel": "Bentota Beach Resort 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 6,
+        "title": "Bentota to Colombo & Airport Departure",
+        "description": "Short Colombo city shopping walk and transfer to airport.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Transfer"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Sri Lanka Heritage Resorts 3\u2605",
+        "city": "Multi-City",
+        "rating": "3 Star",
+        "nights": 5
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the package cost?",
+        "answer": "Price is \u20b944,000 per person MAP Plan (increased by \u20b95k from flyer rate \u20b939,000) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-srilanka-6n7d-panorama",
+    "name": "Ultimate Sri Lanka Panorama: Sigiriya, Kandy, Nuwara Eliya, Yala, Bentota & Colombo (6N/7D)",
+    "slug": "srilanka-ultimate-panorama-6n7d-package",
+    "destination": "Sigiriya, Kandy, Nuwara Eliya, Yala, Bentota, Colombo",
+    "destinationSlug": "sri-lanka",
+    "country": "Sri Lanka",
+    "region": "South Asia",
+    "isInternational": true,
+    "durationDays": 7,
+    "durationNights": 6,
+    "startingPrice": 51000,
+    "discountPrice": 62999,
+    "rating": 4.98,
+    "reviewsCount": 380,
+    "heroImage": "/destinations/bhutan.jpg",
+    "gallery": [
+      "/destinations/bhutan.jpg",
+      "/destinations/kerala.jpg"
+    ],
+    "highlights": [
+      "Complete Sri Lanka Island Circuit covering All Top 6 Destinations",
+      "Ancient Sigiriya Fortress, Kandy Temple & Nuwara Eliya Tea Country",
+      "Yala Wildlife Safari & Bentota Beach Resort",
+      "Overnight Stay & Shopping in Capital City Colombo",
+      "MAP Plan: Daily Breakfast & Dinner Included (Min 4 Pax)"
+    ],
+    "inclusions": [
+      "6 Nights Hotel Accommodations (MAP Plan Breakfast + Dinner)",
+      "Private Dedicated AC Vehicle with Driver-Guide",
+      "Complete Sightseeing & Inter-city Transfers",
+      "All Local Taxes & Tolls"
+    ],
+    "exclusions": [
+      "Airfare & Visa",
+      "Monument Entry Tickets",
+      "Personal Expenses"
+    ],
+    "theme": "Grand Panorama",
+    "hotelCategory": "3 Star / 4 Star",
+    "mealPlan": "MAP (Breakfast + Dinner)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Airport to Sigiriya",
+        "description": "Arrival and drive to Sigiriya.",
+        "meals": [
+          "Dinner"
+        ],
+        "activities": [
+          "Transfer"
+        ],
+        "hotel": "Sigiriya Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Sigiriya Rock Climb & Drive to Kandy",
+        "description": "Explore Sigiriya Fortress, drive to Kandy, visit Tooth Relic Temple.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Sigiriya & Tooth Temple"
+        ],
+        "hotel": "Kandy Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Kandy to Nuwara Eliya Tea Country",
+        "description": "Drive through tea gardens and waterfalls to Nuwara Eliya.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Tea Country Tour"
+        ],
+        "hotel": "Nuwara Eliya Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Nuwara Eliya to Yala National Park",
+        "description": "Drive to Yala, afternoon wildlife safari.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Yala Safari"
+        ],
+        "hotel": "Yala Resort 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 5,
+        "title": "Yala to Bentota Beach Resort",
+        "description": "Drive to Bentota. Relax on golden beaches.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Bentota Beach"
+        ],
+        "hotel": "Bentota Resort 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 6,
+        "title": "Bentota to Colombo City Stay",
+        "description": "Drive to Colombo. Visit Gangaramaya Temple, Independence Square, and Pettah Market shopping.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Colombo City Tour"
+        ],
+        "hotel": "Colombo Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 7,
+        "title": "Colombo Airport Departure",
+        "description": "Breakfast and transfer to airport.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Drop"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Sri Lanka Grand Hotels 3\u2605",
+        "city": "Multi-City",
+        "rating": "3 Star",
+        "nights": 6
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the package cost?",
+        "answer": "Price is \u20b951,000 per person MAP Plan (increased by \u20b95k from flyer rate \u20b946,000) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-thailand-pattaya-budget-3n4d",
+    "name": "Pattaya Beach & Nightlife Express (3N/4D)",
+    "slug": "pattaya-beach-nightlife-budget-3n4d-package",
+    "destination": "Pattaya",
+    "destinationSlug": "thailand",
+    "country": "Thailand",
+    "region": "South East Asia",
+    "isInternational": true,
+    "durationDays": 4,
+    "durationNights": 3,
+    "startingPrice": 14000,
+    "discountPrice": 18999,
+    "rating": 4.85,
+    "reviewsCount": 210,
+    "heroImage": "/destinations/thailand.jpg",
+    "gallery": [
+      "/destinations/thailand.jpg"
+    ],
+    "highlights": [
+      "3 Nights Stay in Pattaya 3-Star Hotel",
+      "Coral Island Speedboat Tour with Lunch",
+      "Walking Street Nightlife Exploration",
+      "Daily Breakfast & Airport Transfers (Min 4 Pax)"
+    ],
+    "inclusions": [
+      "3 Nights 3\u2605 Hotel in Pattaya",
+      "Daily Breakfast",
+      "Coral Island Speedboat Tour",
+      "Airport Transfers"
+    ],
+    "exclusions": [
+      "Airfare & Visa",
+      "Personal Expenses"
+    ],
+    "theme": "Budget & Nightlife",
+    "hotelCategory": "3 Star",
+    "mealPlan": "CP (Breakfast Only)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Bangkok Airport to Pattaya",
+        "description": "Transfer to Pattaya, check in hotel. Walking street evening stroll.",
+        "meals": [
+          "None"
+        ],
+        "activities": [
+          "Walking Street"
+        ],
+        "hotel": "Pattaya Hotel 3\u2605",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Coral Island Speedboat Tour",
+        "description": "Speedboat tour to Coral Island with lunch and water sports.",
+        "meals": [
+          "Breakfast",
+          "Lunch"
+        ],
+        "activities": [
+          "Coral Island"
+        ],
+        "hotel": "Pattaya Hotel 3\u2605",
+        "transfers": "SIC Tour"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Pattaya Leisure & Shopping",
+        "description": "Free day for shopping or optional Nong Nooch Tropical Garden.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Shopping"
+        ],
+        "hotel": "Pattaya Hotel 3\u2605",
+        "transfers": "N/A"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Pattaya to Bangkok Airport Departure",
+        "description": "Transfer to airport for return flight.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Drop"
+        ],
+        "hotel": "N/A",
+        "transfers": "SIC Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Pattaya Central 3\u2605",
+        "city": "Pattaya",
+        "rating": "3 Star",
+        "nights": 3
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the price?",
+        "answer": "Price is \u20b914,000 per person (increased by \u20b95k from flyer rate \u20b99,000) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-thailand-pattaya-bangkok-4n5d",
+    "name": "Thailand Express: Pattaya (3N) & Bangkok (1N) (4N/5D)",
+    "slug": "pattaya-bangkok-express-4n5d-package",
+    "destination": "Pattaya, Bangkok",
+    "destinationSlug": "thailand",
+    "country": "Thailand",
+    "region": "South East Asia",
+    "isInternational": true,
+    "durationDays": 5,
+    "durationNights": 4,
+    "startingPrice": 17000,
+    "discountPrice": 22999,
+    "rating": 4.88,
+    "reviewsCount": 270,
+    "heroImage": "/destinations/thailand.jpg",
+    "gallery": [
+      "/destinations/thailand.jpg"
+    ],
+    "highlights": [
+      "3 Nights Pattaya Beach + 1 Night Bangkok Shopping Stay",
+      "Coral Island Tour by Speedboat with Lunch",
+      "Bangkok Golden Buddha Temple & City Tour",
+      "Daily Breakfast & All Transfers (Min 4 Pax)"
+    ],
+    "inclusions": [
+      "3N Pattaya (3\u2605) + 1N Bangkok (3\u2605)",
+      "Daily Breakfast",
+      "Coral Island Tour",
+      "Bangkok Temple Tour",
+      "Transfers"
+    ],
+    "exclusions": [
+      "Airfare & Visa",
+      "Personal Expenses"
+    ],
+    "theme": "Budget Multi-City",
+    "hotelCategory": "3 Star",
+    "mealPlan": "CP (Breakfast Only)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Bangkok Airport to Pattaya Transfer",
+        "description": "Arrival, transfer to Pattaya hotel.",
+        "meals": [
+          "None"
+        ],
+        "activities": [
+          "Transfer"
+        ],
+        "hotel": "Pattaya Hotel 3\u2605",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Coral Island Speedboat Tour",
+        "description": "Coral Island tour with lunch.",
+        "meals": [
+          "Breakfast",
+          "Lunch"
+        ],
+        "activities": [
+          "Coral Island"
+        ],
+        "hotel": "Pattaya Hotel 3\u2605",
+        "transfers": "SIC Tour"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Pattaya Free Day",
+        "description": "Free day for beach and shopping.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Leisure"
+        ],
+        "hotel": "Pattaya Hotel 3\u2605",
+        "transfers": "N/A"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Pattaya to Bangkok Transfer & Temple Tour",
+        "description": "Transfer to Bangkok. Visit Golden Buddha and Marble Temple.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Temple Tour"
+        ],
+        "hotel": "Bangkok Hotel 3\u2605",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 5,
+        "title": "Bangkok Departure",
+        "description": "Checkout and transfer to airport.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Drop"
+        ],
+        "hotel": "N/A",
+        "transfers": "SIC Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Pattaya Beach 3\u2605",
+        "city": "Pattaya",
+        "rating": "3 Star",
+        "nights": 3
+      },
+      {
+        "name": "Bangkok Central 3\u2605",
+        "city": "Bangkok",
+        "rating": "3 Star",
+        "nights": 1
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the price?",
+        "answer": "Price is \u20b917,000 per person (increased by \u20b95k from flyer rate \u20b912,000) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-thailand-phuket-budget-3n4d",
+    "name": "Phuket Island & Patong Beach Getaway (3N/4D)",
+    "slug": "phuket-island-patong-budget-3n4d-package",
+    "destination": "Phuket",
+    "destinationSlug": "thailand",
+    "country": "Thailand",
+    "region": "South East Asia",
+    "isInternational": true,
+    "durationDays": 4,
+    "durationNights": 3,
+    "startingPrice": 17500,
+    "discountPrice": 23999,
+    "rating": 4.88,
+    "reviewsCount": 310,
+    "heroImage": "/destinations/thailand.jpg",
+    "gallery": [
+      "/destinations/thailand.jpg"
+    ],
+    "highlights": [
+      "3 Nights Stay at Patong Beach Hotel in Phuket",
+      "Phuket Half Day City & Viewpoint Tour",
+      "Phi Phi Islands Speedboat Excursion",
+      "Daily Breakfast & Airport Transfers (Min 4 Pax)"
+    ],
+    "inclusions": [
+      "3 Nights 3\u2605 Hotel in Phuket",
+      "Daily Breakfast",
+      "Phuket City Tour",
+      "Airport Transfers"
+    ],
+    "exclusions": [
+      "Airfare & Visa",
+      "Personal Expenses"
+    ],
+    "theme": "Beach & Island",
+    "hotelCategory": "3 Star",
+    "mealPlan": "CP (Breakfast Only)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Phuket Airport Transfer \u2013 Patong Beach",
+        "description": "Arrival, transfer to hotel.",
+        "meals": [
+          "None"
+        ],
+        "activities": [
+          "Patong Beach"
+        ],
+        "hotel": "Phuket Hotel 3\u2605",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Phuket Half Day City Sightseeing",
+        "description": "Big Buddha, Karon Viewpoint, Wat Chalong.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "City Tour"
+        ],
+        "hotel": "Phuket Hotel 3\u2605",
+        "transfers": "SIC Tour"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Optional Phi Phi Island Speedboat Tour",
+        "description": "Free day or optional Phi Phi Island excursion.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Island Tour"
+        ],
+        "hotel": "Phuket Hotel 3\u2605",
+        "transfers": "N/A"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Phuket Departure",
+        "description": "Airport drop for return flight.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Drop"
+        ],
+        "hotel": "N/A",
+        "transfers": "SIC Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Phuket Beach Hotel 3\u2605",
+        "city": "Phuket",
+        "rating": "3 Star",
+        "nights": 3
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the price?",
+        "answer": "Price is \u20b917,500 per person (increased by \u20b95k from flyer rate \u20b912,500) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-thailand-pattaya-extended-4n5d",
+    "name": "Pattaya Coastal Beach & Island Extended Stay (4N/5D)",
+    "slug": "pattaya-coastal-extended-4n5d-package",
+    "destination": "Pattaya",
+    "destinationSlug": "thailand",
+    "country": "Thailand",
+    "region": "South East Asia",
+    "isInternational": true,
+    "durationDays": 5,
+    "durationNights": 4,
+    "startingPrice": 18000,
+    "discountPrice": 24999,
+    "rating": 4.89,
+    "reviewsCount": 180,
+    "heroImage": "/destinations/thailand.jpg",
+    "gallery": [
+      "/destinations/thailand.jpg"
+    ],
+    "highlights": [
+      "4 Nights Beachfront Hotel Stay in Pattaya",
+      "Coral Island Speedboat Tour with Lunch",
+      "Alcazar Cabaret Show Ticket Included",
+      "Daily Breakfast & Airport Transfers (Min 4 Pax)"
+    ],
+    "inclusions": [
+      "4 Nights 3\u2605 Hotel in Pattaya",
+      "Daily Breakfast",
+      "Coral Island Tour",
+      "Alcazar Show",
+      "Airport Transfers"
+    ],
+    "exclusions": [
+      "Airfare & Visa",
+      "Personal Expenses"
+    ],
+    "theme": "Beach & Nightlife",
+    "hotelCategory": "3 Star",
+    "mealPlan": "CP (Breakfast Only)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival Transfer to Pattaya",
+        "description": "Arrival, transfer to Pattaya hotel.",
+        "meals": [
+          "None"
+        ],
+        "activities": [
+          "Beach Walk"
+        ],
+        "hotel": "Pattaya Hotel 3\u2605",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Coral Island Tour with Lunch",
+        "description": "Speedboat tour to Coral Island with lunch.",
+        "meals": [
+          "Breakfast",
+          "Lunch"
+        ],
+        "activities": [
+          "Coral Island"
+        ],
+        "hotel": "Pattaya Hotel 3\u2605",
+        "transfers": "SIC Tour"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Pattaya Sightseeing & Alcazar Show",
+        "description": "City tour and evening Alcazar Show.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Alcazar Show"
+        ],
+        "hotel": "Pattaya Hotel 3\u2605",
+        "transfers": "SIC Tour"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Pattaya Free Day",
+        "description": "Leisure and shopping.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Shopping"
+        ],
+        "hotel": "Pattaya Hotel 3\u2605",
+        "transfers": "N/A"
+      },
+      {
+        "dayNumber": 5,
+        "title": "Pattaya Departure",
+        "description": "Airport drop for flight home.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Drop"
+        ],
+        "hotel": "N/A",
+        "transfers": "SIC Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Pattaya Beach Resort 3\u2605",
+        "city": "Pattaya",
+        "rating": "3 Star",
+        "nights": 4
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the price?",
+        "answer": "Price is \u20b918,000 per person (increased by \u20b95k from flyer rate \u20b913,000) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-philippines-siargao-3n4d",
+    "name": "Discover Philippines: Siargao Surfing & Island Paradise (3N/4D)",
+    "slug": "philippines-siargao-island-3n4d-package",
+    "destination": "Siargao",
+    "destinationSlug": "philippines",
+    "country": "Philippines",
+    "region": "South East Asia",
+    "isInternational": true,
+    "durationDays": 4,
+    "durationNights": 3,
+    "startingPrice": 43000,
+    "discountPrice": 52999,
+    "rating": 4.95,
+    "reviewsCount": 140,
+    "heroImage": "/destinations/bali.jpg",
+    "gallery": [
+      "/destinations/bali.jpg",
+      "/destinations/thailand.jpg"
+    ],
+    "highlights": [
+      "3 Nights Accommodation in Siargao 3-Star Resort",
+      "Daily Hotel Breakfast Included",
+      "Private Round-Trip Airport Transfers",
+      "Minimum 2 Pax Private Booking",
+      "World-Famous Surfing Capital & Palm Tree Lagoon Exploration"
+    ],
+    "inclusions": [
+      "3 Nights 3\u2605 Accommodation in Siargao",
+      "Daily Breakfast",
+      "Round Trip Airport Transfers on PVT Basis"
+    ],
+    "exclusions": [
+      "Internal/International Flights",
+      "Environmental & Terminal Fees",
+      "Tipping & Personal Expenses"
+    ],
+    "theme": "Islands & Surfing",
+    "hotelCategory": "3 Star",
+    "mealPlan": "CP (Breakfast Only)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival Siargao \u2013 Hotel Transfer & Leisure",
+        "description": "Arrival at Sayak Airport (IAO), private transfer to resort. Free leisure day at Cloud 9 beach.",
+        "meals": [
+          "None"
+        ],
+        "activities": [
+          "Cloud 9 Beach"
+        ],
+        "hotel": "Siargao Resort 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Siargao Island Free Leisure Day",
+        "description": "Free day to explore Guyam, Daku, and Naked islands or learn surfing.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Surfing / Beach"
+        ],
+        "hotel": "Siargao Resort 3\u2605",
+        "transfers": "N/A"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Siargao Lagoon & Beach Day",
+        "description": "Free day to visit Sugba Lagoon or Maasin River palm tree swing.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Sugba Lagoon"
+        ],
+        "hotel": "Siargao Resort 3\u2605",
+        "transfers": "N/A"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Siargao Departure",
+        "description": "Breakfast, checkout, and private transfer to airport.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Drop"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Siargao Island Resort 3\u2605",
+        "city": "Siargao",
+        "rating": "3 Star",
+        "nights": 3
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the price?",
+        "answer": "Price is \u20b943,000 per person ($515 USD, increased by $60 USD / \u20b95k INR from flyer rate $455 USD) for min 2 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-philippines-bohol-puertoprincesa-3n4d",
+    "name": "Discover Philippines: Puerto Princesa & Bohol Countryside Tour (3N/4D)",
+    "slug": "philippines-puerto-princesa-bohol-3n4d-package",
+    "destination": "Puerto Princesa, Bohol",
+    "destinationSlug": "philippines",
+    "country": "Philippines",
+    "region": "South East Asia",
+    "isInternational": true,
+    "durationDays": 4,
+    "durationNights": 3,
+    "startingPrice": 37500,
+    "discountPrice": 46999,
+    "rating": 4.96,
+    "reviewsCount": 190,
+    "heroImage": "/destinations/bali.jpg",
+    "gallery": [
+      "/destinations/bali.jpg"
+    ],
+    "highlights": [
+      "Bohol Countryside Tour with Chocolate Hills & Tarsier Sanctuary",
+      "Loboc River Cruise with Buffet Lunch Included",
+      "Puerto Princesa City Tour & Applicable Entrance Fees",
+      "3 Nights Accommodation with Daily Breakfast",
+      "Private Airport & Tour Transfers (Min 2 Pax)"
+    ],
+    "inclusions": [
+      "3 Nights 3\u2605 Accommodation in Puerto Princesa",
+      "Daily Breakfast + 1 Buffet Lunch on Loboc River Cruise",
+      "Bohol Countryside Tour & Puerto Princesa City Tour",
+      "Private Airport Transfers & English Speaking Guide"
+    ],
+    "exclusions": [
+      "Internal/International Airfare",
+      "Terminal & Environmental Fees",
+      "Personal Expenses"
+    ],
+    "theme": "Nature & Countryside",
+    "hotelCategory": "3 Star",
+    "mealPlan": "MAP (Breakfast + Selected Lunch)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival Puerto Princesa \u2013 Hotel Transfer",
+        "description": "Arrival, private transfer to hotel. Free evening.",
+        "meals": [
+          "None"
+        ],
+        "activities": [
+          "Transfer"
+        ],
+        "hotel": "Puerto Princesa Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Bohol Countryside Tour & Loboc River Cruise",
+        "description": "Pick up 08:30 for Bohol Countryside Tour. Visit Chocolate Hills, Tarsier Sanctuary, and enjoy Loboc River Cruise with lunch.",
+        "meals": [
+          "Breakfast",
+          "Lunch"
+        ],
+        "activities": [
+          "Chocolate Hills",
+          "Loboc River Cruise",
+          "Tarsiers"
+        ],
+        "hotel": "Puerto Princesa Hotel 3\u2605",
+        "transfers": "Private Tour"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Puerto Princesa Free Day",
+        "description": "Free day for optional Underground River Tour or Honda Bay Island hopping.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Leisure"
+        ],
+        "hotel": "Puerto Princesa Hotel 3\u2605",
+        "transfers": "N/A"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Puerto Princesa Departure",
+        "description": "Breakfast, checkout, and private airport transfer.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Drop"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Puerto Princesa Resort 3\u2605",
+        "city": "Puerto Princesa",
+        "rating": "3 Star",
+        "nights": 3
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the price?",
+        "answer": "Price is \u20b937,500 per person ($450 USD, increased by $60 USD / \u20b95k INR from flyer rate $390 USD) for min 2 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-philippines-manila-3n4d",
+    "name": "Discover Philippines: Manila City Heritage & Cultural Experience (3N/4D)",
+    "slug": "philippines-manila-city-3n4d-package",
+    "destination": "Manila",
+    "destinationSlug": "philippines",
+    "country": "Philippines",
+    "region": "South East Asia",
+    "isInternational": true,
+    "durationDays": 4,
+    "durationNights": 3,
+    "startingPrice": 44000,
+    "discountPrice": 53999,
+    "rating": 4.9,
+    "reviewsCount": 160,
+    "heroImage": "/destinations/singapore.jpg",
+    "gallery": [
+      "/destinations/singapore.jpg"
+    ],
+    "highlights": [
+      "Guided Manila City Tour (Intramuros, Fort Santiago & Rizal Park)",
+      "3 Nights Hotel Stay in Central Manila",
+      "Daily Breakfast & Applicable Entrance Fees",
+      "Private Airport & Tour Transfers (Min 2 Pax)"
+    ],
+    "inclusions": [
+      "3 Nights 3\u2605 Hotel Stay in Manila",
+      "Daily Breakfast",
+      "Manila City Tour with Guide",
+      "Private Airport Transfers"
+    ],
+    "exclusions": [
+      "Airfare",
+      "Terminal & Porterage Fees",
+      "Personal Expenses"
+    ],
+    "theme": "City & Heritage",
+    "hotelCategory": "3 Star",
+    "mealPlan": "CP (Breakfast Only)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival Manila \u2013 Transfer to Hotel",
+        "description": "Arrival at Ninoy Aquino Airport (MNL), private transfer to hotel.",
+        "meals": [
+          "None"
+        ],
+        "activities": [
+          "Transfer"
+        ],
+        "hotel": "Manila Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Manila City Tour",
+        "description": "Pick up 09:00 for Manila City Tour. Visit historic Intramuros, Fort Santiago, San Agustin Church, and Rizal Park.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Intramuros Tour",
+          "Fort Santiago"
+        ],
+        "hotel": "Manila Hotel 3\u2605",
+        "transfers": "Private Tour"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Manila Free Leisure & Shopping Day",
+        "description": "Free day for shopping at SM Mall of Asia.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Mall of Asia Shopping"
+        ],
+        "hotel": "Manila Hotel 3\u2605",
+        "transfers": "N/A"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Manila Departure",
+        "description": "Breakfast, checkout, and airport transfer.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Drop"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Manila Central Hotel 3\u2605",
+        "city": "Manila",
+        "rating": "3 Star",
+        "nights": 3
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the price?",
+        "answer": "Price is \u20b944,000 per person ($530 USD, increased by $60 USD / \u20b95k INR from flyer rate $470 USD) for min 2 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-srilanka-kandy-bentota-4n5d",
+    "name": "Sri Lanka Circuit 1: Kandy Hills (2N) & Bentota Beach (2N) (4N/5D)",
+    "slug": "srilanka-kandy-bentota-4n5d-tour-package",
+    "destination": "Kandy, Bentota, Galle",
+    "destinationSlug": "sri-lanka",
+    "country": "Sri Lanka",
+    "region": "South Asia",
+    "isInternational": true,
+    "durationDays": 5,
+    "durationNights": 4,
+    "startingPrice": 40000,
+    "discountPrice": 48999,
+    "rating": 4.93,
+    "reviewsCount": 210,
+    "heroImage": "/destinations/bhutan.jpg",
+    "gallery": [
+      "/destinations/bhutan.jpg"
+    ],
+    "highlights": [
+      "2 Nights Kandy Sacred Temple & Cultural Shows",
+      "2 Nights Bentota Beach & Galle Dutch Fort Day Trip",
+      "MAP Plan: Daily Breakfast & Dinner Included",
+      "Private Transfers in AC Vehicle (Min 4 Pax)"
+    ],
+    "inclusions": [
+      "2N Kandy (3\u2605) + 2N Bentota (3\u2605)",
+      "MAP Plan (Breakfast + Dinner)",
+      "Private AC Transfers & Sightseeing",
+      "Galle Day Excursion"
+    ],
+    "exclusions": [
+      "Airfare & Visa",
+      "Monument Entry Tickets",
+      "Personal Expenses"
+    ],
+    "theme": "Hills & Beach",
+    "hotelCategory": "3 Star",
+    "mealPlan": "MAP (Breakfast + Dinner)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Airport to Kandy (110 Kms / 4 Hrs+)",
+        "description": "Arrival, drive to Kandy visiting Pinnawala Elephant Orphanage enroute.",
+        "meals": [
+          "Dinner"
+        ],
+        "activities": [
+          "Elephant Orphanage"
+        ],
+        "hotel": "Kandy Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Kandy City Tour",
+        "description": "Visit Temple of the Tooth Relic, Royal Botanical Gardens, and Kandy Lake.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Tooth Temple Tour"
+        ],
+        "hotel": "Kandy Hotel 3\u2605",
+        "transfers": "Private Tour"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Kandy to Bentota (185 Kms / 5 Hrs+)",
+        "description": "Scenic drive down to Bentota beach resort.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Bentota Beach"
+        ],
+        "hotel": "Bentota Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Bentota to Galle Day Trip to Bentota",
+        "description": "Excursion to UNESCO Galle Dutch Fort and Kosgoda Turtle Hatchery.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Galle Fort",
+          "Turtle Hatchery"
+        ],
+        "hotel": "Bentota Hotel 3\u2605",
+        "transfers": "Private Tour"
+      },
+      {
+        "dayNumber": 5,
+        "title": "Bentota to Airport Departure",
+        "description": "Checkout and transfer to Colombo airport.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Drop"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Kandy Hotel 3\u2605",
+        "city": "Kandy",
+        "rating": "3 Star",
+        "nights": 2
+      },
+      {
+        "name": "Bentota Resort 3\u2605",
+        "city": "Bentota",
+        "rating": "3 Star",
+        "nights": 2
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the price?",
+        "answer": "Price is \u20b940,000 per person MAP Plan (increased by \u20b95k from flyer rate \u20b935,000) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-srilanka-kandy-nuwaraeliya-colombo-4n5d",
+    "name": "Sri Lanka Circuit 2: Kandy (2N), Nuwara Eliya (1N) & Colombo (1N) (4N/5D)",
+    "slug": "srilanka-kandy-nuwaraeliya-colombo-4n5d-package",
+    "destination": "Kandy, Nuwara Eliya, Colombo",
+    "destinationSlug": "sri-lanka",
+    "country": "Sri Lanka",
+    "region": "South Asia",
+    "isInternational": true,
+    "durationDays": 5,
+    "durationNights": 4,
+    "startingPrice": 40000,
+    "discountPrice": 48999,
+    "rating": 4.92,
+    "reviewsCount": 195,
+    "heroImage": "/destinations/bhutan.jpg",
+    "gallery": [
+      "/destinations/bhutan.jpg"
+    ],
+    "highlights": [
+      "Kandy Temple of Tooth & Tea Factory Tour",
+      "Nuwara Eliya Hill Station & Gregory Lake",
+      "Colombo Capital City Shopping & Sightseeing",
+      "MAP Plan: Daily Breakfast & Dinner Included (Min 4 Pax)"
+    ],
+    "inclusions": [
+      "2N Kandy + 1N Nuwara Eliya + 1N Colombo",
+      "MAP Plan (Breakfast + Dinner)",
+      "Private AC Transfers"
+    ],
+    "exclusions": [
+      "Airfare & Visa",
+      "Entrance Fees"
+    ],
+    "theme": "Hill Country & Capital",
+    "hotelCategory": "3 Star",
+    "mealPlan": "MAP (Breakfast + Dinner)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Airport to Kandy",
+        "description": "Transfer to Kandy.",
+        "meals": [
+          "Dinner"
+        ],
+        "activities": [
+          "Transfer"
+        ],
+        "hotel": "Kandy Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Kandy City Tour",
+        "description": "Tooth Relic Temple and Kandy cultural dance.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Tooth Temple"
+        ],
+        "hotel": "Kandy Hotel 3\u2605",
+        "transfers": "Private Tour"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Kandy to Nuwara Eliya",
+        "description": "Tea estates, waterfalls, and Gregory Lake.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Tea Country Tour"
+        ],
+        "hotel": "Nuwara Eliya Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Nuwara Eliya to Colombo",
+        "description": "Drive to Colombo. Evening shopping at Pettah Market.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Colombo Shopping"
+        ],
+        "hotel": "Colombo Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 5,
+        "title": "Colombo Airport Departure",
+        "description": "Transfer to airport.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Drop"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Sri Lanka Heritage 3\u2605",
+        "city": "Multi-City",
+        "rating": "3 Star",
+        "nights": 4
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the price?",
+        "answer": "Price is \u20b940,000 per person MAP Plan (increased by \u20b95k from flyer rate \u20b935,000) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-srilanka-sigiriya-kandy-colombo-4n5d",
+    "name": "Sri Lanka Circuit 3: Sigiriya Fortress (2N), Kandy (1N) & Colombo (1N) (4N/5D)",
+    "slug": "srilanka-sigiriya-kandy-colombo-4n5d-package",
+    "destination": "Sigiriya, Kandy, Colombo",
+    "destinationSlug": "sri-lanka",
+    "country": "Sri Lanka",
+    "region": "South Asia",
+    "isInternational": true,
+    "durationDays": 5,
+    "durationNights": 4,
+    "startingPrice": 40000,
+    "discountPrice": 48999,
+    "rating": 4.94,
+    "reviewsCount": 230,
+    "heroImage": "/destinations/bhutan.jpg",
+    "gallery": [
+      "/destinations/bhutan.jpg"
+    ],
+    "highlights": [
+      "2 Nights Sigiriya Rock Fortress & Dambulla Cave Temple",
+      "1 Night Kandy Temple of Tooth Relic",
+      "1 Night Colombo Capital City Shopping",
+      "MAP Plan: Daily Breakfast & Dinner (Min 4 Pax)"
+    ],
+    "inclusions": [
+      "2N Sigiriya + 1N Kandy + 1N Colombo",
+      "MAP Plan (Breakfast + Dinner)",
+      "Private AC Transfers"
+    ],
+    "exclusions": [
+      "Airfare & Visa",
+      "Entrance Tickets"
+    ],
+    "theme": "Ancient Heritage",
+    "hotelCategory": "3 Star",
+    "mealPlan": "MAP (Breakfast + Dinner)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Airport to Sigiriya",
+        "description": "Drive to Sigiriya.",
+        "meals": [
+          "Dinner"
+        ],
+        "activities": [
+          "Transfer"
+        ],
+        "hotel": "Sigiriya Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Sigiriya City Tour & Dambulla Caves",
+        "description": "Climb Sigiriya Fortress and visit Dambulla Cave Temple.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Sigiriya & Dambulla"
+        ],
+        "hotel": "Sigiriya Hotel 3\u2605",
+        "transfers": "Private Tour"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Sigiriya to Kandy",
+        "description": "Drive to Kandy, visit Tooth Relic Temple.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Tooth Temple"
+        ],
+        "hotel": "Kandy Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Kandy to Colombo",
+        "description": "Drive to Colombo, city tour and shopping.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Colombo City Tour"
+        ],
+        "hotel": "Colombo Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 5,
+        "title": "Colombo Airport Departure",
+        "description": "Airport drop.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Drop"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Sri Lanka Cultural Hotels 3\u2605",
+        "city": "Multi-City",
+        "rating": "3 Star",
+        "nights": 4
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the price?",
+        "answer": "Price is \u20b940,000 per person MAP Plan (increased by \u20b95k from flyer rate \u20b935,000) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-srilanka-yala-mirissa-bentota-4n5d",
+    "name": "Sri Lanka Circuit 4: Yala Safari (1N), Udawalawe (1N), Mirissa Beach (1N) & Bentota (1N)",
+    "slug": "srilanka-wildlife-beach-safari-4n5d-package",
+    "destination": "Yala, Udawalawe, Mirissa, Bentota",
+    "destinationSlug": "sri-lanka",
+    "country": "Sri Lanka",
+    "region": "South Asia",
+    "isInternational": true,
+    "durationDays": 5,
+    "durationNights": 4,
+    "startingPrice": 40000,
+    "discountPrice": 48999,
+    "rating": 4.96,
+    "reviewsCount": 260,
+    "heroImage": "/destinations/bhutan.jpg",
+    "gallery": [
+      "/destinations/bhutan.jpg"
+    ],
+    "highlights": [
+      "Yala National Park Leopard Safari",
+      "Udawalawe Elephant Transit Home & National Park",
+      "Mirissa Beach & Whale Watching Coast",
+      "Bentota Golden Sands & Water Sports",
+      "MAP Plan: Daily Breakfast & Dinner (Min 4 Pax)"
+    ],
+    "inclusions": [
+      "1N Yala + 1N Udawalawe + 1N Mirissa + 1N Bentota",
+      "MAP Plan (Breakfast + Dinner)",
+      "Private AC Transfers"
+    ],
+    "exclusions": [
+      "Airfare & Visa",
+      "Safari Tickets",
+      "Whale Watching Ticket"
+    ],
+    "theme": "Safari & Whale Coast",
+    "hotelCategory": "3 Star",
+    "mealPlan": "MAP (Breakfast + Dinner)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Airport to Yala National Park",
+        "description": "Arrival, drive to Yala.",
+        "meals": [
+          "Dinner"
+        ],
+        "activities": [
+          "Drive to Yala"
+        ],
+        "hotel": "Yala Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Yala Safari to Udawalawe",
+        "description": "Morning Yala safari, drive to Udawalawe elephant sanctuary.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Yala Safari",
+          "Udawalawe"
+        ],
+        "hotel": "Udawalawe Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Udawalawe to Mirissa Beach",
+        "description": "Drive to Mirissa coastal resort.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Mirissa Beach"
+        ],
+        "hotel": "Mirissa Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Mirissa to Bentota Beach",
+        "description": "Drive to Bentota, water sports and sunset beach walk.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Bentota Beach"
+        ],
+        "hotel": "Bentota Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 5,
+        "title": "Bentota Airport Departure",
+        "description": "Airport drop.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Drop"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Sri Lanka Wildlife & Beach Resorts 3\u2605",
+        "city": "Multi-City",
+        "rating": "3 Star",
+        "nights": 4
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the price?",
+        "answer": "Price is \u20b940,000 per person MAP Plan (increased by \u20b95k from flyer rate \u20b935,000) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-srilanka-bentota-galle-2n3d",
+    "name": "Sri Lanka Beach Getaway: Bentota & Galle Day Excursion (2N/3D)",
+    "slug": "srilanka-bentota-galle-2n3d-package",
+    "destination": "Bentota, Galle",
+    "destinationSlug": "sri-lanka",
+    "country": "Sri Lanka",
+    "region": "South Asia",
+    "isInternational": true,
+    "durationDays": 3,
+    "durationNights": 2,
+    "startingPrice": 29000,
+    "discountPrice": 35999,
+    "rating": 4.88,
+    "reviewsCount": 150,
+    "heroImage": "/destinations/bhutan.jpg",
+    "gallery": [
+      "/destinations/bhutan.jpg"
+    ],
+    "highlights": [
+      "2 Nights Bentota Beachfront Resort Stay",
+      "Galle Dutch Fort UNESCO Heritage Day Trip",
+      "MAP Plan: Daily Breakfast & Dinner Included (Min 4 Pax)"
+    ],
+    "inclusions": [
+      "2 Nights Bentota Hotel 3\u2605",
+      "MAP Plan (Breakfast + Dinner)",
+      "Private AC Transfers"
+    ],
+    "exclusions": [
+      "Airfare & Visa",
+      "Personal Expenses"
+    ],
+    "theme": "Short Beach Break",
+    "hotelCategory": "3 Star",
+    "mealPlan": "MAP (Breakfast + Dinner)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Airport to Bentota",
+        "description": "Transfer to Bentota resort.",
+        "meals": [
+          "Dinner"
+        ],
+        "activities": [
+          "Beach Walk"
+        ],
+        "hotel": "Bentota Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Galle Fort Day Excursion",
+        "description": "Excursion to Galle Dutch Fort.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Galle Fort Tour"
+        ],
+        "hotel": "Bentota Hotel 3\u2605",
+        "transfers": "Private Tour"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Bentota to Airport Departure",
+        "description": "Transfer to airport.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Drop"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Bentota Beach Hotel 3\u2605",
+        "city": "Bentota",
+        "rating": "3 Star",
+        "nights": 2
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the price?",
+        "answer": "Price is \u20b929,000 per person MAP Plan (increased by \u20b95k from flyer rate \u20b924,000) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-srilanka-colombo-bentota-2n3d",
+    "name": "Sri Lanka Express: Colombo City (2N) & Bentota Beach Day Trip (2N/3D)",
+    "slug": "srilanka-colombo-bentota-2n3d-package",
+    "destination": "Colombo, Bentota",
+    "destinationSlug": "sri-lanka",
+    "country": "Sri Lanka",
+    "region": "South Asia",
+    "isInternational": true,
+    "durationDays": 3,
+    "durationNights": 2,
+    "startingPrice": 29000,
+    "discountPrice": 35999,
+    "rating": 4.86,
+    "reviewsCount": 120,
+    "heroImage": "/destinations/bhutan.jpg",
+    "gallery": [
+      "/destinations/bhutan.jpg"
+    ],
+    "highlights": [
+      "2 Nights Colombo Capital City Stay & Shopping",
+      "Day Excursion to Bentota Beach & Turtle Hatchery",
+      "MAP Plan: Daily Breakfast & Dinner (Min 4 Pax)"
+    ],
+    "inclusions": [
+      "2 Nights Colombo Hotel 3\u2605",
+      "MAP Plan (Breakfast + Dinner)",
+      "Private AC Transfers"
+    ],
+    "exclusions": [
+      "Airfare & Visa",
+      "Personal Expenses"
+    ],
+    "theme": "Short City Break",
+    "hotelCategory": "3 Star",
+    "mealPlan": "MAP (Breakfast + Dinner)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Airport to Colombo",
+        "description": "Transfer to Colombo.",
+        "meals": [
+          "Dinner"
+        ],
+        "activities": [
+          "Transfer"
+        ],
+        "hotel": "Colombo Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Bentota Beach Day Trip",
+        "description": "Day trip to Bentota beach.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Bentota Day Trip"
+        ],
+        "hotel": "Colombo Hotel 3\u2605",
+        "transfers": "Private Tour"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Colombo Shopping & Departure",
+        "description": "Shopping and airport transfer.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Drop"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Colombo Central Hotel 3\u2605",
+        "city": "Colombo",
+        "rating": "3 Star",
+        "nights": 2
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the price?",
+        "answer": "Price is \u20b929,000 per person MAP Plan (increased by \u20b95k from flyer rate \u20b924,000) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-srilanka-colombo-3n4d",
+    "name": "Sri Lanka Capital & Beach: Colombo (3N) with Bentota Excursion (3N/4D)",
+    "slug": "srilanka-colombo-bentota-3n4d-package",
+    "destination": "Colombo, Bentota",
+    "destinationSlug": "sri-lanka",
+    "country": "Sri Lanka",
+    "region": "South Asia",
+    "isInternational": true,
+    "durationDays": 4,
+    "durationNights": 3,
+    "startingPrice": 35000,
+    "discountPrice": 42999,
+    "rating": 4.9,
+    "reviewsCount": 170,
+    "heroImage": "/destinations/bhutan.jpg",
+    "gallery": [
+      "/destinations/bhutan.jpg"
+    ],
+    "highlights": [
+      "3 Nights Colombo Capital Hotel Stay",
+      "Full Day Excursion to Bentota Beach",
+      "MAP Plan: Daily Breakfast & Dinner Included (Min 4 Pax)"
+    ],
+    "inclusions": [
+      "3 Nights Colombo Hotel 3\u2605",
+      "MAP Plan (Breakfast + Dinner)",
+      "Private AC Transfers"
+    ],
+    "exclusions": [
+      "Airfare & Visa",
+      "Personal Expenses"
+    ],
+    "theme": "City & Beach",
+    "hotelCategory": "3 Star",
+    "mealPlan": "MAP (Breakfast + Dinner)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Airport to Colombo",
+        "description": "Transfer to Colombo hotel.",
+        "meals": [
+          "Dinner"
+        ],
+        "activities": [
+          "Transfer"
+        ],
+        "hotel": "Colombo Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Bentota Beach Day Trip",
+        "description": "Day trip to Bentota beach.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Bentota Beach"
+        ],
+        "hotel": "Colombo Hotel 3\u2605",
+        "transfers": "Private Tour"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Colombo City Sightseeing & Shopping",
+        "description": "Colombo city tour and shopping.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Colombo Shopping"
+        ],
+        "hotel": "Colombo Hotel 3\u2605",
+        "transfers": "Private Tour"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Colombo Airport Departure",
+        "description": "Transfer to airport.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Drop"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Colombo City Hotel 3\u2605",
+        "city": "Colombo",
+        "rating": "3 Star",
+        "nights": 3
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the price?",
+        "answer": "Price is \u20b935,000 per person MAP Plan (increased by \u20b95k from flyer rate \u20b930,000) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-srilanka-kandy-bentota-colombo-3n4d",
+    "name": "Sri Lanka Highlights: Kandy (1N), Bentota (1N) & Colombo (1N) (3N/4D)",
+    "slug": "srilanka-kandy-bentota-colombo-3n4d-package",
+    "destination": "Kandy, Bentota, Colombo",
+    "destinationSlug": "sri-lanka",
+    "country": "Sri Lanka",
+    "region": "South Asia",
+    "isInternational": true,
+    "durationDays": 4,
+    "durationNights": 3,
+    "startingPrice": 35000,
+    "discountPrice": 42999,
+    "rating": 4.92,
+    "reviewsCount": 210,
+    "heroImage": "/destinations/bhutan.jpg",
+    "gallery": [
+      "/destinations/bhutan.jpg"
+    ],
+    "highlights": [
+      "Kandy Temple of Tooth Relic & Hills",
+      "Bentota Beach Resort Stay",
+      "Colombo Capital City Shopping",
+      "MAP Plan: Daily Breakfast & Dinner (Min 4 Pax)"
+    ],
+    "inclusions": [
+      "1N Kandy + 1N Bentota + 1N Colombo",
+      "MAP Plan (Breakfast + Dinner)",
+      "Private AC Transfers"
+    ],
+    "exclusions": [
+      "Airfare & Visa",
+      "Personal Expenses"
+    ],
+    "theme": "Tri-City Highlights",
+    "hotelCategory": "3 Star",
+    "mealPlan": "MAP (Breakfast + Dinner)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Airport to Kandy",
+        "description": "Transfer to Kandy, visit Tooth Relic Temple.",
+        "meals": [
+          "Dinner"
+        ],
+        "activities": [
+          "Tooth Temple"
+        ],
+        "hotel": "Kandy Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Kandy to Bentota Beach",
+        "description": "Drive to Bentota.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Bentota Beach"
+        ],
+        "hotel": "Bentota Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Bentota to Colombo City",
+        "description": "Drive to Colombo, city tour and shopping.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Colombo Tour"
+        ],
+        "hotel": "Colombo Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Colombo Departure",
+        "description": "Airport drop.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Drop"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Sri Lanka Express Hotels 3\u2605",
+        "city": "Multi-City",
+        "rating": "3 Star",
+        "nights": 3
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the price?",
+        "answer": "Price is \u20b935,000 per person MAP Plan (increased by \u20b95k from flyer rate \u20b930,000) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-srilanka-kandy-nuwaraeliya-colombo-3n4d",
+    "name": "Sri Lanka Hill Country Express: Kandy (1N), Nuwara Eliya (1N) & Colombo (1N) (3N/4D)",
+    "slug": "srilanka-kandy-nuwaraeliya-colombo-3n4d-package",
+    "destination": "Kandy, Nuwara Eliya, Colombo",
+    "destinationSlug": "sri-lanka",
+    "country": "Sri Lanka",
+    "region": "South Asia",
+    "isInternational": true,
+    "durationDays": 4,
+    "durationNights": 3,
+    "startingPrice": 35000,
+    "discountPrice": 42999,
+    "rating": 4.91,
+    "reviewsCount": 180,
+    "heroImage": "/destinations/bhutan.jpg",
+    "gallery": [
+      "/destinations/bhutan.jpg"
+    ],
+    "highlights": [
+      "Kandy Temple of Tooth & Tea Factory Visit",
+      "Nuwara Eliya Hill Station & Gregory Lake",
+      "Colombo Capital City Shopping",
+      "MAP Plan: Daily Breakfast & Dinner (Min 4 Pax)"
+    ],
+    "inclusions": [
+      "1N Kandy + 1N Nuwara Eliya + 1N Colombo",
+      "MAP Plan (Breakfast + Dinner)",
+      "Private AC Transfers"
+    ],
+    "exclusions": [
+      "Airfare & Visa",
+      "Personal Expenses"
+    ],
+    "theme": "Hill Country Express",
+    "hotelCategory": "3 Star",
+    "mealPlan": "MAP (Breakfast + Dinner)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Airport to Kandy",
+        "description": "Transfer to Kandy.",
+        "meals": [
+          "Dinner"
+        ],
+        "activities": [
+          "Tooth Temple"
+        ],
+        "hotel": "Kandy Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Kandy to Nuwara Eliya",
+        "description": "Tea gardens and Gregory Lake.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Tea Estate Tour"
+        ],
+        "hotel": "Nuwara Eliya Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Nuwara Eliya to Colombo",
+        "description": "Drive to Colombo, city tour and shopping.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Colombo Shopping"
+        ],
+        "hotel": "Colombo Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Colombo Departure",
+        "description": "Airport drop.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Drop"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Sri Lanka Hill Hotels 3\u2605",
+        "city": "Multi-City",
+        "rating": "3 Star",
+        "nights": 3
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the price?",
+        "answer": "Price is \u20b935,000 per person MAP Plan (increased by \u20b95k from flyer rate \u20b930,000) for min 4 pax."
+      }
+    ]
   }
 
 ];
