@@ -13216,6 +13216,825 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "answer": "Price is EUR 2650 (~\u20b92,43,000 INR) per adult on double sharing (increased by EUR 50 / ~\u20b95,000 from flyer rate EUR 2600)."
     }
   ]
+},
+  {
+  "id": "pkg-armenia-yerevan-tsaghkadzor-sevan-3n4d",
+  "name": "Armenia Cultural Express: Yerevan, Tsaghkadzor Ropeway & Lake Sevan (3N/4D)",
+  "slug": "armenia-yerevan-tsaghkadzor-sevan-3n4d-package",
+  "destination": "Yerevan, Tsaghkadzor, Lake Sevan",
+  "destinationSlug": "armenia",
+  "country": "Armenia",
+  "region": "Caucasus",
+  "isInternational": true,
+  "durationDays": 4,
+  "durationNights": 3,
+  "startingPrice": 33000,
+  "discountPrice": 39999,
+  "rating": 4.9,
+  "reviewsCount": 130,
+  "heroImage": "/destinations/switzerland.jpg",
+  "gallery": [
+    "/destinations/switzerland.jpg"
+  ],
+  "highlights": [
+    "Ararat Brandy Factory Tour & Degustation Tasting",
+    "Tsaghkadzor Alpine Ropeway Cable Car Ride",
+    "High-Altitude Pearl Lake Sevan & Sevanavank Monastery",
+    "Vernissage Open-Air Flea Market & Cascade Complex",
+    "Private Transfers & 2 Bottles of Water Daily Per Pax"
+  ],
+  "inclusions": [
+    "3 Nights Accommodation in 3\u2605 / 4\u2605 Yerevan Hotel",
+    "Daily Breakfast",
+    "Ararat Brandy Factory Tour & Degustation Ticket",
+    "Tsaghkadzor Ropeway Ticket",
+    "Private Sightseeing Tours with English Speaking Guide",
+    "Private Airport Pickup & Drop Transfers (EVN)",
+    "2 Water Bottles per person per day"
+  ],
+  "exclusions": [
+    "International Flights & Armenia Visa",
+    "Lunch & Dinners",
+    "Personal Expenses"
+  ],
+  "theme": "Caucasus Heritage & Alpine Lakes",
+  "hotelCategory": "3 Star / 4 Star",
+  "mealPlan": "CP (Daily Breakfast)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Ani Grand Hotel / Opera Suite Yerevan 4\u2605",
+      "city": "Yerevan",
+      "rating": "4 Star",
+      "nights": 3
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Yerevan Airport Arrival & Hotel Check-in",
+      "description": "Arrival at Zvartnots International Airport (EVN). Private transfer to Yerevan hotel.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Transfer"
+      ],
+      "hotel": "Yerevan 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Yerevan City Tour, Ararat Brandy & Vernissage",
+      "description": "Guided city tour of Republic Square, Cascade Complex, Yerevan Brandy Factory ARARAT degustation tasting, and Vernissage craft market.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Republic Square",
+        "ARARAT Brandy Degustation",
+        "Vernissage Market"
+      ],
+      "hotel": "Yerevan 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Tsaghkadzor Ropeway & Lake Sevan Tour",
+      "description": "Excursion to Tsaghkadzor ski resort, ropeway ride up Mount Teghenis, and azure Lake Sevan with Sevanavank Monastery.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Tsaghkadzor Ropeway",
+        "Lake Sevan",
+        "Sevanavank Monastery"
+      ],
+      "hotel": "Yerevan 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Yerevan Airport Departure",
+      "description": "Check out and private transfer to EVN airport.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Transfer"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private Transfer"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package pricing?",
+      "answer": "Price is $395 USD (~\u20b933,000) per person on double sharing (increased by $60 / \u20b95,000 from flyer rate $335)."
+    }
+  ]
+},
+  {
+  "id": "pkg-armenia-garni-geghard-symphony-stones-4n5d",
+  "name": "Armenia Grand Wonders: Yerevan, Tsaghkadzor, Lake Sevan, Garni Temple & Geghard (4N/5D)",
+  "slug": "armenia-garni-geghard-symphony-stones-4n5d-package",
+  "destination": "Yerevan, Tsaghkadzor, Lake Sevan, Garni, Geghard",
+  "destinationSlug": "armenia",
+  "country": "Armenia",
+  "region": "Caucasus",
+  "isInternational": true,
+  "durationDays": 5,
+  "durationNights": 4,
+  "startingPrice": 41000,
+  "discountPrice": 49999,
+  "rating": 4.94,
+  "reviewsCount": 150,
+  "heroImage": "/destinations/switzerland.jpg",
+  "gallery": [
+    "/destinations/switzerland.jpg"
+  ],
+  "highlights": [
+    "Garni Pagan Temple & UNESCO Geghard Cave Monastery",
+    "Charents Arch Mount Ararat Panoramic View",
+    "Symphony of Stones Basalt Canyon Wonder",
+    "Ararat Brandy Factory & Tsaghkadzor Cable Car",
+    "Lake Sevan & Private Guided Transfers"
+  ],
+  "inclusions": [
+    "4 Nights Accommodation in Yerevan 4\u2605 Hotel",
+    "Daily Breakfast",
+    "Ararat Brandy Tour & Tasting Ticket",
+    "Tsaghkadzor Ropeway Ticket",
+    "Garni & Geghard Monument Entrance Fees",
+    "Private Airport Pickup & Drop Transfers"
+  ],
+  "exclusions": [
+    "Airfare & Visa",
+    "Personal Expenses"
+  ],
+  "theme": "Pagan Temples & Rock Architecture",
+  "hotelCategory": "4 Star",
+  "mealPlan": "CP (Daily Breakfast)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Ani Plaza Hotel / DoubleTree Yerevan 4\u2605",
+      "city": "Yerevan",
+      "rating": "4 Star",
+      "nights": 4
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Yerevan Airport Arrival",
+      "description": "Arrival at EVN Airport. Private transfer to hotel.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Transfer"
+      ],
+      "hotel": "Yerevan 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Yerevan City Tour & Ararat Brandy Tasting",
+      "description": "City tour, Republic Square, Ararat Brandy factory degustation, Vernissage.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Yerevan City Tour",
+        "Ararat Brandy Factory"
+      ],
+      "hotel": "Yerevan 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Tsaghkadzor Ropeway & Lake Sevan",
+      "description": "Tsaghkadzor ropeway cable car and Lake Sevan peninsula.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Tsaghkadzor Ropeway",
+        "Lake Sevan"
+      ],
+      "hotel": "Yerevan 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Charents Arch, Garni Temple, Geghard & Symphony of Stones",
+      "description": "Stop at Charents Arch, visit 1st century Garni Greco-Roman temple, UNESCO Geghard cave monastery, and Symphony of Stones canyon.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Garni Temple",
+        "Geghard Monastery",
+        "Symphony of Stones"
+      ],
+      "hotel": "Yerevan 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Yerevan Departure",
+      "description": "Check out and private transfer to airport.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Transfer"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private Transfer"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package pricing?",
+      "answer": "Price is $490 USD (~\u20b941,000) per person on double sharing (increased by $60 / \u20b95,000 from flyer rate $430)."
+    }
+  ]
+},
+  {
+  "id": "pkg-armenia-areni-wine-noravank-jermuk-5n6d",
+  "name": "Armenia Complete Odyssey: Yerevan, Sevan, Garni, Areni Winery & Jermuk Resort (5N/6D)",
+  "slug": "armenia-areni-wine-noravank-jermuk-5n6d-package",
+  "destination": "Yerevan, Tsaghkadzor, Lake Sevan, Areni, Noravank, Jermuk",
+  "destinationSlug": "armenia",
+  "country": "Armenia",
+  "region": "Caucasus",
+  "isInternational": true,
+  "durationDays": 6,
+  "durationNights": 5,
+  "startingPrice": 51500,
+  "discountPrice": 62000,
+  "rating": 4.97,
+  "reviewsCount": 165,
+  "heroImage": "/destinations/switzerland.jpg",
+  "gallery": [
+    "/destinations/switzerland.jpg"
+  ],
+  "highlights": [
+    "6,000-Year-Old Areni-1 Cave & Areni Winery Tasting",
+    "Noravank Monastery in Red Rock Canyon",
+    "Jermuk Spa Resort Town & Mineral Water Waterfall",
+    "Garni Temple, Geghard Monastery & Symphony of Stones",
+    "Lake Sevan, Tsaghkadzor Ropeway & Ararat Brandy Factory"
+  ],
+  "inclusions": [
+    "5 Nights Accommodation in Yerevan 4\u2605 Hotel",
+    "Daily Breakfast",
+    "Areni Winery Tasting Ticket",
+    "Ararat Brandy Factory & Tsaghkadzor Ropeway Tickets",
+    "Private Guided Sightseeing & Airport Transfers"
+  ],
+  "exclusions": [
+    "Airfare & Visa",
+    "Personal Expenses"
+  ],
+  "theme": "Wine Country & Mineral Waters",
+  "hotelCategory": "4 Star",
+  "mealPlan": "CP (Daily Breakfast)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Grand Hotel Yerevan / Radisson Blu 4\u2605/5\u2605",
+      "city": "Yerevan",
+      "rating": "4 Star",
+      "nights": 5
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Yerevan Arrival",
+      "description": "Airport pickup and drop to hotel.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Pickup"
+      ],
+      "hotel": "Yerevan 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Yerevan City Tour & Ararat Brandy Factory",
+      "description": "City tour, Republic Square, Ararat Brandy factory degustation.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Yerevan Tour",
+        "Ararat Brandy"
+      ],
+      "hotel": "Yerevan 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Tsaghkadzor Cable Car & Lake Sevan",
+      "description": "Ropeway up Tsaghkadzor and Lake Sevan peninsula.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Tsaghkadzor Ropeway",
+        "Lake Sevan"
+      ],
+      "hotel": "Yerevan 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Charents Arch, Garni & Geghard Monastery",
+      "description": "Garni temple, UNESCO Geghard cave monastery, Symphony of Stones.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Garni Temple",
+        "Geghard Monastery"
+      ],
+      "hotel": "Yerevan 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Areni Cave, Noravank Monastery, Areni Winery & Jermuk",
+      "description": "Visit Areni-1 cave, red gorge Noravank monastery, wine tasting at Areni Winery, and Jermuk mineral waterfall.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Areni Cave",
+        "Noravank Monastery",
+        "Areni Wine Tasting",
+        "Jermuk Waterfall"
+      ],
+      "hotel": "Yerevan 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 6,
+      "title": "Yerevan Departure",
+      "description": "Check out and transfer to airport.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Transfer"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private Transfer"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package pricing?",
+      "answer": "Price is $615 USD (~\u20b951,500) per person on double sharing (increased by $60 / \u20b95,000 from flyer rate $555)."
+    }
+  ]
+},
+  {
+  "id": "pkg-baku-absheron-gabala-4n5d",
+  "name": "Baku Fire & Mountains: Old City, Ateshgah Fire Temple, Yanardag & Gabala Cable Car (4N/5D)",
+  "slug": "baku-absheron-gabala-4n5d-package",
+  "destination": "Baku, Absheron Peninsula, Gabala",
+  "destinationSlug": "baku",
+  "country": "Azerbaijan",
+  "region": "Caucasus",
+  "isInternational": true,
+  "durationDays": 5,
+  "durationNights": 4,
+  "startingPrice": 32500,
+  "discountPrice": 39999,
+  "rating": 4.92,
+  "reviewsCount": 180,
+  "heroImage": "/destinations/dubai.jpg",
+  "gallery": [
+    "/destinations/dubai.jpg"
+  ],
+  "highlights": [
+    "Baku Old City UNESCO Icherisheher & Flame Towers Funicular Ride",
+    "Ateshgah Zoroastrian Fire Temple & Yanardag Burning Mountain",
+    "Tufandag Alpine Resort Gabala Cable Car Ride (2 Passes)",
+    "Nohur Lake Scenic Mountain Reflection",
+    "Private Transfers & English Speaking Guide"
+  ],
+  "inclusions": [
+    "4 Nights Accommodation in 4\u2605 Baku Hotel",
+    "Daily Breakfast",
+    "Gabala Cable Car 2-Pass Ticket",
+    "Ateshgah Fire Temple & Yanardag Entry Passes",
+    "Funicular Railway Pass",
+    "Private Airport Pickup & Drop Transfers (GYD)"
+  ],
+  "exclusions": [
+    "Airfare & Azerbaijan e-Visa ($26)",
+    "Lunch & Dinners",
+    "Personal Expenses"
+  ],
+  "theme": "Land of Fire & Caucasian Alps",
+  "hotelCategory": "4 Star",
+  "mealPlan": "CP (Daily Breakfast)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Winter Park Hotel Baku / Sapphire Hotel 4\u2605",
+      "city": "Baku",
+      "rating": "4 Star",
+      "nights": 4
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Baku Heydar Aliyev Arrival",
+      "description": "Arrival at Heydar Aliyev International Airport (GYD). Private transfer to Baku hotel.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Transfer"
+      ],
+      "hotel": "Winter Park Baku 4\u2605",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Baku Panoramic City Tour & Flame Towers",
+      "description": "Explore Icherisheher Old City (Maiden Tower, Shirvanshahs Palace), Baku Boulevard, Highland Park view, and funicular railway ride.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Old City Tour",
+        "Highland Park Funicular",
+        "Flame Towers View"
+      ],
+      "hotel": "Winter Park Baku 4\u2605",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Full Day Gabala Mountain Resort Excursion",
+      "description": "Drive to Caucasian alpine region of Gabala. Visit Nohur Lake and ride Tufandag Mountain Cable Car (2 passes).",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Gabala Cable Car",
+        "Nohur Lake"
+      ],
+      "hotel": "Winter Park Baku 4\u2605",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Absheron Peninsula Fire Tour: Ateshgah & Yanardag",
+      "description": "Visit Ateshgah Zoroastrian Fire Temple, natural eternal flame mountain Yanardag, and photo stop at futuristic Heydar Aliyev Center.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Fire Temple Ateshgah",
+        "Yanardag Fire Mountain",
+        "Heydar Aliyev Center"
+      ],
+      "hotel": "Winter Park Baku 4\u2605",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Baku Departure",
+      "description": "Check out and private airport transfer.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Transfer"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private Transfer"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package pricing?",
+      "answer": "Price is $390 USD (~\u20b932,500) per person on double sharing (increased by $60 / \u20b95,000 from flyer rate $330)."
+    }
+  ]
+},
+  {
+  "id": "pkg-baku-gabala-absheron-shopping-5n6d",
+  "name": "Baku Grand Discovery: City, Gabala, Absheron Fire Tour & Shopping Experience (5N/6D)",
+  "slug": "baku-gabala-absheron-shopping-5n6d-package",
+  "destination": "Baku, Absheron Peninsula, Gabala",
+  "destinationSlug": "baku",
+  "country": "Azerbaijan",
+  "region": "Caucasus",
+  "isInternational": true,
+  "durationDays": 6,
+  "durationNights": 5,
+  "startingPrice": 36000,
+  "discountPrice": 44000,
+  "rating": 4.95,
+  "reviewsCount": 195,
+  "heroImage": "/destinations/dubai.jpg",
+  "gallery": [
+    "/destinations/dubai.jpg"
+  ],
+  "highlights": [
+    "5 Nights Hotel Stay in Baku Capital",
+    "Nizami Street & Park Bulvar Shopping Tour",
+    "Ateshgah Fire Temple & Yanardag Burning Mountain",
+    "Tufandag Gabala Mountain Cable Car & Nohur Lake",
+    "Old City Icherisheher & Heydar Aliyev Center"
+  ],
+  "inclusions": [
+    "5 Nights Accommodation in 4\u2605 Baku Hotel",
+    "Daily Breakfast",
+    "Gabala Cable Car 2 Passes",
+    "Fire Temple & Yanardag Entry Tickets",
+    "Dedicated Shopping Tour Transfer",
+    "Airport Pick up & Drop Transfers"
+  ],
+  "exclusions": [
+    "Airfare & Visa",
+    "Personal Expenses"
+  ],
+  "theme": "Shopping & Caucasian Heritage",
+  "hotelCategory": "4 Star",
+  "mealPlan": "CP (Daily Breakfast)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Courtyard by Marriott / Midtown Baku 4\u2605",
+      "city": "Baku",
+      "rating": "4 Star",
+      "nights": 5
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Baku Arrival",
+      "description": "Airport pickup and transfer to Baku hotel.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Pickup"
+      ],
+      "hotel": "Baku 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Baku Old City & Highland Park",
+      "description": "Old town tour, Maiden Tower, funicular to Highland Park.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Old City Tour",
+        "Highland Park"
+      ],
+      "hotel": "Baku 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Gabala Alpine Cable Car Tour",
+      "description": "Full day tour to Gabala, Nohur Lake, and Tufandag cable car ride.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Gabala Cable Car",
+        "Nohur Lake"
+      ],
+      "hotel": "Baku 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Absheron Fire Temple & Burning Mountain",
+      "description": "Ateshgah Zoroastrian Fire Temple and Yanardag natural flame mountain.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Ateshgah Temple",
+        "Yanardag Mountain"
+      ],
+      "hotel": "Baku 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Baku Shopping Tour & Nizami Street",
+      "description": "Guided shopping tour of Ganjlik Mall, Daniz Mall, and pedestrian Nizami Street.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Nizami Street Shopping",
+        "Ganjlik Mall"
+      ],
+      "hotel": "Baku 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 6,
+      "title": "Baku Departure",
+      "description": "Check out and airport drop.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Drop"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private Transfer"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package pricing?",
+      "answer": "Price is $430 USD (~\u20b936,000) per person on double sharing (increased by $60 / \u20b95,000 from flyer rate $370)."
+    }
+  ]
+},
+  {
+  "id": "pkg-baku-gabala-overnight-stay-5n6d",
+  "name": "Baku & Gabala Alpine Resort Special: 3N Baku + 2N Gabala Mountain Stay (5N/6D)",
+  "slug": "baku-gabala-overnight-stay-5n6d-package",
+  "destination": "Baku, Gabala, Absheron",
+  "destinationSlug": "baku",
+  "country": "Azerbaijan",
+  "region": "Caucasus",
+  "isInternational": true,
+  "durationDays": 6,
+  "durationNights": 5,
+  "startingPrice": 44000,
+  "discountPrice": 52000,
+  "rating": 4.98,
+  "reviewsCount": 210,
+  "heroImage": "/destinations/dubai.jpg",
+  "gallery": [
+    "/destinations/dubai.jpg"
+  ],
+  "highlights": [
+    "Includes 2 NIGHTS OVERNIGHT STAY in Gabala Mountain Resort",
+    "Baku Old City & Absheron Fire Tour Combined",
+    "Tufandag Mountain Cable Car Pass & 7 Gozel Waterfalls",
+    "Nohur Lake Boating & Gabaland Theme Park",
+    "Complete Relaxation in Caucasian Alps"
+  ],
+  "inclusions": [
+    "3 Nights Baku + 2 Nights Gabala 4\u2605 Resort Stay",
+    "Daily Breakfast",
+    "Gabala Cable Car Tickets",
+    "Fire Temple & Yanardag Entry Tickets",
+    "Private Intercity Transfers Baku \u2013 Gabala \u2013 Baku",
+    "Airport Pick up & Drop Transfers"
+  ],
+  "exclusions": [
+    "Airfare & Visa",
+    "Personal Expenses"
+  ],
+  "theme": "Overnight Alpine Resort & Fire Wonders",
+  "hotelCategory": "4 Star Resort",
+  "mealPlan": "CP (Daily Breakfast)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Winter Park Hotel 4\u2605",
+      "city": "Baku",
+      "rating": "4 Star",
+      "nights": 3
+    },
+    {
+      "name": "Qafqaz Riverside Resort 5\u2605 / Gabala Resort 4\u2605",
+      "city": "Gabala",
+      "rating": "5 Star",
+      "nights": 2
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Baku Arrival",
+      "description": "Airport pickup and drop to Baku hotel.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Pickup"
+      ],
+      "hotel": "Winter Park Baku",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Baku City Tour & Absheron Fire Peninsula",
+      "description": "Full day tour combining Icherisheher Old City, Flame Towers view, Ateshgah Fire Temple, and Yanardag burning mountain.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Old City Tour",
+        "Ateshgah Temple",
+        "Yanardag"
+      ],
+      "hotel": "Winter Park Baku",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Baku to Gabala Mountain Resort Transfer",
+      "description": "Scenic drive through Shamakhi to Gabala. Check in to luxury Gabala resort.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Drive to Gabala",
+        "Resort Check-in"
+      ],
+      "hotel": "Qafqaz Riverside Resort Gabala",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Gabala Cable Car & 7 Gozel Waterfalls",
+      "description": "Full day in Gabala: Tufandag cable car ride, 7 Gozel waterfalls, and Nohur Lake.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Tufandag Cable Car",
+        "7 Gozel Waterfalls",
+        "Nohur Lake"
+      ],
+      "hotel": "Qafqaz Riverside Resort Gabala",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Gabala to Baku Return & Shopping",
+      "description": "Drive back to Baku. Afternoon shopping at Nizami Street and souvenir markets.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Drive to Baku",
+        "Nizami Street Shopping"
+      ],
+      "hotel": "Winter Park Baku",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 6,
+      "title": "Baku Departure",
+      "description": "Check out and private airport transfer.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Drop"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private Transfer"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package pricing?",
+      "answer": "Price is $530 USD (~\u20b944,000) per person on double sharing (increased by $60 / \u20b95,000 from flyer rate $470). Includes 2 nights stay in luxury Gabala resort."
+    }
+  ]
 }
 
 ];
