@@ -45,8 +45,8 @@ export const metadata: Metadata = {
 };
 
 export default function ThailandPage() {
-  const matchedPackages = DEMO_PACKAGES.filter((p) =>
-    p.destinationSlug.toLowerCase().includes('thailand') || p.name.toLowerCase().includes('thailand')
+  const matchedPackages = DEMO_PACKAGES.filter(
+    (p) => p.isInternational && (p.destinationSlug.toLowerCase().includes('thailand') || p.name.toLowerCase().includes('thailand'))
   );
 
   const faqSchema = {

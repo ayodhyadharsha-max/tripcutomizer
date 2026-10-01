@@ -45,8 +45,8 @@ export const metadata: Metadata = {
 };
 
 export default function BaliPage() {
-  const matchedPackages = DEMO_PACKAGES.filter((p) =>
-    p.destinationSlug.toLowerCase().includes('bali') || p.name.toLowerCase().includes('bali')
+  const matchedPackages = DEMO_PACKAGES.filter(
+    (p) => p.isInternational && (p.destinationSlug.toLowerCase().includes('bali') || p.name.toLowerCase().includes('bali'))
   );
 
   const faqSchema = {

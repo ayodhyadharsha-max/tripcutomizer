@@ -45,10 +45,12 @@ export const metadata: Metadata = {
 };
 
 export default function KedarnathPage() {
-  const matchedPackages = DEMO_PACKAGES.filter((p) =>
-    p.destinationSlug.toLowerCase().includes('kedarnath') ||
-    p.destinationSlug.toLowerCase().includes('char-dham') ||
-    p.name.toLowerCase().includes('kedarnath')
+  const matchedPackages = DEMO_PACKAGES.filter(
+    (p) =>
+      !p.isInternational &&
+      (p.destinationSlug.toLowerCase().includes('kedarnath') ||
+        p.destinationSlug.toLowerCase().includes('char-dham') ||
+        p.name.toLowerCase().includes('kedarnath'))
   );
 
   const faqSchema = {

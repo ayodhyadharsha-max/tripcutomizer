@@ -46,9 +46,8 @@ export const metadata: Metadata = {
 };
 
 export default function AyodhyaPage() {
-  const matchedPackages = DEMO_PACKAGES.filter((p) =>
-    p.destinationSlug.toLowerCase().includes('ayodhya') ||
-    p.name.toLowerCase().includes('ayodhya')
+  const matchedPackages = DEMO_PACKAGES.filter(
+    (p) => !p.isInternational && (p.destinationSlug.toLowerCase().includes('ayodhya') || p.name.toLowerCase().includes('ayodhya'))
   );
 
   const faqSchema = {

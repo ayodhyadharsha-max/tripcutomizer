@@ -45,11 +45,13 @@ export const metadata: Metadata = {
 };
 
 export default function BakuPage() {
-  const matchedPackages = DEMO_PACKAGES.filter((p) =>
-    p.destinationSlug.toLowerCase().includes('baku') ||
-    p.destinationSlug.toLowerCase().includes('azerbaijan') ||
-    p.name.toLowerCase().includes('baku') ||
-    p.name.toLowerCase().includes('azerbaijan')
+  const matchedPackages = DEMO_PACKAGES.filter(
+    (p) =>
+      p.isInternational &&
+      (p.destinationSlug.toLowerCase().includes('baku') ||
+        p.destinationSlug.toLowerCase().includes('azerbaijan') ||
+        p.name.toLowerCase().includes('baku') ||
+        p.name.toLowerCase().includes('azerbaijan'))
   );
 
   const faqSchema = {

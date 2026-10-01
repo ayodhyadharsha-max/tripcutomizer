@@ -45,11 +45,13 @@ export const metadata: Metadata = {
 };
 
 export default function VaranasiPage() {
-  const matchedPackages = DEMO_PACKAGES.filter((p) =>
-    p.destinationSlug.toLowerCase().includes('varanasi') ||
-    p.destinationSlug.toLowerCase().includes('kashi') ||
-    p.name.toLowerCase().includes('varanasi') ||
-    p.name.toLowerCase().includes('kashi')
+  const matchedPackages = DEMO_PACKAGES.filter(
+    (p) =>
+      !p.isInternational &&
+      (p.destinationSlug.toLowerCase().includes('varanasi') ||
+        p.destinationSlug.toLowerCase().includes('kashi') ||
+        p.name.toLowerCase().includes('varanasi') ||
+        p.name.toLowerCase().includes('kashi'))
   );
 
   const faqSchema = {

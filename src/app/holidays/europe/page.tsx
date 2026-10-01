@@ -45,12 +45,16 @@ export const metadata: Metadata = {
 };
 
 export default function EuropePage() {
-  const matchedPackages = DEMO_PACKAGES.filter((p) =>
-    p.destinationSlug.toLowerCase().includes('europe') ||
-    p.destinationSlug.toLowerCase().includes('switzerland') ||
-    p.destinationSlug.toLowerCase().includes('paris') ||
-    p.name.toLowerCase().includes('europe') ||
-    p.name.toLowerCase().includes('switzerland')
+  const matchedPackages = DEMO_PACKAGES.filter(
+    (p) =>
+      p.isInternational &&
+      (p.region.toLowerCase().includes('europe') ||
+        p.country.toLowerCase().includes('switzerland') ||
+        p.country.toLowerCase().includes('france') ||
+        p.country.toLowerCase().includes('europe') ||
+        p.destinationSlug.toLowerCase().includes('europe') ||
+        p.destinationSlug.toLowerCase().includes('switzerland') ||
+        p.destinationSlug.toLowerCase().includes('paris'))
   );
 
   const faqSchema = {

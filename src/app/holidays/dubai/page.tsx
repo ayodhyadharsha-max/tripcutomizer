@@ -45,8 +45,8 @@ export const metadata: Metadata = {
 };
 
 export default function DubaiPage() {
-  const matchedPackages = DEMO_PACKAGES.filter((p) =>
-    p.destinationSlug.toLowerCase().includes('dubai') || p.name.toLowerCase().includes('dubai')
+  const matchedPackages = DEMO_PACKAGES.filter(
+    (p) => p.isInternational && (p.destinationSlug.toLowerCase().includes('dubai') || p.name.toLowerCase().includes('dubai'))
   );
 
   const faqSchema = {
