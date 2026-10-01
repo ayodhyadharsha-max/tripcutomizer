@@ -93,7 +93,16 @@ export default function PackageDetailPage({ params }: { params: { destination: s
   const pkg: HolidayPackage = matchedPkg || DEMO_PACKAGES[0];
 
   // Active Main Sub-Tab State
-  const [activeTab, setActiveTab] = useState<'itinerary' | 'inclusions' | 'summary' | 'highlights'>('itinerary');
+  const [activeTab, setActiveTab] = useState<'itinerary' | 'inclusions' | 'summary' | 'highlights' | 'faqs'>('itinerary');
+  const [openFaqs, setOpenFaqs] = useState<number[]>([0]);
+
+  const toggleFaq = (idx: number) => {
+    if (openFaqs.includes(idx)) {
+      setOpenFaqs(openFaqs.filter((f) => f !== idx));
+    } else {
+      setOpenFaqs([...openFaqs, idx]);
+    }
+  };
 
   // Itinerary Tab State
   const [openDays, setOpenDays] = useState<number[]>([1]);
@@ -793,6 +802,17 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                 >
                   ⭐ Key Highlights
                 </button>
+
+                <button
+                  onClick={() => setActiveTab('faqs')}
+                  className={`px-4 py-2.5 rounded-xl font-black text-xs transition-all whitespace-nowrap cursor-pointer ${
+                    activeTab === 'faqs'
+                      ? 'bg-brand-600 text-white shadow-xs'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                  }`}
+                >
+                  ❓ FAQs & Policies
+                </button>
               </div>
 
               {/* Action Buttons: Share & Download */}
@@ -1098,6 +1118,20 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                   </div>
                 </div>
 
+                {/* Night Stay Breakdown */}
+                {pkg.hotels && pkg.hotels.length > 0 && (
+                  <div className="p-4 bg-amber-50/70 border border-amber-200 rounded-2xl space-y-2">
+                    <span className="font-black text-xs text-amber-950 block">Night Stay City Breakdown:</span>
+                    <div className="flex flex-wrap gap-2 text-xs font-bold text-amber-900">
+                      {pkg.hotels.map((h, idx) => (
+                        <span key={idx} className="bg-white border border-amber-300 px-3 py-1 rounded-xl shadow-2xs">
+                          🌙 {h.nights} Nights in {h.city} ({h.name})
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 {/* Important Notes */}
                 <div className="p-4 bg-slate-100 rounded-2xl text-xs space-y-2">
                   <span className="font-bold text-slate-900 flex items-center space-x-1">
@@ -1129,6 +1163,63 @@ export default function PackageDetailPage({ params }: { params: { destination: s
                       </div>
                     </Card>
                   ))}
+                </div>
+              </div>
+            )}
+
+            {/* TAB CONTENT 5: FAQS & POLICIES */}
+            {activeTab === 'faqs' && (
+              <div className="space-y-4 animate-in fade-in">
+                <div className="bg-white p-5 rounded-2xl border border-slate-200/80 space-y-1">
+                  <h3 className="font-black text-lg text-slate-900">Frequently Asked Questions & Policies</h3>
+                  <p className="text-xs text-slate-500">Everything you need to know about booking, hotel stays & transfers</p>
+                </div>
+
+                <div className="space-y-3">
+                  {(pkg.faqs && pkg.faqs.length > 0 ? pkg.faqs : [
+                    {
+                      question: `Is ${pkg.name} 100% customizable?`,
+                      answer: `Yes! All our tour packages can be customized to your preferred travel dates, hotel choices, flight options, and sightseeing preferences.`
+                    },
+                    {
+                      question: `What hotel category is provided in this package?`,
+                      answer: `This package includes ${pkg.hotelCategory || '4 Star Deluxe'} accommodations with clean, hygienic rooms, private bath, and daily breakfast.`
+                    },
+                    {
+                      question: `Are sightseeing transfers private or shared?`,
+                      answer: `All sightseeing and airport/railway station transfers are provided via private AC vehicle reserved exclusively for your family/group.`
+                    },
+                    {
+                      question: `What is the cancellation and refund policy?`,
+                      answer: `Full refunds are processed for cancellations made 15+ days prior to travel date. Flexible token booking option allows date changes up to 7 days prior.`
+                    }
+                  ]).map((faqItem, fIdx) => {
+                    const isOpen = openFaqs.includes(fIdx);
+                    return (
+                      <Card key={fIdx} className="bg-white border-slate-200/80 rounded-2xl overflow-hidden shadow-2xs">
+                        <button
+                          type="button"
+                          onClick={() => toggleFaq(fIdx)}
+                          className="w-full p-4 flex items-center justify-between text-left hover:bg-slate-50 transition-colors cursor-pointer"
+                        >
+                          <span className="font-bold text-sm text-slate-900 flex items-center space-x-2">
+                            <span className="w-6 h-6 rounded-lg bg-brand-50 text-brand-700 font-black text-xs flex items-center justify-center shrink-0">
+                              Q{fIdx + 1}
+                            </span>
+                            <span>{faqItem.question}</span>
+                          </span>
+                          <span className="text-slate-400 pl-2 shrink-0">
+                            {isOpen ? <ChevronUp className="w-5 h-5 text-brand-600" /> : <ChevronDown className="w-5 h-5" />}
+                          </span>
+                        </button>
+                        {isOpen && (
+                          <div className="px-5 pb-5 pt-2 text-xs text-slate-600 border-t border-slate-100 bg-slate-50/50 leading-relaxed">
+                            {faqItem.answer}
+                          </div>
+                        )}
+                      </Card>
+                    );
+                  })}
                 </div>
               </div>
             )}
