@@ -62,7 +62,7 @@ export function HolidayListingView({
   const [selectedTheme, setSelectedTheme] = useState('ALL');
   const [selectedHotelCategory, setSelectedHotelCategory] = useState('ALL');
   const [selectedDuration, setSelectedDuration] = useState('ALL');
-  const [maxPrice, setMaxPrice] = useState(200000);
+  const [maxPrice, setMaxPrice] = useState(500000);
   const [sortBy, setSortBy] = useState<'recommended' | 'price-asc' | 'price-desc' | 'rating'>('recommended');
 
   // Mobile Filter Drawer Toggle
@@ -73,12 +73,12 @@ export function HolidayListingView({
 
   const resetFilters = () => {
     setSearchTerm('');
-    setSelectedCategory(defaultCategory);
-    setSelectedRegion(defaultRegion);
+    setSelectedCategory(defaultCategory || 'ALL');
+    setSelectedRegion(defaultRegion || 'ALL');
     setSelectedTheme('ALL');
     setSelectedHotelCategory('ALL');
     setSelectedDuration('ALL');
-    setMaxPrice(200000);
+    setMaxPrice(500000);
     setSortBy('recommended');
   };
 
@@ -96,17 +96,16 @@ export function HolidayListingView({
       .filter((t) => t.length > 1 && !stopWords.has(t));
 
     const matches = initialPackages.filter((pkg) => {
-      // 1. Search filter
+      // 1. Search keyword filter
       let matchesSearch = true;
       if (rawQuery) {
         const pkgText = `${pkg.name} ${pkg.destination} ${pkg.country} ${pkg.region} ${pkg.theme} ${pkg.highlights.join(' ')} ${pkg.inclusions.join(' ')}`.toLowerCase();
-
         if (pkgText.includes(rawQuery)) {
           matchesSearch = true;
         } else if (tokens.length > 0) {
           matchesSearch = tokens.some((token) => pkgText.includes(token));
         } else {
-          matchesSearch = true;
+          matchesSearch = false;
         }
       }
 
@@ -117,20 +116,77 @@ export function HolidayListingView({
         (selectedCategory === 'INDIA' && !pkg.isInternational);
 
       // 3. Region filter
-      const matchesRegion =
-        selectedRegion === 'ALL' ||
-        pkg.region.toLowerCase().includes(selectedRegion.toLowerCase());
+      let matchesRegion = true;
+      if (selectedRegion !== 'ALL') {
+        const selReg = selectedRegion.toLowerCase();
+        const pkgReg = pkg.region.toLowerCase();
+        const pkgCountry = pkg.country.toLowerCase();
+        const pkgDest = pkg.destination.toLowerCase();
+
+        if (selReg === 'international') {
+          matchesRegion = pkg.isInternational;
+        } else if (selReg === 'north india') {
+          matchesRegion = !pkg.isInternational && (pkgReg.includes('north') || pkgReg.includes('himalaya') || pkgDest.includes('ayodhya') || pkgDest.includes('varanasi') || pkgDest.includes('kashmir') || pkgDest.includes('manali') || pkgDest.includes('uttarakhand'));
+        } else if (selReg === 'south india') {
+          matchesRegion = !pkg.isInternational && (pkgReg.includes('south') || pkgDest.includes('kerala') || pkgDest.includes('andaman'));
+        } else if (selReg === 'west india') {
+          matchesRegion = !pkg.isInternational && (pkgReg.includes('west') || pkgDest.includes('goa') || pkgDest.includes('gujarat') || pkgDest.includes('rajasthan'));
+        } else if (selReg === 'east india') {
+          matchesRegion = !pkg.isInternational && (pkgReg.includes('east') || pkgDest.includes('sikkim') || pkgDest.includes('darjeeling') || pkgDest.includes('meghalaya'));
+        } else if (selReg === 'niche') {
+          matchesRegion = pkg.theme.toLowerCase().includes('spiritual') || pkg.theme.toLowerCase().includes('heritage') || pkgReg.includes('niche') || pkgDest.includes('yatra');
+        } else {
+          matchesRegion = pkgReg.includes(selReg) || pkgCountry.includes(selReg) || pkgDest.includes(selReg);
+        }
+      }
 
       // 4. Theme filter
-      const matchesTheme =
-        selectedTheme === 'ALL' ||
-        pkg.theme.toLowerCase().includes(selectedTheme.toLowerCase());
+      let matchesTheme = true;
+      if (selectedTheme !== 'ALL') {
+        const selTheme = selectedTheme.toLowerCase();
+        const pkgTheme = pkg.theme.toLowerCase();
+        const pkgHighlights = pkg.highlights.join(' ').toLowerCase();
+        const pkgName = pkg.name.toLowerCase();
+        const pkgDest = pkg.destination.toLowerCase();
+        const pkgHotelCat = pkg.hotelCategory.toLowerCase();
+
+        if (selTheme === 'spiritual') {
+          matchesTheme = pkgTheme.includes('spiritual') || pkgTheme.includes('yatra') || pkgHighlights.includes('darshan') || pkgHighlights.includes('temple') || pkgName.includes('yatra') || pkgName.includes('mandir');
+        } else if (selTheme === 'honeymoon') {
+          matchesTheme = pkgTheme.includes('honeymoon') || pkgTheme.includes('romantic') || pkgHighlights.includes('couple') || pkgName.includes('romantic') || pkgName.includes('honeymoon') || pkgDest.includes('bali') || pkgDest.includes('maldives');
+        } else if (selTheme === 'beach') {
+          matchesTheme = pkgTheme.includes('beach') || pkgTheme.includes('coast') || pkgHighlights.includes('beach') || pkgHighlights.includes('island');
+        } else if (selTheme === 'luxury') {
+          matchesTheme = pkgTheme.includes('luxury') || pkgTheme.includes('5 star') || pkgTheme.includes('grandeur') || pkgHotelCat.includes('4 star') || pkgHotelCat.includes('5 star');
+        } else if (selTheme === 'heritage') {
+          matchesTheme = pkgTheme.includes('heritage') || pkgTheme.includes('culture') || pkgTheme.includes('ancient') || pkgHighlights.includes('unesco');
+        } else if (selTheme === 'family') {
+          matchesTheme = pkgTheme.includes('family') || pkgTheme.includes('group') || pkgTheme.includes('disneyland') || pkgHighlights.includes('theme park');
+        } else if (selTheme === 'wildlife') {
+          matchesTheme = pkgTheme.includes('wildlife') || pkgTheme.includes('safari') || pkgHighlights.includes('zoo') || pkgHighlights.includes('park');
+        } else if (selTheme === 'adventure') {
+          matchesTheme = pkgTheme.includes('adventure') || pkgTheme.includes('ski') || pkgTheme.includes('atv') || pkgTheme.includes('trekking') || pkgHighlights.includes('ropeway');
+        } else {
+          matchesTheme = pkgTheme.includes(selTheme);
+        }
+      }
 
       // 5. Hotel category filter
-      const matchesHotelCat =
-        selectedHotelCategory === 'ALL' || pkg.hotelCategory === selectedHotelCategory;
+      let matchesHotelCat = true;
+      if (selectedHotelCategory !== 'ALL') {
+        const pkgHotel = pkg.hotelCategory.toLowerCase();
+        if (selectedHotelCategory === '3 Star') {
+          matchesHotelCat = pkgHotel.includes('3 star') || pkgHotel.includes('3★');
+        } else if (selectedHotelCategory === '4 Star') {
+          matchesHotelCat = pkgHotel.includes('4 star') || pkgHotel.includes('4★');
+        } else if (selectedHotelCategory === '5 Star') {
+          matchesHotelCat = pkgHotel.includes('5 star') || pkgHotel.includes('5★');
+        } else {
+          matchesHotelCat = pkgHotel.includes(selectedHotelCategory.toLowerCase());
+        }
+      }
 
-      // 6. Price filter
+      // 6. Max budget filter
       const matchesPrice = pkg.startingPrice <= maxPrice;
 
       // 7. Duration filter
@@ -149,15 +205,6 @@ export function HolidayListingView({
         matchesDuration
       );
     });
-
-    // Fallback: If query was passed but yielded 0 results, return top packages in selected category so screen is never empty
-    if (rawQuery && matches.length === 0) {
-      return initialPackages.filter((pkg) => {
-        if (selectedCategory === 'INTERNATIONAL') return pkg.isInternational;
-        if (selectedCategory === 'INDIA') return !pkg.isInternational;
-        return true;
-      });
-    }
 
     return matches.sort((a, b) => {
       if (sortBy === 'price-asc') return a.startingPrice - b.startingPrice;
@@ -294,20 +341,22 @@ export function HolidayListingView({
       <div>
         <div className="flex justify-between items-center text-xs font-bold text-slate-800 mb-1.5">
           <span>Max Budget</span>
-          <span className="text-brand-600 font-black">{formatCurrency(maxPrice)}</span>
+          <span className="text-brand-600 font-black">
+            {maxPrice >= 500000 ? '₹5,00,000+ (Any)' : formatCurrency(maxPrice)}
+          </span>
         </div>
         <input
           type="range"
           min="10000"
-          max="200000"
-          step="5000"
+          max="500000"
+          step="10000"
           value={maxPrice}
           onChange={(e) => setMaxPrice(Number(e.target.value))}
           className="w-full accent-brand-500 cursor-pointer"
         />
         <div className="flex justify-between text-[10px] text-slate-400 font-bold mt-1">
           <span>₹10,000</span>
-          <span>₹2,00,000</span>
+          <span>₹5,00,000+</span>
         </div>
       </div>
     </div>
@@ -366,7 +415,7 @@ export function HolidayListingView({
           {/* 1-Tap Horizontal Quick Filter Chips */}
           <div className="flex items-center space-x-2 overflow-x-auto pb-1 no-scrollbar text-xs font-bold text-slate-700">
             <button
-              onClick={() => { setSelectedCategory('ALL'); setSelectedHotelCategory('ALL'); setSelectedTheme('ALL'); setSelectedDuration('ALL'); setMaxPrice(200000); }}
+              onClick={() => resetFilters()}
               className={`px-3.5 py-1.5 rounded-full shrink-0 border transition-all ${
                 selectedCategory === 'ALL' && selectedHotelCategory === 'ALL' && selectedTheme === 'ALL'
                   ? 'bg-brand-600 text-white border-brand-600 shadow-xs'
