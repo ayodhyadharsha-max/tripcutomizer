@@ -12,7 +12,7 @@ export default function InternationalHolidaysPage() {
       subtitle="Explore Europe, Dubai, Bali, Singapore, Maldives, Thailand & Japan with flights, visas, 4-star hotels & Indian meals."
       badgeText="Worldwide Destinations"
       defaultCategory="INTERNATIONAL"
-      defaultRegion="International"
+      defaultRegion="ALL"
     />
   );
 }
