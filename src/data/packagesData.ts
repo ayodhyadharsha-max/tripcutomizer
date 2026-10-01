@@ -8627,6 +8627,2061 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "answer": "Price is \u20b935,000 per person MAP Plan (increased by \u20b95k from flyer rate \u20b930,000) for min 4 pax."
       }
     ]
-  }
+  },
+  {
+  "id": "pkg-georgia-tbilisi-gudauri-kazbegi-4n5d",
+  "name": "Georgia Enchantment: Tbilisi, Ananuri, Gudauri & Kazbegi Express (4N/5D)",
+  "slug": "georgia-tbilisi-gudauri-kazbegi-4n5d-package",
+  "destination": "Tbilisi, Gudauri, Kazbegi",
+  "destinationSlug": "georgia",
+  "country": "Georgia",
+  "region": "Caucasus / Europe",
+  "isInternational": true,
+  "durationDays": 5,
+  "durationNights": 4,
+  "startingPrice": 32500,
+  "discountPrice": 39999,
+  "rating": 4.92,
+  "reviewsCount": 165,
+  "heroImage": "/destinations/switzerland.jpg",
+  "gallery": [
+    "/destinations/switzerland.jpg"
+  ],
+  "highlights": [
+    "Tbilisi Old Town & Narikala Fortress Cable Car",
+    "Jinvali Water Reservoir & Ananuri Fortress Complex",
+    "Gudauri Ski Resort & Russia-Georgia Friendship Monument",
+    "4WD Jeep Safari to Gergeti Trinity Church in Kazbegi",
+    "Includes Daily Breakfast & Private AC Transfers"
+  ],
+  "inclusions": [
+    "4 Nights Stay in 3\u2605 / 4\u2605 Tbilisi Hotel",
+    "Daily Breakfast",
+    "Private Airport Transfers",
+    "Tbilisi & Kazbegi Full Day Sightseeing",
+    "4WD 3Delica Jeep ride to Gergeti Monastery"
+  ],
+  "exclusions": [
+    "International Airfare & Georgia Visa fee",
+    "Lunch & Dinners",
+    "Personal Expenses & Tips"
+  ],
+  "theme": "Caucasus Scenic & Cultural",
+  "hotelCategory": "3 Star / 4 Star",
+  "mealPlan": "CP (Daily Breakfast)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Tbilisi City Hotel 4\u2605",
+      "city": "Tbilisi",
+      "rating": "4 Star",
+      "nights": 4
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Arrival in Tbilisi & Evening Promenade",
+      "description": "Arrive at Tbilisi International Airport (TBS). Private transfer to hotel. Evening walk around Shardeni Street and Peace Bridge.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Transfer",
+        "Shardeni Street Walk"
+      ],
+      "hotel": "Tbilisi City Hotel 4\u2605",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Tbilisi Historic City Tour & Cable Car",
+      "description": "Explore Metekhi Church, Europe Square, Narikala Fortress via aerial cable car, Abanotubani Sulfur Baths, and Leghvtakhevi Waterfall.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Narikala Cable Car",
+        "Sulfur Baths Walk",
+        "Peace Bridge"
+      ],
+      "hotel": "Tbilisi City Hotel 4\u2605",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Ananuri Fortress, Gudauri & Kazbegi 4WD Safari",
+      "description": "Drive scenic Georgian Military Highway. Stop at Jinvali Reservoir, Ananuri Fortress, Gudauri Viewpoint, and 4WD Jeep up to Gergeti Trinity Church.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Ananuri Fortress",
+        "Gudauri Panorama",
+        "4WD Gergeti Trinity Church"
+      ],
+      "hotel": "Tbilisi City Hotel 4\u2605",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Mtskheta Ancient Capital & Mtatsminda Park",
+      "description": "Visit UNESCO-listed Mtskheta ancient capital, Jvari Monastery overlooking confluence of Aragvi and Mtkvari rivers, and Mtatsminda funicular park.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Jvari Monastery",
+        "Mtskheta Tour",
+        "Mtatsminda Park"
+      ],
+      "hotel": "Tbilisi City Hotel 4\u2605",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Tbilisi Shopping & Departure",
+      "description": "Leisure time for shopping at East Point Mall or Dry Bridge Flea Market before airport drop.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Shopping",
+        "Airport Drop"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private Transfer"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package pricing?",
+      "answer": "Starting price is $390 USD (~\u20b932,500) per person (increased by $60 / \u20b95,000 from base flyer rate $330)."
+    },
+    {
+      "question": "Do Indian passport holders need a visa for Georgia?",
+      "answer": "Indian nationals with valid US, UK, Schengen, or GCC visas/residence permits get visa-free entry; others require an e-Visa."
+    }
+  ]
+},
+  {
+  "id": "pkg-georgia-tbilisi-kazbegi-mtskheta-5n6d",
+  "name": "Georgia Grand Discovery: Tbilisi, Kazbegi, Mtskheta & Uplistsikhe (5N/6D)",
+  "slug": "georgia-tbilisi-kazbegi-mtskheta-5n6d-package",
+  "destination": "Tbilisi, Mtskheta, Kazbegi, Uplistsikhe",
+  "destinationSlug": "georgia",
+  "country": "Georgia",
+  "region": "Caucasus / Europe",
+  "isInternational": true,
+  "durationDays": 6,
+  "durationNights": 5,
+  "startingPrice": 60000,
+  "discountPrice": 72000,
+  "rating": 4.95,
+  "reviewsCount": 140,
+  "heroImage": "/destinations/switzerland.jpg",
+  "gallery": [
+    "/destinations/switzerland.jpg"
+  ],
+  "highlights": [
+    "Tbilisi Old Town & Funicular Railway to Mtatsminda",
+    "UNESCO Mtskheta, Jvari Monastery & Svetitskhoveli Cathedral",
+    "Uplistsikhe Ancient Cave Town Exploration",
+    "Full Day Kazbegi 4x4 Mountain Excursion",
+    "Premium 4\u2605 Hotel Stay with Breakfast & Guided Tours"
+  ],
+  "inclusions": [
+    "5 Nights Hotel Stay in 4\u2605 Tbilisi Hotel",
+    "Daily Buffet Breakfast",
+    "Private Sightseeing Tours & English Speaking Driver Guide",
+    "4WD Delica Ride in Kazbegi",
+    "Airport Pick up & Drop Transfers"
+  ],
+  "exclusions": [
+    "Airfare & Georgia Visa",
+    "Lunch, Dinner & Wine Tasting Fees",
+    "Personal Expenses"
+  ],
+  "theme": "Caucasus Heritage & Mountains",
+  "hotelCategory": "4 Star",
+  "mealPlan": "CP (Daily Breakfast)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Tbilisi Grand Plaza 4\u2605",
+      "city": "Tbilisi",
+      "rating": "4 Star",
+      "nights": 5
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Welcome to Tbilisi",
+      "description": "Airport reception and private transfer to Tbilisi hotel. Free evening to sample Georgian khachapuri.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Transfer"
+      ],
+      "hotel": "Tbilisi Grand Plaza 4\u2605",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Tbilisi Heritage Walk & Cable Car",
+      "description": "Visit Sameba Cathedral, Metekhi, Narikala Fortress via cable car, sulfur bath district, and Botanical Garden waterfall.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Sameba Cathedral",
+        "Narikala Cable Car",
+        "Old Town Walk"
+      ],
+      "hotel": "Tbilisi Grand Plaza 4\u2605",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Kazbegi High Mountains & Gergeti Church",
+      "description": "Scenic highway pass through Jinvali lake, Ananuri Castle, Gudauri Ski Resort, and 4WD mountain ascent to Gergeti Church.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Ananuri",
+        "Gudauri Friendship Arch",
+        "Gergeti 4x4"
+      ],
+      "hotel": "Tbilisi Grand Plaza 4\u2605",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Ancient Mtskheta & Uplistsikhe Cave City",
+      "description": "Travel to Mtskheta ancient capital, Jvari Monastery, and explore 3,000-year-old Uplistsikhe rock-cut cave town.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Jvari Monastery",
+        "Svetitskhoveli",
+        "Uplistsikhe Caves"
+      ],
+      "hotel": "Tbilisi Grand Plaza 4\u2605",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Kakheti Wine Region Day Trip (Optional Signagi)",
+      "description": "Day tour to Kakheti wine region, city of love Signagi, Bodbe Monastery, and traditional wine cellar tasting.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Signagi City Walk",
+        "Bodbe Monastery",
+        "Wine Cellar Visit"
+      ],
+      "hotel": "Tbilisi Grand Plaza 4\u2605",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 6,
+      "title": "Tbilisi Souvenir Shopping & Departure",
+      "description": "Check out and visit Galleria Tbilisi for souvenirs before airport departure.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Shopping",
+        "Airport Transfer"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private Transfer"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package pricing?",
+      "answer": "Price is $720 USD (~\u20b960,000) per person (increased by $60 / \u20b95,000 from flyer rate $660)."
+    }
+  ]
+},
+  {
+  "id": "pkg-georgia-tbilisi-batumi-prometheus-6n7d",
+  "name": "Georgia Complete Explorer: Tbilisi, Batumi Black Sea Coast & Prometheus Cave (6N/7D)",
+  "slug": "georgia-tbilisi-batumi-prometheus-6n7d-package",
+  "destination": "Tbilisi, Batumi, Kutaisi, Prometheus Cave",
+  "destinationSlug": "georgia",
+  "country": "Georgia",
+  "region": "Caucasus / Europe",
+  "isInternational": true,
+  "durationDays": 7,
+  "durationNights": 6,
+  "startingPrice": 53500,
+  "discountPrice": 64999,
+  "rating": 4.94,
+  "reviewsCount": 155,
+  "heroImage": "/destinations/switzerland.jpg",
+  "gallery": [
+    "/destinations/switzerland.jpg"
+  ],
+  "highlights": [
+    "3N Tbilisi + 3N Batumi Black Sea Riviera Stay",
+    "Prometheus Karst Caves & Martvili Canyon Boat Ride",
+    "Batumi Boulevard, Ali & Nino Moving Statue",
+    "Highland Kazbegi 4WD Excursion",
+    "Comprehensive Georgia Coast & Mountain Highlights"
+  ],
+  "inclusions": [
+    "3 Nights Tbilisi + 3 Nights Batumi 4\u2605 Hotel Stay",
+    "Daily Breakfast",
+    "Intercity Transfers Tbilisi \u2013 Batumi",
+    "Excursions to Kazbegi & Prometheus Cave",
+    "Private Airport Pick up & Drop"
+  ],
+  "exclusions": [
+    "Airfare & Visa Fees",
+    "Prometheus Cave Boat Ticket",
+    "Personal Expenses"
+  ],
+  "theme": "Black Sea Coast & Mountains",
+  "hotelCategory": "4 Star",
+  "mealPlan": "CP (Daily Breakfast)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Tbilisi City Hotel 4\u2605",
+      "city": "Tbilisi",
+      "rating": "4 Star",
+      "nights": 3
+    },
+    {
+      "name": "Batumi Seaside Resort 4\u2605",
+      "city": "Batumi",
+      "rating": "4 Star",
+      "nights": 3
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Tbilisi Arrival",
+      "description": "Airport pick up and drop to Tbilisi hotel. Evening stroll in Rustaveli Avenue.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Transfer"
+      ],
+      "hotel": "Tbilisi City Hotel 4\u2605",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Tbilisi Classic City Tour",
+      "description": "Full day tour of Old Tbilisi, Narikala Fortress cable car, sulfur baths, and Mtatsminda Viewpoint.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Narikala Cable Car",
+        "Old Town",
+        "Mtatsminda"
+      ],
+      "hotel": "Tbilisi City Hotel 4\u2605",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Gudauri & Kazbegi 4WD Mountain Excursion",
+      "description": "Day trip to Kazbegi via Ananuri and Gudauri. 4WD jeep up to Gergeti Trinity Church.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Ananuri Castle",
+        "Gergeti Trinity 4WD"
+      ],
+      "hotel": "Tbilisi City Hotel 4\u2605",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Tbilisi to Batumi via Prometheus Cave & Martvili Canyon",
+      "description": "Drive west to Imereti region. Explore subterranean Prometheus Cave and boat through Martvili Canyon. Arrive in Batumi.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Prometheus Cave",
+        "Martvili Canyon Boat"
+      ],
+      "hotel": "Batumi Seaside Resort 4\u2605",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Batumi Riviera & Ali & Nino Promenade",
+      "description": "Explore Batumi Boulevard, Alphabetic Tower, Europe Square, and kinetic statue of Ali & Nino.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Ali & Nino Statue",
+        "Batumi Boulevard",
+        "Cable Car"
+      ],
+      "hotel": "Batumi Seaside Resort 4\u2605",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 6,
+      "title": "Makhuntseti Waterfall & Queen Tamar Bridge",
+      "description": "Drive to Adjara highlands, Makhuntseti Waterfall and arched stone Queen Tamar Bridge.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Makhuntseti Waterfall",
+        "Stone Bridge"
+      ],
+      "hotel": "Batumi Seaside Resort 4\u2605",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 7,
+      "title": "Batumi / Tbilisi Departure",
+      "description": "Transfer to Batumi (BUS) or Tbilisi (TBS) airport for flight back home.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Drop"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private Transfer"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package pricing?",
+      "answer": "Price is $643 USD (~\u20b953,500) per person (increased by $60 / \u20b95,000 from flyer rate $583)."
+    }
+  ]
+},
+  {
+  "id": "pkg-japan-osaka-kyoto-nara-private-4n5d",
+  "name": "Japan Luxury Private Escape: Osaka, Universal Studios, Kyoto & Nara (4N/5D - 2 Pax Private)",
+  "slug": "japan-osaka-kyoto-nara-private-4n5d-package",
+  "destination": "Osaka, Kyoto, Nara, Lake Biwa",
+  "destinationSlug": "japan",
+  "country": "Japan",
+  "region": "East Asia",
+  "isInternational": true,
+  "durationDays": 5,
+  "durationNights": 4,
+  "startingPrice": 145000,
+  "discountPrice": 175000,
+  "rating": 4.96,
+  "reviewsCount": 95,
+  "heroImage": "/destinations/japan.jpg",
+  "gallery": [
+    "/destinations/japan.jpg"
+  ],
+  "highlights": [
+    "Private Tour for 2 Pax in Luxury Sedan / MPV",
+    "Universal Studios Japan (USJ) Osaka Full Day",
+    "Kyoto Fushimi Inari Shrine & Kinkaku-ji Golden Pavilion",
+    "Nara Deer Park & Todai-ji Temple",
+    "Lake Biwa Scenic Lakeside & Dotonbori Street Food"
+  ],
+  "inclusions": [
+    "4 Nights in 4\u2605 Osaka Hotel",
+    "Daily Breakfast",
+    "Private Vehicle & English Speaking Driver Guide for 5 Days",
+    "Universal Studios Japan Day Pass",
+    "Kansai Airport (KIX) Transfers"
+  ],
+  "exclusions": [
+    "International Airfare & Japan Visa",
+    "Lunch & Dinners",
+    "Personal Expenses"
+  ],
+  "theme": "Private Luxury & Pop Culture",
+  "hotelCategory": "4 Star",
+  "mealPlan": "CP (Daily Breakfast)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Swiss\u00f4tel Namba Osaka 4\u2605",
+      "city": "Osaka",
+      "rating": "4 Star",
+      "nights": 4
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Kansai Arrival & Dotonbori Evening",
+      "description": "Arrival at Osaka Kansai Airport (KIX). Private airport pickup to hotel. Evening stroll in neon-lit Dotonbori and Shinsaibashi.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Pickup",
+        "Dotonbori Food Tour"
+      ],
+      "hotel": "Swiss\u00f4tel Namba Osaka 4\u2605",
+      "transfers": "Private Car"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Universal Studios Japan (USJ) Thrills",
+      "description": "Full day at Universal Studios Japan including Super Nintendo World and Wizarding World of Harry Potter.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "USJ Entry Pass",
+        "Nintendo World"
+      ],
+      "hotel": "Swiss\u00f4tel Namba Osaka 4\u2605",
+      "transfers": "Private Car"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Kyoto Cultural Heritage Private Tour",
+      "description": "Private drive to Kyoto. Visit Fushimi Inari Taisha (10,000 torii gates), Kinkaku-ji Golden Pavilion, and Arashiyama Bamboo Grove.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Fushimi Inari",
+        "Golden Pavilion",
+        "Arashiyama Bamboo Grove"
+      ],
+      "hotel": "Swiss\u00f4tel Namba Osaka 4\u2605",
+      "transfers": "Private Car"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Nara Deer Park & Lake Biwa Scenic Excursion",
+      "description": "Visit Nara Deer Park, feed bow deer, see Giant Buddha at Todai-ji. Afternoon drive to Lake Biwa scenic lakeshore.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Nara Deer Park",
+        "Todai-ji Temple",
+        "Lake Biwa Drive"
+      ],
+      "hotel": "Swiss\u00f4tel Namba Osaka 4\u2605",
+      "transfers": "Private Car"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Osaka Castle & Departure",
+      "description": "Morning visit to Osaka Castle grounds. Transfer to Kansai Airport for departure.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Osaka Castle Park",
+        "Airport Drop"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private Car"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the total price for 2 people?",
+      "answer": "Total price is \u20b92,90,000 for 2 adults (\u20b91,45,000 per person, increased by \u20b95,000 per person / \u20b910,000 total from flyer rate \u20b92,80,000)."
+    }
+  ]
+},
+  {
+  "id": "pkg-japan-tokyo-disneyland-fuji-snow-private-4n5d",
+  "name": "Japan Wonderland Private: Tokyo, Disneyland, Mt. Fuji & Snowman Ski Resort (4N/5D - 2 Pax Private)",
+  "slug": "japan-tokyo-disneyland-fuji-snow-private-4n5d-package",
+  "destination": "Tokyo, Mt. Fuji, Snowman Ski Resort",
+  "destinationSlug": "japan",
+  "country": "Japan",
+  "region": "East Asia",
+  "isInternational": true,
+  "durationDays": 5,
+  "durationNights": 4,
+  "startingPrice": 155000,
+  "discountPrice": 185000,
+  "rating": 4.98,
+  "reviewsCount": 110,
+  "heroImage": "/destinations/japan.jpg",
+  "gallery": [
+    "/destinations/japan.jpg"
+  ],
+  "highlights": [
+    "Exclusive Private Tour for 2 Pax in Tokyo & Mt Fuji",
+    "Tokyo Disneyland or DisneySea 1-Day Pass",
+    "Mt. Fuji 5th Station & Lake Kawaguchiko Panorama",
+    "Snowman / Fujiten Ski Resort Winter Snow Play",
+    "Senso-ji Temple Asakusa & Shibuya Crossing"
+  ],
+  "inclusions": [
+    "4 Nights in 4\u2605 Central Tokyo Hotel",
+    "Daily Breakfast",
+    "Private Vehicle & Dedicated Driver Guide",
+    "Tokyo Disneyland Day Pass",
+    "Haneda / Narita Airport Private Transfers"
+  ],
+  "exclusions": [
+    "International Airfare & Visa",
+    "Ski Gear Rental & Lift Passes",
+    "Personal Expenses"
+  ],
+  "theme": "Private Family & Winter Romance",
+  "hotelCategory": "4 Star",
+  "mealPlan": "CP (Daily Breakfast)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Tokyo Dome Hotel / Daiwa Roynet 4\u2605",
+      "city": "Tokyo",
+      "rating": "4 Star",
+      "nights": 4
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Tokyo Arrival & Shibuya Crossing",
+      "description": "Private airport pickup from Haneda (HND) / Narita (NRT). Hotel check-in and evening walk through Shibuya Crossing and Hachiko statue.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Pickup",
+        "Shibuya Crossing"
+      ],
+      "hotel": "Tokyo Central Hotel 4\u2605",
+      "transfers": "Private Car"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Tokyo Disneyland Magic Day",
+      "description": "Full day immersive fairytale experience at Tokyo Disneyland with fireworks and parades.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Tokyo Disneyland Ticket"
+      ],
+      "hotel": "Tokyo Central Hotel 4\u2605",
+      "transfers": "Private Car"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Mt. Fuji & Snowman Ski Resort Adventure",
+      "description": "Private drive to Lake Kawaguchiko, Mt. Fuji 5th Station, and winter snow sports play at Fujiten / Snowman Ski Resort.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Mt Fuji 5th Station",
+        "Lake Kawaguchiko",
+        "Snow Ski Resort"
+      ],
+      "hotel": "Tokyo Central Hotel 4\u2605",
+      "transfers": "Private Car"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Asakusa Senso-ji, Skytree & Ginza Shopping",
+      "description": "Visit historic Senso-ji Temple in Asakusa, Nakamise Shopping Street, photo stop at Tokyo Skytree, and luxury shopping in Ginza.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Sensoji Temple",
+        "Nakamise Street",
+        "Ginza Shopping"
+      ],
+      "hotel": "Tokyo Central Hotel 4\u2605",
+      "transfers": "Private Car"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Tokyo Departure",
+      "description": "Check out and private transfer to Tokyo Narita / Haneda airport.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Transfer"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private Car"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the total price for 2 adults?",
+      "answer": "Total price is \u20b93,10,000 for 2 adults (\u20b91,55,000 per person, increased by \u20b95,000 per person / \u20b910,000 total from flyer rate \u20b93,00,000)."
+    }
+  ]
+},
+  {
+  "id": "pkg-japan-nagoya-takayama-kanazawa-group-4n5d",
+  "name": "Japan Alpine Highlights: Nagoya, Takayama Folk Village & Kanazawa (4N/5D Group Tour)",
+  "slug": "japan-nagoya-takayama-kanazawa-group-4n5d-package",
+  "destination": "Nagoya, Takayama, Kanazawa",
+  "destinationSlug": "japan",
+  "country": "Japan",
+  "region": "East Asia",
+  "isInternational": true,
+  "durationDays": 5,
+  "durationNights": 4,
+  "startingPrice": 125000,
+  "discountPrice": 149999,
+  "rating": 4.89,
+  "reviewsCount": 80,
+  "heroImage": "/destinations/japan.jpg",
+  "gallery": [
+    "/destinations/japan.jpg"
+  ],
+  "highlights": [
+    "Group Departure Special (Min 10 Pax)",
+    "Takayama Sanmachi Suji Preservation District (2N)",
+    "Shirakawa-go UNESCO Gassho-Zukuri Village",
+    "Kanazawa Kenroku-en Garden & Higashi Chaya Tea District (1N)",
+    "Nagoya Castle & Oasis 21 Shopping"
+  ],
+  "inclusions": [
+    "2N Takayama + 1N Kanazawa + 1N Takayama 3\u2605/4\u2605 Hotels",
+    "Daily Breakfast",
+    "Group Coach Coach Transfers & Sightseeing",
+    "English Speaking Tour Manager"
+  ],
+  "exclusions": [
+    "Airfare & Visa",
+    "Personal Expenses & Tips"
+  ],
+  "theme": "Alpine Village & Traditions",
+  "hotelCategory": "3 Star / 4 Star",
+  "mealPlan": "CP (Daily Breakfast)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Takayama Green Hotel / Similar",
+      "city": "Takayama",
+      "rating": "4 Star",
+      "nights": 3
+    },
+    {
+      "name": "Kanazawa Hotel International",
+      "city": "Kanazawa",
+      "rating": "3 Star",
+      "nights": 1
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Nagoya Arrival to Takayama",
+      "description": "Meet group at Nagoya Airport (NGO). Transfer by AC coach to historic alpine town of Takayama.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Group Transfer",
+        "Takayama Welcome"
+      ],
+      "hotel": "Takayama Green Hotel",
+      "transfers": "AC Group Coach"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Shirakawa-go UNESCO Village & Takayama Old Town",
+      "description": "Visit iconic thatched roof houses of Shirakawa-go and stroll Takayama Sanmachi Suji merchant streets.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Shirakawa-go Village",
+        "Sanmachi Suji Walk"
+      ],
+      "hotel": "Takayama Green Hotel",
+      "transfers": "AC Group Coach"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Takayama to Kanazawa Castle & Kenroku-en",
+      "description": "Drive to Kanazawa. Visit Kenroku-en (one of Japan's top 3 gardens), Kanazawa Castle Park, and Geisha district.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Kenrokuen Garden",
+        "Kanazawa Castle"
+      ],
+      "hotel": "Kanazawa Hotel",
+      "transfers": "AC Group Coach"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Kanazawa Omicho Market to Takayama",
+      "description": "Explore Omicho seafood market before returning to Takayama for evening relaxing onsen soak.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Omicho Market",
+        "Onsen Village Experience"
+      ],
+      "hotel": "Takayama Green Hotel",
+      "transfers": "AC Group Coach"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Nagoya City Tour & Departure",
+      "description": "Visit Nagoya Castle grounds and transfer to Nagoya Airport for flight.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Nagoya Castle",
+        "Airport Drop"
+      ],
+      "hotel": "N/A",
+      "transfers": "AC Group Coach"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the group tour price?",
+      "answer": "Price is \u20b91,25,000 per person for minimum 10 pax (increased by \u20b95,000 from flyer rate \u20b91,20,000)."
+    }
+  ]
+},
+  {
+  "id": "pkg-japan-osaka-kyoto-nara-group-4n5d",
+  "name": "Japan Kansai Express Group: Osaka (4N), Kyoto & Nara Heritage (4N/5D Group Tour)",
+  "slug": "japan-osaka-kyoto-nara-group-4n5d-package",
+  "destination": "Osaka, Kyoto, Nara",
+  "destinationSlug": "japan",
+  "country": "Japan",
+  "region": "East Asia",
+  "isInternational": true,
+  "durationDays": 5,
+  "durationNights": 4,
+  "startingPrice": 125000,
+  "discountPrice": 149999,
+  "rating": 4.91,
+  "reviewsCount": 120,
+  "heroImage": "/destinations/japan.jpg",
+  "gallery": [
+    "/destinations/japan.jpg"
+  ],
+  "highlights": [
+    "Group Departure Special (Min 10 Pax)",
+    "4 Nights Stay in Osaka Central Hotel",
+    "Kyoto Golden Pavilion & Fushimi Inari Shrine Excursion",
+    "Nara Deer Park & Todai-ji Temple Group Visit",
+    "Dotonbori Street Shopping & Osaka Castle"
+  ],
+  "inclusions": [
+    "4 Nights in 3\u2605 / 4\u2605 Osaka Hotel",
+    "Daily Breakfast",
+    "AC Group Coach Transfers",
+    "Sightseeing Entry Passes as per Itinerary"
+  ],
+  "exclusions": [
+    "Airfare & Visa",
+    "Personal Expenses"
+  ],
+  "theme": "Kansai Cultural Group",
+  "hotelCategory": "3 Star / 4 Star",
+  "mealPlan": "CP (Daily Breakfast)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Osaka Plaza Hotel 3\u2605/4\u2605",
+      "city": "Osaka",
+      "rating": "3 Star",
+      "nights": 4
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Osaka Kansai Arrival",
+      "description": "Group arrival at Kansai International Airport (KIX). Transfer to Osaka hotel.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Pickup"
+      ],
+      "hotel": "Osaka Plaza Hotel",
+      "transfers": "Group Coach"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Kyoto Ancient Capital Tour",
+      "description": "Full day Kyoto excursion: Fushimi Inari Taisha, Kinkaku-ji (Golden Pavilion), and Kiyomizu-dera Temple.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Fushimi Inari",
+        "Golden Pavilion",
+        "Kiyomizudera"
+      ],
+      "hotel": "Osaka Plaza Hotel",
+      "transfers": "Group Coach"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Nara Deer Park & Todai-ji Buddha",
+      "description": "Excursion to Nara. Interact with friendly sika deer in Nara Park and visit Todai-ji Temple housing Great Buddha.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Nara Deer Park",
+        "Todaiji Temple"
+      ],
+      "hotel": "Osaka Plaza Hotel",
+      "transfers": "Group Coach"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Osaka City Tour & Dotonbori Shopping",
+      "description": "Visit Osaka Castle Park, Umeda Sky Building observatory view, and evening shopping at Dotonbori & Shinsaibashi.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Osaka Castle",
+        "Dotonbori Shopping"
+      ],
+      "hotel": "Osaka Plaza Hotel",
+      "transfers": "Group Coach"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Osaka Departure",
+      "description": "Check out and group coach transfer to Kansai Airport.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Drop"
+      ],
+      "hotel": "N/A",
+      "transfers": "Group Coach"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the price?",
+      "answer": "Price is \u20b91,25,000 per person for minimum 10 pax (increased by \u20b95,000 from flyer rate \u20b91,20,000)."
+    }
+  ]
+},
+  {
+  "id": "pkg-japan-sapporo-asahikawa-noboribetsu-group-4n5d",
+  "name": "Japan Hokkaido Wonders: Sapporo (4N), Asahikawa Zoo, Noboribetsu & Lake Toya (4N/5D Group Tour)",
+  "slug": "japan-sapporo-asahikawa-noboribetsu-group-4n5d-package",
+  "destination": "Sapporo, Asahikawa, Noboribetsu, Lake Toya",
+  "destinationSlug": "japan",
+  "country": "Japan",
+  "region": "East Asia",
+  "isInternational": true,
+  "durationDays": 5,
+  "durationNights": 4,
+  "startingPrice": 125000,
+  "discountPrice": 149999,
+  "rating": 4.93,
+  "reviewsCount": 75,
+  "heroImage": "/destinations/japan.jpg",
+  "gallery": [
+    "/destinations/japan.jpg"
+  ],
+  "highlights": [
+    "Group Departure Special (Min 10 Pax)",
+    "4 Nights Hotel Stay in Sapporo Capital",
+    "Asahikawa Zoo & Penguin Walk Excursion",
+    "Noboribetsu Jigokudani (Hell Valley) Volcanic Geysers",
+    "Lake Toya Volcanic Crater Lake & Mt. Usu Ropeway"
+  ],
+  "inclusions": [
+    "4 Nights in 3\u2605/4\u2605 Sapporo Hotel",
+    "Daily Breakfast",
+    "Group Coach Sightseeing",
+    "Entry Passes to Asahikawa Zoo & Lake Toya Ropeway"
+  ],
+  "exclusions": [
+    "Airfare & Visa",
+    "Personal Expenses"
+  ],
+  "theme": "Hokkaido Nature & Wildlife",
+  "hotelCategory": "3 Star / 4 Star",
+  "mealPlan": "CP (Daily Breakfast)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Sapporo Grand Hotel / Similar 4\u2605",
+      "city": "Sapporo",
+      "rating": "4 Star",
+      "nights": 4
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Sapporo New Chitose Arrival",
+      "description": "Group arrival at Sapporo New Chitose Airport (CTS). Coach transfer to hotel. Evening at Odori Park and Tanukikoji Shopping Arcade.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Pickup",
+        "Odori Park"
+      ],
+      "hotel": "Sapporo Grand Hotel",
+      "transfers": "Group Coach"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Asahikawa Zoo & Shirogane Blue Pond",
+      "description": "Day trip north to Asahikawa Zoo (famous penguin walk) and breathtaking cobalt-blue Shirogane Blue Pond in Biei.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Asahikawa Zoo",
+        "Blue Pond Biei"
+      ],
+      "hotel": "Sapporo Grand Hotel",
+      "transfers": "Group Coach"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Noboribetsu Hell Valley & Lake Toya",
+      "description": "Visit steaming geothermal volcanic vents of Jigokudani Hell Valley in Noboribetsu and scenic Lake Toya panorama.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Noboribetsu Hell Valley",
+        "Lake Toya Viewpoint"
+      ],
+      "hotel": "Sapporo Grand Hotel",
+      "transfers": "Group Coach"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Otaru Canal Historic Town & Sapporo Beer Museum",
+      "description": "Excursion to romantic Otaru Canal, Glassworks shops, and Sapporo Beer Museum for tasting.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Otaru Canal",
+        "Sapporo Beer Museum"
+      ],
+      "hotel": "Sapporo Grand Hotel",
+      "transfers": "Group Coach"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Sapporo Departure",
+      "description": "Hotel check out and airport coach drop to New Chitose Airport.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Transfer"
+      ],
+      "hotel": "N/A",
+      "transfers": "Group Coach"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the price?",
+      "answer": "Price is \u20b91,25,000 per person for minimum 10 pax (increased by \u20b95,000 from flyer rate \u20b91,20,000)."
+    }
+  ]
+},
+  {
+  "id": "pkg-japan-tokyo-fuji-group-4n5d",
+  "name": "Japan Capital & Mt. Fuji Group: Tokyo (4N), Mt. Fuji & Hakone Lake Ashi (4N/5D Group Tour)",
+  "slug": "japan-tokyo-fuji-group-4n5d-package",
+  "destination": "Tokyo, Mt. Fuji, Hakone",
+  "destinationSlug": "japan",
+  "country": "Japan",
+  "region": "East Asia",
+  "isInternational": true,
+  "durationDays": 5,
+  "durationNights": 4,
+  "startingPrice": 125000,
+  "discountPrice": 149999,
+  "rating": 4.94,
+  "reviewsCount": 145,
+  "heroImage": "/destinations/japan.jpg",
+  "gallery": [
+    "/destinations/japan.jpg"
+  ],
+  "highlights": [
+    "Group Departure Special (Min 10 Pax)",
+    "4 Nights Central Tokyo Hotel Stay",
+    "Mt. Fuji 5th Station & Lake Ashi Pirate Cruise",
+    "Komagatake Ropeway Mountain Cable Car Ride",
+    "Shibuya Crossing, Senso-ji & Imperial Palace Gardens"
+  ],
+  "inclusions": [
+    "4 Nights in 3\u2605 / 4\u2605 Tokyo Hotel",
+    "Daily Breakfast",
+    "Group AC Coach Transfers",
+    "Lake Ashi Cruise & Mt Fuji Sightseeing"
+  ],
+  "exclusions": [
+    "Airfare & Visa",
+    "Personal Expenses"
+  ],
+  "theme": "Tokyo Metropolis & Mt Fuji",
+  "hotelCategory": "3 Star / 4 Star",
+  "mealPlan": "CP (Daily Breakfast)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Sunshine City Prince Hotel Tokyo 4\u2605",
+      "city": "Tokyo",
+      "rating": "4 Star",
+      "nights": 4
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Tokyo Narita / Haneda Arrival",
+      "description": "Group arrival in Tokyo. Coach pickup to hotel. Free evening in Ikebukuro or Shinjuku.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Pickup"
+      ],
+      "hotel": "Sunshine City Prince Hotel",
+      "transfers": "Group Coach"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Tokyo City Icons: Asakusa, Imperial Palace & Shibuya",
+      "description": "Visit Senso-ji Temple, Nakamise street, Imperial Palace East Gardens, Odaiba Statue of Liberty, and Shibuya Crossing.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Sensoji Temple",
+        "Imperial Palace",
+        "Shibuya Crossing"
+      ],
+      "hotel": "Sunshine City Prince Hotel",
+      "transfers": "Group Coach"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Mt. Fuji 5th Station & Hakone Cruise",
+      "description": "Full day tour to Mt. Fuji 5th Station, pirate boat cruise on Lake Ashi, and Komagatake Ropeway cable car.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Mt Fuji 5th Station",
+        "Lake Ashi Cruise",
+        "Ropeway Ride"
+      ],
+      "hotel": "Sunshine City Prince Hotel",
+      "transfers": "Group Coach"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Tokyo Free Shopping / Optional Disneyland",
+      "description": "Day at leisure for shopping in Ginza, Akihabara electric town, or optional visit to Tokyo Disneyland.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Shopping",
+        "Akihabara Walk"
+      ],
+      "hotel": "Sunshine City Prince Hotel",
+      "transfers": "Group Coach"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Tokyo Departure",
+      "description": "Hotel check out and group coach transfer to Tokyo airport.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Drop"
+      ],
+      "hotel": "N/A",
+      "transfers": "Group Coach"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the price?",
+      "answer": "Price is \u20b91,25,000 per person for minimum 10 pax (increased by \u20b95,000 from flyer rate \u20b91,20,000)."
+    }
+  ]
+},
+  {
+  "id": "pkg-malaysia-kl-genting-batu-caves-cameron-4n5d",
+  "name": "Best of Malaysia: Kuala Lumpur, Genting Highlands, Batu Caves & Cameron Highlands (4N/5D)",
+  "slug": "malaysia-kl-genting-batu-caves-cameron-4n5d-package",
+  "destination": "Kuala Lumpur, Genting Highlands, Batu Caves, Cameron Highlands",
+  "destinationSlug": "malaysia",
+  "country": "Malaysia",
+  "region": "Southeast Asia",
+  "isInternational": true,
+  "durationDays": 5,
+  "durationNights": 4,
+  "startingPrice": 46000,
+  "discountPrice": 55000,
+  "rating": 4.9,
+  "reviewsCount": 185,
+  "heroImage": "/destinations/malaysia.jpg",
+  "gallery": [
+    "/destinations/malaysia.jpg"
+  ],
+  "highlights": [
+    "FREE Visa on Arrival / Entry for Indian Passport Holders",
+    "Petronas Twin Towers Photo Stop & KL Tower Entrance",
+    "Batu Caves Golden Murugan Statue Visit",
+    "Genting Highlands Two-Way Cable Car Ride & Indoor Theme Park",
+    "Cameron Highlands Tea Plantation & Strawberry Farm Excursion"
+  ],
+  "inclusions": [
+    "3N Kuala Lumpur + 1N Cameron Highlands 3\u2605/4\u2605 Hotel Stay",
+    "Daily Breakfast",
+    "Two-Way Genting SkyWay Cable Car Tickets",
+    "Private AC Transfers & Sightseeing Tours",
+    "Airport Pick up & Drop Transfers"
+  ],
+  "exclusions": [
+    "International Flights",
+    "Tourism Tax (MYR 10/room/night payable at hotel)",
+    "Personal Expenses"
+  ],
+  "theme": "Metropolitan & Highland Nature",
+  "hotelCategory": "3 Star / 4 Star",
+  "mealPlan": "CP (Daily Breakfast)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Ibis KLCC / Furama Bukit Bintang 4\u2605",
+      "city": "Kuala Lumpur",
+      "rating": "4 Star",
+      "nights": 3
+    },
+    {
+      "name": "Heritage Hotel Cameron Highlands 3\u2605",
+      "city": "Cameron Highlands",
+      "rating": "3 Star",
+      "nights": 1
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Kuala Lumpur Arrival & Putrajaya Tour",
+      "description": "Arrive at KLIA airport. En route tour of Putrajaya (Pink Mosque & Prime Minister Office) before KL hotel check-in.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Pick up",
+        "Putrajaya Tour"
+      ],
+      "hotel": "Ibis KLCC 4\u2605",
+      "transfers": "Private AC Transfer"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Batu Caves & Genting Highlands Cable Car",
+      "description": "Visit Batu Caves rainbow stairs and Murugan Temple. Proceed to Genting Cable Car station, ride skyway to Genting Highlands casino and theme park.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Batu Caves",
+        "Genting Cable Car",
+        "Skytropolis Park"
+      ],
+      "hotel": "Ibis KLCC 4\u2605",
+      "transfers": "Private AC Transfer"
+    },
+    {
+      "dayNumber": 3,
+      "title": "KL City Tour & Melaka Day Excursion",
+      "description": "Morning photo stop at Petronas Twin Towers, King Palace, Independence Square. Afternoon excursion to UNESCO historic Melaka city.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Petronas Twin Towers",
+        "King Palace",
+        "Melaka Tour"
+      ],
+      "hotel": "Ibis KLCC 4\u2605",
+      "transfers": "Private AC Transfer"
+    },
+    {
+      "dayNumber": 4,
+      "title": "KL to Cameron Highlands Tea Estates",
+      "description": "Drive up to cool Cameron Highlands. Visit BOH Tea Plantation, Strawberry Picking Farm, Lavender Garden, and Rose Valley.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "BOH Tea Estate",
+        "Strawberry Farm"
+      ],
+      "hotel": "Heritage Hotel Cameron Highlands",
+      "transfers": "Private AC Transfer"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Cameron Highlands Departure",
+      "description": "Check out and drive back to KLIA airport for flight home.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Drop"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private AC Transfer"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package price?",
+      "answer": "Starting price is \u20b946,000 per person (increased by \u20b95,000 from flyer rate \u20b941,000)."
+    },
+    {
+      "question": "Is visa required for Indians in Malaysia?",
+      "answer": "Malaysia provides Visa-Free Entry for Indian citizens (requires digital arrival card MDAC registration)."
+    }
+  ]
+},
+  {
+  "id": "pkg-malaysia-kl-genting-batu-melaka-ipoh-cameron-5n6d",
+  "name": "Malaysia Ultimate Grandeur: KL, Genting, Batu Caves, Melaka, Ipoh & Cameron (5N/6D)",
+  "slug": "malaysia-kl-genting-batu-melaka-ipoh-cameron-5n6d-package",
+  "destination": "Kuala Lumpur, Genting, Batu Caves, Melaka, Ipoh, Cameron Highlands",
+  "destinationSlug": "malaysia",
+  "country": "Malaysia",
+  "region": "Southeast Asia",
+  "isInternational": true,
+  "durationDays": 6,
+  "durationNights": 5,
+  "startingPrice": 63500,
+  "discountPrice": 75000,
+  "rating": 4.94,
+  "reviewsCount": 160,
+  "heroImage": "/destinations/malaysia.jpg",
+  "gallery": [
+    "/destinations/malaysia.jpg"
+  ],
+  "highlights": [
+    "FREE Visa-Free Entry for Indian Passport Holders",
+    "Putrajaya Tour & KL Night Sightseeing with Petronas Towers",
+    "Batu Caves Temple & Genting SkyWay Cable Car",
+    "Historic UNESCO Melaka & Heritage Ipoh Cave Temples",
+    "Cameron Highlands Tea Gardens & Strawberry Farms"
+  ],
+  "inclusions": [
+    "3N Kuala Lumpur + 1N Ipoh + 1N Cameron Highlands Stay",
+    "Daily Breakfast",
+    "Genting SkyWay Cable Car Passes",
+    "Private Sightseeing Cabs & Intercity Transfers",
+    "Airport Pickup & Drop"
+  ],
+  "exclusions": [
+    "International Flights",
+    "Tourism Tax MYR 10/room/night",
+    "Personal Expenses"
+  ],
+  "theme": "Grand Heritage & Highlands",
+  "hotelCategory": "4 Star",
+  "mealPlan": "CP (Daily Breakfast)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Novotel KLCC 4\u2605",
+      "city": "Kuala Lumpur",
+      "rating": "4 Star",
+      "nights": 3
+    },
+    {
+      "name": "WEIL Hotel Ipoh 4\u2605",
+      "city": "Ipoh",
+      "rating": "4 Star",
+      "nights": 1
+    },
+    {
+      "name": "Cameron Highlands Resort 4\u2605",
+      "city": "Cameron Highlands",
+      "rating": "4 Star",
+      "nights": 1
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "KLIA Arrival & Putrajaya Tour",
+      "description": "Airport pickup, Putrajaya administrative capital tour, hotel check-in in KL.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Pickup",
+        "Putrajaya City Tour"
+      ],
+      "hotel": "Novotel KLCC 4\u2605",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Batu Caves, Genting Highlands & KL Night Tour",
+      "description": "Visit Batu Caves, cable car ride to Genting Highlands. Evening KL night tour including illumination at Petronas Towers.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Batu Caves",
+        "Genting Cable Car",
+        "KL Night Tour"
+      ],
+      "hotel": "Novotel KLCC 4\u2605",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 3,
+      "title": "UNESCO Historic Melaka Day Excursion",
+      "description": "Day trip to Melaka: A Famosa fortress, Stadthuys Red Square, St. Paul's Church, and Jonker Street walk.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Melaka Stadthuys",
+        "A Famosa Fortress",
+        "Jonker Street"
+      ],
+      "hotel": "Novotel KLCC 4\u2605",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 4,
+      "title": "KL to Ipoh Heritage Town & Limestone Caves",
+      "description": "Drive to Ipoh. Visit Kek Lok Tong limestone cave temple, Concubine Lane, and sample Ipoh white coffee.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Kek Lok Tong Cave",
+        "Concubine Lane Walk"
+      ],
+      "hotel": "WEIL Hotel Ipoh 4\u2605",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Ipoh to Cameron Highlands Tea Estates",
+      "description": "Drive up to Cameron Highlands. Tour BOH Tea Plantation, Mossy Forest viewpoint, and strawberry farm.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "BOH Tea Garden",
+        "Mossy Forest"
+      ],
+      "hotel": "Cameron Highlands Resort",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 6,
+      "title": "Cameron Highlands to KLIA Departure",
+      "description": "Check out and private transfer to KLIA airport for flight home.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Drop"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private Transfer"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package price?",
+      "answer": "Price is \u20b963,500 per person (increased by \u20b95,000 from flyer rate \u20b958,500)."
+    }
+  ]
+},
+  {
+  "id": "pkg-nepal-kathmandu-discovery-2n3d",
+  "name": "Nepal Kathmandu Express Discovery: Pashupatinath & Swayambhunath (2N/3D)",
+  "slug": "nepal-kathmandu-discovery-2n3d-package",
+  "destination": "Kathmandu",
+  "destinationSlug": "nepal",
+  "country": "Nepal",
+  "region": "South Asia",
+  "isInternational": true,
+  "durationDays": 3,
+  "durationNights": 2,
+  "startingPrice": 15000,
+  "discountPrice": 19999,
+  "rating": 4.85,
+  "reviewsCount": 140,
+  "heroImage": "/destinations/nepal.jpg",
+  "gallery": [
+    "/destinations/nepal.jpg"
+  ],
+  "highlights": [
+    "Pashupatinath Temple Holy Darshan",
+    "Boudhanath Stupa UNESCO World Heritage Site",
+    "Swayambhunath Monkey Temple Panoramas",
+    "Kathmandu Durbar Square Historic Palaces",
+    "Private Airport Transfers & 3\u2605 Hotel Stay"
+  ],
+  "inclusions": [
+    "2 Nights Stay in 3\u2605 Kathmandu Hotel",
+    "Daily Breakfast",
+    "Private Airport Pick up & Drop Transfers",
+    "Half-Day Sightseeing Tour of Kathmandu Valley"
+  ],
+  "exclusions": [
+    "Airfare",
+    "Monument Entry Fees & Temple Donations",
+    "Personal Expenses"
+  ],
+  "theme": "Spiritual Heritage",
+  "hotelCategory": "3 Star",
+  "mealPlan": "CP (Daily Breakfast)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Hotel Arts Kathmandu / Royal Singi 3\u2605",
+      "city": "Kathmandu",
+      "rating": "3 Star",
+      "nights": 2
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Kathmandu Tribhuvan Arrival",
+      "description": "Meet representative at Tribhuvan International Airport (KTM). Transfer to Thamel area hotel. Evening walk in Thamel market.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Pickup",
+        "Thamel Stroll"
+      ],
+      "hotel": "Hotel Arts Kathmandu",
+      "transfers": "Private Cab"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Pashupatinath, Boudhanath & Swayambhunath Tour",
+      "description": "Morning sacred darshan at Pashupatinath Temple on Bagmati river. Visit giant stupa at Boudhanath and hilltop Swayambhunath Monkey Temple.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Pashupatinath Temple",
+        "Boudhanath Stupa",
+        "Swayambhunath"
+      ],
+      "hotel": "Hotel Arts Kathmandu",
+      "transfers": "Private Cab"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Kathmandu Durbar Square & Airport Drop",
+      "description": "Visit historic Kathmandu Durbar Square and Kumari Ghar before drop to Kathmandu airport for departure.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Durbar Square",
+        "Airport Drop"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private Cab"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package price?",
+      "answer": "Starting price is \u20b915,000 per person (increased by \u20b95,000 from flyer rate \u20b910,000)."
+    },
+    {
+      "question": "Do Indians need a passport/visa for Nepal?",
+      "answer": "Indian nationals do NOT need a visa. Entry is granted with valid Voter ID card or Passport."
+    }
+  ]
+},
+  {
+  "id": "pkg-nepal-kathmandu-patan-bhaktapur-3n4d",
+  "name": "Nepal Heritage Triangle: Kathmandu, Patan & Bhaktapur Kingdom (3N/4D)",
+  "slug": "nepal-kathmandu-patan-bhaktapur-3n4d-package",
+  "destination": "Kathmandu, Patan, Bhaktapur",
+  "destinationSlug": "nepal",
+  "country": "Nepal",
+  "region": "South Asia",
+  "isInternational": true,
+  "durationDays": 4,
+  "durationNights": 3,
+  "startingPrice": 20000,
+  "discountPrice": 25999,
+  "rating": 4.89,
+  "reviewsCount": 165,
+  "heroImage": "/destinations/nepal.jpg",
+  "gallery": [
+    "/destinations/nepal.jpg"
+  ],
+  "highlights": [
+    "Pashupatinath Temple & Boudhanath Stupa",
+    "Patan Durbar Square Golden Temple & Krishna Mandir",
+    "Bhaktapur Ancient City 55-Window Palace & Nyatapola Temple",
+    "Nagarkot Sunrise View of Mount Everest Range",
+    "Private Transfers & 3\u2605 Hotel Stay with Breakfast"
+  ],
+  "inclusions": [
+    "3 Nights Hotel Stay in Kathmandu 3\u2605",
+    "Daily Breakfast",
+    "Private Sightseeing Cabs",
+    "Airport Pickup & Drop"
+  ],
+  "exclusions": [
+    "Airfare",
+    "Monument Entry Tickets",
+    "Personal Expenses"
+  ],
+  "theme": "Ancient Kingdoms & Culture",
+  "hotelCategory": "3 Star",
+  "mealPlan": "CP (Daily Breakfast)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Hotel Tibet / Lord Buddha 3\u2605",
+      "city": "Kathmandu",
+      "rating": "3 Star",
+      "nights": 3
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Kathmandu Arrival",
+      "description": "Airport pickup and drop to hotel. Evening at leisure.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Pickup"
+      ],
+      "hotel": "Hotel Tibet",
+      "transfers": "Private Cab"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Pashupatinath, Boudhanath & Patan Durbar Square",
+      "description": "Visit sacred Pashupatinath Temple, Boudhanath Stupa, and royal palace complex of Patan Durbar Square.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Pashupatinath",
+        "Boudhanath",
+        "Patan Durbar Square"
+      ],
+      "hotel": "Hotel Tibet",
+      "transfers": "Private Cab"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Bhaktapur Ancient City & Nagarkot Hill Viewpoint",
+      "description": "Explore Bhaktapur Durbar Square (55 Window Palace, Nyatapola) and drive to Nagarkot hill station for Himalayan mountain views.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Bhaktapur City Tour",
+        "Nagarkot Viewpoint"
+      ],
+      "hotel": "Hotel Tibet",
+      "transfers": "Private Cab"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Kathmandu Departure",
+      "description": "Breakfast and drop to Kathmandu airport for departure flight.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Drop"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private Cab"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package price?",
+      "answer": "Price is \u20b920,000 per person (increased by \u20b95,000 from flyer rate \u20b915,000)."
+    }
+  ]
+},
+  {
+  "id": "pkg-nepal-kathmandu-pokhara-4n5d",
+  "name": "Nepal Golden Highlights: Kathmandu & Pokhara Annapurna Lake City (4N/5D)",
+  "slug": "nepal-kathmandu-pokhara-4n5d-package",
+  "destination": "Kathmandu, Pokhara",
+  "destinationSlug": "nepal",
+  "country": "Nepal",
+  "region": "South Asia",
+  "isInternational": true,
+  "durationDays": 5,
+  "durationNights": 4,
+  "startingPrice": 26000,
+  "discountPrice": 32999,
+  "rating": 4.93,
+  "reviewsCount": 210,
+  "heroImage": "/destinations/nepal.jpg",
+  "gallery": [
+    "/destinations/nepal.jpg"
+  ],
+  "highlights": [
+    "2N Kathmandu + 2N Pokhara Scenic Lakeside",
+    "Pashupatinath & Swayambhunath Temple Visits",
+    "Sarangkot Himalayan Sunrise over Annapurna Range",
+    "Fewa Lake Boating & Tal Barahi Island Temple",
+    "Davis Falls, Gupteshwor Cave & Bindhyabasini Temple"
+  ],
+  "inclusions": [
+    "2N Kathmandu + 2N Pokhara 3\u2605 Hotel Stay",
+    "Daily Breakfast",
+    "Private AC Cab for Kathmandu-Pokhara Transfers & Tours",
+    "Airport Pickup & Drop"
+  ],
+  "exclusions": [
+    "Airfare",
+    "Fewa Lake Boat Charge & Entrance Fees",
+    "Personal Expenses"
+  ],
+  "theme": "Lakes & Annapurna Mountains",
+  "hotelCategory": "3 Star",
+  "mealPlan": "CP (Daily Breakfast)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Hotel Arts Kathmandu 3\u2605",
+      "city": "Kathmandu",
+      "rating": "3 Star",
+      "nights": 2
+    },
+    {
+      "name": "Hotel Barahi / Mount View Pokhara 3\u2605",
+      "city": "Pokhara",
+      "rating": "3 Star",
+      "nights": 2
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Kathmandu Arrival",
+      "description": "Airport pickup and drop to hotel.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Pickup"
+      ],
+      "hotel": "Hotel Arts Kathmandu",
+      "transfers": "Private Cab"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Kathmandu Sightseeing & Scenic Drive to Pokhara",
+      "description": "Morning visits to Pashupatinath Temple and Swayambhunath. Drive to picturesque lake city Pokhara.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Pashupatinath",
+        "Drive to Pokhara"
+      ],
+      "hotel": "Hotel Barahi Pokhara",
+      "transfers": "Private Cab"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Sarangkot Sunrise & Pokhara City Sightseeing",
+      "description": "Early morning sunrise view from Sarangkot hill over Annapurna & Machhapuchhre. Visit Davis Falls, Gupteshwor Cave, and boat on Fewa Lake.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Sarangkot Sunrise",
+        "Davis Falls",
+        "Fewa Lake Boating"
+      ],
+      "hotel": "Hotel Barahi Pokhara",
+      "transfers": "Private Cab"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Pokhara to Kathmandu Scenic Drive",
+      "description": "Drive back to Kathmandu (optional cable car at Manakamana en route). Check in to Kathmandu hotel.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Drive to Kathmandu"
+      ],
+      "hotel": "Hotel Arts Kathmandu",
+      "transfers": "Private Cab"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Kathmandu Departure",
+      "description": "Breakfast and transfer to airport for final departure.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Drop"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private Cab"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package price?",
+      "answer": "Price is \u20b926,000 per person (increased by \u20b95,000 from flyer rate \u20b921,000)."
+    }
+  ]
+},
+  {
+  "id": "pkg-nepal-muktinath-pilgrimage-special-5n6d",
+  "name": "Nepal Muktinath Holy Pilgrimage Special: Kathmandu, Pokhara & Muktinath Dham (5N/6D)",
+  "slug": "nepal-muktinath-pilgrimage-special-5n6d-package",
+  "destination": "Kathmandu, Pokhara, Muktinath, Jomsom",
+  "destinationSlug": "nepal",
+  "country": "Nepal",
+  "region": "South Asia",
+  "isInternational": true,
+  "durationDays": 6,
+  "durationNights": 5,
+  "startingPrice": 37000,
+  "discountPrice": 44999,
+  "rating": 4.96,
+  "reviewsCount": 240,
+  "heroImage": "/destinations/nepal.jpg",
+  "gallery": [
+    "/destinations/nepal.jpg"
+  ],
+  "highlights": [
+    "2N Kathmandu + 2N Pokhara + 1N Jomsom / Muktinath Stay",
+    "Muktinath Temple 108 Bull-Headed Water Spouts Bathing",
+    "Pashupatinath & Budhanilkantha Sleeping Vishnu Temple",
+    "Jomsom Kali Gandaki River Valley & Shaligram Search",
+    "Sarangkot Sunrise & Fewa Lake Boating"
+  ],
+  "inclusions": [
+    "2N Kathmandu + 2N Pokhara + 1N Jomsom Hotel Stay",
+    "Daily Breakfast & Dinner (MAP Plan)",
+    "Pokhara \u2013 Jomsom \u2013 Muktinath 4WD Jeep / Vehicle Transfers",
+    "TIMS Permit & ACAP Annapurna Conservation Area Permit",
+    "Airport Transfers & Local Sightseeing Cabs"
+  ],
+  "exclusions": [
+    "Airfare (Optional Pokhara-Jomsom Flight)",
+    "Temple Donation & Horse / Pony Ride at Muktinath",
+    "Personal Expenses"
+  ],
+  "theme": "Pilgrimage & Sacred Himalaya",
+  "hotelCategory": "3 Star",
+  "mealPlan": "MAP (Breakfast & Dinner)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Hotel Arts Kathmandu 3\u2605",
+      "city": "Kathmandu",
+      "rating": "3 Star",
+      "nights": 2
+    },
+    {
+      "name": "Hotel Barahi Pokhara 3\u2605",
+      "city": "Pokhara",
+      "rating": "3 Star",
+      "nights": 2
+    },
+    {
+      "name": "Hotel Majestic Jomsom 3\u2605",
+      "city": "Jomsom",
+      "rating": "3 Star",
+      "nights": 1
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Kathmandu Arrival & Pashupatinath Evening Aarti",
+      "description": "Airport pickup, transfer to hotel. Evening sacred Bagmati Ganga Aarti at Pashupatinath Temple.",
+      "meals": [
+        "Breakfast",
+        "Dinner"
+      ],
+      "activities": [
+        "Airport Pickup",
+        "Pashupatinath Aarti"
+      ],
+      "hotel": "Hotel Arts Kathmandu",
+      "transfers": "Private Cab"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Kathmandu to Pokhara Scenic Drive",
+      "description": "Drive to Pokhara (en route visit Manakamana Temple via cable car). Check in to Pokhara hotel near Fewa Lake.",
+      "meals": [
+        "Breakfast",
+        "Dinner"
+      ],
+      "activities": [
+        "Manakamana Temple",
+        "Drive to Pokhara"
+      ],
+      "hotel": "Hotel Barahi Pokhara",
+      "transfers": "Private Cab"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Pokhara to Jomsom & Muktinath Darshan",
+      "description": "Drive by 4WD Jeep along Kali Gandaki river canyon to Jomsom and up to Ranipuwa Muktinath. Holy bath at 108 spouts and divine darshan at Muktinath Dham.",
+      "meals": [
+        "Breakfast",
+        "Dinner"
+      ],
+      "activities": [
+        "4WD Jeep Ride",
+        "Muktinath Darshan",
+        "108 Spouts Bath"
+      ],
+      "hotel": "Hotel Majestic Jomsom",
+      "transfers": "4WD Jeep"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Jomsom to Pokhara & Fewa Lake Evening",
+      "description": "Search sacred Shaligram stones along Kali Gandaki river. Drive back to Pokhara for evening relaxation by Fewa Lake.",
+      "meals": [
+        "Breakfast",
+        "Dinner"
+      ],
+      "activities": [
+        "Shaligram Search",
+        "Drive to Pokhara",
+        "Fewa Lake"
+      ],
+      "hotel": "Hotel Barahi Pokhara",
+      "transfers": "Private Cab"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Pokhara Sightseeing & Drive to Kathmandu",
+      "description": "Visit Davis Falls, Gupteshwor Cave, and drive back to Kathmandu. Night stay in Kathmandu.",
+      "meals": [
+        "Breakfast",
+        "Dinner"
+      ],
+      "activities": [
+        "Davis Falls",
+        "Drive to Kathmandu"
+      ],
+      "hotel": "Hotel Arts Kathmandu",
+      "transfers": "Private Cab"
+    },
+    {
+      "dayNumber": 6,
+      "title": "Budhanilkantha Sleeping Vishnu & Airport Drop",
+      "description": "Visit Budhanilkantha Sleeping Vishnu Temple before drop to Kathmandu airport for departure.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Budhanilkantha Temple",
+        "Airport Drop"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private Cab"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package price?",
+      "answer": "Price is \u20b937,000 per person MAP Plan (increased by \u20b95,000 from flyer rate \u20b932,000)."
+    }
+  ]
+}
 
 ];
