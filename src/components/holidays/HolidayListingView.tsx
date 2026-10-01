@@ -140,33 +140,93 @@ export function HolidayListingView({
         const pkgReg = pkg.region.toLowerCase();
         const pkgCountry = pkg.country.toLowerCase();
         const pkgDest = pkg.destination.toLowerCase();
+        const pkgName = pkg.name.toLowerCase();
 
-        if (selReg === 'international') {
+        const anyIn = (text: string, arr: string[]) => arr.some((k) => text.includes(k));
+
+        if (selReg === 'international' || selReg.includes('international')) {
           matchesRegion = pkg.isInternational;
-        } else if (selReg === 'north india') {
-          matchesRegion = !pkg.isInternational && (pkgReg.includes('north') || pkgReg.includes('himalaya') || pkgDest.includes('ayodhya') || pkgDest.includes('varanasi') || pkgDest.includes('kashmir') || pkgDest.includes('manali') || pkgDest.includes('uttarakhand'));
-        } else if (selReg === 'south india') {
-          matchesRegion = !pkg.isInternational && (pkgReg.includes('south') || pkgDest.includes('kerala') || pkgDest.includes('andaman'));
-        } else if (selReg === 'west india') {
-          matchesRegion = !pkg.isInternational && (pkgReg.includes('west') || pkgDest.includes('goa') || pkgDest.includes('gujarat') || pkgDest.includes('rajasthan'));
-        } else if (selReg === 'east india') {
-          matchesRegion = !pkg.isInternational && (pkgReg.includes('east') || pkgDest.includes('sikkim') || pkgDest.includes('darjeeling') || pkgDest.includes('meghalaya'));
-        } else if (selReg === 'niche') {
-          matchesRegion = pkg.theme.toLowerCase().includes('spiritual') || pkg.theme.toLowerCase().includes('heritage') || pkgReg.includes('niche') || pkgDest.includes('yatra');
-        } else if (selReg === 'middle east') {
-          matchesRegion = pkgReg.includes('middle east') || pkgCountry.includes('united arab emirates') || pkgCountry.includes('egypt') || pkgDest.includes('dubai');
-        } else if (selReg === 'southeast asia') {
-          matchesRegion = pkgReg.includes('southeast') || pkgCountry.includes('indonesia') || pkgCountry.includes('thailand') || pkgCountry.includes('vietnam') || pkgCountry.includes('malaysia') || pkgCountry.includes('singapore') || pkgCountry.includes('philippines') || pkgDest.includes('bali');
-        } else if (selReg === 'east asia') {
-          matchesRegion = pkgReg.includes('east asia') || pkgCountry.includes('japan') || pkgDest.includes('tokyo') || pkgDest.includes('osaka');
-        } else if (selReg === 'europe') {
-          matchesRegion = pkgReg.includes('europe') || pkgCountry.includes('europe') || pkgCountry.includes('switzerland') || pkgCountry.includes('france') || pkgCountry.includes('italy') || pkgCountry.includes('united kingdom') || pkgDest.includes('paris');
-        } else if (selReg === 'caucasus') {
-          matchesRegion = pkgReg.includes('caucasus') || pkgCountry.includes('georgia') || pkgCountry.includes('armenia') || pkgCountry.includes('azerbaijan') || pkgCountry.includes('kazakhstan') || pkgDest.includes('tbilisi') || pkgDest.includes('baku');
-        } else if (selReg === 'south asia') {
-          matchesRegion = pkgReg.includes('south asia') || pkgCountry.includes('nepal') || pkgCountry.includes('sri lanka') || pkgCountry.includes('bhutan') || pkgDest.includes('kathmandu');
+        } else if (selReg === 'north india' || selReg.includes('north india')) {
+          matchesRegion =
+            !pkg.isInternational &&
+            (pkgReg.includes('north') ||
+              pkgReg.includes('himalaya') ||
+              anyIn(pkgDest, ['ayodhya', 'varanasi', 'kashmir', 'manali', 'uttarakhand', 'prayagraj', 'shimla', 'spiti', 'delhi', 'agra', 'jaipur', 'haridwar', 'rishikesh', 'kedarnath', 'amarnath', 'vaishno', 'ladakh', 'leh', 'srinagar', 'gulmarg', 'dharamshala']) ||
+              anyIn(pkgName, ['ayodhya', 'varanasi', 'kashmir', 'manali', 'uttarakhand', 'prayagraj', 'shimla', 'spiti', 'delhi', 'agra', 'jaipur', 'haridwar', 'rishikesh', 'kedarnath', 'amarnath', 'vaishno', 'ladakh', 'leh', 'srinagar', 'gulmarg', 'dharamshala']));
+        } else if (selReg === 'south india' || selReg.includes('south india')) {
+          matchesRegion =
+            !pkg.isInternational &&
+            (pkgReg.includes('south') ||
+              anyIn(pkgDest, ['kerala', 'andaman', 'coorg', 'munnar', 'wayanad', 'mysore', 'ooty', 'tamil', 'rameshwaram', 'madurai', 'hampi', 'gokarna', 'kanyakumari', 'alleppey', 'kochi']) ||
+              anyIn(pkgName, ['kerala', 'andaman', 'coorg', 'munnar', 'wayanad', 'mysore', 'ooty', 'tamil', 'rameshwaram', 'madurai', 'hampi', 'gokarna', 'kanyakumari', 'alleppey', 'kochi']));
+        } else if (selReg === 'west india' || selReg.includes('west india')) {
+          matchesRegion =
+            !pkg.isInternational &&
+            (pkgReg.includes('west') ||
+              anyIn(pkgDest, ['goa', 'gujarat', 'rajasthan', 'kutch', 'jaisalmer', 'udaipur', 'jaipur', 'dwarka', 'somnath', 'statue of unity', 'maharashtra', 'mumbai', 'shirdi', 'mahableshwar', 'ranthambore', 'mount abu']) ||
+              anyIn(pkgName, ['goa', 'gujarat', 'rajasthan', 'kutch', 'jaisalmer', 'udaipur', 'jaipur', 'dwarka', 'somnath', 'statue of unity', 'maharashtra', 'mumbai', 'shirdi', 'mahableshwar', 'ranthambore', 'mount abu']));
+        } else if (selReg === 'east india' || selReg.includes('east india') || selReg.includes('north east')) {
+          matchesRegion =
+            !pkg.isInternational &&
+            (pkgReg.includes('east') ||
+              anyIn(pkgDest, ['sikkim', 'darjeeling', 'meghalaya', 'kaziranga', 'assam', 'gangtok', 'shillong', 'puri', 'bhubaneswar', 'odisha', 'kolkata', 'tawang', 'arunachal', 'north east']) ||
+              anyIn(pkgName, ['sikkim', 'darjeeling', 'meghalaya', 'kaziranga', 'assam', 'gangtok', 'shillong', 'puri', 'bhubaneswar', 'odisha', 'kolkata', 'tawang', 'arunachal', 'north east']));
+        } else if (selReg === 'niche' || selReg.includes('spiritual') || selReg.includes('yatra')) {
+          matchesRegion =
+            pkg.theme.toLowerCase().includes('spiritual') ||
+            pkg.theme.toLowerCase().includes('yatra') ||
+            pkg.theme.toLowerCase().includes('heritage') ||
+            anyIn(pkgDest, ['yatra', 'kedarnath', 'char dham', 'temple', 'mandir', 'dham', 'ram', 'kashi', 'vishwanath', 'pilgrimage', 'muktinath', 'pashupatinath']) ||
+            anyIn(pkgName, ['yatra', 'kedarnath', 'char dham', 'temple', 'mandir', 'dham', 'ram', 'kashi', 'vishwanath', 'pilgrimage', 'muktinath', 'pashupatinath']);
+        } else if (selReg === 'middle east' || selReg.includes('middle east')) {
+          matchesRegion =
+            pkg.isInternational &&
+            (pkgReg.includes('middle east') ||
+              anyIn(pkgCountry, ['united arab emirates', 'uae', 'egypt']) ||
+              anyIn(pkgDest, ['dubai', 'cairo', 'abu dhabi', 'giza', 'alexandria', 'aswan', 'luxor']) ||
+              anyIn(pkgName, ['dubai', 'cairo', 'abu dhabi', 'giza', 'alexandria', 'egypt']));
+        } else if (selReg === 'southeast asia' || selReg.includes('southeast asia')) {
+          matchesRegion =
+            pkg.isInternational &&
+            (pkgReg.includes('southeast') ||
+              anyIn(pkgCountry, ['indonesia', 'thailand', 'vietnam', 'malaysia', 'singapore', 'philippines']) ||
+              anyIn(pkgDest, ['bali', 'phuket', 'bangkok', 'hanoi', 'kuala lumpur', 'genting', 'singapore', 'manila', 'boracay', 'cebu']) ||
+              anyIn(pkgName, ['bali', 'phuket', 'bangkok', 'hanoi', 'kuala lumpur', 'genting', 'singapore', 'manila', 'boracay', 'cebu', 'thailand', 'vietnam', 'malaysia', 'philippines']));
+        } else if (selReg === 'east asia' || selReg.includes('east asia')) {
+          matchesRegion =
+            pkg.isInternational &&
+            (pkgReg.includes('east asia') ||
+              pkgCountry.includes('japan') ||
+              anyIn(pkgDest, ['japan', 'tokyo', 'osaka', 'kyoto', 'nara', 'sapporo', 'hokkaido']) ||
+              anyIn(pkgName, ['japan', 'tokyo', 'osaka', 'kyoto', 'nara', 'sapporo', 'hokkaido']));
+        } else if (selReg === 'europe' || selReg.includes('europe')) {
+          matchesRegion =
+            pkg.isInternational &&
+            (pkgReg.includes('europe') ||
+              anyIn(pkgCountry, ['europe', 'switzerland', 'france', 'italy', 'uk', 'united kingdom', 'germany', 'austria', 'belgium', 'netherlands', 'vatican', 'liechtenstein']) ||
+              anyIn(pkgDest, ['paris', 'rome', 'london', 'zurich', 'interlaken', 'amsterdam', 'brussels', 'venice', 'florence', 'geneva']) ||
+              anyIn(pkgName, ['europe', 'switzerland', 'france', 'italy', 'london', 'paris', 'rome', 'zurich', 'interlaken', 'amsterdam']));
+        } else if (selReg === 'caucasus' || selReg.includes('caucasus') || selReg.includes('central asia')) {
+          matchesRegion =
+            pkg.isInternational &&
+            (pkgReg.includes('caucasus') ||
+              pkgReg.includes('central asia') ||
+              anyIn(pkgCountry, ['georgia', 'armenia', 'azerbaijan', 'kazakhstan']) ||
+              anyIn(pkgDest, ['tbilisi', 'baku', 'yerevan', 'almaty', 'gudauri', 'kazbegi', 'batumi', 'gabala', 'absheron', 'tsaghkadzor', 'sevan']) ||
+              anyIn(pkgName, ['georgia', 'armenia', 'baku', 'azerbaijan', 'almaty', 'kazakhstan', 'tbilisi']));
+        } else if (selReg === 'south asia' || selReg.includes('south asia')) {
+          matchesRegion =
+            pkg.isInternational &&
+            (pkgReg.includes('south asia') ||
+              anyIn(pkgCountry, ['nepal', 'sri lanka', 'bhutan']) ||
+              anyIn(pkgDest, ['kathmandu', 'pokhara', 'muktinath', 'colombo', 'kandy', 'nuwara eliya', 'bentota', 'sigiriya', 'thimphu', 'paro']) ||
+              anyIn(pkgName, ['nepal', 'sri lanka', 'bhutan', 'kathmandu', 'pokhara', 'muktinath', 'colombo', 'kandy']));
         } else {
-          matchesRegion = pkgReg.includes(selReg) || pkgCountry.includes(selReg) || pkgDest.includes(selReg);
+          matchesRegion =
+            pkgReg.includes(selReg) ||
+            pkgCountry.includes(selReg) ||
+            pkgDest.includes(selReg) ||
+            pkgName.includes(selReg);
         }
       }
 
