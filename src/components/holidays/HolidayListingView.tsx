@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { Container } from '@/components/ui/Container';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { HolidayPackage } from '@/data/packagesData';
+import { DEMO_PACKAGES, HolidayPackage } from '@/data/packagesData';
 import { formatCurrency } from '@/lib/utils';
 import {
   Search,
@@ -82,8 +82,22 @@ export function HolidayListingView({
     setSortBy('recommended');
   };
 
+  // Determine if user has actively applied any custom filter
+  const isFilterModified = useMemo(() => {
+    return (
+      searchTerm.trim() !== '' ||
+      selectedCategory !== defaultCategory ||
+      (selectedRegion !== defaultRegion && selectedRegion !== 'ALL') ||
+      selectedTheme !== 'ALL' ||
+      selectedHotelCategory !== 'ALL' ||
+      selectedDuration !== 'ALL' ||
+      maxPrice < 500000
+    );
+  }, [searchTerm, selectedCategory, defaultCategory, selectedRegion, defaultRegion, selectedTheme, selectedHotelCategory, selectedDuration, maxPrice]);
+
   const filteredPackages = useMemo(() => {
     const rawQuery = searchTerm.toLowerCase().trim();
+    const sourcePool = isFilterModified ? DEMO_PACKAGES : initialPackages;
 
     // Common stop words to extract core destination tokens
     const stopWords = new Set([
@@ -95,21 +109,25 @@ export function HolidayListingView({
       .split(/[\s\-_,]+/)
       .filter((t) => t.length > 1 && !stopWords.has(t));
 
-    const matches = initialPackages.filter((pkg) => {
+    const matches = sourcePool.filter((pkg) => {
       // 1. Search keyword filter
       let matchesSearch = true;
       if (rawQuery) {
-        const pkgText = `${pkg.name} ${pkg.destination} ${pkg.country} ${pkg.region} ${pkg.theme} ${pkg.highlights.join(' ')} ${pkg.inclusions.join(' ')}`.toLowerCase();
+        const pkgText = `${pkg.name} ${pkg.destination} ${pkg.destinationSlug} ${pkg.country} ${pkg.region} ${pkg.theme} ${pkg.hotelCategory} ${pkg.mealPlan} ${pkg.highlights.join(' ')} ${pkg.inclusions.join(' ')} ${pkg.hotels.map((h) => h.name + ' ' + h.city).join(' ')}`.toLowerCase();
+        
         if (pkgText.includes(rawQuery)) {
           matchesSearch = true;
         } else if (tokens.length > 0) {
-          matchesSearch = tokens.some((token) => pkgText.includes(token));
+          matchesSearch = tokens.every((token) => pkgText.includes(token));
+          if (!matchesSearch) {
+            matchesSearch = tokens.some((token) => pkgText.includes(token));
+          }
         } else {
           matchesSearch = false;
         }
       }
 
-      // 2. Category filter
+      // 2. Domestic / International Category filter
       const matchesCategory =
         selectedCategory === 'ALL' ||
         (selectedCategory === 'INTERNATIONAL' && pkg.isInternational) ||
@@ -135,6 +153,18 @@ export function HolidayListingView({
           matchesRegion = !pkg.isInternational && (pkgReg.includes('east') || pkgDest.includes('sikkim') || pkgDest.includes('darjeeling') || pkgDest.includes('meghalaya'));
         } else if (selReg === 'niche') {
           matchesRegion = pkg.theme.toLowerCase().includes('spiritual') || pkg.theme.toLowerCase().includes('heritage') || pkgReg.includes('niche') || pkgDest.includes('yatra');
+        } else if (selReg === 'middle east') {
+          matchesRegion = pkgReg.includes('middle east') || pkgCountry.includes('united arab emirates') || pkgCountry.includes('egypt') || pkgDest.includes('dubai');
+        } else if (selReg === 'southeast asia') {
+          matchesRegion = pkgReg.includes('southeast') || pkgCountry.includes('indonesia') || pkgCountry.includes('thailand') || pkgCountry.includes('vietnam') || pkgCountry.includes('malaysia') || pkgCountry.includes('singapore') || pkgCountry.includes('philippines') || pkgDest.includes('bali');
+        } else if (selReg === 'east asia') {
+          matchesRegion = pkgReg.includes('east asia') || pkgCountry.includes('japan') || pkgDest.includes('tokyo') || pkgDest.includes('osaka');
+        } else if (selReg === 'europe') {
+          matchesRegion = pkgReg.includes('europe') || pkgCountry.includes('europe') || pkgCountry.includes('switzerland') || pkgCountry.includes('france') || pkgCountry.includes('italy') || pkgCountry.includes('united kingdom') || pkgDest.includes('paris');
+        } else if (selReg === 'caucasus') {
+          matchesRegion = pkgReg.includes('caucasus') || pkgCountry.includes('georgia') || pkgCountry.includes('armenia') || pkgCountry.includes('azerbaijan') || pkgCountry.includes('kazakhstan') || pkgDest.includes('tbilisi') || pkgDest.includes('baku');
+        } else if (selReg === 'south asia') {
+          matchesRegion = pkgReg.includes('south asia') || pkgCountry.includes('nepal') || pkgCountry.includes('sri lanka') || pkgCountry.includes('bhutan') || pkgDest.includes('kathmandu');
         } else {
           matchesRegion = pkgReg.includes(selReg) || pkgCountry.includes(selReg) || pkgDest.includes(selReg);
         }
@@ -214,6 +244,7 @@ export function HolidayListingView({
     });
   }, [
     initialPackages,
+    isFilterModified,
     searchTerm,
     selectedCategory,
     selectedRegion,
@@ -277,13 +308,19 @@ export function HolidayListingView({
           onChange={(e) => setSelectedRegion(e.target.value)}
           className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800"
         >
-          <option value="ALL">All Regions</option>
+          <option value="ALL">All Regions (Global)</option>
           <option value="North India">North India (UP, Kashmir, HP, UK)</option>
           <option value="South India">South India & Islands (Kerala, Tamil Nadu, Andaman)</option>
-          <option value="West India">West India (Goa, Gujarat, MH)</option>
-          <option value="East India">East & North East India (Sikkim, Meghalaya)</option>
+          <option value="West India">West India (Goa, Gujarat, MH, Rajasthan)</option>
+          <option value="East India">East & North East India (Sikkim, Meghalaya, Assam)</option>
           <option value="Niche">Niche / Spiritual Yatras</option>
-          <option value="International">International Destinations</option>
+          <option value="Middle East">Middle East (Dubai, Egypt)</option>
+          <option value="Southeast Asia">Southeast Asia (Bali, Thailand, Vietnam, Malaysia, Singapore)</option>
+          <option value="East Asia">East Asia (Japan)</option>
+          <option value="Europe">Europe & UK</option>
+          <option value="Caucasus">Caucasus & Central Asia (Georgia, Armenia, Baku, Almaty)</option>
+          <option value="South Asia">South Asia (Nepal, Sri Lanka, Bhutan)</option>
+          <option value="International">All International Destinations</option>
         </select>
       </div>
 
