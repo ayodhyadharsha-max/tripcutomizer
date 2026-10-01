@@ -73,8 +73,102 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Trip Customizer',
+    url: 'https://www.tripcustomizer.com',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: 'https://www.tripcustomizer.com/holidays?q={search_term_string}',
+      },
+      'query-input': 'required name=search_term_string',
+    },
+  };
+
+  const agencySchema = {
+    '@context': 'https://schema.org',
+    '@type': 'TravelAgency',
+    name: 'Trip Customizer',
+    url: 'https://www.tripcustomizer.com',
+    logo: 'https://www.tripcustomizer.com/logo-square.png',
+    image: 'https://www.tripcustomizer.com/destinations/hero-holidays.jpg',
+    description:
+      'Book customized international & domestic tour packages across 40+ countries. 4-Star hotels, flights, visa assistance, 5% GST tax compliance, and 24x7 expert travel desk support.',
+    telephone: '+91-9876543210',
+    priceRange: '$$',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Trip Customizer Plaza, Ayodhya Road',
+      addressLocality: 'Ayodhya',
+      addressRegion: 'Uttar Pradesh',
+      postalCode: '224001',
+      addressCountry: 'IN',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 26.7922,
+      longitude: 82.1998,
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.9',
+      reviewCount: '12850',
+    },
+    sameAs': [
+      'https://facebook.com/tripcustomizer',
+      'https://instagram.com/tripcustomizer',
+      'https://twitter.com/tripcustomizer',
+    ],
+  };
+
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Why book tour packages with Trip Customizer?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Trip Customizer offers 100% customized holiday itineraries with flights, 4-star handpicked hotels, private cabs, 5% GST tax compliance, and 24x7 dedicated travel desk support across 40+ global destinations.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'How do I customize my holiday package?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'You can customize any holiday package on Trip Customizer by selecting your preferred departure city, hotel category, travel dates, and adding custom sightseeing or meals directly via our online trip wizard or WhatsApp desk.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Are flights and transfers included in Trip Customizer tour packages?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes, all Trip Customizer tour packages can be booked with roundtrip flights, airport transfers, daily breakfast, and private AC vehicles for sightseeing.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What are the most popular spiritual yatra packages on Trip Customizer?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Top spiritual yatras include Ayodhya Ram Mandir VIP Darshan, Char Dham Yatra (Kedarnath, Badrinath, Gangotri, Yamunotri), Kashi Varanasi Ganga Aarti, and Dwarka Somnath Gujarat Teerth.',
+        },
+      },
+    ],
+  };
+
   return (
     <div className="bg-slate-50 min-h-screen">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(agencySchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+
       {/* Hero & Search Tabs */}
       <HeroSearch />
 
