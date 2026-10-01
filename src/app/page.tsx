@@ -117,7 +117,7 @@ export default function Home() {
       ratingValue: '4.9',
       reviewCount: '12850',
     },
-    sameAs': [
+    sameAs: [
       'https://facebook.com/tripcustomizer',
       'https://instagram.com/tripcustomizer',
       'https://twitter.com/tripcustomizer',

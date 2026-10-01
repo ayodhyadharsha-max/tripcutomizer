@@ -3919,7 +3919,2407 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "faqs": [
       { "question": "Do Indian passport holders get Visa Free Entry to Malaysia?", "answer": "Yes, Malaysia offers Visa-Free entry for Indian citizens for up to 30 days." }
     ]
-  }
-];
+  },
 
-export const packages = DEMO_PACKAGES;
+  {
+    "id": "pkg-thailand-phuket-krabi-5n",
+    "name": "Amazing Thailand: Phuket (3N) & Krabi (2N) Island Getaway",
+    "slug": "thailand-phuket-krabi-5n6d-tour-package",
+    "destination": "Phuket, Krabi",
+    "destinationSlug": "thailand",
+    "country": "Thailand",
+    "region": "South East Asia",
+    "isInternational": true,
+    "durationDays": 6,
+    "durationNights": 5,
+    "startingPrice": 24500,
+    "discountPrice": 29999,
+    "rating": 4.9,
+    "reviewsCount": 340,
+    "heroImage": "/destinations/thailand.jpg",
+    "gallery": [
+      "/destinations/thailand.jpg",
+      "/destinations/bali.jpg"
+    ],
+    "highlights": [
+      "Phuket Island & Patong Beach Exploration",
+      "Phi Phi Islands Speedboat Tour with Buffet Lunch",
+      "Krabi 4 Islands Boat Tour (Chicken Island & Phra Nang Cave)",
+      "Emerald Pool & Hot Springs Natural Spa",
+      "Minimum 4 Pax Special Rate"
+    ],
+    "inclusions": [
+      "3 Nights Accommodation in Phuket (3-Star Hotel)",
+      "2 Nights Accommodation in Krabi (3-Star Hotel)",
+      "Daily Breakfast at Hotels",
+      "Airport & Inter-Hotel Transfers on Private/SIC Basis",
+      "Phi Phi Island & Krabi 4 Islands Sightseeing Tours",
+      "English Speaking Driver & Tour Guide Assistance"
+    ],
+    "exclusions": [
+      "International Flights & Thailand Visa Fees",
+      "National Park Entrance Fees",
+      "Personal Expenses & Travel Insurance"
+    ],
+    "theme": "Beach & Island",
+    "hotelCategory": "3 Star",
+    "mealPlan": "CP (Breakfast Only)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival in Phuket \u2013 Hotel Transfer & Leisure",
+        "description": "Arrive at Phuket International Airport, meet our local representative, and transfer to your 3-star hotel. Evening free to explore Patong Beach and Bangla Road night markets.",
+        "meals": [
+          "None"
+        ],
+        "activities": [
+          "Patong Beach Walk",
+          "Bangla Road Night Market"
+        ],
+        "hotel": "Patong Beach Hotel 3\u2605 / Similar",
+        "transfers": "Private Airport Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Phi Phi Islands Speedboat Tour with Lunch",
+        "description": "Full day speedboat excursion to Maya Bay, Pileh Lagoon, Monkey Beach, and Viking Cave. Enjoy snorkeling and a delicious beachfront buffet lunch.",
+        "meals": [
+          "Breakfast",
+          "Lunch"
+        ],
+        "activities": [
+          "Speedboat Cruise",
+          "Snorkeling at Maya Bay",
+          "Viking Cave Visit"
+        ],
+        "hotel": "Patong Beach Hotel 3\u2605 / Similar",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Phuket City Sightseeing Tour",
+        "description": "Visit the iconic Big Buddha Phuket, Karon Viewpoint, Wat Chalong Temple, and Old Phuket Town historic Sino-Portuguese architecture.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Big Buddha Visit",
+          "Wat Chalong Temple",
+          "Old Phuket Town Walk"
+        ],
+        "hotel": "Patong Beach Hotel 3\u2605 / Similar",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Transfer to Krabi \u2013 Check-in & Evening Beach Stroll",
+        "description": "Scenic road transfer from Phuket to Krabi. Check-in to your resort and enjoy free time at Ao Nang Beach and local night markets.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Scenic Coastal Drive",
+          "Ao Nang Beach Leisure"
+        ],
+        "hotel": "Ao Nang Resort 3\u2605 / Similar",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 5,
+        "title": "Krabi 4 Islands Speedboat Tour",
+        "description": "Explore Phra Nang Cave Beach, Tup Island, Chicken Island, and Poda Island with crystal clear waters and limestone cliffs.",
+        "meals": [
+          "Breakfast",
+          "Lunch"
+        ],
+        "activities": [
+          "4 Islands Boat Tour",
+          "Snorkeling",
+          "Phra Nang Cave"
+        ],
+        "hotel": "Ao Nang Resort 3\u2605 / Similar",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 6,
+        "title": "Departure from Phuket / Krabi Airport",
+        "description": "Enjoy breakfast, check out from hotel, and private transfer to airport for your onward return flight home with sweet Thailand memories.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Hotel Check-out",
+          "Airport Transfer"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Airport Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Patong Beach Hotel 3\u2605",
+        "city": "Phuket",
+        "rating": "3 Star",
+        "nights": 3
+      },
+      {
+        "name": "Ao Nang Cliff Resort 3\u2605",
+        "city": "Krabi",
+        "rating": "3 Star",
+        "nights": 2
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the price per person for this Thailand 5N/6D package?",
+        "answer": "The official price is \u20b924,500 per person on double sharing basis for a minimum group of 4 pax (increased by \u20b95k over flyer rate \u20b919,500)."
+      },
+      {
+        "question": "Are island boat tours included?",
+        "answer": "Yes, full day Phi Phi Islands Speedboat tour and Krabi 4 Islands tour are included."
+      }
+    ]
+  },
+  {
+    "id": "pkg-thailand-phuket-pattaya-bangkok-7n",
+    "name": "Thailand Trio Explorer: Phuket (3N), Pattaya (2N) & Bangkok (2N)",
+    "slug": "thailand-phuket-pattaya-bangkok-7n8d-package",
+    "destination": "Phuket, Pattaya, Bangkok",
+    "destinationSlug": "thailand",
+    "country": "Thailand",
+    "region": "South East Asia",
+    "isInternational": true,
+    "durationDays": 8,
+    "durationNights": 7,
+    "startingPrice": 29200,
+    "discountPrice": 34999,
+    "rating": 4.9,
+    "reviewsCount": 410,
+    "heroImage": "/destinations/thailand.jpg",
+    "gallery": [
+      "/destinations/thailand.jpg",
+      "/destinations/singapore.jpg"
+    ],
+    "highlights": [
+      "Phuket Patong Beach & Island Sightseeing",
+      "Coral Island Speedboat Tour with Indian Lunch in Pattaya",
+      "Alcazar Cabaret Show Ticket",
+      "Bangkok Temple Tour (Wat Traimit Golden Buddha & Wat Pho)",
+      "Minimum 4 Pax Special Rate"
+    ],
+    "inclusions": [
+      "3N Phuket + 2N Pattaya + 2N Bangkok in 3-Star Hotels",
+      "Daily Breakfast at All Hotels",
+      "Coral Island Tour by Speedboat with Lunch",
+      "Bangkok Golden Buddha & Marble Temple Tour",
+      "Inter-city Transfers and Airport Drop"
+    ],
+    "exclusions": [
+      "International Airfare & Visa",
+      "Personal Expenses",
+      "Tips & Porterage"
+    ],
+    "theme": "Multi-City Highlights",
+    "hotelCategory": "3 Star",
+    "mealPlan": "CP (Breakfast Only)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival in Phuket \u2013 Leisure & Nightlife",
+        "description": "Arrive in Phuket, private transfer to hotel. Explore Bangla Road and Patong nightlife.",
+        "meals": [
+          "None"
+        ],
+        "activities": [
+          "Patong Beach"
+        ],
+        "hotel": "Phuket 3\u2605 Hotel",
+        "transfers": "Private Airport Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Phuket Island & Viewpoint Tour",
+        "description": "Visit Big Buddha, Karon Viewpoint, and Wat Chalong Temple.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Sightseeing"
+        ],
+        "hotel": "Phuket 3\u2605 Hotel",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Phuket Free Day / Optional James Bond Island",
+        "description": "Day at leisure for shopping or optional James Bond Island tour.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Shopping"
+        ],
+        "hotel": "Phuket 3\u2605 Hotel",
+        "transfers": "N/A"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Flight to Bangkok \u2013 Transfer to Pattaya",
+        "description": "Fly to Bangkok and private drive to beach city Pattaya. Evening Alcazar Cabaret Show.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Alcazar Show"
+        ],
+        "hotel": "Pattaya 3\u2605 Hotel",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 5,
+        "title": "Coral Island Speedboat Tour with Lunch",
+        "description": "Speedboat ride to Coral Island. Enjoy water sports, white sand beaches, and lunch.",
+        "meals": [
+          "Breakfast",
+          "Lunch"
+        ],
+        "activities": [
+          "Coral Island",
+          "Water Sports"
+        ],
+        "hotel": "Pattaya 3\u2605 Hotel",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 6,
+        "title": "Transfer to Bangkok \u2013 Temple & City Tour",
+        "description": "Drive to Bangkok. Visit Wat Traimit (Golden Buddha) and Wat Benchamabophit.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "City Temple Tour"
+        ],
+        "hotel": "Bangkok 3\u2605 Hotel",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 7,
+        "title": "Bangkok Shopping & Chao Phraya River Cruise",
+        "description": "Explore MBK Center, Platinum Mall, and evening Chao Phraya Dinner Cruise.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Shopping",
+          "Dinner Cruise"
+        ],
+        "hotel": "Bangkok 3\u2605 Hotel",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 8,
+        "title": "Bangkok Departure",
+        "description": "Check out and transfer to Suvarnabhumi Airport for return flight.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Transfer"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Phuket City Hotel 3\u2605",
+        "city": "Phuket",
+        "rating": "3 Star",
+        "nights": 3
+      },
+      {
+        "name": "Pattaya Beach Resort 3\u2605",
+        "city": "Pattaya",
+        "rating": "3 Star",
+        "nights": 2
+      },
+      {
+        "name": "Bangkok Center Hotel 3\u2605",
+        "city": "Bangkok",
+        "rating": "3 Star",
+        "nights": 2
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the package price for 7N/8D Thailand Trio?",
+        "answer": "The price is \u20b929,200 per person (increased by \u20b95k from flyer rate \u20b924,200) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-thailand-phuket-krabi-bangkok-7n",
+    "name": "Thailand Paradise: Phuket (3N), Krabi (2N) & Bangkok (2N)",
+    "slug": "thailand-phuket-krabi-bangkok-7n8d-package",
+    "destination": "Phuket, Krabi, Bangkok",
+    "destinationSlug": "thailand",
+    "country": "Thailand",
+    "region": "South East Asia",
+    "isInternational": true,
+    "durationDays": 8,
+    "durationNights": 7,
+    "startingPrice": 32000,
+    "discountPrice": 38999,
+    "rating": 4.9,
+    "reviewsCount": 285,
+    "heroImage": "/destinations/thailand.jpg",
+    "gallery": [
+      "/destinations/thailand.jpg",
+      "/destinations/bali.jpg"
+    ],
+    "highlights": [
+      "Phi Phi Islands Speedboat Excursion with Lunch",
+      "Krabi 4 Islands Scenic Boat Tour",
+      "Bangkok Golden Buddha & Gems Gallery Tour",
+      "Chao Phraya River Princess Dinner Cruise",
+      "Minimum 4 Pax Special Rate"
+    ],
+    "inclusions": [
+      "3N Phuket + 2N Krabi + 2N Bangkok 3-Star Hotels",
+      "Daily Breakfast at All Accommodations",
+      "Phi Phi Island & Krabi 4 Islands Sightseeing Tours",
+      "Bangkok City & Temple Tour",
+      "Private Airport & Inter-city Transfers"
+    ],
+    "exclusions": [
+      "Airfare & Visa",
+      "National Park Fees",
+      "Personal Expenses"
+    ],
+    "theme": "Island & Culture",
+    "hotelCategory": "3 Star",
+    "mealPlan": "CP (Breakfast Only)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival Phuket \u2013 Hotel Check-in",
+        "description": "Airport arrival and transfer to Phuket resort. Evening Patong beach leisure.",
+        "meals": [
+          "None"
+        ],
+        "activities": [
+          "Patong Beach"
+        ],
+        "hotel": "Phuket Resort 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Phi Phi Islands Speedboat Tour",
+        "description": "Full day speedboat tour to Maya Bay, Pileh Lagoon, and Viking Cave.",
+        "meals": [
+          "Breakfast",
+          "Lunch"
+        ],
+        "activities": [
+          "Island Tour",
+          "Snorkeling"
+        ],
+        "hotel": "Phuket Resort 3\u2605",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Phuket Cultural Sightseeing",
+        "description": "Visit Big Buddha, Wat Chalong, and Karon Viewpoint.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Temple Tour"
+        ],
+        "hotel": "Phuket Resort 3\u2605",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Scenic Drive Phuket to Krabi",
+        "description": "Road transfer to Krabi. Relax at Ao Nang Beach.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Ao Nang Beach"
+        ],
+        "hotel": "Krabi Resort 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 5,
+        "title": "Krabi 4 Islands Boat Tour",
+        "description": "Explore Phra Nang Cave, Tup Island, Chicken Island, and Poda Island.",
+        "meals": [
+          "Breakfast",
+          "Lunch"
+        ],
+        "activities": [
+          "4 Islands Tour"
+        ],
+        "hotel": "Krabi Resort 3\u2605",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 6,
+        "title": "Flight Krabi to Bangkok \u2013 City Tour",
+        "description": "Fly to Bangkok, half day Golden Buddha and Marble Temple tour.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Bangkok City Tour"
+        ],
+        "hotel": "Bangkok Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 7,
+        "title": "Bangkok Shopping & Dinner Cruise",
+        "description": "Free day for shopping at Siam Paragon. Evening Chao Phraya Dinner Cruise.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Dinner Cruise"
+        ],
+        "hotel": "Bangkok Hotel 3\u2605",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 8,
+        "title": "Bangkok Departure",
+        "description": "Breakfast, checkout, and airport transfer for return flight.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Transfer"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Phuket Resort 3\u2605",
+        "city": "Phuket",
+        "rating": "3 Star",
+        "nights": 3
+      },
+      {
+        "name": "Krabi Cliff Resort 3\u2605",
+        "city": "Krabi",
+        "rating": "3 Star",
+        "nights": 2
+      },
+      {
+        "name": "Bangkok City Hotel 3\u2605",
+        "city": "Bangkok",
+        "rating": "3 Star",
+        "nights": 2
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the package cost?",
+        "answer": "Price is \u20b932,000 per person (increased by \u20b95k from flyer rate \u20b927,000) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-thailand-grand-4city-8n",
+    "name": "Grand Thailand 4-City Odyssey: Phuket, Krabi, Pattaya & Bangkok (8N/9D)",
+    "slug": "thailand-grand-4city-8n9d-tour-package",
+    "destination": "Phuket, Krabi, Pattaya, Bangkok",
+    "destinationSlug": "thailand",
+    "country": "Thailand",
+    "region": "South East Asia",
+    "isInternational": true,
+    "durationDays": 9,
+    "durationNights": 8,
+    "startingPrice": 34500,
+    "discountPrice": 42999,
+    "rating": 4.95,
+    "reviewsCount": 520,
+    "heroImage": "/destinations/thailand.jpg",
+    "gallery": [
+      "/destinations/thailand.jpg",
+      "/destinations/singapore.jpg"
+    ],
+    "highlights": [
+      "Ultimate 4-City Thailand Experience across Islands & Metropolises",
+      "Phuket Phi Phi Island Tour & Krabi 4 Islands Excursion",
+      "Pattaya Coral Island Speedboat Tour & Alcazar Show",
+      "Bangkok Temples, Shopping & Dinner Cruise",
+      "Minimum 4 Pax Special Rate"
+    ],
+    "inclusions": [
+      "2N Phuket + 2N Krabi + 2N Pattaya + 2N Bangkok in 3-Star Hotels",
+      "Daily Breakfast at All Hotels",
+      "3 Island Boat Tours (Phi Phi, Krabi 4 Islands & Coral Island)",
+      "City Tours of Phuket, Pattaya & Bangkok",
+      "All Inter-city Transfers by AC Coach/Car"
+    ],
+    "exclusions": [
+      "Airfare & Visa",
+      "National Park Entrance Fees",
+      "Personal Expenses"
+    ],
+    "theme": "Grand Expedition",
+    "hotelCategory": "3 Star",
+    "mealPlan": "CP (Breakfast Only)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival Phuket \u2013 Patong Beach",
+        "description": "Arrival in Phuket, transfer to hotel. Relax at Patong Beach.",
+        "meals": [
+          "None"
+        ],
+        "activities": [
+          "Patong Beach"
+        ],
+        "hotel": "Phuket Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Phi Phi Islands Speedboat Tour",
+        "description": "Full day Phi Phi Island tour with lunch.",
+        "meals": [
+          "Breakfast",
+          "Lunch"
+        ],
+        "activities": [
+          "Phi Phi Tour"
+        ],
+        "hotel": "Phuket Hotel 3\u2605",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Phuket to Krabi Transfer \u2013 Ao Nang Beach",
+        "description": "Transfer to Krabi. Sunset walk at Ao Nang Beach.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Ao Nang Beach"
+        ],
+        "hotel": "Krabi Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Krabi 4 Islands Boat Tour",
+        "description": "Excursion to Phra Nang, Tup, Chicken & Poda islands.",
+        "meals": [
+          "Breakfast",
+          "Lunch"
+        ],
+        "activities": [
+          "4 Islands Boat Tour"
+        ],
+        "hotel": "Krabi Hotel 3\u2605",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 5,
+        "title": "Flight to Bangkok \u2013 Drive to Pattaya",
+        "description": "Flight to Bangkok, drive to Pattaya. Evening Alcazar Show.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Alcazar Show"
+        ],
+        "hotel": "Pattaya Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 6,
+        "title": "Coral Island Speedboat Tour with Lunch",
+        "description": "Coral Island speedboat tour and water sports.",
+        "meals": [
+          "Breakfast",
+          "Lunch"
+        ],
+        "activities": [
+          "Coral Island"
+        ],
+        "hotel": "Pattaya Hotel 3\u2605",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 7,
+        "title": "Pattaya to Bangkok Transfer \u2013 City & Temple Tour",
+        "description": "Transfer to Bangkok. Visit Golden Buddha and Marble Temple.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Bangkok City Tour"
+        ],
+        "hotel": "Bangkok Hotel 3\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 8,
+        "title": "Bangkok Shopping & Chao Phraya Dinner Cruise",
+        "description": "Shopping at MBK Center and evening Chao Phraya Dinner Cruise.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Dinner Cruise"
+        ],
+        "hotel": "Bangkok Hotel 3\u2605",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 9,
+        "title": "Bangkok Departure",
+        "description": "Check out and transfer to airport for departure flight.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Transfer"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Phuket Hotel 3\u2605",
+        "city": "Phuket",
+        "rating": "3 Star",
+        "nights": 2
+      },
+      {
+        "name": "Krabi Hotel 3\u2605",
+        "city": "Krabi",
+        "rating": "3 Star",
+        "nights": 2
+      },
+      {
+        "name": "Pattaya Hotel 3\u2605",
+        "city": "Pattaya",
+        "rating": "3 Star",
+        "nights": 2
+      },
+      {
+        "name": "Bangkok Hotel 3\u2605",
+        "city": "Bangkok",
+        "rating": "3 Star",
+        "nights": 2
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the package cost?",
+        "answer": "Price is \u20b934,500 per person (increased by \u20b95k from flyer rate \u20b929,500) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-almaty-3n4d",
+    "name": "Private Almaty Adventure: Ski Resorts & Hot Springs (3N/4D)",
+    "slug": "almaty-kazakhstan-3n4d-private-tour",
+    "destination": "Almaty",
+    "destinationSlug": "almaty",
+    "country": "Kazakhstan",
+    "region": "Central Asia",
+    "isInternational": true,
+    "durationDays": 4,
+    "durationNights": 3,
+    "startingPrice": 34000,
+    "discountPrice": 41999,
+    "rating": 4.95,
+    "reviewsCount": 190,
+    "heroImage": "/destinations/azerbaijan.jpg",
+    "gallery": [
+      "/destinations/azerbaijan.jpg",
+      "/destinations/switzerland.jpg"
+    ],
+    "highlights": [
+      "FREE VISA ON ARRIVAL FOR INDIAN PASSPORT HOLDERS",
+      "100% Private Tour with Dedicated English-Speaking Guide",
+      "Shymbulak Ski Resort & Medeo High Altitude Ice Rink Cable Car",
+      "Almarasan Gorge & Thermal Mineral Hot Springs Excursion",
+      "Live Falconry Show & Zenkov Cathedral City Sightseeing",
+      "Minimum 4 Pax Special Rate"
+    ],
+    "inclusions": [
+      "3 Nights 4-Star Hotel Accommodation in Almaty",
+      "Daily Buffet Breakfast at Hotel",
+      "Private Airport Transfers (Arrival & Departure)",
+      "Tours & Transfers in Comfortable AC Vehicle",
+      "Cable Car Tickets to Shymbulak Ski Resort",
+      "English Speaking Driver & Expert Local Guide"
+    ],
+    "exclusions": [
+      "International Airfare",
+      "Lunch & Dinner (unless mentioned)",
+      "Personal Expenses & Tips"
+    ],
+    "theme": "Nature & Snow Adventure",
+    "hotelCategory": "4 Star",
+    "mealPlan": "CP (Breakfast Only)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival in Almaty \u2013 Hotel Transfer & Evening Leisure",
+        "description": "Arrive at Almaty International Airport (ALA). Free Visa on Arrival processing for Indians. Meet private driver and transfer to hotel. Evening at leisure.",
+        "meals": [
+          "None"
+        ],
+        "activities": [
+          "Airport Welcome",
+          "Almaty Evening Stroll"
+        ],
+        "hotel": "Almaty Grand Hotel 4\u2605 / Similar",
+        "transfers": "Private Airport Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Shymbulak Ski Resort & Medeo High Altitude Complex",
+        "description": "Ride world-class cable cars to Shymbulak Ski Resort located at 2,260m altitude. Visit Medeo, the world\u2019s highest outdoor speed skating rink amidst snow-capped peaks.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Shymbulak Cable Car",
+          "Medeo Ice Rink Visit",
+          "Alpine Photography"
+        ],
+        "hotel": "Almaty Grand Hotel 4\u2605 / Similar",
+        "transfers": "Private Tour Vehicle"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Almarasan Gorge, Hot Springs & Falcon Show",
+        "description": "Drive into scenic Almarasan Gorge, famous for pine forests and crystal clear mountain streams. Relax at natural hot springs and attend a traditional Kazakh Falconry show.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Almarasan Gorge Trek",
+          "Thermal Hot Springs",
+          "Falcon Hunting Show"
+        ],
+        "hotel": "Almaty Grand Hotel 4\u2605 / Similar",
+        "transfers": "Private Tour Vehicle"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Almaty City Tour & Departure",
+        "description": "Explore Zenkov Wooden Cathedral, Panfilov Park, and Green Bazaar for local souvenirs before private airport drop for departure flight.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Zenkov Cathedral",
+          "Green Bazaar Shopping",
+          "Airport Transfer"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Airport Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Almaty Grand Hotel 4\u2605",
+        "city": "Almaty",
+        "rating": "4 Star",
+        "nights": 3
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Is visa required for Indians traveling to Almaty?",
+        "answer": "Indians get 14-day Free Visa on Arrival in Kazakhstan."
+      },
+      {
+        "question": "What is the package price?",
+        "answer": "Price is \u20b934,000 per person (increased by \u20b95k from flyer rate \u20b929,000) for min 4 pax private tour."
+      }
+    ]
+  },
+  {
+    "id": "pkg-almaty-4n5d",
+    "name": "Almaty & Issyk Alpine Lake Expedition (4N/5D)",
+    "slug": "almaty-issyk-lake-4n5d-private-tour",
+    "destination": "Almaty",
+    "destinationSlug": "almaty",
+    "country": "Kazakhstan",
+    "region": "Central Asia",
+    "isInternational": true,
+    "durationDays": 5,
+    "durationNights": 4,
+    "startingPrice": 46000,
+    "discountPrice": 54999,
+    "rating": 4.95,
+    "reviewsCount": 220,
+    "heroImage": "/destinations/azerbaijan.jpg",
+    "gallery": [
+      "/destinations/azerbaijan.jpg",
+      "/destinations/switzerland.jpg"
+    ],
+    "highlights": [
+      "FREE VISA ON ARRIVAL FOR INDIANS",
+      "Full Day Excursion to Emerald Green Issyk Alpine Lake",
+      "Shymbulak Ski Resort High Cable Car Excursion",
+      "Almaty City Tour & Green Bazaar Shopping",
+      "100% Private Basis (Min 4 Pax)"
+    ],
+    "inclusions": [
+      "4 Nights 4-Star Hotel Accommodation in Almaty",
+      "Daily Breakfast at Hotel",
+      "Private Transfers & Sightseeing in AC Vehicle",
+      "Issyk Lake & Shymbulak Cable Car Tickets",
+      "English Speaking Driver & Guide"
+    ],
+    "exclusions": [
+      "Airfare",
+      "Lunch & Dinner",
+      "Personal Expenses"
+    ],
+    "theme": "Lakes & Alpine Adventure",
+    "hotelCategory": "4 Star",
+    "mealPlan": "CP (Breakfast Only)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival Almaty \u2013 Hotel Transfer",
+        "description": "Arrival in Almaty, airport greeting and hotel check-in.",
+        "meals": [
+          "None"
+        ],
+        "activities": [
+          "Airport Transfer"
+        ],
+        "hotel": "Almaty Hotel 4\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Shymbulak Ski Resort & Medeo Complex",
+        "description": "Cable car rides to Shymbulak Ski Resort and Medeo.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Shymbulak Cable Car"
+        ],
+        "hotel": "Almaty Hotel 4\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Almaty City Tour & Green Bazaar",
+        "description": "Visit Panfilov Park, Zenkov Cathedral, Kok Tobe, and Green Bazaar.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "City Sightseeing"
+        ],
+        "hotel": "Almaty Hotel 4\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Full Day Issyk Lake Excursion",
+        "description": "Day trip to breathtaking Issyk Alpine Lake situated at 1,760m surrounded by Tien Shan mountains.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Issyk Lake Tour"
+        ],
+        "hotel": "Almaty Hotel 4\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 5,
+        "title": "Almarasan Gorge & Departure",
+        "description": "Morning visit to Almarasan Gorge, afternoon airport transfer.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Transfer"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Almaty Plaza Hotel 4\u2605",
+        "city": "Almaty",
+        "rating": "4 Star",
+        "nights": 4
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the package cost?",
+        "answer": "Price is \u20b946,000 per person (increased by \u20b95k from flyer rate \u20b941,000) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-almaty-5n6d",
+    "name": "Grand Kazakhstan: Almaty, Kolsay Lake & Charyn Canyon Wonders (5N/6D)",
+    "slug": "almaty-kolsay-charyn-canyon-5n6d-tour",
+    "destination": "Almaty",
+    "destinationSlug": "almaty",
+    "country": "Kazakhstan",
+    "region": "Central Asia",
+    "isInternational": true,
+    "durationDays": 6,
+    "durationNights": 5,
+    "startingPrice": 56000,
+    "discountPrice": 67999,
+    "rating": 4.98,
+    "reviewsCount": 310,
+    "heroImage": "/destinations/azerbaijan.jpg",
+    "gallery": [
+      "/destinations/azerbaijan.jpg",
+      "/destinations/switzerland.jpg"
+    ],
+    "highlights": [
+      "FREE VISA ON ARRIVAL FOR INDIANS",
+      "Full Day Charyn Canyon & Black Canyon Excursion",
+      "Kolsay Alpine Lakes Nature Reserve Expedition",
+      "Shymbulak Ski Resort & Kok Tobe Hilltop Panoramic View",
+      "Almarasan & Ausay Mountain Gorges Exploration",
+      "Private VIP Transfers (Min 4 Pax)"
+    ],
+    "inclusions": [
+      "5 Nights 4-Star Hotel Accommodation in Almaty",
+      "Daily Breakfast at Hotel",
+      "Charyn Canyon & Kolsay Lakes Full Day Tours",
+      "Shymbulak Cable Car & Kok Tobe Entry Tickets",
+      "Private AC Vehicle with English Driver"
+    ],
+    "exclusions": [
+      "International Flights",
+      "Meals Not Mentioned",
+      "Personal Expenses"
+    ],
+    "theme": "Canyons & Lakes Expedition",
+    "hotelCategory": "4 Star",
+    "mealPlan": "CP (Breakfast Only)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival Almaty \u2013 Transfer to Hotel",
+        "description": "Arrival in Almaty, private greeting and transfer to 4-star hotel.",
+        "meals": [
+          "None"
+        ],
+        "activities": [
+          "Airport Transfer"
+        ],
+        "hotel": "Almaty Luxury Hotel 4\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Shymbulak Ski Resort & Medeo Rink",
+        "description": "Cable car ascent to Shymbulak Ski Resort.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Ski Resort Cable Car"
+        ],
+        "hotel": "Almaty Luxury Hotel 4\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Charyn Canyon & Kolsay Lakes Full Day Tour",
+        "description": "Spectacular excursion to Charyn Canyon, Black Canyon, and crystal clear Kolsay Lake.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Charyn Canyon Trek",
+          "Kolsay Lake"
+        ],
+        "hotel": "Almaty Luxury Hotel 4\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Almaty City Tour & Kok Tobe Cable Car",
+        "description": "Visit Panfilov Park, Zenkov Cathedral, and ride Kok Tobe cable car for sunset views.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Kok Tobe Cable Car"
+        ],
+        "hotel": "Almaty Luxury Hotel 4\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 5,
+        "title": "Almarasan & Ausay Gorges Exploration",
+        "description": "Visit Almarasan Gorge, hot springs, and Ausay Gorge stream valleys.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Gorge Nature Walk"
+        ],
+        "hotel": "Almaty Luxury Hotel 4\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 6,
+        "title": "Almaty Departure",
+        "description": "Breakfast, checkout, and private airport drop.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Drop"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Almaty Palace Hotel 4\u2605",
+        "city": "Almaty",
+        "rating": "4 Star",
+        "nights": 5
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the package cost?",
+        "answer": "Price is \u20b956,000 per person (increased by \u20b95k from flyer rate \u20b951,000) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-vietnam-danang-hoian-4n5d",
+    "name": "Vietnam Marvels: Da Nang, Ba Na Hills & Hoi An Ancient Town (4N/5D)",
+    "slug": "vietnam-danang-hoian-bana-hills-4n5d-package",
+    "destination": "Da Nang, Hoi An",
+    "destinationSlug": "vietnam",
+    "country": "Vietnam",
+    "region": "South East Asia",
+    "isInternational": true,
+    "durationDays": 5,
+    "durationNights": 4,
+    "startingPrice": 27000,
+    "discountPrice": 34999,
+    "rating": 4.9,
+    "reviewsCount": 380,
+    "heroImage": "/destinations/vietnam.jpg",
+    "gallery": [
+      "/destinations/vietnam.jpg",
+      "/destinations/japan.jpg"
+    ],
+    "highlights": [
+      "Ba Na Hills World Record Cable Car & Golden Giant Hands Bridge",
+      "Buffet Lunch Included at Ba Na Hills Resort",
+      "Lantern-lit UNESCO Heritage Hoi An Ancient Town with Dinner",
+      "Son Tra Peninsula & Marble Mountains Exploration",
+      "Minimum 4 Pax Special Group Rate"
+    ],
+    "inclusions": [
+      "4 Nights 3-Star Hotel Stay in Da Nang",
+      "Daily Breakfast + 1 Buffet Lunch + 1 Dinner",
+      "Ba Na Hills Cable Car & Golden Bridge Entrance Ticket",
+      "Sightseeing Tours & Transfers on SIC Basis",
+      "English Speaking Local Tour Guide"
+    ],
+    "exclusions": [
+      "International Flights & Visa Fees",
+      "Personal Expenses",
+      "Tips"
+    ],
+    "theme": "Heritage & Cable Car",
+    "hotelCategory": "3 Star",
+    "mealPlan": "MAP (Breakfast + Selected Meals)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Da Nang Arrival \u2013 Free Leisure",
+        "description": "Arrive at Da Nang International Airport, transfer to hotel. Free leisure evening at My Khe Beach.",
+        "meals": [
+          "None"
+        ],
+        "activities": [
+          "My Khe Beach"
+        ],
+        "hotel": "Da Nang Beach Hotel 3\u2605",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Ba Na Hills & Golden Bridge Cable Car (Buffet Lunch)",
+        "description": "Full day tour to Ba Na Hills. Ride cable car, walk across Golden Bridge held by giant hands, visit French Village. Enjoy international buffet lunch.",
+        "meals": [
+          "Breakfast",
+          "Lunch"
+        ],
+        "activities": [
+          "Golden Bridge",
+          "Ba Na Hills Cable Car",
+          "French Village"
+        ],
+        "hotel": "Da Nang Beach Hotel 3\u2605",
+        "transfers": "SIC Tour"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Son Tra Peninsula, Marble Mountain & Hoi An Ancient Town",
+        "description": "Visit Linh Ung Pagoda on Son Tra Peninsula, explore Marble Mountain caves. Evening tour to magical Hoi An Ancient Town with Japanese Bridge and lantern night market. Dinner included.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Marble Mountain",
+          "Hoi An Lantern Town"
+        ],
+        "hotel": "Da Nang Beach Hotel 3\u2605",
+        "transfers": "SIC Tour"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Da Nang Free Leisure Day",
+        "description": "Free day for shopping, beach relaxation, or optional Han River cruise.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Beach Leisure",
+          "Shopping"
+        ],
+        "hotel": "Da Nang Beach Hotel 3\u2605",
+        "transfers": "N/A"
+      },
+      {
+        "dayNumber": 5,
+        "title": "Da Nang Departure",
+        "description": "Breakfast, hotel checkout, and transfer to airport for departure flight.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Transfer"
+        ],
+        "hotel": "N/A",
+        "transfers": "SIC Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Da Nang Central Hotel 3\u2605",
+        "city": "Da Nang",
+        "rating": "3 Star",
+        "nights": 4
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the price?",
+        "answer": "Price is \u20b927,000 per person (increased by \u20b95k from flyer rate \u20b922,000) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-vietnam-saigon-mekong-4n5d",
+    "name": "Vietnam Southern Highlights: Ho Chi Minh City, Cu Chi Tunnels & Mekong Delta (4N/5D)",
+    "slug": "vietnam-ho-chi-minh-mekong-cuchi-4n5d-package",
+    "destination": "Ho Chi Minh City, Mekong Delta",
+    "destinationSlug": "vietnam",
+    "country": "Vietnam",
+    "region": "South East Asia",
+    "isInternational": true,
+    "durationDays": 5,
+    "durationNights": 4,
+    "startingPrice": 34000,
+    "discountPrice": 42999,
+    "rating": 4.9,
+    "reviewsCount": 290,
+    "heroImage": "/destinations/vietnam.jpg",
+    "gallery": [
+      "/destinations/vietnam.jpg",
+      "/destinations/japan.jpg"
+    ],
+    "highlights": [
+      "Full Day Mekong Delta River Cruise with Local Vietnamese Lunch",
+      "Historic Cu Chi Underground Tunnels Excursion",
+      "Ho Chi Minh City Tour (Notre Dame Cathedral & War Remnants Museum)",
+      "Ben Thanh Market Shopping Experience",
+      "Minimum 4 Pax Special Rate"
+    ],
+    "inclusions": [
+      "4 Nights Accommodation in Ho Chi Minh City (3-Star Hotel)",
+      "Daily Breakfast + 2 Local Lunches",
+      "Cu Chi Tunnels Entry & Mekong Delta Sampan Boat Cruise",
+      "Tours & Transfers on Join Group SIC Basis",
+      "English Speaking Local Guide"
+    ],
+    "exclusions": [
+      "Airfare & Visa",
+      "Personal Expenses",
+      "Tips"
+    ],
+    "theme": "History & River Cruise",
+    "hotelCategory": "3 Star",
+    "mealPlan": "MAP (Breakfast + Selected Lunches)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival Ho Chi Minh City \u2013 Free Evening",
+        "description": "Arrive Tan Son Nhat Airport, transfer to hotel. Free evening to explore Saigon night market.",
+        "meals": [
+          "None"
+        ],
+        "activities": [
+          "Saigon Night Market"
+        ],
+        "hotel": "Ho Chi Minh Hotel 3\u2605",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Ho Chi Minh City Sightseeing Tour",
+        "description": "Visit War Remnants Museum, Reunification Palace, Notre Dame Cathedral, and Central Post Office.",
+        "meals": [
+          "Breakfast",
+          "Lunch"
+        ],
+        "activities": [
+          "Saigon City Tour"
+        ],
+        "hotel": "Ho Chi Minh Hotel 3\u2605",
+        "transfers": "SIC Tour"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Cu Chi Underground Tunnels Tour",
+        "description": "Excursion to legendary Cu Chi Tunnels. Walk through underground guerrilla network and see trapdoors.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Cu Chi Tunnels"
+        ],
+        "hotel": "Ho Chi Minh Hotel 3\u2605",
+        "transfers": "SIC Tour"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Mekong Delta Full Day River Cruise",
+        "description": "Boat trip down Mekong River to My Tho. Visit coconut candy workshop, ride sampan through canal, enjoy fresh fruits and local lunch.",
+        "meals": [
+          "Breakfast",
+          "Lunch"
+        ],
+        "activities": [
+          "Mekong Boat Cruise",
+          "Coconut Candy Workshop"
+        ],
+        "hotel": "Ho Chi Minh Hotel 3\u2605",
+        "transfers": "SIC Tour"
+      },
+      {
+        "dayNumber": 5,
+        "title": "Ho Chi Minh Departure",
+        "description": "Breakfast, checkout, and airport transfer for return flight.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Transfer"
+        ],
+        "hotel": "N/A",
+        "transfers": "SIC Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Saigon Boutique Hotel 3\u2605",
+        "city": "Ho Chi Minh",
+        "rating": "3 Star",
+        "nights": 4
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the package cost?",
+        "answer": "Price is \u20b934,000 per person (increased by \u20b95k from flyer rate \u20b929,000) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-vietnam-hanoi-sapa-halong-4n5d",
+    "name": "Vietnam Wonders: Hanoi (2N), Sapa Mountain (1N) & Ha Long Bay Cruise (4N/5D)",
+    "slug": "vietnam-hanoi-sapa-halong-bay-4n5d-package",
+    "destination": "Hanoi, Sapa, Ha Long Bay",
+    "destinationSlug": "vietnam",
+    "country": "Vietnam",
+    "region": "South East Asia",
+    "isInternational": true,
+    "durationDays": 5,
+    "durationNights": 4,
+    "startingPrice": 38000,
+    "discountPrice": 46999,
+    "rating": 4.95,
+    "reviewsCount": 450,
+    "heroImage": "/destinations/vietnam.jpg",
+    "gallery": [
+      "/destinations/vietnam.jpg",
+      "/destinations/japan.jpg"
+    ],
+    "highlights": [
+      "Overnight Mountain Homestay / Hotel Stay in Sapa",
+      "Fansipan Peak Cable Car Ride (\"Roof of Indochina\" 3,143m)",
+      "Cat Cat Ethnic Village Trekking & Cultural Show",
+      "Ha Long Bay UNESCO World Heritage Day Cruise with Seafood Lunch",
+      "Hanoi Old Quarter Street Food & Lake Walk",
+      "Minimum 4 Pax Special Rate"
+    ],
+    "inclusions": [
+      "3 Nights Hanoi (3\u2605) + 1 Night Sapa (3\u2605)",
+      "Daily Breakfast + 3 Lunches + 1 Dinner",
+      "Ha Long Bay Cruise Ticket & Kayaking",
+      "Fansipan Cable Car Ticket",
+      "Tours & Transfers on Join Group Basis"
+    ],
+    "exclusions": [
+      "Airfare & Visa",
+      "Personal Expenses",
+      "Tips"
+    ],
+    "theme": "Mountains & Cruise",
+    "hotelCategory": "3 Star",
+    "mealPlan": "MAP (Breakfast + Selected Meals)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Hanoi Arrival \u2013 Free Leisure",
+        "description": "Arrive in Hanoi, check in hotel. Walk around Hoan Kiem Lake and Old Quarter.",
+        "meals": [
+          "None"
+        ],
+        "activities": [
+          "Hoan Kiem Lake Walk"
+        ],
+        "hotel": "Hanoi Hotel 3\u2605",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Hanoi to Sapa \u2013 Cat Cat Village Trekking",
+        "description": "Scenic bus drive to Sapa. Trek through Cat Cat Village, learn Black Hmong culture. Overnight in Sapa. Dinner included.",
+        "meals": [
+          "Breakfast",
+          "Lunch",
+          "Dinner"
+        ],
+        "activities": [
+          "Cat Cat Village Trek"
+        ],
+        "hotel": "Sapa Mountain Hotel 3\u2605",
+        "transfers": "SIC Coach"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Fansipan Peak Cable Car \u2013 Return to Hanoi",
+        "description": "Ride cable car to Fansipan Peak summit. Return to Hanoi in the evening.",
+        "meals": [
+          "Breakfast",
+          "Lunch"
+        ],
+        "activities": [
+          "Fansipan Cable Car"
+        ],
+        "hotel": "Hanoi Hotel 3\u2605",
+        "transfers": "SIC Coach"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Ha Long Bay UNESCO World Heritage Day Cruise",
+        "description": "Drive to Ha Long Bay. Board day cruise ship, sail past limestone karsts, visit Sung Sot Cave, kayaking, and seafood lunch.",
+        "meals": [
+          "Breakfast",
+          "Lunch"
+        ],
+        "activities": [
+          "Ha Long Cruise",
+          "Sung Sot Cave",
+          "Kayaking"
+        ],
+        "hotel": "Hanoi Hotel 3\u2605",
+        "transfers": "SIC Cruise Tour"
+      },
+      {
+        "dayNumber": 5,
+        "title": "Hanoi Departure",
+        "description": "Breakfast, checkout, and airport transfer for return flight.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Transfer"
+        ],
+        "hotel": "N/A",
+        "transfers": "SIC Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Hanoi Old Quarter Hotel 3\u2605",
+        "city": "Hanoi",
+        "rating": "3 Star",
+        "nights": 3
+      },
+      {
+        "name": "Sapa Valley Hotel 3\u2605",
+        "city": "Sapa",
+        "rating": "3 Star",
+        "nights": 1
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the package cost?",
+        "answer": "Price is \u20b938,000 per person (increased by \u20b95k from flyer rate \u20b933,000) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-dubai-4n5d-winter",
+    "name": "Dubai Winter Sale Special: City, Burj Khalifa & Desert Safari (4N/5D)",
+    "slug": "dubai-winter-sale-4n5d-package",
+    "destination": "Dubai",
+    "destinationSlug": "dubai",
+    "country": "United Arab Emirates",
+    "region": "Middle East",
+    "isInternational": true,
+    "durationDays": 5,
+    "durationNights": 4,
+    "startingPrice": 54000,
+    "discountPrice": 68999,
+    "rating": 4.95,
+    "reviewsCount": 620,
+    "heroImage": "/destinations/dubai.jpg",
+    "gallery": [
+      "/destinations/dubai.jpg",
+      "/destinations/switzerland.jpg"
+    ],
+    "highlights": [
+      "DUBAI TOURIST VISA INCLUDED",
+      "Private Airport Transfers (Arrival & Departure)",
+      "Burj Khalifa 124-125 Floor Observation Deck Ticket (Non-Prime)",
+      "Dubai Marina Luxury Dhow Dinner Cruise (SIC)",
+      "4x4 Desert Safari with Dune Bashing, Camel Ride & BBQ Dinner",
+      "Miracle Garden & Global Village (Private Transfers)",
+      "Rates Valid 1st Oct to 23rd Dec 2026 (Min 2 Pax)"
+    ],
+    "inclusions": [
+      "4 Nights Hotel Stay (3-Star \u20b954,000 / 4-Star \u20b960,000)",
+      "Daily Breakfast at Hotel",
+      "Dubai Tourist Visa with Insurance",
+      "Private Airport Transfers",
+      "All Mentioned Sightseeing & Entrance Tickets"
+    ],
+    "exclusions": [
+      "Airfare",
+      "Tourism Dirham Fee",
+      "Personal Expenses"
+    ],
+    "theme": "Winter Special",
+    "hotelCategory": "3 Star / 4 Star",
+    "mealPlan": "CP (Breakfast Only)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival Dubai \u2013 Private Transfer & Dhow Cruise",
+        "description": "Arrival in Dubai, private transfer to hotel. Evening Marina Dhow Dinner Cruise with live Tanoura dance show.",
+        "meals": [
+          "Dinner"
+        ],
+        "activities": [
+          "Marina Dhow Cruise",
+          "Tanoura Dance"
+        ],
+        "hotel": "Dubai Hotel 3\u2605 / 4\u2605",
+        "transfers": "Private Airport Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Half Day Dubai City Tour & Burj Khalifa 124th Floor",
+        "description": "Half day city tour visiting Dubai Frame, Zabeel Palace, and Jumeirah Mosque. Afternoon visit to Dubai Mall and Burj Khalifa 124-125th floor observation deck.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Burj Khalifa 124th Floor",
+          "Dubai Mall Fountain Show"
+        ],
+        "hotel": "Dubai Hotel 3\u2605 / 4\u2605",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Miracle Garden, Global Village & 4x4 Desert Safari",
+        "description": "Morning visit to Miracle Garden and Global Village. Afternoon 4x4 Desert Safari with dune bashing, camel rides, belly dance, and BBQ buffet dinner.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Desert Safari",
+          "Dune Bashing",
+          "Miracle Garden",
+          "Global Village"
+        ],
+        "hotel": "Dubai Hotel 3\u2605 / 4\u2605",
+        "transfers": "Private & 4x4 Shared"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Dubai Shopping & Leisure Day",
+        "description": "Free day for shopping at Gold Souk, Mall of the Emirates, or optional Museum of the Future visit.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Gold Souk Shopping"
+        ],
+        "hotel": "Dubai Hotel 3\u2605 / 4\u2605",
+        "transfers": "N/A"
+      },
+      {
+        "dayNumber": 5,
+        "title": "Dubai Departure",
+        "description": "Breakfast, checkout, and private transfer to Dubai International Airport (DXB).",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Drop"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Airport Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Citymax Hotel Bur Dubai 3\u2605 / Aloft Meaisam 4\u2605",
+        "city": "Dubai",
+        "rating": "3 Star / 4 Star",
+        "nights": 4
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the package pricing?",
+        "answer": "3-Star Hotel option is \u20b954,000 per person and 4-Star Hotel option is \u20b960,000 per person (increased by \u20b95k from flyer rates \u20b949k/\u20b955k) for min 2 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-dubai-5n6d-winter",
+    "name": "Dubai & Abu Dhabi Winter Deluxe Escape (5N/6D)",
+    "slug": "dubai-abu-dhabi-winter-deluxe-5n6d-package",
+    "destination": "Dubai, Abu Dhabi",
+    "destinationSlug": "dubai",
+    "country": "United Arab Emirates",
+    "region": "Middle East",
+    "isInternational": true,
+    "durationDays": 6,
+    "durationNights": 5,
+    "startingPrice": 64000,
+    "discountPrice": 79999,
+    "rating": 4.96,
+    "reviewsCount": 540,
+    "heroImage": "/destinations/dubai.jpg",
+    "gallery": [
+      "/destinations/dubai.jpg",
+      "/destinations/switzerland.jpg"
+    ],
+    "highlights": [
+      "DUBAI VISA INCLUDED",
+      "Full Day Abu Dhabi Tour with Sheikh Zayed Grand Mosque",
+      "Burj Khalifa 124-125 Floor Observation Deck Entry",
+      "Marina Dhow Dinner Cruise & 4x4 Desert Safari BBQ",
+      "Miracle Garden & Global Village Private Tour",
+      "Rates Valid 1st Oct to 23rd Dec 2026 (Min 2 Pax)"
+    ],
+    "inclusions": [
+      "5 Nights Hotel Stay (3-Star \u20b964,000 / 4-Star \u20b970,000)",
+      "Daily Breakfast",
+      "Dubai Tourist Visa",
+      "Private Airport Transfers",
+      "Abu Dhabi & Dubai City Tours"
+    ],
+    "exclusions": [
+      "Airfare",
+      "Tourism Dirham Fee",
+      "Personal Expenses"
+    ],
+    "theme": "Winter Special",
+    "hotelCategory": "3 Star / 4 Star",
+    "mealPlan": "CP (Breakfast Only)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival Dubai \u2013 Dhow Dinner Cruise",
+        "description": "Private airport transfer to hotel. Evening Marina Dhow Dinner Cruise.",
+        "meals": [
+          "Dinner"
+        ],
+        "activities": [
+          "Dhow Cruise"
+        ],
+        "hotel": "Dubai Hotel 3\u2605/4\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Dubai City Tour & Burj Khalifa 124th Floor",
+        "description": "Half day Dubai city tour and Burj Khalifa 124-125 floor entry.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Burj Khalifa"
+        ],
+        "hotel": "Dubai Hotel 3\u2605/4\u2605",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 3,
+        "title": "4x4 Desert Safari with BBQ Dinner",
+        "description": "Afternoon 4x4 dune bashing, camel ride, belly dance, and BBQ dinner.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Desert Safari"
+        ],
+        "hotel": "Dubai Hotel 3\u2605/4\u2605",
+        "transfers": "4x4 Shared"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Full Day Abu Dhabi City Tour",
+        "description": "Visit majestic Sheikh Zayed Grand Mosque, Corniche, and Heritage Village in Abu Dhabi.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Sheikh Zayed Mosque",
+          "Abu Dhabi Tour"
+        ],
+        "hotel": "Dubai Hotel 3\u2605/4\u2605",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 5,
+        "title": "Miracle Garden & Global Village Private Tour",
+        "description": "Visit Miracle Garden and Global Village multicultural pavilions.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Miracle Garden",
+          "Global Village"
+        ],
+        "hotel": "Dubai Hotel 3\u2605/4\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 6,
+        "title": "Dubai Departure",
+        "description": "Breakfast, checkout, and private airport drop.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Drop"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Ibis Styles Bur Dubai 3\u2605 / Grand Excelsior 4\u2605",
+        "city": "Dubai",
+        "rating": "3 Star / 4 Star",
+        "nights": 5
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the package pricing?",
+        "answer": "3-Star option is \u20b964,000 per person and 4-Star option is \u20b970,000 per person (increased by \u20b95k from flyer rates \u20b959k/\u20b965k) for min 2 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-dubai-6n7d-winter",
+    "name": "Dubai & Abu Dhabi Grand Winter Celebration (6N/7D)",
+    "slug": "dubai-abu-dhabi-grand-winter-6n7d-package",
+    "destination": "Dubai, Abu Dhabi",
+    "destinationSlug": "dubai",
+    "country": "United Arab Emirates",
+    "region": "Middle East",
+    "isInternational": true,
+    "durationDays": 7,
+    "durationNights": 6,
+    "startingPrice": 69000,
+    "discountPrice": 86999,
+    "rating": 4.98,
+    "reviewsCount": 480,
+    "heroImage": "/destinations/dubai.jpg",
+    "gallery": [
+      "/destinations/dubai.jpg",
+      "/destinations/switzerland.jpg"
+    ],
+    "highlights": [
+      "DUBAI VISA INCLUDED",
+      "Full Day Abu Dhabi Tour & Sheikh Zayed Mosque",
+      "Burj Khalifa 124-125 Floor Entry Ticket",
+      "Marina Dhow Dinner Cruise & 4x4 Desert Safari",
+      "Miracle Garden & Global Village Private Transfers",
+      "Dedicated Full Day Leisure for Shopping & Atlantis Aquaventure",
+      "Rates Valid 1st Oct to 23rd Dec 2026 (Min 2 Pax)"
+    ],
+    "inclusions": [
+      "6 Nights Hotel Stay (3-Star \u20b969,000 / 4-Star \u20b975,000)",
+      "Daily Breakfast",
+      "Dubai Tourist Visa",
+      "Private Airport Transfers",
+      "All Sightseeing & Entry Tickets"
+    ],
+    "exclusions": [
+      "Airfare",
+      "Tourism Dirham Fee",
+      "Personal Expenses"
+    ],
+    "theme": "Winter Special",
+    "hotelCategory": "3 Star / 4 Star",
+    "mealPlan": "CP (Breakfast Only)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival Dubai \u2013 Marina Dhow Cruise",
+        "description": "Arrival in Dubai, private transfer to hotel. Evening Marina Dhow Cruise.",
+        "meals": [
+          "Dinner"
+        ],
+        "activities": [
+          "Dhow Cruise"
+        ],
+        "hotel": "Dubai Hotel 3\u2605/4\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Dubai City Tour & Burj Khalifa 124th Floor",
+        "description": "City tour and visit to Burj Khalifa 124-125th floor.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Burj Khalifa"
+        ],
+        "hotel": "Dubai Hotel 3\u2605/4\u2605",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Miracle Garden & Global Village Private Tour",
+        "description": "Private visit to Miracle Garden and Global Village.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Miracle Garden"
+        ],
+        "hotel": "Dubai Hotel 3\u2605/4\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 4,
+        "title": "4x4 Desert Safari with BBQ Dinner",
+        "description": "Dune bashing, camel ride, live shows, and BBQ dinner in desert camp.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Desert Safari"
+        ],
+        "hotel": "Dubai Hotel 3\u2605/4\u2605",
+        "transfers": "4x4 Shared"
+      },
+      {
+        "dayNumber": 5,
+        "title": "Full Day Abu Dhabi City Tour",
+        "description": "Tour of Abu Dhabi city and Sheikh Zayed Mosque.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Abu Dhabi Tour"
+        ],
+        "hotel": "Dubai Hotel 3\u2605/4\u2605",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 6,
+        "title": "Full Leisure & Shopping Day",
+        "description": "Free day for shopping at Dubai Mall, Gold Souk, or visiting Atlantis Aquaventure Waterpark.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Shopping"
+        ],
+        "hotel": "Dubai Hotel 3\u2605/4\u2605",
+        "transfers": "N/A"
+      },
+      {
+        "dayNumber": 7,
+        "title": "Dubai Departure",
+        "description": "Breakfast, checkout, and private airport drop.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Drop"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Howard Johnson Bur Dubai 3\u2605 / Millenium Place 4\u2605",
+        "city": "Dubai",
+        "rating": "3 Star / 4 Star",
+        "nights": 6
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the package pricing?",
+        "answer": "3-Star option is \u20b969,000 per person and 4-Star option is \u20b975,000 per person (increased by \u20b95k from flyer rates \u20b964k/\u20b970k) for min 2 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-vietnam-phuquoc-paradise-4n5d",
+    "name": "Vietnam Tropical Escape: Phu Quoc Island Paradise (4N/5D)",
+    "slug": "vietnam-phu-quoc-island-paradise-4n5d-package",
+    "destination": "Phu Quoc",
+    "destinationSlug": "vietnam",
+    "country": "Vietnam",
+    "region": "South East Asia",
+    "isInternational": true,
+    "durationDays": 5,
+    "durationNights": 4,
+    "startingPrice": 35500,
+    "discountPrice": 43999,
+    "rating": 4.95,
+    "reviewsCount": 260,
+    "heroImage": "/destinations/vietnam.jpg",
+    "gallery": [
+      "/destinations/vietnam.jpg",
+      "/destinations/bali.jpg"
+    ],
+    "highlights": [
+      "2 Islands Boat Tour with Snorkeling & Seafood Lunch",
+      "Hon Thom World Record Sea Cable Car Experience",
+      "VinWonders Theme Park & Grand World Free Entrance",
+      "Pristine Beach Resort Stay (Min 4 Pax)",
+      "Best Time to Visit: October to April"
+    ],
+    "inclusions": [
+      "4 Nights Beach Resort Stay in Phu Quoc (4\u2605)",
+      "Daily Breakfast + 1 Seafood Lunch",
+      "Hon Thom Cable Car & Island Boat Tickets",
+      "Airport Transfers & Island Tours",
+      "English Speaking Guide"
+    ],
+    "exclusions": [
+      "Airfare & Visa",
+      "Personal Expenses",
+      "Tips"
+    ],
+    "theme": "Island & Beach",
+    "hotelCategory": "4 Star",
+    "mealPlan": "CP (Breakfast Only)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Phu Quoc Arrival \u2013 Beach Relaxation",
+        "description": "Arrive at Phu Quoc International Airport, transfer to resort. Free time on Sunset Sanato beach.",
+        "meals": [
+          "None"
+        ],
+        "activities": [
+          "Beach Relaxation"
+        ],
+        "hotel": "Phu Quoc Beach Resort 4\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "2 Islands Boat Tour & Hon Thom Cable Car",
+        "description": "Board boat to explore 2 tropical islands. Ride Hon Thom Cable Car across the ocean, lunch included.",
+        "meals": [
+          "Breakfast",
+          "Lunch"
+        ],
+        "activities": [
+          "Hon Thom Cable Car",
+          "Island Boat Tour"
+        ],
+        "hotel": "Phu Quoc Beach Resort 4\u2605",
+        "transfers": "SIC Tour"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Phu Quoc Free Day for Water Sports",
+        "description": "Day at leisure to enjoy resort amenities, beach lounge, or optional scuba diving.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Water Sports"
+        ],
+        "hotel": "Phu Quoc Beach Resort 4\u2605",
+        "transfers": "N/A"
+      },
+      {
+        "dayNumber": 4,
+        "title": "VinWonders & Grand World Phu Quoc",
+        "description": "Visit VinWonders theme park, Venice Canal at Grand World, and evening water fountain show.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "VinWonders",
+          "Grand World Venice Show"
+        ],
+        "hotel": "Phu Quoc Beach Resort 4\u2605",
+        "transfers": "SIC Tour"
+      },
+      {
+        "dayNumber": 5,
+        "title": "Phu Quoc Departure",
+        "description": "Breakfast, checkout, and airport drop.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Drop"
+        ],
+        "hotel": "N/A",
+        "transfers": "Private Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Phu Quoc Ocean Resort 4\u2605",
+        "city": "Phu Quoc",
+        "rating": "4 Star",
+        "nights": 4
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the package price?",
+        "answer": "Price is \u20b935,500 per person (increased by \u20b95k from flyer rate \u20b930,500) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-vietnam-discovery-multicity-5n6d",
+    "name": "Vietnam Discovery: Da Nang, Ba Na Hills, Hoi An, Hanoi & Ha Long Bay (5N/6D)",
+    "slug": "vietnam-discovery-multicity-5n6d-package",
+    "destination": "Da Nang, Hanoi, Ha Long Bay",
+    "destinationSlug": "vietnam",
+    "country": "Vietnam",
+    "region": "South East Asia",
+    "isInternational": true,
+    "durationDays": 6,
+    "durationNights": 5,
+    "startingPrice": 39000,
+    "discountPrice": 48999,
+    "rating": 4.96,
+    "reviewsCount": 390,
+    "heroImage": "/destinations/vietnam.jpg",
+    "gallery": [
+      "/destinations/vietnam.jpg",
+      "/destinations/japan.jpg"
+    ],
+    "highlights": [
+      "Golden Bridge Ba Na Hills Cable Car with Lunch",
+      "Hoi An Ancient Town Lantern Evening & Dinner",
+      "Ha Long Bay UNESCO World Heritage Day Cruise",
+      "Hanoi City Tour & Temple of Literature",
+      "Airport Transfers Included (Min 4 Pax)"
+    ],
+    "inclusions": [
+      "2N Da Nang (3\u2605) + 3N Hanoi (3\u2605)",
+      "Daily Breakfast + 2 Lunches + 1 Dinner",
+      "Ba Na Hills Cable Car & Ha Long Cruise Tickets",
+      "All Transfers & Tours on Join Group Basis"
+    ],
+    "exclusions": [
+      "Domestic/International Airfare & Visa",
+      "Personal Expenses"
+    ],
+    "theme": "Multi-City Highlights",
+    "hotelCategory": "3 Star",
+    "mealPlan": "MAP (Breakfast + Selected Meals)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Da Nang Arrival \u2013 Hotel Transfer",
+        "description": "Arrive in Da Nang, hotel transfer. Evening free leisure.",
+        "meals": [
+          "None"
+        ],
+        "activities": [
+          "Beach Walk"
+        ],
+        "hotel": "Da Nang Hotel 3\u2605",
+        "transfers": "SIC Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Ba Na Hills & Golden Bridge Tour",
+        "description": "Full day Ba Na Hills tour, Golden Bridge cable car, and lunch.",
+        "meals": [
+          "Breakfast",
+          "Lunch"
+        ],
+        "activities": [
+          "Golden Bridge"
+        ],
+        "hotel": "Da Nang Hotel 3\u2605",
+        "transfers": "SIC Tour"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Hoi An Tour \u2013 Flight to Hanoi",
+        "description": "Morning Hoi An Ancient town tour, afternoon flight to Hanoi. Hotel check-in.",
+        "meals": [
+          "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Hoi An Tour"
+        ],
+        "hotel": "Hanoi Hotel 3\u2605",
+        "transfers": "SIC & Flight Transfer"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Ha Long Bay UNESCO Cruise",
+        "description": "Day trip to Ha Long Bay, boat cruise, caves, and seafood lunch.",
+        "meals": [
+          "Breakfast",
+          "Lunch"
+        ],
+        "activities": [
+          "Ha Long Bay Cruise"
+        ],
+        "hotel": "Hanoi Hotel 3\u2605",
+        "transfers": "SIC Cruise Tour"
+      },
+      {
+        "dayNumber": 5,
+        "title": "Hanoi City Tour",
+        "description": "Visit Ho Chi Minh Mausoleum, Tran Quoc Pagoda, and Temple of Literature.",
+        "meals": [
+          "Breakfast",
+          "Lunch"
+        ],
+        "activities": [
+          "Hanoi City Tour"
+        ],
+        "hotel": "Hanoi Hotel 3\u2605",
+        "transfers": "SIC Tour"
+      },
+      {
+        "dayNumber": 6,
+        "title": "Hanoi Departure",
+        "description": "Breakfast, checkout, and airport transfer.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Transfer"
+        ],
+        "hotel": "N/A",
+        "transfers": "SIC Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Da Nang Central 3\u2605",
+        "city": "Da Nang",
+        "rating": "3 Star",
+        "nights": 2
+      },
+      {
+        "name": "Hanoi Old Quarter 3\u2605",
+        "city": "Hanoi",
+        "rating": "3 Star",
+        "nights": 3
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the package price?",
+        "answer": "Price is \u20b939,000 per person (increased by \u20b95k from flyer rate \u20b934,000) for min 4 pax."
+      }
+    ]
+  },
+  {
+    "id": "pkg-vietnam-essentials-saigon-vungtau-6n7d",
+    "name": "Vietnam Essentials: Phu Quoc Island, Saigon & Vung Tau Beach Resort (6N/7D)",
+    "slug": "vietnam-essentials-phuquoc-saigon-vungtau-6n7d-package",
+    "destination": "Phu Quoc, Ho Chi Minh City, Vung Tau",
+    "destinationSlug": "vietnam",
+    "country": "Vietnam",
+    "region": "South East Asia",
+    "isInternational": true,
+    "durationDays": 7,
+    "durationNights": 6,
+    "startingPrice": 51000,
+    "discountPrice": 62999,
+    "rating": 4.98,
+    "reviewsCount": 310,
+    "heroImage": "/destinations/vietnam.jpg",
+    "gallery": [
+      "/destinations/vietnam.jpg",
+      "/destinations/bali.jpg"
+    ],
+    "highlights": [
+      "Phu Quoc 2 Islands Boat & Hon Thom Cable Car Tour",
+      "Flight to Ho Chi Minh City Included Transfers",
+      "Mekong Delta River Cruise with Local Lunch",
+      "Full Day Vung Tau Coastal Beach Tour with Lunch",
+      "Best Season: October to April (Min 4 Pax)"
+    ],
+    "inclusions": [
+      "3N Phu Quoc (4\u2605) + 3N Ho Chi Minh City (3\u2605)",
+      "Daily Breakfast + 3 Lunches",
+      "Hon Thom Cable Car & Mekong Delta Boat Tickets",
+      "All Sightseeing Tours & Inter-city Transfers"
+    ],
+    "exclusions": [
+      "Airfare & Visa",
+      "Personal Expenses",
+      "Tips"
+    ],
+    "theme": "Island & City Panorama",
+    "hotelCategory": "3 Star / 4 Star",
+    "mealPlan": "MAP (Breakfast + Selected Lunches)",
+    "flightsIncluded": false,
+    "transfersIncluded": true,
+    "departureCity": "Flexible / Pan-India",
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Phu Quoc Arrival \u2013 Resort Check-in",
+        "description": "Arrive in Phu Quoc, resort check in. Evening beach walk.",
+        "meals": [
+          "None"
+        ],
+        "activities": [
+          "Beach Walk"
+        ],
+        "hotel": "Phu Quoc Resort 4\u2605",
+        "transfers": "Private Transfer"
+      },
+      {
+        "dayNumber": 2,
+        "title": "Phu Quoc 2 Islands Boat & Cable Car Tour",
+        "description": "Join group boat trip to 2 islands, Hon Thom cable car ride, lunch included.",
+        "meals": [
+          "Breakfast",
+          "Lunch"
+        ],
+        "activities": [
+          "Cable Car",
+          "Island Boat"
+        ],
+        "hotel": "Phu Quoc Resort 4\u2605",
+        "transfers": "SIC Tour"
+      },
+      {
+        "dayNumber": 3,
+        "title": "Phu Quoc Beach Free Leisure",
+        "description": "Free day to relax at beach or optional VinWonders theme park.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Beach Leisure"
+        ],
+        "hotel": "Phu Quoc Resort 4\u2605",
+        "transfers": "N/A"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Flight to Ho Chi Minh City \u2013 Saigon Free Evening",
+        "description": "Flight to Ho Chi Minh City. Transfer to hotel, evening Saigon night market walk.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Saigon Night Market"
+        ],
+        "hotel": "Ho Chi Minh Hotel 3\u2605",
+        "transfers": "Private & Flight Transfer"
+      },
+      {
+        "dayNumber": 5,
+        "title": "Mekong Delta River Cruise Day Tour",
+        "description": "Full day Mekong Delta boat trip, coconut sweets factory, and lunch.",
+        "meals": [
+          "Breakfast",
+          "Lunch"
+        ],
+        "activities": [
+          "Mekong Delta Tour"
+        ],
+        "hotel": "Ho Chi Minh Hotel 3\u2605",
+        "transfers": "SIC Tour"
+      },
+      {
+        "dayNumber": 6,
+        "title": "Vung Tau Beach Coastal Day Tour",
+        "description": "Full day tour to coastal Vung Tau beach resort city, Christ Statue, and seafood lunch.",
+        "meals": [
+          "Breakfast",
+          "Lunch"
+        ],
+        "activities": [
+          "Vung Tau Beach Tour"
+        ],
+        "hotel": "Ho Chi Minh Hotel 3\u2605",
+        "transfers": "SIC Tour"
+      },
+      {
+        "dayNumber": 7,
+        "title": "Ho Chi Minh Departure",
+        "description": "Breakfast, checkout, and airport transfer.",
+        "meals": [
+          "Breakfast"
+        ],
+        "activities": [
+          "Airport Transfer"
+        ],
+        "hotel": "N/A",
+        "transfers": "SIC Transfer"
+      }
+    ],
+    "hotels": [
+      {
+        "name": "Phu Quoc Resort 4\u2605",
+        "city": "Phu Quoc",
+        "rating": "4 Star",
+        "nights": 3
+      },
+      {
+        "name": "Saigon Hotel 3\u2605",
+        "city": "Ho Chi Minh",
+        "rating": "3 Star",
+        "nights": 3
+      }
+    ],
+    "faqs": [
+      {
+        "question": "What is the package price?",
+        "answer": "Price is \u20b951,000 per person (increased by \u20b95k from flyer rate \u20b946,000) for min 4 pax."
+      }
+    ]
+  }
+
+];
