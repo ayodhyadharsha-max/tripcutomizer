@@ -21,7 +21,6 @@ export async function POST(req: Request) {
 
     const keySecret = process.env.RAZORPAY_KEY_SECRET || 'gvYHUjt68ufGQTNdLF51wkva';
 
-    // HMAC-SHA256 signature verification (order_id + "|" + payment_id)
     const generatedSignature = crypto
       .createHmac('sha256', keySecret)
       .update(`${razorpay_order_id}|${razorpay_payment_id}`)
@@ -37,8 +36,8 @@ export async function POST(req: Request) {
     }
 
     const timestamp = new Date().toISOString();
+    const pnrVoucher = `TC-2026-${Math.floor(10000 + Math.random() * 90000)}`;
 
-    // 1. Log Payment into Central Database (Supabase)
     try {
       const supabase = getSupabaseServer();
       if (supabase) {
@@ -49,6 +48,7 @@ export async function POST(req: Request) {
           customer_name: bookingData?.customerName || 'Valued Traveler',
           customer_email: bookingData?.customerEmail || '',
           customer_phone: bookingData?.customerPhone || '',
+          pnr_voucher: pnrVoucher,
           status: 'SUCCESS',
           updated_at: timestamp,
         });
@@ -57,7 +57,6 @@ export async function POST(req: Request) {
       console.warn('[API verify-payment] Supabase payment logging info:', dbErr);
     }
 
-    // 2. Trigger Instant Email Alert to tripcustomizer@gmail.com via Web3Forms API
     try {
       const apiKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || 'c542ca79-b08a-4352-bf3e-1045518a0486';
       await fetch('https://api.web3forms.com/submit', {
@@ -68,9 +67,10 @@ export async function POST(req: Request) {
         },
         body: JSON.stringify({
           access_key: apiKey,
-          subject: `🚨 CONFIRMED RAZORPAY PAYMENT & BOOKING: ${razorpay_order_id} - ${bookingData?.customerName}`,
+          subject: `🚨 CONFIRMED RAZORPAY PAYMENT & BOOKING (PNR: ${pnrVoucher}): ${razorpay_order_id} - ${bookingData?.customerName}`,
           from_name: 'Trip Customizer Razorpay PG',
           to_email: 'tripcustomizer@gmail.com',
+          pnr_voucher: pnrVoucher,
           order_id: razorpay_order_id,
           payment_id: razorpay_payment_id,
           customer_name: bookingData?.customerName,
@@ -91,8 +91,10 @@ export async function POST(req: Request) {
     return NextResponse.json({
       success: true,
       message: 'Payment verified successfully',
-      razorpay_order_id: razorpay_order_id,
-      razorpay_payment_id: razorpay_payment_id,
+      pnrVoucher,
+      pnr_voucher: pnrVoucher,
+      razorpay_order_id,
+      razorpay_payment_id,
       order_id: razorpay_order_id,
       payment_id: razorpay_payment_id,
       status: 'PAID',

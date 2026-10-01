@@ -63,7 +63,7 @@ export async function generateMetadata({
   const price = pkg.discountPrice || pkg.startingPrice;
   const duration = `${pkg.durationDays}D / ${pkg.durationNights}N`;
 
-  const title = `${pkg.name} (${duration}) — ₹${price.toLocaleString('en-IN')} | Trip Customizer`;
+  const title = `${pkg.name} (${duration}) — ₹${price.toLocaleString('en-IN')}`;
   const overviewText = pkg.highlights && pkg.highlights.length > 0 ? pkg.highlights.join('. ') : pkg.name;
   const description = `${overviewText.slice(0, 155)}. Book customized ${pkg.destination} tour packages with 4-star hotels, flights, breakfast, private cabs & 24x7 support.`;
   const canonicalUrl = `https://www.tripcustomizer.com/holidays/${pkg.destinationSlug}/${pkg.slug}`;

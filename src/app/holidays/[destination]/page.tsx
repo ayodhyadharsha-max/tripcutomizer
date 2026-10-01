@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: { params: { destination: stri
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
 
-  const title = `${destName} Tour Packages 2026 | Trip Customizer`;
+  const title = `${destName} Tour Packages 2026`;
   const description = `Book customized ${destName} holiday packages with 4-star hotels, flights, private transfers, visa assistance, and 24x7 expert desk support. Best prices starting @ ₹14,999.`;
   const canonicalUrl = `https://www.tripcustomizer.com/holidays/${rawSlug}`;
 

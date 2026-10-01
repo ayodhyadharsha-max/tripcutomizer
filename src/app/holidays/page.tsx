@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { ThomasCookHolidayView } from '@/components/holidays/ThomasCookHolidayView';
 
 export const metadata: Metadata = {
-  title: 'Customized Tour Packages 2026: Domestic & International Holidays | Trip Customizer',
+  title: 'Customized Tour Packages 2026: Domestic & International Holidays',
   description:
     'Book customized international & domestic tour packages across 40+ countries. 4-Star hotels, flights, visa assistance, 5% GST tax compliance, and 24x7 expert travel desk support.',
   keywords: [
