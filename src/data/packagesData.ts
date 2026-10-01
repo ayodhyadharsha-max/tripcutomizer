@@ -10682,6 +10682,2540 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "answer": "Price is \u20b937,000 per person MAP Plan (increased by \u20b95,000 from flyer rate \u20b932,000)."
     }
   ]
+},
+  {
+  "id": "pkg-dubai-winter-sale-4n5d",
+  "name": "Dubai Winter Special: City Tour, Burj Khalifa, Marina Cruise & Desert Safari (4N/5D)",
+  "slug": "dubai-winter-sale-4n5d-package",
+  "destination": "Dubai, Abu Dhabi",
+  "destinationSlug": "dubai",
+  "country": "United Arab Emirates",
+  "region": "Middle East",
+  "isInternational": true,
+  "durationDays": 5,
+  "durationNights": 4,
+  "startingPrice": 54000,
+  "discountPrice": 64999,
+  "rating": 4.91,
+  "reviewsCount": 210,
+  "heroImage": "/destinations/dubai.jpg",
+  "gallery": [
+    "/destinations/dubai.jpg"
+  ],
+  "highlights": [
+    "Includes UAE Tourist Visa & Private Airport Transfers",
+    "Burj Khalifa 124th & 125th Floor Non-Prime Entry Pass",
+    "Dubai Marina Dhow Dinner Cruise with Live Shows",
+    "4x4 Desert Safari with Dune Bashing, Camel Ride & BBQ Dinner",
+    "Full Day Abu Dhabi City Tour with Sheikh Zayed Grand Mosque"
+  ],
+  "inclusions": [
+    "4 Nights Accommodation in 3\u2605 / 4\u2605 Hotel",
+    "Daily Breakfast",
+    "UAE Tourist Visa",
+    "Private Airport Pickup & Drop Transfers",
+    "Half Day Dubai City Tour (SIC)",
+    "Burj Khalifa 124/125th Floor Entry Ticket",
+    "Marina Dhow Cruise with Dinner (SIC)",
+    "Desert Safari 4x4 with BBQ Dinner & Belly Dance",
+    "Full Day Abu Dhabi City Tour (SIC)"
+  ],
+  "exclusions": [
+    "International Airfare",
+    "Tourism Dirham Fee (Payable directly at hotel)",
+    "Personal Expenses"
+  ],
+  "theme": "Winter Luxury & Desert Safari",
+  "hotelCategory": "3 Star / 4 Star",
+  "mealPlan": "CP + Special Dinners",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Citymax Bur Dubai / Howard Johnson 3\u2605",
+      "city": "Dubai",
+      "rating": "3 Star",
+      "nights": 4
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Dubai Arrival & Marina Dhow Cruise Dinner",
+      "description": "Arrival at Dubai International Airport (DXB). Private transfer to hotel. Evening Marina Dhow Cruise with buffet dinner, music, and light shows.",
+      "meals": [
+        "Dinner"
+      ],
+      "activities": [
+        "Private Airport Transfer",
+        "Marina Dhow Cruise Dinner"
+      ],
+      "hotel": "Citymax Bur Dubai 3\u2605",
+      "transfers": "Private & SIC"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Dubai City Tour & Burj Khalifa 124/125th Floor",
+      "description": "Guided city tour covering Dubai Museum, Gold & Spice Souks, Jumeirah Mosque, and Burj Al Arab photo stop. Afternoon visit to Dubai Mall and Burj Khalifa observation deck.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Half Day City Tour",
+        "Burj Khalifa 124/125th Floor Observation Deck",
+        "Dubai Fountain Show"
+      ],
+      "hotel": "Citymax Bur Dubai 3\u2605",
+      "transfers": "SIC Transfer"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Full Day Abu Dhabi Capital Tour",
+      "description": "Full day tour to UAE capital Abu Dhabi. Visit magnificent Sheikh Zayed Grand Mosque, Corniche waterfront, Heritage Village, and view Emirates Palace.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Sheikh Zayed Mosque",
+        "Abu Dhabi Corniche",
+        "Heritage Village"
+      ],
+      "hotel": "Citymax Bur Dubai 3\u2605",
+      "transfers": "SIC Transfer"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Morning Shopping & 4x4 Desert Safari",
+      "description": "Morning free for shopping at Meena Bazaar. Afternoon pickup in 4x4 Land Cruiser for desert dune bashing, sandboarding, camel riding, henna painting, and BBQ buffet dinner with Tanoura dance.",
+      "meals": [
+        "Breakfast",
+        "Dinner"
+      ],
+      "activities": [
+        "4x4 Dune Bashing",
+        "Camel Ride",
+        "BBQ Buffet Dinner",
+        "Belly Dance"
+      ],
+      "hotel": "Citymax Bur Dubai 3\u2605",
+      "transfers": "4x4 Shared Transfer"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Dubai Departure",
+      "description": "Check out from hotel and private transfer to Dubai International Airport for departure.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Private Airport Transfer"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private Transfer"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package pricing?",
+      "answer": "Starting price for 3\u2605 hotel is \u20b954,000 per person (increased by \u20b95,000 from flyer rate \u20b949,000). 4\u2605 hotel option is \u20b960,000 per person."
+    }
+  ]
+},
+  {
+  "id": "pkg-dubai-miracle-global-village-5n6d",
+  "name": "Dubai Grand Winter Escape: City Tour, Burj Khalifa, Miracle Garden & Global Village (5N/6D)",
+  "slug": "dubai-miracle-global-village-5n6d-package",
+  "destination": "Dubai, Abu Dhabi",
+  "destinationSlug": "dubai",
+  "country": "United Arab Emirates",
+  "region": "Middle East",
+  "isInternational": true,
+  "durationDays": 6,
+  "durationNights": 5,
+  "startingPrice": 64000,
+  "discountPrice": 75999,
+  "rating": 4.95,
+  "reviewsCount": 195,
+  "heroImage": "/destinations/dubai.jpg",
+  "gallery": [
+    "/destinations/dubai.jpg"
+  ],
+  "highlights": [
+    "Includes UAE Visa & Private Airport Transfers",
+    "Miracle Garden (World's Largest Flower Garden) & Global Village Private Tour",
+    "Burj Khalifa 124/125th Floor Non-Prime Entry Pass",
+    "Dubai Marina Dhow Cruise & 4x4 Desert Safari",
+    "Full Day Abu Dhabi Grand Mosque & City Sightseeing"
+  ],
+  "inclusions": [
+    "5 Nights Accommodation in 3\u2605 / 4\u2605 Hotel",
+    "Daily Breakfast",
+    "UAE Tourist Visa",
+    "Private Airport Pick up & Drop Transfers",
+    "Miracle Garden & Global Village Entry Tickets with Private Transfer",
+    "Burj Khalifa 124/125th Floor Observation Deck Ticket",
+    "Marina Dhow Cruise Dinner",
+    "4x4 Desert Safari with BBQ Dinner",
+    "Abu Dhabi Full Day City Tour"
+  ],
+  "exclusions": [
+    "Airfare",
+    "Tourism Dirham Fee",
+    "Personal Expenses"
+  ],
+  "theme": "Winter Grandeur & Shopping",
+  "hotelCategory": "3 Star / 4 Star",
+  "mealPlan": "CP + Special Dinners",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Zabeel House / Aloft Dubai 4\u2605",
+      "city": "Dubai",
+      "rating": "4 Star",
+      "nights": 5
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Dubai Arrival & Marina Dhow Cruise",
+      "description": "Airport pickup and private transfer to hotel. Evening Marina Dhow Cruise with international buffet dinner.",
+      "meals": [
+        "Dinner"
+      ],
+      "activities": [
+        "Airport Pickup",
+        "Marina Dhow Cruise"
+      ],
+      "hotel": "Dubai 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Dubai City Tour & Burj Khalifa",
+      "description": "City tour covering Jumeirah Beach, Burj Al Arab, Atlantis Palm photo stop, and Burj Khalifa 124/125th floor.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "City Tour",
+        "Burj Khalifa Entry"
+      ],
+      "hotel": "Dubai 4\u2605 Hotel",
+      "transfers": "SIC Transfer"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Miracle Garden & Global Village Extravaganza",
+      "description": "Visit iconic Miracle Garden with over 150 million blooming flowers followed by evening at Global Village cultural pavilions.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Miracle Garden",
+        "Global Village"
+      ],
+      "hotel": "Dubai 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Abu Dhabi Capital Tour",
+      "description": "Full day tour to Abu Dhabi visiting Sheikh Zayed Mosque and Heritage Village.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Sheikh Zayed Mosque",
+        "Abu Dhabi Tour"
+      ],
+      "hotel": "Dubai 4\u2605 Hotel",
+      "transfers": "SIC Transfer"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Desert Safari with BBQ Dinner",
+      "description": "Morning leisure. Afternoon 4x4 desert safari with dune bashing, camel rides, and live entertainment.",
+      "meals": [
+        "Breakfast",
+        "Dinner"
+      ],
+      "activities": [
+        "Desert Safari",
+        "BBQ Dinner"
+      ],
+      "hotel": "Dubai 4\u2605 Hotel",
+      "transfers": "4x4 Shared"
+    },
+    {
+      "dayNumber": 6,
+      "title": "Dubai Departure",
+      "description": "Check out and private transfer to airport.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Transfer"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private Transfer"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package pricing?",
+      "answer": "Starting price for 3\u2605 is \u20b964,000 per person (increased by \u20b95,000 from flyer rate \u20b959,000). 4\u2605 hotel option is \u20b970,000 per person."
+    }
+  ]
+},
+  {
+  "id": "pkg-dubai-ultimate-luxury-6n7d",
+  "name": "Dubai Ultimate Explorer: City, Miracle Garden, Global Village, Abu Dhabi & Safari (6N/7D)",
+  "slug": "dubai-ultimate-luxury-6n7d-package",
+  "destination": "Dubai, Abu Dhabi",
+  "destinationSlug": "dubai",
+  "country": "United Arab Emirates",
+  "region": "Middle East",
+  "isInternational": true,
+  "durationDays": 7,
+  "durationNights": 6,
+  "startingPrice": 69000,
+  "discountPrice": 82000,
+  "rating": 4.97,
+  "reviewsCount": 230,
+  "heroImage": "/destinations/dubai.jpg",
+  "gallery": [
+    "/destinations/dubai.jpg"
+  ],
+  "highlights": [
+    "6 Nights Extended Leisure Stay in Dubai",
+    "UAE Visa & Private Airport Pickup/Drop Included",
+    "Burj Khalifa 124/125th Floor Non-Prime Ticket",
+    "Miracle Garden & Global Village Private Tour",
+    "Abu Dhabi Tour, Marina Dhow Cruise & 4x4 Desert Safari"
+  ],
+  "inclusions": [
+    "6 Nights Accommodation in 3\u2605 / 4\u2605 Hotel",
+    "Daily Breakfast",
+    "UAE Visa",
+    "Private Airport Transfers",
+    "All Major Dubai & Abu Dhabi Excursions"
+  ],
+  "exclusions": [
+    "Airfare",
+    "Tourism Dirham",
+    "Personal Expenses"
+  ],
+  "theme": "Comprehensive Arabia",
+  "hotelCategory": "3 Star / 4 Star",
+  "mealPlan": "CP + Special Dinners",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Millennium Plaza / Grand Excelsior 4\u2605",
+      "city": "Dubai",
+      "rating": "4 Star",
+      "nights": 6
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Arrival & Hotel Check-in",
+      "description": "Airport pickup and drop to Dubai hotel. Free evening.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Pickup"
+      ],
+      "hotel": "Dubai 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Dubai City Tour & Marina Dhow Cruise",
+      "description": "Morning city sightseeing tour and evening Marina Dhow Dinner Cruise.",
+      "meals": [
+        "Breakfast",
+        "Dinner"
+      ],
+      "activities": [
+        "City Tour",
+        "Marina Cruise Dinner"
+      ],
+      "hotel": "Dubai 4\u2605 Hotel",
+      "transfers": "SIC Transfer"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Burj Khalifa 124/125th Floor & Dubai Mall",
+      "description": "Visit Dubai Mall, Dubai Aquarium, and view Dubai from 124/125th floor of Burj Khalifa.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Burj Khalifa",
+        "Dubai Mall"
+      ],
+      "hotel": "Dubai 4\u2605 Hotel",
+      "transfers": "SIC Transfer"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Miracle Garden & Global Village",
+      "description": "Explore colorful flower displays at Miracle Garden and global shopping pavilions at Global Village.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Miracle Garden",
+        "Global Village"
+      ],
+      "hotel": "Dubai 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Abu Dhabi Tour & Grand Mosque",
+      "description": "Full day tour to Abu Dhabi visiting Sheikh Zayed Grand Mosque.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Abu Dhabi City Tour"
+      ],
+      "hotel": "Dubai 4\u2605 Hotel",
+      "transfers": "SIC Transfer"
+    },
+    {
+      "dayNumber": 6,
+      "title": "4x4 Desert Safari & BBQ Dinner",
+      "description": "Afternoon dune bashing in desert, camel ride, belly dance performance, and BBQ dinner.",
+      "meals": [
+        "Breakfast",
+        "Dinner"
+      ],
+      "activities": [
+        "Desert Safari",
+        "BBQ Dinner"
+      ],
+      "hotel": "Dubai 4\u2605 Hotel",
+      "transfers": "4x4 Shared"
+    },
+    {
+      "dayNumber": 7,
+      "title": "Dubai Departure",
+      "description": "Check out and private airport transfer.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Transfer"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private Transfer"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package pricing?",
+      "answer": "Starting price for 3\u2605 is \u20b969,000 per person (increased by \u20b95,000 from flyer rate \u20b964,000). 4\u2605 hotel option is \u20b975,000 per person."
+    }
+  ]
+},
+  {
+  "id": "pkg-egypt-cairo-pyramids-fayoum-3n4d",
+  "name": "Egypt Pharaohs & Desert Express: Cairo, Pyramids of Giza & Fayoum Desert Safari (3N/4D)",
+  "slug": "egypt-cairo-pyramids-fayoum-3n4d-package",
+  "destination": "Cairo, Giza, Fayoum Oasis",
+  "destinationSlug": "egypt",
+  "country": "Egypt",
+  "region": "North Africa / Middle East",
+  "isInternational": true,
+  "durationDays": 4,
+  "durationNights": 3,
+  "startingPrice": 49000,
+  "discountPrice": 59999,
+  "rating": 4.93,
+  "reviewsCount": 160,
+  "heroImage": "/destinations/egypt.jpg",
+  "gallery": [
+    "/destinations/egypt.jpg"
+  ],
+  "highlights": [
+    "Great Pyramids of Giza, Sphinx & Grand Egyptian Museum",
+    "Fayoum Desert Safari 4x4 Adventure",
+    "Wadi El Hitan UNESCO Whale Valley Sand Dunes",
+    "Private Guided Tour on Double Sharing Basis (Min 4 Pax)",
+    "Private Airport Pickup & Drop Transfers"
+  ],
+  "inclusions": [
+    "3 Nights Accommodation in 4\u2605 Cairo Hotel",
+    "Daily Breakfast",
+    "Private Guided Sightseeing with Expert Egyptologist",
+    "Fayoum 4x4 Desert Safari Tour",
+    "Airport Pick up & Drop Transfers"
+  ],
+  "exclusions": [
+    "International Flights & Egypt Visa",
+    "Lunch & Dinners",
+    "Pyramid Interior Entry Tickets"
+  ],
+  "theme": "Ancient Pyramids & Desert Safari",
+  "hotelCategory": "4 Star",
+  "mealPlan": "CP (Daily Breakfast)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Steigenberger Pyramids / Concorde El Salam 4\u2605",
+      "city": "Cairo",
+      "rating": "4 Star",
+      "nights": 3
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Cairo International Airport Arrival",
+      "description": "Arrival in Cairo. Representative welcome and private hotel check-in.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Transfer"
+      ],
+      "hotel": "Cairo 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Pyramids of Giza, Great Sphinx & Grand Egyptian Museum",
+      "description": "Full day tour to iconic Pyramids of Khufu, Khafre, Menkaure, the enigma Great Sphinx, and Grand Egyptian Museum artifacts.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Pyramids of Giza",
+        "Great Sphinx",
+        "Grand Egyptian Museum"
+      ],
+      "hotel": "Cairo 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Fayoum Desert Safari & Wadi El Hitan Adventure",
+      "description": "4x4 jeep adventure to Fayoum Oasis, Magic Lake, and UNESCO heritage Wadi El Hitan (Valley of Whales prehistoric fossils).",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Fayoum 4x4 Safari",
+        "Wadi El Hitan",
+        "Magic Lake Dunes"
+      ],
+      "hotel": "Cairo 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Cairo Departure",
+      "description": "Hotel check out and private transfer to Cairo International Airport.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Transfer"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private Transfer"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package pricing?",
+      "answer": "Starting price is \u20b949,000 per person on double sharing basis for min 4 pax (increased by \u20b95,000 from flyer rate \u20b944,000)."
+    }
+  ]
+},
+  {
+  "id": "pkg-egypt-cairo-alexandria-pyramids-4n5d",
+  "name": "Egypt Timeless Heritage: Cairo, Pyramids, Alexandria Mediterranean & Khan El Khalili (4N/5D)",
+  "slug": "egypt-cairo-alexandria-pyramids-4n5d-package",
+  "destination": "Cairo, Giza, Alexandria",
+  "destinationSlug": "egypt",
+  "country": "Egypt",
+  "region": "North Africa / Middle East",
+  "isInternational": true,
+  "durationDays": 5,
+  "durationNights": 4,
+  "startingPrice": 54000,
+  "discountPrice": 66000,
+  "rating": 4.95,
+  "reviewsCount": 175,
+  "heroImage": "/destinations/egypt.jpg",
+  "gallery": [
+    "/destinations/egypt.jpg"
+  ],
+  "highlights": [
+    "Pyramids of Giza, Sphinx & Grand Egyptian Museum",
+    "Full-Day Alexandria Mediterranean Coast Excursion",
+    "Citadel of Qaitbay & Catacombs of Kom El Shoqafa",
+    "Old Cairo Coptic Church & Historic Khan El Khalili Bazaar",
+    "Private Guided Tour on Double Sharing Basis (Min 4 Pax)"
+  ],
+  "inclusions": [
+    "4 Nights Accommodation in 4\u2605 Cairo Hotel",
+    "Daily Breakfast",
+    "Full Day Alexandria Guided Tour",
+    "Old Cairo & Khan El Khalili Tour",
+    "Airport Pick up & Drop Transfers"
+  ],
+  "exclusions": [
+    "Airfare & Visa",
+    "Personal Expenses"
+  ],
+  "theme": "Mediterranean & Ancient Pharaohs",
+  "hotelCategory": "4 Star",
+  "mealPlan": "CP (Daily Breakfast)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Cairo Pyramids Hotel 4\u2605",
+      "city": "Cairo",
+      "rating": "4 Star",
+      "nights": 4
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Cairo Arrival",
+      "description": "Airport pickup and private transfer to Cairo hotel.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Pickup"
+      ],
+      "hotel": "Cairo Pyramids Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Pyramids of Giza, Sphinx & Grand Museum",
+      "description": "Full day tour of Pyramids complex, Sphinx statue, and Grand Egyptian Museum.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Giza Pyramids",
+        "Sphinx",
+        "Grand Museum"
+      ],
+      "hotel": "Cairo Pyramids Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Full Day Alexandria Mediterranean Coast Tour",
+      "description": "Drive to Alexandria. Visit Qaitbay Citadel on sea coast, Montaza Palace Gardens, and Catacombs of Kom El Shoqafa.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Qaitbay Citadel",
+        "Alexandria Library",
+        "Montaza Gardens"
+      ],
+      "hotel": "Cairo Pyramids Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Old Cairo & Khan El Khalili Souk Shopping",
+      "description": "Visit Coptic Hanging Church, Citadel of Saladin, and centuries-old Khan El Khalili market for spices and souvenirs.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Old Cairo Coptic Church",
+        "Khan El Khalili Bazaar"
+      ],
+      "hotel": "Cairo Pyramids Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Cairo Departure",
+      "description": "Hotel check out and airport drop.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Drop"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private Transfer"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package pricing?",
+      "answer": "Starting price is \u20b954,000 per person on double sharing for min 4 pax (increased by \u20b95,000 from flyer rate \u20b949,000)."
+    }
+  ]
+},
+  {
+  "id": "pkg-egypt-nile-cruise-pharaohs-odyssey-5n6d",
+  "name": "Egypt Nile Cruise & Pharaohs Odyssey: Cairo, Aswan, Kom Ombo, Edfu & Luxor (5N/6D)",
+  "slug": "egypt-nile-cruise-pharaohs-odyssey-5n6d-package",
+  "destination": "Cairo, Aswan, Kom Ombo, Edfu, Luxor",
+  "destinationSlug": "egypt",
+  "country": "Egypt",
+  "region": "North Africa / Middle East",
+  "isInternational": true,
+  "durationDays": 6,
+  "durationNights": 5,
+  "startingPrice": 94000,
+  "discountPrice": 112000,
+  "rating": 4.98,
+  "reviewsCount": 190,
+  "heroImage": "/destinations/egypt.jpg",
+  "gallery": [
+    "/destinations/egypt.jpg"
+  ],
+  "highlights": [
+    "Includes 3 NIGHTS Full Board Stay on Luxury Nile Cruise",
+    "Pyramids of Giza, Sphinx & Grand Egyptian Museum",
+    "Philae Temple of Isis in Aswan",
+    "Kom Ombo Temple of Sobek & Horus Temple in Edfu",
+    "Valley of the Kings, Hatshepsut Temple & Karnak Temple in Luxor"
+  ],
+  "inclusions": [
+    "2 Nights 4\u2605 Cairo Hotel + 3 Nights 5\u2605 Luxury Nile Cruise",
+    "Full Board Meals on Nile Cruise (Breakfast, Lunch & Dinner)",
+    "Domestic Flight Cairo \u2013 Aswan (or Luxor)",
+    "Private Guided Excursions with Egyptologist",
+    "All Airport & Cruise Dock Transfers"
+  ],
+  "exclusions": [
+    "International Flights & Egypt Visa",
+    "Personal Expenses"
+  ],
+  "theme": "Nile River Cruise & Royal Tombs",
+  "hotelCategory": "5 Star Cruise / 4 Star Hotel",
+  "mealPlan": "Full Board on Cruise + CP in Cairo",
+  "flightsIncluded": true,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Cairo Hotel 4\u2605",
+      "city": "Cairo",
+      "rating": "4 Star",
+      "nights": 2
+    },
+    {
+      "name": "Luxury 5\u2605 Nile Cruise Ship",
+      "city": "Aswan to Luxor",
+      "rating": "5 Star",
+      "nights": 3
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Cairo Arrival & Hotel Check-in",
+      "description": "Airport pickup and private transfer to Cairo hotel.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Pickup"
+      ],
+      "hotel": "Cairo 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Pyramids of Giza, Sphinx & Grand Egyptian Museum",
+      "description": "Explore Great Pyramids, Sphinx, and Grand Egyptian Museum.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Giza Pyramids",
+        "Sphinx",
+        "Museum"
+      ],
+      "hotel": "Cairo 4\u2605 Hotel",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Fly to Aswan, Philae Temple & Board Nile Cruise",
+      "description": "Flight to Aswan. Visit Philae Temple of Goddess Isis, Aswan High Dam, and check in to 5\u2605 Nile Cruise for lunch and sailing.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Domestic Flight",
+        "Philae Temple",
+        "Board Cruise"
+      ],
+      "hotel": "5\u2605 Nile Cruise Ship",
+      "transfers": "Private & Flight"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Kom Ombo Temple & Sail to Edfu",
+      "description": "Sail to Kom Ombo and visit dual temple dedicated to crocodile god Sobek and falcon god Haroeris. Continue sailing to Edfu.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Kom Ombo Temple",
+        "Nile Sailing"
+      ],
+      "hotel": "5\u2605 Nile Cruise Ship",
+      "transfers": "Cruise Sailing"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Edfu Temple of Horus & Sail to Luxor",
+      "description": "Visit well-preserved Edfu Temple of Horus by horse carriage. Sail through Esna Lock to Luxor.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Edfu Temple",
+        "Esna Lock",
+        "Luxor Arrival"
+      ],
+      "hotel": "5\u2605 Nile Cruise Ship",
+      "transfers": "Cruise Sailing"
+    },
+    {
+      "dayNumber": 6,
+      "title": "Valley of the Kings, Karnak Temple & Departure",
+      "description": "Disembark cruise. Explore Valley of the Kings pharaoh tombs, Queen Hatshepsut Temple, Colossi of Memnon, and Karnak Temple complex before airport drop.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Valley of Kings",
+        "Karnak Temple",
+        "Airport Drop"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private Transfer"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package pricing?",
+      "answer": "Price is \u20b994,000 per person on double sharing for min 4 pax (increased by \u20b95,000 from flyer rate \u20b989,000). Includes 3 nights 5\u2605 Nile Cruise with all meals and domestic Cairo-Aswan flight."
+    }
+  ]
+},
+  {
+  "id": "pkg-bali-watersports-kintamani-nusa-penida-4n5d",
+  "name": "Discover Magic of Bali: Watersports, Padang Padang, Kintamani & Nusa Penida (4N/5D)",
+  "slug": "bali-watersports-kintamani-nusa-penida-4n5d-package",
+  "destination": "Bali, Nusa Penida, Ubud, Kintamani",
+  "destinationSlug": "bali",
+  "country": "Indonesia",
+  "region": "Southeast Asia",
+  "isInternational": true,
+  "durationDays": 5,
+  "durationNights": 4,
+  "startingPrice": 28500,
+  "discountPrice": 35000,
+  "rating": 4.92,
+  "reviewsCount": 240,
+  "heroImage": "/destinations/bali.jpg",
+  "gallery": [
+    "/destinations/bali.jpg"
+  ],
+  "highlights": [
+    "Tanjung Benoa Watersports (Banana Boat, Jet Ski)",
+    "Padang Padang Beach & Cliffside Uluwatu Temple",
+    "Kintamani Batur Volcano Viewpoint & Tegenungan Waterfall",
+    "Bali Aloha Swing Experience & Handicraft Villages",
+    "Full Day Nusa Penida Island Tour with Private AC Car"
+  ],
+  "inclusions": [
+    "4 Nights Accommodation in 4\u2605 Bali Resort",
+    "Daily Breakfast",
+    "Tanjung Benoa Watersports Package",
+    "Full Day Nusa Penida Speedboat & Island Tour",
+    "Private Airport Pickup & Drop Transfers"
+  ],
+  "exclusions": [
+    "Airfare & Visa on Arrival (IDR 500,000 / ~Rs 2,700)",
+    "Personal Expenses"
+  ],
+  "theme": "Tropical Beaches & Island Adventure",
+  "hotelCategory": "4 Star",
+  "mealPlan": "CP (Daily Breakfast)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Best Western Kuta / Fontana Hotel Ubud 4\u2605",
+      "city": "Bali",
+      "rating": "4 Star",
+      "nights": 4
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Bali Denpasar Arrival",
+      "description": "Arrival at Ngurah Rai Airport (DPS). Warm welcome and private hotel check-in.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Pickup"
+      ],
+      "hotel": "Bali Resort 4\u2605",
+      "transfers": "Private AC Car"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Watersports, Padang Padang & Uluwatu Sunset",
+      "description": "Head to Tanjung Benoa beach for watersports thrills. Visit surfer haven Padang Padang Beach and Uluwatu cliff temple.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Tanjung Benoa Watersports",
+        "Padang Padang Beach",
+        "Uluwatu Temple Sunset"
+      ],
+      "hotel": "Bali Resort 4\u2605",
+      "transfers": "Private AC Car"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Celuk, Kintamani Volcano, Tegenungan & Bali Swing",
+      "description": "Explore silver crafting at Celuk, woodcarving at Mas, Kintamani Mount Batur volcano view, Tegenungan Waterfall, and Bali Aloha Swing.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Kintamani Viewpoint",
+        "Tegenungan Waterfall",
+        "Bali Aloha Swing"
+      ],
+      "hotel": "Bali Resort 4\u2605",
+      "transfers": "Private AC Car"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Full Day Nusa Penida Island Day Tour",
+      "description": "Fast boat ride to Nusa Penida island. Visit Kelingking T-Rex Beach, Angel's Billabong, Broken Beach, and Crystal Bay.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Nusa Penida Fast Boat",
+        "Kelingking Beach",
+        "Angel Billabong"
+      ],
+      "hotel": "Bali Resort 4\u2605",
+      "transfers": "Boat & Private Island Car"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Bali Departure",
+      "description": "Check out and airport drop.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Transfer"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private AC Car"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package price?",
+      "answer": "Starting price is \u20b928,500 per person on double sharing (increased by \u20b95,000 from flyer rate \u20b923,500)."
+    }
+  ]
+},
+  {
+  "id": "pkg-bali-gwk-sunset-cruise-ubud-massage-5n6d",
+  "name": "Bali Luxury Panorama: GWK Park, Sunset Dinner Cruise, Rice Terraces & Balinese Massage (5N/6D)",
+  "slug": "bali-gwk-sunset-cruise-ubud-massage-5n6d-package",
+  "destination": "Bali, Ubud, Uluwatu",
+  "destinationSlug": "bali",
+  "country": "Indonesia",
+  "region": "Southeast Asia",
+  "isInternational": true,
+  "durationDays": 6,
+  "durationNights": 5,
+  "startingPrice": 34500,
+  "discountPrice": 42000,
+  "rating": 4.96,
+  "reviewsCount": 215,
+  "heroImage": "/destinations/bali.jpg",
+  "gallery": [
+    "/destinations/bali.jpg"
+  ],
+  "highlights": [
+    "Includes Bali Hai Sunset Dinner Cruise Experience",
+    "GWK Cultural Park, Pandawa Beach & Kecak Dance",
+    "Kintamani Viewpoint & Tegalalang Rice Terrace in Ubud",
+    "Ulun Danu Beratan Temple & Handara Gate Photo Stop",
+    "Complimentary 1-Hour Authentic Balinese Spa Massage"
+  ],
+  "inclusions": [
+    "5 Nights Accommodation in 4\u2605 Bali Hotel / Resort",
+    "Daily Breakfast",
+    "Bali Hai Sunset Dinner Cruise Ticket",
+    "1 Hour Balinese Massage Session",
+    "Private Airport Pickup & Drop Transfers"
+  ],
+  "exclusions": [
+    "Airfare & Visa on Arrival",
+    "Personal Expenses"
+  ],
+  "theme": "Cultural Romance & Cruise",
+  "hotelCategory": "4 Star",
+  "mealPlan": "CP + Sunset Dinner",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Grand Inna Kuta / Aryaduta Bali 4\u2605",
+      "city": "Bali",
+      "rating": "4 Star",
+      "nights": 5
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Bali Arrival",
+      "description": "Airport pickup and drop to resort.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Pickup"
+      ],
+      "hotel": "Bali 4\u2605 Resort",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 2,
+      "title": "GWK Park, Pandawa Beach, Uluwatu & Kecak Fire Dance",
+      "description": "Visit giant GWK statue, turquoise Pandawa Beach, Uluwatu Temple, and witness cliffside Kecak & Fire Dance.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "GWK Statue",
+        "Pandawa Beach",
+        "Kecak Fire Dance"
+      ],
+      "hotel": "Bali 4\u2605 Resort",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Bali Hai Sunset Dinner Cruise",
+      "description": "Day at leisure. Evening Bali Hai catamaran sunset cruise with international buffet dinner and cabaret show.",
+      "meals": [
+        "Breakfast",
+        "Dinner"
+      ],
+      "activities": [
+        "Sunset Dinner Cruise",
+        "Cabaret Show"
+      ],
+      "hotel": "Bali 4\u2605 Resort",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Kintamani Viewpoint, Penglipuran & Tegalalang",
+      "description": "Tour Kintamani Batur volcano, traditional Penglipuran Village, and Instagram-famous Tegalalang Rice Terraces.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Kintamani Volcano",
+        "Penglipuran Village",
+        "Tegalalang Rice Terrace"
+      ],
+      "hotel": "Bali 4\u2605 Resort",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Ulun Danu Water Temple, Handara Gate & Balinese Massage",
+      "description": "Visit scenic Ulun Danu Beratan temple on Lake Beratan, Handara Iconic Gate, Ubud Market, and indulge in a 60-minute relaxing Balinese Massage.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Ulun Danu Temple",
+        "Handara Gate",
+        "Ubud Market",
+        "Balinese Massage"
+      ],
+      "hotel": "Bali 4\u2605 Resort",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 6,
+      "title": "Bali Departure",
+      "description": "Check out and airport drop.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Drop"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private Transfer"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package price?",
+      "answer": "Price is \u20b934,500 per person on double sharing (increased by \u20b95,000 from flyer rate \u20b929,500)."
+    }
+  ]
+},
+  {
+  "id": "pkg-bali-ultimate-odyssey-nusa-atv-finns-6n7d",
+  "name": "Bali Grand Odyssey: Suluban Beach, FINNS Beach Club, Nusa Penida Snorkeling & ATV Ride (6N/7D)",
+  "slug": "bali-ultimate-odyssey-nusa-atv-finns-6n7d-package",
+  "destination": "Bali, Nusa Penida, Seminyak, Ubud",
+  "destinationSlug": "bali",
+  "country": "Indonesia",
+  "region": "Southeast Asia",
+  "isInternational": true,
+  "durationDays": 7,
+  "durationNights": 6,
+  "startingPrice": 39000,
+  "discountPrice": 48000,
+  "rating": 4.98,
+  "reviewsCount": 260,
+  "heroImage": "/destinations/bali.jpg",
+  "gallery": [
+    "/destinations/bali.jpg"
+  ],
+  "highlights": [
+    "Nusa Penida Island Tour with Snorkeling at Crystal Bay",
+    "FINNS Beach Club Seminyak Sunset Pass",
+    "Exciting Jungle ATV Quad Bike Ride (or Bali Swing)",
+    "Ulun Danu Temple, Handara Gate & Suluban Secret Beach",
+    "Kintamani Volcano, Tegenungan Waterfall & Ubud Art Villages"
+  ],
+  "inclusions": [
+    "6 Nights Accommodation in 4\u2605 Bali Resort",
+    "Daily Breakfast",
+    "Full Day Nusa Penida Tour + Snorkeling Gear",
+    "ATV Quad Bike Adventure",
+    "Private Airport & Sightseeing Transfers"
+  ],
+  "exclusions": [
+    "Airfare & Visa on Arrival",
+    "Personal Expenses"
+  ],
+  "theme": "Grand Adventure & Beach Club",
+  "hotelCategory": "4 Star",
+  "mealPlan": "CP (Daily Breakfast)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "The Anvaya Beach Resort / Aston Kuta 4\u2605",
+      "city": "Bali",
+      "rating": "4 Star",
+      "nights": 6
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Bali Airport Arrival",
+      "description": "Airport pickup and drop to resort.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Transfer"
+      ],
+      "hotel": "Bali 4\u2605 Resort",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Suluban Beach, Pandawa Beach & Uluwatu Temple",
+      "description": "Explore cave-carved Suluban Beach, Ramah Barak, Pandawa Beach, and Uluwatu cliff temple.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Suluban Beach",
+        "Pandawa Beach",
+        "Uluwatu Temple"
+      ],
+      "hotel": "Bali 4\u2605 Resort",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Ulun Danu Temple, Handara Gate & FINNS Beach Club",
+      "description": "Visit iconic lake temple Ulun Danu, Handara Gate, Seminyak stroll, and evening chill at world-famous FINNS Beach Club.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Ulun Danu Temple",
+        "Handara Gate",
+        "FINNS Beach Club"
+      ],
+      "hotel": "Bali 4\u2605 Resort",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Nusa Penida Tour & Coral Reef Snorkeling",
+      "description": "Full day at Nusa Penida: Angel's Billabong, Broken Beach, Kelingking T-Rex Beach, and snorkeling among marine life in Crystal Bay.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Nusa Penida Fast Boat",
+        "Kelingking Beach",
+        "Crystal Bay Snorkeling"
+      ],
+      "hotel": "Bali 4\u2605 Resort",
+      "transfers": "Boat & Island Car"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Jungle ATV Quad Bike Ride & Ubud Market",
+      "description": "Thrill of 2-hour jungle & muddy trail ATV Quad Bike Ride (or optional Bali Swing). Afternoon at Ubud Art Market.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Jungle ATV Ride",
+        "Ubud Market"
+      ],
+      "hotel": "Bali 4\u2605 Resort",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 6,
+      "title": "Celuk, Kintamani Volcano & Tegenungan Waterfall",
+      "description": "Visit Celuk craft village, Kintamani Mount Batur volcano view, Tegenungan Waterfall, and Bali Aloha Swing.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Kintamani Volcano",
+        "Tegenungan Waterfall",
+        "Bali Swing"
+      ],
+      "hotel": "Bali 4\u2605 Resort",
+      "transfers": "Private Transfer"
+    },
+    {
+      "dayNumber": 7,
+      "title": "Bali Departure",
+      "description": "Check out and airport drop.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Drop"
+      ],
+      "hotel": "N/A",
+      "transfers": "Private Transfer"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package price?",
+      "answer": "Price is \u20b939,000 per person on double sharing (increased by \u20b95,000 from flyer rate \u20b934,000)."
+    }
+  ]
+},
+  {
+  "id": "pkg-europe-grand-wonders-15n16d",
+  "name": "Grand Wonders Of Europe: UK (London), France, Belgium, Netherlands, Germany, Switzerland, Austria, Liechtenstein, Italy & Vatican (15N/16D)",
+  "slug": "europe-grand-wonders-15n16d-package",
+  "destination": "London, Paris, Brussels, Amsterdam, Black Forest, Mt Titlis, Venice, Rome, Vatican",
+  "destinationSlug": "europe",
+  "country": "Europe Multi-Country",
+  "region": "Europe",
+  "isInternational": true,
+  "durationDays": 16,
+  "durationNights": 15,
+  "startingPrice": 330000,
+  "discountPrice": 380000,
+  "rating": 4.98,
+  "reviewsCount": 115,
+  "heroImage": "/destinations/switzerland.jpg",
+  "gallery": [
+    "/destinations/switzerland.jpg"
+  ],
+  "highlights": [
+    "10 European Countries: UK (3N), France, Belgium, Netherlands, Germany, Switzerland, Austria, Liechtenstein, Italy & Vatican",
+    "Guaranteed 4-Star Hotel Accommodations",
+    "ALL MEALS INCLUDED (Daily Continental Breakfast, Indian Lunches & Dinners)",
+    "All Major Sightseeing Entry Tickets & Excursions Included",
+    "Driver Tips & Airport Transfers Included"
+  ],
+  "inclusions": [
+    "15 Nights Stay in Guaranteed 4\u2605 Hotels across Europe",
+    "All Meals (Daily Breakfast, Lunch & Dinner)",
+    "Comprehensive Sightseeing Excursions in London, Paris, Venice, Rome & Swiss Alps",
+    "Driver Tips Included",
+    "London LHR Arrival & Rome FCO Departure Transfers"
+  ],
+  "exclusions": [
+    "International Air Tickets & Schengen / UK Visas",
+    "Travel Insurance",
+    "Personal Expenses"
+  ],
+  "theme": "Grand European Panorama",
+  "hotelCategory": "4 Star",
+  "mealPlan": "All Meals Included (Breakfast, Lunch, Dinner)",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Guaranteed 4\u2605 European Hotels",
+      "city": "Multi-City Europe",
+      "rating": "4 Star",
+      "nights": 15
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "London Arrival",
+      "description": "Arrival at London Heathrow Airport (LHR). Private/Coach transfer to guaranteed 4\u2605 hotel.",
+      "meals": [
+        "Dinner"
+      ],
+      "activities": [
+        "Airport Transfer"
+      ],
+      "hotel": "London 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 2,
+      "title": "London Guided City Tour & London Eye",
+      "description": "Visit Big Ben, Tower Bridge, Buckingham Palace Changing of the Guard, and flight on London Eye.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "London City Tour",
+        "London Eye"
+      ],
+      "hotel": "London 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Windsor Castle & Madame Tussauds",
+      "description": "Excursion to royal Windsor Castle and Madame Tussauds Wax Museum.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Windsor Castle",
+        "Madame Tussauds"
+      ],
+      "hotel": "London 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 4,
+      "title": "London to Paris via Eurostar High Speed Train",
+      "description": "Board Eurostar train under the English Channel to Paris. River Seine evening cruise.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Eurostar Train",
+        "Seine River Cruise"
+      ],
+      "hotel": "Paris 4\u2605 Hotel",
+      "transfers": "Train & Coach"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Paris Eiffel Tower 3rd Level & Guided City Tour",
+      "description": "Ascend to 3rd level of Eiffel Tower, Louvre Museum exterior, Arc de Triomphe, Champs-\u00c9lys\u00e9es.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Eiffel Tower 3rd Level",
+        "Paris City Tour"
+      ],
+      "hotel": "Paris 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 6,
+      "title": "Disneyland Paris Magic Day",
+      "description": "Full day at Disneyland Paris 1-Park pass.",
+      "meals": [
+        "Breakfast",
+        "Packed Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Disneyland Paris"
+      ],
+      "hotel": "Paris 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 7,
+      "title": "Paris to Brussels & Amsterdam",
+      "description": "Drive to Brussels (Grand Place, Atomium). Continue to Amsterdam.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Brussels Grand Place",
+        "Atomium Photo Stop"
+      ],
+      "hotel": "Amsterdam 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 8,
+      "title": "Amsterdam Canal Cruise & Dutch Windmills",
+      "description": "Glass-topped canal boat cruise, Zaanse Schans windmills, and cheese clog factory.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Amsterdam Canal Cruise",
+        "Windmill Village"
+      ],
+      "hotel": "Amsterdam 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 9,
+      "title": "Cologne Cathedral & Rhine River Cruise (Germany)",
+      "description": "Visit Gothic Cologne Cathedral in Germany and scenic Rhine river drive.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Cologne Cathedral",
+        "Rhine Cruise"
+      ],
+      "hotel": "Germany 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 10,
+      "title": "Black Forest Cuckoo Clocks to Rhine Falls & Zurich",
+      "description": "Black Forest Titisee drive, witness cuckoo clock demonstration. Boat ride at Rhine Falls in Schaffhausen, Switzerland.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Titisee Black Forest",
+        "Rhine Falls Boat Ride"
+      ],
+      "hotel": "Central Switzerland 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 11,
+      "title": "Mt. Titlis Revolving Cable Car & Cliff Walk",
+      "description": "Ascend Mt. Titlis on Rotair revolving cable car, Ice Flyer ride, Titlis Cliff Walk, and Lucerne Orientation.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Mt Titlis Cable Car",
+        "Cliff Walk",
+        "Lucerne Tour"
+      ],
+      "hotel": "Central Switzerland 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 12,
+      "title": "Jungfraujoch Top of Europe Excursion",
+      "description": "Cogwheel train ride up to Jungfraujoch Top of Europe (3,454m), Sphinx observatory, and Ice Palace.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Jungfraujoch Top of Europe",
+        "Ice Palace"
+      ],
+      "hotel": "Central Switzerland 4\u2605 Hotel",
+      "transfers": "Coach & Cogwheel Train"
+    },
+    {
+      "dayNumber": 13,
+      "title": "Vaduz (Liechtenstein) & Innsbruck (Austria)",
+      "description": "Drive through Liechtenstein capital Vaduz. Visit Golden Roof in Innsbruck, Austria and Swarovski Crystal Museum.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Vaduz Orientation",
+        "Innsbruck Golden Roof"
+      ],
+      "hotel": "Austria 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 14,
+      "title": "Venice Gondola & St. Mark's Square (Italy)",
+      "description": "Vaporetto boat ride to Venice island. St. Mark's Square, Bridge of Sighs, Doge's Palace, Murano Glass demo.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Venice Vaporetto Boat",
+        "St Marks Square"
+      ],
+      "hotel": "Padova / Venice 4\u2605 Hotel",
+      "transfers": "Coach & Boat"
+    },
+    {
+      "dayNumber": 15,
+      "title": "Florence Duomo & Leaning Tower of Pisa",
+      "description": "Photo stop at Leaning Tower of Pisa. Guided tour of Florence renaissance treasures: Duomo, Ponte Vecchio.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Pisa Leaning Tower",
+        "Florence Duomo"
+      ],
+      "hotel": "Rome 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 16,
+      "title": "Rome Colosseum, Vatican City & Departure",
+      "description": "Guided tour of Vatican City (St. Peter's Basilica) and Colosseum photo stop. Transfer to Rome FCO Airport.",
+      "meals": [
+        "Breakfast",
+        "Lunch"
+      ],
+      "activities": [
+        "Vatican City Tour",
+        "Rome Colosseum",
+        "Airport Transfer"
+      ],
+      "hotel": "N/A",
+      "transfers": "Coach Transfer"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package pricing?",
+      "answer": "Price is EUR 3600 (~\u20b93,30,000 INR) per adult on double sharing basis (increased by EUR 50 / ~\u20b95,000 from flyer rate EUR 3550). Includes guaranteed 4\u2605 hotels, all meals, and driver tips."
+    }
+  ]
+},
+  {
+  "id": "pkg-europe-best-paris-rome-12n13d",
+  "name": "Best of Europe: Paris to Rome via Belgium, Netherlands, Germany, Switzerland, Austria & Italy (12N/13D)",
+  "slug": "europe-best-paris-rome-12n13d-package",
+  "destination": "Paris, Brussels, Amsterdam, Black Forest, Mt Titlis, Venice, Florence, Rome",
+  "destinationSlug": "europe",
+  "country": "Europe Multi-Country",
+  "region": "Europe",
+  "isInternational": true,
+  "durationDays": 13,
+  "durationNights": 12,
+  "startingPrice": 266000,
+  "discountPrice": 310000,
+  "rating": 4.96,
+  "reviewsCount": 130,
+  "heroImage": "/destinations/switzerland.jpg",
+  "gallery": [
+    "/destinations/switzerland.jpg"
+  ],
+  "highlights": [
+    "8 Countries: France, Belgium, Netherlands, Germany, Switzerland, Austria, Liechtenstein, Italy & Vatican",
+    "Starts in Paris (CDG Airport) & Ends in Rome (FCO Airport)",
+    "Guaranteed 4-Star Hotel Accommodations",
+    "ALL MEALS INCLUDED (Daily Breakfast, Lunches & Dinners)",
+    "Eiffel Tower 3rd Level, Mt Titlis, Venice Gondola & Vatican"
+  ],
+  "inclusions": [
+    "12 Nights Stay in Guaranteed 4\u2605 Hotels",
+    "All Meals (Breakfast, Lunches & Dinners)",
+    "All Sightseeing Entry Tickets",
+    "Driver Tips Included",
+    "Paris CDG Arrival & Rome FCO Departure Transfers"
+  ],
+  "exclusions": [
+    "Air Tickets & Schengen Visa",
+    "Personal Expenses"
+  ],
+  "theme": "Classic European Tour",
+  "hotelCategory": "4 Star",
+  "mealPlan": "All Meals Included",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Guaranteed 4\u2605 European Hotels",
+      "city": "Multi-City Europe",
+      "rating": "4 Star",
+      "nights": 12
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Paris CDG Arrival",
+      "description": "Arrival at Paris Charles de Gaulle Airport (CDG). Transfer to hotel.",
+      "meals": [
+        "Dinner"
+      ],
+      "activities": [
+        "Airport Transfer"
+      ],
+      "hotel": "Paris 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Paris Eiffel Tower 3rd Level & Seine Cruise",
+      "description": "Ascend 3rd level Eiffel Tower, Paris city tour, and romantic River Seine cruise.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Eiffel Tower 3rd Level",
+        "Seine River Cruise"
+      ],
+      "hotel": "Paris 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Disneyland Paris & Illumination Tour",
+      "description": "Full day at Disneyland Paris followed by Paris by Night illumination drive.",
+      "meals": [
+        "Breakfast",
+        "Packed Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Disneyland Paris"
+      ],
+      "hotel": "Paris 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Brussels Atomium to Amsterdam",
+      "description": "Drive to Brussels. Visit Mannekin Pis, Grand Place, and continue to Amsterdam.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Brussels City Tour"
+      ],
+      "hotel": "Amsterdam 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Amsterdam Canal Cruise & Windmills",
+      "description": "Glass-topped boat cruise in Amsterdam and Zaanse Schans windmill tour.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Amsterdam Canal Cruise",
+        "Windmills Tour"
+      ],
+      "hotel": "Amsterdam 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 6,
+      "title": "Cologne Cathedral & Germany Black Forest",
+      "description": "Drive through Germany. Visit Gothic Cologne Cathedral and Titisee Cuckoo Clock workshop.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Cologne Cathedral",
+        "Titisee Black Forest"
+      ],
+      "hotel": "Germany 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 7,
+      "title": "Rhine Falls & Central Switzerland",
+      "description": "Thrilling boat ride at Rhine Falls in Schaffhausen. Transfer to Central Switzerland hotel.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Rhine Falls Boat Ride"
+      ],
+      "hotel": "Central Switzerland 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 8,
+      "title": "Mt. Titlis Cable Car & Lucerne",
+      "description": "Rotair revolving cable car up Mt Titlis, Titlis Cliff Walk, and Lucerne city tour.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Mt Titlis Cable Car",
+        "Lucerne Tour"
+      ],
+      "hotel": "Central Switzerland 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 9,
+      "title": "Vaduz & Innsbruck (Austria)",
+      "description": "Drive via Vaduz in Liechtenstein to Innsbruck, Austria. Visit Golden Roof.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Innsbruck Tour"
+      ],
+      "hotel": "Austria 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 10,
+      "title": "Venice Canal Island Tour (Italy)",
+      "description": "Vaporetto boat ride to St. Mark's Square in Venice.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Venice Canal Boat",
+        "St Marks Square"
+      ],
+      "hotel": "Venice / Padova 4\u2605 Hotel",
+      "transfers": "Coach & Boat"
+    },
+    {
+      "dayNumber": 11,
+      "title": "Pisa Leaning Tower & Florence",
+      "description": "Pisa Square of Miracles photo stop and Florence historic center walk.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Leaning Tower of Pisa",
+        "Florence Tour"
+      ],
+      "hotel": "Rome 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 12,
+      "title": "Rome & Vatican City",
+      "description": "Visit Vatican City (St. Peter's Basilica), Colosseum exterior, and Trevi Fountain.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Vatican Basilica",
+        "Rome Colosseum"
+      ],
+      "hotel": "Rome 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 13,
+      "title": "Rome FCO Airport Departure",
+      "description": "Check out and coach drop to Rome FCO Airport by 11:00 AM.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Drop"
+      ],
+      "hotel": "N/A",
+      "transfers": "Coach Transfer"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package pricing?",
+      "answer": "Price is EUR 2900 (~\u20b92,66,000 INR) per adult on double sharing (increased by EUR 50 / ~\u20b95,000 from flyer rate EUR 2850)."
+    }
+  ]
+},
+  {
+  "id": "pkg-europe-grand-exclusive-london-rome-12n13d",
+  "name": "Grand Exclusive Europe: London (2N), Paris, Switzerland, Austria & Italy (12N/13D)",
+  "slug": "europe-grand-exclusive-london-rome-12n13d-package",
+  "destination": "London, Paris, Engelberg, Venice, Rome",
+  "destinationSlug": "europe",
+  "country": "Europe Multi-Country",
+  "region": "Europe",
+  "isInternational": true,
+  "durationDays": 13,
+  "durationNights": 12,
+  "startingPrice": 280000,
+  "discountPrice": 325000,
+  "rating": 4.97,
+  "reviewsCount": 105,
+  "heroImage": "/destinations/switzerland.jpg",
+  "gallery": [
+    "/destinations/switzerland.jpg"
+  ],
+  "highlights": [
+    "Starts in London (LHR) & Ends in Rome (FCO)",
+    "5 Iconic Countries: UK (02 Nights), France, Switzerland, Austria & Italy",
+    "Guaranteed 4-Star Hotel Stay with All Meals Included",
+    "London Eye, Eiffel Tower, Mt. Titlis & Venice Gondola",
+    "Driver Tips & Airport Transfers Included"
+  ],
+  "inclusions": [
+    "12 Nights Stay in Guaranteed 4\u2605 Hotels",
+    "All Meals (Daily Breakfast, Lunches & Dinners)",
+    "All Tour Entries & Driver Tips",
+    "London Airport Arrival & Rome Airport Departure Transfers"
+  ],
+  "exclusions": [
+    "Air Tickets, UK & Schengen Visa Fees",
+    "Personal Expenses"
+  ],
+  "theme": "Exclusive Multi-Country",
+  "hotelCategory": "4 Star",
+  "mealPlan": "All Meals Included",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Guaranteed 4\u2605 European Hotels",
+      "city": "Multi-City Europe",
+      "rating": "4 Star",
+      "nights": 12
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "London Heathrow Arrival",
+      "description": "Arrival at London Heathrow Airport (LHR). Transfer to 4\u2605 hotel.",
+      "meals": [
+        "Dinner"
+      ],
+      "activities": [
+        "Airport Pickup"
+      ],
+      "hotel": "London 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 2,
+      "title": "London City Tour & Flight on London Eye",
+      "description": "Big Ben, Tower Bridge, Parliament, and ride on London Eye.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "London City Tour",
+        "London Eye"
+      ],
+      "hotel": "London 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 3,
+      "title": "London to Paris via Eurostar",
+      "description": "High speed Eurostar train under English Channel to Paris. River Seine cruise.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Eurostar Train",
+        "Seine Cruise"
+      ],
+      "hotel": "Paris 4\u2605 Hotel",
+      "transfers": "Train & Coach"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Paris Eiffel Tower 3rd Level & Louvre",
+      "description": "3rd level of Eiffel Tower and Paris landmarks tour.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Eiffel Tower 3rd Level"
+      ],
+      "hotel": "Paris 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Paris to Central Switzerland",
+      "description": "Drive through scenic French countryside into Switzerland.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Scenic Swiss Countryside Drive"
+      ],
+      "hotel": "Central Switzerland 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 6,
+      "title": "Mt. Titlis Cable Car & Lucerne",
+      "description": "Mt Titlis Rotair revolving cable car, Titlis Cliff Walk, and Lake Lucerne orientation.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Mt Titlis Cable Car",
+        "Lucerne City Tour"
+      ],
+      "hotel": "Central Switzerland 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 7,
+      "title": "Rhine Falls & Zurich Lindt Chocolate",
+      "description": "Boat ride at Rhine Falls in Schaffhausen and visit Lindt Home of Chocolate.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Rhine Falls Boat Ride",
+        "Lindt Chocolate Museum"
+      ],
+      "hotel": "Central Switzerland 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 8,
+      "title": "Innsbruck Golden Roof (Austria)",
+      "description": "Drive into Austrian Alps, visit Innsbruck Old Town and Golden Roof.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Innsbruck Tour"
+      ],
+      "hotel": "Austria 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 9,
+      "title": "Venice St. Mark's Square (Italy)",
+      "description": "Boat ride to Venice island. St Mark's Basilica and Doge's Palace.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Venice Vaporetto Boat",
+        "St Marks Square"
+      ],
+      "hotel": "Venice / Padova 4\u2605 Hotel",
+      "transfers": "Coach & Boat"
+    },
+    {
+      "dayNumber": 10,
+      "title": "Pisa Leaning Tower & Florence",
+      "description": "Photo stop at Leaning Tower of Pisa and Florence historic center.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Pisa Leaning Tower",
+        "Florence Walk"
+      ],
+      "hotel": "Rome 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 11,
+      "title": "Rome & Vatican City",
+      "description": "Guided Vatican City St. Peter's Basilica tour and Rome Colosseum.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Vatican Basilica",
+        "Rome Colosseum"
+      ],
+      "hotel": "Rome 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 12,
+      "title": "Rome Historic Squares & Trevi Fountain",
+      "description": "Stroll through Piazza Navona, Spanish Steps, and toss coin in Trevi Fountain.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Trevi Fountain",
+        "Spanish Steps"
+      ],
+      "hotel": "Rome 4\u2605 Hotel",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 13,
+      "title": "Rome FCO Departure",
+      "description": "Coach drop to Rome FCO Airport by 11:00 AM for flight home.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Drop"
+      ],
+      "hotel": "N/A",
+      "transfers": "Coach Transfer"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package pricing?",
+      "answer": "Price is EUR 3050 (~\u20b92,80,000 INR) per adult on double sharing (increased by EUR 50 / ~\u20b95,000 from flyer rate EUR 3000)."
+    }
+  ]
+},
+  {
+  "id": "pkg-europe-fascinating-paris-geneva-jungfrau-7n8d",
+  "name": "Fascinating Europe: Paris (3N), Geneva (1N), Jungfraujoch & Central Switzerland (3N/8D)",
+  "slug": "europe-fascinating-paris-geneva-jungfrau-7n8d-package",
+  "destination": "Paris, Geneva, Interlaken, Jungfraujoch, Engelberg, Zurich",
+  "destinationSlug": "europe",
+  "country": "France & Switzerland",
+  "region": "Europe",
+  "isInternational": true,
+  "durationDays": 8,
+  "durationNights": 7,
+  "startingPrice": 211000,
+  "discountPrice": 245000,
+  "rating": 4.95,
+  "reviewsCount": 140,
+  "heroImage": "/destinations/switzerland.jpg",
+  "gallery": [
+    "/destinations/switzerland.jpg"
+  ],
+  "highlights": [
+    "3 Nights Paris + 1 Night Geneva + 3 Nights Central Switzerland",
+    "Eiffel Tower 3rd Level, Disneyland Paris & Seine River Cruise",
+    "Jungfraujoch - Top of Europe Cogwheel Train Excursion",
+    "Mt. Titlis Revolving Cable Car & Cliff Walk",
+    "Rhine Falls Boat Ride & Lindt Home of Chocolate Zurich"
+  ],
+  "inclusions": [
+    "7 Nights Accommodation in 3\u2605/4\u2605 Hotels (B&B/Millennium Paris, Movenpick Geneva, Radisson Central Switzerland)",
+    "Daily Buffet Breakfast",
+    "6 Indian Jain/Veg/Non-Veg Lunches + 7 Indian Dinners",
+    "Packed Lunch on Disneyland & Geneva Travel Days",
+    "All Tour Entry Passes & Transfers"
+  ],
+  "exclusions": [
+    "Airfare, Schengen Visa & Travel Insurance",
+    "Personal Expenses"
+  ],
+  "theme": "France & Swiss Alpine Wonders",
+  "hotelCategory": "3 Star / 4 Star",
+  "mealPlan": "Breakfast, Lunch & Dinner Included",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "B&B / Millennium CDG 3\u2605/4\u2605",
+      "city": "Paris",
+      "rating": "4 Star",
+      "nights": 3
+    },
+    {
+      "name": "Everness / Movenpick Geneva 4\u2605",
+      "city": "Geneva",
+      "rating": "4 Star",
+      "nights": 1
+    },
+    {
+      "name": "La Maison Suisse Dottingen / Radisson 4\u2605",
+      "city": "Central Switzerland",
+      "rating": "4 Star",
+      "nights": 3
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Paris CDG Airport Arrival",
+      "description": "Arrival at Paris CDG Airport. Transfer to hotel.",
+      "meals": [
+        "Dinner"
+      ],
+      "activities": [
+        "Airport Transfer"
+      ],
+      "hotel": "Millennium CDG Paris",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Paris Eiffel Tower 3rd Level, Seine Cruise & Versailles Palace",
+      "description": "Guided city tour of Paris, ascend 3rd level Eiffel Tower, Versailles Palace guided tour, and River Seine cruise.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Eiffel Tower 3rd Level",
+        "Versailles Palace",
+        "Seine Cruise"
+      ],
+      "hotel": "Millennium CDG Paris",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Full Day Disneyland Paris & Illumination Tour",
+      "description": "Magic day at Disneyland Paris with packed lunch. Paris by Night illumination tour.",
+      "meals": [
+        "Breakfast",
+        "Packed Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Disneyland Paris",
+        "Paris Illumination Tour"
+      ],
+      "hotel": "Millennium CDG Paris",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Paris to Geneva Orientation Tour",
+      "description": "Drive south to Geneva, Switzerland. Orientation tour covering Jet d'Eau water fountain and UN headquarters.",
+      "meals": [
+        "Breakfast",
+        "Packed Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Geneva City Tour",
+        "Jet d'Eau"
+      ],
+      "hotel": "Movenpick Geneva",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Geneva to Interlaken & Jungfraujoch Top of Europe",
+      "description": "Drive to Interlaken. Cogwheel train ascension to Jungfraujoch Top of Europe glaciers.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Jungfraujoch Top of Europe",
+        "Interlaken Tour"
+      ],
+      "hotel": "Radisson Central Switzerland",
+      "transfers": "Coach & Train"
+    },
+    {
+      "dayNumber": 6,
+      "title": "Engelberg Mt. Titlis & Lucerne City Tour",
+      "description": "World's first revolving cable car to Mt Titlis, Titlis Cliff Walk, and Lucerne city orientation.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Mt Titlis Cable Car",
+        "Titlis Cliff Walk",
+        "Lucerne Tour"
+      ],
+      "hotel": "Radisson Central Switzerland",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 7,
+      "title": "Rhine Falls Boat Ride, Zurich & Lindt Chocolate",
+      "description": "Rhine Falls boat ride in Schaffhausen, Zurich Lindt Home of Chocolate visit, and Bern city tour.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Rhine Falls Boat Ride",
+        "Lindt Chocolate Museum",
+        "Bern Tour"
+      ],
+      "hotel": "Radisson Central Switzerland",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 8,
+      "title": "Zurich ZRH Airport Departure",
+      "description": "Check out and coach drop to Zurich Airport (ZRH) by 09:00 AM.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Transfer"
+      ],
+      "hotel": "N/A",
+      "transfers": "Coach Transfer"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package price?",
+      "answer": "Price is EUR 2300 (~\u20b92,11,000 INR) per adult on double sharing (increased by EUR 50 / ~\u20b95,000 from flyer rate EUR 2250)."
+    }
+  ]
+},
+  {
+  "id": "pkg-europe-beauty-paris-amsterdam-swiss-8n9d",
+  "name": "Beauty Of Europe: Paris (3N), Brussels, Amsterdam (1N), Germany (1N) & Switzerland (3N) (8N/9D)",
+  "slug": "europe-beauty-paris-amsterdam-swiss-8n9d-package",
+  "destination": "Paris, Brussels, Amsterdam, Heidelberg, Interlaken, Mt Titlis, Zurich",
+  "destinationSlug": "europe",
+  "country": "France, Belgium, Netherlands, Germany, Switzerland",
+  "region": "Europe",
+  "isInternational": true,
+  "durationDays": 9,
+  "durationNights": 8,
+  "startingPrice": 243000,
+  "discountPrice": 280000,
+  "rating": 4.97,
+  "reviewsCount": 150,
+  "heroImage": "/destinations/switzerland.jpg",
+  "gallery": [
+    "/destinations/switzerland.jpg"
+  ],
+  "highlights": [
+    "3N Paris + 1N Netherlands + 1N Germany + 3N Central Switzerland",
+    "Eiffel Tower 3rd Level, Versailles Palace & Disneyland Paris",
+    "Brussels Mini Europe, Amsterdam Canal Cruise & Windmills",
+    "Heidelberg Altstadt & Titisee Black Forest Cuckoo Clocks",
+    "Jungfraujoch Top of Europe, Mt. Titlis & Rhine Falls Boat Ride"
+  ],
+  "inclusions": [
+    "8 Nights Hotel Stay in 3\u2605/4\u2605 European Hotels",
+    "Daily Buffet Breakfast",
+    "7 Indian Lunches + 8 Indian Dinners",
+    "All Excursions & Entry Passes Included",
+    "Paris CDG Arrival & Zurich ZRH Departure Transfers"
+  ],
+  "exclusions": [
+    "Air Tickets & Schengen Visa",
+    "Personal Expenses"
+  ],
+  "theme": "Western Europe Grand Highlights",
+  "hotelCategory": "3 Star / 4 Star",
+  "mealPlan": "Breakfast, Lunch & Dinner Included",
+  "flightsIncluded": false,
+  "transfersIncluded": true,
+  "departureCity": "Flexible / Pan-India",
+  "hotels": [
+    {
+      "name": "Millennium CDG Paris 4\u2605",
+      "city": "Paris",
+      "rating": "4 Star",
+      "nights": 3
+    },
+    {
+      "name": "Van der Valk Netherlands 4\u2605",
+      "city": "Netherlands",
+      "rating": "4 Star",
+      "nights": 1
+    },
+    {
+      "name": "Elaya Hotel Germany 4\u2605",
+      "city": "Germany",
+      "rating": "4 Star",
+      "nights": 1
+    },
+    {
+      "name": "Radisson Central Switzerland 4\u2605",
+      "city": "Central Switzerland",
+      "rating": "4 Star",
+      "nights": 3
+    }
+  ],
+  "itinerary": [
+    {
+      "dayNumber": 1,
+      "title": "Paris CDG Arrival",
+      "description": "Arrival at Paris CDG Airport. Transfer to hotel.",
+      "meals": [
+        "Dinner"
+      ],
+      "activities": [
+        "Airport Transfer"
+      ],
+      "hotel": "Millennium CDG Paris",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 2,
+      "title": "Paris Eiffel Tower 3rd Level, Seine Cruise & Versailles",
+      "description": "City tour, ascend 3rd level Eiffel Tower, Versailles Palace guided tour, and Seine river cruise.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Eiffel Tower 3rd Level",
+        "Versailles Palace",
+        "Seine Cruise"
+      ],
+      "hotel": "Millennium CDG Paris",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 3,
+      "title": "Disneyland Paris Day Tour",
+      "description": "Full day at Disneyland Paris with packed lunch.",
+      "meals": [
+        "Breakfast",
+        "Packed Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Disneyland Paris"
+      ],
+      "hotel": "Millennium CDG Paris",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 4,
+      "title": "Brussels Mini Europe to Netherlands",
+      "description": "Drive to Brussels. Entry to Mini Europe, Grand Place, Mannekin Pis. Continue to Netherlands hotel.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Mini Europe",
+        "Grand Place"
+      ],
+      "hotel": "Van der Valk Netherlands",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 5,
+      "title": "Amsterdam Canal Cruise, Windmills to Germany",
+      "description": "Keukenhof tulip gardens (or traditional fishing village & windmills) and Amsterdam canal cruise. Drive to Heidelberg Germany.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Amsterdam Canal Cruise",
+        "Windmills Village"
+      ],
+      "hotel": "Elaya Hotel Germany",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 6,
+      "title": "Heidelberg, Titisee Black Forest to Switzerland",
+      "description": "Heidelberg Altstadt tour, Church of Holy Spirit, drive to Titisee Black Forest for cuckoo clock demo. Drive to Switzerland.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Heidelberg Altstadt",
+        "Titisee Black Forest"
+      ],
+      "hotel": "Radisson Central Switzerland",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 7,
+      "title": "Rhine Falls Boat Ride & Jungfraujoch Top of Europe",
+      "description": "Rhine Falls boat ride in Schaffhausen and excursion to Jungfraujoch Top of Europe.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Rhine Falls Boat Ride",
+        "Jungfraujoch Top of Europe"
+      ],
+      "hotel": "Radisson Central Switzerland",
+      "transfers": "Coach & Train"
+    },
+    {
+      "dayNumber": 8,
+      "title": "Mt. Titlis Cable Car, Lucerne & Lindt Chocolate",
+      "description": "Mt Titlis revolving cable car, Titlis Cliff Walk, Lucerne orientation, and Zurich Lindt Home of Chocolate.",
+      "meals": [
+        "Breakfast",
+        "Lunch",
+        "Dinner"
+      ],
+      "activities": [
+        "Mt Titlis Cable Car",
+        "Lucerne Tour",
+        "Lindt Chocolate"
+      ],
+      "hotel": "Radisson Central Switzerland",
+      "transfers": "Coach Transfer"
+    },
+    {
+      "dayNumber": 9,
+      "title": "Zurich ZRH Airport Departure",
+      "description": "Check out and coach drop to Zurich ZRH Airport by 09:00 AM.",
+      "meals": [
+        "Breakfast"
+      ],
+      "activities": [
+        "Airport Drop"
+      ],
+      "hotel": "N/A",
+      "transfers": "Coach Transfer"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is the package price?",
+      "answer": "Price is EUR 2650 (~\u20b92,43,000 INR) per adult on double sharing (increased by EUR 50 / ~\u20b95,000 from flyer rate EUR 2600)."
+    }
+  ]
 }
 
 ];
