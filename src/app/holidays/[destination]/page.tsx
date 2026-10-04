@@ -286,6 +286,83 @@ export default function DestinationListingPage({ params }: { params: { destinati
           defaultDestinationSlug={rawSlug}
         />
       </Suspense>
+
+      {/* Server-Side Rendered Crawlable HTML Section for Googlebot Indexing & AI Search */}
+      <section className="bg-slate-100 py-12 border-t border-slate-200 text-slate-800">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <header className="mb-8">
+            <h1 className="text-2xl sm:text-3xl font-black text-slate-950 mb-2">
+              {destName} Tour Packages 2026: Customized Holiday & Travel Guide
+            </h1>
+            <p className="text-xs sm:text-sm text-slate-600 max-w-4xl leading-relaxed">
+              Plan your dream vacation to {destName} with Trip Customizer. Our handcrafted {destName} holiday packages include 4-star deluxe hotel stays, daily breakfast & dinner, private AC airport transfers, guided sightseeing tours, and 24x7 travel desk support.
+            </p>
+          </header>
+
+          {/* Pricing Table for Featured Snippets */}
+          <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 mb-8 overflow-x-auto">
+            <h2 className="text-lg font-bold text-slate-950 mb-4">
+              Best Selling {destName} Tour Packages & Starting Price List 2026
+            </h2>
+            <table className="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr className="bg-slate-50 border-b border-slate-200 text-slate-700 font-extrabold uppercase tracking-wider">
+                  <th className="p-3">Package Name</th>
+                  <th className="p-3">Duration</th>
+                  <th className="p-3">Hotel Category</th>
+                  <th className="p-3">Starting Price</th>
+                  <th className="p-3">Inclusions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 font-medium">
+                {displayPackages.map((p) => (
+                  <tr key={p.id} className="hover:bg-slate-50/80 transition-colors">
+                    <td className="p-3 font-bold text-slate-900">{p.name}</td>
+                    <td className="p-3 whitespace-nowrap">{p.durationDays}D / {p.durationNights}N</td>
+                    <td className="p-3 whitespace-nowrap">{p.hotelCategory || '4-Star Deluxe'}</td>
+                    <td className="p-3 font-extrabold text-emerald-600 whitespace-nowrap">₹{(p.discountPrice || p.startingPrice).toLocaleString('en-IN')}</td>
+                    <td className="p-3">{p.inclusions ? p.inclusions.slice(0, 3).join(', ') : 'Hotels, Breakfast, Cabs'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Travel Guide & FAQs */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs sm:text-sm">
+            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-3">
+              <h2 className="text-base font-bold text-slate-950">
+                Key Highlights & Sightseeing in {destName}
+              </h2>
+              <p className="text-slate-600 leading-relaxed">
+                Whether you are traveling for a romantic honeymoon, a family vacation, or a spiritual pilgrimage, {destName} offers iconic landmarks, cultural heritage, and scenic landscapes. Customize your daily itinerary with our senior travel desk.
+              </p>
+              <ul className="list-disc pl-5 space-y-1 text-slate-700 font-medium">
+                <li>Customized day-by-day itineraries tailored to your budget</li>
+                <li>Private AC cabs for airport transfers and local sightseeing</li>
+                <li>Flexible booking policy with 5% GST tax compliance invoice</li>
+                <li>24/7 dedicated travel manager support throughout the tour</li>
+              </ul>
+            </div>
+
+            <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-3">
+              <h2 className="text-base font-bold text-slate-950">
+                Frequently Asked Questions (FAQs) - {destName} Travel
+              </h2>
+              <div className="space-y-3">
+                <div>
+                  <h3 className="font-bold text-slate-900">What is the best time to visit {destName}?</h3>
+                  <p className="text-slate-600 text-xs mt-0.5">The peak travel season is during pleasant weather months. Contact our desk for month-by-month climate recommendations.</p>
+                </div>
+                <div className="border-t border-slate-100 pt-2">
+                  <h3 className="font-bold text-slate-900">Are flights and meals included in {destName} packages?</h3>
+                  <p className="text-slate-600 text-xs mt-0.5">Yes, all packages offer customizable options including round-trip flight bookings, daily breakfast, and dinner buffet options.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

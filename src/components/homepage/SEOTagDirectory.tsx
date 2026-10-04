@@ -146,8 +146,12 @@ export const SEOTagDirectory: React.FC = () => {
           <div className="lg:col-span-8 flex flex-wrap gap-3 pt-1">
             {categories[activeTab].tags.map((tag, idx) => {
               const isFlight = tag.toLowerCase().includes('flights');
-              const searchKeyword = tag.replace(/ (packages|tour|yatra|tourism|ghats|heritage|palaces|slopes)/i, '').trim();
-              const targetUrl = isFlight ? '/flights' : `/holidays?search=${encodeURIComponent(searchKeyword)}`;
+              const cleanSlug = tag
+                .toLowerCase()
+                .replace(/ (packages|package|tour|yatra|tourism|ghats|heritage|palaces|slopes|journey in india)/g, '')
+                .trim()
+                .replace(/\s+/g, '-');
+              const targetUrl = isFlight ? '/flights' : `/holidays/${cleanSlug}`;
 
               return (
                 <Link
