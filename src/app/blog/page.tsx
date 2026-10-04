@@ -8,6 +8,15 @@ import { BookOpen, User, Calendar, ArrowRight } from 'lucide-react';
 export default function BlogHubPage() {
   const blogs = [
     {
+      slug: 'top-10-international-tour-packages-under-25k-2026',
+      title: 'Top 10 Best International Tour Packages Under ₹25,000 (Visa-Free for Indians 2026) ✈️🌴',
+      category: '🔥 Viral 2026 Hotspot',
+      author: 'Senior Travel Desk',
+      date: 'Oct 04, 2026',
+      image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop',
+      summary: 'Explore 10 foreign destinations under ₹25,000! Thailand, Bali, Vietnam, Malaysia, Dubai, Baku Azerbaijan & Sri Lanka with 4-star hotels, flights & 10-min quote desk.',
+    },
+    {
       slug: 'top-10-best-winter-destinations-2026',
       title: 'Top 10 Best Winter Holiday Destinations 2026: Kashmir, Dubai, Vietnam, Bali & Manali ❄️🌴',
       category: '❄️ Winter Special 2026',

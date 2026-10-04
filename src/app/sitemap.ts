@@ -74,6 +74,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/blog/top-10-international-tour-packages-under-25k-2026`,
+      lastModified: currentDate,
+      changeFrequency: 'daily',
+      priority: 0.99,
+    },
+    {
       url: `${baseUrl}/blog/top-10-best-winter-destinations-2026`,
       lastModified: currentDate,
       changeFrequency: 'daily',
