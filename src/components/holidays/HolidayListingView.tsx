@@ -59,6 +59,15 @@ export function HolidayListingView({
   const [searchTerm, setSearchTerm] = useState('');
 
   const [selectedCategory, setSelectedCategory] = useState(defaultCategory);
+
+  const dynamicTitle =
+    selectedCategory === 'INDIA'
+      ? 'India Tour Packages'
+      : selectedCategory === 'INTERNATIONAL'
+        ? 'International Tour Packages'
+        : defaultDestinationSlug
+          ? title
+          : (defaultCategory === 'ALL' && title ? title : 'All Tour Packages');
   const [selectedRegion, setSelectedRegion] = useState(defaultRegion);
   const [selectedTheme, setSelectedTheme] = useState('ALL');
   const [selectedHotelCategory, setSelectedHotelCategory] = useState('ALL');
@@ -526,7 +535,7 @@ export function HolidayListingView({
               <span>{badgeText}</span>
             </span>
             <h1 className="text-2xl sm:text-4xl font-black tracking-tight mb-2">
-              {title}
+              {dynamicTitle}
             </h1>
             <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
               {subtitle}
