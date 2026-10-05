@@ -192,7 +192,10 @@ export default function HotelSearchPage() {
             <h3 className="font-black text-base text-slate-900 mb-1">{selectedHotel.name}</h3>
             <p className="text-xs text-slate-500 mb-4">{selectedHotel.roomType} • {formatCurrency(selectedHotel.totalPrice)} / night total</p>
 
-            <Link href="/booking/checkout" className="block">
+            <Link
+              href={`/booking/checkout?title=${encodeURIComponent(`${selectedHotel.name} - ${selectedHotel.roomType}`)}&price=${selectedHotel.totalPrice}&dest=${encodeURIComponent(selectedHotel.city)}&pax=2`}
+              className="block"
+            >
               <Button variant="accent" size="lg" className="w-full font-black py-3 text-slate-950 text-xs">
                 PROCEED TO GUEST DETAILS →
               </Button>

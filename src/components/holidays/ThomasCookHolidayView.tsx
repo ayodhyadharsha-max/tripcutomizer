@@ -71,7 +71,7 @@ export function tripcustomizerHolidayView() {
   // State for Specials Banner Slide
   const [specialsSlide, setSpecialsSlide] = useState(0);
 
-  // Filter view toggle (Show all 50+ packages with filters vs tripcustomizer homepage layout)
+  // Filter view toggle (Show all 5,500+ packages with filters vs tripcustomizer homepage layout)
   const [activeTab, setActiveTab] = useState<'HOME' | 'ALL_PACKAGES'>('HOME');
 
   // FAQ Active Accordion
@@ -301,7 +301,7 @@ export function tripcustomizerHolidayView() {
       <div>
         <div className="bg-slate-900 text-white py-3 border-b border-slate-800">
           <Container className="flex items-center justify-between text-xs">
-            <span className="font-bold text-slate-300">Showing All 50+ Pan-India & Global Packages with Filters</span>
+            <span className="font-bold text-slate-300">Showing All 5,500+ Pan-India & Global Packages with Filters</span>
             <button
               onClick={() => setActiveTab('HOME')}
               className="bg-brand-600 hover:bg-brand-500 text-white px-3 py-1 rounded-full font-bold transition-all"
@@ -313,8 +313,8 @@ export function tripcustomizerHolidayView() {
         <HolidayListingView
           initialPackages={getAllCatalogPackages()}
           title="Holiday Tour Packages & Destinations"
-          subtitle="Discover 50+ curated international and domestic India tour itineraries with flights, luxury hotels & private transfers."
-          badgeText="50+ Verified Tour Packages"
+          subtitle="Discover 5,500+ curated international and domestic India tour itineraries with flights, luxury hotels & private transfers."
+          badgeText="5,500+ Verified Tour Packages"
           defaultCategory="ALL"
           defaultRegion="ALL"
         />
@@ -346,7 +346,7 @@ export function tripcustomizerHolidayView() {
             Perfect Holidays, Crafted Just for You
           </h1>
           <p className="text-slate-200 text-xs sm:text-lg font-medium mb-6 sm:mb-8 drop-shadow-sm">
-            Explore 50+ curated tour packages across India & worldwide destinations
+            Explore 5,500+ curated tour packages across India & worldwide destinations
           </p>
 
           {/* Large Search Bar */}
@@ -685,7 +685,7 @@ export function tripcustomizerHolidayView() {
               className="hidden sm:flex items-center space-x-1.5 bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold text-xs px-4 py-2 rounded-xl transition-all"
             >
               <SlidersHorizontal className="w-4 h-4" />
-              <span>Browse All 50+ Packages with Filters →</span>
+              <span>Browse All 5,500+ Packages with Filters →</span>
             </button>
           </div>
 
@@ -1302,13 +1302,13 @@ export function tripcustomizerHolidayView() {
           </div>
         </div>
 
-        {/* SECTION 15: EXPLORE ALL 50+ PACKAGES WITH FILTERS BANNER */}
+        {/* SECTION 15: EXPLORE ALL 5,500+ PACKAGES WITH FILTERS BANNER */}
         <div className="bg-gradient-to-r from-brand-900 via-brand-800 to-slate-900 text-white rounded-3xl p-6 sm:p-10 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center sm:text-left">
             <span className="bg-accent-400/20 text-accent-400 border border-accent-400/30 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full inline-block">
               COMPLETE TOUR DIRECTORY
             </span>
-            <h3 className="text-xl sm:text-4xl font-black">Looking for all 50+ Packages & Filters?</h3>
+            <h3 className="text-xl sm:text-4xl font-black">Looking for all 5,500+ Packages & Filters?</h3>
             <p className="text-slate-300 text-xs sm:text-sm max-w-xl">
               Filter packages by price, hotel star rating, duration, and theme using our complete interactive sidebar filter.
             </p>
@@ -1318,7 +1318,7 @@ export function tripcustomizerHolidayView() {
             onClick={() => setActiveTab('ALL_PACKAGES')}
             className="w-full sm:w-auto bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs sm:text-sm px-6 py-3.5 sm:px-8 sm:py-4 rounded-2xl shadow-xl hover:scale-105 transition-all shrink-0"
           >
-            BROWSE ALL 50+ PACKAGES →
+            BROWSE ALL 5,500+ PACKAGES →
           </button>
         </div>
       </Container>
@@ -1331,7 +1331,7 @@ export function tripcustomizerHolidayView() {
         </a>
         <button onClick={() => setActiveTab('ALL_PACKAGES')} className="flex items-center space-x-1 text-[11px] font-extrabold text-white bg-brand-700 hover:bg-brand-800 px-3 py-2 rounded-full shadow-md shrink-0">
           <SlidersHorizontal className="w-3.5 h-3.5" />
-          <span>50+ Packages</span>
+          <span>5,500+ Packages</span>
         </button>
         <Link href="/customize-trip" className="flex items-center space-x-1 text-[11px] font-black text-slate-950 bg-amber-400 hover:bg-amber-300 px-3 py-2 rounded-full shadow-sm shrink-0">
           <Sparkles className="w-3.5 h-3.5" />

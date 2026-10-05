@@ -105,7 +105,7 @@ export default function TravelInsurancePage() {
                 <span className="text-xs text-slate-500 font-medium"> total premium for {durationDays} Days</span>
               </div>
 
-              <Link href="/booking/checkout">
+              <Link href={`/booking/checkout?title=${encodeURIComponent('Overseas Travel Insurance Policy ($50,000 Cover)')}&price=${calculatedQuote}&dest=${encodeURIComponent(destinationRegion)}&pax=1`}>
                 <Button variant="primary" size="md" className="font-bold px-6 py-2.5 text-xs">
                   BUY POLICY INSTANTLY →
                 </Button>

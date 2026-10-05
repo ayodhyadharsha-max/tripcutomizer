@@ -11,11 +11,15 @@ import { CheckCircle2, ShieldCheck, ChevronRight, User, Tag, Loader2 } from 'luc
 import { useAuth } from '@/context/AuthContext';
 import { cloudStore, CustomerBooking } from '@/lib/cloudStore';
 import { sendWeb3FormLead } from '@/lib/web3forms';
-import { DEMO_PACKAGES } from '@/data/packagesData';
+import { HolidayPackage } from '@/data/packagesData';
+import { findCatalogPackage, getAllCatalogPackages } from '@/data/packageCatalog';
 
 export default function BookingCheckoutPage() {
   const { user, login } = useAuth();
   const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
+
+  const [hasBookingContext, setHasBookingContext] = useState<boolean>(true);
+  const [isClientReady, setIsClientReady] = useState<boolean>(false);
 
   // Dynamic Selected Package Info
   const [pkgInfo, setPkgInfo] = useState({
@@ -36,19 +40,31 @@ export default function BookingCheckoutPage() {
       const paxStr = params.get('pax');
       const dest = params.get('dest') || params.get('location');
 
-      let matched = DEMO_PACKAGES.find((p) => {
-        if (!slug) return false;
-        const s = slug.toLowerCase();
-        return (
-          p.slug.toLowerCase() === s ||
-          p.destinationSlug.toLowerCase() === s ||
-          p.destination.toLowerCase().includes(s) ||
-          p.name.toLowerCase().includes(s)
-        );
-      });
+      if (!slug && !title && !priceStr && !dest) {
+        setHasBookingContext(false);
+        setIsClientReady(true);
+        return;
+      }
+
+      let matched: HolidayPackage | undefined = undefined;
+      if (slug) {
+        matched = findCatalogPackage(slug);
+        if (!matched && dest) {
+          matched = findCatalogPackage(dest, slug);
+        }
+        if (!matched) {
+          const s = slug.toLowerCase();
+          matched = getAllCatalogPackages().find((p) =>
+            p.slug.toLowerCase() === s ||
+            p.destinationSlug.toLowerCase() === s ||
+            p.destination.toLowerCase().includes(s) ||
+            p.name.toLowerCase().includes(s)
+          );
+        }
+      }
 
       if (!matched && title) {
-        matched = DEMO_PACKAGES.find((p) => p.name.toLowerCase().includes(title.toLowerCase()));
+        matched = getAllCatalogPackages().find((p) => p.name.toLowerCase().includes(title.toLowerCase()));
       }
 
       const tierParam = params.get('tier') || 'deluxe';
@@ -62,6 +78,7 @@ export default function BookingCheckoutPage() {
           pricePerPerson: Math.round(matched.startingPrice * tierMultiplier),
           travelersCount: paxStr ? Math.max(1, parseInt(paxStr, 10)) : 2,
         });
+        setHasBookingContext(true);
       } else if (title || priceStr) {
         setPkgInfo({
           name: title || 'Customized Holiday Package',
@@ -70,7 +87,12 @@ export default function BookingCheckoutPage() {
           pricePerPerson: priceStr ? parseInt(priceStr, 10) : 14500,
           travelersCount: paxStr ? Math.max(1, parseInt(paxStr, 10)) : 2,
         });
+        setHasBookingContext(true);
+      } else {
+        setHasBookingContext(false);
       }
+
+      setIsClientReady(true);
 
       const urlCoupon = params.get('coupon');
       const urlDiscount = params.get('discount');
@@ -422,6 +444,36 @@ export default function BookingCheckoutPage() {
       alert('Order Creation Info: Unable to reach payment gateway. Please select UPI QR Code or WhatsApp booking to complete instantly.');
     }
   };
+
+  if (isClientReady && !hasBookingContext) {
+    return (
+      <div className="bg-slate-50 min-h-screen py-16">
+        <Container className="max-w-2xl text-center">
+          <Card className="p-8 sm:p-12 bg-white rounded-3xl shadow-xl border border-slate-200">
+            <div className="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-5">
+              <Tag className="w-8 h-8 text-amber-600" />
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 mb-2">No Tour Package Selected</h1>
+            <p className="text-slate-500 text-sm mb-8 max-w-md mx-auto">
+              You haven&apos;t selected a holiday package or travel itinerary yet. Please explore our 5,500+ tour packages or customize a trip to proceed to checkout.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+              <Link href="/holidays">
+                <Button variant="primary" size="lg" className="w-full sm:w-auto font-black px-6">
+                  Explore 5,500+ Tour Packages →
+                </Button>
+              </Link>
+              <Link href="/customize-trip">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto font-bold px-6 border-slate-300">
+                  Build Custom Itinerary
+                </Button>
+              </Link>
+            </div>
+          </Card>
+        </Container>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-slate-50 min-h-screen py-10">

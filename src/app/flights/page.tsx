@@ -232,7 +232,10 @@ export default function FlightSearchPage() {
             <h3 className="font-black text-base text-slate-900 mb-1">{selectedFlight.airline} ({selectedFlight.flightNumber})</h3>
             <p className="text-xs text-slate-500 mb-4">{selectedFlight.fromCity} to {selectedFlight.toCity} • Total Fare: {formatCurrency(selectedFlight.price)}</p>
 
-            <Link href="/booking/checkout" className="block">
+            <Link
+              href={`/booking/checkout?title=${encodeURIComponent(`${selectedFlight.airline} (${selectedFlight.flightNumber}) - ${selectedFlight.fromCity} to ${selectedFlight.toCity}`)}&price=${selectedFlight.price}&dest=${encodeURIComponent(selectedFlight.toCity)}&pax=1`}
+              className="block"
+            >
               <Button variant="accent" size="lg" className="w-full font-black py-3 text-slate-950 text-xs">
                 PROCEED TO TRAVELLER DETAILS →
               </Button>
