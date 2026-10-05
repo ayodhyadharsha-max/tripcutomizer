@@ -106,7 +106,7 @@ export default function BookingSuccessPage() {
               <span className="text-xs font-extrabold uppercase tracking-widest text-emerald-800">Payment Paid & Booking Confirmed</span>
               <h1 className="text-2xl md:text-3xl font-black text-slate-900 mt-1">Thank You, {customerName}!</h1>
               <p className="text-xs text-slate-600 mt-1 font-medium">
-                Your holiday package booking reference is <span className="font-extrabold text-brand-700">{bookingRef}</span>. A confirmation voucher has been logged in the central database and emailed to tripcustomizer@gmail.com.
+                Your holiday package booking reference is <span className="font-extrabold text-brand-700">{bookingRef}</span>. A confirmation voucher has been logged in the central database and dispatched to your email.
               </p>
             </div>
           </div>
@@ -200,7 +200,7 @@ export default function BookingSuccessPage() {
             <ul className="text-slate-600 space-y-1 list-disc list-inside">
               <li>Our dedicated holiday manager will call you within 2 hours to finalize hotel preferences and custom flight add-ons.</li>
               <li>Your official detailed PDF itinerary and hotel booking vouchers will be dispatched to <strong className="text-slate-900">{customerEmail}</strong>.</li>
-              <li>For immediate assistance or changes, reach us anytime on <strong className="text-slate-900">+91 7408763401</strong> or email <strong className="text-slate-900">tripcustomizer@gmail.com</strong>.</li>
+              <li>For immediate assistance or changes, reach us anytime on <strong className="text-slate-900">+91 7408763401</strong> or email <strong className="text-slate-900">help@tripcustomizer.com</strong>.</li>
             </ul>
           </div>
 

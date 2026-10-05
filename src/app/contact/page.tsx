@@ -69,10 +69,10 @@ export default function ContactPage() {
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-slate-900 text-sm">Toll-Free Helpline</h3>
+                  <h3 className="font-bold text-slate-900 text-sm">Customer Support Helpline</h3>
                   <p className="text-xs text-slate-500 font-medium mt-0.5">Mon - Sun (9:00 AM - 9:00 PM)</p>
-                  <a href="tel:18002099100" className="text-brand-600 font-black text-base hover:underline block mt-1">
-                    1800-2099-100
+                  <a href="tel:+917408763401" className="text-brand-600 font-black text-base hover:underline block mt-1">
+                    +91 7408763401
                   </a>
                 </div>
               </div>
@@ -102,8 +102,8 @@ export default function ContactPage() {
                 <div>
                   <h3 className="font-bold text-slate-900 text-sm">Official Email Support</h3>
                   <p className="text-xs text-slate-500 font-medium mt-0.5">Response within 2 hours</p>
-                  <a href="mailto:support@tripcustomizer.com" className="text-slate-800 font-bold text-xs hover:underline block mt-1">
-                    support@tripcustomizer.com
+                  <a href="mailto:help@tripcustomizer.com" className="text-slate-800 font-bold text-xs hover:underline block mt-1">
+                    help@tripcustomizer.com
                   </a>
                 </div>
               </div>

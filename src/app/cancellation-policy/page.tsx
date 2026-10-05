@@ -40,7 +40,7 @@ export default function CancellationPolicyPage() {
               <span>1. Traveler-Initiated Cancellation Slabs</span>
             </h2>
             <p>
-              If you wish to cancel your tour package booking, written notification must be sent to our official email address at <strong>tripcustomizer@gmail.com</strong>.
+              If you wish to cancel your tour package booking, written notification must be sent to our official email address at <strong>help@tripcustomizer.com</strong>.
               Cancellation charges are calculated based on the number of days prior to departure:
             </p>
             <div className="overflow-x-auto">
@@ -123,8 +123,8 @@ export default function CancellationPolicyPage() {
                 <Mail className="w-6 h-6 text-brand-600" />
                 <div>
                   <span className="text-[10px] text-slate-400 font-bold uppercase block">Email Request</span>
-                  <a href="mailto:tripcustomizer@gmail.com" className="font-bold text-slate-900 hover:text-brand-600">
-                    tripcustomizer@gmail.com
+                  <a href="mailto:help@tripcustomizer.com" className="font-bold text-slate-900 hover:text-brand-600">
+                    help@tripcustomizer.com
                   </a>
                 </div>
               </div>

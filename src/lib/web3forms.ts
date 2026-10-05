@@ -62,7 +62,7 @@ ${payload.message ? `Additional Notes: ${payload.message}` : ''}
         from_name: 'tripcustomizer Direct Lead Alert',
         subject: formattedSubject,
         name: customerName,
-        email: payload.email || 'no-reply@tripcustomizer.com',
+        email: payload.email || 'help@tripcustomizer.com',
         phone: payload.phone || '',
         destination: destinationName,
         travel_date: payload.travel_date || payload.travelDates || 'Flexible',

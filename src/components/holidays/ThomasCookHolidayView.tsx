@@ -1325,7 +1325,7 @@ export function tripcustomizerHolidayView() {
 
       {/* Floating Sticky Mobile Quick Action Navigation Bar */}
       <div className="fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-slate-200 px-3 py-2.5 z-40 flex sm:hidden items-center justify-between shadow-2xl gap-1.5">
-        <a href="tel:18002099100" className="flex items-center space-x-1 text-[11px] font-extrabold text-slate-800 bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-full border border-slate-200 shrink-0">
+        <a href="tel:+917408763401" className="flex items-center space-x-1 text-[11px] font-extrabold text-slate-800 bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-full border border-slate-200 shrink-0">
           <PhoneCall className="w-3.5 h-3.5 text-brand-600" />
           <span>Call Us</span>
         </a>

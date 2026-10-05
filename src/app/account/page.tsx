@@ -905,8 +905,8 @@ export default function CustomerAccountPage() {
                 <span className="font-extrabold text-slate-400 uppercase text-[10px] block">Issued By (Service Provider)</span>
                 <p className="font-black text-slate-900 text-sm">Trip Customizer Travels Pvt. Ltd.</p>
                 <p className="text-slate-600">GSTIN: 07AAAAA0000A1Z5</p>
-                <p className="text-slate-600">Toll Free: 1800-2099-100</p>
-                <p className="text-slate-600">Support: support@tripcustomizer.com</p>
+                <p className="text-slate-600">Phone: +91 7408763401</p>
+                <p className="text-slate-600">Support: help@tripcustomizer.com</p>
               </div>
               <div className="space-y-1 sm:border-l sm:border-slate-200 sm:pl-4">
                 <span className="font-extrabold text-slate-400 uppercase text-[10px] block">Billed To (Customer Details)</span>

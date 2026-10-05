@@ -125,8 +125,8 @@ export default function RefundPolicyPage() {
                 <Mail className="w-6 h-6 text-brand-600" />
                 <div>
                   <span className="text-[10px] text-slate-400 font-bold uppercase block">Email Support</span>
-                  <a href="mailto:tripcustomizer@gmail.com" className="font-bold text-slate-900 hover:text-brand-600">
-                    tripcustomizer@gmail.com
+                  <a href="mailto:help@tripcustomizer.com" className="font-bold text-slate-900 hover:text-brand-600">
+                    help@tripcustomizer.com
                   </a>
                 </div>
               </div>

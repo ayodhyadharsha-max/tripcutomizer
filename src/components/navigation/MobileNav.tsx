@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { X, ChevronRight, Phone, MessageCircle, MapPin, Compass, Plane, Hotel, Gift, Briefcase, User, Sparkles, Award, Building2, BookOpen } from 'lucide-react';
+import { X, ChevronRight, Phone, Mail, MessageCircle, MapPin, Compass, Plane, Hotel, Gift, Briefcase, User, Sparkles, Award, Building2, BookOpen } from 'lucide-react';
 import { Button } from '../ui/Button';
 
 interface MobileNavProps {
@@ -125,9 +125,13 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
 
         {/* Footer Support Info */}
         <div className="p-4 bg-slate-50 border-t border-slate-200 text-xs space-y-2">
-          <a href="tel:18002099100" className="flex items-center space-x-2 text-slate-700 font-semibold">
+          <a href="tel:+917408763401" className="flex items-center space-x-2 text-slate-700 font-semibold">
             <Phone className="w-4 h-4 text-accent-500" />
-            <span>1800-2099-100 (Toll Free)</span>
+            <span>+91 7408763401 (Call Support)</span>
+          </a>
+          <a href="mailto:help@tripcustomizer.com" className="flex items-center space-x-2 text-slate-700 font-semibold">
+            <Mail className="w-4 h-4 text-brand-600" />
+            <span>help@tripcustomizer.com</span>
           </a>
           <a href="https://wa.me/917408763401" target="_blank" rel="noreferrer" className="flex items-center space-x-2 text-emerald-700 font-semibold">
             <MessageCircle className="w-4 h-4 text-emerald-500" />

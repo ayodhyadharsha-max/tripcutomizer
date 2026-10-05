@@ -334,7 +334,7 @@ export default function RootLayout({
         areaServed: ['IN', 'US', 'AE', 'GB', 'CA', 'AU', 'SG'],
         availableLanguage: ['English', 'Hindi'],
       },
-      email: 'tripcustomizer@gmail.com',
+      email: 'help@tripcustomizer.com',
       sameAs: [
         'https://www.facebook.com/tripcustomizer',
         'https://www.instagram.com/tripcustomizer',
@@ -374,7 +374,7 @@ export default function RootLayout({
           name: 'How to contact Trip Customizer customer support directly?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'You can contact Trip Customizer 24x7 via WhatsApp or Phone at +91 7408763401, email at tripcustomizer@gmail.com, or visit our head office on Ram Path, Ayodhya.',
+            text: 'You can contact Trip Customizer 24x7 via WhatsApp or Phone at +91 7408763401, email at help@tripcustomizer.com, or visit our head office on Ram Path, Ayodhya.',
           },
         },
       ],

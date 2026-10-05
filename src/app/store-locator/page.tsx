@@ -55,7 +55,7 @@ export default function StoreLocatorPage() {
             </div>
             <h3 className="font-extrabold text-slate-900 text-base">24/7 Dedicated Support</h3>
             <p className="text-xs text-slate-500 leading-relaxed">
-              Speak directly with our travel experts via toll-free helpline or instant WhatsApp assistance.
+              Speak directly with our travel experts via helpline or instant WhatsApp assistance.
             </p>
             <Link href="/contact" className="inline-flex items-center gap-1 text-xs font-black text-amber-600 hover:underline pt-2">
               Contact Care <ArrowRight className="w-3.5 h-3.5" />
@@ -67,14 +67,14 @@ export default function StoreLocatorPage() {
         <Card className="p-8 bg-gradient-to-r from-slate-900 via-brand-950 to-slate-900 text-white rounded-3xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-2">
             <h3 className="text-xl font-black text-white">Need Personalized Assistance?</h3>
-            <p className="text-xs text-slate-300">Call Toll-Free: 1800-2099-100 (9 AM - 9 PM) or chat on WhatsApp</p>
+            <p className="text-xs text-slate-300">Call: +91 7408763401 (9 AM - 9 PM) or chat on WhatsApp</p>
           </div>
           <div className="flex items-center gap-3">
             <a
-              href="tel:18002099100"
+              href="tel:+917408763401"
               className="bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs px-5 py-3 rounded-2xl shadow-md cursor-pointer flex items-center gap-1.5"
             >
-              <Phone className="w-4 h-4" /> Call 1800-2099-100
+              <Phone className="w-4 h-4" /> Call +91 7408763401
             </a>
             <a
               href="https://wa.me/917408763401"

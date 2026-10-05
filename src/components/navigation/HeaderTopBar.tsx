@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Phone, MapPin, User, ChevronDown, MessageCircle, HelpCircle, LogOut, ShoppingBag, LogIn, FileText } from 'lucide-react';
+import { Phone, Mail, MapPin, User, ChevronDown, MessageCircle, HelpCircle, LogOut, ShoppingBag, LogIn, FileText } from 'lucide-react';
 import { Container } from '../ui/Container';
 import { useAuth } from '@/context/AuthContext';
 import { AuthModal } from '../modals/AuthModal';
@@ -27,17 +27,24 @@ export const HeaderTopBar: React.FC = () => {
       <div className="hidden lg:block bg-brand-800 text-slate-200 text-xs py-2 border-b border-brand-700/50">
         <Container className="flex justify-between items-center">
           {/* Left Links */}
-          <div className="flex items-center space-x-6">
-            <a href="tel:18002099100" className="flex items-center space-x-1.5 hover:text-accent-400 transition-colors">
+          <div className="flex items-center space-x-5">
+            <a href="tel:+917408763401" className="flex items-center space-x-1.5 hover:text-accent-400 transition-colors">
               <Phone className="w-3.5 h-3.5 text-accent-400" />
-              <span className="font-semibold tracking-wide">1800-2099-100</span>
-              <span className="hidden md:inline text-slate-400 font-normal">(Toll Free 9 AM - 9 PM)</span>
+              <span className="font-semibold tracking-wide">+91 7408763401</span>
+              <span className="hidden xl:inline text-slate-400 font-normal">(9 AM - 9 PM)</span>
+            </a>
+            <a
+              href="mailto:help@tripcustomizer.com"
+              className="hidden sm:flex items-center space-x-1.5 hover:text-accent-400 transition-colors"
+            >
+              <Mail className="w-3.5 h-3.5 text-amber-400" />
+              <span>help@tripcustomizer.com</span>
             </a>
             <a
               href="https://wa.me/917408763401"
               target="_blank"
               rel="noreferrer"
-              className="hidden sm:flex items-center space-x-1 hover:text-emerald-400 transition-colors"
+              className="hidden md:flex items-center space-x-1 hover:text-emerald-400 transition-colors"
             >
               <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
               <span>WhatsApp Us</span>
