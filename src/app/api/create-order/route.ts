@@ -7,8 +7,8 @@ export async function POST(req: Request) {
     const body = await req.json().catch(() => ({}));
     const { amount, currency = 'INR', receipt, packageName, customerName, customerEmail, customerPhone } = body;
 
-    const keyId = process.env.RAZORPAY_KEY_ID || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_test_TfNoGuhXf8yXWP';
-    const keySecret = process.env.RAZORPAY_KEY_SECRET || 'gvYHUjt68ufGQTNdLF51wkva';
+    const keyId = process.env.RAZORPAY_KEY_ID || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_live_TkIZmrFqBluPJN';
+    const keySecret = process.env.RAZORPAY_KEY_SECRET || 'LR6tbNSU6wozUm97BftZNDmK';
 
     // Convert to paise if amount is provided in rupees
     let amountInPaise = amount;
@@ -102,8 +102,8 @@ export async function POST(req: Request) {
       orderId: fallbackId,
       amount: 1499900,
       currency: 'INR',
-      key_id: 'rzp_test_TfNoGuhXf8yXWP',
-      keyId: 'rzp_test_TfNoGuhXf8yXWP',
+      key_id: 'rzp_live_TkIZmrFqBluPJN',
+      keyId: 'rzp_live_TkIZmrFqBluPJN',
       receipt: `rcpt_${Date.now()}`,
       isFallback: true,
     });

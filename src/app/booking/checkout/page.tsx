@@ -287,7 +287,7 @@ export default function BookingCheckoutPage() {
       }
 
       const orderId = orderData.order_id || orderData.orderId;
-      const razorpayKeyId = orderData.key_id || orderData.keyId || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_test_TfNoGuhXf8yXWP';
+      const razorpayKeyId = orderData.key_id || orderData.keyId || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_live_TkIZmrFqBluPJN';
 
       // 2. Load Razorpay Web Checkout JS SDK dynamically
       const isSDKLoaded = await loadRazorpaySDK();

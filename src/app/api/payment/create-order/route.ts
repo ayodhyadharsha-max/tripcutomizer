@@ -7,8 +7,8 @@ export async function POST(req: Request) {
     const body = await req.json().catch(() => ({}));
     const { amount, currency = 'INR', receipt, packageName, customerName, customerEmail, customerPhone } = body;
 
-    const keyId = process.env.RAZORPAY_KEY_ID || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_test_TfNoGuhXf8yXWP';
-    const keySecret = process.env.RAZORPAY_KEY_SECRET || 'gvYHUjt68ufGQTNdLF51wkva';
+    const keyId = process.env.RAZORPAY_KEY_ID || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_live_TkIZmrFqBluPJN';
+    const keySecret = process.env.RAZORPAY_KEY_SECRET || 'LR6tbNSU6wozUm97BftZNDmK';
 
     let amountInPaise = amount;
     if (typeof amount === 'number' && amount < 100) {
