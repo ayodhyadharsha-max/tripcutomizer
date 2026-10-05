@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { Metadata } from 'next';
-import { DEMO_PACKAGES } from '@/data/packagesData';
+import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
 interface HoneymoonPageProps {
@@ -24,18 +24,24 @@ export async function generateMetadata({ params }: HoneymoonPageProps): Promise<
 
 export default function HoneymoonDestinationPage({ params }: HoneymoonPageProps) {
   const rawSlug = params.destination.toLowerCase().trim();
+  const isIndia = rawSlug === 'india';
+  const isIntl = rawSlug === 'international';
+  const allCatalog = getAllCatalogPackages();
 
-  // Filter packages matching destination or category
-  const matchedPackages = DEMO_PACKAGES.filter((p) => {
-    const dSlug = p.destinationSlug.toLowerCase();
-    const dest = p.destination.toLowerCase();
-    const name = p.name.toLowerCase();
-    const region = p.region.toLowerCase();
-    const country = p.country.toLowerCase();
+  // Filter packages matching destination or category with strict Honeymoon theme
+  const matchedPackages = allCatalog.filter((p) => {
+    // Strict honeymoon theme classification
+    if (!(p.theme || '').toLowerCase().includes('honeymoon')) return false;
 
     // Category match
-    if (rawSlug === 'international' && p.isInternational) return true;
-    if (rawSlug === 'india' && !p.isInternational) return true;
+    if (isIndia && !p.isInternational) return true;
+    if (isIntl && p.isInternational) return true;
+
+    const dSlug = (p.destinationSlug || '').toLowerCase();
+    const dest = (p.destination || '').toLowerCase();
+    const name = (p.name || '').toLowerCase();
+    const region = (p.region || '').toLowerCase();
+    const country = (p.country || '').toLowerCase();
 
     // Direct match
     if (
@@ -132,7 +138,12 @@ export default function HoneymoonDestinationPage({ params }: HoneymoonPageProps)
 
     if (
       rawSlug === 'europe' &&
-      (p.isInternational && (region.includes('europe') || country.includes('europe') || dest.includes('switzerland') || dest.includes('paris') || dest.includes('italy')))
+      (p.isInternational && (region.includes('europe') || country.includes('europe') || dest.includes('switzerland') || dest.includes('paris') || dest.includes('italy') || dest.includes('lucerne')))
+    ) return true;
+
+    if (
+      rawSlug === 'switzerland' &&
+      (p.isInternational && (dest.includes('switzerland') || dest.includes('lucerne') || dest.includes('zurich') || name.includes('swiss') || name.includes('switzerland')))
     ) return true;
 
     return false;
@@ -141,7 +152,8 @@ export default function HoneymoonDestinationPage({ params }: HoneymoonPageProps)
   // Fail-safe fallback: If specific slug match is empty, show relevant category packages so 0 packages is NEVER displayed
   const displayPackages = matchedPackages.length > 0
     ? matchedPackages
-    : DEMO_PACKAGES.filter((p) => {
+    : allCatalog.filter((p) => {
+        if (!(p.theme || '').toLowerCase().includes('honeymoon')) return false;
         const isIntlSlug = [
           'dubai', 'uae', 'bali', 'thailand', 'singapore', 'maldives', 'switzerland',
           'vietnam', 'japan', 'australia', 'azerbaijan', 'bhutan', 'sri-lanka', 'malaysia',
@@ -158,11 +170,13 @@ export default function HoneymoonDestinationPage({ params }: HoneymoonPageProps)
   return (
     <Suspense fallback={<div className="min-h-screen bg-slate-900 py-20 text-center text-white font-bold">Loading Honeymoon Packages...</div>}>
       <HolidayListingView
-        initialPackages={displayPackages}
+        initialPackages={displayPackages.slice(0, 12)}
         title={`${destName} Honeymoon Packages`}
         subtitle={`Romantic Couple Escapes in ${destName} with luxury resorts, candlelight dinners, private cabs & 24x7 honeymoon support.`}
         badgeText={`${destName} Couple Specials & Honeymoon Offers`}
-        defaultDestinationSlug={rawSlug}
+        defaultCategory={isIndia ? 'INDIA' : isIntl ? 'INTERNATIONAL' : 'ALL'}
+        defaultDestinationSlug={isIndia || isIntl ? undefined : rawSlug}
+        defaultTheme="Honeymoon"
       />
     </Suspense>
   );

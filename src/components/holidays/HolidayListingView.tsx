@@ -44,6 +44,7 @@ interface HolidayListingViewProps {
   defaultCategory?: string; // 'ALL' | 'INDIA' | 'INTERNATIONAL'
   defaultRegion?: string;
   defaultDestinationSlug?: string;
+  defaultTheme?: string;
 }
 
 export function HolidayListingView({
@@ -54,22 +55,43 @@ export function HolidayListingView({
   defaultCategory = 'ALL',
   defaultRegion = 'ALL',
   defaultDestinationSlug,
+  defaultTheme = 'ALL',
 }: HolidayListingViewProps) {
   // Filter States
   const [searchTerm, setSearchTerm] = useState('');
 
   const [selectedCategory, setSelectedCategory] = useState(defaultCategory);
 
-  const dynamicTitle =
-    selectedCategory === 'INDIA'
-      ? 'India Tour Packages'
-      : selectedCategory === 'INTERNATIONAL'
-        ? 'International Tour Packages'
-        : defaultDestinationSlug
-          ? title
-          : (defaultCategory === 'ALL' && title ? title : 'All Tour Packages');
+  const isHoneymoon =
+    defaultTheme.toLowerCase() === 'honeymoon' ||
+    (typeof title === 'string' && title.toLowerCase().includes('honeymoon'));
+
+  const isCategoryPage =
+    (defaultCategory === 'INDIA' || defaultCategory === 'INTERNATIONAL') &&
+    !defaultDestinationSlug;
+
+  const isHoneymoonCategoryPage =
+    isHoneymoon &&
+    (defaultCategory === 'INDIA' || defaultCategory === 'INTERNATIONAL') &&
+    !defaultDestinationSlug;
+
+  const dynamicTitle = isHoneymoon
+    ? (selectedCategory === 'INDIA'
+        ? (title.toLowerCase().includes('india') ? title : 'India Honeymoon Packages')
+        : selectedCategory === 'INTERNATIONAL'
+          ? (title.toLowerCase().includes('international') ? title : 'International Honeymoon Packages')
+          : defaultDestinationSlug
+            ? title
+            : 'All Honeymoon Packages')
+    : (selectedCategory === 'INDIA'
+        ? 'India Tour Packages'
+        : selectedCategory === 'INTERNATIONAL'
+          ? 'International Tour Packages'
+          : defaultDestinationSlug
+            ? title
+            : (defaultCategory === 'ALL' && title ? title : 'All Tour Packages'));
   const [selectedRegion, setSelectedRegion] = useState(defaultRegion);
-  const [selectedTheme, setSelectedTheme] = useState('ALL');
+  const [selectedTheme, setSelectedTheme] = useState(defaultTheme);
   const [selectedHotelCategory, setSelectedHotelCategory] = useState('ALL');
   const [selectedDuration, setSelectedDuration] = useState('ALL');
   const [maxPrice, setMaxPrice] = useState(500000);
@@ -87,7 +109,7 @@ export function HolidayListingView({
     setSearchTerm('');
     setSelectedCategory(defaultCategory || 'ALL');
     setSelectedRegion(defaultRegion || 'ALL');
-    setSelectedTheme('ALL');
+    setSelectedTheme(defaultTheme || 'ALL');
     setSelectedHotelCategory('ALL');
     setSelectedDuration('ALL');
     setMaxPrice(500000);
@@ -100,12 +122,12 @@ export function HolidayListingView({
       searchTerm.trim() !== '' ||
       selectedCategory !== defaultCategory ||
       (selectedRegion !== defaultRegion && selectedRegion !== 'ALL') ||
-      selectedTheme !== 'ALL' ||
+      selectedTheme !== defaultTheme ||
       selectedHotelCategory !== 'ALL' ||
       selectedDuration !== 'ALL' ||
       maxPrice < 500000
     );
-  }, [searchTerm, selectedCategory, defaultCategory, selectedRegion, defaultRegion, selectedTheme, selectedHotelCategory, selectedDuration, maxPrice]);
+  }, [searchTerm, selectedCategory, defaultCategory, selectedRegion, defaultRegion, selectedTheme, defaultTheme, selectedHotelCategory, selectedDuration, maxPrice]);
 
   const PAGE_SIZE = 24;
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
@@ -118,18 +140,13 @@ export function HolidayListingView({
     const rawQuery = searchTerm.toLowerCase().trim();
     const allCatalog = getAllCatalogPackages();
 
-    // For category pages (India / International), derive sourcePool from allCatalog directly
-    const isCategoryPage =
-      (defaultCategory === 'INDIA' || defaultCategory === 'INTERNATIONAL') &&
-      !defaultDestinationSlug;
-
     // Guard against routes silently locking to old 50/80/130 DEMO_PACKAGES subset
     const isOldDemoSubset =
       Boolean(initialPackages) &&
       (initialPackages.length === 50 || initialPackages.length === 80 || initialPackages.length === 130) &&
       !defaultDestinationSlug;
 
-    const sourcePool = isCategoryPage || isFilterModified || isOldDemoSubset
+    const sourcePool = isCategoryPage || isHoneymoonCategoryPage || isFilterModified || isOldDemoSubset
       ? allCatalog
       : (initialPackages && initialPackages.length > 0 ? initialPackages : allCatalog);
 
@@ -286,7 +303,7 @@ export function HolidayListingView({
         if (selTheme === 'spiritual') {
           matchesTheme = pkgTheme.includes('spiritual') || pkgTheme.includes('yatra') || pkgHighlights.includes('darshan') || pkgHighlights.includes('temple') || pkgName.includes('yatra') || pkgName.includes('mandir');
         } else if (selTheme === 'honeymoon') {
-          matchesTheme = pkgTheme.includes('honeymoon') || pkgTheme.includes('romantic') || pkgHighlights.includes('couple') || pkgName.includes('romantic') || pkgName.includes('honeymoon') || pkgDest.includes('bali') || pkgDest.includes('maldives');
+          matchesTheme = pkgTheme.includes('honeymoon');
         } else if (selTheme === 'beach') {
           matchesTheme = pkgTheme.includes('beach') || pkgTheme.includes('coast') || pkgHighlights.includes('beach') || pkgHighlights.includes('island');
         } else if (selTheme === 'luxury') {
@@ -568,7 +585,7 @@ export function HolidayListingView({
                   : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
               }`}
             >
-              🔥 All ({initialPackages.length > 0 ? initialPackages.length : (defaultCategory === 'INDIA' ? 3500 : defaultCategory === 'INTERNATIONAL' ? 2080 : 5580)})
+              🔥 All ({isCategoryPage || isHoneymoonCategoryPage ? (defaultCategory === 'INDIA' && defaultTheme.toLowerCase() === 'honeymoon' ? 396 : defaultCategory === 'INTERNATIONAL' && defaultTheme.toLowerCase() === 'honeymoon' ? 230 : defaultCategory === 'INDIA' ? 3500 : defaultCategory === 'INTERNATIONAL' ? 2080 : 5580) : (initialPackages.length > 0 ? initialPackages.length : 5580)})
             </button>
             <button
               onClick={() => setSelectedCategory('INDIA')}
