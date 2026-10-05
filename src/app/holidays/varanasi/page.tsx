@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { DEMO_PACKAGES } from '@/data/packagesData';
+import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
 export const metadata: Metadata = {
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 };
 
 export default function VaranasiPage() {
-  const matchedPackages = DEMO_PACKAGES.filter(
+  const matchedPackages = getAllCatalogPackages().filter(
     (p) =>
       !p.isInternational &&
       (p.destinationSlug.toLowerCase().includes('varanasi') ||
@@ -87,7 +87,7 @@ export default function VaranasiPage() {
         title="Varanasi Luxury Ganga Aarti Ghat Tour Package"
         subtitle="Experience Shri Kashi Vishwanath Temple VIP Darshan, Reserved Ganga Aarti boat view, Morning Subah-e-Banaras & Sarnath."
         defaultDestinationSlug="varanasi"
-        initialPackages={matchedPackages.length > 0 ? matchedPackages : DEMO_PACKAGES.slice(0, 3)}
+        initialPackages={matchedPackages.length > 0 ? matchedPackages : getAllCatalogPackages().slice(0, 3)}
       />
     </>
   );

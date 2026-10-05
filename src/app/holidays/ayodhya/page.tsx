@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { DEMO_PACKAGES } from '@/data/packagesData';
+import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
 export const metadata: Metadata = {
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 };
 
 export default function AyodhyaPage() {
-  const matchedPackages = DEMO_PACKAGES.filter(
+  const matchedPackages = getAllCatalogPackages().filter(
     (p) => !p.isInternational && (p.destinationSlug.toLowerCase().includes('ayodhya') || p.name.toLowerCase().includes('ayodhya'))
   );
 
@@ -83,7 +83,7 @@ export default function AyodhyaPage() {
         title="Ayodhya Ram Mandir VIP Darshan Tour Package"
         subtitle="Experience Ram Janmabhoomi VIP Darshan, Hanuman Garhi, Saryu River Aarti, 4-star accommodation, and private AC transfers."
         defaultDestinationSlug="ayodhya"
-        initialPackages={matchedPackages.length > 0 ? matchedPackages : DEMO_PACKAGES.slice(0, 3)}
+        initialPackages={matchedPackages.length > 0 ? matchedPackages : getAllCatalogPackages().slice(0, 3)}
       />
     </>
   );

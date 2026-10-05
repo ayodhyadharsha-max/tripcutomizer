@@ -14531,7 +14531,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
   {
     "id": "pkg-dubai-winter-sale-4n5d",
     "name": "Dubai Winter Special: City Tour, Burj Khalifa, Marina Cruise & Desert Safari (4N/5D)",
-    "slug": "dubai-winter-sale-4n5d-package",
+    "slug": "dubai-winter-special-4n5d-package",
     "destination": "Dubai, Abu Dhabi",
     "destinationSlug": "dubai",
     "country": "United Arab Emirates",

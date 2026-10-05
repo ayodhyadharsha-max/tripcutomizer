@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { DEMO_PACKAGES, HolidayPackage } from '@/data/packagesData';
+import { findCatalogPackage } from '@/data/packageCatalog';
 import { PackageDetailClientView } from '@/components/holidays/PackageDetailClientView';
 
 function getMatchedPackage(destinationParam: string, packageParam: string): HolidayPackage {
@@ -39,7 +40,12 @@ function getMatchedPackage(destinationParam: string, packageParam: string): Holi
     );
   }
 
-  // 6. Destination match fallback: match first package of target destination
+  // 6. Expanded 4,800+ OTA catalog lookup
+  if (!matchedPkg) {
+    matchedPkg = findCatalogPackage(decodedDestParam, decodedPkgParam);
+  }
+
+  // 7. Destination match fallback: match first package of target destination
   if (!matchedPkg && decodedDestParam) {
     matchedPkg = DEMO_PACKAGES.find(
       (p) =>

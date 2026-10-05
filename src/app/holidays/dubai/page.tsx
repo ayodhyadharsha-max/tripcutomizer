@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { DEMO_PACKAGES } from '@/data/packagesData';
+import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
 export const metadata: Metadata = {
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 };
 
 export default function DubaiPage() {
-  const matchedPackages = DEMO_PACKAGES.filter(
+  const matchedPackages = getAllCatalogPackages().filter(
     (p) => p.isInternational && (p.destinationSlug.toLowerCase().includes('dubai') || p.name.toLowerCase().includes('dubai'))
   );
 
@@ -82,7 +82,7 @@ export default function DubaiPage() {
         title="Dubai 5 Days Luxury Tour Package with Desert Safari"
         subtitle="Experience 4-Star luxury stay, dune bashing, Burj Khalifa 124th floor view, Marina Dhow Cruise, and express UAE visa."
         defaultDestinationSlug="dubai"
-        initialPackages={matchedPackages.length > 0 ? matchedPackages : DEMO_PACKAGES.slice(0, 3)}
+        initialPackages={matchedPackages.length > 0 ? matchedPackages : getAllCatalogPackages().slice(0, 3)}
       />
     </>
   );

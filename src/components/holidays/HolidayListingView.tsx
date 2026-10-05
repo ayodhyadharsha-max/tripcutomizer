@@ -7,7 +7,8 @@ import Image from 'next/image';
 import { Container } from '@/components/ui/Container';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { DEMO_PACKAGES, HolidayPackage } from '@/data/packagesData';
+import { HolidayPackage } from '@/data/packagesData';
+import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { formatCurrency } from '@/lib/utils';
 import {
   Search,
@@ -71,6 +72,8 @@ export function HolidayListingView({
   // Quick Quote Modal state
   const [activeQuotePkg, setActiveQuotePkg] = useState<HolidayPackage | null>(null);
 
+
+
   const resetFilters = () => {
     setSearchTerm('');
     setSelectedCategory(defaultCategory || 'ALL');
@@ -95,9 +98,26 @@ export function HolidayListingView({
     );
   }, [searchTerm, selectedCategory, defaultCategory, selectedRegion, defaultRegion, selectedTheme, selectedHotelCategory, selectedDuration, maxPrice]);
 
+  const PAGE_SIZE = 24;
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+
+  React.useEffect(() => {
+    setVisibleCount(PAGE_SIZE);
+  }, [searchTerm, selectedCategory, selectedRegion, selectedTheme, selectedHotelCategory, selectedDuration, maxPrice, sortBy]);
+
   const filteredPackages = useMemo(() => {
     const rawQuery = searchTerm.toLowerCase().trim();
-    const sourcePool = isFilterModified ? DEMO_PACKAGES : initialPackages;
+    const allCatalog = getAllCatalogPackages();
+
+    // Guard against routes silently locking to old 50/80/130 DEMO_PACKAGES subset
+    const isOldDemoSubset =
+      Boolean(initialPackages) &&
+      (initialPackages.length === 50 || initialPackages.length === 80 || initialPackages.length === 130) &&
+      !defaultDestinationSlug;
+
+    const sourcePool = isFilterModified || isOldDemoSubset
+      ? allCatalog
+      : (initialPackages && initialPackages.length > 0 ? initialPackages : allCatalog);
 
     // Common stop words to extract core destination tokens
     const stopWords = new Set([
@@ -323,6 +343,10 @@ export function HolidayListingView({
     maxPrice,
     sortBy,
   ]);
+
+  const visiblePackages = useMemo(() => {
+    return filteredPackages.slice(0, visibleCount);
+  }, [filteredPackages, visibleCount]);
 
   const sidebarContent = (
     <div className="space-y-6">
@@ -671,7 +695,7 @@ export function HolidayListingView({
             ) : (
               /* Packages Listing Array */
               <div className="space-y-6">
-                {filteredPackages.map((pkg, idx) => (
+                {visiblePackages.map((pkg, idx) => (
                   <Card
                     key={pkg.id}
                     hoverable
@@ -769,6 +793,17 @@ export function HolidayListingView({
                     </div>
                   </Card>
                 ))}
+
+                {visibleCount < filteredPackages.length && (
+                  <div className="pt-6 pb-2 text-center">
+                    <button
+                      onClick={() => setVisibleCount((prev) => prev + PAGE_SIZE)}
+                      className="border border-slate-300 hover:bg-slate-100 hover:border-slate-400 text-slate-700 font-bold text-xs px-8 py-3 rounded-2xl shadow-xs transition-all"
+                    >
+                      Load More Packages ({filteredPackages.length - visibleCount} more)
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </div>

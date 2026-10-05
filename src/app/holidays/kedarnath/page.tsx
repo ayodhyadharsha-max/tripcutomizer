@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { DEMO_PACKAGES } from '@/data/packagesData';
+import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
 export const metadata: Metadata = {
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 };
 
 export default function KedarnathPage() {
-  const matchedPackages = DEMO_PACKAGES.filter(
+  const matchedPackages = getAllCatalogPackages().filter(
     (p) =>
       !p.isInternational &&
       (p.destinationSlug.toLowerCase().includes('kedarnath') ||
@@ -86,7 +86,7 @@ export default function KedarnathPage() {
         title="Kedarnath Badrinath Divine Yatra Package Price 2026"
         subtitle="Perform sacred Do Dham Yatra covering Kedarnath Ji & Badrinath Ji with private AC transport, hotel stays & registration assistance."
         defaultDestinationSlug="kedarnath"
-        initialPackages={matchedPackages.length > 0 ? matchedPackages : DEMO_PACKAGES.slice(0, 3)}
+        initialPackages={matchedPackages.length > 0 ? matchedPackages : getAllCatalogPackages().slice(0, 3)}
       />
     </>
   );

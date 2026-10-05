@@ -1,9 +1,9 @@
 import React from 'react';
-import { DEMO_PACKAGES } from '@/data/packagesData';
+import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
 export default function InternationalHolidaysPage() {
-  const intlPackages = DEMO_PACKAGES.filter((p) => p.isInternational);
+  const intlPackages = getAllCatalogPackages().filter((p) => p.isInternational);
 
   return (
     <HolidayListingView

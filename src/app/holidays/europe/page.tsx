@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { DEMO_PACKAGES } from '@/data/packagesData';
+import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
 export const metadata: Metadata = {
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 };
 
 export default function EuropePage() {
-  const matchedPackages = DEMO_PACKAGES.filter(
+  const matchedPackages = getAllCatalogPackages().filter(
     (p) =>
       p.isInternational &&
       (p.region.toLowerCase().includes('europe') ||
@@ -90,7 +90,7 @@ export default function EuropePage() {
         title="Europe Tour Packages 10 Days Customized"
         subtitle="Explore Paris, Swiss Alps, Mt. Titlis, Venice & Rome with 4-star hotel stay, Eurail train passes & Schengen visa guidance."
         defaultDestinationSlug="europe"
-        initialPackages={matchedPackages.length > 0 ? matchedPackages : DEMO_PACKAGES.slice(0, 3)}
+        initialPackages={matchedPackages.length > 0 ? matchedPackages : getAllCatalogPackages().slice(0, 3)}
       />
     </>
   );

@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import type { Metadata } from 'next';
-import { DEMO_PACKAGES } from '@/data/packagesData';
+import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
 export async function generateMetadata({ params }: { params: { destination: string } }): Promise<Metadata> {
@@ -73,7 +73,8 @@ export default function DestinationListingPage({ params }: { params: { destinati
     'himachal', 'uttarakhand', 'gujarat', 'up', 'uttar-pradesh', 'north-east', 'himalayas'
   ].some((s) => rawSlug.includes(s));
 
-  const matchedPackages = DEMO_PACKAGES.filter((p) => {
+  const allCatalog = getAllCatalogPackages();
+  const matchedPackages = allCatalog.filter((p) => {
     // Strictly isolate international vs domestic routes
     if (isIntlSlug && !p.isInternational) return false;
     if (isDomesticSlug && p.isInternational) return false;
@@ -143,10 +144,8 @@ export default function DestinationListingPage({ params }: { params: { destinati
 
     if (
       rawSlug === 'kerala' &&
-      (dest.includes('kerala') ||
-        dest.includes('coorg') ||
-        dest.includes('wayanad') ||
-        dest.includes('munnar') ||
+      (dSlug === 'kerala' ||
+        dest.includes('kerala') ||
         name.includes('kerala'))
     ) {
       return true;
@@ -215,7 +214,7 @@ export default function DestinationListingPage({ params }: { params: { destinati
   // Fail-safe fallback: If specific slug match is empty, show relevant category packages so 0 packages is NEVER displayed
   const displayPackages = matchedPackages.length > 0
     ? matchedPackages
-    : DEMO_PACKAGES.filter((p) => {
+    : allCatalog.filter((p) => {
         const isIntlSlug = [
           'dubai', 'uae', 'bali', 'thailand', 'singapore', 'maldives', 'switzerland',
           'vietnam', 'japan', 'australia', 'azerbaijan', 'bhutan', 'sri-lanka', 'malaysia',

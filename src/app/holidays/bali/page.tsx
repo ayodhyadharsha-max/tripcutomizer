@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { DEMO_PACKAGES } from '@/data/packagesData';
+import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
 export const metadata: Metadata = {
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 };
 
 export default function BaliPage() {
-  const matchedPackages = DEMO_PACKAGES.filter(
+  const matchedPackages = getAllCatalogPackages().filter(
     (p) => p.isInternational && (p.destinationSlug.toLowerCase().includes('bali') || p.name.toLowerCase().includes('bali'))
   );
 
@@ -82,7 +82,7 @@ export default function BaliPage() {
         title="Bali Honeymoon Package with Private Pool Villa (5N/6D)"
         subtitle="Enjoy private pool villa luxury, floating breakfasts, Nusa Penida island speedboat tour, and candlelit dinners."
         defaultDestinationSlug="bali"
-        initialPackages={matchedPackages.length > 0 ? matchedPackages : DEMO_PACKAGES.slice(0, 3)}
+        initialPackages={matchedPackages.length > 0 ? matchedPackages : getAllCatalogPackages().slice(0, 3)}
       />
     </>
   );

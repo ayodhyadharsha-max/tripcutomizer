@@ -8,6 +8,7 @@ import { Container } from '@/components/ui/Container';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { DEMO_PACKAGES, HolidayPackage } from '@/data/packagesData';
+import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { formatCurrency } from '@/lib/utils';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 import { cloudStore } from '@/lib/cloudStore';
@@ -310,7 +311,7 @@ export function tripcustomizerHolidayView() {
           </Container>
         </div>
         <HolidayListingView
-          initialPackages={DEMO_PACKAGES}
+          initialPackages={getAllCatalogPackages()}
           title="Holiday Tour Packages & Destinations"
           subtitle="Discover 50+ curated international and domestic India tour itineraries with flights, luxury hotels & private transfers."
           badgeText="50+ Verified Tour Packages"

@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { DEMO_PACKAGES } from '@/data/packagesData';
+import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
 export const metadata: Metadata = {
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 };
 
 export default function ThailandPage() {
-  const matchedPackages = DEMO_PACKAGES.filter(
+  const matchedPackages = getAllCatalogPackages().filter(
     (p) => p.isInternational && (p.destinationSlug.toLowerCase().includes('thailand') || p.name.toLowerCase().includes('thailand'))
   );
 
@@ -82,7 +82,7 @@ export default function ThailandPage() {
         title="Budget Thailand Tour Package for Couple Under 30k"
         subtitle="Explore Bangkok & Pattaya with 4-star hotel stay, Coral Island speedboat tour, temple visits, and airport transfers."
         defaultDestinationSlug="thailand"
-        initialPackages={matchedPackages.length > 0 ? matchedPackages : DEMO_PACKAGES.slice(0, 3)}
+        initialPackages={matchedPackages.length > 0 ? matchedPackages : getAllCatalogPackages().slice(0, 3)}
       />
     </>
   );
