@@ -37,7 +37,7 @@ function SearchQuerySync({ onQueryFound }: { onQueryFound: (q: string) => void }
 }
 
 interface HolidayListingViewProps {
-  initialPackages: HolidayPackage[];
+  initialPackages?: HolidayPackage[];
   title: string;
   subtitle: string;
   badgeText?: string;
@@ -47,7 +47,7 @@ interface HolidayListingViewProps {
 }
 
 export function HolidayListingView({
-  initialPackages,
+  initialPackages = [],
   title,
   subtitle,
   badgeText = '100% Handcrafted Holiday Packages',
@@ -109,13 +109,18 @@ export function HolidayListingView({
     const rawQuery = searchTerm.toLowerCase().trim();
     const allCatalog = getAllCatalogPackages();
 
+    // For category pages (India / International), derive sourcePool from allCatalog directly
+    const isCategoryPage =
+      (defaultCategory === 'INDIA' || defaultCategory === 'INTERNATIONAL') &&
+      !defaultDestinationSlug;
+
     // Guard against routes silently locking to old 50/80/130 DEMO_PACKAGES subset
     const isOldDemoSubset =
       Boolean(initialPackages) &&
       (initialPackages.length === 50 || initialPackages.length === 80 || initialPackages.length === 130) &&
       !defaultDestinationSlug;
 
-    const sourcePool = isFilterModified || isOldDemoSubset
+    const sourcePool = isCategoryPage || isFilterModified || isOldDemoSubset
       ? allCatalog
       : (initialPackages && initialPackages.length > 0 ? initialPackages : allCatalog);
 
@@ -334,6 +339,8 @@ export function HolidayListingView({
   }, [
     initialPackages,
     isFilterModified,
+    defaultCategory,
+    defaultDestinationSlug,
     searchTerm,
     selectedCategory,
     selectedRegion,
@@ -552,7 +559,7 @@ export function HolidayListingView({
                   : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
               }`}
             >
-              🔥 All ({initialPackages.length})
+              🔥 All ({initialPackages.length > 0 ? initialPackages.length : (defaultCategory === 'INDIA' ? 3500 : defaultCategory === 'INTERNATIONAL' ? 2080 : 5580)})
             </button>
             <button
               onClick={() => setSelectedCategory('INDIA')}
