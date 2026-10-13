@@ -25,11 +25,11 @@ const nextConfig = {
   async headers() {
     const cspHeader = `
       default-src 'self';
-      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://checkout.razorpay.com https://*.googleapis.com https://apis.google.com;
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://checkout.razorpay.com https://*.googleapis.com https://apis.google.com https://www.googletagmanager.com;
       style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-      img-src 'self' data: blob: https://images.unsplash.com https://via.placeholder.com https://*.razorpay.com;
+      img-src 'self' data: blob: https://images.unsplash.com https://via.placeholder.com https://*.razorpay.com https://*.google-analytics.com https://*.googletagmanager.com;
       font-src 'self' data: https://fonts.gstatic.com;
-      connect-src 'self' https://api.razorpay.com https://lumberjack.razorpay.com https://*.firebaseio.com https://*.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://*.supabase.co wss://*.supabase.co https://api.web3forms.com;
+      connect-src 'self' https://api.razorpay.com https://lumberjack.razorpay.com https://*.firebaseio.com https://*.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://*.supabase.co wss://*.supabase.co https://api.web3forms.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com;
       frame-src 'self' https://api.razorpay.com https://checkout.razorpay.com https://*.firebaseapp.com;
       object-src 'none';
       base-uri 'self';
