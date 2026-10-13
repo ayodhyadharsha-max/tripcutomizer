@@ -25,10 +25,6 @@ export default function BookingSuccessPage() {
         (b) => (ref && b.referenceNo === ref) || (orderId && b.transactionId?.includes(orderId))
       );
 
-      if (!matched && allBookings.length > 0) {
-        matched = allBookings[0];
-      }
-
       setBooking(matched || null);
       setLoading(false);
     }

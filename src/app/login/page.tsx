@@ -132,12 +132,14 @@ export default function LoginPage() {
         firebaseUid = userCredential.user?.uid || '';
       } catch (err: any) {
         console.warn('Firebase OTP verification info:', err);
-        if (code !== '969696' && code !== '123456') {
-          setErrorMsg('Invalid OTP code. Please check and re-enter.');
-          setIsVerifying(false);
-          return;
-        }
+        setErrorMsg('Invalid OTP code. Please check and re-enter.');
+        setIsVerifying(false);
+        return;
       }
+    } else {
+      setErrorMsg('No active verification session. Please request a new OTP.');
+      setIsVerifying(false);
+      return;
     }
 
     const cleanDigits = phoneNumber.replace(/\D/g, '');

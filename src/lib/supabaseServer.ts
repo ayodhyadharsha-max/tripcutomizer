@@ -8,9 +8,12 @@ const supabaseKey =
   '';
 
 export const getSupabaseServer = () => {
+  if (!supabaseUrl || !supabaseKey || supabaseUrl.includes('placeholder')) {
+    return null;
+  }
   return createClient(
-    supabaseUrl || 'https://placeholder.supabase.co',
-    supabaseKey || 'placeholder-anon-key',
+    supabaseUrl,
+    supabaseKey,
     {
       auth: {
         persistSession: false,

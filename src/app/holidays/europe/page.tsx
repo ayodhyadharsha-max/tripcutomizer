@@ -4,7 +4,7 @@ import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
 export const metadata: Metadata = {
-  title: 'Europe Tour Packages 10 Days Customized | Trip Customizer',
+  title: 'Europe Tour Packages 10 Days Customized',
   description:
     'Book 9N/10D customized Europe tour package covering Paris, Swiss Alps, Mt Titlis, Venice & Rome with 4-star hotel stay, Schengen visa & flight options.',
   keywords: [

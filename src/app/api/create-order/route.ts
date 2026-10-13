@@ -1,16 +1,38 @@
 import { NextResponse } from 'next/server';
 import Razorpay from 'razorpay';
 import getSupabaseServer from '@/lib/supabaseServer';
+import { checkRateLimit, sanitizeInput } from '@/lib/security/sanitizer';
 
 export async function POST(req: Request) {
   try {
+    const forwarded = req.headers.get('x-forwarded-for') || '127.0.0.1';
+    const clientIp = forwarded.split(',')[0].trim();
+
+    // 1. Rate Limiting: Max 10 order creations per minute per IP
+    const rateLimit = checkRateLimit(`order_create_${clientIp}`, 10, 60000);
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        { success: false, error: 'Too many payment requests. Please try again shortly.' },
+        { status: 429 }
+      );
+    }
+
     const body = await req.json().catch(() => ({}));
     const { amount, currency = 'INR', receipt, packageName, customerName, customerEmail, customerPhone } = body;
 
-    const keyId = process.env.RAZORPAY_KEY_ID || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_live_TkIZmrFqBluPJN';
-    const keySecret = process.env.RAZORPAY_KEY_SECRET || 'LR6tbNSU6wozUm97BftZNDmK';
+    // 2. Server Environment Credentials (FAIL SAFELY IF MISSING)
+    const keyId = process.env.RAZORPAY_KEY_ID || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
+    const keySecret = process.env.RAZORPAY_KEY_SECRET;
 
-    // Convert to paise if amount is provided in rupees
+    if (!keyId || !keySecret) {
+      console.error('[Payment Gateway Error]: Server Razorpay credentials missing from environment variables.');
+      return NextResponse.json(
+        { success: false, error: 'Payment gateway configuration is missing on server.' },
+        { status: 500 }
+      );
+    }
+
+    // 3. Amount Validation
     let amountInPaise = amount;
     if (typeof amount === 'number' && amount < 100) {
       amountInPaise = Math.round(amount * 100);
@@ -19,48 +41,43 @@ export async function POST(req: Request) {
     }
 
     if (!amountInPaise || amountInPaise < 100) {
-      return NextResponse.json({ success: false, error: 'Amount must be at least 100 paise (₹1)' }, { status: 400 });
+      return NextResponse.json(
+        { success: false, error: 'Amount must be at least 100 paise (₹1)' },
+        { status: 400 }
+      );
     }
 
-    // In Razorpay Test Mode (rzp_test_), cap test transaction amount to ₹14,999 (1499900 paise)
-    // to prevent test bank simulator from rejecting with "Amount exceeds maximum amount allowed"
-    if (keyId.startsWith('rzp_test_') && amountInPaise > 1500000) {
-      amountInPaise = 1499900;
+    // Razorpay maximum transaction safeguard (₹15,00,000 max single transaction)
+    if (amountInPaise > 150000000) {
+      return NextResponse.json(
+        { success: false, error: 'Transaction exceeds maximum permitted single order limit.' },
+        { status: 400 }
+      );
     }
 
-    let order: any;
-    let isFallback = false;
+    const cleanCustomerName = sanitizeInput(customerName || 'Traveler');
+    const cleanCustomerEmail = sanitizeInput(customerEmail || '');
+    const cleanCustomerPhone = sanitizeInput(customerPhone || '');
+    const cleanPackageName = sanitizeInput(packageName || 'Custom Package');
 
-    try {
-      const razorpay = new Razorpay({
-        key_id: keyId,
-        key_secret: keySecret,
-      });
+    const razorpay = new Razorpay({
+      key_id: keyId,
+      key_secret: keySecret,
+    });
 
-      const orderOptions = {
-        amount: amountInPaise,
-        currency: currency || 'INR',
-        receipt: receipt || `rcpt_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
-        notes: {
-          customer_name: customerName || 'Traveler',
-          customer_email: customerEmail || '',
-          customer_phone: customerPhone || '',
-          package_name: packageName || 'Custom Package',
-        },
-      };
+    const orderOptions = {
+      amount: amountInPaise,
+      currency: currency || 'INR',
+      receipt: receipt || `rcpt_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
+      notes: {
+        customer_name: cleanCustomerName,
+        customer_email: cleanCustomerEmail,
+        customer_phone: cleanCustomerPhone,
+        package_name: cleanPackageName,
+      },
+    };
 
-      order = await razorpay.orders.create(orderOptions);
-    } catch (razorpayErr: any) {
-      console.warn('[Razorpay API Warning - Fallback Order Generated]:', razorpayErr?.message || razorpayErr);
-      isFallback = true;
-      const fallbackId = `order_TC_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
-      order = {
-        id: fallbackId,
-        amount: amountInPaise,
-        currency: currency || 'INR',
-        receipt: receipt || `rcpt_${Date.now()}`,
-      };
-    }
+    const order = await razorpay.orders.create(orderOptions);
 
     // Save order record to Supabase payments table if configured
     try {
@@ -70,9 +87,9 @@ export async function POST(req: Request) {
           order_id: order.id,
           amount: amountInPaise / 100,
           currency: order.currency,
-          customer_name: customerName,
-          customer_email: customerEmail,
-          customer_phone: customerPhone,
+          customer_name: cleanCustomerName,
+          customer_email: cleanCustomerEmail,
+          customer_phone: cleanCustomerPhone,
           status: 'CREATED',
           created_at: new Date().toISOString(),
         });
@@ -90,22 +107,15 @@ export async function POST(req: Request) {
       key_id: keyId,
       keyId: keyId,
       receipt: order.receipt,
-      isFallback,
     });
   } catch (err: any) {
-    console.error('[Razorpay Create Order Error]:', err);
-    // Even on total exception, return guaranteed fallback order ID so user checkout never breaks
-    const fallbackId = `order_TC_${Date.now()}_${Math.floor(Math.random() * 1000)}`;
-    return NextResponse.json({
-      success: true,
-      order_id: fallbackId,
-      orderId: fallbackId,
-      amount: 1499900,
-      currency: 'INR',
-      key_id: 'rzp_live_TkIZmrFqBluPJN',
-      keyId: 'rzp_live_TkIZmrFqBluPJN',
-      receipt: `rcpt_${Date.now()}`,
-      isFallback: true,
-    });
+    console.error('[Razorpay Create Order Error]:', err?.message || err);
+    return NextResponse.json(
+      {
+        success: false,
+        error: err?.error?.description || err.message || 'Unable to create payment order. Please try again.',
+      },
+      { status: 500 }
+    );
   }
 }

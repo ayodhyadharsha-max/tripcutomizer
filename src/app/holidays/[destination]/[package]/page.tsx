@@ -1,10 +1,11 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { DEMO_PACKAGES, HolidayPackage } from '@/data/packagesData';
 import { findCatalogPackage } from '@/data/packageCatalog';
 import { PackageDetailClientView } from '@/components/holidays/PackageDetailClientView';
 
-function getMatchedPackage(destinationParam: string, packageParam: string): HolidayPackage {
+function getMatchedPackage(destinationParam: string, packageParam: string): HolidayPackage | null {
   const decodedPkgParam = decodeURIComponent(packageParam || '').toLowerCase().trim();
   const decodedDestParam = decodeURIComponent(destinationParam || '').toLowerCase().trim();
 
@@ -45,19 +46,8 @@ function getMatchedPackage(destinationParam: string, packageParam: string): Holi
     matchedPkg = findCatalogPackage(decodedDestParam, decodedPkgParam);
   }
 
-  // 7. Destination match fallback: match first package of target destination
-  if (!matchedPkg && decodedDestParam) {
-    matchedPkg = DEMO_PACKAGES.find(
-      (p) =>
-        p.destinationSlug.toLowerCase() === decodedDestParam ||
-        p.destination.toLowerCase().includes(decodedDestParam) ||
-        decodedDestParam.includes(p.destinationSlug.toLowerCase()) ||
-        p.name.toLowerCase().includes(decodedDestParam)
-    );
-  }
-
-  // 7. Guaranteed non-null fallback
-  return matchedPkg || DEMO_PACKAGES[0];
+  // 7. Return matched package or null
+  return matchedPkg || null;
 }
 
 export async function generateMetadata({
@@ -66,6 +56,13 @@ export async function generateMetadata({
   params: { destination: string; package: string };
 }): Promise<Metadata> {
   const pkg = getMatchedPackage(params.destination, params.package);
+  if (!pkg) {
+    return {
+      title: 'Tour Package Not Found',
+      description: 'The requested tour package could not be found.',
+      robots: { index: false, follow: false },
+    };
+  }
   const price = pkg.discountPrice || pkg.startingPrice;
   const duration = `${pkg.durationDays}D / ${pkg.durationNights}N`;
 
@@ -119,6 +116,9 @@ export default function ServerPackageDetailPage({
   params: { destination: string; package: string };
 }) {
   const pkg = getMatchedPackage(params.destination, params.package);
+  if (!pkg) {
+    notFound();
+  }
   const price = pkg.discountPrice || pkg.startingPrice;
   const overviewText = pkg.highlights && pkg.highlights.length > 0 ? pkg.highlights.join('. ') : pkg.name;
 

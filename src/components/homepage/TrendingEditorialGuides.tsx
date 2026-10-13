@@ -1,0 +1,169 @@
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Container } from '@/components/ui/Container';
+import { Card } from '@/components/ui/Card';
+import { Sparkles, ArrowRight, MapPin, Snowflake, Flame, Music, Tent } from 'lucide-react';
+
+export const TrendingEditorialGuides: React.FC = () => {
+  const editorialGuides = [
+    {
+      slug: 'gulmarg-gondola-ticket-booking-online-kashmir-winter-package-guide',
+      title: 'Gulmarg Gondola Booking 2026: Phase 1 & 2 Rates, Snow Dates & Kashmir Tour Guide',
+      badge: 'Snow Season • Dec–Feb',
+      badgeColor: 'bg-sky-600 text-white',
+      location: 'Gulmarg & Srinagar, Kashmir',
+      duration: '5 Days / 4 Nights',
+      price: '₹12,999',
+      image: 'https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=600&auto=format&fit=crop',
+      summary: 'Gondola online tickets, Apharwat Peak snow, Dal Lake houseboats, ski slopes & 5D/4N holiday itineraries.',
+    },
+    {
+      slug: 'sunburn-goa-2026-dates-tickets-christmas-new-year-package-guide',
+      title: 'Sunburn Goa 2026: Official Dates, Tickets, Venue, Christmas & New Year Beach Guide',
+      badge: 'Festive Peak • Dec 28–31',
+      badgeColor: 'bg-emerald-600 text-white',
+      location: 'Vagator & North Goa Beaches',
+      duration: '4 Days / 3 Nights',
+      price: '₹9,999',
+      image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=600&auto=format&fit=crop',
+      summary: 'Early bird festival passes, Christmas midnight mass in Old Goa, beach shacks, fireworks & resort deals.',
+    },
+    {
+      slug: 'rann-utsav-2026-dates-tent-city-package-price-booking-guide',
+      title: 'Rann Utsav 2026–2027: Official Dates, Tent City Price & Full Moon Schedule',
+      badge: 'Season Live • Nov 1',
+      badgeColor: 'bg-amber-600 text-white',
+      location: 'Dhordo White Desert, Kutch, Gujarat',
+      duration: '4 Days / 3 Nights',
+      price: '₹14,500',
+      image: 'https://images.unsplash.com/photo-1609137144813-7d9921338f24?q=80&w=600&auto=format&fit=crop',
+      summary: 'Dhordo Tent City booking, full moon Purnima calendar, online border permits & Kutch tour itineraries.',
+    },
+    {
+      slug: 'pushkar-mela-2026-dates-schedule-luxury-camps-booking-guide',
+      title: 'Pushkar Mela 2026: Official Dates, Event Schedule & Luxury Tent Camp Rates',
+      badge: 'Trending • Nov 20–28',
+      badgeColor: 'bg-orange-600 text-white',
+      location: 'Pushkar Fairgrounds, Rajasthan',
+      duration: '4 Days / 3 Nights',
+      price: '₹11,999',
+      image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=600&auto=format&fit=crop',
+      summary: 'World’s biggest camel fair, Kartik Purnima Maha Aarti at Pushkar Lake, luxury Swiss camps & hot air balloons.',
+    },
+    {
+      slug: 'top-10-diwali-holiday-destinations-2026',
+      title: 'Top 10 Best Diwali Holiday Destinations 2026: Dubai, Rajasthan, Bali & Goa',
+      badge: 'Festive Rush',
+      badgeColor: 'bg-rose-600 text-white',
+      location: 'Domestic & International Getaways',
+      duration: '5 Days / 4 Nights',
+      price: '₹12,999',
+      image: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?q=80&w=600&auto=format&fit=crop',
+      summary: 'Royal palaces of Udaipur, Dubai fireworks, Bali pool villas, Goa beach shacks & Varanasi Dev Deepawali.',
+    },
+    {
+      slug: 'top-10-honeymoon-destinations-in-india-under-30k',
+      title: 'Top 10 Best Honeymoon Destinations in India Under ₹30,000 for Couples in 2026',
+      badge: 'Couple Favorite',
+      badgeColor: 'bg-pink-600 text-white',
+      location: 'Kashmir, Kerala Backwaters & Manali',
+      duration: '6 Days / 5 Nights',
+      price: '₹13,999',
+      image: 'https://images.unsplash.com/photo-1595815771614-ade9d652a65d?q=80&w=600&auto=format&fit=crop',
+      summary: 'Romantic retreats with houseboat stays, private chauffeur, candlelight dinner & couple photoshoot perks.',
+    },
+  ];
+
+  return (
+    <section className="py-16 bg-gradient-to-b from-white via-slate-50 to-white border-b border-slate-200">
+      <Container>
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold uppercase tracking-wider mb-2.5">
+              <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+              <span>Trending Festivals &amp; Peak Seasonal Guides</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
+              Trending Travel Stories &amp; Festival Guides
+            </h2>
+            <p className="text-slate-600 text-sm sm:text-base mt-2 max-w-2xl">
+              Handpicked travel guides for destinations whose travel seasons are commencing right now. Get verified itineraries, hotel rates, and insider hacks.
+            </p>
+          </div>
+
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 text-sm font-bold text-amber-700 hover:text-amber-800 transition-colors shrink-0 group self-start md:self-auto"
+          >
+            <span>View All Travel Guides</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+
+        {/* 6 Cards Grid (2x3) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {editorialGuides.map((guide, idx) => (
+            <Card
+              key={idx}
+              className="group overflow-hidden rounded-2xl border border-slate-200 hover:border-amber-400 hover:shadow-xl transition-all duration-300 flex flex-col bg-white"
+            >
+              {/* Thumbnail */}
+              <div className="relative h-48 w-full overflow-hidden">
+                <Image
+                  src={guide.image}
+                  alt={guide.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
+                
+                {/* Badge */}
+                <div className="absolute top-3 left-3">
+                  <span className={`text-[11px] font-extrabold px-2.5 py-1 rounded-md shadow-md uppercase tracking-wider ${guide.badgeColor}`}>
+                    {guide.badge}
+                  </span>
+                </div>
+
+                {/* Price Pill */}
+                <div className="absolute bottom-3 right-3 bg-slate-900/85 backdrop-blur-sm text-white text-xs font-bold px-2.5 py-1 rounded-lg">
+                  From {guide.price}
+                </div>
+              </div>
+
+              {/* Body */}
+              <div className="p-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-1.5 text-xs text-slate-500 mb-2 font-medium">
+                    <MapPin className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                    <span className="truncate">{guide.location}</span>
+                  </div>
+
+                  <h3 className="font-bold text-slate-900 text-base leading-snug group-hover:text-amber-700 transition-colors line-clamp-2">
+                    {guide.title}
+                  </h3>
+
+                  <p className="text-xs text-slate-600 mt-2 line-clamp-2 leading-relaxed">
+                    {guide.summary}
+                  </p>
+                </div>
+
+                <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
+                  <span className="text-[11px] font-medium text-slate-500">{guide.duration}</span>
+                  <Link
+                    href={`/blog/${guide.slug}`}
+                    className="inline-flex items-center gap-1 text-xs font-bold text-amber-700 hover:text-amber-800"
+                  >
+                    <span>Read Guide</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                  </Link>
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </Container>
+    </section>
+  );
+};

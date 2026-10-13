@@ -287,7 +287,13 @@ export default function BookingCheckoutPage() {
       }
 
       const orderId = orderData.order_id || orderData.orderId;
-      const razorpayKeyId = orderData.key_id || orderData.keyId || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_live_TkIZmrFqBluPJN';
+      const razorpayKeyId = orderData.key_id || orderData.keyId || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
+
+      if (!razorpayKeyId) {
+        alert('Payment configuration is currently unavailable. Please contact support or try again shortly.');
+        setIsProcessingPayment(false);
+        return;
+      }
 
       // 2. Load Razorpay Web Checkout JS SDK dynamically
       const isSDKLoaded = await loadRazorpaySDK();

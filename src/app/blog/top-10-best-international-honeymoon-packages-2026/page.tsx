@@ -9,7 +9,7 @@ import { Badge } from '@/components/ui/Badge';
 import { ShieldCheck, Heart, Sparkles, MapPin, Calendar, CheckCircle2, ArrowRight, Star, Clock } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Top 10 Best International Honeymoon Packages 2026: Bali, Maldives, Dubai & Europe | Trip Customizer',
+  title: 'Top 10 Best International Honeymoon Packages 2026: Bali, Maldives, Dubai & Europe',
   description: 'Book customized international honeymoon tour packages across 40+ countries. 4-Star hotels, private pool villas, flights, visa assistance, 5% GST compliance, and 24x7 travel desk support.',
   keywords: [
     'customized bali honeymoon package with private pool villa',

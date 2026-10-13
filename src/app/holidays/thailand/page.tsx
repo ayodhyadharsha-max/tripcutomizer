@@ -4,7 +4,7 @@ import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
 export const metadata: Metadata = {
-  title: 'Budget Thailand Tour Package for Couple Under 30k | Trip Customizer',
+  title: 'Budget Thailand Tour Package for Couple Under 30k',
   description:
     'Book 5N/6D budget Thailand honeymoon & couple tour package under ₹30,000. Includes Bangkok, Pattaya, Coral Island speedboat tour, 4-star hotel stay & transfers.',
   keywords: [

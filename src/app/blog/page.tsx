@@ -1,12 +1,123 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import type { Metadata } from 'next';
 import { Container } from '@/components/ui/Container';
 import { Card } from '@/components/ui/Card';
 import { BookOpen, User, Calendar, ArrowRight } from 'lucide-react';
 
+export const metadata: Metadata = {
+  title: 'Travel Blog & Destination Guides 2026',
+  description:
+    'Expert travel guides, visa-free destinations for Indians, winter getaways, budget international trips under ₹25k, and romantic honeymoon ideas for 2026.',
+  keywords: [
+    'travel blog india',
+    'gulmarg gondola ticket booking online 2026',
+    'sunburn goa 2026 dates tickets venue',
+    'rann utsav 2026 dates tent city price',
+    'pushkar mela 2026 schedule luxury camps',
+    'diwali holiday destinations 2026',
+    'honeymoon destinations in india under 30000',
+    'summer holiday destinations 2026',
+    'visa on arrival countries for indians 2026',
+    'international tour guides 2026',
+    'visa free countries for indians 2026',
+    'budget international trips under 25k',
+    'best winter destinations 2026',
+    'honeymoon guides 2026',
+    'Trip Customizer',
+  ],
+  alternates: {
+    canonical: 'https://www.tripcustomizer.com/blog',
+  },
+  openGraph: {
+    title: 'Travel Blog & Destination Guides 2026 | Trip Customizer',
+    description: 'Expert travel guides, Gulmarg Gondola tickets, Sunburn Goa 2026, Rann Utsav Kutch, Pushkar Camel Fair, Diwali packages, and honeymoon deals.',
+    url: 'https://www.tripcustomizer.com/blog',
+    images: ['https://www.tripcustomizer.com/destinations/hero-holidays.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Travel Blog & Guides 2026 | Trip Customizer',
+    description: 'Curated travel advice, destination guides, and budget tips.',
+    images: ['https://www.tripcustomizer.com/destinations/hero-holidays.jpg'],
+  },
+};
+
 export default function BlogHubPage() {
   const blogs = [
+    {
+      slug: 'gulmarg-gondola-ticket-booking-online-kashmir-winter-package-guide',
+      title: 'Gulmarg Gondola Ticket Booking Online 2026: Phase 1 & 2 Rates, Timings & Kashmir Winter Guide ❄️🚠',
+      category: '❄️ Kashmir Snow Special',
+      author: 'Himalayan Expeditions Desk',
+      date: 'Oct 13, 2026',
+      image: 'https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=600&auto=format&fit=crop',
+      summary: 'Complete guide to booking Gondola Phase 1 (₹800) and Phase 2 (₹1,050) tickets, sold-out hacks, snow seasons, Srinagar houseboats & packages starting @ ₹12,999.',
+    },
+    {
+      slug: 'sunburn-goa-2026-dates-tickets-christmas-new-year-package-guide',
+      title: 'Sunburn Goa 2026: Official Dates, Tickets, Venue, Christmas & New Year Beach Guide 🏖️🎉',
+      category: '🏖️ Goa Beach Carnival',
+      author: 'Beach & Nightlife Desk',
+      date: 'Oct 13, 2026',
+      image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=600&auto=format&fit=crop',
+      summary: 'Festival dates (Dec 28–31), ticket prices (GA @ ₹3,500, VIP @ ₹7,500), venue details, North vs South Goa stays, Christmas midnight mass & packages @ ₹9,999.',
+    },
+    {
+      slug: 'rann-utsav-2026-dates-tent-city-package-price-booking-guide',
+      title: 'Rann Utsav 2026-2027: Official Dates, Tent City Price, Full Moon Schedule & Booking Guide 🎪',
+      category: '🎪 White Desert Special (Live)',
+      author: 'Cultural Travel Desk',
+      date: 'Oct 12, 2026',
+      image: 'https://images.unsplash.com/photo-1609137144813-7d9921338f24?q=80&w=600&auto=format&fit=crop',
+      summary: 'Season starting Nov 1, 2026! Complete guide to Tent City Dhordo tariffs, Full Moon night schedule, online border permits & Kutch tour packages starting @ ₹14,500.',
+    },
+    {
+      slug: 'pushkar-mela-2026-dates-schedule-luxury-camps-booking-guide',
+      title: 'Pushkar Mela 2026: Official Dates, Full Schedule, Luxury Tent Price & Booking Guide 🐪🎪',
+      category: '🐪 Royal Rajasthan Fair',
+      author: 'Rajasthan Heritage Desk',
+      date: 'Oct 12, 2026',
+      image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=600&auto=format&fit=crop',
+      summary: 'Dates: Nov 20–28, 2026! World’s largest camel fair, Kartik Purnima Maha Aarti on Pushkar lake, luxury Swiss desert camps & hot air balloon safaris starting @ ₹11,999.',
+    },
+    {
+      slug: 'top-10-diwali-holiday-destinations-2026',
+      title: 'Top 10 Best Diwali Holiday Destinations in 2026: Dubai, Rajasthan, Bali, Goa & Kashmir 🪔✨',
+      category: '🪔 Diwali Special 2026',
+      author: 'Senior Travel Desk',
+      date: 'Oct 12, 2026',
+      image: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?q=80&w=600&auto=format&fit=crop',
+      summary: 'Make this Diwali long weekend unforgettable! Royal Rajasthan palaces, Dubai fireworks, Bali pool villas, Goa beaches & Varanasi Dev Deepawali starting @ ₹12,999.',
+    },
+    {
+      slug: 'top-10-honeymoon-destinations-in-india-under-30k',
+      title: 'Top 10 Best Honeymoon Destinations in India Under ₹30,000 for Couples in 2026: Kashmir, Kerala & Goa 💑🏔️',
+      category: '💑 Honeymoon Under 30k',
+      author: 'Romance Travel Concierge',
+      date: 'Oct 12, 2026',
+      image: 'https://images.unsplash.com/photo-1595815771614-ade9d652a65d?q=80&w=600&auto=format&fit=crop',
+      summary: 'Fairytale honeymoon on a budget! Kashmir cedar houseboats, Kerala backwaters, Manali snow valleys & Goa beach resorts with free candlelight dinner & private cab.',
+    },
+    {
+      slug: 'top-10-summer-holiday-destinations-2026',
+      title: 'Top 10 Best Summer Holiday Destinations in 2026: Kashmir, Ladakh, Bali, Switzerland & Manali ☀️🏔️',
+      category: '☀️ Trending Summer 2026',
+      author: 'Senior Travel Desk',
+      date: 'Oct 07, 2026',
+      image: 'https://images.unsplash.com/photo-1595815771614-ade9d652a65d?q=80&w=600&auto=format&fit=crop',
+      summary: 'Beat the heat in summer 2026! Discover Kashmir Gulmarg, Ladakh bike tours, Manali hill stations, Bali private pool villas & Swiss Alps starting @ ₹12,999.',
+    },
+    {
+      slug: 'top-10-visa-on-arrival-countries-for-indians-2026',
+      title: 'Top 10 Visa on Arrival Countries for Indian Passport Holders in 2026: Rules, Fees & Packages 🛂✈️',
+      category: '🛂 VoA Master Guide',
+      author: 'Senior Visa Desk',
+      date: 'Oct 07, 2026',
+      image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=600&auto=format&fit=crop',
+      summary: 'Fly abroad without embassy visits! Bali, Thailand, Sri Lanka, Maldives, Seychelles, Mauritius & Kenya with accurate 2026 visa fees, required documents & packages.',
+    },
     {
       slug: 'top-10-international-tour-packages-under-25k-2026',
       title: 'Top 10 Best International Tour Packages Under ₹25,000 (Visa-Free for Indians 2026) ✈️🌴',

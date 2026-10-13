@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
@@ -208,20 +209,13 @@ export default function DestinationListingPage({ params }: { params: { destinati
       (dest.includes('maldives') || name.includes('maldives') || p.id === 'pkg-intl-maldives')
     ) return true;
 
-    return false;
   });
 
-  // Fail-safe fallback: If specific slug match is empty, show relevant category packages so 0 packages is NEVER displayed
-  const displayPackages = matchedPackages.length > 0
-    ? matchedPackages
-    : allCatalog.filter((p) => {
-        const isIntlSlug = [
-          'dubai', 'uae', 'bali', 'thailand', 'singapore', 'maldives', 'switzerland',
-          'vietnam', 'japan', 'australia', 'azerbaijan', 'bhutan', 'sri-lanka', 'malaysia',
-          'nepal', 'europe', 'international'
-        ].some((s) => rawSlug.includes(s));
-        return isIntlSlug ? p.isInternational : !p.isInternational;
-      });
+  if (matchedPackages.length === 0) {
+    notFound();
+  }
+
+  const displayPackages = matchedPackages;
 
   const destName = rawSlug
     .split('-')

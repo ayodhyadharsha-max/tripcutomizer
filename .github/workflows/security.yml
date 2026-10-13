@@ -1,0 +1,71 @@
+name: Security Guardrails & Compliance CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  security-gate:
+    name: Security Gate & Automated Guardrails
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: 1. Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 2. Setup Node.js Runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: 3. Verify Lockfile & Install Dependencies (npm ci)
+        run: npm ci
+
+      - name: 4. Scan Repository for Secrets & Backdoors
+        run: node scripts/security/scan-secrets.js
+
+      - name: 5. Gitleaks Secret Scanner
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: false
+
+      - name: 6. Enforce Untracked Databases & Credentials Policy
+        run: node scripts/security/check-tracked-files.js
+
+      - name: 7. Scan Source Code for Customer PII
+        run: node scripts/security/scan-pii.js
+
+      - name: 8. Verify Client Components & Env Security Policy
+        run: node scripts/security/check-client-secrets.js
+
+      - name: 9. TypeScript Compilation Check (Strict Mode)
+        run: npx tsc --noEmit
+
+      - name: 10. Run Automated Security Unit & Regression Tests
+        run: node tests/security/run-all-security-tests.mjs
+        env:
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD || 'TripCustomizer@Admin2026!' }}
+          ADMIN_SESSION_SECRET: ${{ secrets.ADMIN_SESSION_SECRET || 'tc_internal_ci_test_secret_2026' }}
+          RAZORPAY_KEY_ID: 'rzp_test_ci_mock_key'
+          RAZORPAY_KEY_SECRET: 'mock_ci_secret_1234567890'
+
+      - name: 11. Dependency Security Vulnerability Audit
+        run: npm audit --audit-level=high
+
+      - name: 12. Next.js Production Build Verification
+        run: npm run build
+        env:
+          NEXT_PUBLIC_RAZORPAY_KEY_ID: 'rzp_test_dummy_key_ci'
+          RAZORPAY_KEY_ID: 'rzp_test_dummy_key_ci'
+          RAZORPAY_KEY_SECRET: 'dummy_ci_secret_key_123456'

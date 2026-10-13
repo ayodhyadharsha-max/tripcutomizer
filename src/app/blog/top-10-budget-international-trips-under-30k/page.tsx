@@ -9,7 +9,7 @@ import { Calendar, User, Clock, ChevronRight, Compass, Sparkles, ShieldCheck, Ch
 import { BlogInquiryForm } from './BlogInquiryForm';
 
 export const metadata: Metadata = {
-  title: 'Top 10 Budget International Holiday Packages Under ₹30,000 (Visa-Free for Indians) ✈️ | Trip Customizer',
+  title: 'Top 10 Budget International Holiday Packages Under ₹30,000 (Visa-Free for Indians) ✈️',
   description:
     'Discover the top 10 international destinations under ₹30,000 for Indian travelers. Includes Thailand, Bali, Vietnam, Malaysia, Baku Azerbaijan & Dubai with flights, 4-star hotels & 24x7 expert support.',
   keywords: [
