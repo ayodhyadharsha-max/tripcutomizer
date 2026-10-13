@@ -10,12 +10,15 @@ import { FlightPromotions } from '@/components/homepage/FlightPromotions';
 import { HotelStaysSection } from '@/components/homepage/HotelStaysSection';
 import { SpecialsSection } from '@/components/homepage/SpecialsSection';
 import { WhyChooseUs } from '@/components/homepage/WhyChooseUs';
+import { TrendingEditorialGuides } from '@/components/homepage/TrendingEditorialGuides';
 import { TravelInsights } from '@/components/homepage/TravelInsights';
 import { SEOTagDirectory } from '@/components/homepage/SEOTagDirectory';
 import { TestimonialsMetrics } from '@/components/homepage/TestimonialsMetrics';
 
 export const metadata: Metadata = {
-  title: 'Trip Customizer™ | Book Customized Holiday Packages, Flights & 4-Star Hotels',
+  title: {
+    absolute: 'Trip Customizer™ | Book Customized Holiday Packages, Flights & 4-Star Hotels',
+  },
   description:
     'Book customized international & domestic tour packages across 40+ countries. 4-Star hotels, flights, visa assistance, 5% GST tax compliance, and 24x7 travel desk support.',
   keywords: [
@@ -198,6 +201,9 @@ export default function Home() {
 
       {/* Why Choose Us */}
       <WhyChooseUs />
+
+      {/* Trending Editorial Guides & Peak Season Festivals */}
+      <TrendingEditorialGuides />
 
       {/* Travel Insights / Insta Moments */}
       <TravelInsights />

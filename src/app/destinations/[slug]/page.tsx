@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
 import { Container } from '@/components/ui/Container';
 import { Card } from '@/components/ui/Card';
 import { DEMO_PACKAGES } from '@/data/packagesData';
@@ -8,17 +9,47 @@ import { formatCurrency } from '@/lib/utils';
 import { MapPin, Sun, DollarSign, FileCheck, Compass, ArrowRight, ChevronRight } from 'lucide-react';
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const name = params.slug.toUpperCase();
+  const destSlug = params.slug.toLowerCase().trim();
+  const packages = DEMO_PACKAGES.filter((p) => p.destinationSlug === destSlug);
+  if (packages.length === 0) {
+    return {
+      title: 'Destination Not Found',
+      robots: { index: false, follow: false },
+    };
+  }
+  const name = destSlug.charAt(0).toUpperCase() + destSlug.slice(1);
+  const title = `${name} Travel Guide 2026 — Places to Visit, Best Time, Visa & Packages`;
+  const description = `Complete travel guide for ${name}. Explore top attractions, best time to visit, visa guidelines, currency exchange rates and holiday packages.`;
+  const canonicalUrl = `https://www.tripcustomizer.com/destinations/${destSlug}`;
+
   return {
-    title: `${name} Travel Guide 2026 — Places to Visit, Best Time, Visa & Packages | tripcustomizer`,
-    description: `Complete travel guide for ${name}. Explore top attractions, best time to visit, visa guidelines, currency exchange rates and holiday packages.`,
+    title,
+    description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      images: ['https://www.tripcustomizer.com/destinations/hero-holidays.jpg'],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['https://www.tripcustomizer.com/destinations/hero-holidays.jpg'],
+    },
   };
 }
 
 export default function DestinationMasterSeoPage({ params }: { params: { slug: string } }) {
-  const destSlug = params.slug;
+  const destSlug = params.slug.toLowerCase().trim();
+  const packages = DEMO_PACKAGES.filter((p) => p.destinationSlug === destSlug);
+  if (packages.length === 0) {
+    notFound();
+  }
   const name = destSlug.charAt(0).toUpperCase() + destSlug.slice(1);
-  const packages = DEMO_PACKAGES.filter((p) => p.destinationSlug === destSlug) || DEMO_PACKAGES;
 
   // JSON-LD TouristTrip & TravelAgency Structured Data
   const jsonLd = {
@@ -29,8 +60,8 @@ export default function DestinationMasterSeoPage({ params }: { params: { slug: s
     touristType: ['Family', 'Couples', 'Solo'],
     provider: {
       '@type': 'TravelAgency',
-      name: 'tripcustomizer',
-      url: 'https://tripcustomizer.com',
+      name: 'Trip Customizer',
+      url: 'https://www.tripcustomizer.com',
     },
   };
 
@@ -64,9 +95,9 @@ export default function DestinationMasterSeoPage({ params }: { params: { slug: s
         {/* Dynamic SEO Navigation Tabs */}
         <div className="flex overflow-x-auto gap-2 pb-4 mb-8 text-xs font-bold border-b border-slate-200">
           <Link href={`/destinations/${destSlug}`} className="bg-brand-900 text-white px-4 py-2 rounded-xl">Overview</Link>
-          <Link href={`/destinations/${destSlug}/places-to-visit`} className="bg-white text-slate-700 hover:bg-slate-200 px-4 py-2 rounded-xl">Places to Visit</Link>
-          <Link href={`/destinations/${destSlug}/best-time-to-visit`} className="bg-white text-slate-700 hover:bg-slate-200 px-4 py-2 rounded-xl">Best Time to Visit</Link>
-          <Link href={`/destinations/${destSlug}/how-to-reach`} className="bg-white text-slate-700 hover:bg-slate-200 px-4 py-2 rounded-xl">How to Reach</Link>
+          <a href="#places-to-visit" className="bg-white text-slate-700 hover:bg-slate-200 px-4 py-2 rounded-xl">Places to Visit</a>
+          <a href="#best-time-to-visit" className="bg-white text-slate-700 hover:bg-slate-200 px-4 py-2 rounded-xl">Best Time to Visit</a>
+          <a href="#how-to-reach" className="bg-white text-slate-700 hover:bg-slate-200 px-4 py-2 rounded-xl">How to Reach</a>
         </div>
 
         {/* Content Section */}

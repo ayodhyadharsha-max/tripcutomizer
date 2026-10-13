@@ -9,7 +9,7 @@ import { Calendar, User, Clock, CheckCircle2, Star, Sparkles, PhoneCall, ShieldC
 import { BlogInquiryForm } from '../top-10-budget-international-trips-under-30k/BlogInquiryForm';
 
 export const metadata: Metadata = {
-  title: 'Top 7 Spiritual Yatras in India 2026: Char Dham, Ayodhya & Kashi | Trip Customizer',
+  title: 'Top 7 Spiritual Yatras in India 2026: Char Dham, Ayodhya & Kashi',
   description:
     'Explore the top 7 sacred spiritual yatras in India for 2026. Complete travel guide for Char Dham Yatra, Ayodhya Ram Mandir VIP Darshan, Kashi Vishwanath, Kedarnath & Badrinath with 4-star hotels & AC transport.',
   keywords: [

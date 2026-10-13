@@ -244,9 +244,11 @@ const syncProfileToCloud = async (profile: UserProfile) => {
   }
 };
 
-// Fetch latest global bookings & leads from Supabase / Server API
+// Fetch latest global bookings & leads from Supabase / Server API (Admin only)
 const syncFromCloud = async () => {
   if (typeof window === 'undefined') return;
+  // Security Hardening: Never sync global bookings or leads to regular user browsers
+  if (!window.location.pathname.startsWith('/admin')) return;
 
   // 1. Fetch from Supabase PostgreSQL first if configured
   try {
@@ -369,6 +371,7 @@ let isCloudListenerInitialized = false;
 
 const initCloudListeners = () => {
   if (typeof window === 'undefined' || isCloudListenerInitialized) return;
+  if (!window.location.pathname.startsWith('/admin')) return;
   isCloudListenerInitialized = true;
 
   syncFromCloud();

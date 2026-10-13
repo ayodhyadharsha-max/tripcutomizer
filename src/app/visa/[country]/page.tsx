@@ -16,20 +16,20 @@ export default function VisaCountryPage({ params }: { params: { country: string 
   const visaFee = 6500;
 
   const [applicant, setApplicant] = useState({
-    firstName: 'Rishabh',
-    lastName: 'Jaiswal',
-    passportNo: 'Z9841029',
-    dob: '1994-05-14',
-    passportExpiry: '2031-08-20',
-    email: 'rishabh@example.com',
-    phone: '+91 9876543210',
+    firstName: '',
+    lastName: '',
+    passportNo: '',
+    dob: '',
+    passportExpiry: '',
+    email: '',
+    phone: '',
   });
 
   const [uploadedFiles, setUploadedFiles] = useState({
-    passportDoc: true,
-    photoDoc: true,
-    bankStatement: true,
-    flightTickets: true,
+    passportDoc: false,
+    photoDoc: false,
+    bankStatement: false,
+    flightTickets: false,
   });
 
   const [appRef, setAppRef] = useState('VISA-984210');

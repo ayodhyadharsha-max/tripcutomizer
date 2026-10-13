@@ -2,13 +2,34 @@ import { NextResponse } from 'next/server';
 import Razorpay from 'razorpay';
 import getSupabaseServer from '@/lib/supabaseServer';
 
+import { checkRateLimit, sanitizeInput } from '@/lib/security/sanitizer';
+
 export async function POST(req: Request) {
   try {
+    // 1. IP Rate Limiting
+    const forwardedFor = req.headers.get('x-forwarded-for') || '127.0.0.1';
+    const clientIp = forwardedFor.split(',')[0].trim();
+    const rateCheck = checkRateLimit(`payment_create_${clientIp}`, 10, 60000);
+    if (!rateCheck.allowed) {
+      return NextResponse.json(
+        { success: false, error: 'Too many requests. Please try again later.' },
+        { status: 429 }
+      );
+    }
+
     const body = await req.json().catch(() => ({}));
     const { amount, currency = 'INR', receipt, packageName, customerName, customerEmail, customerPhone } = body;
 
-    const keyId = process.env.RAZORPAY_KEY_ID || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_live_TkIZmrFqBluPJN';
-    const keySecret = process.env.RAZORPAY_KEY_SECRET || 'LR6tbNSU6wozUm97BftZNDmK';
+    const keyId = process.env.RAZORPAY_KEY_ID || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
+    const keySecret = process.env.RAZORPAY_KEY_SECRET;
+
+    if (!keyId || !keySecret) {
+      console.error('[API payment/create-order] Missing server Razorpay credentials in process.env');
+      return NextResponse.json(
+        { success: false, error: 'Payment gateway configuration is missing on server' },
+        { status: 500 }
+      );
+    }
 
     let amountInPaise = amount;
     if (typeof amount === 'number' && amount < 100) {
@@ -32,15 +53,20 @@ export async function POST(req: Request) {
       key_secret: keySecret,
     });
 
+    const safeCustomerName = sanitizeInput(customerName || 'Traveler');
+    const safeCustomerEmail = sanitizeInput(customerEmail || '');
+    const safeCustomerPhone = sanitizeInput(customerPhone || '');
+    const safePackageName = sanitizeInput(packageName || 'Custom Package');
+
     const orderOptions = {
       amount: amountInPaise,
       currency: currency || 'INR',
       receipt: receipt || `rcpt_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
       notes: {
-        customer_name: customerName || 'Traveler',
-        customer_email: customerEmail || '',
-        customer_phone: customerPhone || '',
-        package_name: packageName || 'Custom Package',
+        customer_name: safeCustomerName,
+        customer_email: safeCustomerEmail,
+        customer_phone: safeCustomerPhone,
+        package_name: safePackageName,
       },
     };
 
@@ -53,9 +79,9 @@ export async function POST(req: Request) {
           order_id: order.id,
           amount: amountInPaise / 100,
           currency: order.currency,
-          customer_name: customerName,
-          customer_email: customerEmail,
-          customer_phone: customerPhone,
+          customer_name: safeCustomerName,
+          customer_email: safeCustomerEmail,
+          customer_phone: safeCustomerPhone,
           status: 'CREATED',
           created_at: new Date().toISOString(),
         });

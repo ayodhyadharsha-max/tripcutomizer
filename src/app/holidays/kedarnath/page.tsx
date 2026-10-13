@@ -4,7 +4,7 @@ import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
 export const metadata: Metadata = {
-  title: 'Kedarnath Badrinath Divine Yatra Package Price 2026 | Trip Customizer',
+  title: 'Kedarnath Badrinath Divine Yatra Package Price 2026',
   description:
     'Book 5N/6D Kedarnath Badrinath Do Dham Yatra divine tour package. Includes Haridwar Ganga Aarti, Sonprayag transport, VIP Puja assistance & 4-star hotel stay.',
   keywords: [

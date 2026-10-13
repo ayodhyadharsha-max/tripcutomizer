@@ -2,7 +2,6 @@
 
 /**
  * Web3Forms Instant Direct Email Integration for tripcustomizer@gmail.com
- * Access Key: c542ca79-b08a-4352-bf3e-1045518a0486
  */
 
 export interface Web3FormPayload {
@@ -25,7 +24,12 @@ export const sendWeb3FormLead = async (payload: Web3FormPayload): Promise<boolea
     payload.access_key ||
     process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ||
     process.env.NEXT_PUBLIC_WEB3FORMS_KEY ||
-    'c542ca79-b08a-4352-bf3e-1045518a0486';
+    '';
+
+  if (!apiKey) {
+    console.warn('[Web3Forms] Missing access key in environment variables');
+    return false;
+  }
 
   const customerName = payload.name || 'Valued Customer';
   const destinationName = payload.destination || 'Custom Holiday';

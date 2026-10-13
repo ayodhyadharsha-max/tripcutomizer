@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/Button';
 import { Calendar, User, Clock, ChevronRight, Compass, Sparkles, ShieldCheck, CheckCircle2, PhoneCall, Globe2, Plane, DollarSign, MapPin, Award, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Top 10 Visa-Free Countries for Indian Passport Holders in 2026 (3,000+ Word Ultimate Guide) 🛂✈️ | Trip Customizer',
+  title: 'Top 10 Visa-Free Countries for Indian Passport Holders in 2026 (3,000+ Word Ultimate Guide) 🛂✈️',
   description:
     'The definitive 3,000+ word master guide on visa-free and visa-on-arrival countries for Indian travelers in 2026: Thailand, Vietnam, Bali, Malaysia, Sri Lanka, Kazakhstan, Mauritius & Seychelles. Day-by-day itineraries & budget breakdowns.',
   keywords: [

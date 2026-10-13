@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
@@ -16,9 +17,28 @@ export async function generateMetadata({ params }: HoneymoonPageProps): Promise<
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
 
+  const title = `${destName} Honeymoon Packages 2026 | Best Romantic Couple Deals - TripCustomizer`;
+  const description = `Book exclusive ${destName} Honeymoon Tour Packages with luxury resorts, candlelight dinners, private transfers, and special couple inclusions. 24x7 support & best rates guaranteed.`;
+  const canonicalUrl = `https://www.tripcustomizer.com/honeymoon/${rawSlug}`;
+
   return {
-    title: `${destName} Honeymoon Packages 2026 | Best Romantic Couple Deals - TripCustomizer`,
-    description: `Book exclusive ${destName} Honeymoon Tour Packages with luxury resorts, candlelight dinners, private transfers, and special couple inclusions. 24x7 support & best rates guaranteed.`,
+    title,
+    description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      images: ['https://www.tripcustomizer.com/destinations/hero-holidays.jpg'],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['https://www.tripcustomizer.com/destinations/hero-holidays.jpg'],
+    },
   };
 }
 
@@ -149,18 +169,11 @@ export default function HoneymoonDestinationPage({ params }: HoneymoonPageProps)
     return false;
   });
 
-  // Fail-safe fallback: If specific slug match is empty, show relevant category packages so 0 packages is NEVER displayed
-  const displayPackages = matchedPackages.length > 0
-    ? matchedPackages
-    : allCatalog.filter((p) => {
-        if (!(p.theme || '').toLowerCase().includes('honeymoon')) return false;
-        const isIntlSlug = [
-          'dubai', 'uae', 'bali', 'thailand', 'singapore', 'maldives', 'switzerland',
-          'vietnam', 'japan', 'australia', 'azerbaijan', 'bhutan', 'sri-lanka', 'malaysia',
-          'nepal', 'europe', 'international'
-        ].some((s) => rawSlug.includes(s));
-        return isIntlSlug ? p.isInternational : !p.isInternational;
-      });
+  if (matchedPackages.length === 0) {
+    notFound();
+  }
+
+  const displayPackages = matchedPackages;
 
   const destName = rawSlug
     .split('-')

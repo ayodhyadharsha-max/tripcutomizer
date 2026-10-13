@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 import getSupabaseServer from '@/lib/supabaseServer';
+import { verifyAdminRequest } from '@/lib/security/adminAuth';
+import { checkRateLimit, sanitizeInput } from '@/lib/security/sanitizer';
 
 export interface ServerLead {
   id: string;
@@ -17,22 +19,8 @@ export interface ServerLead {
   source?: string;
 }
 
-// In-memory cache fallback for leads
-let memoryLeads: ServerLead[] = [
-  {
-    id: 'lead-sample-1',
-    name: 'Mr rishabh jais',
-    phone: '8881299358',
-    email: 'rj906906@gmail.com',
-    destination: 'Ayodhya – Varanasi – Prayagraj Classic Heritage',
-    budget: '₹27,405',
-    travelDates: '15 Oct 2026 - 20 Oct 2026',
-    travelersCount: 2,
-    status: 'Converted',
-    createdAt: '2026-09-13T10:00:00.000Z',
-    source: 'Confirmed Online Booking'
-  }
-];
+// In-memory cache for runtime (initialized empty, NO hardcoded customer PII)
+let memoryLeads: ServerLead[] = [];
 
 const getDataFilePath = () => {
   const dataDir = path.join(process.cwd(), 'data');
@@ -73,7 +61,19 @@ const saveLeadsToFile = (leads: ServerLead[]) => {
   }
 };
 
-export async function GET() {
+/**
+ * GET /api/leads
+ * Secured: Requires valid Admin authentication session.
+ */
+export async function GET(req: Request) {
+  const isAdmin = verifyAdminRequest(req);
+  if (!isAdmin) {
+    return NextResponse.json(
+      { success: false, error: 'Unauthorized: Admin authentication required to access leads data' },
+      { status: 401 }
+    );
+  }
+
   let fileLeads = loadLeadsFromFile();
   let supabaseLeads: ServerLead[] = [];
 
@@ -116,23 +116,54 @@ export async function GET() {
   return NextResponse.json({ success: true, leads: merged });
 }
 
+/**
+ * POST /api/leads
+ * Public inquiry submission with rate limiting and input sanitization.
+ */
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
+    // 1. IP Rate Limiting (Prevent spam lead flooding)
+    const forwardedFor = req.headers.get('x-forwarded-for') || '127.0.0.1';
+    const clientIp = forwardedFor.split(',')[0].trim();
+    const rateCheck = checkRateLimit(`lead_submit_${clientIp}`, 10, 60000);
+    if (!rateCheck.allowed) {
+      return NextResponse.json(
+        { success: false, error: 'Too many inquiries submitted. Please wait a minute.' },
+        { status: 429 }
+      );
+    }
+
+    const body = await req.json().catch(() => ({}));
     const existing = loadLeadsFromFile();
 
+    const safeName = sanitizeInput(String(body.name || 'Valued Client')).slice(0, 100);
+    const safePhone = sanitizeInput(String(body.phone || '')).replace(/[^0-9+\s-]/g, '').slice(0, 20);
+    const safeEmail = sanitizeInput(String(body.email || '')).slice(0, 100);
+    const safeDestination = sanitizeInput(String(body.destination || 'Selected Destination')).slice(0, 150);
+    const safeBudget = sanitizeInput(String(body.budget || '')).slice(0, 60);
+    const safeTravelDates = sanitizeInput(String(body.travelDates || '')).slice(0, 80);
+    const safeSource = sanitizeInput(String(body.source || 'Website Lead Form')).slice(0, 60);
+    const travelersCount = Math.min(Math.max(Number(body.travelersCount) || 1, 1), 50);
+
+    if (!safePhone && !safeEmail) {
+      return NextResponse.json(
+        { success: false, error: 'Phone or email is required' },
+        { status: 400 }
+      );
+    }
+
     const newLead: ServerLead = {
-      id: body.id || `lead-${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
-      name: body.name || 'Valued Client',
-      phone: body.phone || '',
-      email: body.email || '',
-      destination: body.destination || 'Selected Destination',
-      budget: body.budget || '',
-      travelDates: body.travelDates || '',
-      travelersCount: Number(body.travelersCount) || 1,
-      status: body.status || 'New',
-      createdAt: body.createdAt || new Date().toISOString(),
-      source: body.source || 'Website Lead Form'
+      id: body.id ? sanitizeInput(String(body.id)).slice(0, 50) : `lead-${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+      name: safeName,
+      phone: safePhone,
+      email: safeEmail,
+      destination: safeDestination,
+      budget: safeBudget,
+      travelDates: safeTravelDates,
+      travelersCount,
+      status: 'New',
+      createdAt: new Date().toISOString(),
+      source: safeSource
     };
 
     const updated = [newLead, ...existing.filter(l => l.id !== newLead.id)];
@@ -160,48 +191,79 @@ export async function POST(req: Request) {
       console.warn('[API Leads POST] Supabase sync info:', supaErr);
     }
 
-    // 2. Instant Email Notification to tripcustomizer@gmail.com via Web3Forms
+    // 2. Email Notification to tripcustomizer@gmail.com via Web3Forms if configured
     try {
-      const apiKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || 'c542ca79-b08a-4352-bf3e-1045518a0486';
-      await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({
-          access_key: apiKey,
-          subject: `⚡ INSTANT CUSTOMER TRIP ENQUIRY: ${newLead.name} - ${newLead.destination}`,
-          from_name: 'tripcustomizer Platform Alert',
-          to_email: 'tripcustomizer@gmail.com',
-          customer_name: newLead.name,
-          phone_number: newLead.phone,
-          email_address: newLead.email || 'Not Provided',
-          destination: newLead.destination,
-          budget: newLead.budget || 'Custom Quote Requested',
-          travel_dates: newLead.travelDates || 'Flexible',
-          travelers_count: newLead.travelersCount || 1,
-          lead_source: newLead.source || 'Website Lead Form',
-          submitted_at: newLead.createdAt,
-        }),
-      });
+      const apiKey = process.env.WEB3FORMS_ACCESS_KEY || process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+      if (apiKey) {
+        await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            access_key: apiKey,
+            subject: `⚡ INSTANT CUSTOMER TRIP ENQUIRY: ${newLead.name} - ${newLead.destination}`,
+            from_name: 'Trip Customizer Platform Alert',
+            to_email: 'tripcustomizer@gmail.com',
+            customer_name: newLead.name,
+            phone_number: newLead.phone,
+            email_address: newLead.email || 'Not Provided',
+            destination: newLead.destination,
+            budget: newLead.budget || 'Custom Quote Requested',
+            travel_dates: newLead.travelDates || 'Flexible',
+            travelers_count: newLead.travelersCount || 1,
+            lead_source: newLead.source || 'Website Lead Form',
+            submitted_at: newLead.createdAt,
+          }),
+        });
+      }
     } catch (emailErr) {
       console.warn('[API Leads POST] Email alert info:', emailErr);
     }
 
-    return NextResponse.json({ success: true, lead: newLead, leads: updated });
+    return NextResponse.json({ success: true, lead: newLead });
   } catch (e: any) {
     return NextResponse.json({ success: false, error: e.message }, { status: 500 });
   }
 }
 
+/**
+ * PATCH /api/leads
+ * Secured: Requires Admin authentication to update lead status.
+ */
 export async function PATCH(req: Request) {
+  const isAdmin = verifyAdminRequest(req);
+  if (!isAdmin) {
+    return NextResponse.json(
+      { success: false, error: 'Unauthorized: Admin authentication required to update lead' },
+      { status: 401 }
+    );
+  }
+
   try {
     const body = await req.json();
     const { id, status } = body;
+    if (!id || !status) {
+      return NextResponse.json({ success: false, error: 'id and status are required' }, { status: 400 });
+    }
+
+    const validStatuses = ['New', 'Contacted', 'Converted', 'Closed'];
+    if (!validStatuses.includes(status)) {
+      return NextResponse.json({ success: false, error: 'Invalid status' }, { status: 400 });
+    }
+
     const existing = loadLeadsFromFile();
     const updated = existing.map(l => (l.id === id ? { ...l, status } : l));
     saveLeadsToFile(updated);
+
+    try {
+      const supabaseServer = getSupabaseServer();
+      if (supabaseServer) {
+        await supabaseServer.from('leads').update({ status }).eq('id', id);
+      }
+    } catch (e) {}
+
     return NextResponse.json({ success: true, leads: updated });
   } catch (e: any) {
     return NextResponse.json({ success: false, error: e.message }, { status: 500 });

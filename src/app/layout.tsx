@@ -160,9 +160,6 @@ export const metadata: Metadata = {
   authors: [{ name: 'Trip Customizer Senior Travel Desk' }],
   creator: 'Trip Customizer',
   publisher: 'Trip Customizer',
-  alternates: {
-    canonical: 'https://www.tripcustomizer.com',
-  },
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },

@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/Button';
 import { Calendar, User, Clock, ChevronRight, Compass, Sparkles, ShieldCheck, CheckCircle2, PhoneCall, Globe2, Snowflake, Sun } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Top 10 Best Winter Holiday Destinations 2026: Kashmir, Dubai, Vietnam, Bali & Manali ❄️🌴 | Trip Customizer',
+  title: 'Top 10 Best Winter Holiday Destinations 2026: Kashmir, Dubai, Vietnam, Bali & Manali ❄️🌴',
   description:
     'Discover the top 10 winter getaway destinations for 2026. Explore snowy Kashmir Gulmarg skiing, Dubai Shopping Festival, Vietnam beaches, Bali villas & Kerala backwaters. Packages starting @ ₹14,999.',
   keywords: [

@@ -27,6 +27,7 @@ yarn-error.log*
 .env.production.local
 *.env
 *.env.local
+!.env.example
 
 # vercel
 .vercel
@@ -38,9 +39,27 @@ next-env.d.ts
 # OS / Editor
 .DS_Store
 *.pem
+*.key
+*.p12
+*.pfx
+
+# Databases & local state
+*.db
+*.db-*
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+prisma/*.db
+prisma/*.db-*
+prisma/*.sqlite
+prisma/*.sqlite3
+data/*.json
 
 # Android build outputs
 /app/
+/android-build-app/
 /*.keystore
 /twa-manifest.json
 /manifest-checksum.txt

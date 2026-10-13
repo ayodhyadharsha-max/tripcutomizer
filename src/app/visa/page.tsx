@@ -6,7 +6,7 @@ import { Card } from '@/components/ui/Card';
 import { FileCheck, ShieldCheck, Clock, CheckCircle2, ChevronRight, Search } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Tourist Visa Assistance & E-Visa Services 2026 | Trip Customizer',
+  title: 'Tourist Visa Assistance & E-Visa Services 2026',
   description:
     'Hassle-free tourist visa assistance for Schengen, USA, UK, Dubai, Vietnam, Japan, Singapore & Australia. 99.4% visa approval success rate with expert document verification.',
   keywords: [

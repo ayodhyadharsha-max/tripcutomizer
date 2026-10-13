@@ -12,26 +12,35 @@ export default function AdminLoginPage() {
   const [adminPassword, setAdminPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
-  const handleAdminLogin = (e: React.FormEvent) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleAdminLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg('');
+    setIsLoading(true);
 
-    // Admin Credentials Validation
-    if (
-      (adminEmail.toLowerCase() === 'admin@tripcustomizer.com' && adminPassword === 'admin123') ||
-      adminPassword === '89421' || adminPassword === 'admin'
-    ) {
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('tc_admin_session', JSON.stringify({
-          authenticated: true,
-          user: adminEmail || 'admin@tripcustomizer.com',
-          role: 'Super Admin',
-          timestamp: new Date().toISOString(),
-        }));
+    try {
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: adminEmail,
+          password: adminPassword,
+        }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.success) {
+        setErrorMsg(data.error || 'Invalid Admin Email or Password. Access Denied.');
+        setIsLoading(false);
+        return;
       }
+
       router.push('/admin/dashboard');
-    } else {
-      setErrorMsg('Invalid Admin Email or Secret Passcode. Access Denied.');
+    } catch {
+      setErrorMsg('Network error. Unable to reach authentication server.');
+      setIsLoading(false);
     }
   };
 

@@ -4,7 +4,7 @@ import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
 export const metadata: Metadata = {
-  title: 'Dubai 5 Days Luxury Tour Package with Desert Safari @ ₹34,500 | Trip Customizer',
+  title: 'Dubai 5 Days Luxury Tour Package with Desert Safari @ ₹34,500',
   description:
     'Book 5N/6D Dubai luxury desert & skyline extravaganza package. Includes 4-star hotel stay, dune bashing, Burj Khalifa entry tickets, Dhow cruise dinner & visa.',
   keywords: [

@@ -1,17 +1,72 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import type { Metadata } from 'next';
 import { Container } from '@/components/ui/Container';
 import { Card } from '@/components/ui/Card';
 import { DEMO_PACKAGES } from '@/data/packagesData';
 import { formatCurrency } from '@/lib/utils';
-import { Heart, Clock, Star, ArrowRight } from 'lucide-react';
+import { Heart, Clock, ArrowRight } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: 'Honeymoon Tour Packages 2026: Romantic Couple Holiday Deals',
+  description:
+    'Book exclusive honeymoon tour packages with private pool villas, overwater bungalows, candlelight dinners, resort stays & romantic inclusions in Bali, Maldives, Switzerland, Paris & Kerala.',
+  keywords: [
+    'honeymoon packages 2026',
+    'romantic honeymoon tour packages',
+    'maldives honeymoon package',
+    'bali honeymoon packages',
+    'switzerland honeymoon tour',
+    'kerala honeymoon packages',
+    'kashmir honeymoon packages',
+    'Trip Customizer',
+  ],
+  alternates: {
+    canonical: 'https://www.tripcustomizer.com/honeymoon',
+  },
+  openGraph: {
+    title: 'Honeymoon Tour Packages 2026: Romantic Couple Holiday Deals | Trip Customizer',
+    description: 'Exclusive honeymoon packages with pool villas, candlelight dinners, and couple transfers.',
+    url: 'https://www.tripcustomizer.com/honeymoon',
+    images: ['https://www.tripcustomizer.com/destinations/hero-holidays.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Honeymoon Tour Packages 2026 | Trip Customizer',
+    description: 'Romantic couple holiday packages across Bali, Maldives, Europe, Kashmir & Kerala.',
+    images: ['https://www.tripcustomizer.com/destinations/hero-holidays.jpg'],
+  },
+};
 
 export default function HoneymoonPage() {
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://www.tripcustomizer.com',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Honeymoon Packages',
+        item: 'https://www.tripcustomizer.com/honeymoon',
+      },
+    ],
+  };
+
   const honeymoonPackages = DEMO_PACKAGES.filter((p) => p.theme === 'Honeymoon' || p.slug.includes('bali') || p.slug.includes('maldives'));
 
   return (
     <div className="bg-slate-50 min-h-screen py-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <Container>
         <div className="bg-gradient-to-r from-rose-900 via-brand-900 to-slate-900 text-white rounded-3xl p-8 mb-8 shadow-xl">
           <div className="flex items-center space-x-2 text-rose-400 font-bold text-xs uppercase tracking-wider mb-2">
