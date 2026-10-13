@@ -57,7 +57,8 @@ prisma/*.sqlite
 prisma/*.sqlite3
 data/*.json
 
-# Android build outputs
+# Android build outputs & local workflows
+/.github/
 /app/
 /android-build-app/
 /*.keystore
