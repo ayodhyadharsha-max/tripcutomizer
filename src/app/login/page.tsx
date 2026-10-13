@@ -343,6 +343,32 @@ export default function LoginPage() {
                   </form>
                 </div>
               )}
+
+              {/* Alternative 1-Click WhatsApp Login Button */}
+              <div className="pt-2">
+                <div className="relative my-3">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-slate-200" />
+                  </div>
+                  <div className="relative flex justify-center text-[10px] uppercase tracking-wider">
+                    <span className="bg-white px-2 text-slate-400 font-bold">Or 100% Instant Delivery</span>
+                  </div>
+                </div>
+
+                <a
+                  href={`https://wa.me/917408763401?text=${encodeURIComponent(
+                    `Hi TripCustomizer Team, please verify my login for mobile number: ${selectedCountry.dialCode} ${phoneNumber || 'N/A'}`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-3 px-4 rounded-xl text-xs transition-all shadow-md flex items-center justify-center space-x-2 text-center"
+                >
+                  <span>🟢 Login / Verify via WhatsApp (+91 7408763401)</span>
+                </a>
+                <p className="text-[10px] text-slate-400 text-center mt-1.5 font-medium">
+                  Direct login assistance if carrier SMS OTP is delayed
+                </p>
+              </div>
             </div>
 
             <div className="pt-4 border-t border-slate-100 text-center">

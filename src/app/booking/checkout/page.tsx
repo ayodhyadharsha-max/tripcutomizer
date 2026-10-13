@@ -236,6 +236,48 @@ export default function BookingCheckoutPage() {
   const [paymentMethod, setPaymentMethod] = useState<'razorpay'>('razorpay');
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
+  // Abandoned Cart Recovery Lead Capture State
+  const capturedAbandonedCartRef = React.useRef(false);
+
+  const captureAbandonedCartLead = (reason: string = 'Checkout Step 1') => {
+    const fullName = `${travellerData.firstName} ${travellerData.lastName}`.trim();
+    const phone = travellerData.phone.trim();
+    const email = travellerData.email.trim();
+
+    const hasValidPhone = phone.replace(/\D/g, '').length >= 10;
+    const hasValidEmail = email.includes('@');
+
+    if (!hasValidPhone && !hasValidEmail) return;
+
+    if (capturedAbandonedCartRef.current && reason.includes('Blur')) return;
+    capturedAbandonedCartRef.current = true;
+
+    try {
+      cloudStore.saveLead({
+        name: fullName || 'Valued Traveler',
+        phone: phone || 'Not Provided',
+        email: email || 'not-provided@tripcustomizer.com',
+        destination: `${pkgInfo.name} (${pkgInfo.destination})`,
+        budget: `₹${grandTotal.toLocaleString('en-IN')}`,
+        travelersCount: pkgInfo.travelersCount,
+        status: 'New',
+        source: `Abandoned Cart Recovery: Checkout Step 1 [${reason}]`,
+      });
+
+      sendWeb3FormLead({
+        subject: `[ABANDONED CART RECOVERY 🛒] Lead: ${pkgInfo.name} (${phone || email})`,
+        name: fullName || 'Valued Client',
+        email: email || 'lead@tripcustomizer.com',
+        phone: phone || 'N/A',
+        destination: `${pkgInfo.name} (${pkgInfo.destination})`,
+        budget: `₹${grandTotal.toLocaleString('en-IN')} (${pkgInfo.travelersCount} Travelers)`,
+        notes: `Traveler engaged in Checkout Step 1. Triggered by: ${reason}. Destination: ${pkgInfo.destination}, Package: ${pkgInfo.name}, Total: ₹${grandTotal.toLocaleString('en-IN')}.`,
+      }).catch(() => {});
+    } catch (err) {
+      console.warn('Abandoned cart capture background note:', err);
+    }
+  };
+
   const loadRazorpaySDK = (): Promise<boolean> => {
     return new Promise((resolve) => {
       if (typeof window === 'undefined') return resolve(false);
@@ -550,7 +592,14 @@ export default function BookingCheckoutPage() {
               )}
             </div>
 
-            <form onSubmit={(e) => { e.preventDefault(); setStep(2); }} className="space-y-4 text-xs">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                captureAbandonedCartLead('Proceed to Step 2 Review');
+                setStep(2);
+              }}
+              className="space-y-4 text-xs"
+            >
               <div className="grid grid-cols-3 gap-2">
                 <div>
                   <label className="font-bold text-slate-700 block mb-1">Title</label>
@@ -597,6 +646,7 @@ export default function BookingCheckoutPage() {
                     placeholder="your.email@example.com"
                     value={travellerData.email}
                     onChange={(e) => setTravellerData({ ...travellerData, email: e.target.value })}
+                    onBlur={() => captureAbandonedCartLead('Email Field Blur')}
                     className="w-full bg-slate-50 border rounded-xl px-3.5 py-2.5 font-semibold text-slate-800"
                   />
                 </div>
@@ -608,12 +658,13 @@ export default function BookingCheckoutPage() {
                     placeholder="+91 9876543210"
                     value={travellerData.phone}
                     onChange={(e) => setTravellerData({ ...travellerData, phone: e.target.value })}
+                    onBlur={() => captureAbandonedCartLead('Phone Field Blur')}
                     className="w-full bg-slate-50 border rounded-xl px-3.5 py-2.5 font-semibold text-slate-800"
                   />
                 </div>
               </div>
 
-              <Button type="submit" variant="accent" size="lg" className="w-full font-black py-3 text-slate-950 mt-4">
+              <Button type="submit" variant="accent" size="lg" className="w-full font-black py-3 text-slate-950 mt-4 cursor-pointer">
                 CONTINUE TO REVIEW DETAILS →
               </Button>
             </form>
