@@ -152,7 +152,7 @@ export const PackageInquiryModal: React.FC<PackageInquiryModalProps> = ({
 
               <div className="flex flex-col gap-3">
                 <a
-                  href={`https://wa.me/919876543210?text=${whatsappMessage}`}
+                  href={`https://wa.me/917408763401?text=${whatsappMessage}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl transition shadow-md"
@@ -331,7 +331,7 @@ export const PackageInquiryModal: React.FC<PackageInquiryModalProps> = ({
 
               <div className="text-center">
                 <a
-                  href={`https://wa.me/919876543210?text=${whatsappMessage}`}
+                  href={`https://wa.me/917408763401?text=${whatsappMessage}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs text-emerald-700 hover:text-emerald-800 font-semibold inline-flex items-center gap-1 mt-1"

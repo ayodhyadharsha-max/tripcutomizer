@@ -478,7 +478,7 @@ export default function ViralSummerHolidayDestinationsPage() {
                       </Button>
                     </Link>
                     <a
-                      href="https://wa.me/919876543210?text=Hello%20Trip%20Customizer%2C%20I%20am%20interested%20in%20Summer%202026%20package%20quote"
+                      href="https://wa.me/917408763401?text=Hello%20Trip%20Customizer%2C%20I%20am%20interested%20in%20Summer%202026%20package%20quote"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs shadow-md flex items-center gap-1.5"

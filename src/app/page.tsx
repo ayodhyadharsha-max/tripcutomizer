@@ -100,7 +100,7 @@ export default function Home() {
     image: 'https://www.tripcustomizer.com/destinations/hero-holidays.jpg',
     description:
       'Book customized international & domestic tour packages across 40+ countries. 4-Star hotels, flights, visa assistance, 5% GST tax compliance, and 24x7 expert travel desk support.',
-    telephone: '+91-9876543210',
+    telephone: '+91-7408763401',
     priceRange: '$$',
     address: {
       '@type': 'PostalAddress',

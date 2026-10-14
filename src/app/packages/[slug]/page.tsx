@@ -53,13 +53,13 @@ export async function generateMetadata({
   const canonicalUrl = `https://www.tripcustomizer.com/packages/${pkg.slug}`;
 
   return {
-    title: pkg.metaTitle,
+    title: `${pkg.metaTitle} | Trip Customizer`,
     description: pkg.metaDescription,
     alternates: {
       canonical: canonicalUrl,
     },
     openGraph: {
-      title: pkg.metaTitle,
+      title: `${pkg.metaTitle} | Trip Customizer`,
       description: pkg.metaDescription,
       url: canonicalUrl,
       type: 'website',
@@ -132,7 +132,7 @@ export default function ProgrammaticPackagePage({
       '@type': 'TravelAgency',
       name: 'Trip Customizer',
       url: 'https://www.tripcustomizer.com',
-      telephone: '+91-9876543210',
+      telephone: '+91-7408763401',
       priceRange: '₹₹',
     },
   };
