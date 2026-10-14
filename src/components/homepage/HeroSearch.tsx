@@ -31,7 +31,7 @@ const slides: HeroSlide[] = [
   },
   {
     id: 2,
-    bgImage: 'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?q=80&w=2000&auto=format&fit=crop',
+    bgImage: 'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?q=75&w=1200&auto=format&fit=crop',
     taglineHeading: 'CHASE THE AURORA. CRUISE THE COAST. MEET SANTA CLAUS.',
     mainTitle: 'Experience Europe Beyond the Postcards',
     subtitle: 'Packages starting @ ₹ 2,33,000.00',
@@ -41,7 +41,7 @@ const slides: HeroSlide[] = [
   },
   {
     id: 3,
-    bgImage: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2000&auto=format&fit=crop',
+    bgImage: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=75&w=1200&auto=format&fit=crop',
     mainTitle: 'Unforgettable Taj experiences across India',
     subtitle: 'Holiday packages starting at ₹ 20,700.00',
     priceTag: '₹ 20,700.00',
@@ -51,7 +51,7 @@ const slides: HeroSlide[] = [
   },
   {
     id: 4,
-    bgImage: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2000&auto=format&fit=crop',
+    bgImage: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=75&w=1200&auto=format&fit=crop',
     taglineHeading: 'EXOTIC TROPICAL ISLAND ESCAPES',
     mainTitle: 'Luxury Overwater Villa Resorts & Beach Holidays',
     subtitle: 'Holiday packages starting at ₹ 35,500.00',
@@ -128,8 +128,8 @@ export const HeroSearch: React.FC = () => {
               alt={slide.mainTitle}
               fill
               priority={idx === 0}
-              sizes="100vw"
-              quality={80}
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1200px"
+              quality={idx === 0 ? 80 : 70}
               className="object-cover"
             />
             {/* Dark overlay gradient for text legibility */}
