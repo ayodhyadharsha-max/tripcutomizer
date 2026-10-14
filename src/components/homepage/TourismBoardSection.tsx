@@ -58,7 +58,7 @@ export const TourismBoardSection: React.FC = () => {
           {boards.map((board) => (
             <Card key={board.name} hoverable className="border-slate-200 group">
               <div className="relative h-44 w-full overflow-hidden bg-slate-100">
-                <Image src={board.image} alt={board.name} fill unoptimized className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                <Image src={board.image} alt={board.name} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 300px" loading="lazy" className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
                 <div className="absolute bottom-3 left-3 text-white">
                   <span className="text-[10px] font-bold bg-brand-500/80 px-2 py-0.5 rounded text-white mb-1 inline-block">

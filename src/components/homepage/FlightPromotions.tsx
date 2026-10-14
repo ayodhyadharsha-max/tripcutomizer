@@ -46,7 +46,7 @@ export const FlightPromotions: React.FC = () => {
             >
               {/* Rounded Square Thumbnail */}
               <div className="relative w-16 h-16 shrink-0 rounded-2xl overflow-hidden shadow-sm border border-white">
-                <Image src={r.image} alt={r.city} fill unoptimized className="object-cover group-hover:scale-110 transition-transform duration-300" />
+                <Image src={r.image} alt={r.city} fill sizes="64px" loading="lazy" className="object-cover group-hover:scale-110 transition-transform duration-300" />
               </div>
 
               {/* Details */}

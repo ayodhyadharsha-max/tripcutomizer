@@ -74,7 +74,7 @@ export const TravelInsights: React.FC = () => {
                 key={reel.id}
                 className="group relative h-96 rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer border-4 border-white"
               >
-                <Image src={reel.image} alt={reel.title} fill unoptimized className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                <Image src={reel.image} alt={reel.title} fill sizes="(max-width: 640px) 100vw, 300px" loading="lazy" className="object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/30" />
 
                 {/* Top Badge */}

@@ -27,7 +27,8 @@ export const SpecialsSection: React.FC = () => {
               src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=800&auto=format&fit=crop"
               alt="Spiritual Journey"
               fill
-              unoptimized
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
+              loading="lazy"
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent" />
@@ -55,7 +56,8 @@ export const SpecialsSection: React.FC = () => {
               src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?q=80&w=800&auto=format&fit=crop"
               alt="Australia"
               fill
-              unoptimized
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
+              loading="lazy"
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
@@ -83,7 +85,8 @@ export const SpecialsSection: React.FC = () => {
               src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=800&auto=format&fit=crop"
               alt="Char Dham"
               fill
-              unoptimized
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
+              loading="lazy"
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent" />
@@ -114,7 +117,8 @@ export const SpecialsSection: React.FC = () => {
               src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=800&auto=format&fit=crop"
               alt="Escorted Tour"
               fill
-              unoptimized
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
+              loading="lazy"
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-transparent" />
@@ -139,7 +143,8 @@ export const SpecialsSection: React.FC = () => {
               src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=800&auto=format&fit=crop"
               alt="Build Itinerary"
               fill
-              unoptimized
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
+              loading="lazy"
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-transparent" />
@@ -164,7 +169,8 @@ export const SpecialsSection: React.FC = () => {
               src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?q=80&w=800&auto=format&fit=crop"
               alt="Honeymoon Escapes"
               fill
-              unoptimized
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
+              loading="lazy"
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-transparent" />
@@ -192,7 +198,8 @@ export const SpecialsSection: React.FC = () => {
               src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop"
               alt="Flights"
               fill
-              unoptimized
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
+              loading="lazy"
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-transparent" />
@@ -217,7 +224,8 @@ export const SpecialsSection: React.FC = () => {
               src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=800&auto=format&fit=crop"
               alt="Custom Packages"
               fill
-              unoptimized
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
+              loading="lazy"
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-transparent" />
@@ -242,7 +250,8 @@ export const SpecialsSection: React.FC = () => {
               src="https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=800&auto=format&fit=crop"
               alt="Vietnam"
               fill
-              unoptimized
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
+              loading="lazy"
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-transparent" />

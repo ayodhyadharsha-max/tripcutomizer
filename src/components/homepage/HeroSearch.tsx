@@ -109,6 +109,12 @@ export const HeroSearch: React.FC = () => {
     router.push(`/holidays/${cleanSlug}`);
   };
 
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
   const activeSlide = slides[currentSlide];
 
   return (
@@ -116,26 +122,32 @@ export const HeroSearch: React.FC = () => {
       {/* Banner Carousel Box */}
       <div className="relative rounded-3xl overflow-hidden shadow-2xl min-h-[480px] sm:min-h-[520px] lg:min-h-[560px] flex items-center justify-center bg-slate-900 group">
         {/* Background Image Carousel with Fade Animation */}
-        {slides.map((slide, idx) => (
-          <div
-            key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              idx === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
-            }`}
-          >
-            <Image
-              src={slide.bgImage}
-              alt={slide.mainTitle}
-              fill
-              priority={idx === 0}
-              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1200px"
-              quality={idx === 0 ? 80 : 70}
-              className="object-cover"
-            />
-            {/* Dark overlay gradient for text legibility */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/40 to-slate-950/50" />
-          </div>
-        ))}
+        {slides.map((slide, idx) => {
+          const shouldRender = idx === 0 || (hasMounted && (idx === currentSlide || idx === (currentSlide + 1) % slides.length));
+          return (
+            <div
+              key={slide.id}
+              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                idx === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
+              }`}
+            >
+              {shouldRender && (
+                <Image
+                  src={slide.bgImage}
+                  alt={slide.mainTitle}
+                  fill
+                  priority={idx === 0}
+                  fetchPriority={idx === 0 ? 'high' : 'auto'}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1200px"
+                  quality={idx === 0 ? 80 : 70}
+                  className="object-cover"
+                />
+              )}
+              {/* Dark overlay gradient for text legibility */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/40 to-slate-950/50" />
+            </div>
+          );
+        })}
 
         {/* Navigation Arrows */}
         <button

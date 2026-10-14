@@ -449,12 +449,12 @@ export default function RootLayout({
         />
         {/* Google Analytics 4 (GA4) */}
         <Script
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID || 'G-J3CHVB5ZZL'}`}
         />
         <Script
           id="google-analytics-init"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
@@ -469,7 +469,7 @@ export default function RootLayout({
         {/* Meta Pixel (Facebook & Instagram Ads) */}
         <Script
           id="meta-pixel-init"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               !function(f,b,e,v,n,t,s)

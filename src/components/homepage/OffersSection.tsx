@@ -104,7 +104,7 @@ export const OffersSection: React.FC = () => {
           {filteredOffers.map((offer) => (
             <Card key={offer.id} hoverable className="flex flex-col h-full bg-white border-slate-200">
               <div className="relative h-44 w-full overflow-hidden">
-                <Image src={offer.image} alt={offer.title} fill unoptimized className="object-cover" />
+                <Image src={offer.image} alt={offer.title} fill sizes="(max-width: 768px) 100vw, 400px" loading="lazy" className="object-cover" />
                 <div className="absolute top-3 left-3 bg-brand-500 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-md uppercase tracking-wider">
                   {offer.product}
                 </div>

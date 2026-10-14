@@ -3,9 +3,9 @@
  * Optimized for Instant APK Launch, Offline Resiliency & Fast Photo Delivery
  */
 
-const STATIC_CACHE = 'tripcustomizer-static-v5';
-const IMAGE_CACHE = 'tripcustomizer-images-v5';
-const PAGES_CACHE = 'tripcustomizer-pages-v5';
+const STATIC_CACHE = 'tripcustomizer-static-v6';
+const IMAGE_CACHE = 'tripcustomizer-images-v6';
+const PAGES_CACHE = 'tripcustomizer-pages-v6';
 
 const PRECACHE_ASSETS = [
   '/',
@@ -35,10 +35,14 @@ async function trimCache(cacheName, maxItems) {
 // 1. Install Event: Precache core shell assets
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(STATIC_CACHE).then((cache) => {
-      return cache.addAll(PRECACHE_ASSETS).catch((err) => {
-        console.warn('Pre-caching partial warning:', err);
-      });
+    caches.open(STATIC_CACHE).then(async (cache) => {
+      await Promise.allSettled(
+        PRECACHE_ASSETS.map((asset) =>
+          cache.add(asset).catch((err) => {
+            console.warn('Pre-cache skip:', asset, err);
+          })
+        )
+      );
     })
   );
   self.skipWaiting();
@@ -94,7 +98,7 @@ self.addEventListener('fetch', (event) => {
         return fetch(request).then((networkResponse) => {
           if (networkResponse && networkResponse.status === 200) {
             const clone = networkResponse.clone();
-            caches.open(STATIC_CACHE).then((cache) => cache.put(request, clone));
+            caches.open(STATIC_CACHE).then((cache) => cache.put(request, clone)).catch(() => {});
           }
           return networkResponse;
         });
@@ -104,7 +108,7 @@ self.addEventListener('fetch', (event) => {
   }
 
   // B. Photos & Media (Images from Unsplash, /_next/image, or local WebP/JPG/PNG)
-  // Strategy: Cache-First with Stale-While-Revalidate for fast photo loading in APK
+  // Strategy: Cache-First with Stale-While-Revalidate for instant 0ms photo delivery
   const isImageRequest =
     request.destination === 'image' ||
     url.hostname === 'images.unsplash.com' ||
@@ -113,21 +117,37 @@ self.addEventListener('fetch', (event) => {
 
   if (isImageRequest) {
     event.respondWith(
-      caches.open(IMAGE_CACHE).then(async (cache) => {
-        const cachedResponse = await cache.match(request);
-        const fetchPromise = fetch(request)
-          .then((networkResponse) => {
-            if (networkResponse && networkResponse.status === 200) {
-              cache.put(request, networkResponse.clone());
-              trimCache(IMAGE_CACHE, MAX_CACHED_IMAGES);
-            }
-            return networkResponse;
-          })
-          .catch(() => cachedResponse);
+      (async () => {
+        try {
+          const cache = await caches.open(IMAGE_CACHE);
+          const cachedResponse = await cache.match(request);
 
-        // Return cached photo immediately if available (0ms load), otherwise wait for network
-        return cachedResponse || fetchPromise;
-      })
+          const networkFetch = fetch(request)
+            .then(async (networkResponse) => {
+              if (networkResponse && (networkResponse.status === 200 || networkResponse.type === 'opaque')) {
+                try {
+                  await cache.put(request, networkResponse.clone());
+                  trimCache(IMAGE_CACHE, MAX_CACHED_IMAGES);
+                } catch (e) {}
+              }
+              return networkResponse;
+            })
+            .catch(() => null);
+
+          if (cachedResponse) {
+            // Keep cache updated in the background
+            event.waitUntil(networkFetch);
+            return cachedResponse;
+          }
+
+          const networkResponse = await networkFetch;
+          if (networkResponse) return networkResponse;
+
+          return new Response('', { status: 408, statusText: 'Image Timeout' });
+        } catch (e) {
+          return fetch(request);
+        }
+      })()
     );
     return;
   }

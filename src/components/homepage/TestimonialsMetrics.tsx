@@ -100,7 +100,7 @@ export const TestimonialsMetrics: React.FC = () => {
 
                 <div className="flex items-center space-x-3 pt-3 border-t border-slate-100">
                   <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 border border-amber-300">
-                    <Image src={t.avatar} alt={t.name} fill unoptimized className="object-cover" />
+                    <Image src={t.avatar} alt={t.name} fill sizes="40px" loading="lazy" className="object-cover" />
                   </div>
                   <div>
                     <h4 className="font-extrabold text-xs text-slate-900">{t.name}</h4>

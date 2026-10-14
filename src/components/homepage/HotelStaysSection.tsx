@@ -36,7 +36,7 @@ export const HotelStaysSection: React.FC = () => {
               href={`/hotels?location=${encodeURIComponent(h.city)}`}
               className="group relative h-96 w-full rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-4 border-white"
             >
-              <Image src={h.image} alt={h.city} fill unoptimized className="object-cover group-hover:scale-105 transition-transform duration-700" />
+              <Image src={h.image} alt={h.city} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 300px" loading="lazy" className="object-cover group-hover:scale-105 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
 
               {/* Bottom Details: City Name & Yellow Expandable Button */}

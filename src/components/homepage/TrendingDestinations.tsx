@@ -264,7 +264,8 @@ export const TrendingDestinations: React.FC = () => {
                   src={item.image}
                   alt={item.name}
                   fill
-                  unoptimized
+                  sizes="(max-width: 640px) 140px, (max-width: 1024px) 165px, 180px"
+                  loading="lazy"
                   className="object-cover group-hover/card:scale-105 transition-transform duration-500"
                 />
 
