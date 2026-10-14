@@ -226,20 +226,6 @@ export const HeroSearch: React.FC = () => {
           </div>
         </div>
 
-        {/* Slide Indicators */}
-        <div className="absolute bottom-16 sm:bottom-20 z-20 flex gap-2">
-          {slides.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setCurrentSlide(idx)}
-              className={`h-2 sm:h-2.5 rounded-full transition-all cursor-pointer ${
-                idx === currentSlide ? 'w-6 sm:w-8 bg-white' : 'w-2 sm:w-2.5 bg-white/50'
-              }`}
-              aria-label={`Go to slide ${idx + 1}`}
-            />
-          ))}
-        </div>
-
         {/* Floating Search Bar (Centered at Bottom) */}
         <div className="absolute bottom-3 sm:bottom-5 z-30 w-full max-w-xl px-3 sm:px-4">
           <form
