@@ -260,6 +260,37 @@ export default function DestinationListingPage({ params }: { params: { destinati
     })),
   };
 
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: `What is the best time to visit ${destName}?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `The peak travel season for ${destName} is during pleasant weather months. Trip Customizer offers customized month-by-month itinerary advice and luxury hotel packages.`,
+        },
+      },
+      {
+        '@type': 'Question',
+        name: `Are flights and meals included in ${destName} packages?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `Yes, all ${destName} packages can be booked with round-trip flights from your home airport, daily buffet breakfast, private AC cabs, and verified 4-star hotel stays.`,
+        },
+      },
+      {
+        '@type': 'Question',
+        name: `Can I customize my ${destName} tour itinerary?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `Yes, 100% of our ${destName} packages can be tailored to your preferred travel dates, duration, hotel rating, and custom sightseeing preferences via our 24x7 travel desk.`,
+        },
+      },
+    ],
+  };
+
   return (
     <>
       <script
@@ -269,6 +300,10 @@ export default function DestinationListingPage({ params }: { params: { destinati
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <Suspense fallback={<div className="min-h-screen bg-slate-900 py-20 text-center text-white font-bold">Loading holiday packages...</div>}>
         <HolidayListingView

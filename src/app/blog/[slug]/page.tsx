@@ -169,8 +169,69 @@ export default function BlogDetailPage({ params }: { params: { slug: string } })
     notFound();
   }
 
+  const canonicalUrl = `https://www.tripcustomizer.com/blog/${params.slug}`;
+
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: article.title,
+    description: article.content.slice(0, 160).trim() + '...',
+    image: [article.heroImage],
+    datePublished: '2026-09-10T08:00:00+05:30',
+    dateModified: '2026-10-15T10:00:00+05:30',
+    author: {
+      '@type': 'Person',
+      name: article.author,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Trip Customizer',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.tripcustomizer.com/logo-square.png',
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': canonicalUrl,
+    },
+  };
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://www.tripcustomizer.com',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Travel Blog',
+        item: 'https://www.tripcustomizer.com/blog',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: article.title,
+        item: canonicalUrl,
+      },
+    ],
+  };
+
   return (
     <div className="bg-slate-50 min-h-screen py-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <Container className="max-w-4xl">
         {/* Breadcrumb */}
         <div className="flex items-center space-x-2 text-xs text-slate-500 mb-4">

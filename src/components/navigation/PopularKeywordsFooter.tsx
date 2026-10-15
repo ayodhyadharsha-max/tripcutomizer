@@ -99,6 +99,48 @@ export const PopularKeywordsFooter: React.FC = () => {
             </div>
           ))}
         </div>
+
+        {/* Trending City-Wise Package Routes for Direct Internal Link Equity */}
+        <div className="mt-10 pt-8 border-t border-brand-800/80">
+          <div className="flex items-center gap-2 mb-3">
+            <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white">
+              Trending City-Wise Tour Packages
+            </h4>
+          </div>
+          <div className="flex flex-wrap gap-2 text-[11px]">
+            <Link href="/packages/dubai-tour-package-from-ahmedabad" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Dubai Package from Ahmedabad
+            </Link>
+            <Link href="/packages/dubai-tour-package-from-mumbai" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Dubai Package from Mumbai
+            </Link>
+            <Link href="/packages/kashmir-5-days-honeymoon-package" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Kashmir Honeymoon 5 Days
+            </Link>
+            <Link href="/packages/ayodhya-varanasi-prayagraj-4-days-tour" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Ayodhya Varanasi Prayagraj 4 Days
+            </Link>
+            <Link href="/packages/char-dham-yatra-10-days-from-delhi" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Char Dham Yatra from Delhi
+            </Link>
+            <Link href="/packages/bali-honeymoon-package-with-private-pool-villa" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Bali Pool Villa Honeymoon
+            </Link>
+            <Link href="/packages/kerala-tour-package-6-days" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Kerala Tour Package 6 Days
+            </Link>
+            <Link href="/packages/vietnam-highlights-7-days" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Vietnam Highlights 7 Days
+            </Link>
+            <Link href="/packages/azerbaijan-baku-5-days-tour-from-delhi" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Baku 5 Days Tour from Delhi
+            </Link>
+            <Link href="/packages/maldives-4-days-water-villa-honeymoon" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Maldives Water Villa Honeymoon
+            </Link>
+          </div>
+        </div>
       </div>
     </nav>
   );
