@@ -878,6 +878,7 @@ interface MatrixEntry {
   metaTitle: string;
   metaDescription: string;
   priceModifier?: number;
+  heroImage?: string;
 }
 
 const MATRIX_ENTRIES: MatrixEntry[] = [
@@ -1322,6 +1323,77 @@ const MATRIX_ENTRIES: MatrixEntry[] = [
   },
 ];
 
+const PROGRAMMATIC_HERO_IMAGES: Record<string, string> = {
+  // Dubai Routes
+  'dubai-tour-package-from-ahmedabad': 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80',
+  'dubai-tour-package-from-mumbai': 'https://images.unsplash.com/photo-1580674684081-7617fbf3d745?auto=format&fit=crop&w=1200&q=80',
+  'dubai-tour-package-from-delhi': 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80',
+  'dubai-tour-package-from-bangalore': 'https://images.unsplash.com/photo-1580674285054-bed31e145f59?auto=format&fit=crop&w=1200&q=80',
+  'dubai-5-days-luxury-family-tour': 'https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1200&q=80',
+  'dubai-tour-package-from-pune': 'https://images.unsplash.com/photo-1526495124232-a04e1849168c?auto=format&fit=crop&w=1200&q=80',
+  'dubai-tour-package-from-kolkata': 'https://images.unsplash.com/photo-1578895101408-1a36b834405b?auto=format&fit=crop&w=1200&q=80',
+  'dubai-tour-package-from-chennai': 'https://images.unsplash.com/photo-1546412414-8035e1776c9a?auto=format&fit=crop&w=1200&q=80',
+
+  // Kashmir Routes
+  'kashmir-5-days-honeymoon-package': 'https://images.unsplash.com/photo-1566837945700-30057527ade0?auto=format&fit=crop&w=1200&q=80',
+  'kashmir-tour-package-from-delhi': 'https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=1200&q=80',
+  'kashmir-tour-package-from-mumbai': 'https://images.unsplash.com/photo-1598091383021-15ddea10925d?auto=format&fit=crop&w=1200&q=80',
+  'kashmir-tour-package-from-ahmedabad': 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80',
+  'kashmir-tour-package-from-pune': 'https://images.unsplash.com/photo-1627894483216-2138af692e32?auto=format&fit=crop&w=1200&q=80',
+  'kashmir-tour-package-from-kolkata': 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80',
+
+  // Ayodhya & Varanasi Routes
+  'ayodhya-ram-mandir-vip-darshan-tour': 'https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&w=1200&q=80',
+  'ayodhya-varanasi-prayagraj-4-days-tour': 'https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1200&q=80',
+  'ayodhya-tour-package-from-delhi': 'https://images.unsplash.com/photo-1571536802807-30451e3955d8?auto=format&fit=crop&w=1200&q=80',
+  'ayodhya-tour-package-from-mumbai': 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80',
+  'ayodhya-tour-package-from-lucknow': 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80',
+  'ayodhya-tour-package-from-ahmedabad': 'https://images.unsplash.com/photo-1605369572399-05d8d64a0f6e?auto=format&fit=crop&w=1200&q=80',
+  'ayodhya-tour-package-from-pune': 'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=1200&q=80',
+  'ayodhya-tour-package-from-kolkata': 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1200&q=80',
+  'ayodhya-tour-package-from-bangalore': 'https://images.unsplash.com/photo-1600100397608-f010f44390f4?auto=format&fit=crop&w=1200&q=80',
+
+  // Bali Routes
+  'bali-honeymoon-package-from-mumbai': 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80',
+  'bali-honeymoon-package-from-delhi': 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1200&q=80',
+  'bali-honeymoon-package-from-bangalore': 'https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=1200&q=80',
+  'bali-6-days-private-pool-villa-honeymoon': 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80',
+  'bali-tour-package-from-ahmedabad': 'https://images.unsplash.com/photo-1558005530-a7958896ec60?auto=format&fit=crop&w=1200&q=80',
+  'bali-tour-package-from-bangalore': 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=80',
+  'bali-tour-package-from-kolkata': 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
+
+  // Thailand Routes
+  'thailand-tour-package-from-delhi': 'https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?auto=format&fit=crop&w=1200&q=80',
+  'thailand-tour-package-from-mumbai': 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=1200&q=80',
+  'thailand-tour-package-from-kolkata': 'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=80',
+  'thailand-5-days-bangkok-pattaya-budget-tour': 'https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=80',
+  'thailand-tour-package-from-ahmedabad': 'https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=80',
+  'thailand-tour-package-from-pune': 'https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=1200&q=80',
+  'thailand-tour-package-from-bangalore': 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=80',
+
+  // Char Dham Routes
+  'char-dham-yatra-package-from-delhi': 'https://images.unsplash.com/photo-1605649487212-47bdab064df8?auto=format&fit=crop&w=1200&q=80',
+  'char-dham-yatra-package-from-ahmedabad': 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80',
+  'char-dham-yatra-10-days-complete-yatra': 'https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1200&q=80',
+
+  // Goa Routes
+  'goa-beach-holiday-package-from-bangalore': 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1200&q=80',
+  'goa-beach-holiday-package-from-mumbai': 'https://images.unsplash.com/photo-1587922546307-776227941871?auto=format&fit=crop&w=1200&q=80',
+  'goa-beach-holiday-package-from-delhi': 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
+  'goa-4-days-beach-party-resort-package': 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=80',
+  'goa-beach-holiday-package-from-ahmedabad': 'https://images.unsplash.com/photo-1614082242765-7c98ca0f3df3?auto=format&fit=crop&w=1200&q=80',
+  'goa-beach-holiday-package-from-pune': 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=1200&q=80',
+  'goa-beach-holiday-package-from-kolkata': 'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?auto=format&fit=crop&w=1200&q=80',
+
+  // Kerala Routes
+  'kerala-5-days-munnar-alleppey-houseboat-package': 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=80',
+  'kerala-tour-package-from-delhi': 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1200&q=80',
+  'kerala-tour-package-from-mumbai': 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=80',
+  'kerala-tour-package-from-bangalore': 'https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=1200&q=80',
+  'kerala-tour-package-from-ahmedabad': 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80',
+  'kerala-tour-package-from-pune': 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
+};
+
 // Generate programmatic package object by combining blueprint + departure city
 function buildProgrammaticPackage(entry: MatrixEntry): ProgrammaticPackage {
   const bp = DESTINATION_BLUEPRINTS[entry.blueprintKey] || DESTINATION_BLUEPRINTS.dubai;
@@ -1345,7 +1417,7 @@ function buildProgrammaticPackage(entry: MatrixEntry): ProgrammaticPackage {
     discountPrice: bp.discountPrice + priceMod,
     rating: 4.9,
     reviewsCount: 380 + (entry.slug.length * 7) % 150,
-    heroImage: bp.heroImage,
+    heroImage: entry.heroImage || PROGRAMMATIC_HERO_IMAGES[entry.slug] || bp.heroImage,
     departureCity: city,
     highlights: bp.highlights,
     inclusions: bp.inclusions,

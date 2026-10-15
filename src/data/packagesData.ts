@@ -1366,8 +1366,10 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 23500,
     "rating": 4.9,
     "reviewsCount": 150,
-    "heroImage": "/destinations/switzerland.jpg",
-    "gallery": [],
+    "heroImage": "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=1200&q=80"
+    ],
     "highlights": [
       "2N Chopta Swiss Tent Camp + Tungnath Shiva Temple Trek",
       "2N Auli Ski Resort & Chair Lift Ride",
@@ -1498,8 +1500,10 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 20500,
     "rating": 4.8,
     "reviewsCount": 490,
-    "heroImage": "/destinations/himachal.jpg",
-    "gallery": [],
+    "heroImage": "https://images.unsplash.com/photo-1627894483216-2138af692e32?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1627894483216-2138af692e32?auto=format&fit=crop&w=1200&q=80"
+    ],
     "highlights": [
       "2N Shimla Kufri & Mall Road",
       "3N Manali Solang Valley & Atal Tunnel Excursion",
@@ -1645,8 +1649,10 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 21000,
     "rating": 4.8,
     "reviewsCount": 160,
-    "heroImage": "/destinations/himachal.jpg",
-    "gallery": [],
+    "heroImage": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80"
+    ],
     "highlights": [
       "2N Dharamshala Dalai Lama Temple & Bhagsu Waterfall",
       "2N Dalhousie Khajjiar Mini Switzerland",
@@ -2913,8 +2919,10 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 17900,
     "rating": 4.8,
     "reviewsCount": 165,
-    "heroImage": "/destinations/south-africa.jpg",
-    "gallery": [],
+    "heroImage": "https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=1200&q=80"
+    ],
     "highlights": [
       "2 Open Gypsy / Canter Safaris in Core Zones 1-5",
       "2N Jungle Resort with Swimming Pool",
@@ -3669,8 +3677,10 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 26500,
     "rating": 4.8,
     "reviewsCount": 130,
-    "heroImage": "/destinations/south-africa.jpg",
-    "gallery": [],
+    "heroImage": "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&w=1200&q=80"
+    ],
     "highlights": [
       "2N Khajuraho Western Group Temples & Light Show",
       "2N Bandhavgarh Tiger Reserve (2 Open Jeep Safaris)"
@@ -5282,8 +5292,10 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 19800,
     "rating": 4.8,
     "reviewsCount": 130,
-    "heroImage": "/destinations/south-africa.jpg",
-    "gallery": [],
+    "heroImage": "https://images.unsplash.com/photo-1584646098378-0874589d76b1?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1584646098378-0874589d76b1?auto=format&fit=crop&w=1200&q=80"
+    ],
     "highlights": [
       "2N Kaziranga 1 Elephant + 1 Jeep Safari (One-Horned Rhino)",
       "1N Majuli World's Largest River Island Satra Culture"
@@ -5837,8 +5849,10 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 17800,
     "rating": 4.8,
     "reviewsCount": 160,
-    "heroImage": "/destinations/south-africa.jpg",
-    "gallery": [],
+    "heroImage": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=80",
+    "gallery": [
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=80"
+    ],
     "highlights": [
       "1N Kolkata Victoria Memorial & Dakshineswar Kali",
       "2N Sundarbans Royal Bengal Tiger Jungle Boat Cruise"
@@ -6230,9 +6244,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 42500,
     "rating": 4.9,
     "reviewsCount": 380,
-    "heroImage": "/destinations/dubai.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/dubai.jpg"
+      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Burj Khalifa 124th Floor Observation Deck",
@@ -6381,9 +6395,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 51000,
     "rating": 4.9,
     "reviewsCount": 420,
-    "heroImage": "/destinations/bali.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/bali.jpg"
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "2N Private Pool Villa Stay in Seminyak",
@@ -6532,9 +6546,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 36500,
     "rating": 4.8,
     "reviewsCount": 350,
-    "heroImage": "/destinations/thailand.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/thailand.jpg"
+      "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Phi Phi Island Speedboat Tour with Lunch",
@@ -6967,9 +6981,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 158000,
     "rating": 4.9,
     "reviewsCount": 180,
-    "heroImage": "/destinations/switzerland.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/switzerland.jpg"
+      "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Mount Titlis Cable Car with Ice Flyer",
@@ -7149,9 +7163,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 39000,
     "rating": 4.8,
     "reviewsCount": 160,
-    "heroImage": "/destinations/vietnam.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/vietnam.jpg"
+      "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "1N Overnight Luxury Cruise in Ha Long Bay",
@@ -7299,9 +7313,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 145000,
     "rating": 5,
     "reviewsCount": 140,
-    "heroImage": "/destinations/japan.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/japan.jpg"
+      "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Shinkansen Bullet Train Experience",
@@ -7647,9 +7661,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 36500,
     "rating": 4.8,
     "reviewsCount": 210,
-    "heroImage": "/destinations/malaysia.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/malaysia.jpg"
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Petronas Twin Towers Skybridge & Observation Deck Ticket",
@@ -7782,9 +7796,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 29999,
     "rating": 4.9,
     "reviewsCount": 340,
-    "heroImage": "/destinations/thailand.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/thailand.jpg",
+      "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=1200&q=80",
       "/destinations/bali.jpg"
     ],
     "highlights": [
@@ -7944,9 +7958,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 34999,
     "rating": 4.9,
     "reviewsCount": 410,
-    "heroImage": "/destinations/thailand.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/thailand.jpg",
+      "https://images.unsplash.com/photo-1506665531195-3566af2b4dfa?auto=format&fit=crop&w=1200&q=80",
       "/destinations/singapore.jpg"
     ],
     "highlights": [
@@ -8125,9 +8139,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 38999,
     "rating": 4.9,
     "reviewsCount": 285,
-    "heroImage": "/destinations/thailand.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/thailand.jpg",
+      "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=80",
       "/destinations/bali.jpg"
     ],
     "highlights": [
@@ -8307,9 +8321,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 42999,
     "rating": 4.95,
     "reviewsCount": 520,
-    "heroImage": "/destinations/thailand.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/thailand.jpg",
+      "https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1200&q=80",
       "/destinations/singapore.jpg"
     ],
     "highlights": [
@@ -8508,9 +8522,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 41999,
     "rating": 4.95,
     "reviewsCount": 190,
-    "heroImage": "/destinations/azerbaijan.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/azerbaijan.jpg",
+      "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80",
       "/destinations/switzerland.jpg"
     ],
     "highlights": [
@@ -8635,9 +8649,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 54999,
     "rating": 4.95,
     "reviewsCount": 220,
-    "heroImage": "/destinations/azerbaijan.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/azerbaijan.jpg",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
       "/destinations/switzerland.jpg"
     ],
     "highlights": [
@@ -8762,9 +8776,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 67999,
     "rating": 4.98,
     "reviewsCount": 310,
-    "heroImage": "/destinations/azerbaijan.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/azerbaijan.jpg",
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80",
       "/destinations/switzerland.jpg"
     ],
     "highlights": [
@@ -8904,9 +8918,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 34999,
     "rating": 4.9,
     "reviewsCount": 380,
-    "heroImage": "/destinations/vietnam.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/vietnam.jpg",
+      "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=1200&q=80",
       "/destinations/japan.jpg"
     ],
     "highlights": [
@@ -9037,9 +9051,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 42999,
     "rating": 4.9,
     "reviewsCount": 290,
-    "heroImage": "/destinations/vietnam.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/vietnam.jpg",
+      "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1200&q=80",
       "/destinations/japan.jpg"
     ],
     "highlights": [
@@ -9167,9 +9181,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 46999,
     "rating": 4.95,
     "reviewsCount": 450,
-    "heroImage": "/destinations/vietnam.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1570789210967-2cac24afeb00?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/vietnam.jpg",
+      "https://images.unsplash.com/photo-1570789210967-2cac24afeb00?auto=format&fit=crop&w=1200&q=80",
       "/destinations/japan.jpg"
     ],
     "highlights": [
@@ -9307,9 +9321,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 68999,
     "rating": 4.95,
     "reviewsCount": 620,
-    "heroImage": "/destinations/dubai.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/dubai.jpg",
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
       "/destinations/switzerland.jpg"
     ],
     "highlights": [
@@ -9442,9 +9456,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 79999,
     "rating": 4.96,
     "reviewsCount": 540,
-    "heroImage": "/destinations/dubai.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/dubai.jpg",
+      "https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1200&q=80",
       "/destinations/switzerland.jpg"
     ],
     "highlights": [
@@ -9586,9 +9600,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 86999,
     "rating": 4.98,
     "reviewsCount": 480,
-    "heroImage": "/destinations/dubai.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1580674684081-7617fbf3d745?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/dubai.jpg",
+      "https://images.unsplash.com/photo-1580674684081-7617fbf3d745?auto=format&fit=crop&w=1200&q=80",
       "/destinations/switzerland.jpg"
     ],
     "highlights": [
@@ -9742,9 +9756,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 43999,
     "rating": 4.95,
     "reviewsCount": 260,
-    "heroImage": "/destinations/vietnam.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/vietnam.jpg",
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80",
       "/destinations/bali.jpg"
     ],
     "highlights": [
@@ -9872,9 +9886,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 48999,
     "rating": 4.96,
     "reviewsCount": 390,
-    "heroImage": "/destinations/vietnam.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/vietnam.jpg",
+      "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1200&q=80",
       "/destinations/japan.jpg"
     ],
     "highlights": [
@@ -10020,9 +10034,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 62999,
     "rating": 4.98,
     "reviewsCount": 310,
-    "heroImage": "/destinations/vietnam.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/vietnam.jpg",
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
       "/destinations/bali.jpg"
     ],
     "highlights": [
@@ -10182,9 +10196,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 46999,
     "rating": 4.92,
     "reviewsCount": 240,
-    "heroImage": "/destinations/bhutan.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/bhutan.jpg",
+      "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=1200&q=80",
       "/destinations/kerala.jpg"
     ],
     "highlights": [
@@ -10335,9 +10349,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 53999,
     "rating": 4.95,
     "reviewsCount": 290,
-    "heroImage": "/destinations/bhutan.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/bhutan.jpg",
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
       "/destinations/kerala.jpg"
     ],
     "highlights": [
@@ -10479,9 +10493,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 62999,
     "rating": 4.98,
     "reviewsCount": 380,
-    "heroImage": "/destinations/bhutan.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/bhutan.jpg",
+      "https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=1200&q=80",
       "/destinations/kerala.jpg"
     ],
     "highlights": [
@@ -10636,9 +10650,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 18999,
     "rating": 4.85,
     "reviewsCount": 210,
-    "heroImage": "/destinations/thailand.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/thailand.jpg"
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "3 Nights Stay in Pattaya 3-Star Hotel",
@@ -10747,9 +10761,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 22999,
     "rating": 4.88,
     "reviewsCount": 270,
-    "heroImage": "/destinations/thailand.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/thailand.jpg"
+      "https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "3 Nights Pattaya Beach + 1 Night Bangkok Shopping Stay",
@@ -10878,9 +10892,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 23999,
     "rating": 4.88,
     "reviewsCount": 310,
-    "heroImage": "/destinations/thailand.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/thailand.jpg"
+      "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "3 Nights Stay at Patong Beach Hotel in Phuket",
@@ -10988,9 +11002,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 24999,
     "rating": 4.89,
     "reviewsCount": 180,
-    "heroImage": "/destinations/thailand.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/thailand.jpg"
+      "https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "4 Nights Beachfront Hotel Stay in Pattaya",
@@ -11113,9 +11127,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 52999,
     "rating": 4.95,
     "reviewsCount": 140,
-    "heroImage": "/destinations/bali.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/bali.jpg",
+      "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&w=1200&q=80",
       "/destinations/thailand.jpg"
     ],
     "highlights": [
@@ -11225,9 +11239,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 46999,
     "rating": 4.96,
     "reviewsCount": 190,
-    "heroImage": "/destinations/bali.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/bali.jpg"
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Bohol Countryside Tour with Chocolate Hills & Tarsier Sanctuary",
@@ -11340,9 +11354,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 53999,
     "rating": 4.9,
     "reviewsCount": 160,
-    "heroImage": "/destinations/singapore.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/singapore.jpg"
+      "https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Guided Manila City Tour (Intramuros, Fort Santiago & Rizal Park)",
@@ -11452,9 +11466,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 48999,
     "rating": 4.93,
     "reviewsCount": 210,
-    "heroImage": "/destinations/bhutan.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/bhutan.jpg"
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "2 Nights Kandy Sacred Temple & Cultural Shows",
@@ -11586,9 +11600,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 48999,
     "rating": 4.92,
     "reviewsCount": 195,
-    "heroImage": "/destinations/bhutan.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1566837945700-30057527ade0?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/bhutan.jpg"
+      "https://images.unsplash.com/photo-1566837945700-30057527ade0?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Kandy Temple of Tooth & Tea Factory Tour",
@@ -11711,9 +11725,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 48999,
     "rating": 4.94,
     "reviewsCount": 230,
-    "heroImage": "/destinations/bhutan.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1588598198321-9735fd52455f?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/bhutan.jpg"
+      "https://images.unsplash.com/photo-1588598198321-9735fd52455f?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "2 Nights Sigiriya Rock Fortress & Dambulla Cave Temple",
@@ -11836,9 +11850,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 48999,
     "rating": 4.96,
     "reviewsCount": 260,
-    "heroImage": "/destinations/bhutan.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/bhutan.jpg"
+      "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Yala National Park Leopard Safari",
@@ -11964,9 +11978,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 35999,
     "rating": 4.88,
     "reviewsCount": 150,
-    "heroImage": "/destinations/bhutan.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1580674684081-7617fbf3d745?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/bhutan.jpg"
+      "https://images.unsplash.com/photo-1580674684081-7617fbf3d745?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "2 Nights Bentota Beachfront Resort Stay",
@@ -12060,9 +12074,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 35999,
     "rating": 4.86,
     "reviewsCount": 120,
-    "heroImage": "/destinations/bhutan.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/bhutan.jpg"
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "2 Nights Colombo Capital City Stay & Shopping",
@@ -12156,9 +12170,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 42999,
     "rating": 4.9,
     "reviewsCount": 170,
-    "heroImage": "/destinations/bhutan.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1578895101408-1a36b834405b?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/bhutan.jpg"
+      "https://images.unsplash.com/photo-1578895101408-1a36b834405b?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "3 Nights Colombo Capital Hotel Stay",
@@ -12266,9 +12280,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 42999,
     "rating": 4.92,
     "reviewsCount": 210,
-    "heroImage": "/destinations/bhutan.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/bhutan.jpg"
+      "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Kandy Temple of Tooth Relic & Hills",
@@ -12377,9 +12391,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 42999,
     "rating": 4.91,
     "reviewsCount": 180,
-    "heroImage": "/destinations/bhutan.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/bhutan.jpg"
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Kandy Temple of Tooth & Tea Factory Visit",
@@ -12488,9 +12502,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 39999,
     "rating": 4.92,
     "reviewsCount": 165,
-    "heroImage": "/destinations/switzerland.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/switzerland.jpg"
+      "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Tbilisi Old Town & Narikala Fortress Cable Car",
@@ -12626,9 +12640,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 72000,
     "rating": 4.95,
     "reviewsCount": 140,
-    "heroImage": "/destinations/switzerland.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1584646098378-0874589d76b1?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/switzerland.jpg"
+      "https://images.unsplash.com/photo-1584646098378-0874589d76b1?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Tbilisi Old Town & Funicular Railway to Mtatsminda",
@@ -12774,9 +12788,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 64999,
     "rating": 4.94,
     "reviewsCount": 155,
-    "heroImage": "/destinations/switzerland.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/switzerland.jpg"
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "3N Tbilisi + 3N Batumi Black Sea Riviera Stay",
@@ -12939,9 +12953,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 175000,
     "rating": 4.96,
     "reviewsCount": 95,
-    "heroImage": "/destinations/japan.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1492571350019-22de08371fd3?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/japan.jpg"
+      "https://images.unsplash.com/photo-1492571350019-22de08371fd3?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Private Tour for 2 Pax in Luxury Sedan / MPV",
@@ -13072,9 +13086,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 185000,
     "rating": 4.98,
     "reviewsCount": 110,
-    "heroImage": "/destinations/japan.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/japan.jpg"
+      "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Exclusive Private Tour for 2 Pax in Tokyo & Mt Fuji",
@@ -13203,9 +13217,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 149999,
     "rating": 4.89,
     "reviewsCount": 80,
-    "heroImage": "/destinations/japan.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1528164344705-475426879c0d?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/japan.jpg"
+      "https://images.unsplash.com/photo-1528164344705-475426879c0d?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Group Departure Special (Min 10 Pax)",
@@ -13338,9 +13352,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 149999,
     "rating": 4.91,
     "reviewsCount": 120,
-    "heroImage": "/destinations/japan.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1578637387939-43c525550085?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/japan.jpg"
+      "https://images.unsplash.com/photo-1578637387939-43c525550085?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Group Departure Special (Min 10 Pax)",
@@ -13466,9 +13480,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 149999,
     "rating": 4.93,
     "reviewsCount": 75,
-    "heroImage": "/destinations/japan.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/japan.jpg"
+      "https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Group Departure Special (Min 10 Pax)",
@@ -13594,9 +13608,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 149999,
     "rating": 4.94,
     "reviewsCount": 145,
-    "heroImage": "/destinations/japan.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1570459027562-4a916cc6113f?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/japan.jpg"
+      "https://images.unsplash.com/photo-1570459027562-4a916cc6113f?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Group Departure Special (Min 10 Pax)",
@@ -13723,9 +13737,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 55000,
     "rating": 4.9,
     "reviewsCount": 185,
-    "heroImage": "/destinations/malaysia.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1541888946425-d0fbb18669f7?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/malaysia.jpg"
+      "https://images.unsplash.com/photo-1541888946425-d0fbb18669f7?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "FREE Visa on Arrival / Entry for Indian Passport Holders",
@@ -13865,9 +13879,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 75000,
     "rating": 4.94,
     "reviewsCount": 160,
-    "heroImage": "/destinations/malaysia.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/malaysia.jpg"
+      "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "FREE Visa-Free Entry for Indian Passport Holders",
@@ -14023,9 +14037,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 19999,
     "rating": 4.85,
     "reviewsCount": 140,
-    "heroImage": "/destinations/nepal.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/nepal.jpg"
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Pashupatinath Temple Holy Darshan",
@@ -14130,9 +14144,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 25999,
     "rating": 4.89,
     "reviewsCount": 165,
-    "heroImage": "/destinations/nepal.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/nepal.jpg"
+      "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Pashupatinath Temple & Boudhanath Stupa",
@@ -14245,9 +14259,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 32999,
     "rating": 4.93,
     "reviewsCount": 210,
-    "heroImage": "/destinations/nepal.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/nepal.jpg"
+      "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "2N Kathmandu + 2N Pokhara Scenic Lakeside",
@@ -14379,9 +14393,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 44999,
     "rating": 4.96,
     "reviewsCount": 240,
-    "heroImage": "/destinations/nepal.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1605649487212-47bdab064df8?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/nepal.jpg"
+      "https://images.unsplash.com/photo-1605649487212-47bdab064df8?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "2N Kathmandu + 2N Pokhara + 1N Jomsom / Muktinath Stay",
@@ -14543,9 +14557,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 64999,
     "rating": 4.91,
     "reviewsCount": 210,
-    "heroImage": "/destinations/dubai.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1580674285054-bed31e145f59?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/dubai.jpg"
+      "https://images.unsplash.com/photo-1580674285054-bed31e145f59?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Includes UAE Tourist Visa & Private Airport Transfers",
@@ -14682,9 +14696,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 75999,
     "rating": 4.95,
     "reviewsCount": 195,
-    "heroImage": "/destinations/dubai.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1526495124232-a04e1849168c?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/dubai.jpg"
+      "https://images.unsplash.com/photo-1526495124232-a04e1849168c?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Includes UAE Visa & Private Airport Transfers",
@@ -14831,9 +14845,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 82000,
     "rating": 4.97,
     "reviewsCount": 230,
-    "heroImage": "/destinations/dubai.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1546412414-8035e1776c9a?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/dubai.jpg"
+      "https://images.unsplash.com/photo-1546412414-8035e1776c9a?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "6 Nights Extended Leisure Stay in Dubai",
@@ -14989,9 +15003,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 59999,
     "rating": 4.93,
     "reviewsCount": 160,
-    "heroImage": "/destinations/egypt.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/egypt.jpg"
+      "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Great Pyramids of Giza, Sphinx & Grand Egyptian Museum",
@@ -15106,9 +15120,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 66000,
     "rating": 4.95,
     "reviewsCount": 175,
-    "heroImage": "/destinations/egypt.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/egypt.jpg"
+      "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Pyramids of Giza, Sphinx & Grand Egyptian Museum",
@@ -15236,9 +15250,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 112000,
     "rating": 4.98,
     "reviewsCount": 190,
-    "heroImage": "/destinations/egypt.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/egypt.jpg"
+      "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Includes 3 NIGHTS Full Board Stay on Luxury Nile Cruise",
@@ -15395,9 +15409,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 35000,
     "rating": 4.92,
     "reviewsCount": 240,
-    "heroImage": "/destinations/bali.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/bali.jpg"
+      "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Tanjung Benoa Watersports (Banana Boat, Jet Ski)",
@@ -15526,9 +15540,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 42000,
     "rating": 4.96,
     "reviewsCount": 215,
-    "heroImage": "/destinations/bali.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/bali.jpg"
+      "https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Includes Bali Hai Sunset Dinner Cruise Experience",
@@ -15673,9 +15687,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 48000,
     "rating": 4.98,
     "reviewsCount": 260,
-    "heroImage": "/destinations/bali.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/bali.jpg"
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Nusa Penida Island Tour with Snorkeling at Crystal Bay",
@@ -15833,9 +15847,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 380000,
     "rating": 4.98,
     "reviewsCount": 115,
-    "heroImage": "/destinations/switzerland.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/switzerland.jpg"
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "10 European Countries: UK (3N), France, Belgium, Netherlands, Germany, Switzerland, Austria, Liechtenstein, Italy & Vatican",
@@ -16147,9 +16161,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 310000,
     "rating": 4.96,
     "reviewsCount": 130,
-    "heroImage": "/destinations/switzerland.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/switzerland.jpg"
+      "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "8 Countries: France, Belgium, Netherlands, Germany, Switzerland, Austria, Liechtenstein, Italy & Vatican",
@@ -16405,9 +16419,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 325000,
     "rating": 4.97,
     "reviewsCount": 105,
-    "heroImage": "/destinations/switzerland.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/switzerland.jpg"
+      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Starts in London (LHR) & Ends in Rome (FCO)",
@@ -16663,9 +16677,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 245000,
     "rating": 4.95,
     "reviewsCount": 140,
-    "heroImage": "/destinations/switzerland.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/switzerland.jpg"
+      "https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "3 Nights Paris + 1 Night Geneva + 3 Nights Central Switzerland",
@@ -16860,9 +16874,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 280000,
     "rating": 4.97,
     "reviewsCount": 150,
-    "heroImage": "/destinations/switzerland.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/switzerland.jpg"
+      "https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "3N Paris + 1N Netherlands + 1N Germany + 3N Central Switzerland",
@@ -17077,9 +17091,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 39999,
     "rating": 4.9,
     "reviewsCount": 130,
-    "heroImage": "/destinations/switzerland.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1580674285054-bed31e145f59?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/switzerland.jpg"
+      "https://images.unsplash.com/photo-1580674285054-bed31e145f59?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Ararat Brandy Factory Tour & Degustation Tasting",
@@ -17196,9 +17210,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 49999,
     "rating": 4.94,
     "reviewsCount": 150,
-    "heroImage": "/destinations/switzerland.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/switzerland.jpg"
+      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Garni Pagan Temple & UNESCO Geghard Cave Monastery",
@@ -17326,9 +17340,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 62000,
     "rating": 4.97,
     "reviewsCount": 165,
-    "heroImage": "/destinations/switzerland.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/switzerland.jpg"
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "6,000-Year-Old Areni-1 Cave & Areni Winery Tasting",
@@ -17470,9 +17484,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 39999,
     "rating": 4.92,
     "reviewsCount": 180,
-    "heroImage": "/destinations/dubai.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1610444585141-8f52636a0d24?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/dubai.jpg"
+      "https://images.unsplash.com/photo-1610444585141-8f52636a0d24?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Baku Old City UNESCO Icherisheher & Flame Towers Funicular Ride",
@@ -17602,9 +17616,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 44000,
     "rating": 4.95,
     "reviewsCount": 195,
-    "heroImage": "/destinations/dubai.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1584646098378-0874589d76b1?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/dubai.jpg"
+      "https://images.unsplash.com/photo-1584646098378-0874589d76b1?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "5 Nights Hotel Stay in Baku Capital",
@@ -17745,9 +17759,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 52000,
     "rating": 4.98,
     "reviewsCount": 210,
-    "heroImage": "/destinations/dubai.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/dubai.jpg"
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "Includes 2 NIGHTS OVERNIGHT STAY in Gabala Mountain Resort",
