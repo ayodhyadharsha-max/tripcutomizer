@@ -55,9 +55,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 18500,
     "rating": 4.9,
     "reviewsCount": 230,
-    "heroImage": "/destinations/ayodhya-varanasi.jpg",
+    "heroImage": "/destinations/verified/ayodhya-ram-mandir.jpg",
     "gallery": [
-      "/destinations/ayodhya-varanasi.jpg"
+      "/destinations/verified/ayodhya-ram-mandir.jpg"
     ],
     "highlights": [
       "1N Ayodhya Ram Mandir VIP Darshan",
@@ -379,7 +379,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 18900,
     "rating": 4.8,
     "reviewsCount": 110,
-    "heroImage": "/destinations/ayodhya-varanasi.jpg",
+    "heroImage": "/destinations/verified/ayodhya-hanuman-garhi.jpg",
     "gallery": [],
     "highlights": [
       "Naimisharanya Chakra Tirtha Dip",
@@ -494,7 +494,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 19500,
     "rating": 4.8,
     "reviewsCount": 95,
-    "heroImage": "/destinations/ayodhya-varanasi.jpg",
+    "heroImage": "/destinations/verified/varanasi-ganga-aarti.jpg",
     "gallery": [],
     "highlights": [
       "Vindhyavasini Ropeway VIP Darshan",
@@ -726,7 +726,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "reviewsCount": 310,
     "heroImage": "/destinations/char-dham.jpg",
     "gallery": [
-      "/destinations/char-dham.jpg"
+      "/destinations/verified/varanasi-ganga-aarti.jpg"
     ],
     "highlights": [
       "Yamunotri, Gangotri, Kedarnath & Badrinath",

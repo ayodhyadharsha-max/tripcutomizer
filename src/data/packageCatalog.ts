@@ -140,11 +140,35 @@ export const OTA_DOMESTIC_SECTORS: SectorDefinition[] = [
     country: 'India',
     regionCategory: 'Spiritual',
     isInternational: false,
-    cities: ['Kedarnath', 'Badrinath', 'Gangotri', 'Yamunotri', 'Varanasi', 'Ayodhya', 'Tirupati', 'Shirdi', 'Puri', 'Dwarka'],
-    count: 250,
+    cities: ['Kedarnath', 'Badrinath', 'Gangotri', 'Yamunotri', 'Tirupati', 'Shirdi', 'Puri', 'Dwarka'],
+    count: 200,
     minPrice: 4999,
     maxPrice: 85000,
     heroImage: '/destinations/spiritual.jpg'
+  },
+  {
+    region: 'Ayodhya & Ram Janmabhoomi',
+    destinationSlug: 'ayodhya',
+    country: 'India',
+    regionCategory: 'Spiritual',
+    isInternational: false,
+    cities: ['Ram Janmabhoomi', 'Hanuman Garhi', 'Kanak Bhawan', 'Saryu Ghat', 'Ram Ki Paidi', 'Surya Kund', 'Nageshwarnath', 'Guptar Ghat'],
+    count: 120,
+    minPrice: 5999,
+    maxPrice: 35000,
+    heroImage: '/destinations/verified/ayodhya-ram-mandir.jpg'
+  },
+  {
+    region: 'Varanasi & Kashi Vishwanath',
+    destinationSlug: 'varanasi',
+    country: 'India',
+    regionCategory: 'Spiritual',
+    isInternational: false,
+    cities: ['Kashi Vishwanath', 'Dashashwamedh Ghat', 'Assi Ghat', 'Sarnath', 'Manikarnika', 'Ramnagar Fort'],
+    count: 120,
+    minPrice: 6999,
+    maxPrice: 38000,
+    heroImage: '/destinations/verified/varanasi-ganga-aarti.jpg'
   },
   {
     region: 'Karnataka & Coorg',
@@ -456,6 +480,25 @@ const SECTOR_IMAGE_POOLS: Record<string, string[]> = {
     '/destinations/verified/dubai-yas-island.jpg',
     '/destinations/verified/dubai-frame-exterior.jpg',
     '/destinations/verified/dubai-creek.jpg',
+    '/destinations/verified/dubai-ferrari-world.jpg',
+    '/destinations/dubai/dubai-creek-abra.jpg',
+    '/destinations/dubai/dubai-frame.jpg',
+    '/destinations/dubai/dubai-marina-skyscrapers.jpg',
+    '/destinations/dubai.jpg',
+  ],
+  ayodhya: [
+    '/destinations/verified/ayodhya-ram-mandir.jpg',
+    '/destinations/verified/ayodhya-saryu-ghat.jpg',
+    '/destinations/verified/ayodhya-hanuman-garhi.jpg',
+    '/destinations/verified/ayodhya-kanak-bhawan.jpg',
+    '/destinations/ayodhya-varanasi.jpg',
+    '/destinations/spiritual.jpg',
+  ],
+  varanasi: [
+    '/destinations/verified/varanasi-ganga-aarti.jpg',
+    '/destinations/verified/varanasi-kashi-vishwanath.jpg',
+    '/destinations/verified/prayagraj-triveni-sangam.jpg',
+    '/destinations/ayodhya-varanasi.jpg',
   ],
   bali: [
     '/destinations/verified/bali-kelingking.jpg',
@@ -464,6 +507,7 @@ const SECTOR_IMAGE_POOLS: Record<string, string[]> = {
     '/destinations/verified/bali-uluwatu.jpg',
     '/destinations/verified/bali-besakih.jpg',
     '/destinations/bali.jpg',
+    '/destinations/hero-beach.jpg',
   ],
   thailand: [
     '/destinations/verified/thailand-phi-phi.jpg',
@@ -497,6 +541,11 @@ const SECTOR_IMAGE_POOLS: Record<string, string[]> = {
   ],
   vietnam: [
     '/destinations/verified/vietnam-halong-bay.jpg',
+    '/destinations/verified/vietnam-bana-hills.jpg',
+    '/destinations/verified/vietnam-danang.jpg',
+    '/destinations/verified/vietnam-ho-chi-minh.jpg',
+    '/destinations/verified/vietnam-sapa.jpg',
+    '/destinations/verified/vietnam-phu-quoc.jpg',
     '/destinations/vietnam.jpg',
   ],
   europe: [
@@ -522,9 +571,11 @@ const SECTOR_IMAGE_POOLS: Record<string, string[]> = {
     '/destinations/rajasthan.jpg',
   ],
   himachal: [
+    '/destinations/verified/india-manali.jpg',
     '/destinations/himachal.jpg',
   ],
   uttarakhand: [
+    '/destinations/verified/india-auli.jpg',
     '/destinations/uttarakhand.jpg',
   ],
   baku: [
@@ -533,175 +584,31 @@ const SECTOR_IMAGE_POOLS: Record<string, string[]> = {
   ],
   egypt: [
     '/destinations/verified/egypt-pyramids.jpg',
+    '/destinations/verified/egypt-alexandria.jpg',
+    '/destinations/verified/egypt-luxor-nile.jpg',
     '/destinations/egypt.jpg',
   ],
   nepal: [
     '/destinations/verified/nepal-swayambhunath.jpg',
+    '/destinations/verified/nepal-bhaktapur.jpg',
+    '/destinations/verified/nepal-pokhara.jpg',
+    '/destinations/verified/nepal-muktinath.jpg',
     '/destinations/nepal.jpg',
   ],
   japan: [
     '/destinations/verified/japan-mount-fuji.jpg',
     '/destinations/verified/japan-fushimi-inari.jpg',
+    '/destinations/verified/japan-osaka-castle.jpg',
+    '/destinations/verified/japan-sapporo.jpg',
+    '/destinations/verified/japan-tokyo-tower.jpg',
     '/destinations/japan.jpg',
   ],
   malaysia: [
     '/destinations/verified/malaysia-petronas-towers.jpg',
+    '/destinations/verified/malaysia-batu-caves.jpg',
+    '/destinations/verified/malaysia-cameron-highlands.jpg',
     '/destinations/malaysia.jpg',
   ]
-};
-
-const CITY_IMAGE_POOLS: Record<string, string[]> = {
-  // Dubai & UAE
-  'desert safari': ['/destinations/verified/dubai-desert-safari.jpg'],
-  'yas island': ['/destinations/verified/dubai-yas-island.jpg', '/destinations/verified/dubai-ferrari-world.jpg'],
-  'abu dhabi': ['/destinations/verified/dubai-sheikh-zayed-mosque.jpg', '/destinations/verified/dubai-ferrari-world.jpg'],
-  'dubai city': [
-    '/destinations/verified/dubai-burj-khalifa.jpg',
-    '/destinations/verified/dubai-marina.jpg',
-    '/destinations/verified/dubai-palm-jumeirah.jpg',
-    '/destinations/verified/dubai-atlantis.jpg',
-    '/destinations/verified/dubai-burj-al-arab.jpg',
-    '/destinations/verified/dubai-miracle-garden.jpg',
-    '/destinations/verified/dubai-frame-exterior.jpg',
-    '/destinations/verified/dubai-creek.jpg',
-  ],
-
-  // Religious & Spiritual
-  'ayodhya': [
-    '/destinations/verified/ayodhya-ram-mandir.jpg',
-    '/destinations/verified/ayodhya-saryu-ghat.jpg',
-    '/destinations/verified/ayodhya-hanuman-garhi.jpg',
-    '/destinations/verified/ayodhya-kanak-bhawan.jpg',
-  ],
-  'varanasi': [
-    '/destinations/verified/varanasi-ganga-aarti.jpg',
-    '/destinations/verified/varanasi-kashi-vishwanath.jpg',
-  ],
-  'prayagraj': ['/destinations/verified/prayagraj-triveni-sangam.jpg'],
-  'kedarnath': ['/destinations/verified/chardham-kedarnath.jpg'],
-  'badrinath': ['/destinations/verified/chardham-badrinath.jpg'],
-  'gangotri': ['/destinations/verified/chardham-gangotri.jpg'],
-  'yamunotri': ['/destinations/verified/chardham-kedarnath.jpg'],
-
-  // Kashmir
-  'srinagar': ['/destinations/verified/kashmir-dal-lake.jpg'],
-  'gulmarg': ['/destinations/verified/kashmir-gulmarg.jpg'],
-  'pahalgam': ['/destinations/verified/kashmir-pahalgam.jpg'],
-  'sonamarg': ['/destinations/verified/kashmir-sonamarg.jpg'],
-  'yusmarg': ['/destinations/kashmir.jpg'],
-
-  // Kerala
-  'munnar': ['/destinations/verified/kerala-munnar.jpg'],
-  'alleppey': ['/destinations/verified/kerala-alleppey.jpg'],
-  'cochin': ['/destinations/verified/kerala-kochi.jpg'],
-  'thekkady': ['/destinations/verified/kerala-athirappilly.jpg'],
-  'varkala': ['/destinations/verified/kerala-varkala.jpg'],
-  'kovalam': ['/destinations/verified/kerala-alleppey.jpg'],
-  'kumarakom': ['/destinations/verified/kerala-alleppey.jpg'],
-
-  // Goa
-  'north goa': ['/destinations/verified/goa-calangute.jpg'],
-  'south goa': ['/destinations/verified/goa-palolem.jpg'],
-  'panaji': ['/destinations/verified/goa-bom-jesus.jpg'],
-  'calangute': ['/destinations/verified/goa-calangute.jpg'],
-  'dudhsagar': ['/destinations/verified/goa-dudhsagar.jpg'],
-
-  // Thailand
-  'bangkok': [
-    '/destinations/verified/thailand-wat-arun.jpg',
-    '/destinations/verified/thailand-grand-palace.jpg',
-  ],
-  'pattaya': [
-    '/destinations/verified/thailand-sanctuary-truth.jpg',
-    '/destinations/verified/thailand-pattaya.jpg',
-  ],
-  'phuket': [
-    '/destinations/verified/thailand-phi-phi.jpg',
-    '/destinations/verified/thailand-railay.jpg',
-    '/destinations/verified/thailand-james-bond.jpg',
-  ],
-  'krabi': [
-    '/destinations/verified/thailand-railay.jpg',
-    '/destinations/verified/thailand-phi-phi.jpg',
-  ],
-
-  // Bali
-  'ubud': ['/destinations/verified/bali-tegallalang.jpg', '/destinations/verified/bali-besakih.jpg'],
-  'seminyak': ['/destinations/verified/bali-tanah-lot.jpg'],
-  'kuta': ['/destinations/verified/bali-kelingking.jpg'],
-  'nusa dua': ['/destinations/verified/bali-uluwatu.jpg'],
-  'uluwatu': ['/destinations/verified/bali-uluwatu.jpg'],
-  'sanur': ['/destinations/verified/bali-tanah-lot.jpg'],
-
-  // Europe
-  'paris': ['/destinations/verified/europe-eiffel-tower.jpg'],
-  'rome': ['/destinations/verified/europe-colosseum.jpg'],
-  'switzerland': ['/destinations/verified/europe-jungfrau.jpg'],
-  'amsterdam': ['/destinations/verified/europe-amsterdam-canals.jpg'],
-  'london': ['/destinations/verified/europe-tower-bridge.jpg'],
-
-  // Sri Lanka
-  'colombo': ['/destinations/verified/srilanka-galle.jpg'],
-  'kandy': ['/destinations/verified/srilanka-kandy.jpg'],
-  'nuwara eliya': ['/destinations/verified/srilanka-nine-arch.jpg'],
-  'sigiriya': ['/destinations/verified/srilanka-sigiriya.jpg'],
-  'bentota': ['/destinations/verified/srilanka-galle.jpg'],
-  'yala': ['/destinations/verified/srilanka-yala.jpg'],
-
-  // Egypt
-  'cairo': ['/destinations/verified/egypt-pyramids.jpg'],
-  'alexandria': ['/destinations/verified/egypt-alexandria.jpg'],
-  'luxor': ['/destinations/verified/egypt-luxor-nile.jpg'],
-
-  // Azerbaijan
-  'baku': ['/destinations/verified/baku-flame-towers.jpg'],
-
-  // Nepal
-  'kathmandu': ['/destinations/verified/nepal-swayambhunath.jpg'],
-  'pokhara': ['/destinations/verified/nepal-pokhara.jpg'],
-  'bhaktapur': ['/destinations/verified/nepal-bhaktapur.jpg'],
-  'muktinath': ['/destinations/verified/nepal-muktinath.jpg'],
-
-  // Japan
-  'tokyo': ['/destinations/verified/japan-tokyo-tower.jpg', '/destinations/verified/japan-mount-fuji.jpg'],
-  'kyoto': ['/destinations/verified/japan-fushimi-inari.jpg'],
-  'osaka': ['/destinations/verified/japan-osaka-castle.jpg'],
-  'sapporo': ['/destinations/verified/japan-sapporo.jpg'],
-
-  // Malaysia
-  'kuala lumpur': ['/destinations/verified/malaysia-petronas-towers.jpg'],
-  'genting': ['/destinations/verified/malaysia-batu-caves.jpg'],
-  'cameron': ['/destinations/verified/malaysia-cameron-highlands.jpg'],
-
-  // Vietnam
-  'hanoi': ['/destinations/verified/vietnam-halong-bay.jpg'],
-  'ha long bay': ['/destinations/verified/vietnam-halong-bay.jpg'],
-  'da nang': ['/destinations/verified/vietnam-bana-hills.jpg', '/destinations/verified/vietnam-danang.jpg'],
-  'hoi an': ['/destinations/verified/vietnam-bana-hills.jpg'],
-  'ho chi minh': ['/destinations/verified/vietnam-ho-chi-minh.jpg'],
-  'sapa': ['/destinations/verified/vietnam-sapa.jpg'],
-  'phu quoc': ['/destinations/verified/vietnam-phu-quoc.jpg'],
-
-  // Almaty
-  'almaty': ['/destinations/verified/almaty-city.jpg'],
-  'charyn': ['/destinations/verified/almaty-charyn-canyon.jpg'],
-
-  // Georgia
-  'tbilisi': ['/destinations/verified/georgia-tbilisi.jpg'],
-  'batumi': ['/destinations/verified/georgia-batumi.jpg'],
-  'kazbegi': ['/destinations/verified/georgia-kazbegi.jpg'],
-
-  // Armenia
-  'yerevan': ['/destinations/verified/armenia-yerevan.jpg'],
-  'sevan': ['/destinations/verified/armenia-lake-sevan.jpg'],
-  'garni': ['/destinations/verified/armenia-garni.jpg'],
-
-  // India
-  'auli': ['/destinations/verified/india-auli.jpg'],
-  'manali': ['/destinations/verified/india-manali.jpg'],
-  'ranthambore': ['/destinations/verified/india-ranthambore.jpg'],
-  'kaziranga': ['/destinations/verified/india-kaziranga.jpg'],
-  'khajuraho': ['/destinations/verified/india-khajuraho.jpg'],
 };
 
 function slugify(text: string): string {
@@ -803,12 +710,10 @@ function generateSynthesizedPackage(
     }
   ];
 
-  const cityKey = city.toLowerCase();
-  const imagePool = CITY_IMAGE_POOLS[cityKey] || SECTOR_IMAGE_POOLS[sector.destinationSlug] || [sector.heroImage];
   const sectorPool = SECTOR_IMAGE_POOLS[sector.destinationSlug] || [sector.heroImage];
-  const assignedHeroImage = imagePool[pkgIndex % imagePool.length];
-  const gallerySecondary = imagePool[(pkgIndex + 1) % imagePool.length] || sectorPool[(pkgIndex + 1) % sectorPool.length] || assignedHeroImage;
-  const galleryTertiary = sectorPool[(pkgIndex + 2) % sectorPool.length] || sectorPool[0] || assignedHeroImage;
+  const assignedHeroImage = sectorPool[pkgIndex % sectorPool.length];
+  const gallerySecondary = sectorPool[(pkgIndex + 1) % sectorPool.length] || assignedHeroImage;
+  const galleryTertiary = sectorPool[(pkgIndex + 2) % sectorPool.length] || assignedHeroImage;
 
   return {
     id,
