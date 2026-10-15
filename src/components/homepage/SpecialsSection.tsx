@@ -24,7 +24,7 @@ export const SpecialsSection: React.FC = () => {
             className="relative h-64 rounded-3xl overflow-hidden shadow-md group border border-slate-100 block transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
           >
             <Image
-              src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=800&auto=format&fit=crop"
+              src="/destinations/verified/chardham-kedarnath.jpg"
               alt="Spiritual Journey"
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
@@ -53,7 +53,7 @@ export const SpecialsSection: React.FC = () => {
             className="relative h-64 rounded-3xl overflow-hidden shadow-md group border border-slate-100 block transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
           >
             <Image
-              src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?q=80&w=800&auto=format&fit=crop"
+              src="/destinations/australia.jpg"
               alt="Australia"
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
@@ -82,7 +82,7 @@ export const SpecialsSection: React.FC = () => {
             className="relative h-64 rounded-3xl overflow-hidden shadow-md group border border-slate-100 block transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
           >
             <Image
-              src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=800&auto=format&fit=crop"
+              src="/destinations/verified/srilanka-sigiriya.jpg"
               alt="Char Dham"
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
@@ -114,7 +114,7 @@ export const SpecialsSection: React.FC = () => {
             className="relative h-72 rounded-3xl overflow-hidden shadow-md group border border-slate-100 bg-amber-50 block transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
           >
             <Image
-              src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=800&auto=format&fit=crop"
+              src="/destinations/verified/europe-eiffel-tower.jpg"
               alt="Escorted Tour"
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
@@ -140,7 +140,7 @@ export const SpecialsSection: React.FC = () => {
             className="relative h-72 rounded-3xl overflow-hidden shadow-md group border border-slate-100 bg-sky-50 block transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
           >
             <Image
-              src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=800&auto=format&fit=crop"
+              src="/destinations/verified/dubai-burj-khalifa.jpg"
               alt="Build Itinerary"
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
@@ -166,7 +166,7 @@ export const SpecialsSection: React.FC = () => {
             className="relative h-72 rounded-3xl overflow-hidden shadow-md group border border-slate-100 bg-rose-50 block transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
           >
             <Image
-              src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?q=80&w=800&auto=format&fit=crop"
+              src="/destinations/hero-beach.jpg"
               alt="Honeymoon Escapes"
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
@@ -195,7 +195,7 @@ export const SpecialsSection: React.FC = () => {
             className="relative h-72 rounded-3xl overflow-hidden shadow-md group border border-slate-100 bg-blue-900 block transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
           >
             <Image
-              src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop"
+              src="/destinations/luxury.jpg"
               alt="Flights"
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
@@ -221,7 +221,7 @@ export const SpecialsSection: React.FC = () => {
             className="relative h-72 rounded-3xl overflow-hidden shadow-md group border border-slate-100 bg-amber-900 block transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
           >
             <Image
-              src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=800&auto=format&fit=crop"
+              src="/destinations/verified/bali-kelingking.jpg"
               alt="Custom Packages"
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
@@ -247,7 +247,7 @@ export const SpecialsSection: React.FC = () => {
             className="relative h-72 rounded-3xl overflow-hidden shadow-md group border border-slate-100 bg-teal-900 block transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
           >
             <Image
-              src="https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=800&auto=format&fit=crop"
+              src="/destinations/verified/vietnam-halong-bay.jpg"
               alt="Vietnam"
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"

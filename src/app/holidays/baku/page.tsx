@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     siteName: 'Trip Customizer',
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=80',
+        url: 'https://www.tripcustomizer.com/destinations/verified/baku-flame-towers.jpg',
         width: 1200,
         height: 630,
         alt: 'Azerbaijan Baku 5 Days Tour Package from Delhi',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     title: 'Azerbaijan Baku 5 Days Tour Package from Delhi | Trip Customizer',
     description:
       'Book 4N/5D Baku Azerbaijan tour package from Delhi. Includes Flame Towers, Ateshgah Fire Temple, Gobustan mud volcanoes, 4-star hotel stay & visa.',
-    images: ['https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=80'],
+    images: ['https://www.tripcustomizer.com/destinations/verified/baku-flame-towers.jpg'],
   },
 };
 

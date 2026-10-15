@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     siteName: 'Trip Customizer',
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=80',
+        url: 'https://www.tripcustomizer.com/destinations/verified/vietnam-halong-bay.jpg',
         width: 1200,
         height: 630,
         alt: 'Vietnam Customized Itinerary 7 Days Package',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     title: 'Vietnam Customized Itinerary 7 Days Package | Trip Customizer',
     description:
       'Book 6N/7D customized Vietnam tour package. Includes Hanoi, Ha Long Bay luxury cruise, Da Nang, Ba Na Hills Golden Bridge, Hoi An & e-visa assistance.',
-    images: ['https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=80'],
+    images: ['https://www.tripcustomizer.com/destinations/verified/vietnam-halong-bay.jpg'],
   },
 };
 

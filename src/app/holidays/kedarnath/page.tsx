@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     siteName: 'Trip Customizer',
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80',
+        url: 'https://www.tripcustomizer.com/destinations/verified/chardham-kedarnath.jpg',
         width: 1200,
         height: 630,
         alt: 'Kedarnath Badrinath Divine Yatra Package Price 2026',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     title: 'Kedarnath Badrinath Divine Yatra Package Price 2026 | Trip Customizer',
     description:
       'Book 5N/6D Kedarnath Badrinath Do Dham Yatra divine tour package. Includes Haridwar Ganga Aarti, Sonprayag transport, VIP Puja assistance & 4-star hotel stay.',
-    images: ['https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80'],
+    images: ['https://www.tripcustomizer.com/destinations/verified/chardham-kedarnath.jpg'],
   },
 };
 

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     siteName: 'Trip Customizer',
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80',
+        url: 'https://www.tripcustomizer.com/destinations/verified/ayodhya-ram-mandir.jpg',
         width: 1200,
         height: 630,
         alt: 'Ayodhya Ram Mandir VIP Darshan Tour Package',
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     title: 'Ayodhya Ram Mandir VIP Darshan Tour Package | Trip Customizer',
     description:
       'Book customized Ayodhya spiritual tour package including Ram Janmabhoomi VIP darshan, Saryu Aarti, local AC transport & 4-star hotel stay.',
-    images: ['https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80'],
+    images: ['https://www.tripcustomizer.com/destinations/verified/ayodhya-ram-mandir.jpg'],
   },
 };
 

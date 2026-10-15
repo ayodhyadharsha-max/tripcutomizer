@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     siteName: 'Trip Customizer',
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80',
+        url: 'https://www.tripcustomizer.com/destinations/verified/chardham-kedarnath.jpg',
         width: 1200,
         height: 630,
         alt: 'Char Dham Yatra Sacred Tour Package 2026',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     title: 'Char Dham Yatra Sacred Tour Package 2026 (Ayodhya & Delhi Departure) | Trip Customizer',
     description:
       'Book 10N/11D Char Dham Yatra divine tour package covering Yamunotri, Gangotri, Kedarnath & Badrinath. Includes AC transport, hotel stays, puja assistance & meals.',
-    images: ['https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80'],
+    images: ['https://www.tripcustomizer.com/destinations/verified/chardham-kedarnath.jpg'],
   },
 };
 

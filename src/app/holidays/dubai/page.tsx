@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     siteName: 'Trip Customizer',
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80',
+        url: 'https://www.tripcustomizer.com/destinations/verified/dubai-burj-khalifa.jpg',
         width: 1200,
         height: 630,
         alt: 'Dubai 5 Days Luxury Tour Package',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     title: 'Dubai 5 Days Luxury Tour Package with Desert Safari @ ₹34,500 | Trip Customizer',
     description:
       'Book 5N/6D Dubai luxury desert & skyline extravaganza package. Includes 4-star hotel stay, dune bashing, Burj Khalifa entry tickets, Dhow cruise dinner & visa.',
-    images: ['https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=80'],
+    images: ['https://www.tripcustomizer.com/destinations/verified/dubai-burj-khalifa.jpg'],
   },
 };
 

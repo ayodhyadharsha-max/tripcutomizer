@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     siteName: 'Trip Customizer',
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=80',
+        url: 'https://www.tripcustomizer.com/destinations/verified/thailand-phi-phi.jpg',
         width: 1200,
         height: 630,
         alt: 'Budget Thailand Tour Package for Couple Under 30k',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     title: 'Budget Thailand Tour Package for Couple Under 30k | Trip Customizer',
     description:
       'Book 5N/6D budget Thailand honeymoon & couple tour package under ₹30,000. Includes Bangkok, Pattaya, Coral Island speedboat tour, 4-star hotel stay & transfers.',
-    images: ['https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=80'],
+    images: ['https://www.tripcustomizer.com/destinations/verified/thailand-phi-phi.jpg'],
   },
 };
 

@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     siteName: 'Trip Customizer',
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80',
+        url: 'https://www.tripcustomizer.com/destinations/verified/bali-kelingking.jpg',
         width: 1200,
         height: 630,
         alt: 'Bali Honeymoon Package with Private Pool Villa',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     title: 'Bali Honeymoon Package with Private Pool Villa (5N/6D) | Trip Customizer',
     description:
       'Book customized Bali honeymoon package featuring private pool villa, floating breakfast, Nusa Penida island tour, couples spa treatment & airport transfers.',
-    images: ['https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=80'],
+    images: ['https://www.tripcustomizer.com/destinations/verified/bali-kelingking.jpg'],
   },
 };
 

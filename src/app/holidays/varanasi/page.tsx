@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     siteName: 'Trip Customizer',
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1200&q=80',
+        url: 'https://www.tripcustomizer.com/destinations/verified/varanasi-ganga-aarti.jpg',
         width: 1200,
         height: 630,
         alt: 'Varanasi Luxury Ganga Aarti Ghat Tour Package',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     title: 'Varanasi Luxury Ganga Aarti Ghat Tour Package | Trip Customizer',
     description:
       'Book 3N/4D Varanasi spiritual tour package featuring Dashashwamedh Ghat Ganga Aarti VIP boat view, Kashi Vishwanath Temple VIP darshan & 4-star hotel stay.',
-    images: ['https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1200&q=80'],
+    images: ['https://www.tripcustomizer.com/destinations/verified/varanasi-ganga-aarti.jpg'],
   },
 };
 
