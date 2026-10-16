@@ -236,6 +236,17 @@ export default function RootLayout({
       url: 'https://www.tripcustomizer.com',
       telephone: '+91 7408763401',
       priceRange: '₹₹',
+      currenciesAccepted: 'INR, USD, AED, EUR, GBP',
+      paymentAccepted: 'Credit Card, Debit Card, Net Banking, UPI, Razorpay',
+      knowsAbout: [
+        'Customized Holiday Packages',
+        'Char Dham Yatra & Kedarnath Badrinath',
+        'Ayodhya Ram Mandir VIP Darshan',
+        'Dubai Luxury Tours & Desert Safari',
+        'Bali Honeymoon Packages',
+        'Europe Multi-Country Escorted Tours',
+        'Flight Ticketing & Visa Assistance',
+      ],
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Ram Path, Near Ram Janmabhoomi Complex',
@@ -384,7 +395,33 @@ export default function RootLayout({
             text: 'You can contact Trip Customizer 24x7 via WhatsApp or Phone at +91 7408763401, email at help@tripcustomizer.com, or visit our head office on Ram Path, Ayodhya.',
           },
         },
+        {
+          '@type': 'Question',
+          name: 'Is Trip Customizer a verified and trusted tour operator?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Yes, Trip Customizer is a 100% verified Indian travel platform with 12,480+ happy travelers, official GST tax compliance, transparent pricing with no hidden charges, and 4.9/5 verified customer satisfaction rating.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Does Trip Customizer provide flight tickets, hotel vouchers, and visa assistance?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Yes, all international and domestic tour packages can be customized with confirmed flights, 4-star/5-star verified hotel stays, airport transfers, travel insurance, and step-by-step visa assistance.',
+          },
+        },
       ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'Trip Customizer Official Travel Portal',
+      url: 'https://www.tripcustomizer.com',
+      speakable: {
+        '@type': 'SpeakableSpecification',
+        cssSelector: ['h1', 'h2', '.speakable-content', 'p.hero-subtitle'],
+      },
     },
     {
       '@context': 'https://schema.org',

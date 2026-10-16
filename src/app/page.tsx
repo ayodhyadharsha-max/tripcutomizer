@@ -14,6 +14,7 @@ import { TrendingEditorialGuides } from '@/components/homepage/TrendingEditorial
 import { TravelInsights } from '@/components/homepage/TravelInsights';
 import { SEOTagDirectory } from '@/components/homepage/SEOTagDirectory';
 import { TestimonialsMetrics } from '@/components/homepage/TestimonialsMetrics';
+import { HomepageFAQ } from '@/components/homepage/HomepageFAQ';
 
 export const metadata: Metadata = {
   title: {
@@ -210,6 +211,9 @@ export default function Home() {
 
       {/* Trust Metrics & FAQs */}
       <TestimonialsMetrics />
+
+      {/* AEO & GEO Structured FAQ Section */}
+      <HomepageFAQ />
 
       {/* SEO Tour Package Tag Directory (Tours and Travel Agency – tripcustomizer) */}
       <SEOTagDirectory />
