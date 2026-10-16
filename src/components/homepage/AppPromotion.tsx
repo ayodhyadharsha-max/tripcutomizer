@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { Smartphone, Download, QrCode } from 'lucide-react';
+import { Smartphone, Download } from 'lucide-react';
 import { Container } from '../ui/Container';
 
 export const AppPromotion: React.FC = () => {
@@ -51,16 +51,6 @@ export const AppPromotion: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white text-slate-900 p-6 rounded-3xl shadow-2xl flex items-center space-x-4 border border-slate-200 shrink-0">
-            <div className="p-3 bg-slate-100 rounded-2xl">
-              <QrCode className="w-20 h-20 text-slate-900" />
-            </div>
-            <div>
-              <p className="text-xs font-bold text-slate-900">Scan to Download</p>
-              <p className="text-[11px] text-slate-500 mt-1">Available for iOS & Android</p>
-              <span className="text-[10px] text-brand-600 font-bold block mt-2">⭐ 4.8 Rating (50K+ Reviews)</span>
-            </div>
-          </div>
         </div>
       </Container>
     </section>

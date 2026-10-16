@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Container } from '../ui/Container';
-import { Smartphone, QrCode, ArrowDownToLine, ShieldCheck, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Smartphone, ArrowDownToLine, ShieldCheck, Sparkles, CheckCircle2 } from 'lucide-react';
 
 export const AppDownloadBanner: React.FC = () => {
   const [downloadStarted, setDownloadStarted] = useState(false);
@@ -23,8 +23,6 @@ export const AppDownloadBanner: React.FC = () => {
     }, 5000);
   };
 
-  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://www.tripcustomizer.com/TripCustomizer.apk`;
-
   return (
     <section className="py-6 sm:py-10 bg-slate-50">
       <Container>
@@ -36,7 +34,7 @@ export const AppDownloadBanner: React.FC = () => {
           </div>
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* Left Column: Title, Buttons & QR Scanner Box */}
+            {/* Left Column: Title and Direct Download Buttons */}
             <div className="lg:col-span-7 space-y-5">
               <div className="inline-flex items-center space-x-2 bg-amber-400/20 border border-amber-400/40 text-amber-300 font-extrabold text-[11px] uppercase tracking-wider px-3.5 py-1 rounded-full">
                 <Smartphone className="w-3.5 h-3.5 text-amber-400" />
@@ -60,7 +58,7 @@ export const AppDownloadBanner: React.FC = () => {
                 </div>
               )}
 
-              {/* Direct Buttons & Scanner Row */}
+              {/* Direct Buttons Row */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
                 {/* 1. Direct APK Download Button (Primary CTA) */}
                 <button
@@ -95,34 +93,6 @@ export const AppDownloadBanner: React.FC = () => {
                     </span>
                   </div>
                 </button>
-
-                {/* 3. High Resolution QR Scanner Card */}
-                <div
-                  onClick={handleDownloadAPK}
-                  title="Click or Scan QR code to download TripCustomizer.apk"
-                  className="bg-white text-slate-900 p-2.5 rounded-2xl shadow-xl flex items-center space-x-3 border border-slate-200 cursor-pointer hover:border-amber-400 transition-colors group shrink-0"
-                >
-                  <div className="relative p-1 bg-slate-900 rounded-xl overflow-hidden shrink-0">
-                    <img
-                      src={qrCodeUrl}
-                      alt="Scan QR Code to Download App"
-                      className="w-12 h-12 object-contain bg-white p-1 rounded-lg"
-                    />
-                    <div className="absolute inset-0 border-2 border-amber-400 rounded-xl pointer-events-none opacity-80" />
-                  </div>
-                  <div className="pr-2 text-left">
-                    <div className="flex items-center space-x-1 text-slate-900">
-                      <QrCode className="w-3.5 h-3.5 text-brand-600" />
-                      <span className="text-xs font-black uppercase tracking-tight">Scan QR</span>
-                    </div>
-                    <span className="text-[10px] text-slate-500 font-semibold block leading-tight mt-0.5">
-                      Point Camera to Install
-                    </span>
-                    <span className="text-[9px] text-emerald-600 font-bold block mt-0.5 group-hover:underline">
-                      Tap to Download ↓
-                    </span>
-                  </div>
-                </div>
               </div>
 
               {/* Safety Features Footer Badges */}
