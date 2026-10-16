@@ -435,17 +435,28 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              if ('serviceWorker' in navigator) {
-                window.addEventListener('load', function() {
-                  navigator.serviceWorker.register('/sw.js').then(
-                    function(reg) {
-                      console.log('SW registered successfully:', reg.scope);
-                    },
-                    function(err) {
-                      console.log('SW registration failed:', err);
+              if (typeof window !== 'undefined') {
+                if ('caches' in window && !localStorage.getItem('tc_cache_clean_v8')) {
+                  caches.keys().then(function(names) {
+                    for (var name of names) {
+                      caches.delete(name);
                     }
-                  );
-                });
+                  });
+                  localStorage.setItem('tc_cache_clean_v8', '1');
+                }
+                if ('serviceWorker' in navigator) {
+                  window.addEventListener('load', function() {
+                    navigator.serviceWorker.register('/sw.js').then(
+                      function(reg) {
+                        reg.update();
+                        console.log('SW registered successfully:', reg.scope);
+                      },
+                      function(err) {
+                        console.log('SW registration failed:', err);
+                      }
+                    );
+                  });
+                }
               }
             `,
           }}

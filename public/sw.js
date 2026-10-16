@@ -3,9 +3,9 @@
  * Optimized for Instant APK Launch, Offline Resiliency & Fast Photo Delivery
  */
 
-const STATIC_CACHE = 'tripcustomizer-static-v6';
-const IMAGE_CACHE = 'tripcustomizer-images-v6';
-const PAGES_CACHE = 'tripcustomizer-pages-v6';
+const STATIC_CACHE = 'tripcustomizer-static-v8';
+const IMAGE_CACHE = 'tripcustomizer-images-v8';
+const PAGES_CACHE = 'tripcustomizer-pages-v8';
 
 const PRECACHE_ASSETS = [
   '/',
