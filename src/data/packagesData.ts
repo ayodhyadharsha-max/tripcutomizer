@@ -15847,9 +15847,9 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 380000,
     "rating": 4.98,
     "reviewsCount": 115,
-    "heroImage": "/destinations/verified/europe-eiffel-tower.jpg",
+    "heroImage": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80",
     "gallery": [
-      "/destinations/verified/europe-eiffel-tower.jpg"
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80"
     ],
     "highlights": [
       "10 European Countries: UK (3N), France, Belgium, Netherlands, Germany, Switzerland, Austria, Liechtenstein, Italy & Vatican",

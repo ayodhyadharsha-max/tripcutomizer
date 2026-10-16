@@ -549,7 +549,7 @@ const SECTOR_IMAGE_POOLS: Record<string, string[]> = {
     '/destinations/vietnam.jpg',
   ],
   europe: [
-    '/destinations/verified/europe-eiffel-tower.jpg',
+    'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80',
     '/destinations/verified/europe-colosseum.jpg',
     '/destinations/verified/europe-jungfrau.jpg',
     '/destinations/verified/europe-amsterdam-canals.jpg',

@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     siteName: 'Trip Customizer',
     images: [
       {
-        url: 'https://www.tripcustomizer.com/destinations/verified/europe-eiffel-tower.jpg',
+        url: 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=1200&q=80',
         width: 1200,
         height: 630,
         alt: 'Europe Tour Packages 10 Days Customized',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     title: 'Europe Tour Packages 10 Days Customized | Trip Customizer',
     description:
       'Book 9N/10D customized Europe tour package covering Paris, Swiss Alps, Mt Titlis, Venice & Rome with 4-star hotel stay, Schengen visa & flight options.',
-    images: ['https://www.tripcustomizer.com/destinations/verified/europe-eiffel-tower.jpg'],
+    images: ['https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=1200&q=80'],
   },
 };
 

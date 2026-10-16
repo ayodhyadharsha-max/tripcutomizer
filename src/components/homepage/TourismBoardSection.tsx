@@ -19,7 +19,7 @@ export const TourismBoardSection: React.FC = () => {
     {
       name: 'Switzerland Tourism',
       country: 'Switzerland',
-      image: '/destinations/verified/europe-jungfrau.jpg',
+      image: 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?q=80&w=800&auto=format&fit=crop',
       desc: 'Explore scenic alpine train rides, snow peaks, crystal lakes & fairytale villages.',
       slug: 'switzerland',
     },
@@ -33,7 +33,7 @@ export const TourismBoardSection: React.FC = () => {
     {
       name: 'Incredible India Tourism',
       country: 'India',
-      image: '/destinations/verified/kerala-alleppey.jpg',
+      image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=800&auto=format&fit=crop',
       desc: 'Immerse in timeless heritage, spiritual retreats, backwaters and royal palaces.',
       slug: 'kerala',
     },
