@@ -126,6 +126,35 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/destinations/:slug*-tour-package',
+        destination: '/holidays/:slug*',
+        permanent: true,
+      },
+      {
+        source: '/destinations/:slug*-tour-packages',
+        destination: '/holidays/:slug*',
+        permanent: true,
+      },
+      {
+        source: '/destinations/:slug*-package',
+        destination: '/holidays/:slug*',
+        permanent: true,
+      },
+      {
+        source: '/destinations/:slug*-packages',
+        destination: '/holidays/:slug*',
+        permanent: true,
+      },
+      {
+        source: '/destination/:path*',
+        destination: '/destinations/:path*',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

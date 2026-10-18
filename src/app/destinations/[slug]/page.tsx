@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { notFound } from 'next/navigation';
+import { permanentRedirect } from 'next/navigation';
 import { Container } from '@/components/ui/Container';
 import { Card } from '@/components/ui/Card';
 import { DEMO_PACKAGES } from '@/data/packagesData';
@@ -12,9 +12,17 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const destSlug = params.slug.toLowerCase().trim();
   const packages = DEMO_PACKAGES.filter((p) => p.destinationSlug === destSlug);
   if (packages.length === 0) {
+    const cleanSlug = destSlug
+      .replace(/-tour-packages?$/, '')
+      .replace(/-packages?$/, '')
+      .replace(/-tour$/, '');
+    const cleanName = cleanSlug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
     return {
-      title: 'Destination Not Found',
-      robots: { index: false, follow: false },
+      title: `${cleanName} Tour Packages 2026 | Trip Customizer`,
+      description: `Book customized ${cleanName} holiday packages with 4-star hotels, flights, and 24x7 expert desk support.`,
+      alternates: {
+        canonical: `https://www.tripcustomizer.com/holidays/${cleanSlug}`,
+      },
     };
   }
   const name = destSlug.charAt(0).toUpperCase() + destSlug.slice(1);
@@ -47,7 +55,11 @@ export default function DestinationMasterSeoPage({ params }: { params: { slug: s
   const destSlug = params.slug.toLowerCase().trim();
   const packages = DEMO_PACKAGES.filter((p) => p.destinationSlug === destSlug);
   if (packages.length === 0) {
-    notFound();
+    const cleanSlug = destSlug
+      .replace(/-tour-packages?$/, '')
+      .replace(/-packages?$/, '')
+      .replace(/-tour$/, '');
+    permanentRedirect(`/holidays/${cleanSlug}`);
   }
   const name = destSlug.charAt(0).toUpperCase() + destSlug.slice(1);
 
