@@ -5,6 +5,7 @@ import { Header } from '@/components/navigation/Header';
 import { Footer } from '@/components/navigation/Footer';
 import { ClientProviders } from '@/components/providers/ClientProviders';
 import { MakeMyTripBottomNav } from '@/components/navigation/MakeMyTripBottomNav';
+import { GlobalInquiryFloatingWidget } from '@/components/navigation/GlobalInquiryFloatingWidget';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.tripcustomizer.com'),
@@ -552,6 +553,7 @@ export default function RootLayout({
           </main>
           <Footer />
           <MakeMyTripBottomNav />
+          <GlobalInquiryFloatingWidget />
         </ClientProviders>
       </body>
     </html>
