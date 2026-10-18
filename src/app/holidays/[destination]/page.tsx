@@ -1,7 +1,9 @@
 import React, { Suspense } from 'react';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getAllCatalogPackages } from '@/data/packageCatalog';
+import { getAllProgrammaticPackages } from '@/data/programmaticPackages';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
 export async function generateMetadata({ params }: { params: { destination: string } }): Promise<Metadata> {
@@ -217,6 +219,22 @@ export default function DestinationListingPage({ params }: { params: { destinati
 
   const displayPackages = matchedPackages;
 
+  const allProgPackages = getAllProgrammaticPackages();
+  const destinationProgPackages = allProgPackages.filter(
+    (p) =>
+      p.destinationSlug === rawSlug ||
+      rawSlug.includes(p.destinationSlug) ||
+      p.slug.includes(rawSlug) ||
+      (rawSlug === 'dubai' && p.slug.startsWith('dubai-')) ||
+      (rawSlug === 'kashmir' && p.slug.startsWith('kashmir-')) ||
+      (rawSlug === 'bali' && p.slug.startsWith('bali-')) ||
+      (rawSlug === 'thailand' && p.slug.startsWith('thailand-')) ||
+      (rawSlug === 'ayodhya' && p.slug.startsWith('ayodhya-')) ||
+      (rawSlug === 'char-dham' && p.slug.startsWith('char-dham-')) ||
+      (rawSlug === 'goa' && p.slug.startsWith('goa-')) ||
+      (rawSlug === 'kerala' && p.slug.startsWith('kerala-'))
+  );
+
   const destName = rawSlug
     .split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -355,6 +373,34 @@ export default function DestinationListingPage({ params }: { params: { destinati
               </tbody>
             </table>
           </div>
+
+          {/* City Departures & Programmatic Hub Links for Internal Link Equity */}
+          {destinationProgPackages.length > 0 && (
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 mb-8">
+              <h2 className="text-base sm:text-lg font-bold text-slate-950 mb-2">
+                Popular City Departures for {destName} Tour Packages 2026
+              </h2>
+              <p className="text-xs text-slate-600 mb-4">
+                Explore customized itineraries with direct flights, private airport transfers, and 4-star hotel stays departing from your city:
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {destinationProgPackages.map((prog) => (
+                  <Link
+                    key={prog.slug}
+                    href={`/packages/${prog.slug}`}
+                    className="p-3.5 rounded-xl border border-slate-200 hover:border-brand-500 hover:bg-brand-50/50 transition-all group block text-left shadow-2xs"
+                  >
+                    <div className="flex items-center justify-between text-xs font-bold text-slate-900 group-hover:text-brand-700">
+                      <span>{prog.departureCity.city} Departure</span>
+                      <span className="text-emerald-600">₹{(prog.discountPrice || prog.startingPrice).toLocaleString('en-IN')}</span>
+                    </div>
+                    <p className="text-[11px] text-slate-600 mt-1 line-clamp-1 font-medium">{prog.h1}</p>
+                    <span className="text-[10px] text-brand-600 font-bold mt-1.5 inline-block group-hover:underline">View Itinerary & Book &rarr;</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Travel Guide & FAQs */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs sm:text-sm">

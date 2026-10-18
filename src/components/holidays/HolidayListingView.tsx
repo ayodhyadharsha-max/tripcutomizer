@@ -10,6 +10,8 @@ import { Button } from '@/components/ui/Button';
 import { HolidayPackage } from '@/data/packagesData';
 import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { formatCurrency } from '@/lib/utils';
+import { cloudStore } from '@/lib/cloudStore';
+import { sendWeb3FormLead } from '@/lib/web3forms';
 import {
   Search,
   Filter,
@@ -102,6 +104,51 @@ export function HolidayListingView({
 
   // Quick Quote Modal state
   const [activeQuotePkg, setActiveQuotePkg] = useState<HolidayPackage | null>(null);
+  const [quoteName, setQuoteName] = useState('');
+  const [quotePhone, setQuotePhone] = useState('');
+  const [quoteDate, setQuoteDate] = useState('');
+  const [quoteSuccess, setQuoteSuccess] = useState(false);
+  const [isSubmittingQuote, setIsSubmittingQuote] = useState(false);
+
+  const handleQuoteSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!activeQuotePkg || !quotePhone.trim()) return;
+    setIsSubmittingQuote(true);
+
+    const priceText = `₹${(activeQuotePkg.discountPrice || activeQuotePkg.startingPrice).toLocaleString('en-IN')}`;
+
+    cloudStore.saveLead({
+      name: quoteName.trim() || 'Valued Client',
+      phone: quotePhone.trim(),
+      email: '',
+      destination: activeQuotePkg.name,
+      budget: priceText,
+      travelDates: quoteDate || 'Flexible',
+      travelersCount: 2,
+      status: 'New',
+      source: `Package Quick Quote: ${activeQuotePkg.name} (${activeQuotePkg.destination})`,
+    });
+
+    sendWeb3FormLead({
+      subject: `⚡ QUICK QUOTE INQUIRY: ${quoteName.trim() || 'Client'} - ${activeQuotePkg.name}`,
+      name: quoteName.trim() || 'Valued Client',
+      phone: quotePhone.trim(),
+      destination: activeQuotePkg.name,
+      travel_date: quoteDate || 'Flexible',
+      budget: priceText,
+      source: `Holiday Listing Quote Modal`,
+    });
+
+    setIsSubmittingQuote(false);
+    setQuoteSuccess(true);
+    setTimeout(() => {
+      setActiveQuotePkg(null);
+      setQuoteSuccess(false);
+      setQuoteName('');
+      setQuotePhone('');
+      setQuoteDate('');
+    }, 3500);
+  };
 
 
 
@@ -807,10 +854,22 @@ export function HolidayListingView({
                             <span className="text-[10px] text-slate-500 font-bold"> / person</span>
                           </div>
 
-                          <div className="flex items-center space-x-2 w-full sm:w-auto">
+                          <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+                            <a
+                              href={`https://wa.me/917408763401?text=${encodeURIComponent(`Hi Trip Customizer, I am interested in ${pkg.name} (${pkg.durationDays}D/${pkg.durationNights}N) starting at ₹${(pkg.discountPrice || pkg.startingPrice).toLocaleString('en-IN')}. Please share itinerary and quote.`)}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex-1 sm:flex-none bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-3.5 py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1"
+                              title="Chat on WhatsApp with Senior Travel Desk"
+                            >
+                              WhatsApp
+                            </a>
                             <button
-                              onClick={() => setActiveQuotePkg(pkg)}
-                              className="flex-1 sm:flex-none border border-slate-300 hover:bg-slate-100 text-slate-800 font-bold text-xs px-3.5 py-2.5 rounded-xl transition-all shadow-2xs"
+                              onClick={() => {
+                                setActiveQuotePkg(pkg);
+                                setQuoteSuccess(false);
+                              }}
+                              className="flex-1 sm:flex-none border border-slate-300 hover:bg-slate-100 text-slate-800 font-bold text-xs px-3.5 py-2.5 rounded-xl transition-all shadow-2xs cursor-pointer"
                             >
                               Get Quote
                             </button>
@@ -861,31 +920,69 @@ export function HolidayListingView({
             <h3 className="font-black text-base text-slate-900 mb-1">{activeQuotePkg.name}</h3>
             <p className="text-xs text-slate-500 mb-4">{activeQuotePkg.durationDays} Days / {activeQuotePkg.durationNights} Nights • Starting at <span className="font-bold text-brand-700">{formatCurrency(activeQuotePkg.startingPrice)}</span></p>
 
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                alert(`Quote request received for ${activeQuotePkg.name}! Our expert agent will contact you on WhatsApp/Phone shortly.`);
-                setActiveQuotePkg(null);
-              }}
-              className="space-y-3.5 text-xs"
-            >
-              <div>
-                <label className="font-bold text-slate-700 block mb-1">Your Full Name</label>
-                <input required type="text" placeholder="e.g. Rahul Sharma" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500" />
+            {quoteSuccess ? (
+              <div className="py-6 text-center space-y-3">
+                <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
+                  <CheckCircle2 className="w-7 h-7" />
+                </div>
+                <h4 className="font-black text-slate-900 text-base">Inquiry Sent Successfully!</h4>
+                <p className="text-xs text-slate-600 max-w-xs mx-auto">
+                  Our destination specialist has received your request. We will contact you on WhatsApp / Phone within 15 minutes.
+                </p>
+                <a
+                  href={`https://wa.me/917408763401?text=${encodeURIComponent(`Hi Trip Customizer, I just submitted a quote request for ${activeQuotePkg.name}. Please connect.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block mt-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition-colors"
+                >
+                  Chat on WhatsApp Now &rarr;
+                </a>
               </div>
-              <div>
-                <label className="font-bold text-slate-700 block mb-1">Phone / WhatsApp Number</label>
-                <input required type="tel" placeholder="+91 9876543210" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500" />
-              </div>
-              <div>
-                <label className="font-bold text-slate-700 block mb-1">Travel Date</label>
-                <input required type="date" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500" />
-              </div>
+            ) : (
+              <form onSubmit={handleQuoteSubmit} className="space-y-3.5 text-xs">
+                <div>
+                  <label className="font-bold text-slate-700 block mb-1">Your Full Name</label>
+                  <input
+                    required
+                    type="text"
+                    placeholder="e.g. Rahul Sharma"
+                    value={quoteName}
+                    onChange={(e) => setQuoteName(e.target.value)}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  />
+                </div>
+                <div>
+                  <label className="font-bold text-slate-700 block mb-1">Phone / WhatsApp Number *</label>
+                  <input
+                    required
+                    type="tel"
+                    placeholder="+91 9876543210"
+                    value={quotePhone}
+                    onChange={(e) => setQuotePhone(e.target.value)}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  />
+                </div>
+                <div>
+                  <label className="font-bold text-slate-700 block mb-1">Travel Date (Optional)</label>
+                  <input
+                    type="date"
+                    value={quoteDate}
+                    onChange={(e) => setQuoteDate(e.target.value)}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  />
+                </div>
 
-              <Button type="submit" variant="accent" size="md" className="w-full font-black py-3 mt-2 shadow-md">
-                GET FREE INSTANT QUOTE
-              </Button>
-            </form>
+                <Button
+                  type="submit"
+                  disabled={isSubmittingQuote}
+                  variant="accent"
+                  size="md"
+                  className="w-full font-black py-3 mt-2 shadow-md cursor-pointer"
+                >
+                  {isSubmittingQuote ? 'SENDING INQUIRY...' : 'GET FREE INSTANT QUOTE'}
+                </Button>
+              </form>
+            )}
           </Card>
         </div>
       )}

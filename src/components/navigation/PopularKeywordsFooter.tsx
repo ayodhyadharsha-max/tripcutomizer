@@ -115,29 +115,71 @@ export const PopularKeywordsFooter: React.FC = () => {
             <Link href="/packages/dubai-tour-package-from-mumbai" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
               Dubai Package from Mumbai
             </Link>
+            <Link href="/packages/dubai-tour-package-from-delhi" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Dubai Package from Delhi
+            </Link>
+            <Link href="/packages/dubai-tour-package-from-bangalore" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Dubai Package from Bangalore
+            </Link>
             <Link href="/packages/kashmir-5-days-honeymoon-package" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
               Kashmir Honeymoon 5 Days
+            </Link>
+            <Link href="/packages/kashmir-tour-package-from-delhi" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Kashmir Package from Delhi
+            </Link>
+            <Link href="/packages/kashmir-tour-package-from-mumbai" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Kashmir Package from Mumbai
+            </Link>
+            <Link href="/packages/kashmir-tour-package-from-ahmedabad" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Kashmir Package from Ahmedabad
             </Link>
             <Link href="/packages/ayodhya-varanasi-prayagraj-4-days-tour" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
               Ayodhya Varanasi Prayagraj 4 Days
             </Link>
-            <Link href="/packages/char-dham-yatra-10-days-from-delhi" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+            <Link href="/packages/ayodhya-ram-mandir-vip-darshan-tour" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Ayodhya VIP Darshan Tour
+            </Link>
+            <Link href="/packages/ayodhya-tour-package-from-delhi" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Ayodhya Tour from Delhi
+            </Link>
+            <Link href="/packages/ayodhya-tour-package-from-mumbai" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Ayodhya Tour from Mumbai
+            </Link>
+            <Link href="/packages/char-dham-yatra-package-from-delhi" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
               Char Dham Yatra from Delhi
             </Link>
-            <Link href="/packages/bali-honeymoon-package-with-private-pool-villa" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+            <Link href="/packages/char-dham-yatra-package-from-ahmedabad" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Char Dham from Ahmedabad
+            </Link>
+            <Link href="/packages/bali-honeymoon-package-from-mumbai" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Bali Honeymoon from Mumbai
+            </Link>
+            <Link href="/packages/bali-honeymoon-package-from-delhi" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Bali Honeymoon from Delhi
+            </Link>
+            <Link href="/packages/bali-6-days-private-pool-villa-honeymoon" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
               Bali Pool Villa Honeymoon
             </Link>
-            <Link href="/packages/kerala-tour-package-6-days" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
-              Kerala Tour Package 6 Days
+            <Link href="/packages/thailand-tour-package-from-delhi" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Thailand Package from Delhi
             </Link>
-            <Link href="/packages/vietnam-highlights-7-days" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
-              Vietnam Highlights 7 Days
+            <Link href="/packages/thailand-tour-package-from-mumbai" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Thailand Package from Mumbai
             </Link>
-            <Link href="/packages/azerbaijan-baku-5-days-tour-from-delhi" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
-              Baku 5 Days Tour from Delhi
+            <Link href="/packages/kerala-5-days-munnar-alleppey-houseboat-package" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Kerala Munnar Houseboat Tour
             </Link>
-            <Link href="/packages/maldives-4-days-water-villa-honeymoon" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
-              Maldives Water Villa Honeymoon
+            <Link href="/packages/kerala-tour-package-from-delhi" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Kerala Package from Delhi
+            </Link>
+            <Link href="/packages/goa-beach-holiday-package-from-mumbai" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Goa Beach Package from Mumbai
+            </Link>
+            <Link href="/packages/goa-beach-holiday-package-from-delhi" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Goa Beach Package from Delhi
+            </Link>
+            <Link href="/packages/goa-beach-holiday-package-from-bangalore" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Goa Package from Bangalore
             </Link>
           </div>
         </div>

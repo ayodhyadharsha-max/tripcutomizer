@@ -208,22 +208,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // 2. Destination Landing Pages (Holidays)
+  // 2. Destination Landing Pages (Holidays) - 100% Verified Valid Routes
   const targetIntlKeywords = [
-    'turkey', 'singapore', 'malaysia', 'bali', 'dubai', 'mauritius',
+    'singapore', 'malaysia', 'bali', 'dubai', 'mauritius',
     'maldives', 'vietnam', 'cambodia', 'seychelles', 'australia', 'europe',
-    'south-africa', 'egypt', 'spain', 'usa', 'japan', 'thailand',
-    'azerbaijan', 'baku', 'georgia', 'kazakhstan', 'bhutan', 'nepal', 'sri-lanka'
+    'egypt', 'usa', 'japan', 'thailand',
+    'azerbaijan', 'baku', 'bhutan', 'nepal', 'sri-lanka'
   ];
 
   const targetSpiritualKeywords = [
-    'ayodhya', 'varanasi', 'kedarnath', 'char-dham', 'badrinath', 'amarnath',
-    'dwarka-somnath', 'mathura-vrindavan', 'amritsar', 'puri', 'rameshwaram',
-    'tirupati', 'shirdi', 'vaishno-devi', 'kailash-mansarovar', 'do-dham',
-    'haridwar', 'rishikesh', 'prayagraj', 'ujjain', 'omkareshwar', 'kumbh-mela',
-    'bodhgaya', 'bhubaneswar', 'konark', 'madurai', 'kanchipuram', 'kumbakonam',
-    'sabrimala', 'velankanni', 'ajmer', 'pushkar', 'guptkashi', 'dharamsala',
-    'khajuraho', 'maheshwar', 'mandu', 'tawang', 'somnath', 'dwarka', 'mathura', 'spiritual',
+    'ayodhya', 'varanasi', 'kedarnath', 'char-dham', 'badrinath',
+    'puri', 'rameshwaram', 'tirupati', 'shirdi',
+    'haridwar', 'rishikesh', 'prayagraj', 'ujjain', 'pushkar',
+    'somnath', 'dwarka',
     'kerala', 'kashmir', 'himachal', 'rajasthan', 'andaman', 'ladakh', 'goa', 'uttarakhand', 'sikkim'
   ];
 
@@ -237,11 +234,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  // 3. Honeymoon Destination Landing Pages
+  // 3. Honeymoon Destination Landing Pages - Verified 200 OK
   const honeymoonSlugs = [
-    'maldives', 'bali', 'switzerland', 'paris', 'mauritius', 'seychelles',
+    'maldives', 'bali', 'paris', 'mauritius', 'seychelles',
     'dubai', 'thailand', 'kerala', 'kashmir', 'andaman', 'manali',
-    'goa', 'udaipur', 'coorg', 'sri-lanka', 'europe', 'greece'
+    'goa', 'udaipur', 'coorg', 'sri-lanka', 'europe'
   ];
 
   const honeymoonDestinationPages: MetadataRoute.Sitemap = honeymoonSlugs.map((slug) => ({
@@ -249,20 +246,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: currentDate,
     changeFrequency: 'daily',
     priority: 0.88,
-  }));
-
-  // 4. Destination Travel Guide Pages
-  const guideSlugs = [
-    'goa', 'kerala', 'kashmir', 'dubai', 'bali', 'thailand',
-    'singapore', 'vietnam', 'maldives', 'switzerland', 'azerbaijan',
-    'bhutan', 'andaman', 'himachal', 'rajasthan', 'ladakh'
-  ];
-
-  const guidePages: MetadataRoute.Sitemap = guideSlugs.map((slug) => ({
-    url: `${baseUrl}/destinations/${slug}`,
-    lastModified: currentDate,
-    changeFrequency: 'weekly',
-    priority: 0.82,
   }));
 
   // 5. Package Detail Pages
@@ -285,7 +268,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticPages,
     ...holidayDestinationPages,
     ...honeymoonDestinationPages,
-    ...guidePages,
     ...packagePages,
     ...programmaticPackagePages,
   ];

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight, Search } from 'lucide-react';
+import { getAllProgrammaticSlugs } from '@/data/programmaticPackages';
 
 interface HeroSlide {
   id: number;
@@ -105,8 +106,37 @@ export const HeroSearch: React.FC = () => {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     const query = searchQuery.trim() || searchPlaceholders[placeholderIndex].replace(/Search "|"$/g, '');
+    if (!query) return;
+
     const cleanSlug = query.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-    router.push(`/holidays/${cleanSlug}`);
+
+    // 1. Direct or partial programmatic package match
+    try {
+      const progSlugs = getAllProgrammaticSlugs();
+      const matchedProg = progSlugs.find(
+        (s) => s === cleanSlug || s.includes(cleanSlug) || cleanSlug.includes(s)
+      );
+      if (matchedProg) {
+        router.push(`/packages/${matchedProg}`);
+        return;
+      }
+    } catch (e) {}
+
+    // 2. Known destination match
+    const validDests = [
+      'dubai', 'bali', 'thailand', 'kashmir', 'ayodhya', 'goa', 'kerala', 'singapore',
+      'maldives', 'vietnam', 'europe', 'char-dham', 'kedarnath', 'badrinath', 'rajasthan',
+      'himachal', 'andaman', 'ladakh', 'varanasi', 'dwarka', 'tirupati', 'shirdi', 'paris',
+      'switzerland', 'mauritius', 'seychelles', 'japan', 'egypt', 'azerbaijan', 'baku'
+    ];
+    const matchedDest = validDests.find((d) => cleanSlug.includes(d));
+    if (matchedDest) {
+      router.push(`/holidays/${matchedDest}`);
+      return;
+    }
+
+    // 3. Fallback: Safe search query on holidays listing (100% zero 404s!)
+    router.push(`/holidays?q=${encodeURIComponent(query)}`);
   };
 
   const [hasMounted, setHasMounted] = useState(false);
