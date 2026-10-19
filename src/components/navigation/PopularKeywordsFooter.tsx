@@ -183,6 +183,45 @@ export const PopularKeywordsFooter: React.FC = () => {
             </Link>
           </div>
         </div>
+
+        {/* Trending Festival & Seasonal Travel Guides */}
+        <div className="mt-8 pt-6 border-t border-brand-800/80">
+          <div className="flex items-center gap-2 mb-3">
+            <Compass className="w-4 h-4 text-emerald-400 shrink-0" />
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white">
+              Trending Festival & Seasonal Travel Guides (2026–2027)
+            </h4>
+          </div>
+          <div className="flex flex-wrap gap-2 text-[11px]">
+            <Link href="/blog/sunburn-goa-2026-dates-tickets-christmas-new-year-package-guide" className="bg-brand-900/80 hover:bg-brand-800 text-amber-300 hover:text-white px-3 py-1 rounded-full border border-amber-800/60 transition">
+              Sunburn Goa 2026 Dates & Tickets
+            </Link>
+            <Link href="/blog/gulmarg-gondola-ticket-booking-online-kashmir-winter-package-guide" className="bg-brand-900/80 hover:bg-brand-800 text-sky-300 hover:text-white px-3 py-1 rounded-full border border-sky-800/60 transition">
+              Gulmarg Gondola Booking & Snow Packages
+            </Link>
+            <Link href="/blog/rann-utsav-2026-dates-tent-city-package-price-booking-guide" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Rann Utsav Kutch Tent City Guide
+            </Link>
+            <Link href="/blog/pushkar-mela-2026-dates-schedule-luxury-camps-booking-guide" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
+              Pushkar Mela Luxury Camps & Dates
+            </Link>
+            <Link href="/blog/top-10-honeymoon-destinations-in-india-under-30k" className="bg-brand-900/80 hover:bg-brand-800 text-pink-300 hover:text-white px-3 py-1 rounded-full border border-pink-800/60 transition">
+              Top 10 Honeymoon in India Under 30K
+            </Link>
+            <Link href="/blog/top-10-diwali-holiday-destinations-2026" className="bg-brand-900/80 hover:bg-brand-800 text-amber-300 hover:text-white px-3 py-1 rounded-full border border-amber-800/60 transition">
+              Top 10 Diwali Holiday Destinations
+            </Link>
+            <Link href="/blog/top-10-visa-on-arrival-countries-for-indians-2026" className="bg-brand-900/80 hover:bg-brand-800 text-emerald-300 hover:text-white px-3 py-1 rounded-full border border-emerald-800/60 transition">
+              Visa on Arrival Countries for Indians
+            </Link>
+            <Link href="/blog/top-7-spiritual-yatras-in-india-2026" className="bg-brand-900/80 hover:bg-brand-800 text-amber-300 hover:text-white px-3 py-1 rounded-full border border-amber-800/60 transition">
+              Top 7 Sacred Spiritual Yatras
+            </Link>
+            <Link href="/blog/top-10-best-winter-destinations-2026" className="bg-brand-900/80 hover:bg-brand-800 text-cyan-300 hover:text-white px-3 py-1 rounded-full border border-cyan-800/60 transition">
+              Best Winter Snow Destinations
+            </Link>
+          </div>
+        </div>
       </div>
     </nav>
   );
