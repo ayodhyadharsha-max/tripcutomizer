@@ -142,85 +142,92 @@ export const SEOTagDirectory: React.FC = () => {
             ))}
           </div>
 
-          {/* Right Area: Pill Buttons Cloud */}
-          <div className="lg:col-span-8 flex flex-wrap gap-3 pt-1">
-            {categories[activeTab].tags.map((tag, idx) => {
-              const lowerTag = tag.toLowerCase().trim();
-              const isFlight = lowerTag.includes('flights');
-              const isHoneymoon = lowerTag.includes('honeymoon');
+          {/* Right Area: Pill Buttons Cloud for All Categories (DOM-friendly for SEO Crawlers) */}
+          <div className="lg:col-span-8 pt-1">
+            {categories.map((category, catIdx) => (
+              <div
+                key={catIdx}
+                className={activeTab === catIdx ? 'flex flex-wrap gap-3' : 'hidden'}
+              >
+                {category.tags.map((tag, idx) => {
+                  const lowerTag = tag.toLowerCase().trim();
+                  const isFlight = lowerTag.includes('flights');
+                  const isHoneymoon = lowerTag.includes('honeymoon');
 
-              let targetUrl = '/holidays';
+                  let targetUrl = '/holidays';
 
-              if (isFlight) {
-                targetUrl = '/flights';
-              } else {
-                const knownDestinations: Record<string, string> = {
-                  'dubai': 'dubai',
-                  'bali': 'bali',
-                  'thailand': 'thailand',
-                  'singapore': 'singapore',
-                  'maldives': 'maldives',
-                  'vietnam': 'vietnam',
-                  'europe': 'europe',
-                  'kashmir': 'kashmir',
-                  'goa': 'goa',
-                  'kerala': 'kerala',
-                  'himachal': 'himachal',
-                  'andaman': 'andaman',
-                  'rajasthan': 'rajasthan',
-                  'ladakh': 'ladakh',
-                  'ayodhya': 'ayodhya',
-                  'varanasi': 'varanasi',
-                  'kedarnath': 'kedarnath',
-                  'char dham': 'char-dham',
-                  'badrinath': 'badrinath',
-                  'puri': 'puri',
-                  'rameshwaram': 'rameshwaram',
-                  'tirupati': 'tirupati',
-                  'shirdi': 'shirdi',
-                  'dwarka': 'dwarka',
-                  'somnath': 'somnath',
-                  'udaipur': 'udaipur',
-                  'manali': 'manali',
-                  'coorg': 'coorg',
-                  'sikkim': 'sikkim',
-                  'darjeeling': 'darjeeling',
-                  'haridwar': 'haridwar',
-                  'rishikesh': 'rishikesh',
-                  'prayagraj': 'prayagraj',
-                  'ujjain': 'ujjain',
-                  'pushkar': 'pushkar',
-                  'mauritius': 'mauritius',
-                  'seychelles': 'seychelles',
-                  'egypt': 'cairo',
-                  'japan': 'japan',
-                  'azerbaijan': 'azerbaijan',
-                  'baku': 'baku',
-                  'paris': 'paris',
-                  'switzerland': 'switzerland',
-                };
+                  if (isFlight) {
+                    targetUrl = '/flights';
+                  } else {
+                    const knownDestinations: Record<string, string> = {
+                      'dubai': 'dubai',
+                      'bali': 'bali',
+                      'thailand': 'thailand',
+                      'singapore': 'singapore',
+                      'maldives': 'maldives',
+                      'vietnam': 'vietnam',
+                      'europe': 'europe',
+                      'kashmir': 'kashmir',
+                      'goa': 'goa',
+                      'kerala': 'kerala',
+                      'himachal': 'himachal',
+                      'andaman': 'andaman',
+                      'rajasthan': 'rajasthan',
+                      'ladakh': 'ladakh',
+                      'ayodhya': 'ayodhya',
+                      'varanasi': 'varanasi',
+                      'kedarnath': 'kedarnath',
+                      'char dham': 'char-dham',
+                      'badrinath': 'badrinath',
+                      'puri': 'puri',
+                      'rameshwaram': 'rameshwaram',
+                      'tirupati': 'tirupati',
+                      'shirdi': 'shirdi',
+                      'dwarka': 'dwarka',
+                      'somnath': 'somnath',
+                      'udaipur': 'udaipur',
+                      'manali': 'manali',
+                      'coorg': 'coorg',
+                      'sikkim': 'sikkim',
+                      'darjeeling': 'darjeeling',
+                      'haridwar': 'haridwar',
+                      'rishikesh': 'rishikesh',
+                      'prayagraj': 'prayagraj',
+                      'ujjain': 'ujjain',
+                      'pushkar': 'pushkar',
+                      'mauritius': 'mauritius',
+                      'seychelles': 'seychelles',
+                      'egypt': 'cairo',
+                      'japan': 'japan',
+                      'azerbaijan': 'azerbaijan',
+                      'baku': 'baku',
+                      'paris': 'paris',
+                      'switzerland': 'switzerland',
+                    };
 
-                const matchedKey = Object.keys(knownDestinations).find((key) => lowerTag.includes(key));
-                if (matchedKey) {
-                  const destSlug = knownDestinations[matchedKey];
-                  targetUrl = isHoneymoon ? `/honeymoon/${destSlug}` : `/holidays/${destSlug}`;
-                } else if (isHoneymoon) {
-                  targetUrl = '/honeymoon';
-                } else {
-                  targetUrl = `/holidays?q=${encodeURIComponent(tag)}`;
-                }
-              }
+                    const matchedKey = Object.keys(knownDestinations).find((key) => lowerTag.includes(key));
+                    if (matchedKey) {
+                      const destSlug = knownDestinations[matchedKey];
+                      targetUrl = isHoneymoon ? `/honeymoon/${destSlug}` : `/holidays/${destSlug}`;
+                    } else if (isHoneymoon) {
+                      targetUrl = '/honeymoon';
+                    } else {
+                      targetUrl = `/holidays?q=${encodeURIComponent(tag)}`;
+                    }
+                  }
 
-              return (
-                <Link
-                  key={idx}
-                  href={targetUrl}
-                  className="px-5 py-2.5 bg-white text-blue-600 border-2 border-blue-500 hover:border-blue-600 hover:bg-blue-50 rounded-full text-xs sm:text-sm font-bold shadow-xs transition-all cursor-pointer inline-block"
-                >
-                  {tag}
-                </Link>
-              );
-            })}
+                  return (
+                    <Link
+                      key={idx}
+                      href={targetUrl}
+                      className="px-5 py-2.5 bg-white text-blue-600 border-2 border-blue-500 hover:border-blue-600 hover:bg-blue-50 rounded-full text-xs sm:text-sm font-bold shadow-xs transition-all cursor-pointer inline-block"
+                    >
+                      {tag}
+                    </Link>
+                  );
+                })}
+              </div>
+            ))}
           </div>
         </div>
       </Container>
