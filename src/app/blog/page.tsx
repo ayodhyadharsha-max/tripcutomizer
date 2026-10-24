@@ -201,8 +201,48 @@ export default function BlogHubPage() {
     },
   ];
 
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://www.tripcustomizer.com',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Travel Blog & Destination Guides',
+        item: 'https://www.tripcustomizer.com/blog',
+      },
+    ],
+  };
+
+  const itemListJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Trip Customizer Travel Guides & Articles',
+    numberOfItems: blogs.length,
+    itemListElement: blogs.map((b, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      name: b.title,
+      url: `https://www.tripcustomizer.com/blog/${b.slug}`,
+    })),
+  };
+
   return (
     <div className="bg-slate-50 min-h-screen py-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+      />
       <Container>
         <div className="bg-white rounded-3xl p-8 mb-8 shadow-md border border-slate-200 text-slate-900">
           <div className="flex items-center space-x-2 text-brand-600 font-bold text-xs uppercase tracking-wider mb-2">

@@ -169,28 +169,113 @@ export default function HoneymoonDestinationPage({ params }: HoneymoonPageProps)
     return false;
   });
 
-  if (matchedPackages.length === 0) {
-    notFound();
-  }
-
-  const displayPackages = matchedPackages;
-
   const destName = rawSlug
     .split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
 
+  // Gracefully fallback to main destination if no strict honeymoon filter matched
+  const fallbackPackages = matchedPackages.length > 0
+    ? matchedPackages
+    : allCatalog.filter((p) => {
+        const dSlug = (p.destinationSlug || '').toLowerCase();
+        const dest = (p.destination || '').toLowerCase();
+        return dSlug === rawSlug || dSlug.includes(rawSlug) || dest.includes(rawSlug);
+      });
+
+  if (fallbackPackages.length === 0) {
+    notFound();
+  }
+
+  const displayPackages = fallbackPackages;
+  const canonicalUrl = `https://www.tripcustomizer.com/honeymoon/${rawSlug}`;
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://www.tripcustomizer.com',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Honeymoon Packages',
+        item: 'https://www.tripcustomizer.com/honeymoon',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: `${destName} Honeymoon Packages`,
+        item: canonicalUrl,
+      },
+    ],
+  };
+
+  const itemListJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: `${destName} Honeymoon Tour Packages 2026`,
+    numberOfItems: displayPackages.length,
+    itemListElement: displayPackages.map((p, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      name: p.name,
+      url: `https://www.tripcustomizer.com/holidays/${p.destinationSlug}/${p.slug}`,
+    })),
+  };
+
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: `What makes ${destName} a great honeymoon destination?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `${destName} offers scenic romance, luxury couple accommodations, secluded viewpoints, and private dining experiences perfectly tailored for newlyweds.`,
+        },
+      },
+      {
+        '@type': 'Question',
+        name: `Can we customize ${destName} honeymoon packages with private cabs and flights?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `Yes, all ${destName} honeymoon packages can be booked with round-trip flights from your nearest city, private AC cabs, 4-star/5-star honeymoon suites, and special candlelit dinners.`,
+        },
+      },
+    ],
+  };
+
   return (
-    <Suspense fallback={<div className="min-h-screen bg-slate-900 py-20 text-center text-white font-bold">Loading Honeymoon Packages...</div>}>
-      <HolidayListingView
-        initialPackages={displayPackages.slice(0, 12)}
-        title={`${destName} Honeymoon Packages`}
-        subtitle={`Romantic Couple Escapes in ${destName} with luxury resorts, candlelight dinners, private cabs & 24x7 honeymoon support.`}
-        badgeText={`${destName} Couple Specials & Honeymoon Offers`}
-        defaultCategory={isIndia ? 'INDIA' : isIntl ? 'INTERNATIONAL' : 'ALL'}
-        defaultDestinationSlug={isIndia || isIntl ? undefined : rawSlug}
-        defaultTheme="Honeymoon"
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-    </Suspense>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <Suspense fallback={<div className="min-h-screen bg-slate-900 py-20 text-center text-white font-bold">Loading Honeymoon Packages...</div>}>
+        <HolidayListingView
+          initialPackages={displayPackages.slice(0, 12)}
+          title={`${destName} Honeymoon Packages`}
+          subtitle={`Romantic Couple Escapes in ${destName} with luxury resorts, candlelight dinners, private cabs & 24x7 honeymoon support.`}
+          badgeText={`${destName} Couple Specials & Honeymoon Offers`}
+          defaultCategory={isIndia ? 'INDIA' : isIntl ? 'INTERNATIONAL' : 'ALL'}
+          defaultDestinationSlug={isIndia || isIntl ? undefined : rawSlug}
+          defaultTheme="Honeymoon"
+        />
+      </Suspense>
+    </>
   );
 }

@@ -61,11 +61,63 @@ export default function HoneymoonPage() {
 
   const honeymoonPackages = DEMO_PACKAGES.filter((p) => p.theme === 'Honeymoon' || p.slug.includes('bali') || p.slug.includes('maldives'));
 
+  const itemListJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Top Honeymoon & Couple Tour Packages 2026',
+    numberOfItems: honeymoonPackages.length,
+    itemListElement: honeymoonPackages.map((pkg, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      name: pkg.name,
+      url: `https://www.tripcustomizer.com/holidays/${pkg.destinationSlug}/${pkg.slug}`,
+    })),
+  };
+
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'What is included in Trip Customizer honeymoon packages?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Trip Customizer honeymoon packages include verified 4-star/5-star romantic resort stays, private pool villas, complimentary candlelight dinners, flower bed decorations, airport transfers, and 24x7 couple concierge support.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Which are the best budget honeymoon destinations in India under ₹30,000?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Top budget honeymoon destinations under ₹30,000 include Kashmir (Srinagar houseboat & Gulmarg), Kerala (Munnar & Alleppey backwaters), Manali snow cottages, and North Goa beach resorts.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Can we customize our honeymoon package with flights and private pool villas?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes, 100% of our honeymoon packages in Bali, Maldives, Mauritius, Thailand, and Switzerland can be customized with direct flights, private pool villas, floating breakfasts, and luxury couple spa sessions.',
+        },
+      },
+    ],
+  };
+
   return (
     <div className="bg-slate-50 min-h-screen py-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <Container>
         <div className="bg-gradient-to-r from-rose-900 via-brand-900 to-slate-900 text-white rounded-3xl p-8 mb-8 shadow-xl">
