@@ -266,7 +266,10 @@ export async function POST(req: Request) {
 
     // 2. Email Notification to tripcustomizer@gmail.com via Web3Forms if configured
     try {
-      const apiKey = process.env.WEB3FORMS_ACCESS_KEY || process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+      const apiKey =
+        process.env.WEB3FORMS_ACCESS_KEY ||
+        process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ||
+        'c542ca79-b08a-4352-bf3e-1045518a0486';
       if (apiKey) {
         await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
