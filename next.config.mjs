@@ -47,6 +47,23 @@ const nextConfig = {
         ],
       },
       {
+        source: '/TripCustomizer.apk',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'application/vnd.android.package-archive',
+          },
+          {
+            key: 'Content-Disposition',
+            value: 'attachment; filename="TripCustomizer.apk"',
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=604800, immutable',
+          },
+        ],
+      },
+      {
         source: '/destinations/:path*',
         headers: [
           {
@@ -151,6 +168,11 @@ const nextConfig = {
       {
         source: '/destination/:path*',
         destination: '/destinations/:path*',
+        permanent: true,
+      },
+      {
+        source: '/custom-trip',
+        destination: '/customize-trip',
         permanent: true,
       },
     ];
