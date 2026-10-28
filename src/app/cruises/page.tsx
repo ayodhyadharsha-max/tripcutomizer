@@ -11,8 +11,48 @@ export default function CruisesPage() {
   const cruisePkgs = DEMO_PACKAGES.filter((p) => p.theme === 'Cruise' || p.slug.includes('cruise'));
   const pkg = cruisePkgs[0] || DEMO_PACKAGES[5];
 
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://www.tripcustomizer.com',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Luxury Cruise Packages',
+        item: 'https://www.tripcustomizer.com/cruises',
+      },
+    ],
+  };
+
+  const touristTripJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'TouristTrip',
+    name: 'Luxury Ocean & River Cruise Packages 2026',
+    description: 'Experience Genting Dream Cruise, Royal Caribbean, Costa Cruises & Cordelia Cruises with unlimited dining and ocean suites.',
+    touristType: ['Cruisers', 'Families', 'Couples'],
+    provider: {
+      '@type': 'TravelAgency',
+      name: 'Trip Customizer',
+      url: 'https://www.tripcustomizer.com',
+    },
+  };
+
   return (
     <div className="bg-slate-50 min-h-screen py-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(touristTripJsonLd) }}
+      />
       <Container>
         <div className="bg-gradient-to-r from-sky-900 via-brand-900 to-slate-900 text-white rounded-3xl p-8 mb-8 shadow-xl">
           <div className="flex items-center space-x-2 text-sky-400 font-bold text-xs uppercase tracking-wider mb-2">

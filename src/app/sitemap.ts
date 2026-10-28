@@ -195,6 +195,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.95,
     },
     {
+      url: `${baseUrl}/char-dham`,
+      lastModified: currentDate,
+      changeFrequency: 'daily',
+      priority: 0.95,
+    },
+    {
+      url: `${baseUrl}/offers`,
+      lastModified: currentDate,
+      changeFrequency: 'daily',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/cruises`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/eurail`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
       url: `${baseUrl}/about`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
@@ -212,6 +236,54 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.6,
     },
+    {
+      url: `${baseUrl}/loyalty`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/careers`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/privacy`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/terms`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/cancellation-policy`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/refund-policy`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/cookie-policy`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/disclaimer`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
   ];
 
   // 2. Destination Landing Pages (Holidays) - 100% Verified Valid Routes
@@ -227,7 +299,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'puri', 'rameshwaram', 'tirupati', 'shirdi',
     'haridwar', 'rishikesh', 'prayagraj', 'ujjain', 'pushkar',
     'somnath', 'dwarka',
-    'kerala', 'kashmir', 'himachal', 'rajasthan', 'andaman', 'ladakh', 'goa', 'uttarakhand', 'sikkim'
+    'kerala', 'kashmir', 'himachal', 'rajasthan', 'andaman', 'ladakh', 'goa', 'uttarakhand', 'sikkim',
+    'manali', 'shimla', 'auli', 'nainital', 'mussoorie', 'udaipur', 'jaipur', 'jaisalmer', 'munnar', 'coorg', 'kutch'
   ];
 
   const demoSlugs = DEMO_PACKAGES.map((p) => p.destinationSlug);

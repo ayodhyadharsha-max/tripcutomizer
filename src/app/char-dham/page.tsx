@@ -75,8 +75,49 @@ export default function CharDhamPage() {
     ],
   };
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://www.tripcustomizer.com',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Char Dham Yatra',
+        item: 'https://www.tripcustomizer.com/char-dham',
+      },
+    ],
+  };
+
+  const touristTripSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'TouristTrip',
+    name: 'Char Dham Yatra Sacred Tour Package 2026',
+    description: 'Divine 10N/11D Char Dham pilgrimage covering Yamunotri, Gangotri, Kedarnath and Badrinath with VIP darshan and AC transport.',
+    touristType: ['Pilgrims', 'Families', 'Senior Citizens'],
+    provider: {
+      '@type': 'TravelAgency',
+      name: 'Trip Customizer',
+      url: 'https://www.tripcustomizer.com',
+      telephone: '+91-7408763401',
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(touristTripSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

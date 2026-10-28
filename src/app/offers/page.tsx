@@ -53,8 +53,48 @@ export default function OffersPage() {
     setTimeout(() => setCopiedCode(null), 2000);
   };
 
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://www.tripcustomizer.com',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Offers & Promo Codes',
+        item: 'https://www.tripcustomizer.com/offers',
+      },
+    ],
+  };
+
+  const itemListJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Trip Customizer Travel Deals & Bank Promo Codes',
+    numberOfItems: offersList.length,
+    itemListElement: offersList.map((off, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      name: off.title,
+      description: `${off.terms} Promo Code: ${off.code} (${off.validity})`,
+    })),
+  };
+
   return (
     <div className="bg-slate-50 min-h-screen py-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+      />
       <Container>
         {/* Breadcrumb */}
         <div className="flex items-center space-x-2 text-xs text-slate-500 mb-4">
