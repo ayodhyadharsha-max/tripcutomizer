@@ -421,7 +421,7 @@ export default function RootLayout({
       url: 'https://www.tripcustomizer.com',
       speakable: {
         '@type': 'SpeakableSpecification',
-        cssSelector: ['h1', 'h2', '.speakable-content', 'p.hero-subtitle'],
+        cssSelector: ['h1', 'h2', 'h2.aeo-question', 'h3.aeo-question', '.speakable-content', '.aeo-answer', 'p.hero-subtitle'],
       },
     },
     {

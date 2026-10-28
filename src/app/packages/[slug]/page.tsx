@@ -27,6 +27,7 @@ import {
   Phone,
   Award,
   ChevronRight,
+  CreditCard,
 } from 'lucide-react';
 
 export const revalidate = 86400; // ISR 24 Hours
@@ -92,6 +93,8 @@ export default function ProgrammaticPackagePage({
   if (!pkg) {
     notFound();
   }
+
+  const hotelCategory = pkg.hotels?.[0]?.category || '4-Star Deluxe';
 
   // Get sibling packages for cross-linking
   const allPackages = getAllProgrammaticPackages();
@@ -195,6 +198,51 @@ export default function ProgrammaticPackagePage({
     ],
   };
 
+  const speakableWebPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: pkg.h1,
+    url: canonicalUrl,
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['h1', 'h2.aeo-question', '.speakable-content', '.aeo-answer'],
+    },
+  };
+
+  const howToBookSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: `How to Book and Customize ${pkg.h1}`,
+    description: `Step-by-step booking guide for ${pkg.h1} with confirmed flights from ${pkg.departureCity.city}, 4-star hotels, and transfers.`,
+    totalTime: 'PT10M',
+    step: [
+      {
+        '@type': 'HowToStep',
+        position: 1,
+        name: `Select ${pkg.departureCity.city} Departure Flight`,
+        text: `Choose your departure from ${pkg.departureCity.airport} with partner airlines ${pkg.departureCity.airlines.slice(0, 3).join(', ')}.`,
+      },
+      {
+        '@type': 'HowToStep',
+        position: 2,
+        name: 'Customize Hotel Stay and Meal Preferences',
+        text: `Select your preferred ${hotelCategory} room category with daily buffet breakfast and dinner options.`,
+      },
+      {
+        '@type': 'HowToStep',
+        position: 3,
+        name: 'Personalize Sightseeing Excursions',
+        text: `Tailor day-by-day sightseeing across ${pkg.destination} with private AC cab transfers.`,
+      },
+      {
+        '@type': 'HowToStep',
+        position: 4,
+        name: 'Receive Instant Booking Confirmation',
+        text: 'Confirm with GST-compliant tax invoicing, instant vouchers, and 24x7 senior concierge support.',
+      },
+    ],
+  };
+
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -213,6 +261,10 @@ export default function ProgrammaticPackagePage({
       {/* JSON-LD Schemas */}
       <script
         type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableWebPageSchema) }}
+      />
+      <script
+        type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(touristTripSchema) }}
       />
       <script
@@ -222,6 +274,10 @@ export default function ProgrammaticPackagePage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToBookSchema) }}
       />
       <script
         type="application/ld+json"
@@ -356,6 +412,56 @@ export default function ProgrammaticPackagePage({
 
               <div className="mt-4 p-3 bg-white/70 rounded-xl border border-blue-100 text-xs text-slate-600 leading-relaxed">
                 <strong>Terminal Guidance:</strong> {pkg.departureCity.terminalNotes}
+              </div>
+            </section>
+
+            {/* AEO Quick Facts & Direct Answer Box (Optimized for Featured Snippets & AI Search) */}
+            <section className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200/90 shadow-sm space-y-6">
+              <div className="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-slate-100">
+                <div className="inline-flex items-center space-x-2 bg-blue-50 border border-blue-200/70 text-blue-700 font-extrabold text-xs uppercase tracking-wider px-3 py-1 rounded-full">
+                  <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+                  <span>Quick Facts &amp; Direct Answer Guide</span>
+                </div>
+                <div className="text-xs text-slate-500 font-semibold flex items-center gap-1.5">
+                  <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                  <span>2026 Guaranteed Pricing</span>
+                </div>
+              </div>
+
+              {/* Direct Q1: Cost & Inclusions */}
+              <div className="bg-slate-50 rounded-xl p-4 sm:p-5 border border-slate-200/70">
+                <h2 className="aeo-question text-base sm:text-lg font-extrabold text-slate-900 mb-2 flex items-center gap-2">
+                  <CreditCard className="w-4 h-4 text-blue-600 shrink-0" />
+                  <span>How much does the {pkg.h1} cost?</span>
+                </h2>
+                <p className="speakable-content aeo-answer text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
+                  The {pkg.h1} starts at <strong>₹{pkg.discountPrice.toLocaleString('en-IN')} per person</strong> (reduced from ₹{pkg.startingPrice.toLocaleString('en-IN')}) for a {pkg.durationDays}-day, {pkg.durationNights}-night itinerary. This price includes confirmed flights from {pkg.departureCity.city} ({pkg.departureCity.airport}), verified {hotelCategory} hotel stays, daily breakfast, private sightseeing transfers, and 24x7 senior concierge support.
+                </p>
+              </div>
+
+              {/* Direct Q2: Flight & Transport Connectivity */}
+              <div className="bg-slate-50 rounded-xl p-4 sm:p-5 border border-slate-200/70">
+                <h2 className="aeo-question text-base sm:text-lg font-extrabold text-slate-900 mb-2 flex items-center gap-2">
+                  <Plane className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>What flight and transfer services are included from {pkg.departureCity.city}?</span>
+                </h2>
+                <p className="speakable-content aeo-answer text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
+                  Departures from {pkg.departureCity.city} feature confirmed flights on partner airlines ({pkg.departureCity.airlines.slice(0, 3).join(', ')}), private AC airport pickup and drop transfers, intercity sightseeing, verified hotel check-in assistance, and 5% GST tax-compliant billing with zero hidden fees.
+                </p>
+              </div>
+
+              {/* Direct Q3: How to Customize */}
+              <div className="bg-slate-50 rounded-xl p-4 sm:p-5 border border-slate-200/70">
+                <h2 className="aeo-question text-base sm:text-lg font-extrabold text-slate-900 mb-2 flex items-center gap-2">
+                  <Compass className="w-4 h-4 text-purple-600 shrink-0" />
+                  <span>How can I customize this {pkg.destination} tour package?</span>
+                </h2>
+                <ol className="list-decimal pl-5 space-y-1.5 text-xs sm:text-sm text-slate-700 font-medium">
+                  <li>Choose your preferred travel departure date from {pkg.departureCity.city}.</li>
+                  <li>Upgrade or select hotel category ({hotelCategory} or 5-Star Luxury).</li>
+                  <li>Add private day tours, dinner cruises, or adventurous outdoor excursions.</li>
+                  <li>Confirm with transparent pricing via WhatsApp (+91 7408763401) within 2 hours.</li>
+                </ol>
               </div>
             </section>
 
@@ -533,15 +639,16 @@ export default function ProgrammaticPackagePage({
                 {pkg.faqs.map((faq, idx) => (
                   <details
                     key={idx}
+                    open={idx === 0}
                     className="group bg-slate-50 rounded-xl border border-slate-200/80 p-4 transition open:bg-white open:shadow-xs"
                   >
                     <summary className="font-bold text-sm sm:text-base text-slate-900 cursor-pointer list-none flex items-center justify-between">
-                      <span>{faq.question}</span>
+                      <span className="aeo-question">{faq.question}</span>
                       <span className="ml-2 text-blue-600 font-semibold group-open:rotate-180 transition-transform">
                         ▼
                       </span>
                     </summary>
-                    <p className="text-xs sm:text-sm text-slate-600 mt-3 pt-3 border-t border-slate-200/60 leading-relaxed">
+                    <p className="speakable-content aeo-answer text-xs sm:text-sm text-slate-600 mt-3 pt-3 border-t border-slate-200/60 leading-relaxed">
                       {faq.answer}
                     </p>
                   </details>

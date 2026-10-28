@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { getAllProgrammaticPackages } from '@/data/programmaticPackages';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
+import { AEODirectAnswerBox } from '@/components/holidays/AEODirectAnswerBox';
 
 export async function generateMetadata({ params }: { params: { destination: string } }): Promise<Metadata> {
   const rawSlug = params.destination.toLowerCase().trim();
@@ -278,24 +279,87 @@ export default function DestinationListingPage({ params }: { params: { destinati
     })),
   };
 
+  const minPrice = displayPackages.length > 0
+    ? Math.min(...displayPackages.map((p) => (p.discountPrice || p.startingPrice || 14999)))
+    : 14999;
+  const maxPrice = displayPackages.length > 0
+    ? Math.max(...displayPackages.map((p) => (p.startingPrice || p.discountPrice || 55000)))
+    : 55000;
+  const recommendedDays = displayPackages.length > 0
+    ? Math.round(displayPackages.reduce((acc, p) => acc + (p.durationDays || 5), 0) / displayPackages.length)
+    : 5;
+
+  const speakableWebPageJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: `${destName} Tour Packages 2026: Customized Holiday & Travel Guide`,
+    url: `https://www.tripcustomizer.com/holidays/${rawSlug}`,
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['h1', 'h2.aeo-question', '.speakable-content', '.aeo-answer'],
+    },
+  };
+
+  const howToJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: `How to Book and Customize a ${destName} Tour Package`,
+    description: `Step-by-step guide to customizing and booking an all-inclusive ${destName} holiday package with flights, 4-star hotels, and transfers from India.`,
+    totalTime: 'PT10M',
+    step: [
+      {
+        '@type': 'HowToStep',
+        position: 1,
+        name: 'Select Departure City and Travel Dates',
+        text: 'Choose your preferred departure airport (Delhi, Mumbai, Ahmedabad, Bangalore, Kolkata, Pune) and travel dates.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 2,
+        name: 'Choose Hotel Category',
+        text: 'Select 3-Star comfort, 4-Star deluxe, or 5-Star luxury resort accommodations with daily breakfast.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 3,
+        name: 'Personalize Sightseeing and Activities',
+        text: 'Add private sightseeing tours, island excursions, desert safaris, or temple darshans according to your preferences.',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 4,
+        name: 'Confirm with 5% GST Invoice',
+        text: 'Receive your transparent quotation with guaranteed departure vouchers and 24x7 dedicated travel desk support.',
+      },
+    ],
+  };
+
   const faqJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: [
       {
         '@type': 'Question',
-        name: `What is the best time to visit ${destName}?`,
+        name: `How much does a ${destName} tour package cost from India?`,
         acceptedAnswer: {
           '@type': 'Answer',
-          text: `The peak travel season for ${destName} is during pleasant weather months. Trip Customizer offers customized month-by-month itinerary advice and luxury hotel packages.`,
+          text: `A customized ${destName} tour package from India typically costs between ₹${minPrice.toLocaleString('en-IN')} to ₹${maxPrice.toLocaleString('en-IN')} per person for a ${recommendedDays} Days vacation. This price includes verified 4-star deluxe hotel accommodations, daily breakfast and dinner, private AC airport transfers, guided sightseeing excursions, and 24x7 dedicated travel desk support.`,
         },
       },
       {
         '@type': 'Question',
-        name: `Are flights and meals included in ${destName} packages?`,
+        name: `What is the best time to visit ${destName}?`,
         acceptedAnswer: {
           '@type': 'Answer',
-          text: `Yes, all ${destName} packages can be booked with round-trip flights from your home airport, daily buffet breakfast, private AC cabs, and verified 4-star hotel stays.`,
+          text: `The peak travel season for ${destName} is during pleasant weather months with clear skies suitable for outdoor sightseeing. Booking your holiday package 30 to 45 days in advance guarantees early-bird airfare discounts, preferred flight timings, and guaranteed room availability at top-rated 4-star and 5-star properties.`,
+        },
+      },
+      {
+        '@type': 'Question',
+        name: `Are flights and visa assistance included in ${destName} packages?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `Yes, all ${destName} tour packages booked on Trip Customizer can be bundled with confirmed round-trip flights departing from major Indian airports (Delhi, Mumbai, Ahmedabad, Kolkata, Bangalore). International itineraries include step-by-step visa assistance with 5% GST tax compliant invoicing.`,
         },
       },
       {
@@ -303,7 +367,7 @@ export default function DestinationListingPage({ params }: { params: { destinati
         name: `Can I customize my ${destName} tour itinerary?`,
         acceptedAnswer: {
           '@type': 'Answer',
-          text: `Yes, 100% of our ${destName} packages can be tailored to your preferred travel dates, duration, hotel rating, and custom sightseeing preferences via our 24x7 travel desk.`,
+          text: `Yes, 100% of our ${destName} packages can be tailored to your preferred travel dates, duration, hotel rating, and custom sightseeing preferences via our 24x7 travel desk on WhatsApp at +91 7408763401.`,
         },
       },
     ],
@@ -313,11 +377,19 @@ export default function DestinationListingPage({ params }: { params: { destinati
     <>
       <script
         type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableWebPageJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
       />
       <script
         type="application/ld+json"
@@ -344,6 +416,16 @@ export default function DestinationListingPage({ params }: { params: { destinati
               Plan your dream vacation to {destName} with Trip Customizer. Our handcrafted {destName} holiday packages include 4-star deluxe hotel stays, daily breakfast & dinner, private AC airport transfers, guided sightseeing tours, and 24x7 travel desk support.
             </p>
           </header>
+
+          {/* AEO Direct Answer Box (Optimized for Featured Snippets Position 0 & Voice Search) */}
+          <AEODirectAnswerBox
+            destName={destName}
+            destinationSlug={rawSlug}
+            isInternational={isIntlSlug}
+            minPrice={minPrice}
+            maxPrice={maxPrice}
+            recommendedDays={recommendedDays}
+          />
 
           {/* Pricing Table for Featured Snippets */}
           <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 mb-8 overflow-x-auto">

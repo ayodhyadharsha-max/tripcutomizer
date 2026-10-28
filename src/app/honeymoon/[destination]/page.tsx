@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
+import { AEODirectAnswerBox } from '@/components/holidays/AEODirectAnswerBox';
 
 interface HoneymoonPageProps {
   params: {
@@ -190,6 +191,27 @@ export default function HoneymoonDestinationPage({ params }: HoneymoonPageProps)
   const displayPackages = fallbackPackages;
   const canonicalUrl = `https://www.tripcustomizer.com/honeymoon/${rawSlug}`;
 
+  const minPrice = displayPackages.length > 0
+    ? Math.min(...displayPackages.map((p) => (p.discountPrice || p.startingPrice || 18999)))
+    : 18999;
+  const maxPrice = displayPackages.length > 0
+    ? Math.max(...displayPackages.map((p) => (p.startingPrice || p.discountPrice || 65000)))
+    : 65000;
+  const recommendedDays = displayPackages.length > 0
+    ? Math.round(displayPackages.reduce((acc, p) => acc + (p.durationDays || 5), 0) / displayPackages.length)
+    : 6;
+
+  const speakableWebPageJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: `${destName} Honeymoon Packages 2026`,
+    url: canonicalUrl,
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['h1', 'h2.aeo-question', '.speakable-content', '.aeo-answer'],
+    },
+  };
+
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -234,6 +256,14 @@ export default function HoneymoonDestinationPage({ params }: HoneymoonPageProps)
     mainEntity: [
       {
         '@type': 'Question',
+        name: `How much does a ${destName} honeymoon tour package cost?`,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: `A customized ${destName} honeymoon package starts from ₹${minPrice.toLocaleString('en-IN')} to ₹${maxPrice.toLocaleString('en-IN')} per couple. This package includes verified 4-star/5-star honeymoon suites, candlelight dinners, private sightseeing cabs, and 24x7 trip concierge.`,
+        },
+      },
+      {
+        '@type': 'Question',
         name: `What makes ${destName} a great honeymoon destination?`,
         acceptedAnswer: {
           '@type': 'Answer',
@@ -253,6 +283,10 @@ export default function HoneymoonDestinationPage({ params }: HoneymoonPageProps)
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableWebPageJsonLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
@@ -276,6 +310,29 @@ export default function HoneymoonDestinationPage({ params }: HoneymoonPageProps)
           defaultTheme="Honeymoon"
         />
       </Suspense>
+
+      {/* Crawlable HTML Section for Search Bots & Voice AEO */}
+      <section className="bg-slate-100 py-12 border-t border-slate-200 text-slate-800">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <header className="mb-8">
+            <h1 className="text-2xl sm:text-3xl font-black text-slate-950 mb-2">
+              {destName} Honeymoon Packages 2026: Romantic Couple Escapes
+            </h1>
+            <p className="text-xs sm:text-sm text-slate-600 max-w-4xl leading-relaxed">
+              Celebrate your love with Trip Customizer&apos;s handcrafted {destName} honeymoon packages. Enjoy luxury romantic resorts, candlelit dinners, couple spa sessions, private airport transfers, and 24x7 senior concierge support.
+            </p>
+          </header>
+
+          <AEODirectAnswerBox
+            destName={`${destName} Honeymoon`}
+            destinationSlug={rawSlug}
+            isInternational={isIntl}
+            minPrice={minPrice}
+            maxPrice={maxPrice}
+            recommendedDays={recommendedDays}
+          />
+        </div>
+      </section>
     </>
   );
 }

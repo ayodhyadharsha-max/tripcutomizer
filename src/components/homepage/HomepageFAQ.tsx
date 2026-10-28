@@ -90,7 +90,7 @@ export const HomepageFAQ: React.FC = () => {
                       <span className="text-[10px] font-bold text-brand-600 uppercase tracking-wider">
                         {item.category}
                       </span>
-                      <h3 className="text-sm sm:text-base font-extrabold text-slate-900 leading-snug">
+                      <h3 className="aeo-question text-sm sm:text-base font-extrabold text-slate-900 leading-snug">
                         {item.question}
                       </h3>
                     </div>
@@ -103,11 +103,13 @@ export const HomepageFAQ: React.FC = () => {
                     </div>
                   </button>
 
-                  {isOpen && (
-                    <div className="px-5 pb-5 sm:px-6 sm:pb-6 pt-0 border-t border-slate-100 text-xs sm:text-sm text-slate-600 leading-relaxed speakable-content">
-                      <p className="pt-3">{item.answer}</p>
-                    </div>
-                  )}
+                  <div
+                    className={`px-5 pb-5 sm:px-6 sm:pb-6 pt-0 border-t border-slate-100 text-xs sm:text-sm text-slate-600 leading-relaxed speakable-content aeo-answer ${
+                      isOpen ? 'block' : 'hidden'
+                    }`}
+                  >
+                    <p className="pt-3">{item.answer}</p>
+                  </div>
                 </div>
               );
             })}
