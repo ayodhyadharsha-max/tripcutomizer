@@ -15,6 +15,7 @@ import { TravelInsights } from '@/components/homepage/TravelInsights';
 import { SEOTagDirectory } from '@/components/homepage/SEOTagDirectory';
 import { TestimonialsMetrics } from '@/components/homepage/TestimonialsMetrics';
 import { HomepageFAQ } from '@/components/homepage/HomepageFAQ';
+import { SitelinksDirectory } from '@/components/homepage/SitelinksDirectory';
 
 export const metadata: Metadata = {
   title: {
@@ -81,6 +82,7 @@ export default function Home() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'Trip Customizer',
+    alternateName: ['TripCustomizer', 'Trip Customizer India', 'TripCustomizer.com', 'ट्रिप कस्टमाइज़र'],
     url: 'https://www.tripcustomizer.com',
     potentialAction: {
       '@type': 'SearchAction',
@@ -90,6 +92,115 @@ export default function Home() {
       },
       'query-input': 'required name=search_term_string',
     },
+  };
+
+  const siteNavigationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Trip Customizer Main Sitelinks Navigation',
+    description: 'Corporate navigation sitelinks for holiday packages, honeymoon specials, spiritual yatras, and custom trip planning.',
+    numberOfItems: 8,
+    itemListElement: [
+      {
+        '@type': 'SiteNavigationElement',
+        position: 1,
+        name: 'Holiday Packages 2026',
+        description: 'Explore 500+ customized holiday packages with flights, 4-star hotels, and transfers.',
+        url: 'https://www.tripcustomizer.com/holidays',
+      },
+      {
+        '@type': 'SiteNavigationElement',
+        position: 2,
+        name: 'Honeymoon Tour Packages',
+        description: 'Romantic couple getaways with luxury resort stays, candlelight dinners, and private cabs.',
+        url: 'https://www.tripcustomizer.com/honeymoon',
+      },
+      {
+        '@type': 'SiteNavigationElement',
+        position: 3,
+        name: 'Char Dham & Spiritual Yatras',
+        description: 'Sacred pilgrimages to Kedarnath, Badrinath, Ayodhya Ram Mandir VIP Darshan & Varanasi.',
+        url: 'https://www.tripcustomizer.com/char-dham',
+      },
+      {
+        '@type': 'SiteNavigationElement',
+        position: 4,
+        name: 'City Departure Tour Packages',
+        description: 'Browse city-to-destination holiday packages with direct flights from Mumbai, Delhi, Ahmedabad, and Bangalore.',
+        url: 'https://www.tripcustomizer.com/packages',
+      },
+      {
+        '@type': 'SiteNavigationElement',
+        position: 5,
+        name: '1-Minute Custom Trip Wizard',
+        description: 'Plan and customize your dream holiday itinerary in 60 seconds with 24x7 expert travel desk support.',
+        url: 'https://www.tripcustomizer.com/customize-trip',
+      },
+      {
+        '@type': 'SiteNavigationElement',
+        position: 6,
+        name: 'Exclusive Travel Offers & Deals',
+        description: 'Unlock seasonal discounts up to ₹15,000, early-bird holiday deals, and festive vacation packages.',
+        url: 'https://www.tripcustomizer.com/offers',
+      },
+      {
+        '@type': 'SiteNavigationElement',
+        position: 7,
+        name: 'Luxury Ocean Cruises',
+        description: 'Book luxury cruise vacations across Goa, Lakshadweep, Dubai Marina, Singapore, and European ports.',
+        url: 'https://www.tripcustomizer.com/cruises',
+      },
+      {
+        '@type': 'SiteNavigationElement',
+        position: 8,
+        name: 'Travel Blog & 2026 Guides',
+        description: 'Expert travel guides, itineraries, tips, and destination recommendations for 2026.',
+        url: 'https://www.tripcustomizer.com/blog',
+      },
+    ],
+  };
+
+  const howToBookSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How to Plan and Customize an All-Inclusive Holiday Package in 4 Easy Steps',
+    description: 'Step-by-step guide to customizing and booking an all-inclusive holiday package with flights, 4-star hotels, and transfers on Trip Customizer.',
+    totalTime: 'PT5M',
+    estimatedCost: {
+      '@type': 'MonetaryAmount',
+      currency: 'INR',
+      value: '14999',
+    },
+    step: [
+      {
+        '@type': 'HowToStep',
+        position: 1,
+        name: 'Select Destination & Departure City',
+        text: 'Choose from 40+ countries or domestic Indian hotspots. Pick flights departing from Delhi, Mumbai, Ahmedabad, Bangalore, Kolkata, or Pune.',
+        url: 'https://www.tripcustomizer.com/#how-it-works',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 2,
+        name: 'Choose Hotel Tier & Meal Plan',
+        text: 'Select handpicked 3-Star comfort, 4-Star deluxe, or 5-Star luxury resort accommodations with daily buffet breakfast and dinner options.',
+        url: 'https://www.tripcustomizer.com/#how-it-works',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 3,
+        name: 'Personalize Sightseeing & Transfers',
+        text: 'Add private AC cabs for airport transfers, curated day tours, desert safaris, island speedboat rides, or VIP temple darshan entry passes.',
+        url: 'https://www.tripcustomizer.com/#how-it-works',
+      },
+      {
+        '@type': 'HowToStep',
+        position: 4,
+        name: 'Instant Confirmation & 24x7 Concierge',
+        text: 'Receive 5% GST-compliant tax invoice, confirmed hotel and flight vouchers, and a dedicated personal relationship manager throughout your trip.',
+        url: 'https://www.tripcustomizer.com/#how-it-works',
+      },
+    ],
   };
 
   const agencySchema = {
@@ -170,6 +281,8 @@ export default function Home() {
   return (
     <div className="bg-slate-50 min-h-screen">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(siteNavigationSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToBookSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(agencySchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
@@ -181,6 +294,9 @@ export default function Home() {
 
       {/* Trending Destinations */}
       <TrendingDestinations />
+
+      {/* Official Sitelinks Directory & Multi-Step Booking Guide */}
+      <SitelinksDirectory />
 
       {/* Offers For You */}
       <OffersSection />

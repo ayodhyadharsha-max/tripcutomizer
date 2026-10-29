@@ -196,7 +196,7 @@ export async function POST(req: Request) {
       const apiKey =
         process.env.WEB3FORMS_ACCESS_KEY ||
         process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ||
-        'c542ca79-b08a-4352-bf3e-1045518a0486';
+        '';
       if (apiKey) {
         await fetch('https://api.web3forms.com/submit', {
           method: 'POST',

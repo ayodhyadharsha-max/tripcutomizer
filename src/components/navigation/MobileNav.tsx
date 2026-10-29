@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { X, ChevronRight, Phone, Mail, MessageCircle, MapPin, Compass, Plane, Hotel, Gift, Briefcase, User, Sparkles, Award, Building2, BookOpen } from 'lucide-react';
+import { X, ChevronRight, Phone, Mail, MessageCircle, MapPin, Compass, Plane, Hotel, Gift, Briefcase, User, Sparkles, Award, Building2, BookOpen, Heart } from 'lucide-react';
 import { Button } from '../ui/Button';
 
 interface MobileNavProps {
@@ -60,7 +60,31 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
               <Link href="/holidays" onClick={onClose} className="flex items-center justify-between p-2.5 rounded-lg hover:bg-slate-100">
                 <div className="flex items-center space-x-3 text-brand-600">
                   <Compass className="w-4 h-4" />
-                  <span>Holidays & Packages</span>
+                  <span>Holidays &amp; Packages</span>
+                </div>
+                <ChevronRight className="w-4 h-4 text-slate-400" />
+              </Link>
+
+              <Link href="/honeymoon" onClick={onClose} className="flex items-center justify-between p-2.5 rounded-lg hover:bg-rose-50 text-slate-800">
+                <div className="flex items-center space-x-3 text-rose-600">
+                  <Heart className="w-4 h-4 fill-rose-500/20" />
+                  <span>Honeymoon Specials</span>
+                </div>
+                <ChevronRight className="w-4 h-4 text-slate-400" />
+              </Link>
+
+              <Link href="/char-dham" onClick={onClose} className="flex items-center justify-between p-2.5 rounded-lg hover:bg-amber-50 text-slate-800">
+                <div className="flex items-center space-x-3 text-amber-700">
+                  <MapPin className="w-4 h-4" />
+                  <span>Char Dham &amp; Spiritual</span>
+                </div>
+                <ChevronRight className="w-4 h-4 text-slate-400" />
+              </Link>
+
+              <Link href="/packages" onClick={onClose} className="flex items-center justify-between p-2.5 rounded-lg hover:bg-slate-100 text-slate-800">
+                <div className="flex items-center space-x-3 text-emerald-700">
+                  <Plane className="w-4 h-4" />
+                  <span>Packages by City</span>
                 </div>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
               </Link>

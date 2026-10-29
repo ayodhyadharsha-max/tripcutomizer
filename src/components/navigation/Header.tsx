@@ -7,7 +7,7 @@ import { MegaMenuHolidays } from './MegaMenuHolidays';
 import { MegaMenuMore } from './MegaMenuMore';
 import { MobileNav } from './MobileNav';
 import { Container } from '../ui/Container';
-import { Compass, Plane, Hotel, Sparkles, ChevronDown, Menu } from 'lucide-react';
+import { Compass, Plane, Hotel, Sparkles, ChevronDown, Menu, Heart, MapPin } from 'lucide-react';
 
 export const Header: React.FC = () => {
   const [activeMenu, setActiveMenu] = useState<'holidays' | 'more' | null>(null);
@@ -38,7 +38,7 @@ export const Header: React.FC = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center space-x-3 font-semibold text-xs text-slate-700">
+        <nav aria-label="Main Navigation" className="hidden lg:flex items-center space-x-2 font-semibold text-xs text-slate-700">
           {/* Holidays Link with Mega Menu */}
           <div
             className="relative py-5"
@@ -47,7 +47,7 @@ export const Header: React.FC = () => {
           >
             <Link
               href="/holidays"
-              className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg hover:text-brand-500 hover:bg-slate-50 transition-colors"
+              className="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg hover:text-brand-600 hover:bg-slate-50 transition-colors"
             >
               <Compass className="w-4 h-4 text-brand-500" />
               <span>Holidays</span>
@@ -59,6 +59,24 @@ export const Header: React.FC = () => {
               </div>
             )}
           </div>
+
+          {/* Honeymoon Packages */}
+          <Link
+            href="/honeymoon"
+            className="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg hover:text-rose-600 hover:bg-rose-50 transition-colors text-slate-700"
+          >
+            <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500/20" />
+            <span>Honeymoon</span>
+          </Link>
+
+          {/* Char Dham & Spiritual */}
+          <Link
+            href="/char-dham"
+            className="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg hover:text-amber-700 hover:bg-amber-50 transition-colors text-slate-700"
+          >
+            <MapPin className="w-3.5 h-3.5 text-amber-600" />
+            <span>Char Dham</span>
+          </Link>
 
           {/* Flights */}
           <Link
