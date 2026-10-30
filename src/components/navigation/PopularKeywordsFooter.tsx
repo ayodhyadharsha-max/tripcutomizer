@@ -193,11 +193,17 @@ export const PopularKeywordsFooter: React.FC = () => {
             </h4>
           </div>
           <div className="flex flex-wrap gap-2 text-[11px]">
+            <Link href="/blog/dubai-shopping-festival-2026-dates-flight-packages-guide" className="bg-brand-900/80 hover:bg-brand-800 text-amber-300 hover:text-white px-3 py-1 rounded-full border border-amber-800/60 transition font-bold">
+              Dubai Shopping Festival (DSF) 2026-2027 Flights
+            </Link>
+            <Link href="/blog/top-10-new-year-2027-travel-packages-india-abroad-guide" className="bg-brand-900/80 hover:bg-brand-800 text-rose-300 hover:text-white px-3 py-1 rounded-full border border-rose-800/60 transition font-bold">
+              Top 10 New Year 2027 Destinations &amp; Packages
+            </Link>
             <Link href="/blog/sunburn-goa-2026-dates-tickets-christmas-new-year-package-guide" className="bg-brand-900/80 hover:bg-brand-800 text-amber-300 hover:text-white px-3 py-1 rounded-full border border-amber-800/60 transition">
-              Sunburn Goa 2026 Dates & Tickets
+              Sunburn Goa 2026 Dates &amp; Tickets
             </Link>
             <Link href="/blog/gulmarg-gondola-ticket-booking-online-kashmir-winter-package-guide" className="bg-brand-900/80 hover:bg-brand-800 text-sky-300 hover:text-white px-3 py-1 rounded-full border border-sky-800/60 transition">
-              Gulmarg Gondola Booking & Snow Packages
+              Gulmarg Gondola Booking &amp; Snow Packages
             </Link>
             <Link href="/blog/rann-utsav-2026-dates-tent-city-package-price-booking-guide" className="bg-brand-900/80 hover:bg-brand-800 text-slate-300 hover:text-white px-3 py-1 rounded-full border border-brand-800 transition">
               Rann Utsav Kutch Tent City Guide

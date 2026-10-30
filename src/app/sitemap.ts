@@ -111,6 +111,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
     },
     {
+      url: `${baseUrl}/blog/dubai-shopping-festival-2026-dates-flight-packages-guide`,
+      lastModified: currentDate,
+      changeFrequency: 'daily',
+      priority: 0.99,
+    },
+    {
+      url: `${baseUrl}/blog/top-10-new-year-2027-travel-packages-india-abroad-guide`,
+      lastModified: currentDate,
+      changeFrequency: 'daily',
+      priority: 0.99,
+    },
+    {
       url: `${baseUrl}/blog/gulmarg-gondola-ticket-booking-online-kashmir-winter-package-guide`,
       lastModified: currentDate,
       changeFrequency: 'daily',

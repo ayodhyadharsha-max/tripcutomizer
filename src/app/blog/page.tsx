@@ -47,6 +47,24 @@ export const metadata: Metadata = {
 export default function BlogHubPage() {
   const blogs = [
     {
+      slug: 'dubai-shopping-festival-2026-dates-flight-packages-guide',
+      title: 'Dubai Shopping Festival (DSF) 2026-2027: Official Dates, Mega Sales, Flight Packages & Guide 🛍️✨',
+      category: '🛍️ International Mega Festival',
+      author: 'International Editorial Desk',
+      date: 'Oct 30, 2026',
+      image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=600&auto=format&fit=crop',
+      summary: 'Dates: Dec 2026 – Jan 2027! Over 90% discount sales, direct Emirates/IndiGo flights from Ahmedabad, Mumbai & Delhi, 4-star hotels, desert safari, Burj Khalifa & packages @ ₹34,999.',
+    },
+    {
+      slug: 'top-10-new-year-2027-travel-packages-india-abroad-guide',
+      title: 'Top 10 Best Places to Celebrate New Year 2027 in India & Abroad: Budget Holiday Packages 🎆🍾',
+      category: '🎆 New Year 2027 Countdown',
+      author: 'Festive Travel Editorial',
+      date: 'Oct 30, 2026',
+      image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=600&auto=format&fit=crop',
+      summary: 'Celebrate 2027 in Goa, Dubai, Thailand, Kashmir, Bali & Manali! Early-bird airfares, 4-star stays, beach parties & winter snow getaways starting @ ₹9,999.',
+    },
+    {
       slug: 'gulmarg-gondola-ticket-booking-online-kashmir-winter-package-guide',
       title: 'Gulmarg Gondola Ticket Booking Online 2026: Phase 1 & 2 Rates, Timings & Kashmir Winter Guide ❄️🚠',
       category: '❄️ Kashmir Snow Special',

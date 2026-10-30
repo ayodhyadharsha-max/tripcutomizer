@@ -8,6 +8,28 @@ import { Sparkles, ArrowRight, MapPin, Snowflake, Flame, Music, Tent } from 'luc
 export const TrendingEditorialGuides: React.FC = () => {
   const editorialGuides = [
     {
+      slug: 'dubai-shopping-festival-2026-dates-flight-packages-guide',
+      title: 'Dubai Shopping Festival (DSF) 2026-2027: Dates, Mega Sales & Direct Flight Packages',
+      badge: 'DSF 2026-2027 Live',
+      badgeColor: 'bg-amber-500 text-slate-950 font-black',
+      location: 'Dubai & UAE (AMD, BOM, DEL Flights)',
+      duration: '5 Days / 4 Nights',
+      price: '₹36,999',
+      image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=600&auto=format&fit=crop',
+      summary: 'Up to 90% discount sales, Emirates & IndiGo direct flights, desert safari, Burj Khalifa & 4-star verified stays.',
+    },
+    {
+      slug: 'top-10-new-year-2027-travel-packages-india-abroad-guide',
+      title: 'Top 10 Places to Celebrate New Year 2027: Goa, Dubai, Thailand, Kashmir & Bali',
+      badge: 'New Year 2027 Peak',
+      badgeColor: 'bg-rose-600 text-white font-bold',
+      location: 'India & International Hotspots',
+      duration: '4 to 6 Days',
+      price: '₹9,999',
+      image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=600&auto=format&fit=crop',
+      summary: 'Goa Sunburn countdown, Dubai Burj Khalifa fireworks, Thailand beach parties, Kashmir snow & early-bird rates.',
+    },
+    {
       slug: 'gulmarg-gondola-ticket-booking-online-kashmir-winter-package-guide',
       title: 'Gulmarg Gondola Booking 2026: Phase 1 & 2 Rates, Snow Dates & Kashmir Tour Guide',
       badge: 'Snow Season • Dec–Feb',

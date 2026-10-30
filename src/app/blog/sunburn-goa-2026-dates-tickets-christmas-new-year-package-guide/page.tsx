@@ -157,6 +157,17 @@ export default function SunburnGoa2026GuidePage() {
     ],
   };
 
+  const speakableJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Sunburn Goa 2026 Master Travel Guide',
+    url: 'https://www.tripcustomizer.com/blog/sunburn-goa-2026-dates-tickets-christmas-new-year-package-guide',
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['h1', 'h2.aeo-question', '.speakable-content', '.aeo-answer'],
+    },
+  };
+
   const ticketTiers = [
     {
       tier: 'General Access (GA) - Single Day',
@@ -190,6 +201,7 @@ export default function SunburnGoa2026GuidePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableJsonLd) }} />
 
       {/* Hero Header */}
       <header className="relative bg-gradient-to-br from-emerald-950 via-teal-950 to-slate-950 text-white pt-24 pb-20 overflow-hidden">
@@ -465,8 +477,8 @@ export default function SunburnGoa2026GuidePage() {
               <div className="space-y-3">
                 {faqJsonLd.mainEntity.map((faq, index) => (
                   <div key={index} className="p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
-                    <h3 className="font-bold text-slate-900 text-base mb-1.5">{faq.name}</h3>
-                    <p className="text-sm text-slate-600 leading-relaxed">{faq.acceptedAnswer.text}</p>
+                    <h3 className="aeo-question font-bold text-slate-900 text-base mb-1.5">{faq.name}</h3>
+                    <p className="speakable-content aeo-answer text-sm text-slate-600 leading-relaxed">{faq.acceptedAnswer.text}</p>
                   </div>
                 ))}
               </div>
@@ -488,20 +500,38 @@ export default function SunburnGoa2026GuidePage() {
                   Speak directly with our Goa beach holiday desk for early bird resort lock-in &amp; Sunburn passes.
                 </p>
                 <a
-                  href="tel:+918882003355"
+                  href="tel:+917408763401"
                   className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-xl text-sm transition-colors"
                 >
                   <PhoneCall className="w-4 h-4" />
-                  <span>Call +91 88820 03355</span>
+                  <span>Call +91 7408763401</span>
                 </a>
               </Card>
 
               {/* Related Seasonal Collections */}
               <Card className="mt-6 p-5 bg-white rounded-2xl border border-slate-200 shadow-sm">
                 <h4 className="font-bold text-sm text-slate-900 mb-3 uppercase tracking-wider text-slate-500">
-                  Trending Winter Getaways
+                  Trending Winter &amp; New Year Getaways
                 </h4>
                 <ul className="space-y-3 text-sm">
+                  <li>
+                    <Link
+                      href="/blog/dubai-shopping-festival-2026-dates-flight-packages-guide"
+                      className="text-slate-700 hover:text-amber-600 flex items-center justify-between font-medium group"
+                    >
+                      <span className="font-bold text-amber-700">Dubai Shopping Festival (DSF) Flights</span>
+                      <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-amber-600 transition-colors" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/blog/top-10-new-year-2027-travel-packages-india-abroad-guide"
+                      className="text-slate-700 hover:text-rose-600 flex items-center justify-between font-medium group"
+                    >
+                      <span className="font-bold text-rose-700">Top 10 New Year 2027 Trips</span>
+                      <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-rose-600 transition-colors" />
+                    </Link>
+                  </li>
                   <li>
                     <Link
                       href="/blog/gulmarg-gondola-ticket-booking-online-kashmir-winter-package-guide"
@@ -517,15 +547,6 @@ export default function SunburnGoa2026GuidePage() {
                       className="text-slate-700 hover:text-emerald-600 flex items-center justify-between font-medium group"
                     >
                       <span>Rann Utsav Kutch 2026-2027</span>
-                      <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-emerald-600 transition-colors" />
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/blog/pushkar-mela-2026-dates-schedule-luxury-camps-booking-guide"
-                      className="text-slate-700 hover:text-emerald-600 flex items-center justify-between font-medium group"
-                    >
-                      <span>Pushkar Mela Camel Fair 2026</span>
                       <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-emerald-600 transition-colors" />
                     </Link>
                   </li>
