@@ -11,6 +11,28 @@ export const SEOTagDirectory: React.FC = () => {
 
   const categories = [
     {
+      name: 'City Departure Packages with Flights (Direct Links)',
+      tags: [
+        'Dubai Tour Package from Ahmedabad with Flight',
+        'Delhi to Dubai Tour Package with Flight',
+        'Dubai Tour Package from Mumbai with Flight',
+        'Dubai Tour Package from Bangalore with Flight',
+        'Thailand Tour Package from Pune with Flight',
+        'Thailand Tour Package from Delhi with Flight',
+        'Thailand Tour Package from Mumbai with Flight',
+        'Kashmir Tour Package from Delhi with Flight',
+        'Kashmir Tour Package from Ahmedabad with Flight',
+        'Kashmir Tour Package from Mumbai with Flight',
+        'Bali Honeymoon Package from Mumbai with Flight',
+        'Bali Honeymoon Package from Delhi with Flight',
+        'Ayodhya Ram Mandir VIP Darshan Tour',
+        'Char Dham Yatra Package from Delhi',
+        'Char Dham Yatra Package from Ahmedabad',
+        'Goa Beach Holiday Package from Bangalore',
+        'Kerala Tour Package from Delhi with Flight',
+      ]
+    },
+    {
       name: 'Trending International Tour Packages',
       tags: [
         'Turkey tour packages', 'Singapore tour packages', 'Malaysia tour packages', 'Bali tour packages',
@@ -156,7 +178,31 @@ export const SEOTagDirectory: React.FC = () => {
 
                   let targetUrl = '/holidays';
 
-                  if (isFlight) {
+                  const programmaticMap: Record<string, string> = {
+                    'dubai tour package from ahmedabad': '/packages/dubai-tour-package-from-ahmedabad',
+                    'delhi to dubai tour package': '/packages/dubai-tour-package-from-delhi',
+                    'dubai tour package from delhi': '/packages/dubai-tour-package-from-delhi',
+                    'dubai tour package from mumbai': '/packages/dubai-tour-package-from-mumbai',
+                    'dubai tour package from bangalore': '/packages/dubai-tour-package-from-bangalore',
+                    'thailand tour package from pune': '/packages/thailand-tour-package-from-pune',
+                    'thailand tour package from delhi': '/packages/thailand-tour-package-from-delhi',
+                    'thailand tour package from mumbai': '/packages/thailand-tour-package-from-mumbai',
+                    'kashmir tour package from delhi': '/packages/kashmir-tour-package-from-delhi',
+                    'kashmir tour package from ahmedabad': '/packages/kashmir-tour-package-from-ahmedabad',
+                    'kashmir tour package from mumbai': '/packages/kashmir-tour-package-from-mumbai',
+                    'bali honeymoon package from mumbai': '/packages/bali-honeymoon-package-from-mumbai',
+                    'bali honeymoon package from delhi': '/packages/bali-honeymoon-package-from-delhi',
+                    'ayodhya ram mandir': '/packages/ayodhya-ram-mandir-vip-darshan-tour',
+                    'char dham yatra package from delhi': '/packages/char-dham-yatra-package-from-delhi',
+                    'char dham yatra package from ahmedabad': '/packages/char-dham-yatra-package-from-ahmedabad',
+                    'goa beach holiday package from bangalore': '/packages/goa-beach-holiday-package-from-bangalore',
+                    'kerala tour package from delhi': '/packages/kerala-tour-package-from-delhi',
+                  };
+
+                  const matchedProgKey = Object.keys(programmaticMap).find((key) => lowerTag.includes(key));
+                  if (matchedProgKey) {
+                    targetUrl = programmaticMap[matchedProgKey];
+                  } else if (isFlight) {
                     targetUrl = '/flights';
                   } else {
                     const knownDestinations: Record<string, string> = {

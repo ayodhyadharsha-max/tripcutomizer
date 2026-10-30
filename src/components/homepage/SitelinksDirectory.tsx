@@ -83,10 +83,10 @@ const SITELINK_HUBS: SitelinkCard[] = [
     ctaText: 'Explore City Departures',
     icon: Plane,
     subLinks: [
-      { label: 'From Mumbai', href: '/packages?city=BOM' },
-      { label: 'From Delhi', href: '/packages?city=DEL' },
-      { label: 'From Ahmedabad', href: '/packages?city=AMD' },
-      { label: 'From Bangalore', href: '/packages?city=BLR' },
+      { label: 'Dubai from Ahmedabad', href: '/packages/dubai-tour-package-from-ahmedabad' },
+      { label: 'Dubai from Delhi', href: '/packages/dubai-tour-package-from-delhi' },
+      { label: 'Dubai from Mumbai', href: '/packages/dubai-tour-package-from-mumbai' },
+      { label: 'Thailand from Pune', href: '/packages/thailand-tour-package-from-pune' },
     ],
   },
   {
