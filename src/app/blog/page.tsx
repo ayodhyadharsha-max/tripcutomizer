@@ -65,6 +65,15 @@ export default function BlogHubPage() {
       summary: 'Celebrate 2027 in Goa, Dubai, Thailand, Kashmir, Bali & Manali! Early-bird airfares, 4-star stays, beach parties & winter snow getaways starting @ ₹9,999.',
     },
     {
+      slug: 'top-10-best-winter-destinations-2026',
+      title: 'Top 10 Best Winter Holiday Destinations 2026-2027: Kashmir, Dubai, Goa, Manali & Kutch ❄️🌴',
+      category: '❄️ Winter 2026–2027 Master Guide',
+      author: 'Senior Travel Editorial',
+      date: 'Nov 02, 2026',
+      image: 'https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?q=80&w=600&auto=format&fit=crop',
+      summary: 'Explore 2026-2027 winter wonderlands and tropical beach escapes! Kashmir Gulmarg skiing, Dubai shopping festival, Sunburn Goa, Manali snow, Rann Utsav Kutch, Vietnam & Kerala starting @ ₹13,999.',
+    },
+    {
       slug: 'gulmarg-gondola-ticket-booking-online-kashmir-winter-package-guide',
       title: 'Gulmarg Gondola Ticket Booking Online 2026: Phase 1 & 2 Rates, Timings & Kashmir Winter Guide ❄️🚠',
       category: '❄️ Kashmir Snow Special',
@@ -144,15 +153,6 @@ export default function BlogHubPage() {
       date: 'Oct 04, 2026',
       image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop',
       summary: 'Explore 10 foreign destinations under ₹25,000! Thailand, Bali, Vietnam, Malaysia, Dubai, Baku Azerbaijan & Sri Lanka with 4-star hotels, flights & 10-min quote desk.',
-    },
-    {
-      slug: 'top-10-best-winter-destinations-2026',
-      title: 'Top 10 Best Winter Holiday Destinations 2026: Kashmir, Dubai, Vietnam, Bali & Manali ❄️🌴',
-      category: '❄️ Winter Special 2026',
-      author: 'Senior Travel Desk',
-      date: 'Sept 27, 2026',
-      image: 'https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?q=80&w=600&auto=format&fit=crop',
-      summary: 'Explore 2026 winter wonderlands and tropical beach escapes! Kashmir skiing, Dubai shopping festival, Vietnam cruises, Bali & Kerala backwaters starting @ ₹14,999.',
     },
     {
       slug: 'top-10-visa-free-countries-for-indians-2026',

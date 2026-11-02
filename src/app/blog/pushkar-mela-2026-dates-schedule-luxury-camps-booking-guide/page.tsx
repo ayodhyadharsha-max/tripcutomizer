@@ -157,6 +157,17 @@ export default function PushkarMela2026GuidePage() {
     ],
   };
 
+  const speakableJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Pushkar Mela 2026 Master Booking Guide',
+    url: 'https://www.tripcustomizer.com/blog/pushkar-mela-2026-dates-schedule-luxury-camps-booking-guide',
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['h1', 'h2.aeo-question', '.speakable-content', '.aeo-answer'],
+    },
+  };
+
   const scheduleEvents = [
     { dates: 'Nov 20 – Nov 22, 2026', title: 'Cattle & Camel Trading', desc: 'Over 50,000 camels and horses arrive from across the Thar Desert. Best time for authentic rural photography and trading portraits.' },
     { dates: 'Nov 23 – Nov 24, 2026', title: 'Folk Competitions & Camel Sports', desc: 'Famous Gorbandh (Camel Decoration) pageant, Camel Dance contests, Matka Phod, Tug-of-War, and Longest Moustache contest.' },
@@ -194,6 +205,7 @@ export default function PushkarMela2026GuidePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableJsonLd) }} />
 
       {/* Hero Header */}
       <header className="relative bg-gradient-to-br from-amber-950 via-stone-900 to-orange-950 text-white pt-24 pb-20 overflow-hidden">
@@ -439,8 +451,8 @@ export default function PushkarMela2026GuidePage() {
               <div className="space-y-3">
                 {faqJsonLd.mainEntity.map((faq, index) => (
                   <div key={index} className="p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
-                    <h3 className="font-bold text-slate-900 text-base mb-1.5">{faq.name}</h3>
-                    <p className="text-sm text-slate-600 leading-relaxed">{faq.acceptedAnswer.text}</p>
+                    <h3 className="aeo-question font-bold text-slate-900 text-base mb-1.5">{faq.name}</h3>
+                    <p className="speakable-content aeo-answer text-sm text-slate-600 leading-relaxed">{faq.acceptedAnswer.text}</p>
                   </div>
                 ))}
               </div>
@@ -462,18 +474,18 @@ export default function PushkarMela2026GuidePage() {
                   Speak directly with our Rajasthan cultural holiday desk for fairground tent allocation.
                 </p>
                 <a
-                  href="tel:+918882003355"
+                  href="tel:+917408763401"
                   className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-orange-500 hover:bg-orange-400 text-slate-950 font-bold rounded-xl text-sm transition-colors"
                 >
                   <PhoneCall className="w-4 h-4" />
-                  <span>Call +91 88820 03355</span>
+                  <span>Call +91 7408763401</span>
                 </a>
               </Card>
 
               {/* Related Seasonal Collections */}
               <Card className="mt-6 p-5 bg-white rounded-2xl border border-slate-200 shadow-sm">
                 <h4 className="font-bold text-sm text-slate-900 mb-3 uppercase tracking-wider text-slate-500">
-                  Trending Winter Festivals
+                  Trending Winter &amp; Festival Getaways
                 </h4>
                 <ul className="space-y-3 text-sm">
                   <li>
@@ -487,10 +499,28 @@ export default function PushkarMela2026GuidePage() {
                   </li>
                   <li>
                     <Link
-                      href="/blog/top-10-diwali-holiday-destinations-2026"
+                      href="/blog/dubai-shopping-festival-2026-dates-flight-packages-guide"
                       className="text-slate-700 hover:text-orange-600 flex items-center justify-between font-medium group"
                     >
-                      <span>Diwali Holiday Getaways 2026</span>
+                      <span>Dubai Shopping Festival 2026-2027</span>
+                      <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-orange-600 transition-colors" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/blog/top-10-new-year-2027-travel-packages-india-abroad-guide"
+                      className="text-slate-700 hover:text-orange-600 flex items-center justify-between font-medium group"
+                    >
+                      <span>Top 10 New Year 2027 Packages</span>
+                      <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-orange-600 transition-colors" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/blog/sunburn-goa-2026-dates-tickets-christmas-new-year-package-guide"
+                      className="text-slate-700 hover:text-orange-600 flex items-center justify-between font-medium group"
+                    >
+                      <span>Sunburn Goa 2026 Festival Pass</span>
                       <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-orange-600 transition-colors" />
                     </Link>
                   </li>

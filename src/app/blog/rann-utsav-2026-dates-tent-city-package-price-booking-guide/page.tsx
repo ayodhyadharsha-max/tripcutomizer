@@ -158,6 +158,17 @@ export default function RannUtsav2026GuidePage() {
     ],
   };
 
+  const speakableJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Rann Utsav 2026-2027 Master Booking Guide',
+    url: 'https://www.tripcustomizer.com/blog/rann-utsav-2026-dates-tent-city-package-price-booking-guide',
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['h1', 'h2.aeo-question', '.speakable-content', '.aeo-answer'],
+    },
+  };
+
   const fullMoonCalendar = [
     { month: 'November 2026', dates: 'Nov 23 - Nov 26, 2026', highlight: 'Kartik Purnima Festival & Opening Spike' },
     { month: 'December 2026', dates: 'Dec 22 - Dec 26, 2026', highlight: 'Winter Peak & Pre-Christmas Magic' },
@@ -202,6 +213,7 @@ export default function RannUtsav2026GuidePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableJsonLd) }} />
 
       {/* Hero Header */}
       <header className="relative bg-gradient-to-br from-indigo-950 via-slate-900 to-amber-950 text-white pt-24 pb-20 overflow-hidden">
@@ -463,8 +475,8 @@ export default function RannUtsav2026GuidePage() {
               <div className="space-y-3">
                 {faqJsonLd.mainEntity.map((faq, index) => (
                   <div key={index} className="p-4 bg-white rounded-xl border border-slate-200 shadow-sm">
-                    <h3 className="font-bold text-slate-900 text-base mb-1.5">{faq.name}</h3>
-                    <p className="text-sm text-slate-600 leading-relaxed">{faq.acceptedAnswer.text}</p>
+                    <h3 className="aeo-question font-bold text-slate-900 text-base mb-1.5">{faq.name}</h3>
+                    <p className="speakable-content aeo-answer text-sm text-slate-600 leading-relaxed">{faq.acceptedAnswer.text}</p>
                   </div>
                 ))}
               </div>
@@ -486,44 +498,62 @@ export default function RannUtsav2026GuidePage() {
                   Speak directly with our dedicated Gujarat &amp; Rann Utsav travel specialist for custom tent allocation.
                 </p>
                 <a
-                  href="tel:+918882003355"
+                  href="tel:+917408763401"
                   className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-sm transition-colors"
                 >
                   <PhoneCall className="w-4 h-4" />
-                  <span>Call +91 88820 03355</span>
+                  <span>Call +91 7408763401</span>
                 </a>
               </Card>
 
               {/* Related Seasonal Collections */}
               <Card className="mt-6 p-5 bg-white rounded-2xl border border-slate-200 shadow-sm">
                 <h4 className="font-bold text-sm text-slate-900 mb-3 uppercase tracking-wider text-slate-500">
-                  Trending Winter Festivals
+                  Trending Winter &amp; Festival Getaways
                 </h4>
                 <ul className="space-y-3 text-sm">
                   <li>
                     <Link
-                      href="/blog/top-10-diwali-holiday-destinations-2026"
+                      href="/blog/pushkar-mela-2026-dates-schedule-luxury-camps-booking-guide"
                       className="text-slate-700 hover:text-amber-600 flex items-center justify-between font-medium group"
                     >
-                      <span>Diwali Holiday Getaways 2026</span>
+                      <span>Pushkar Mela Camel Fair 2026</span>
                       <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-amber-600 transition-colors" />
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href="/holidays/rajasthan"
+                      href="/blog/dubai-shopping-festival-2026-dates-flight-packages-guide"
                       className="text-slate-700 hover:text-amber-600 flex items-center justify-between font-medium group"
                     >
-                      <span>Royal Rajasthan Heritage Holidays</span>
+                      <span>Dubai Shopping Festival 2026-2027</span>
                       <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-amber-600 transition-colors" />
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href="/holidays/kashmir"
+                      href="/blog/top-10-new-year-2027-travel-packages-india-abroad-guide"
                       className="text-slate-700 hover:text-amber-600 flex items-center justify-between font-medium group"
                     >
-                      <span>Kashmir Autumn &amp; Snow Tour Packages</span>
+                      <span>Top 10 New Year 2027 Packages</span>
+                      <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-amber-600 transition-colors" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/blog/sunburn-goa-2026-dates-tickets-christmas-new-year-package-guide"
+                      className="text-slate-700 hover:text-amber-600 flex items-center justify-between font-medium group"
+                    >
+                      <span>Sunburn Goa 2026 Festival Pass</span>
+                      <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-amber-600 transition-colors" />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/blog/gulmarg-gondola-ticket-booking-online-kashmir-winter-package-guide"
+                      className="text-slate-700 hover:text-amber-600 flex items-center justify-between font-medium group"
+                    >
+                      <span>Gulmarg Gondola &amp; Kashmir Snow</span>
                       <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-amber-600 transition-colors" />
                     </Link>
                   </li>
