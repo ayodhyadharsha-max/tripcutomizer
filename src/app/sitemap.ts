@@ -111,6 +111,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
     },
     {
+      url: `${baseUrl}/blog/varanasi-dev-deepawali-2026-dates-boat-booking-ganga-aarti-guide`,
+      lastModified: currentDate,
+      changeFrequency: 'daily',
+      priority: 0.99,
+    },
+    {
       url: `${baseUrl}/blog/dubai-shopping-festival-2026-dates-flight-packages-guide`,
       lastModified: currentDate,
       changeFrequency: 'daily',

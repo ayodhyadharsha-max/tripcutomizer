@@ -47,6 +47,15 @@ export const metadata: Metadata = {
 export default function BlogHubPage() {
   const blogs = [
     {
+      slug: 'varanasi-dev-deepawali-2026-dates-boat-booking-ganga-aarti-guide',
+      title: 'Dev Deepawali Varanasi 2026: Official Date, Ghats Schedule, Boat Price & Kashi Guide 🪔✨',
+      category: '🪔 Sacred Festival of Gods (Nov 28)',
+      author: 'Spiritual Expeditions Desk',
+      date: 'Nov 04, 2026',
+      image: 'https://images.unsplash.com/photo-1561361513-2d000a50f0dc?q=80&w=600&auto=format&fit=crop',
+      summary: 'Dates: Nov 28, 2026! Over 15 lakh clay diyas across 84 ghats, Dashashwamedh Maha Aarti with 21 priests, Chet Singh laser show, Ganga boat booking rates & Kashi tour packages @ ₹8,999.',
+    },
+    {
       slug: 'dubai-shopping-festival-2026-dates-flight-packages-guide',
       title: 'Dubai Shopping Festival (DSF) 2026-2027: Official Dates, Mega Sales, Flight Packages & Guide 🛍️✨',
       category: '🛍️ International Mega Festival',
