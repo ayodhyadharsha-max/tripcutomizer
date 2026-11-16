@@ -8,6 +8,17 @@ import { Sparkles, ArrowRight, MapPin, Snowflake, Flame, Music, Tent } from 'luc
 export const TrendingEditorialGuides: React.FC = () => {
   const editorialGuides = [
     {
+      slug: 'christmas-vacation-packages-india-best-places-to-visit-2026-guide',
+      title: 'Christmas Vacation 2026: 7 Best Places to Celebrate Dec 25 Long Weekend in India',
+      badge: 'Christmas Long Weekend • Dec 25',
+      badgeColor: 'bg-emerald-600 text-white font-bold',
+      location: 'Goa, Gulmarg, Manali, Kerala & Pondicherry',
+      duration: '3 to 5 Days',
+      price: '₹10,999',
+      image: 'https://images.unsplash.com/photo-1543258103-a62bdc069871?q=80&w=600&auto=format&fit=crop',
+      summary: 'Dec 25 Friday long weekend escapes: Goa beach parties & midnight mass, Gulmarg snow wonderland, Manali & Kerala backwaters.',
+    },
+    {
       slug: 'dubai-shopping-festival-2026-dates-flight-packages-guide',
       title: 'Dubai Shopping Festival (DSF) 2026-2027: Dates, Mega Sales & Direct Flight Packages',
       badge: 'DSF 2026-2027 Live',

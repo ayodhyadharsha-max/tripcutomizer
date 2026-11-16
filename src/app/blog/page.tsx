@@ -56,6 +56,15 @@ export default function BlogHubPage() {
       summary: 'Dates: Nov 28, 2026! Over 15 lakh clay diyas across 84 ghats, Dashashwamedh Maha Aarti with 21 priests, Chet Singh laser show, Ganga boat booking rates & Kashi tour packages @ ₹8,999.',
     },
     {
+      slug: 'christmas-vacation-packages-india-best-places-to-visit-2026-guide',
+      title: 'Top 10 Places to Celebrate Christmas in India (2026): Snow, Beaches & Long Weekend Packages 🎄❄️',
+      category: '🎄 Christmas Long Weekend (Dec 25)',
+      author: 'Festive Travel Editorial',
+      date: 'Nov 16, 2026',
+      image: 'https://images.unsplash.com/photo-1543258103-a62bdc069871?q=80&w=600&auto=format&fit=crop',
+      summary: 'Friday Dec 25 3-day long weekend! White Christmas in Gulmarg & Manali snowfall, Old Goa midnight mass, Kerala backwaters & family vacation packages starting @ ₹11,999.',
+    },
+    {
       slug: 'dubai-shopping-festival-2026-dates-flight-packages-guide',
       title: 'Dubai Shopping Festival (DSF) 2026-2027: Official Dates, Mega Sales, Flight Packages & Guide 🛍️✨',
       category: '🛍️ International Mega Festival',

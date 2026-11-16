@@ -193,6 +193,9 @@ export const PopularKeywordsFooter: React.FC = () => {
             </h4>
           </div>
           <div className="flex flex-wrap gap-2 text-[11px]">
+            <Link href="/blog/christmas-vacation-packages-india-best-places-to-visit-2026-guide" className="bg-brand-900/80 hover:bg-brand-800 text-red-300 hover:text-white px-3 py-1 rounded-full border border-red-800/60 transition font-bold">
+              Christmas 2026 Holiday Packages (Dec 25 Long Weekend)
+            </Link>
             <Link href="/blog/varanasi-dev-deepawali-2026-dates-boat-booking-ganga-aarti-guide" className="bg-brand-900/80 hover:bg-brand-800 text-amber-300 hover:text-white px-3 py-1 rounded-full border border-amber-800/60 transition font-bold">
               Dev Deepawali Varanasi 2026 Boat Booking
             </Link>
