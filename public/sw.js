@@ -152,39 +152,33 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // C. HTML Page Navigation (Stale-While-Revalidate with fast 1.2s network timeout)
-  // Guarantees the APK opens instantly instead of hanging on a blank screen
+  // C. HTML Page Navigation (Instant Stale-While-Revalidate)
+  // If page is cached, serve in 0ms and update in background. If not, fetch immediately!
   if (request.mode === 'navigate' || request.headers.get('accept')?.includes('text/html')) {
     event.respondWith(
       (async () => {
         const cache = await caches.open(PAGES_CACHE);
         const cachedResponse = await cache.match(request);
 
-        const fetchWithTimeout = new Promise((resolve, reject) => {
-          const timer = setTimeout(() => {
-            if (cachedResponse) resolve(cachedResponse);
-          }, 1200);
+        const networkFetch = fetch(request)
+          .then((networkResponse) => {
+            if (networkResponse && networkResponse.status === 200) {
+              cache.put(request, networkResponse.clone());
+            }
+            return networkResponse;
+          })
+          .catch(() => null);
 
-          fetch(request)
-            .then((networkResponse) => {
-              clearTimeout(timer);
-              if (networkResponse && networkResponse.status === 200) {
-                cache.put(request, networkResponse.clone());
-              }
-              resolve(networkResponse);
-            })
-            .catch((err) => {
-              clearTimeout(timer);
-              if (cachedResponse) resolve(cachedResponse);
-              else reject(err);
-            });
-        });
-
-        try {
-          return await fetchWithTimeout;
-        } catch (e) {
-          return cachedResponse || (await caches.match('/'));
+        // Instant 0ms return if cached!
+        if (cachedResponse) {
+          event.waitUntil(networkFetch);
+          return cachedResponse;
         }
+
+        const networkResponse = await networkFetch;
+        if (networkResponse) return networkResponse;
+
+        return (await caches.match('/')) || new Response('Offline', { status: 503 });
       })()
     );
     return;

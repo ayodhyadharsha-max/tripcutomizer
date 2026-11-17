@@ -19,6 +19,7 @@ export const MakeMyTripBottomNav: React.FC = () => {
       {/* 1. Home Tab */}
       <Link
         href="/"
+        prefetch={true}
         className={`flex flex-col items-center justify-center py-1 px-3 text-[10px] font-bold transition-all ${
           isActive('/') ? 'text-brand-600' : 'text-slate-500 hover:text-slate-800'
         }`}
@@ -30,6 +31,7 @@ export const MakeMyTripBottomNav: React.FC = () => {
       {/* 2. My Trips Tab */}
       <Link
         href="/account"
+        prefetch={true}
         className={`flex flex-col items-center justify-center py-1 px-3 text-[10px] font-bold transition-all ${
           isActive('/account') ? 'text-brand-600' : 'text-slate-500 hover:text-slate-800'
         }`}
@@ -41,6 +43,7 @@ export const MakeMyTripBottomNav: React.FC = () => {
       {/* 3. Center Elevated Floating Blue Sphere (MakeMyTrip Customize Button) */}
       <Link
         href="/customize-trip"
+        prefetch={true}
         className="flex flex-col items-center justify-center -mt-6 group focus:outline-none"
       >
         <div className="w-13 h-13 rounded-full bg-gradient-to-r from-sky-400 via-brand-500 to-indigo-600 text-white flex items-center justify-center shadow-lg border-3 border-white transform group-hover:scale-105 active:scale-95 transition-all">
@@ -52,6 +55,7 @@ export const MakeMyTripBottomNav: React.FC = () => {
       {/* 4. Wishlists Tab */}
       <Link
         href="/holidays"
+        prefetch={true}
         className={`flex flex-col items-center justify-center py-1 px-3 text-[10px] font-bold transition-all ${
           isActive('/holidays') ? 'text-brand-600' : 'text-slate-500 hover:text-slate-800'
         }`}
@@ -63,6 +67,7 @@ export const MakeMyTripBottomNav: React.FC = () => {
       {/* 5. Gift Cards Tab */}
       <Link
         href="/gift-cards"
+        prefetch={true}
         className={`flex flex-col items-center justify-center py-1 px-3 text-[10px] font-bold transition-all ${
           isActive('/gift-cards') ? 'text-amber-500' : 'text-slate-500 hover:text-slate-800'
         }`}

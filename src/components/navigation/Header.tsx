@@ -47,6 +47,7 @@ export const Header: React.FC = () => {
           >
             <Link
               href="/holidays"
+              prefetch={true}
               className="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg hover:text-brand-600 hover:bg-slate-50 transition-colors"
             >
               <Compass className="w-4 h-4 text-brand-500" />
@@ -63,6 +64,7 @@ export const Header: React.FC = () => {
           {/* Honeymoon Packages */}
           <Link
             href="/honeymoon"
+            prefetch={true}
             className="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg hover:text-rose-600 hover:bg-rose-50 transition-colors text-slate-700"
           >
             <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500/20" />
@@ -72,6 +74,7 @@ export const Header: React.FC = () => {
           {/* Char Dham & Spiritual */}
           <Link
             href="/char-dham"
+            prefetch={true}
             className="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg hover:text-amber-700 hover:bg-amber-50 transition-colors text-slate-700"
           >
             <MapPin className="w-3.5 h-3.5 text-amber-600" />
@@ -81,6 +84,7 @@ export const Header: React.FC = () => {
           {/* Flights */}
           <Link
             href="/flights"
+            prefetch={true}
             className="relative flex items-center space-x-1.5 px-3 py-1.5 rounded-lg hover:text-brand-500 hover:bg-slate-50 transition-colors"
           >
             <span className="absolute -top-1.5 -right-1 bg-amber-400 text-slate-950 font-black text-[8px] px-1 py-0.2 rounded uppercase tracking-wider shadow-xs">
@@ -93,6 +97,7 @@ export const Header: React.FC = () => {
           {/* Hotels */}
           <Link
             href="/hotels"
+            prefetch={true}
             className="relative flex items-center space-x-1.5 px-3 py-1.5 rounded-lg hover:text-accent-600 hover:bg-slate-50 transition-colors"
           >
             <span className="absolute -top-1.5 -right-1 bg-amber-400 text-slate-950 font-black text-[8px] px-1 py-0.2 rounded uppercase tracking-wider shadow-xs">
@@ -105,6 +110,7 @@ export const Header: React.FC = () => {
           {/* Customize Trip with NEW Badge */}
           <Link
             href="/customize-trip"
+            prefetch={true}
             className="relative flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl bg-amber-50 text-amber-900 border border-amber-200 font-bold hover:bg-amber-100 transition-all shadow-sm"
           >
             <span className="absolute -top-2 -right-1 bg-rose-500 text-white font-black text-[9px] px-1.5 py-0.2 rounded-md uppercase tracking-wider animate-pulse">

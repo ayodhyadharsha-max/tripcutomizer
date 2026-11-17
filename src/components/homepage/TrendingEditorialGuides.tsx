@@ -139,6 +139,7 @@ export const TrendingEditorialGuides: React.FC = () => {
 
           <Link
             href="/blog"
+            prefetch={true}
             className="inline-flex items-center gap-2 text-sm font-bold text-amber-700 hover:text-amber-800 transition-colors shrink-0 group self-start md:self-auto"
           >
             <span>View All Travel Guides</span>
@@ -197,6 +198,7 @@ export const TrendingEditorialGuides: React.FC = () => {
                   <span className="text-[11px] font-medium text-slate-500">{guide.duration}</span>
                   <Link
                     href={`/blog/${guide.slug}`}
+                    prefetch={true}
                     className="inline-flex items-center gap-1 text-xs font-bold text-amber-700 hover:text-amber-800"
                   >
                     <span>Read Guide</span>

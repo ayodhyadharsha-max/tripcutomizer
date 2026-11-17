@@ -336,6 +336,7 @@ export default function BlogHubPage() {
               <div className="p-5 pt-0">
                 <Link
                   href={`/blog/${b.slug}`}
+                  prefetch={true}
                   className="text-xs font-bold text-brand-500 hover:underline inline-flex items-center"
                 >
                   Read Full Article →

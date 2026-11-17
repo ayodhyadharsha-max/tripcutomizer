@@ -258,6 +258,7 @@ export const TrendingDestinations: React.FC = () => {
               <Link
                 key={item.slug}
                 href={`/holidays/${item.slug}`}
+                prefetch={true}
                 className="group/card relative flex-none w-[140px] sm:w-[165px] lg:w-[180px] aspect-[9/14] rounded-[65px] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 cursor-pointer border-3 border-white bg-slate-100"
               >
                 <Image

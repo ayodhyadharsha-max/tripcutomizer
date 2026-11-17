@@ -53,11 +53,11 @@ export const HeaderTopBar: React.FC = () => {
 
           {/* Right Links & Auth */}
           <div className="flex items-center space-x-5">
-            <Link href="/manage-booking" className="hidden md:flex items-center space-x-1 hover:text-white transition-colors">
+            <Link href="/manage-booking" prefetch={true} className="hidden md:flex items-center space-x-1 hover:text-white transition-colors">
               <FileText className="w-3.5 h-3.5 text-amber-400" />
               <span>Track Booking / Invoice</span>
             </Link>
-            <Link href="/contact" className="hidden md:flex items-center space-x-1 hover:text-white transition-colors">
+            <Link href="/contact" prefetch={true} className="hidden md:flex items-center space-x-1 hover:text-white transition-colors">
               <HelpCircle className="w-3.5 h-3.5" />
               <span>Customer Support</span>
             </Link>

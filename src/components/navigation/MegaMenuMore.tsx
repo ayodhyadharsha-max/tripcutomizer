@@ -25,6 +25,7 @@ export const MegaMenuMore: React.FC = () => {
           <Link
             key={item.title}
             href={item.href}
+            prefetch={true}
             className="flex items-start space-x-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
           >
             <div className="p-2 bg-slate-100 rounded-lg text-slate-600 group-hover:bg-brand-500 group-hover:text-white transition-colors">

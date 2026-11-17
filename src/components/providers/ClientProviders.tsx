@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import { NotificationProvider } from '@/components/notifications/NotificationToast';
 import { AuthProvider } from '@/context/AuthContext';
 import { CustomTripPopupModal } from '@/components/modals/CustomTripPopupModal';
+import { NavigationProgressBar } from '@/components/navigation/NavigationProgressBar';
 
 export function ClientProviders({ children }: { children: React.ReactNode }) {
   useEffect(() => {
@@ -39,6 +40,9 @@ export function ClientProviders({ children }: { children: React.ReactNode }) {
   return (
     <AuthProvider>
       <NotificationProvider>
+        <Suspense fallback={null}>
+          <NavigationProgressBar />
+        </Suspense>
         {children}
         <CustomTripPopupModal />
       </NotificationProvider>

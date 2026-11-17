@@ -62,6 +62,7 @@ export const MegaMenuHolidays: React.FC = () => {
             <li key={item.slug}>
               <Link
                 href={`/holidays/${item.slug}`}
+                prefetch={true}
                 className="hover:text-brand-500 hover:translate-x-1 transition-all inline-block font-medium py-0.5"
               >
                 {item.name}
@@ -70,7 +71,7 @@ export const MegaMenuHolidays: React.FC = () => {
           ))}
         </ul>
         <div className="mt-4 pt-2 border-t border-slate-100">
-          <Link href="/holidays/international" className="text-xs font-bold text-brand-500 hover:underline">
+          <Link href="/holidays/international" prefetch={true} className="text-xs font-bold text-brand-500 hover:underline">
             View All International Packages →
           </Link>
         </div>
@@ -87,6 +88,7 @@ export const MegaMenuHolidays: React.FC = () => {
             <li key={item.slug}>
               <Link
                 href={`/holidays/${item.slug}`}
+                prefetch={true}
                 className="hover:text-brand-500 hover:translate-x-1 transition-all inline-block font-medium py-0.5"
               >
                 {item.name}
@@ -95,7 +97,7 @@ export const MegaMenuHolidays: React.FC = () => {
           ))}
         </ul>
         <div className="mt-4 pt-2 border-t border-slate-100">
-          <Link href="/holidays/india" className="text-xs font-bold text-brand-500 hover:underline">
+          <Link href="/holidays/india" prefetch={true} className="text-xs font-bold text-brand-500 hover:underline">
             Explore All India Destinations →
           </Link>
         </div>
@@ -114,6 +116,7 @@ export const MegaMenuHolidays: React.FC = () => {
               <Link
                 key={item.name}
                 href={item.href}
+                prefetch={true}
                 className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors group"
               >
                 <div className="flex items-center space-x-2 text-xs font-semibold text-slate-700 group-hover:text-brand-500">

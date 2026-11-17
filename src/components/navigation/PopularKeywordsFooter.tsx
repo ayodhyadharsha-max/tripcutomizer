@@ -89,6 +89,7 @@ export const PopularKeywordsFooter: React.FC = () => {
                   <li key={linkIdx}>
                     <Link
                       href={link.href}
+                      prefetch={true}
                       className="text-slate-400 hover:text-amber-300 transition-colors inline-block py-0.5"
                     >
                       {link.label}

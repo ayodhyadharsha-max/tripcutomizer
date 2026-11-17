@@ -57,7 +57,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
           <div>
             <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-2">Primary Categories</span>
             <div className="space-y-1">
-              <Link href="/holidays" onClick={onClose} className="flex items-center justify-between p-2.5 rounded-lg hover:bg-slate-100">
+              <Link href="/holidays" prefetch={true} onClick={onClose} className="flex items-center justify-between p-2.5 rounded-lg hover:bg-slate-100">
                 <div className="flex items-center space-x-3 text-brand-600">
                   <Compass className="w-4 h-4" />
                   <span>Holidays &amp; Packages</span>
@@ -65,7 +65,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
                 <ChevronRight className="w-4 h-4 text-slate-400" />
               </Link>
 
-              <Link href="/honeymoon" onClick={onClose} className="flex items-center justify-between p-2.5 rounded-lg hover:bg-rose-50 text-slate-800">
+              <Link href="/honeymoon" prefetch={true} onClick={onClose} className="flex items-center justify-between p-2.5 rounded-lg hover:bg-rose-50 text-slate-800">
                 <div className="flex items-center space-x-3 text-rose-600">
                   <Heart className="w-4 h-4 fill-rose-500/20" />
                   <span>Honeymoon Specials</span>
@@ -73,7 +73,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
                 <ChevronRight className="w-4 h-4 text-slate-400" />
               </Link>
 
-              <Link href="/char-dham" onClick={onClose} className="flex items-center justify-between p-2.5 rounded-lg hover:bg-amber-50 text-slate-800">
+              <Link href="/char-dham" prefetch={true} onClick={onClose} className="flex items-center justify-between p-2.5 rounded-lg hover:bg-amber-50 text-slate-800">
                 <div className="flex items-center space-x-3 text-amber-700">
                   <MapPin className="w-4 h-4" />
                   <span>Char Dham &amp; Spiritual</span>
@@ -81,7 +81,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
                 <ChevronRight className="w-4 h-4 text-slate-400" />
               </Link>
 
-              <Link href="/packages" onClick={onClose} className="flex items-center justify-between p-2.5 rounded-lg hover:bg-slate-100 text-slate-800">
+              <Link href="/packages" prefetch={true} onClick={onClose} className="flex items-center justify-between p-2.5 rounded-lg hover:bg-slate-100 text-slate-800">
                 <div className="flex items-center space-x-3 text-emerald-700">
                   <Plane className="w-4 h-4" />
                   <span>Packages by City</span>
@@ -89,7 +89,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
                 <ChevronRight className="w-4 h-4 text-slate-400" />
               </Link>
 
-              <Link href="/customize-trip" onClick={onClose} className="flex items-center justify-between p-2.5 rounded-lg bg-amber-50 text-amber-900 border border-amber-200">
+              <Link href="/customize-trip" prefetch={true} onClick={onClose} className="flex items-center justify-between p-2.5 rounded-lg bg-amber-50 text-amber-900 border border-amber-200">
                 <div className="flex items-center space-x-3 text-amber-700 font-bold">
                   <Sparkles className="w-4 h-4 text-amber-600" />
                   <span>Customize Trip</span>
@@ -97,7 +97,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
                 <ChevronRight className="w-4 h-4 text-amber-500" />
               </Link>
 
-              <Link href="/flights" onClick={onClose} className="flex items-center justify-between p-2.5 rounded-lg hover:bg-slate-100">
+              <Link href="/flights" prefetch={true} onClick={onClose} className="flex items-center justify-between p-2.5 rounded-lg hover:bg-slate-100">
                 <div className="flex items-center space-x-3 text-brand-500 font-semibold">
                   <Plane className="w-4 h-4" />
                   <span>Flight Search</span>
@@ -107,7 +107,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
                 </span>
               </Link>
 
-              <Link href="/hotels" onClick={onClose} className="flex items-center justify-between p-2.5 rounded-lg hover:bg-slate-100">
+              <Link href="/hotels" prefetch={true} onClick={onClose} className="flex items-center justify-between p-2.5 rounded-lg hover:bg-slate-100">
                 <div className="flex items-center space-x-3 text-accent-600 font-semibold">
                   <Hotel className="w-4 h-4" />
                   <span>Hotel Stays</span>
@@ -122,21 +122,21 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
           <div className="border-t border-slate-100 pt-3">
             <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-2">More Services</span>
             <div className="space-y-1">
-              <Link href="/gift-cards" onClick={onClose} className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-100">
+              <Link href="/gift-cards" prefetch={true} onClick={onClose} className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-100">
                 <div className="flex items-center space-x-2.5">
                   <Gift className="w-4 h-4 text-slate-500" />
                   <span>Gift Cards</span>
                 </div>
                 <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
               </Link>
-              <Link href="/corporate-travel" onClick={onClose} className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-100">
+              <Link href="/corporate-travel" prefetch={true} onClick={onClose} className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-100">
                 <div className="flex items-center space-x-2.5">
                   <Building2 className="w-4 h-4 text-slate-500" />
                   <span>Corporate Travel</span>
                 </div>
                 <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
               </Link>
-              <Link href="/blog" onClick={onClose} className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-100">
+              <Link href="/blog" prefetch={true} onClick={onClose} className="flex items-center justify-between p-2 rounded-lg hover:bg-slate-100">
                 <div className="flex items-center space-x-2.5">
                   <BookOpen className="w-4 h-4 text-slate-500" />
                   <span>Travel Blog</span>
