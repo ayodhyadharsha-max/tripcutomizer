@@ -42,6 +42,8 @@ export const metadata: Metadata = {
     'North East tour packages',
     'Sikkim Darjeeling packages',
     'Uttarakhand tour packages',
+    'Auli skiing tour packages',
+    'Auli winter packages',
     'Coorg Ooty packages',
     'Manali tour packages',
     // 3. Trending India Honeymoon Packages

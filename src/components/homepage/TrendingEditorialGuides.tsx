@@ -8,6 +8,17 @@ import { Sparkles, ArrowRight, MapPin, Snowflake, Flame, Music, Tent } from 'luc
 export const TrendingEditorialGuides: React.FC = () => {
   const editorialGuides = [
     {
+      slug: 'auli-skiing-tour-packages-ropeway-ticket-booking-winter-guide',
+      title: 'Auli Skiing & Tour Packages 2026–2027: Joshimath Ropeway, Snow Slopes & Delhi Itinerary',
+      badge: 'Ski Season • Dec–Feb',
+      badgeColor: 'bg-cyan-600 text-white font-bold',
+      location: 'Auli & Joshimath, Uttarakhand',
+      duration: '5 Days / 4 Nights',
+      price: '₹12,499',
+      image: 'https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=600&auto=format&fit=crop',
+      summary: 'Asia’s 4.15 km cable car tickets, beginner ski instructors, Nanda Devi views, 4x4 snow tire chains & GMVN stays.',
+    },
+    {
       slug: 'christmas-vacation-packages-india-best-places-to-visit-2026-guide',
       title: 'Christmas Vacation 2026: 7 Best Places to Celebrate Dec 25 Long Weekend in India',
       badge: 'Christmas Long Weekend • Dec 25',

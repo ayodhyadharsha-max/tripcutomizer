@@ -47,6 +47,15 @@ export const metadata: Metadata = {
 export default function BlogHubPage() {
   const blogs = [
     {
+      slug: 'auli-skiing-tour-packages-ropeway-ticket-booking-winter-guide',
+      title: 'Auli Skiing & Tour Packages 2026–2027: Joshimath Ropeway Booking, Snow Dates & 5-Day Delhi Itinerary ❄️⛷️',
+      category: '🎿 Skiing & Snow Special (Dec–Feb)',
+      author: 'Uttarakhand Winter Editorial Desk',
+      date: 'Nov 17, 2026',
+      image: 'https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=600&auto=format&fit=crop',
+      summary: 'Explore India’s skiing capital in Uttarakhand! Asia’s 4.15 km cable car tickets, beginner ski instructors, 4x4 snow tire chains, Nanda Devi views, Gorson Bugyal snow trek & 5D/4N packages @ ₹12,499.',
+    },
+    {
       slug: 'varanasi-dev-deepawali-2026-dates-boat-booking-ganga-aarti-guide',
       title: 'Dev Deepawali Varanasi 2026: Official Date, Ghats Schedule, Boat Price & Kashi Guide 🪔✨',
       category: '🪔 Sacred Festival of Gods (Nov 28)',

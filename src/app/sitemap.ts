@@ -111,6 +111,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
     },
     {
+      url: `${baseUrl}/blog/auli-skiing-tour-packages-ropeway-ticket-booking-winter-guide`,
+      lastModified: currentDate,
+      changeFrequency: 'daily',
+      priority: 0.99,
+    },
+    {
       url: `${baseUrl}/blog/christmas-vacation-packages-india-best-places-to-visit-2026-guide`,
       lastModified: currentDate,
       changeFrequency: 'daily',

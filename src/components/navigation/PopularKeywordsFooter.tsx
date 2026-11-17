@@ -193,6 +193,9 @@ export const PopularKeywordsFooter: React.FC = () => {
             </h4>
           </div>
           <div className="flex flex-wrap gap-2 text-[11px]">
+            <Link href="/blog/auli-skiing-tour-packages-ropeway-ticket-booking-winter-guide" className="bg-brand-900/80 hover:bg-brand-800 text-cyan-300 hover:text-white px-3 py-1 rounded-full border border-cyan-800/60 transition font-bold">
+              Auli Skiing Packages &amp; Joshimath Ropeway Booking
+            </Link>
             <Link href="/blog/christmas-vacation-packages-india-best-places-to-visit-2026-guide" className="bg-brand-900/80 hover:bg-brand-800 text-red-300 hover:text-white px-3 py-1 rounded-full border border-red-800/60 transition font-bold">
               Christmas 2026 Holiday Packages (Dec 25 Long Weekend)
             </Link>
