@@ -15,7 +15,6 @@ import { TravelInsights } from '@/components/homepage/TravelInsights';
 import { SEOTagDirectory } from '@/components/homepage/SEOTagDirectory';
 import { TestimonialsMetrics } from '@/components/homepage/TestimonialsMetrics';
 import { HomepageFAQ } from '@/components/homepage/HomepageFAQ';
-import { SitelinksDirectory } from '@/components/homepage/SitelinksDirectory';
 
 export const metadata: Metadata = {
   title: {
@@ -250,9 +249,6 @@ export default function Home() {
 
       {/* Trending Destinations */}
       <TrendingDestinations />
-
-      {/* Official Sitelinks Directory & Multi-Step Booking Guide */}
-      <SitelinksDirectory />
 
       {/* Offers For You */}
       <OffersSection />
