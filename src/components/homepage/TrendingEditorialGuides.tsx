@@ -8,6 +8,17 @@ import { Sparkles, ArrowRight, MapPin, Snowflake, Flame, Music, Tent } from 'luc
 export const TrendingEditorialGuides: React.FC = () => {
   const editorialGuides = [
     {
+      slug: 'thailand-visa-free-for-indians-tour-packages-itinerary-2026-guide',
+      title: 'Thailand Visa-Free 2026–2027: 60-Day Rules, Phuket & Bangkok Packages Under ₹25k',
+      badge: 'Visa-Free • 60 Days',
+      badgeColor: 'bg-emerald-600 text-white font-bold',
+      location: 'Phuket, Krabi, Bangkok & Pattaya',
+      duration: '5 Days / 4 Nights',
+      price: '₹21,999',
+      image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop',
+      summary: 'Zero visa fee! Direct flights from DEL, BOM, BLR. Phi Phi island speedboat, 4-star beach resorts & Indian meals.',
+    },
+    {
       slug: 'auli-skiing-tour-packages-ropeway-ticket-booking-winter-guide',
       title: 'Auli Skiing & Tour Packages 2026–2027: Joshimath Ropeway, Snow Slopes & Delhi Itinerary',
       badge: 'Ski Season • Dec–Feb',

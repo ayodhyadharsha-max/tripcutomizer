@@ -116,6 +116,8 @@ export const metadata: Metadata = {
     'USA tour packages',
     'Japan tour packages',
     'Thailand tour packages',
+    'Thailand visa free tour packages',
+    'Thailand 60 days visa exemption',
     'Azerbaijan tour packages',
     'Baku tour packages',
     'Georgia tour packages',

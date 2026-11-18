@@ -194,6 +194,9 @@ export const PopularKeywordsFooter: React.FC = () => {
             </h4>
           </div>
           <div className="flex flex-wrap gap-2 text-[11px]">
+            <Link href="/blog/thailand-visa-free-for-indians-tour-packages-itinerary-2026-guide" className="bg-brand-900/80 hover:bg-brand-800 text-emerald-300 hover:text-white px-3 py-1 rounded-full border border-emerald-800/60 transition font-bold">
+              Thailand Visa-Free Tour Packages (60 Days Exemption)
+            </Link>
             <Link href="/blog/auli-skiing-tour-packages-ropeway-ticket-booking-winter-guide" className="bg-brand-900/80 hover:bg-brand-800 text-cyan-300 hover:text-white px-3 py-1 rounded-full border border-cyan-800/60 transition font-bold">
               Auli Skiing Packages &amp; Joshimath Ropeway Booking
             </Link>

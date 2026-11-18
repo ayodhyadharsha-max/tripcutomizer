@@ -111,6 +111,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
     },
     {
+      url: `${baseUrl}/blog/thailand-visa-free-for-indians-tour-packages-itinerary-2026-guide`,
+      lastModified: currentDate,
+      changeFrequency: 'daily',
+      priority: 0.99,
+    },
+    {
       url: `${baseUrl}/blog/auli-skiing-tour-packages-ropeway-ticket-booking-winter-guide`,
       lastModified: currentDate,
       changeFrequency: 'daily',

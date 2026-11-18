@@ -47,6 +47,15 @@ export const metadata: Metadata = {
 export default function BlogHubPage() {
   const blogs = [
     {
+      slug: 'thailand-visa-free-for-indians-tour-packages-itinerary-2026-guide',
+      title: 'Thailand Visa-Free for Indians (2026–2027): 60-Day Rules, Entry Requirements, Packages Under ₹25k & 5-Day Itinerary 🌴✈️',
+      category: '🌴 60-Day Visa Exemption',
+      author: 'Southeast Asia Travel Desk',
+      date: 'Nov 18, 2026',
+      image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600&auto=format&fit=crop',
+      summary: 'Zero visa fee! 60-day entry stamp for Indian passport holders. Phuket Phi Phi island speedboat, Bangkok shopping, Krabi 4-island tour & holiday packages starting @ ₹21,999.',
+    },
+    {
       slug: 'auli-skiing-tour-packages-ropeway-ticket-booking-winter-guide',
       title: 'Auli Skiing & Tour Packages 2026–2027: Joshimath Ropeway Booking, Snow Dates & 5-Day Delhi Itinerary ❄️⛷️',
       category: '🎿 Skiing & Snow Special (Dec–Feb)',
