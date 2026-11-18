@@ -160,49 +160,6 @@ export default function Home() {
     ],
   };
 
-  const howToBookSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'HowTo',
-    name: 'How to Plan and Customize an All-Inclusive Holiday Package in 4 Easy Steps',
-    description: 'Step-by-step guide to customizing and booking an all-inclusive holiday package with flights, 4-star hotels, and transfers on Trip Customizer.',
-    totalTime: 'PT5M',
-    estimatedCost: {
-      '@type': 'MonetaryAmount',
-      currency: 'INR',
-      value: '14999',
-    },
-    step: [
-      {
-        '@type': 'HowToStep',
-        position: 1,
-        name: 'Select Destination & Departure City',
-        text: 'Choose from 40+ countries or domestic Indian hotspots. Pick flights departing from Delhi, Mumbai, Ahmedabad, Bangalore, Kolkata, or Pune.',
-        url: 'https://www.tripcustomizer.com/#how-it-works',
-      },
-      {
-        '@type': 'HowToStep',
-        position: 2,
-        name: 'Choose Hotel Tier & Meal Plan',
-        text: 'Select handpicked 3-Star comfort, 4-Star deluxe, or 5-Star luxury resort accommodations with daily buffet breakfast and dinner options.',
-        url: 'https://www.tripcustomizer.com/#how-it-works',
-      },
-      {
-        '@type': 'HowToStep',
-        position: 3,
-        name: 'Personalize Sightseeing & Transfers',
-        text: 'Add private AC cabs for airport transfers, curated day tours, desert safaris, island speedboat rides, or VIP temple darshan entry passes.',
-        url: 'https://www.tripcustomizer.com/#how-it-works',
-      },
-      {
-        '@type': 'HowToStep',
-        position: 4,
-        name: 'Instant Confirmation & 24x7 Concierge',
-        text: 'Receive 5% GST-compliant tax invoice, confirmed hotel and flight vouchers, and a dedicated personal relationship manager throughout your trip.',
-        url: 'https://www.tripcustomizer.com/#how-it-works',
-      },
-    ],
-  };
-
   const agencySchema = {
     '@context': 'https://schema.org',
     '@type': 'TravelAgency',
@@ -282,7 +239,6 @@ export default function Home() {
     <div className="bg-slate-50 min-h-screen">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(siteNavigationSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToBookSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(agencySchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
