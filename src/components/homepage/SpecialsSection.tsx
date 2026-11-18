@@ -93,7 +93,7 @@ export const SpecialsSection: React.FC = () => {
       <Container className="space-y-4 sm:space-y-8">
         <div>
           <h2 className="text-xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-            tripcustomizer Specials
+            Trip Customizer Specials
           </h2>
         </div>
 
