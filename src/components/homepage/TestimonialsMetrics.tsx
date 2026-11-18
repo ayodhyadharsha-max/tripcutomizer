@@ -1,14 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import { Container } from '../ui/Container';
-import { ChevronDown, ChevronUp, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { Quote } from 'lucide-react';
 
 export const TestimonialsMetrics: React.FC = () => {
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const [showAllFaqs, setShowAllFaqs] = useState(false);
-
   const metrics = [
     { label: 'Years of legacy', value: '7+' },
     { label: 'Tours Conducted', value: '500+' },
@@ -36,34 +33,9 @@ export const TestimonialsMetrics: React.FC = () => {
     },
   ];
 
-  const faqs = [
-    {
-      q: 'What services does Trip Customizer offer?',
-      a: 'Trip Customizer is a leading travel solutions provider offering a wide range of services including international and domestic holiday packages, flight bookings, hotel bookings, customized tour itineraries, and corporate travel management.',
-    },
-    {
-      q: 'How to book holiday packages in India with Trip Customizer?',
-      a: 'You can search for holiday packages on our website by selecting your destination, travel dates, and preferences. Once you select a package, click on "Book Now" or use "Customize Trip" to connect with our travel experts.',
-    },
-    {
-      q: 'Does Trip Customizer offer customizable tour packages?',
-      a: 'Yes, we specialize in fully customized tour packages! You can use our "Customize Trip" wizard or speak with our senior travel architects to tailor flights, hotels, activities, and duration to your exact preferences.',
-    },
-    {
-      q: 'What are the best holiday packages offered by Trip Customizer?',
-      a: 'Our top-rated packages include European Highlights, Exotic Bali Escapes, Char Dham Yatra, Kerala Serenade, Kashmir Paradise, and Luxury Maldives Honeymoon Resorts.',
-    },
-    {
-      q: 'Can I book flights and hotels together?',
-      a: 'Yes, our platform supports seamless flight + hotel bundle bookings with exclusive package discounts.',
-    },
-  ];
-
-  const visibleFaqs = showAllFaqs ? faqs : faqs.slice(0, 4);
-
   return (
     <div className="bg-amber-50/20 border-b border-slate-200">
-      {/* 1. Why Customers Love Us & Metrics Section */}
+      {/* Why Customers Love Us & Metrics Section */}
       <section className="py-16 bg-gradient-to-b from-amber-50/40 to-white">
         <Container>
           {/* Header */}
@@ -110,60 +82,6 @@ export const TestimonialsMetrics: React.FC = () => {
               </div>
             ))}
           </div>
-        </Container>
-      </section>
-
-      {/* 2. Frequently Asked Questions Section */}
-      <section className="py-16 bg-white border-t border-slate-200">
-        <Container className="max-w-4xl">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-              Frequently Asked Questions
-            </h2>
-          </div>
-
-          {/* FAQ Accordion List */}
-          <div className="space-y-4">
-            {visibleFaqs.map((faq, idx) => {
-              const isOpen = openFaq === idx;
-              return (
-                <div
-                  key={idx}
-                  className={`rounded-2xl transition-all border overflow-hidden ${
-                    isOpen
-                      ? 'bg-brand-500 text-white border-brand-500 shadow-md'
-                      : 'bg-white text-slate-800 border-slate-200 hover:border-slate-300'
-                  }`}
-                >
-                  <button
-                    onClick={() => setOpenFaq(isOpen ? null : idx)}
-                    className="w-full p-5 text-left font-bold text-sm sm:text-base flex items-center justify-between gap-4"
-                  >
-                    <span>{faq.q}</span>
-                    {isOpen ? <ChevronUp className="w-5 h-5 shrink-0" /> : <ChevronDown className="w-5 h-5 shrink-0 text-slate-400" />}
-                  </button>
-
-                  {isOpen && (
-                    <div className="px-5 pb-5 text-xs sm:text-sm text-blue-50 leading-relaxed font-normal border-t border-white/20 pt-3">
-                      {faq.a}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Show More Button */}
-          {!showAllFaqs && (
-            <div className="text-center mt-8">
-              <button
-                onClick={() => setShowAllFaqs(true)}
-                className="bg-brand-600 hover:bg-brand-700 text-white text-xs font-extrabold px-8 py-3 rounded-full shadow-md shadow-brand-500/20 transition-all hover:scale-105"
-              >
-                Show More
-              </button>
-            </div>
-          )}
         </Container>
       </section>
     </div>

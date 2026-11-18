@@ -12,16 +12,28 @@ interface FAQItem {
 
 const FAQ_DATA: FAQItem[] = [
   {
+    category: 'About & Services',
+    question: 'What services does Trip Customizer offer?',
+    answer:
+      'Trip Customizer is a leading travel solutions provider offering international and domestic holiday packages, personalized itinerary planning, flight and 4-star/5-star hotel bookings, spiritual yatra management, visa documentation assistance, and corporate travel support.',
+  },
+  {
     category: 'Booking & Customization',
-    question: 'How do I customize a tour package on Trip Customizer?',
+    question: 'How do I book and customize holiday packages on Trip Customizer?',
     answer:
       'You can customize any trip by selecting your destination, choosing your preferred departure city, travel dates, and hotel tier (3-Star, 4-Star, or 5-Star Luxury). Alternatively, use our 1-Minute Custom Trip Wizard or message our travel desk directly on WhatsApp at +91 7408763401 for a customized day-by-day itinerary and transparent quote within 2 hours.',
+  },
+  {
+    category: 'Top Holiday Packages',
+    question: 'What are the best holiday packages offered by Trip Customizer?',
+    answer:
+      'Our top-rated packages include European Highlights, Exotic Bali Escapes, Dubai Luxury & Desert Safari, Thailand & Vietnam, Char Dham Yatra (Kedarnath, Badrinath, Gangotri, Yamunotri), Ayodhya Ram Mandir VIP Darshan & Kashi Varanasi, Kashmir Paradise, and Kerala Backwaters Serenade.',
   },
   {
     category: 'Spiritual Yatras',
     question: 'What spiritual and pilgrimage tour packages does Trip Customizer specialize in?',
     answer:
-      'Trip Customizer specializes in sacred yatras across India including Char Dham Yatra (Kedarnath, Badrinath, Gangotri, Yamunotri) with helicopter options, Ayodhya Ram Mandir VIP Darshan & Saryu Aarti, Varanasi Kashi Vishwanath, Kailash Mansarovar, Dwarka Somnath, and Mathura Vrindavan. All packages include verified AC transport, hotel stays, puja assistance, and experienced yatra guides.',
+      'Trip Customizer specializes in sacred yatras across India including Char Dham Yatra with helicopter options, Ayodhya Ram Mandir VIP Darshan & Saryu Aarti, Varanasi Kashi Vishwanath, Kailash Mansarovar, Dwarka Somnath, and Mathura Vrindavan. All packages include verified AC transport, hotel stays, puja assistance, and experienced yatra guides.',
   },
   {
     category: 'Inclusions & Visa',
