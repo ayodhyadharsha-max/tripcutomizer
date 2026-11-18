@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, ShoppingBag, Search, Heart, Gift, Sparkles } from 'lucide-react';
+import { Home, ShoppingBag, Search, Compass, Gift } from 'lucide-react';
 
 export const MakeMyTripBottomNav: React.FC = () => {
   const pathname = usePathname();
@@ -52,16 +52,16 @@ export const MakeMyTripBottomNav: React.FC = () => {
         <span className="text-[10px] font-black text-brand-600 mt-0.5">Customize</span>
       </Link>
 
-      {/* 4. Wishlists Tab */}
+      {/* 4. Packages Tab */}
       <Link
-        href="/holidays"
+        href="/packages"
         prefetch={true}
         className={`flex flex-col items-center justify-center py-1 px-3 text-[10px] font-bold transition-all ${
-          isActive('/holidays') ? 'text-brand-600' : 'text-slate-500 hover:text-slate-800'
+          isActive('/packages') || isActive('/holidays') ? 'text-brand-600' : 'text-slate-500 hover:text-slate-800'
         }`}
       >
-        <Heart className={`w-5 h-5 mb-0.5 ${isActive('/holidays') ? 'text-brand-600 fill-brand-500/20' : 'text-slate-500'}`} />
-        <span>Wishlists</span>
+        <Compass className={`w-5 h-5 mb-0.5 ${isActive('/packages') || isActive('/holidays') ? 'text-brand-600 fill-brand-500/20' : 'text-slate-500'}`} />
+        <span>Packages</span>
       </Link>
 
       {/* 5. Gift Cards Tab */}
