@@ -50,6 +50,8 @@ export const PackageInquiryModal: React.FC<PackageInquiryModalProps> = ({
 
   if (!isOpen) return null;
 
+  const dealPrice = Math.min(pkg.startingPrice, pkg.discountPrice || pkg.startingPrice);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.phone || formData.phone.trim().length < 10) {
@@ -66,7 +68,7 @@ export const PackageInquiryModal: React.FC<PackageInquiryModalProps> = ({
         phone: formData.phone.trim(),
         email: formData.email.trim(),
         destination: `${pkg.h1} (${formData.departureCity})`,
-        budget: `₹${pkg.discountPrice.toLocaleString('en-IN')}/person`,
+        budget: `₹${dealPrice.toLocaleString('en-IN')}/person`,
         travelersCount: formData.adults + formData.children,
         status: 'New',
         source: `Programmatic Package: /packages/${pkg.slug} [${formData.mode.toUpperCase()}]`,
@@ -79,7 +81,7 @@ export const PackageInquiryModal: React.FC<PackageInquiryModalProps> = ({
         email: formData.email || 'inquiry@tripcustomizer.com',
         phone: formData.phone,
         destination: `${pkg.h1} from ${formData.departureCity}`,
-        budget: `₹${pkg.discountPrice.toLocaleString('en-IN')}/person (${pkg.durationDays}D/${pkg.durationNights}N)`,
+        budget: `₹${dealPrice.toLocaleString('en-IN')}/person (${pkg.durationDays}D/${pkg.durationNights}N)`,
         notes: `Travel Date: ${formData.travelDate || 'Flexible'} | Adults: ${formData.adults}, Children: ${formData.children} | Departure: ${formData.departureCity} | Notes: ${formData.customNotes || 'Standard package inquiry'}`,
       });
 
@@ -94,7 +96,7 @@ export const PackageInquiryModal: React.FC<PackageInquiryModalProps> = ({
   };
 
   const whatsappMessage = encodeURIComponent(
-    `Hello Trip Customizer! I am interested in booking: "${pkg.h1}" departing from ${formData.departureCity} at ₹${pkg.discountPrice.toLocaleString('en-IN')}/person. Please share quote and hotel details.`
+    `Hello Trip Customizer! I am interested in booking: "${pkg.h1}" departing from ${formData.departureCity} at ₹${dealPrice.toLocaleString('en-IN')}/person. Please share quote and hotel details.`
   );
 
   return (
@@ -133,7 +135,7 @@ export const PackageInquiryModal: React.FC<PackageInquiryModalProps> = ({
               Ex-{pkg.departureCity.city}
             </span>
             <span className="font-semibold text-white">
-              Starting at ₹{pkg.discountPrice.toLocaleString('en-IN')} / person
+              Starting at ₹{dealPrice.toLocaleString('en-IN')} / person
             </span>
           </div>
         </div>

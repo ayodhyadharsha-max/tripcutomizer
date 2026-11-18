@@ -23,8 +23,10 @@ export const PackageActionButtons: React.FC<PackageActionButtonsProps> = ({ pkg 
     setIsModalOpen(true);
   };
 
+  const dealPrice = Math.min(pkg.startingPrice, pkg.discountPrice || pkg.startingPrice);
+
   const whatsappMessage = encodeURIComponent(
-    `Hello Trip Customizer! I want details on: "${pkg.h1}" departing from ${pkg.departureCity.city} (Special Price: ₹${pkg.discountPrice.toLocaleString('en-IN')}). Please share itinerary and quote.`
+    `Hello Trip Customizer! I want details on: "${pkg.h1}" departing from ${pkg.departureCity.city} (Special Price: ₹${dealPrice.toLocaleString('en-IN')}). Please share itinerary and quote.`
   );
 
   return (
@@ -35,7 +37,7 @@ export const PackageActionButtons: React.FC<PackageActionButtonsProps> = ({ pkg 
           className="w-full py-4 px-6 bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 hover:from-blue-700 hover:to-indigo-800 text-white font-extrabold rounded-2xl shadow-xl shadow-blue-600/25 flex items-center justify-center gap-2.5 transition-all transform hover:-translate-y-0.5 text-base cursor-pointer"
         >
           <Zap className="w-5 h-5 fill-white" />
-          Book Now @ ₹{pkg.discountPrice.toLocaleString('en-IN')}
+          Book Now @ ₹{dealPrice.toLocaleString('en-IN')}
         </button>
 
         <button

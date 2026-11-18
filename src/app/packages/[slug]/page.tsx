@@ -95,6 +95,9 @@ export default function ProgrammaticPackagePage({
   }
 
   const hotelCategory = pkg.hotels?.[0]?.category || '4-Star Deluxe';
+  const dealPrice = Math.min(pkg.startingPrice, pkg.discountPrice || pkg.startingPrice);
+  const mrpPrice = Math.max(pkg.startingPrice, pkg.discountPrice || Math.round(dealPrice * 1.25));
+  const savings = mrpPrice - dealPrice;
 
   // Get sibling packages for cross-linking
   const allPackages = getAllProgrammaticPackages();
@@ -125,7 +128,7 @@ export default function ProgrammaticPackagePage({
     },
     offers: {
       '@type': 'Offer',
-      price: pkg.discountPrice,
+      price: dealPrice,
       priceCurrency: 'INR',
       availability: 'https://schema.org/InStock',
       validFrom: '2026-01-01',
@@ -159,7 +162,7 @@ export default function ProgrammaticPackagePage({
     },
     offers: {
       '@type': 'Offer',
-      price: pkg.discountPrice,
+      price: dealPrice,
       priceCurrency: 'INR',
       priceValidUntil: '2026-12-31',
       availability: 'https://schema.org/InStock',
@@ -435,7 +438,7 @@ export default function ProgrammaticPackagePage({
                   <span>How much does the {pkg.h1} cost?</span>
                 </h2>
                 <p className="speakable-content aeo-answer text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
-                  The {pkg.h1} starts at <strong>₹{pkg.discountPrice.toLocaleString('en-IN')} per person</strong> (reduced from ₹{pkg.startingPrice.toLocaleString('en-IN')}) for a {pkg.durationDays}-day, {pkg.durationNights}-night itinerary. This price includes confirmed flights from {pkg.departureCity.city} ({pkg.departureCity.airport}), verified {hotelCategory} hotel stays, daily breakfast, private sightseeing transfers, and 24x7 senior concierge support.
+                  The {pkg.h1} starts at <strong>₹{dealPrice.toLocaleString('en-IN')} per person</strong> (reduced from original ₹{mrpPrice.toLocaleString('en-IN')} — save ₹{savings.toLocaleString('en-IN')}!) for a {pkg.durationDays}-day, {pkg.durationNights}-night itinerary. This price includes confirmed flights from {pkg.departureCity.city} ({pkg.departureCity.airport}), verified {hotelCategory} hotel stays, daily breakfast, private sightseeing transfers, and 24x7 senior concierge support.
                 </p>
               </div>
 
@@ -678,7 +681,7 @@ export default function ProgrammaticPackagePage({
                       <div className="flex items-center justify-between text-xs pt-2 border-t border-slate-200/60">
                         <span className="text-slate-500">Starting at</span>
                         <span className="font-bold text-slate-900">
-                          ₹{rel.discountPrice.toLocaleString('en-IN')}
+                          ₹{Math.min(rel.startingPrice, rel.discountPrice || rel.startingPrice).toLocaleString('en-IN')}
                         </span>
                       </div>
                     </Link>
@@ -702,14 +705,14 @@ export default function ProgrammaticPackagePage({
                 </div>
                 <div className="flex items-baseline gap-3">
                   <span className="text-3xl sm:text-4xl font-extrabold text-slate-900">
-                    ₹{pkg.discountPrice.toLocaleString('en-IN')}
+                    ₹{dealPrice.toLocaleString('en-IN')}
                   </span>
                   <span className="text-base text-slate-400 line-through">
-                    ₹{pkg.startingPrice.toLocaleString('en-IN')}
+                    ₹{mrpPrice.toLocaleString('en-IN')}
                   </span>
                 </div>
                 <div className="text-xs text-emerald-600 font-semibold mt-1">
-                  Save ₹{(pkg.startingPrice - pkg.discountPrice).toLocaleString('en-IN')} per couple
+                  Save ₹{savings.toLocaleString('en-IN')} per person ({Math.round((savings / mrpPrice) * 100)}% OFF)
                 </div>
                 <div className="text-[11px] text-slate-400 mt-0.5">
                   *Taxes &amp; GST as applicable. Twin sharing basis.

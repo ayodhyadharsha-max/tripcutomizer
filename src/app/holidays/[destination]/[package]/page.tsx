@@ -63,7 +63,7 @@ export async function generateMetadata({
       robots: { index: false, follow: false },
     };
   }
-  const price = pkg.discountPrice || pkg.startingPrice;
+  const price = Math.min(pkg.startingPrice || 0, pkg.discountPrice || pkg.startingPrice || 0) || pkg.startingPrice || 14999;
   const duration = `${pkg.durationDays}D / ${pkg.durationNights}N`;
 
   const title = `${pkg.name} (${duration}) — ₹${price.toLocaleString('en-IN')}`;
@@ -119,7 +119,7 @@ export default function ServerPackageDetailPage({
   if (!pkg) {
     notFound();
   }
-  const price = pkg.discountPrice || pkg.startingPrice;
+  const price = Math.min(pkg.startingPrice || 0, pkg.discountPrice || pkg.startingPrice || 0) || pkg.startingPrice || 14999;
   const overviewText = pkg.highlights && pkg.highlights.length > 0 ? pkg.highlights.join('. ') : pkg.name;
 
   // 1. Product & Offer Schema

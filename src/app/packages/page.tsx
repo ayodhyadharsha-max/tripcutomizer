@@ -66,7 +66,7 @@ export default function PackagesDirectoryPage() {
       url: `https://www.tripcustomizer.com/packages/${pkg.slug}`,
       offers: {
         '@type': 'Offer',
-        price: pkg.discountPrice,
+        price: Math.min(pkg.startingPrice, pkg.discountPrice || pkg.startingPrice),
         priceCurrency: 'INR',
       },
     })),
@@ -171,7 +171,11 @@ export default function PackagesDirectoryPage() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {cityPackages.map((pkg) => (
+                  {cityPackages.map((pkg) => {
+                    const dealPrice = Math.min(pkg.startingPrice, pkg.discountPrice || pkg.startingPrice);
+                    const mrpPrice = Math.max(pkg.startingPrice, pkg.discountPrice || Math.round(dealPrice * 1.25));
+
+                    return (
                     <Card
                       key={pkg.slug}
                       className="overflow-hidden hover:shadow-xl transition-all duration-300 border border-slate-200 rounded-3xl bg-white flex flex-col group"
@@ -226,10 +230,10 @@ export default function PackagesDirectoryPage() {
                             <span className="text-[10px] text-slate-400 block uppercase font-semibold">Starting From</span>
                             <div className="flex items-baseline gap-1.5">
                               <span className="text-lg font-black text-brand-600">
-                                ₹{pkg.discountPrice.toLocaleString('en-IN')}
+                                ₹{dealPrice.toLocaleString('en-IN')}
                               </span>
                               <span className="text-xs text-slate-400 line-through">
-                                ₹{pkg.startingPrice.toLocaleString('en-IN')}
+                                ₹{mrpPrice.toLocaleString('en-IN')}
                               </span>
                             </div>
                           </div>
@@ -244,7 +248,8 @@ export default function PackagesDirectoryPage() {
                         </div>
                       </div>
                     </Card>
-                  ))}
+                    );
+                  })}
                 </div>
               </section>
             );

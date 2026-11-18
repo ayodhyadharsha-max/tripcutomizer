@@ -192,10 +192,10 @@ export default function HoneymoonDestinationPage({ params }: HoneymoonPageProps)
   const canonicalUrl = `https://www.tripcustomizer.com/honeymoon/${rawSlug}`;
 
   const minPrice = displayPackages.length > 0
-    ? Math.min(...displayPackages.map((p) => (p.discountPrice || p.startingPrice || 18999)))
+    ? Math.min(...displayPackages.map((p) => Math.min(p.startingPrice || 18999, p.discountPrice || p.startingPrice || 18999)))
     : 18999;
   const maxPrice = displayPackages.length > 0
-    ? Math.max(...displayPackages.map((p) => (p.startingPrice || p.discountPrice || 65000)))
+    ? Math.max(...displayPackages.map((p) => Math.max(p.startingPrice || 65000, p.discountPrice || 65000)))
     : 65000;
   const recommendedDays = displayPackages.length > 0
     ? Math.round(displayPackages.reduce((acc, p) => acc + (p.durationDays || 5), 0) / displayPackages.length)

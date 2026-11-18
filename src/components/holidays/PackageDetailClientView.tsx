@@ -389,9 +389,11 @@ export function PackageDetailClientView({ params }: { params: { destination: str
 
   // Pricing calculations based on tier & detailed child ages
   const tierMultiplier = tourTier === 'standard' ? 0.9 : tourTier === 'deluxe' ? 1.0 : 1.25;
-  const basePricePerPerson = Math.round(pkg.startingPrice * tierMultiplier);
-  const originalPricePerPerson = pkg.discountPrice ? Math.round(pkg.discountPrice * tierMultiplier) : Math.round(basePricePerPerson * 1.18);
-  const discountPercent = Math.round(((originalPricePerPerson - basePricePerPerson) / originalPricePerPerson) * 100);
+  const dealBase = Math.min(pkg.startingPrice, pkg.discountPrice || pkg.startingPrice);
+  const mrpBase = Math.max(pkg.startingPrice, pkg.discountPrice || Math.round(dealBase * 1.25));
+  const basePricePerPerson = Math.round(dealBase * tierMultiplier);
+  const originalPricePerPerson = Math.round(mrpBase * tierMultiplier);
+  const discountPercent = Math.max(5, Math.round(((originalPricePerPerson - basePricePerPerson) / originalPricePerPerson) * 100));
 
   // Dynamic Total Calculation
   const subtotalBeforeGst = Math.round(
@@ -536,7 +538,7 @@ export function PackageDetailClientView({ params }: { params: { destination: str
     })),
     offers: {
       '@type': 'Offer',
-      price: pkg.startingPrice,
+      price: dealBase,
       priceCurrency: 'INR',
       availability: 'https://schema.org/InStock',
       url: typeof window !== 'undefined' ? window.location.href : `https://www.tripcustomizer.com/holidays/${pkg.destinationSlug}/${pkg.slug}`,

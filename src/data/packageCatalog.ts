@@ -630,11 +630,12 @@ function generateSynthesizedPackage(
   const durObj = DURATIONS_CONFIG[pkgIndex % DURATIONS_CONFIG.length];
   const hotelTier = HOTEL_TIERS[pkgIndex % HOTEL_TIERS.length];
 
-  const count = sector.count;
-  const step = (sector.maxPrice - sector.minPrice) / Math.max(1, count - 1);
-  const startingPrice = Math.round(sector.minPrice + pkgIndex * step);
-  const discountMultiplier = 1.15 + ((pkgIndex % 5) * 0.05);
-  const discountPrice = Math.round(startingPrice * discountMultiplier);
+  const totalTiers = 12;
+  const step = (sector.maxPrice - sector.minPrice) / Math.max(1, totalTiers - 1);
+  const rawStartingPrice = Math.round((sector.minPrice + (pkgIndex % totalTiers) * step) / 100) * 100;
+  const startingPrice = rawStartingPrice > 0 ? rawStartingPrice : sector.minPrice;
+  const discountMultiplier = 1.20 + ((pkgIndex % 4) * 0.05); // 20% to 35% higher original price
+  const discountPrice = Math.round((startingPrice * discountMultiplier) / 100) * 100;
 
   const ratings = [4.7, 4.8, 4.9, 4.85, 4.95];
   const rating = ratings[pkgIndex % ratings.length];

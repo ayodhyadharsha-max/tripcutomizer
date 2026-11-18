@@ -115,7 +115,8 @@ export function HolidayListingView({
     if (!activeQuotePkg || !quotePhone.trim()) return;
     setIsSubmittingQuote(true);
 
-    const priceText = `₹${(activeQuotePkg.discountPrice || activeQuotePkg.startingPrice).toLocaleString('en-IN')}`;
+    const dealPrice = Math.min(activeQuotePkg.startingPrice, activeQuotePkg.discountPrice || activeQuotePkg.startingPrice);
+    const priceText = `₹${dealPrice.toLocaleString('en-IN')}`;
 
     cloudStore.saveLead({
       name: quoteName.trim() || 'Valued Client',
@@ -775,7 +776,12 @@ export function HolidayListingView({
             ) : (
               /* Packages Listing Array */
               <div className="space-y-6">
-                {visiblePackages.map((pkg, idx) => (
+                {visiblePackages.map((pkg, idx) => {
+                  const itemDealPrice = Math.min(pkg.startingPrice, pkg.discountPrice || pkg.startingPrice);
+                  const itemMrpPrice = Math.max(pkg.startingPrice, pkg.discountPrice || Math.round(itemDealPrice * 1.25));
+                  const savingsPercent = itemMrpPrice > itemDealPrice ? Math.round(((itemMrpPrice - itemDealPrice) / itemMrpPrice) * 100) : 0;
+
+                  return (
                   <Card
                     key={pkg.id}
                     hoverable
@@ -795,9 +801,9 @@ export function HolidayListingView({
                         <div className="absolute top-3 left-3 bg-brand-900/90 backdrop-blur-xs text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-xs">
                           {pkg.theme}
                         </div>
-                        {pkg.discountPrice && pkg.discountPrice > pkg.startingPrice && (
+                        {savingsPercent > 0 && (
                           <div className="absolute bottom-3 left-3 bg-rose-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-md shadow-xs">
-                            SAVE {Math.round(((pkg.discountPrice - pkg.startingPrice) / pkg.discountPrice) * 100)}%
+                            SAVE {savingsPercent}%
                           </div>
                         )}
                       </div>
@@ -843,20 +849,20 @@ export function HolidayListingView({
                         {/* Price & Call to Actions */}
                         <div className="pt-3 border-t border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                           <div>
-                            {pkg.discountPrice && pkg.discountPrice > pkg.startingPrice && (
+                            {itemMrpPrice > itemDealPrice && (
                               <span className="text-xs text-slate-400 line-through mr-2 font-semibold">
-                                {formatCurrency(pkg.discountPrice)}
+                                {formatCurrency(itemMrpPrice)}
                               </span>
                             )}
                             <span className="text-xl font-black text-brand-700">
-                              {formatCurrency(pkg.startingPrice)}
+                              {formatCurrency(itemDealPrice)}
                             </span>
                             <span className="text-[10px] text-slate-500 font-bold"> / person</span>
                           </div>
 
                           <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
                             <a
-                              href={`https://wa.me/917408763401?text=${encodeURIComponent(`Hi Trip Customizer, I am interested in ${pkg.name} (${pkg.durationDays}D/${pkg.durationNights}N) starting at ₹${(pkg.discountPrice || pkg.startingPrice).toLocaleString('en-IN')}. Please share itinerary and quote.`)}`}
+                              href={`https://wa.me/917408763401?text=${encodeURIComponent(`Hi Trip Customizer, I am interested in ${pkg.name} (${pkg.durationDays}D/${pkg.durationNights}N) starting at ₹${itemDealPrice.toLocaleString('en-IN')}. Please share itinerary and quote.`)}`}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="flex-1 sm:flex-none bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-3.5 py-2.5 rounded-xl transition-all shadow-xs flex items-center justify-center gap-1"
@@ -884,7 +890,8 @@ export function HolidayListingView({
                       </div>
                     </div>
                   </Card>
-                ))}
+                  );
+                })}
 
                 {visibleCount < filteredPackages.length && (
                   <div className="pt-6 pb-2 text-center">

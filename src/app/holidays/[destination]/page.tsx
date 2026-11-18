@@ -280,10 +280,10 @@ export default function DestinationListingPage({ params }: { params: { destinati
   };
 
   const minPrice = displayPackages.length > 0
-    ? Math.min(...displayPackages.map((p) => (p.discountPrice || p.startingPrice || 14999)))
+    ? Math.min(...displayPackages.map((p) => Math.min(p.startingPrice || 14999, p.discountPrice || p.startingPrice || 14999)))
     : 14999;
   const maxPrice = displayPackages.length > 0
-    ? Math.max(...displayPackages.map((p) => (p.startingPrice || p.discountPrice || 55000)))
+    ? Math.max(...displayPackages.map((p) => Math.max(p.startingPrice || 55000, p.discountPrice || 55000)))
     : 55000;
   const recommendedDays = displayPackages.length > 0
     ? Math.round(displayPackages.reduce((acc, p) => acc + (p.durationDays || 5), 0) / displayPackages.length)
@@ -448,7 +448,7 @@ export default function DestinationListingPage({ params }: { params: { destinati
                     <td className="p-3 font-bold text-slate-900">{p.name}</td>
                     <td className="p-3 whitespace-nowrap">{p.durationDays}D / {p.durationNights}N</td>
                     <td className="p-3 whitespace-nowrap">{p.hotelCategory || '4-Star Deluxe'}</td>
-                    <td className="p-3 font-extrabold text-emerald-600 whitespace-nowrap">₹{(p.discountPrice || p.startingPrice).toLocaleString('en-IN')}</td>
+                    <td className="p-3 font-extrabold text-emerald-600 whitespace-nowrap">₹{(Math.min(p.startingPrice || 14999, p.discountPrice || p.startingPrice || 14999)).toLocaleString('en-IN')}</td>
                     <td className="p-3">{p.inclusions ? p.inclusions.slice(0, 3).join(', ') : 'Hotels, Breakfast, Cabs'}</td>
                   </tr>
                 ))}
@@ -474,7 +474,7 @@ export default function DestinationListingPage({ params }: { params: { destinati
                   >
                     <div className="flex items-center justify-between text-xs font-bold text-slate-900 group-hover:text-brand-700">
                       <span>{prog.departureCity.city} Departure</span>
-                      <span className="text-emerald-600">₹{(prog.discountPrice || prog.startingPrice).toLocaleString('en-IN')}</span>
+                      <span className="text-emerald-600">₹{(Math.min(prog.startingPrice, prog.discountPrice || prog.startingPrice)).toLocaleString('en-IN')}</span>
                     </div>
                     <p className="text-[11px] text-slate-600 mt-1 line-clamp-1 font-medium">{prog.h1}</p>
                     <span className="text-[10px] text-brand-600 font-bold mt-1.5 inline-block group-hover:underline">View Itinerary & Book &rarr;</span>
