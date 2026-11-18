@@ -52,15 +52,15 @@ export const MakeMyTripBottomNav: React.FC = () => {
         <span className="text-[10px] font-black text-brand-600 mt-0.5">Customize</span>
       </Link>
 
-      {/* 4. Packages Tab */}
+      {/* 4. Packages Tab (Direct link to /holidays) */}
       <Link
-        href="/packages"
+        href="/holidays"
         prefetch={true}
         className={`flex flex-col items-center justify-center py-1 px-3 text-[10px] font-bold transition-all ${
-          isActive('/packages') || isActive('/holidays') ? 'text-brand-600' : 'text-slate-500 hover:text-slate-800'
+          isActive('/holidays') || isActive('/packages') ? 'text-brand-600' : 'text-slate-500 hover:text-slate-800'
         }`}
       >
-        <Compass className={`w-5 h-5 mb-0.5 ${isActive('/packages') || isActive('/holidays') ? 'text-brand-600 fill-brand-500/20' : 'text-slate-500'}`} />
+        <Compass className={`w-5 h-5 mb-0.5 ${isActive('/holidays') || isActive('/packages') ? 'text-brand-600 fill-brand-500/20' : 'text-slate-500'}`} />
         <span>Packages</span>
       </Link>
 
