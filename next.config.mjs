@@ -175,6 +175,51 @@ const nextConfig = {
         destination: '/customize-trip',
         permanent: true,
       },
+      {
+        source: '/investors',
+        destination: '/corporate-travel',
+        permanent: true,
+      },
+      {
+        source: '/brochure',
+        destination: '/customize-trip',
+        permanent: true,
+      },
+      {
+        source: '/mobile-app',
+        destination: '/TripCustomizer.apk',
+        permanent: true,
+      },
+      {
+        source: '/safe-travel',
+        destination: '/travel-insurance',
+        permanent: true,
+      },
+      {
+        source: '/guidelines',
+        destination: '/visa',
+        permanent: true,
+      },
+      {
+        source: '/guidelines/international',
+        destination: '/visa',
+        permanent: true,
+      },
+      {
+        source: '/guidelines/india',
+        destination: '/holidays/india',
+        permanent: true,
+      },
+      {
+        source: '/experiential',
+        destination: '/packages',
+        permanent: true,
+      },
+      {
+        source: '/youth-special',
+        destination: '/offers',
+        permanent: true,
+      },
     ];
   },
 };

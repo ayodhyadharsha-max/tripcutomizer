@@ -85,7 +85,7 @@ export const Footer: React.FC = () => {
               <Link href="/holidays/international" className="hover:text-white transition-colors">International Holidays</Link>
               <Link href="/holidays/india" className="hover:text-white transition-colors">India Holidays</Link>
               <Link href="/blog" className="hover:text-white transition-colors">Travel Blogs</Link>
-              <Link href="/investors" className="hover:text-white transition-colors">Investor Relations</Link>
+              <Link href="/corporate-travel" className="hover:text-white transition-colors">Corporate Travel</Link>
             </div>
 
             {/* PCI DSS Security Certification Badge */}
@@ -139,11 +139,11 @@ export const Footer: React.FC = () => {
                 <ChevronDown className="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" />
               </summary>
               <ul className="space-y-2 pt-2.5 pl-1 text-xs">
-                <li><Link href="/brochure" className="hover:text-white transition-colors block py-0.5">Travel e-brochure</Link></li>
+                <li><Link href="/customize-trip" className="hover:text-white transition-colors block py-0.5">Customize Trip Itinerary</Link></li>
                 <li><Link href="/agent/login" className="hover:text-white transition-colors block py-0.5">Staff / Agent Login</Link></li>
                 <li><Link href="/offers" className="hover:text-white transition-colors block py-0.5">Offers & Discounts</Link></li>
-                <li><Link href="/mobile-app" className="hover:text-white transition-colors block py-0.5">Holiday App</Link></li>
-                <li><Link href="/customize-trip" className="hover:text-white transition-colors block py-0.5">Customize Trip</Link></li>
+                <li><Link href="/TripCustomizer.apk" className="hover:text-white transition-colors block py-0.5">Download Android App (APK)</Link></li>
+                <li><Link href="/packages" className="hover:text-white transition-colors block py-0.5">Browse All Packages</Link></li>
               </ul>
             </details>
 
@@ -156,8 +156,8 @@ export const Footer: React.FC = () => {
                 <li><Link href="/sitemap" className="hover:text-white transition-colors block py-0.5">Sitemap</Link></li>
                 <li><Link href="/holidays/india" className="hover:text-white transition-colors block py-0.5">Domestic Packages from City</Link></li>
                 <li><Link href="/holidays/international" className="hover:text-white transition-colors block py-0.5">International Packages from City</Link></li>
-                <li><Link href="/safe-travel" className="hover:text-white transition-colors block py-0.5">Assured Safe Travel Program</Link></li>
-                <li><Link href="/guidelines" className="hover:text-white transition-colors block py-0.5">COVID 19 Certification</Link></li>
+                <li><Link href="/travel-insurance" className="hover:text-white transition-colors block py-0.5">Travel Insurance & Assistance</Link></li>
+                <li><Link href="/visa" className="hover:text-white transition-colors block py-0.5">Visa Assistance</Link></li>
               </ul>
             </details>
           </div>
@@ -198,11 +198,11 @@ export const Footer: React.FC = () => {
             <div>
               <h4 className="font-extrabold text-white text-xs mb-3.5 uppercase tracking-wider">Quick Links</h4>
               <ul className="space-y-2">
-                <li><Link href="/brochure" className="hover:text-white transition-colors">Travel e-brochure</Link></li>
+                <li><Link href="/customize-trip" className="hover:text-white transition-colors">Customize Trip Itinerary</Link></li>
                 <li><Link href="/agent/login" className="hover:text-white transition-colors">Staff / Agent Login</Link></li>
                 <li><Link href="/offers" className="hover:text-white transition-colors">Offers & Discounts</Link></li>
-                <li><Link href="/mobile-app" className="hover:text-white transition-colors">Holiday App</Link></li>
-                <li><Link href="/customize-trip" className="hover:text-white transition-colors">Customize Trip</Link></li>
+                <li><Link href="/TripCustomizer.apk" className="hover:text-white transition-colors">Download Android App (APK)</Link></li>
+                <li><Link href="/packages" className="hover:text-white transition-colors">Browse All Packages</Link></li>
               </ul>
             </div>
 
@@ -223,8 +223,8 @@ export const Footer: React.FC = () => {
               <h4 className="font-extrabold text-white text-xs mb-3.5 uppercase tracking-wider">Trending Holiday Theme</h4>
               <ul className="space-y-2">
                 <li><Link href="/cruises" className="hover:text-white transition-colors">Cruise Packages</Link></li>
-                <li><Link href="/experiential" className="hover:text-white transition-colors">Experiential Travel Packages</Link></li>
-                <li><Link href="/youth-special" className="hover:text-white transition-colors">Youth Special Packages</Link></li>
+                <li><Link href="/packages" className="hover:text-white transition-colors">Experiential Travel Packages</Link></li>
+                <li><Link href="/offers" className="hover:text-white transition-colors">Youth Special Offers</Link></li>
               </ul>
             </div>
 
@@ -232,10 +232,10 @@ export const Footer: React.FC = () => {
             <div>
               <h4 className="font-extrabold text-white text-xs mb-3.5 uppercase tracking-wider">Travel Guidelines</h4>
               <ul className="space-y-2">
-                <li><Link href="/safe-travel" className="hover:text-white transition-colors">Assured Safe Travel Program</Link></li>
-                <li><Link href="/guidelines" className="hover:text-white transition-colors">COVID 19 Certification</Link></li>
-                <li><Link href="/guidelines/international" className="hover:text-white transition-colors">International Travel Guideline</Link></li>
-                <li><Link href="/guidelines/india" className="hover:text-white transition-colors">India Travel Guidelines</Link></li>
+                <li><Link href="/travel-insurance" className="hover:text-white transition-colors">Travel Insurance & Assistance</Link></li>
+                <li><Link href="/visa" className="hover:text-white transition-colors">Visa Assistance</Link></li>
+                <li><Link href="/visa" className="hover:text-white transition-colors">International Travel Guideline</Link></li>
+                <li><Link href="/holidays/india" className="hover:text-white transition-colors">India Travel Guidelines</Link></li>
               </ul>
             </div>
           </div>
