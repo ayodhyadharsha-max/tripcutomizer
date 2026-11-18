@@ -1,11 +1,22 @@
-import React from 'react';
+'use client';
+
+import React, { useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Container } from '@/components/ui/Container';
 import { Card } from '@/components/ui/Card';
-import { Sparkles, ArrowRight, MapPin, Snowflake, Flame, Music, Tent } from 'lucide-react';
+import { Sparkles, ArrowRight, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export const TrendingEditorialGuides: React.FC = () => {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = direction === 'left' ? -360 : 360;
+      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
   const editorialGuides = [
     {
       slug: 'thailand-visa-free-for-indians-tour-packages-itinerary-2026-guide',
@@ -131,10 +142,10 @@ export const TrendingEditorialGuides: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-b from-white via-slate-50 to-white border-b border-slate-200">
+    <section className="py-16 bg-gradient-to-b from-white via-slate-50 to-white border-b border-slate-200 overflow-hidden">
       <Container>
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        {/* Section Header with Slider Navigation Buttons */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4 px-1">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold uppercase tracking-wider mb-2.5">
               <Sparkles className="w-3.5 h-3.5 text-amber-600" />
@@ -143,82 +154,113 @@ export const TrendingEditorialGuides: React.FC = () => {
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
               Trending Travel Stories &amp; Festival Guides
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base mt-2 max-w-2xl">
+            <p className="text-slate-600 text-xs sm:text-sm mt-2 max-w-2xl">
               Handpicked travel guides for destinations whose travel seasons are commencing right now. Get verified itineraries, hotel rates, and insider hacks.
             </p>
           </div>
 
-          <Link
-            href="/blog"
-            prefetch={true}
-            className="inline-flex items-center gap-2 text-sm font-bold text-amber-700 hover:text-amber-800 transition-colors shrink-0 group self-start md:self-auto"
-          >
-            <span>View All Travel Guides</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
+          <div className="flex items-center gap-3 shrink-0 self-start md:self-auto">
+            <Link
+              href="/blog"
+              prefetch={true}
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-amber-700 hover:text-amber-800 transition-colors mr-2 group"
+            >
+              <span>View All Guides</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+
+            {/* Slider Arrow Controls */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => scroll('left')}
+                aria-label="Previous Stories"
+                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-slate-300 bg-white hover:bg-amber-50 hover:border-amber-400 text-slate-700 hover:text-amber-700 flex items-center justify-center transition shadow-xs cursor-pointer active:scale-95"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={() => scroll('right')}
+                aria-label="Next Stories"
+                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-slate-300 bg-white hover:bg-amber-50 hover:border-amber-400 text-slate-700 hover:text-amber-700 flex items-center justify-center transition shadow-xs cursor-pointer active:scale-95"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* 6 Cards Grid (2x3) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {editorialGuides.map((guide, idx) => (
-            <Card
-              key={idx}
-              className="group overflow-hidden rounded-2xl border border-slate-200 hover:border-amber-400 hover:shadow-xl transition-all duration-300 flex flex-col bg-white"
-            >
-              {/* Thumbnail */}
-              <div className="relative h-48 w-full overflow-hidden">
-                <Image
-                  src={guide.image}
-                  alt={guide.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
-                
-                {/* Badge */}
-                <div className="absolute top-3 left-3">
-                  <span className={`text-[11px] font-extrabold px-2.5 py-1 rounded-md shadow-md uppercase tracking-wider ${guide.badgeColor}`}>
-                    {guide.badge}
-                  </span>
-                </div>
+        {/* Carousel Slider Track */}
+        <div className="relative group">
+          <div
+            ref={scrollContainerRef}
+            className="flex gap-4 sm:gap-6 overflow-x-auto scroll-smooth py-3 px-1 no-scrollbar snap-x snap-mandatory"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {editorialGuides.map((guide, idx) => (
+              <div
+                key={idx}
+                className="w-[285px] sm:w-[325px] lg:w-[360px] flex-none shrink-0 snap-start"
+              >
+                <Card
+                  className="group/card h-full overflow-hidden rounded-2xl border border-slate-200 hover:border-amber-400 hover:shadow-xl transition-all duration-300 flex flex-col bg-white"
+                >
+                  {/* Thumbnail */}
+                  <div className="relative h-48 w-full overflow-hidden">
+                    <Image
+                      src={guide.image}
+                      alt={guide.title}
+                      fill
+                      sizes="(max-width: 640px) 285px, (max-width: 1024px) 325px, 360px"
+                      className="object-cover group-hover/card:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
 
-                {/* Price Pill */}
-                <div className="absolute bottom-3 right-3 bg-slate-900/85 backdrop-blur-sm text-white text-xs font-bold px-2.5 py-1 rounded-lg">
-                  From {guide.price}
-                </div>
-              </div>
+                    {/* Badge */}
+                    <div className="absolute top-3 left-3">
+                      <span className={`text-[10px] sm:text-[11px] font-extrabold px-2.5 py-1 rounded-md shadow-md uppercase tracking-wider ${guide.badgeColor}`}>
+                        {guide.badge}
+                      </span>
+                    </div>
 
-              {/* Body */}
-              <div className="p-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-1.5 text-xs text-slate-500 mb-2 font-medium">
-                    <MapPin className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-                    <span className="truncate">{guide.location}</span>
+                    {/* Price Pill */}
+                    <div className="absolute bottom-3 right-3 bg-slate-900/85 backdrop-blur-sm text-white text-xs font-bold px-2.5 py-1 rounded-lg">
+                      From {guide.price}
+                    </div>
                   </div>
 
-                  <h3 className="font-bold text-slate-900 text-base leading-snug group-hover:text-amber-700 transition-colors line-clamp-2">
-                    {guide.title}
-                  </h3>
+                  {/* Body */}
+                  <div className="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center gap-1.5 text-xs text-slate-500 mb-2 font-medium">
+                        <MapPin className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                        <span className="truncate">{guide.location}</span>
+                      </div>
 
-                  <p className="text-xs text-slate-600 mt-2 line-clamp-2 leading-relaxed">
-                    {guide.summary}
-                  </p>
-                </div>
+                      <h3 className="font-bold text-slate-900 text-sm sm:text-base leading-snug group-hover/card:text-amber-700 transition-colors line-clamp-2">
+                        {guide.title}
+                      </h3>
 
-                <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
-                  <span className="text-[11px] font-medium text-slate-500">{guide.duration}</span>
-                  <Link
-                    href={`/blog/${guide.slug}`}
-                    prefetch={true}
-                    className="inline-flex items-center gap-1 text-xs font-bold text-amber-700 hover:text-amber-800"
-                  >
-                    <span>Read Guide</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                  </Link>
-                </div>
+                      <p className="text-xs text-slate-600 mt-2 line-clamp-2 leading-relaxed">
+                        {guide.summary}
+                      </p>
+                    </div>
+
+                    <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
+                      <span className="text-[11px] font-medium text-slate-500">{guide.duration}</span>
+                      <Link
+                        href={`/blog/${guide.slug}`}
+                        prefetch={true}
+                        className="inline-flex items-center gap-1 text-xs font-bold text-amber-700 hover:text-amber-800"
+                      >
+                        <span>Read Guide</span>
+                        <ArrowRight className="w-3.5 h-3.5 group-hover/card:translate-x-0.5 transition-transform" />
+                      </Link>
+                    </div>
+                  </div>
+                </Card>
               </div>
-            </Card>
-          ))}
+            ))}
+          </div>
         </div>
       </Container>
     </section>
