@@ -1,11 +1,16 @@
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import Script from 'next/script';
 import './globals.css';
 import { Header } from '@/components/navigation/Header';
 import { Footer } from '@/components/navigation/Footer';
 import { ClientProviders } from '@/components/providers/ClientProviders';
 import { MakeMyTripBottomNav } from '@/components/navigation/MakeMyTripBottomNav';
-import { GlobalInquiryFloatingWidget } from '@/components/navigation/GlobalInquiryFloatingWidget';
+
+const GlobalInquiryFloatingWidget = dynamic(
+  () => import('@/components/navigation/GlobalInquiryFloatingWidget').then((mod) => mod.GlobalInquiryFloatingWidget),
+  { ssr: false }
+);
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.tripcustomizer.com'),
@@ -550,16 +555,17 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon.png" />
         <link rel="shortcut icon" href="/favicon.ico" />
-        {/* Preconnect for Instant Photo & Font Delivery */}
+        {/* Preconnect for Instant Photo Delivery */}
         <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchemas) }}
         />
-        <script
+        {/* PWA Service Worker Registration & Cache Management (Non-blocking) */}
+        <Script
+          id="pwa-service-worker-init"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               if (typeof window !== 'undefined') {
@@ -576,11 +582,8 @@ export default function RootLayout({
                     navigator.serviceWorker.register('/sw.js').then(
                       function(reg) {
                         reg.update();
-                        console.log('SW registered successfully:', reg.scope);
                       },
-                      function(err) {
-                        console.log('SW registration failed:', err);
-                      }
+                      function(err) {}
                     );
                   });
                 }

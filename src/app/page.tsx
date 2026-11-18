@@ -1,20 +1,23 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import { HeroSearch } from '@/components/homepage/HeroSearch';
 import { RecentSearches } from '@/components/homepage/RecentSearches';
 import { TrendingDestinations } from '@/components/homepage/TrendingDestinations';
 import { OffersSection } from '@/components/homepage/OffersSection';
-import { AppDownloadBanner } from '@/components/homepage/AppDownloadBanner';
-import { TourismBoardSection } from '@/components/homepage/TourismBoardSection';
-import { FlightPromotions } from '@/components/homepage/FlightPromotions';
-import { HotelStaysSection } from '@/components/homepage/HotelStaysSection';
-import { SpecialsSection } from '@/components/homepage/SpecialsSection';
-import { WhyChooseUs } from '@/components/homepage/WhyChooseUs';
-import { TrendingEditorialGuides } from '@/components/homepage/TrendingEditorialGuides';
-import { TravelInsights } from '@/components/homepage/TravelInsights';
-import { SEOTagDirectory } from '@/components/homepage/SEOTagDirectory';
-import { TestimonialsMetrics } from '@/components/homepage/TestimonialsMetrics';
-import { HomepageFAQ } from '@/components/homepage/HomepageFAQ';
+
+// Dynamically split below-the-fold homepage components to minimize initial JS bundle & accelerate LCP
+const AppDownloadBanner = dynamic(() => import('@/components/homepage/AppDownloadBanner').then((m) => m.AppDownloadBanner));
+const TourismBoardSection = dynamic(() => import('@/components/homepage/TourismBoardSection').then((m) => m.TourismBoardSection));
+const SpecialsSection = dynamic(() => import('@/components/homepage/SpecialsSection').then((m) => m.SpecialsSection));
+const FlightPromotions = dynamic(() => import('@/components/homepage/FlightPromotions').then((m) => m.FlightPromotions));
+const HotelStaysSection = dynamic(() => import('@/components/homepage/HotelStaysSection').then((m) => m.HotelStaysSection));
+const WhyChooseUs = dynamic(() => import('@/components/homepage/WhyChooseUs').then((m) => m.WhyChooseUs));
+const TrendingEditorialGuides = dynamic(() => import('@/components/homepage/TrendingEditorialGuides').then((m) => m.TrendingEditorialGuides));
+const TravelInsights = dynamic(() => import('@/components/homepage/TravelInsights').then((m) => m.TravelInsights));
+const TestimonialsMetrics = dynamic(() => import('@/components/homepage/TestimonialsMetrics').then((m) => m.TestimonialsMetrics));
+const HomepageFAQ = dynamic(() => import('@/components/homepage/HomepageFAQ').then((m) => m.HomepageFAQ));
+const SEOTagDirectory = dynamic(() => import('@/components/homepage/SEOTagDirectory').then((m) => m.SEOTagDirectory));
 
 export const metadata: Metadata = {
   title: {

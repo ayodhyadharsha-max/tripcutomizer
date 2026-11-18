@@ -4,25 +4,28 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Container } from '../ui/Container';
 import { ShieldCheck, Lock, Award, Heart, Mail, CheckCircle2, ArrowRight, ChevronDown } from 'lucide-react';
-
-import { cloudStore } from '@/lib/cloudStore';
 import { PopularKeywordsFooter } from './PopularKeywordsFooter';
 
 export const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
-      cloudStore.saveLead({
-        name: 'Newsletter Subscriber',
-        phone: '',
-        email: email,
-        destination: 'Newsletter Subscription',
-        status: 'New',
-        source: 'Footer Newsletter',
-      });
+      try {
+        const { cloudStore } = await import('@/lib/cloudStore');
+        cloudStore.saveLead({
+          name: 'Newsletter Subscriber',
+          phone: '',
+          email: email,
+          destination: 'Newsletter Subscription',
+          status: 'New',
+          source: 'Footer Newsletter',
+        });
+      } catch (err) {
+        console.error('Newsletter subscribe error:', err);
+      }
       setIsSubscribed(true);
       setEmail('');
       setTimeout(() => setIsSubscribed(false), 4000);

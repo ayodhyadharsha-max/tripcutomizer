@@ -1,10 +1,15 @@
 'use client';
 
 import React, { useEffect, Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import { NotificationProvider } from '@/components/notifications/NotificationToast';
 import { AuthProvider } from '@/context/AuthContext';
-import { CustomTripPopupModal } from '@/components/modals/CustomTripPopupModal';
 import { NavigationProgressBar } from '@/components/navigation/NavigationProgressBar';
+
+const CustomTripPopupModal = dynamic(
+  () => import('@/components/modals/CustomTripPopupModal').then((mod) => mod.CustomTripPopupModal),
+  { ssr: false }
+);
 
 export function ClientProviders({ children }: { children: React.ReactNode }) {
   useEffect(() => {

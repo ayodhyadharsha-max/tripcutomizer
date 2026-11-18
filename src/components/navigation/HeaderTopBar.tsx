@@ -2,11 +2,15 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { Phone, Mail, MapPin, User, ChevronDown, MessageCircle, HelpCircle, LogOut, ShoppingBag, LogIn, FileText } from 'lucide-react';
 import { Container } from '../ui/Container';
 import { useAuth } from '@/context/AuthContext';
-import { AuthModal } from '../modals/AuthModal';
+
+const AuthModal = dynamic(() => import('../modals/AuthModal').then((mod) => mod.AuthModal), {
+  ssr: false,
+});
 
 export const HeaderTopBar: React.FC = () => {
   const router = useRouter();
@@ -158,8 +162,8 @@ export const HeaderTopBar: React.FC = () => {
         </Container>
       </div>
 
-      {/* OTP Auth Modal */}
-      <AuthModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      {/* OTP Auth Modal (Loaded on-demand only when triggered) */}
+      {isModalOpen && <AuthModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />}
     </>
   );
 };

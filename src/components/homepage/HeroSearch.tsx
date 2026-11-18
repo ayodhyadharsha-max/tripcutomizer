@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight, Search } from 'lucide-react';
-import { getAllProgrammaticSlugs } from '@/data/programmaticPackages';
 
 interface HeroSlide {
   id: number;
@@ -103,7 +102,7 @@ export const HeroSearch: React.FC = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     const query = searchQuery.trim() || searchPlaceholders[placeholderIndex].replace(/Search "|"$/g, '');
     if (!query) return;
@@ -112,6 +111,7 @@ export const HeroSearch: React.FC = () => {
 
     // 1. Direct or partial programmatic package match
     try {
+      const { getAllProgrammaticSlugs } = await import('@/data/programmaticPackages');
       const progSlugs = getAllProgrammaticSlugs();
       const matchedProg = progSlugs.find(
         (s) => s === cleanSlug || s.includes(cleanSlug) || cleanSlug.includes(s)

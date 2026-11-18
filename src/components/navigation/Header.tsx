@@ -2,12 +2,14 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { HeaderTopBar } from './HeaderTopBar';
-import { MegaMenuHolidays } from './MegaMenuHolidays';
-import { MegaMenuMore } from './MegaMenuMore';
-import { MobileNav } from './MobileNav';
 import { Container } from '../ui/Container';
 import { Compass, Plane, Hotel, Sparkles, ChevronDown, Menu, Heart, MapPin } from 'lucide-react';
+
+const MegaMenuHolidays = dynamic(() => import('./MegaMenuHolidays').then((mod) => mod.MegaMenuHolidays), { ssr: false });
+const MegaMenuMore = dynamic(() => import('./MegaMenuMore').then((mod) => mod.MegaMenuMore), { ssr: false });
+const MobileNav = dynamic(() => import('./MobileNav').then((mod) => mod.MobileNav), { ssr: false });
 
 export const Header: React.FC = () => {
   const [activeMenu, setActiveMenu] = useState<'holidays' | 'more' | null>(null);
@@ -150,8 +152,8 @@ export const Header: React.FC = () => {
         </div>
       </Container>
 
-      {/* Mobile Drawer */}
-      <MobileNav isOpen={isMobileOpen} onClose={() => setIsMobileOpen(false)} />
+      {/* Mobile Drawer (Loaded on demand only when hamburger is clicked) */}
+      {isMobileOpen && <MobileNav isOpen={isMobileOpen} onClose={() => setIsMobileOpen(false)} />}
     </header>
   );
 };
