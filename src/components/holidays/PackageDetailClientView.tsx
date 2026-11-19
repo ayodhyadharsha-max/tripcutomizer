@@ -157,15 +157,15 @@ export function PackageDetailClientView({ params }: { params: { destination: str
   // Toast / Share State
   const [shareToast, setShareToast] = useState(false);
 
-  // Coupon / Promo Code State & Interactive Coupons Registry
+  // Coupon / Promo Code State & Capped Travel Promo Vouchers
   const [promoInput, setPromoInput] = useState('');
   const [appliedCoupon, setAppliedCoupon] = useState<{ code: string; percent?: number; amount?: number } | null>(null);
   const [couponError, setCouponError] = useState('');
 
-  const VALID_COUPONS: Record<string, { percent?: number; amount?: number; label: string }> = {
-    FESTIVE15: { percent: 15, label: '15% Festive Special Discount' },
-    EARLYBIRD: { amount: 2000, label: '₹2,000 Flat Early Bird Bonus' },
-    HOLIDAY5000: { amount: 5000, label: '₹5,000 Flat Mega Holiday Saver' },
+  const VALID_COUPONS: Record<string, { amount: number; minSpend: number; label: string }> = {
+    WELCOME1000: { amount: 1000, minSpend: 20000, label: '₹1,000 Flat Welcome Voucher' },
+    EARLYBIRD: { amount: 1500, minSpend: 35000, label: '₹1,500 Flat Early Bird Bonus' },
+    HOLIDAY2500: { amount: 2500, minSpend: 50000, label: '₹2,500 Flat Festive Saver' },
   };
 
   const handleApplyCoupon = (e?: React.FormEvent) => {
@@ -177,14 +177,17 @@ export function PackageDetailClientView({ params }: { params: { destination: str
     }
     const matched = VALID_COUPONS[cleanCode];
     if (matched) {
+      if (calculatedTotalPriceWithGst < matched.minSpend) {
+        setCouponError(`Code "${cleanCode}" requires minimum booking of ₹${matched.minSpend.toLocaleString('en-IN')}.`);
+        return;
+      }
       setAppliedCoupon({
         code: cleanCode,
-        percent: matched.percent,
         amount: matched.amount,
       });
       setCouponError('');
     } else {
-      setCouponError(`Invalid code "${cleanCode}". Try FESTIVE15 or EARLYBIRD.`);
+      setCouponError(`Invalid code "${cleanCode}". Try EARLYBIRD or HOLIDAY2500.`);
     }
   };
 
@@ -387,12 +390,24 @@ export function PackageDetailClientView({ params }: { params: { destination: str
   const totalChildrenCount = allChildren.length;
   const totalTravellersCount = totalAdults + totalChildrenCount;
 
-  // Pricing calculations based on tier & detailed child ages
-  const tierMultiplier = tourTier === 'standard' ? 0.9 : tourTier === 'deluxe' ? 1.0 : 1.25;
+  // Pricing calculations based on tier, PAX group sharing & detailed child ages
+  // 1 Adult (Solo): Solo supplement for private room + dedicated private vehicle (+40%)
+  // 2 Adults (Couple): Twin sharing couple rate (+20% covers private cab, romantic setup, room)
+  // 3 Adults: Triple sharing (+10%)
+  // 4 Adults: 2 Couples / Family sharing (+5%)
+  // 5-6+ Adults: Full group rate unlocks lowest teaser starting price (1.0x)
+  const paxMultiplier =
+    effectiveAdultsCount === 1 ? 1.40 :
+    effectiveAdultsCount === 2 ? 1.20 :
+    effectiveAdultsCount === 3 ? 1.10 :
+    effectiveAdultsCount === 4 ? 1.05 :
+    1.00;
+
+  const tierMultiplier = tourTier === 'standard' ? 0.92 : tourTier === 'deluxe' ? 1.0 : 1.25;
   const dealBase = Math.min(pkg.startingPrice, pkg.discountPrice || pkg.startingPrice);
   const mrpBase = Math.max(pkg.startingPrice, pkg.discountPrice || Math.round(dealBase * 1.25));
-  const basePricePerPerson = Math.round(dealBase * tierMultiplier);
-  const originalPricePerPerson = Math.round(mrpBase * tierMultiplier);
+  const basePricePerPerson = Math.round(dealBase * paxMultiplier * tierMultiplier);
+  const originalPricePerPerson = Math.round(mrpBase * paxMultiplier * tierMultiplier);
   const discountPercent = Math.max(5, Math.round(((originalPricePerPerson - basePricePerPerson) / originalPricePerPerson) * 100));
 
   // Dynamic Total Calculation
@@ -408,12 +423,8 @@ export function PackageDetailClientView({ params }: { params: { destination: str
   const calculatedTotalPriceWithGst = subtotalBeforeGst + gstAmount;
 
   let couponDiscountAmount = 0;
-  if (appliedCoupon) {
-    if (appliedCoupon.percent) {
-      couponDiscountAmount = Math.round((calculatedTotalPriceWithGst * appliedCoupon.percent) / 100);
-    } else if (appliedCoupon.amount) {
-      couponDiscountAmount = Math.min(calculatedTotalPriceWithGst, appliedCoupon.amount);
-    }
+  if (appliedCoupon && appliedCoupon.amount) {
+    couponDiscountAmount = Math.min(calculatedTotalPriceWithGst, appliedCoupon.amount);
   }
   const finalPayablePrice = Math.max(0, calculatedTotalPriceWithGst - couponDiscountAmount);
 
@@ -1285,7 +1296,9 @@ export function PackageDetailClientView({ params }: { params: { destination: str
                   <span className="text-3xl font-black text-brand-700">{formatCurrency(basePricePerPerson)}</span>
                   <span className="text-xs text-slate-500 font-semibold">/ adult</span>
                 </div>
-                <span className="text-[10px] text-slate-400 block font-medium">Starting price per adult</span>
+                <span className="text-[10px] text-slate-500 block font-medium">
+                  {effectiveAdultsCount === 1 ? 'Solo Traveler Rate (Private Room & Cab Included)' : effectiveAdultsCount === 2 ? 'Twin Sharing Couple Rate (Per Adult)' : 'Group Saver Rate (Per Adult)'}
+                </span>
               </div>
 
               {/* Interactive Coupon / Promo Code Input Card */}
@@ -1346,17 +1359,17 @@ export function PackageDetailClientView({ params }: { params: { destination: str
                     <span className="text-[10px] text-slate-500 font-semibold block w-full">Available Codes:</span>
                     <button
                       type="button"
-                      onClick={() => { setPromoInput('FESTIVE15'); setAppliedCoupon({ code: 'FESTIVE15', percent: 15 }); setCouponError(''); }}
+                      onClick={() => { setPromoInput('EARLYBIRD'); setAppliedCoupon({ code: 'EARLYBIRD', amount: 1500 }); setCouponError(''); }}
                       className="text-[10px] bg-white border border-amber-300 text-amber-900 font-bold px-2 py-0.5 rounded-md hover:bg-amber-100 cursor-pointer"
                     >
-                      FESTIVE15 (-15%)
+                      EARLYBIRD (-₹1,500)
                     </button>
                     <button
                       type="button"
-                      onClick={() => { setPromoInput('EARLYBIRD'); setAppliedCoupon({ code: 'EARLYBIRD', amount: 2000 }); setCouponError(''); }}
+                      onClick={() => { setPromoInput('HOLIDAY2500'); setAppliedCoupon({ code: 'HOLIDAY2500', amount: 2500 }); setCouponError(''); }}
                       className="text-[10px] bg-white border border-amber-300 text-amber-900 font-bold px-2 py-0.5 rounded-md hover:bg-amber-100 cursor-pointer"
                     >
-                      EARLYBIRD (-₹2000)
+                      HOLIDAY2500 (-₹2,500)
                     </button>
                   </div>
                 )}
@@ -2000,7 +2013,9 @@ export function PackageDetailClientView({ params }: { params: { destination: str
                     <div className="flex items-baseline space-x-1">
                       <span className="text-3xl font-black text-slate-900">{formatCurrency(basePricePerPerson)}</span>
                     </div>
-                    <span className="text-xs text-slate-500 font-semibold block mt-0.5">Starting price per adult</span>
+                    <span className="text-xs text-slate-500 font-semibold block mt-0.5">
+                      {effectiveAdultsCount === 1 ? 'Solo Traveler Rate (Private Room & Cab Included)' : effectiveAdultsCount === 2 ? 'Twin Sharing Couple Rate (Per Adult)' : 'Group Saver Rate (Per Adult)'}
+                    </span>
                   </div>
 
                   {/* Reward Points */}

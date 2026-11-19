@@ -68,15 +68,22 @@ export default function BookingCheckoutPage() {
       }
 
       const tierParam = params.get('tier') || 'deluxe';
-      const tierMultiplier = tierParam === 'standard' ? 0.9 : tierParam === 'super_deluxe' ? 1.25 : 1.0;
+      const tierMultiplier = tierParam === 'standard' ? 0.92 : tierParam === 'super_deluxe' || tierParam === 'luxury' ? 1.25 : 1.0;
+      const travelersCount = paxStr ? Math.max(1, parseInt(paxStr, 10)) : 2;
+      const paxMultiplier =
+        travelersCount === 1 ? 1.40 :
+        travelersCount === 2 ? 1.20 :
+        travelersCount === 3 ? 1.10 :
+        travelersCount === 4 ? 1.05 :
+        1.00;
 
       if (matched) {
         setPkgInfo({
           name: matched.name,
           destination: matched.destination,
           duration: `${matched.durationDays} Days / ${matched.durationNights} Nights`,
-          pricePerPerson: Math.round(matched.startingPrice * tierMultiplier),
-          travelersCount: paxStr ? Math.max(1, parseInt(paxStr, 10)) : 2,
+          pricePerPerson: Math.round(matched.startingPrice * paxMultiplier * tierMultiplier),
+          travelersCount: travelersCount,
         });
         setHasBookingContext(true);
       } else if (title || priceStr) {
@@ -85,7 +92,7 @@ export default function BookingCheckoutPage() {
           destination: dest || 'India',
           duration: '5 Days / 4 Nights',
           pricePerPerson: priceStr ? parseInt(priceStr, 10) : 14500,
-          travelersCount: paxStr ? Math.max(1, parseInt(paxStr, 10)) : 2,
+          travelersCount: travelersCount,
         });
         setHasBookingContext(true);
       } else {
