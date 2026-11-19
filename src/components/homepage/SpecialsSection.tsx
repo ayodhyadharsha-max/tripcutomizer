@@ -20,28 +20,28 @@ const topDestinationSlides: SpecialSlide[] = [
   {
     title: 'Your Spiritual Journey Starts Here',
     subtitle: 'Explore divine destinations in India',
-    price: 'Starting at ₹ 13,400.00',
+    price: 'Starting at ₹ 35,800.00',
     href: '/char-dham',
     image: 'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=800&auto=format&fit=crop',
   },
   {
     title: 'Australia',
     subtitle: 'Wonder Without Limits',
-    price: 'Starting at ₹ 59,800.00',
+    price: 'Starting at ₹ 1,85,000.00',
     href: '/holidays/australia',
     image: 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?q=80&w=800&auto=format&fit=crop',
   },
   {
     title: 'Char Dham Yatra',
     subtitle: 'Serenity Among the Sacred Mountains',
-    price: 'Starting at ₹ 50,500.00',
+    price: 'Starting at ₹ 35,800.00',
     href: '/char-dham',
     image: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=800&auto=format&fit=crop',
   },
   {
     title: 'Vietnam',
     subtitle: 'Where Culture Breathes Landscape',
-    price: 'Starting at ₹ 35,500.00',
+    price: 'Starting at ₹ 27,000.00',
     href: '/holidays/vietnam',
     image: 'https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=800&auto=format&fit=crop',
   },
@@ -336,7 +336,7 @@ export const SpecialsSection: React.FC = () => {
                 </h3>
                 <p className="text-xs text-slate-300">Explore divine destinations in India</p>
                 <div className="flex items-center justify-between pt-1">
-                  <span className="text-xs font-bold text-amber-300">Starting at ₹ 13,400.00</span>
+                  <span className="text-xs font-bold text-amber-300">Starting at ₹ 35,800.00</span>
                   <span className="inline-flex items-center space-x-1 bg-white text-slate-900 font-bold text-xs px-3.5 py-1.5 rounded-full group-hover:bg-amber-400 transition-colors">
                     <span>View More</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
@@ -365,7 +365,7 @@ export const SpecialsSection: React.FC = () => {
                 </h3>
                 <p className="text-xs text-slate-300">Wonder Without Limits</p>
                 <div className="flex items-center justify-between pt-1">
-                  <span className="text-xs font-bold text-amber-300">Starting at ₹ 59,800.00</span>
+                  <span className="text-xs font-bold text-amber-300">Starting at ₹ 1,85,000.00</span>
                   <span className="inline-flex items-center space-x-1 bg-white text-slate-900 font-bold text-xs px-3.5 py-1.5 rounded-full group-hover:bg-amber-400 transition-colors">
                     <span>View More</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
@@ -394,7 +394,7 @@ export const SpecialsSection: React.FC = () => {
                 </h3>
                 <p className="text-xs text-slate-300">Serenity Among the Sacred Mountains</p>
                 <div className="flex items-center justify-between pt-1">
-                  <span className="text-xs font-bold text-amber-300">Starting at ₹ 50,500.00</span>
+                  <span className="text-xs font-bold text-amber-300">Starting at ₹ 35,800.00</span>
                   <span className="inline-flex items-center space-x-1 bg-white text-slate-900 font-bold text-xs px-3.5 py-1.5 rounded-full group-hover:bg-amber-400 transition-colors">
                     <span>View More</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
@@ -559,7 +559,7 @@ export const SpecialsSection: React.FC = () => {
                 </h3>
                 <p className="text-xs text-slate-300">Where Culture Breathes Landscape</p>
                 <div className="flex items-center justify-between pt-1">
-                  <span className="text-xs font-bold text-amber-300">Starting at ₹ 35,500.00</span>
+                  <span className="text-xs font-bold text-amber-300">Starting at ₹ 27,000.00</span>
                   <span className="inline-flex items-center space-x-1 bg-white text-slate-900 font-bold text-xs px-4 py-2 rounded-full group-hover:bg-teal-400 transition-colors">
                     <span>View More</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />

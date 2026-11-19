@@ -126,7 +126,7 @@ export function tripcustomizerHolidayView() {
     ],
     Asia: [
       { title: 'Singapore', price: 37800, image: '/destinations/singapore.jpg', slug: 'singapore' },
-      { title: 'Bali & Indonesia', price: 42500, image: '/destinations/bali.jpg', slug: 'bali' },
+      { title: 'Bali & Indonesia', price: 28500, image: '/destinations/bali.jpg', slug: 'bali' },
       { title: 'Japan & Cherry Blossom', price: 125000, image: '/destinations/japan.jpg', slug: 'japan' },
     ],
     Oceania: [
@@ -139,40 +139,40 @@ export function tripcustomizerHolidayView() {
     ],
     Africa: [
       { title: 'South Africa Safari', price: 115000, image: '/destinations/south-africa.jpg', slug: 'south-africa' },
-      { title: 'Egypt Pyramids & Nile', price: 88000, image: '/destinations/egypt.jpg', slug: 'egypt' },
+      { title: 'Egypt Pyramids & Nile', price: 49000, image: '/destinations/egypt.jpg', slug: 'egypt' },
     ],
     America: [
       { title: 'USA East Coast & West Coast', price: 245000, image: '/destinations/usa.jpg', slug: 'usa' },
     ],
   };
 
-  // India & Around Region Cards
+  // India & Around Region Cards (Matched 100% to live verified package starting prices)
   const indiaRegionCards: Record<string, { title: string; price: number; image: string; slug: string }[]> = {
     North: [
-      { title: 'Kashmir', price: 16300, image: '/destinations/kashmir.jpg', slug: 'kashmir' },
-      { title: 'Himachal Pradesh', price: 15200, image: '/destinations/himachal.jpg', slug: 'himachal' },
-      { title: 'Uttarakhand', price: 12100, image: '/destinations/uttarakhand.jpg', slug: 'uttarakhand' },
-      { title: 'Uttar Pradesh (Kashi)', price: 14300, image: '/destinations/up.jpg', slug: 'ayodhya-varanasi' },
+      { title: 'Kashmir', price: 38700, image: '/destinations/kashmir.jpg', slug: 'kashmir' },
+      { title: 'Himachal Pradesh', price: 34200, image: '/destinations/himachal.jpg', slug: 'himachal' },
+      { title: 'Uttarakhand', price: 15600, image: '/destinations/uttarakhand.jpg', slug: 'uttarakhand' },
+      { title: 'Uttar Pradesh (Kashi)', price: 19900, image: '/destinations/up.jpg', slug: 'ayodhya-varanasi' },
     ],
     South: [
-      { title: 'Kerala Backwaters', price: 14500, image: '/destinations/kerala.jpg', slug: 'kerala' },
-      { title: 'Coorg & Wayanad', price: 13200, image: '/destinations/coorg.jpg', slug: 'coorg' },
-      { title: 'Tamil Nadu Temples', price: 15800, image: '/destinations/tamilnadu.jpg', slug: 'rameshwaram' },
+      { title: 'Kerala Backwaters', price: 34500, image: '/destinations/kerala.jpg', slug: 'kerala' },
+      { title: 'Coorg & Wayanad', price: 22300, image: '/destinations/coorg.jpg', slug: 'coorg' },
+      { title: 'Tamil Nadu Temples', price: 19900, image: '/destinations/tamilnadu.jpg', slug: 'rameshwaram' },
     ],
     East: [
-      { title: 'Sikkim & Darjeeling', price: 18500, image: '/destinations/sikkim.jpg', slug: 'sikkim' },
-      { title: 'Meghalaya Scotland of East', price: 17200, image: '/destinations/meghalaya.jpg', slug: 'meghalaya' },
-      { title: 'Puri Jagannath Odisha', price: 12900, image: '/destinations/puri.jpg', slug: 'puri' },
+      { title: 'Sikkim & Darjeeling', price: 32600, image: '/destinations/sikkim.jpg', slug: 'sikkim' },
+      { title: 'Meghalaya Scotland of East', price: 27500, image: '/destinations/meghalaya.jpg', slug: 'meghalaya' },
+      { title: 'Puri Jagannath Odisha', price: 18200, image: '/destinations/puri.jpg', slug: 'puri' },
     ],
     West: [
-      { title: 'Rajasthan Forts & Palaces', price: 19000, image: '/destinations/rajasthan.jpg', slug: 'rajasthan' },
-      { title: 'Goa Beaches & Watersports', price: 11500, image: '/destinations/goa.jpg', slug: 'goa' },
-      { title: 'Gujarat Rann of Kutch', price: 16800, image: '/destinations/gujarat.jpg', slug: 'kutch' },
+      { title: 'Rajasthan Forts & Palaces', price: 27500, image: '/destinations/rajasthan.jpg', slug: 'rajasthan' },
+      { title: 'Goa Beaches & Watersports', price: 22300, image: '/destinations/goa.jpg', slug: 'goa' },
+      { title: 'Gujarat Rann of Kutch', price: 23500, image: '/destinations/gujarat.jpg', slug: 'kutch' },
     ],
     Around: [
       { title: 'Bhutan Dragon Kingdom', price: 48000, image: '/destinations/bhutan.jpg', slug: 'bhutan' },
-      { title: 'Nepal Kathmandu & Pokhara', price: 24500, image: '/destinations/nepal.jpg', slug: 'nepal' },
-      { title: 'Sri Lanka Coastal Paradise', price: 32000, image: '/destinations/sri-lanka.jpg', slug: 'sri-lanka' },
+      { title: 'Nepal Kathmandu & Pokhara', price: 15000, image: '/destinations/nepal.jpg', slug: 'nepal' },
+      { title: 'Sri Lanka Coastal Paradise', price: 29000, image: '/destinations/sri-lanka.jpg', slug: 'sri-lanka' },
     ],
   };
 
@@ -188,7 +188,7 @@ export function tripcustomizerHolidayView() {
     {
       title: 'Rajasthan',
       subtitle: 'Grandeur, Reimagined.',
-      price: 19000,
+      price: 27500,
       image: '/destinations/rajasthan.jpg',
       slug: 'rajasthan',
     },
