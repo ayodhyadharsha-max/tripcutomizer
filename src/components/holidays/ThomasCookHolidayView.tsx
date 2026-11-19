@@ -44,11 +44,12 @@ import {
 function SearchTabSync({ onQueryFound }: { onQueryFound: () => void }) {
   const searchParams = useSearchParams();
   const q = searchParams ? searchParams.get('q') || '' : '';
+  const view = searchParams ? searchParams.get('view') || searchParams.get('all') || searchParams.get('filter') || '' : '';
   useEffect(() => {
-    if (q) {
+    if (q || view === 'all' || view === 'true') {
       onQueryFound();
     }
-  }, [q, onQueryFound]);
+  }, [q, view, onQueryFound]);
   return null;
 }
 
