@@ -687,6 +687,162 @@ function computeB2BPackagePricing(
   return { startingPrice, discountPrice };
 }
 
+const DESTINATION_ITINERARY_FLOWS: Record<string, { title: string; desc: string; acts: string[] }[]> = {
+  kashmir: [
+    { title: "Arrival in Srinagar & Dal Lake Shikara Ride", desc: "Arrive at Srinagar Airport. Meet our chauffeur and transfer to your luxury Dal Lake Houseboat. In the evening, enjoy a romantic Shikara ride through floating gardens and Char Chinar.", acts: ["Airport Pickup", "Dal Lake Shikara Ride", "Houseboat Check-in"] },
+    { title: "Srinagar to Gulmarg Meadow of Flowers & Gondola Cable Car", desc: "Drive to Gulmarg (50 km). Ascend Apharwat Peak on the world-famous Gulmarg Gondola Cable Car (Phase 1 & 2). Marvel at snow-clad Himalayan peaks, explore the golf course and historic St. Mary Church.", acts: ["Gulmarg Gondola Ride", "Snow Activities at Apharwat Peak", "Golf Course View"] },
+    { title: "Gulmarg to Pahalgam Valley of Shepherds via Saffron Fields", desc: "Journey to scenic Pahalgam (140 km). Enroute witness Pampore saffron fields and Awantipora temple ruins. Check in at your riverside hotel with views of the rushing Lidder River.", acts: ["Pampore Saffron Farms", "Awantipora Ruins", "Riverside Leisure"] },
+    { title: "Pahalgam Exploration: Betaab Valley, Aru Valley & Chandanwari", desc: "Embark on an excursion to breathtaking Betaab Valley, scenic Aru Valley, and Chandanwari snow point. Capture stunning photography and enjoy a serene walk along pine forests.", acts: ["Betaab Valley Sightseeing", "Aru Valley Exploration", "Lidder River Walk"] },
+    { title: "Pahalgam to Sonamarg Meadow of Gold & Thajiwas Glacier", desc: "Day trip to Sonamarg flanked by soaring Himalayan glaciers. Visit Thajiwas Glacier by pony or foot, explore the Sindh river valley, and return to Srinagar for hotel stay.", acts: ["Thajiwas Glacier Trek", "Sindh River View", "Srinagar Hotel Check-in"] },
+    { title: "Mughal Gardens Heritage Tour & Srinagar Airport Departure Drop", desc: "Visit Shalimar Bagh, Nishat Bagh, and the sacred Shankaracharya Hill Temple. Pick up authentic Kashmiri saffron and dry fruits at Lal Chowk before your transfer to Srinagar Airport.", acts: ["Shalimar & Nishat Bagh", "Shankaracharya Temple", "Airport Drop"] }
+  ],
+  kerala: [
+    { title: "Arrival in Kochi & Scenic Drive to Munnar Tea Country", desc: "Arrive at Kochi Airport. Board your private cab for the scenic drive to Munnar. Enroute, witness the cascading Cheeyappara and Valara waterfalls amidst lush spice plantations.", acts: ["Airport Pickup", "Cheeyappara Waterfalls", "Munnar Resort Check-in"] },
+    { title: "Munnar Tea Gardens, Eravikulam National Park & Mattupetty Dam", desc: "Visit Eravikulam National Park to spot the rare Nilgiri Tahr. Explore Mattupetty Dam, Echo Point, Kundala Lake, and the Tata Tea Museum with tea tasting session.", acts: ["Eravikulam Tahr Spotting", "Mattupetty Dam Boating", "Tea Museum Tour"] },
+    { title: "Munnar to Thekkady Spice Plantations & Periyar Boat Safari", desc: "Scenic mountain drive to Thekkady. Tour organic cardamom, cinnamon, and pepper spice plantations. In the afternoon, enjoy a boat safari on Periyar Lake inside the tiger reserve.", acts: ["Spice Plantation Tour", "Periyar Boat Safari", "Kathakali Cultural Show"] },
+    { title: "Thekkady to Alleppey: Private Backwater Houseboat Cruise", desc: "Drive to Alleppey backwaters. Board your private AC Houseboat. Cruise through palm-fringed canals, Vembanad Lake, and paddy fields while enjoying fresh traditional Kerala meals.", acts: ["Houseboat Check-in", "Backwater Cruise", "Traditional Kerala Meals"] },
+    { title: "Alleppey to Kovalam Beach Promenade & Lighthouse Sunset", desc: "Disembark from the houseboat and drive to Kovalam. Check in at your beach resort. Spend a relaxing afternoon at Lighthouse Beach and Hawa Beach watching the Arabian Sea sunset.", acts: ["Kovalam Beach Promenade", "Lighthouse Sunset View", "Seafood Tasting"] },
+    { title: "Kochi Fort Heritage Walk, Chinese Fishing Nets & Airport Drop", desc: "Transfer to Kochi. Visit historic Fort Kochi, St. Francis Church, Dutch Palace, and witness the iconic Chinese Fishing Nets in action before your return airport transfer.", acts: ["Fort Kochi Heritage", "Chinese Fishing Nets", "Airport Departure"] }
+  ],
+  himachal: [
+    { title: "Arrival in Shimla & Evening Leisure on The Ridge & Mall Road", desc: "Arrive at Chandigarh / Kalka and drive to Shimla queen of hills. Check in at your hotel. In the evening, stroll along the pedestrian-only Mall Road, Scandal Point, and Christ Church.", acts: ["Scenic Hill Drive", "Mall Road Promenade", "Christ Church Visit"] },
+    { title: "Kufri Snow Viewpoint, Green Valley & Jakhoo Temple", desc: "Full day excursion to Kufri. Enjoy panoramic Himalayan snow peak views from Mahasu Peak, visit Himalayan Nature Park, and take blessings at the hilltop Jakhoo Hanuman Temple.", acts: ["Kufri Snow Excursion", "Green Valley Photography", "Jakhoo Ropeway"] },
+    { title: "Scenic Mountain Drive from Shimla to Manali via Kullu Valley", desc: "Picturesque journey to Manali. Enroute visit Pandoh Dam, Hanogi Mata Temple, and a traditional Kullu Shawl weaving factory. Check in at your riverside Manali resort.", acts: ["Kullu Valley Drive", "Pandoh Dam Stopover", "Manali Check-in"] },
+    { title: "Solang Valley Adventure & Atal Tunnel Snow Expedition", desc: "Excursion to Solang Valley for paragliding and zorbing. Drive through the historic engineering marvel Atal Tunnel into Sissu Lahaul Valley for pristine snow photography.", acts: ["Solang Valley Adventure", "Atal Tunnel Drive", "Sissu Waterfall View"] },
+    { title: "Manali Local Heritage: Hadimba Temple, Vashisht & Old Manali", desc: "Visit the 500-year-old wooden Hadimba Devi Temple amidst giant deodars, Club House, Tibetan Monastery, and the natural sulphur hot springs of Vashisht Village.", acts: ["Hadimba Temple Darshan", "Vashisht Hot Springs", "Old Manali Cafes"] },
+    { title: "Breakfast, Souvenir Shopping on Mall Road & Departure Drop", desc: "Enjoy a hearty breakfast. Complete hotel check-out. Pick up fresh Himachal apples, jams, and warm woollens from Mall Road before your chauffeur drops you at the departure terminal.", acts: ["Mall Road Shopping", "Hotel Check-out", "Airport / Station Drop"] }
+  ],
+  rajasthan: [
+    { title: "Arrival in Jaipur Pink City & Chokhi Dhani Cultural Evening", desc: "Arrive at Jaipur Airport/Station. Check in at your heritage hotel. In the evening, visit Birla Mandir and experience authentic Rajasthani village culture and cuisine at Chokhi Dhani.", acts: ["Airport Pickup", "Birla Mandir Visit", "Chokhi Dhani Cultural Show"] },
+    { title: "Jaipur Forts & Palaces: Amber Fort, Hawa Mahal & City Palace", desc: "Ascend the majestic Amber Fort by jeep. Stop at Jal Mahal for photographs. Tour the City Palace museum, Maharaja observatory at Jantar Mantar, and the iconic facade of Hawa Mahal.", acts: ["Amber Fort Jeep Ride", "Hawa Mahal Photography", "City Palace Museum"] },
+    { title: "Jaipur to Jodhpur Blue City via Ajmer Sharif & Pushkar", desc: "Drive to Jodhpur. Enroute pay respects at Ajmer Dargah Sharif and the sacred Brahma Temple & Holy Lake in Pushkar. Check in at your Jodhpur heritage property.", acts: ["Ajmer Dargah Ziyarat", "Pushkar Lake Darshan", "Jodhpur Check-in"] },
+    { title: "Mehrangarh Fort Grandeur & Drive to Jaisalmer Golden Sand Dunes", desc: "Tour the imposing Mehrangarh Fort towering above the blue city, and Jaswant Thada marble cenotaphs. Drive into the Thar Desert to Jaisalmer Sam Sand Dunes luxury Swiss camps.", acts: ["Mehrangarh Fort Tour", "Jaswant Thada Cenotaphs", "Desert Camp Check-in"] },
+    { title: "Jaisalmer Fort (Sonar Qila), Patwon Ki Haveli & Camel Sunset Safari", desc: "Explore the living golden fortress of Jaisalmer, Jain Temples, and intricate carvings of Patwon Ki Haveli. In the evening, enjoy a thrilling camel safari and Rajasthani folk dance.", acts: ["Sonar Qila Walking Tour", "Patwon Haveli Carvings", "Camel Dunes Safari"] },
+    { title: "Drive to Udaipur City of Lakes, Lake Pichola Boat Ride & Departure", desc: "Scenic drive to romantic Udaipur. Visit the grand City Palace complex, Saheliyon Ki Bari fountain gardens, and enjoy an enchanting boat ride on Lake Pichola past Jag Mandir before departure drop.", acts: ["Udaipur City Palace", "Lake Pichola Boat Cruise", "Airport Drop"] }
+  ],
+  goa: [
+    { title: "Arrival in Goa, Coastal Resort Check-in & Beach Sunset Leisure", desc: "Arrive at Goa Airport. Private AC transfer to your beach resort. Spend a relaxing evening watching the sunset at Calangute Beach or enjoying beach shack dining with fresh seafood.", acts: ["Airport Meet & Greet", "Resort Welcome", "Sunset Beach Leisure"] },
+    { title: "North Goa Forts & Beaches: Fort Aguada, Baga & Water Sports", desc: "Visit 17th-century Portuguese Fort Aguada with panoramic views of the Arabian Sea. Head to Baga and Anjuna beach for optional parasailing, jet ski, and bumper rides.", acts: ["Fort Aguada Lighthouse", "Baga Beach Promenade", "Water Sports Activities"] },
+    { title: "South Goa Heritage: Old Goa Churches, Mangueshi & Miramar Beach", desc: "Tour UNESCO World Heritage churches in Old Goa including Basilica of Bom Jesus and Se Cathedral. Visit Mangueshi Temple and Dona Paula viewpoint.", acts: ["Bom Jesus Basilica", "Se Cathedral Tour", "Dona Paula Viewpoint"] },
+    { title: "Dudhsagar Waterfalls Jeep Safari & Mandovi River Luxury Cruise", desc: "Thrilling morning 4x4 Jeep Safari through Bhagwan Mahavir Wildlife Sanctuary to the majestic Dudhsagar Waterfalls. In the evening, enjoy a 1-hour Mandovi River sunset cruise with Goan folk music.", acts: ["Dudhsagar Jeep Safari", "Jungle Stream Snorkeling", "Mandovi Sunset Cruise"] },
+    { title: "Breakfast, Souvenir Shopping in Panaji Latin Quarter & Airport Drop", desc: "Enjoy breakfast at the resort. Take a stroll through Fontainhas (Panaji colourful Latin Quarter) to shop for Goan feni, cashews, and handicrafts before your private transfer to the airport.", acts: ["Fontainhas Heritage Walk", "Cashew & Souvenir Shopping", "Airport Departure"] }
+  ],
+  uttarakhand: [
+    { title: "Arrival in Haridwar / Dehradun & Evening Ganga Aarti", desc: "Arrive at Dehradun Airport or Haridwar Railway Station. Private transfer to your hotel. In the evening, witness the divine Ganga Aarti at Har Ki Pauri with thousands of floating earthen lamps.", acts: ["Station / Airport Pickup", "Hotel Check-in", "Har Ki Pauri Ganga Aarti"] },
+    { title: "Rishikesh White Water Rafting, Ram Jhula & Beatles Ashram", desc: "Drive to Rishikesh adventure capital. Experience thrilling grade-III white water rafting from Shivpuri to Rishikesh. Walk across suspension bridges Ram Jhula and Laxman Jhula, and visit the historic Beatles Ashram.", acts: ["White Water Rafting", "Ram Jhula Walk", "Beatles Ashram Tour"] },
+    { title: "Scenic Drive to Mussoorie Queen of Hills via Kempty Falls", desc: "Drive up the winding hills to Mussoorie. Stop at cascading Kempty Falls. Check in at your hill resort. Spend the evening strolling along Camel Back Road and Mall Road.", acts: ["Kempty Falls Excursion", "Mall Road Promenade", "Camel Back Road Sunset"] },
+    { title: "Mussoorie to Nainital Lake District via Corbett Foothills", desc: "Scenic mountain journey to charming Nainital. Check in at your lakeview hotel. Enjoy a serene evening pedal boat ride on emerald Naini Lake and visit sacred Naina Devi Temple.", acts: ["Naini Lake Boating", "Naina Devi Temple Darshan", "Tibetan Market Shopping"] },
+    { title: "Nainital Lake Tour: Bhimtal, Naukuchiatal & Snow View Point", desc: "Explore the surrounding lake district: Bhimtal with its island aquarium, Naukuchiatal nine-cornered lake, and take the aerial ropeway cable car up to Snow View Point for Himalayan vistas.", acts: ["Bhimtal Island Tour", "Naukuchiatal Exploration", "Aerial Ropeway View"] },
+    { title: "Jim Corbett Safari Morning Slot & Delhi / Dehradun Departure Drop", desc: "Morning open Jeep Safari into Jim Corbett National Park to spot wild elephants, deer, and the elusive Royal Bengal Tiger. Breakfast at resort followed by private departure transfer.", acts: ["Corbett Jeep Safari", "Wildlife Photography", "Departure Airport Drop"] }
+  ],
+  andaman: [
+    { title: "Arrival in Port Blair, Cellular Jail & Light and Sound Show", desc: "Arrive at Veer Savarkar Airport Port Blair. Transfer to your hotel. Visit Cellular Jail National Memorial to witness the poignant Sound & Light Show recounting India freedom struggle.", acts: ["Airport Pickup", "Cellular Jail Visit", "Sound & Light Show"] },
+    { title: "Private Cruise Ferry (Makruzz) to Havelock Island & Radhanagar Sunset", desc: "Board high-speed luxury catamaran ferry Makruzz to Havelock Island. Check in at your beachfront resort. In the afternoon, visit Radhanagar Beach (Beach No. 7) for a mesmerizing sunset.", acts: ["Makruzz Catamaran Cruise", "Havelock Resort Check-in", "Radhanagar Beach Sunset"] },
+    { title: "Elephant Beach Coral Reef Expedition & Marine Water Sports", desc: "Speedboat ride to Elephant Beach renowned for vibrant coral reefs. Enjoy included snorkeling session and optional scuba diving, sea walking, or glass-bottom boat rides.", acts: ["Elephant Beach Speedboat", "Snorkeling Coral Session", "Marine Watersports"] },
+    { title: "Inter-Island Ferry to Neil Island: Bharatpur & Natural Rock Bridge", desc: "Cruise to tranquil Neil Island. Explore the white sands of Bharatpur Beach, visit the geological marvel Natural Living Coral Bridge, and witness the golden sunset at Laxmanpur Beach.", acts: ["Neil Island Cruise", "Natural Bridge Photography", "Laxmanpur Sunset"] },
+    { title: "Neil Island to Port Blair Return & Chidiya Tapu Sunset", desc: "Morning return ferry to Port Blair. Afternoon excursion to Chidiya Tapu (Bird Island), known for lush mangrove forests and the finest sunset panorama in south Andaman.", acts: ["Return Ferry to PB", "Chidiya Tapu Excursion", "Sagarika Emporium Shopping"] },
+    { title: "Breakfast, Souvenir Keepsakes & Airport Departure Drop", desc: "Enjoy your last island breakfast. Complete check-out. Pick up authentic shell handicrafts and pearls before your private chauffeur transfers you to Port Blair Airport for your onward flight.", acts: ["Hotel Check-out", "Pearl Souvenir Shopping", "Airport Departure Drop"] }
+  ],
+  ladakh: [
+    { title: "Arrival in Leh Airport, Acclimatization & Shanti Stupa Sunset", desc: "Fly into Leh Airport (3,500m). Transfer to your hotel. Complete rest for acclimatization. In the evening, visit Shanti Stupa for panoramic 360-degree views of Leh town and Leh Palace.", acts: ["Airport Meet & Greet", "Complete Acclimatization Rest", "Shanti Stupa Sunset"] },
+    { title: "Sham Valley Tour: Hall of Fame, Magnetic Hill & Indus-Zanskar Sangam", desc: "Scenic drive along Indus Highway. Visit Kargil war memorial Hall of Fame, gravity-defying Magnetic Hill, sacred Gurudwara Pathar Sahib, and the dramatic confluence of Indus and Zanskar rivers.", acts: ["Hall of Fame Museum", "Magnetic Hill Experience", "Sangam Confluence View"] },
+    { title: "Leh to Nubra Valley via Khardung La Pass (Highest Motorroad)", desc: "Cross legendary Khardung La Pass (18,380 ft). Descend into the picturesque Nubra Valley. Check in at deluxe Swiss camps in Hunder. Ride double-humped Bactrian camels across white sand dunes.", acts: ["Khardung La Pass Crossing", "Hunder Sand Dunes Walk", "Bactrian Camel Safari"] },
+    { title: "Nubra Valley Diskit Monastery to Pangong Tso Lake via Shyok River", desc: "Visit the 106-foot Maitreya Buddha statue at Diskit Monastery. Scenic drive along Shyok River to world-famous Pangong Tso Lake (14,270 ft). Marvel at shifting turquoise and azure shades at sunset.", acts: ["Diskit Monastery Statue", "Shyok River Route", "Pangong Tso Sunset View"] },
+    { title: "Pangong Lake Sunrise & Return to Leh via Chang La Pass", desc: "Capture unforgettable sunrise reflections over Pangong Lake. Journey back to Leh crossing Chang La Pass (17,590 ft). Enroute visit Hemis and Thiksey monasteries.", acts: ["Pangong Sunrise Photography", "Chang La Pass Crossing", "Thiksey Monastery Darshan"] },
+    { title: "Breakfast, Leh Main Bazaar Pashmina Shopping & Airport Drop", desc: "Enjoy breakfast in the trans-Himalayan morning sun. Visit Leh Main Bazaar for authentic Ladakhi apricots and certified Pashmina shawls before your early morning airport departure drop.", acts: ["Leh Bazaar Shopping", "Pashmina & Apricot Buying", "Airport Transfer Drop"] }
+  ]
+};
+
+function getBrandedHotelName(city: string, hotelTier: string): string {
+  if (hotelTier === '5 Star' || hotelTier === 'Luxury Resort') {
+    return city + ' Radisson Blu / Grand Marriott Palace Resort';
+  }
+  if (hotelTier === '4 Star') {
+    return city + ' Lemon Tree Premier / The Fern Resort & Suites';
+  }
+  return city + ' Sarovar Portico / Treebo Prime Comfort Inn';
+}
+
+function buildSectorDayItinerary(
+  sectorSlug: string,
+  city: string,
+  dayNumber: number,
+  totalDays: number,
+  hotelName: string
+): ItineraryDay {
+  const flows = DESTINATION_ITINERARY_FLOWS[sectorSlug];
+  if (flows && flows.length > 0) {
+    if (dayNumber === 1) {
+      const day1 = flows[0];
+      return {
+        dayNumber: 1,
+        title: day1.title,
+        description: day1.desc,
+        meals: ['Dinner'],
+        activities: day1.acts,
+        hotel: hotelName,
+        transfers: 'Private AC Cab Airport / Station Meet & Greet'
+      };
+    }
+    if (dayNumber === totalDays) {
+      const lastDay = flows[flows.length - 1];
+      return {
+        dayNumber: totalDays,
+        title: lastDay.title,
+        description: lastDay.desc,
+        meals: ['Breakfast'],
+        activities: lastDay.acts,
+        hotel: 'Check-out completed',
+        transfers: 'Private AC Cab Departure Airport / Station Transfer'
+      };
+    }
+    const midIndex = 1 + ((dayNumber - 2) % Math.max(1, flows.length - 2));
+    const midDay = flows[midIndex] || flows[1] || flows[0];
+    return {
+      dayNumber,
+      title: midDay.title,
+      description: midDay.desc,
+      meals: ['Breakfast'],
+      activities: midDay.acts,
+      hotel: hotelName,
+      transfers: 'Full Day Dedicated Private AC Vehicle with Chauffeur'
+    };
+  }
+
+  // Fallback for sectors without custom flow
+  if (dayNumber === 1) {
+    return {
+      dayNumber: 1,
+      title: 'Arrival in ' + city + ' & Hotel Check-in',
+      description: 'Arrive at ' + city + '. Meet our friendly tour representative for a private transfer to your hotel. Complete check-in formalities and spend the evening relaxing or exploring nearby local bazaars and food streets at leisure.',
+      meals: ['Dinner'],
+      activities: ['Airport / Station Meet & Greet', 'Private Hotel Transfer', 'Evening Leisure Walk'],
+      hotel: hotelName,
+      transfers: 'Private AC Cab Transfer'
+    };
+  }
+  if (dayNumber === totalDays) {
+    return {
+      dayNumber: totalDays,
+      title: 'Breakfast & Departure Transfers from ' + city,
+      description: 'Enjoy a hearty buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute souvenir shopping before your private transfer to the airport or railway station.',
+      meals: ['Breakfast'],
+      activities: ['Souvenir Shopping', 'Hotel Check-out', 'Departure Airport / Station Transfer'],
+      hotel: 'Check-out completed',
+      transfers: 'Private AC Cab Transfer'
+    };
+  }
+  return {
+    dayNumber,
+    title: 'Day ' + dayNumber + ': ' + city + ' Premier Landmarks & Sightseeing Tour',
+    description: 'After breakfast, embark on a full-day guided sightseeing tour of ' + city + ' premier cultural landmarks, scenic viewpoints, historic monuments, and artisan craft markets with your private chauffeur.',
+    meals: ['Breakfast'],
+    activities: ['Monument Visits', 'Scenic Highlights & Photography', 'Local Artisan Market Tour'],
+    hotel: hotelName,
+    transfers: 'Full Day Private AC Vehicle'
+  };
+}
+
 function generateSynthesizedPackage(
   sector: SectorDefinition,
   sectorIndex: number,
@@ -720,44 +876,15 @@ function generateSynthesizedPackage(
     'Dedicated 24x7 TripCustomizer Support Desk'
   ];
 
+  const hotelName = getBrandedHotelName(city, hotelTier);
   const itinerary: ItineraryDay[] = [];
   for (let d = 1; d <= durObj.days; d++) {
-    if (d === 1) {
-      itinerary.push({
-        dayNumber: 1,
-        title: 'Arrival in ' + city + ' & Hotel Check-in',
-        description: 'Arrive at the destination. Meet our local tour representative for a private transfer to your hotel. Complete check-in formalities and spend the evening relaxing or exploring nearby local markets at leisure.',
-        meals: ['Dinner'],
-        activities: ['Airport / Station Meet & Greet', 'Private Hotel Transfer', 'Evening Leisure Walk'],
-        hotel: city + ' Grand Palace Hotel & Suites',
-        transfers: 'Private AC Cab Transfer'
-      });
-    } else if (d === durObj.days) {
-      itinerary.push({
-        dayNumber: d,
-        title: 'Breakfast & Departure Transfers from ' + city,
-        description: 'Enjoy a hearty breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping before your private transfer to the airport or railway station.',
-        meals: ['Breakfast'],
-        activities: ['Souvenir Shopping', 'Hotel Check-out', 'Departure Airport / Station Transfer'],
-        hotel: 'Check-out completed',
-        transfers: 'Private AC Cab Transfer'
-      });
-    } else {
-      itinerary.push({
-        dayNumber: d,
-        title: 'Day ' + d + ': ' + city + ' Full Day Guided Sightseeing & Exploration',
-        description: 'After breakfast, embark on a comprehensive guided tour of ' + city + ' premier attractions, scenic viewpoints, cultural monuments, and top photography stops with your private chauffeur.',
-        meals: ['Breakfast'],
-        activities: ['Monument Visits', 'Scenic Highlights & Photography', 'Local Food & Artisan Market Tour'],
-        hotel: city + ' Grand Palace Hotel & Suites',
-        transfers: 'Full Day Private AC Vehicle'
-      });
-    }
+    itinerary.push(buildSectorDayItinerary(sector.destinationSlug, city, d, durObj.days, hotelName));
   }
 
   const hotels = [
     {
-      name: city + ' Grand Palace Hotel & Suites',
+      name: hotelName,
       city: city,
       rating: hotelTier,
       nights: durObj.nights
