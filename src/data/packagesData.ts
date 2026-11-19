@@ -95,15 +95,15 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Ayodhya Varanasi Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Ayodhya Varanasi. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Ayodhya Arrival, Saryu Ghat & Warm Welcome",
+        "description": "Arrive in Ayodhya. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, visit Ram Ki Paidi and enjoy a serene stroll along the sacred Saryu riverbanks.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Ayodhya Varanasi",
+          "Arrival Transfer in Ayodhya",
           "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Ram Ki Paidi Evening Leisure Stroll"
         ],
         "hotel": "Hotel Ramayana Ayodhya",
         "transfers": "Private AC Vehicle"
@@ -137,7 +137,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Reserved Ganga Aarti Boat Cruise",
           "Manikarnika Ghat View"
         ],
-        "hotel": "Hotel Ramayana Ayodhya",
+        "hotel": "Kashi Heritage Hotel",
         "transfers": "Private AC Vehicle"
       },
       {
@@ -153,7 +153,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Sarnath Buddhist Stupa & Museum",
           "Banarasi Silk Weaving Center"
         ],
-        "hotel": "Hotel Ramayana Ayodhya",
+        "hotel": "Kashi Heritage Hotel",
         "transfers": "Private AC Vehicle"
       },
       {

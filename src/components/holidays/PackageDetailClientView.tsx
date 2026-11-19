@@ -40,6 +40,229 @@ export interface PassengerData {
   age: string;
 }
 
+const DESTINATION_HOTEL_TIERS: Record<string, { standard: string; deluxe: string; luxury: string }> = {
+  ayodhya: {
+    standard: 'Hotel Ramayana / Treebo Trend Ayodhya (3★ Standard)',
+    deluxe: 'Park Inn by Radisson Ayodhya / Cygnett Collection KK (4★ Deluxe)',
+    luxury: 'Praveg Tent City Royal Suites / The Fern Residency Ayodhya (5★ Luxury)'
+  },
+  varanasi: {
+    standard: 'Hotel Kashi Heritage / Treebo Prime Varanasi (3★ Standard)',
+    deluxe: 'Radisson Hotel Varanasi / Madin Hotel (4★ Deluxe)',
+    luxury: 'Taj Ganges Varanasi / BrijRama Palace Heritage (5★ Luxury)'
+  },
+  prayagraj: {
+    standard: 'Hotel Kanha Shyam / Hotel Milan Palace (3★ Standard)',
+    deluxe: 'Grand Continental Hotel / Legend Hotel Prayagraj (4★ Deluxe)',
+    luxury: 'Welcomhotel by ITC Hotels Prayagraj (5★ Luxury)'
+  },
+  srinagar: {
+    standard: 'Hotel Solar Residency / Grand Boulevard Srinagar (3★ Standard)',
+    deluxe: 'Grand Mumtaz Srinagar / The Fern Residency (4★ Deluxe)',
+    luxury: 'Vivanta Dal View by Taj / The Lalit Grand Palace (5★ Luxury)'
+  },
+  gulmarg: {
+    standard: 'Hotel Hilltop / Pine Palace Resort Gulmarg (3★ Standard)',
+    deluxe: 'The Vintage Gulmarg / Royal Park Resort (4★ Deluxe)',
+    luxury: 'The Khyber Himalayan Resort & Spa Gulmarg (5★ Luxury)'
+  },
+  pahalgam: {
+    standard: 'Hotel Mountview / Pine Spring Pahalgam (3★ Standard)',
+    deluxe: 'Hotel Pine N Peak / Kolahoi Green Resort (4★ Deluxe)',
+    luxury: 'Pahalgam Hotel / Radisson Golf Resort Pahalgam (5★ Luxury)'
+  },
+  sonamarg: {
+    standard: 'Hotel Snowland / Villa Himalaya Sonamarg (3★ Standard)',
+    deluxe: 'Rah Villas / Hotel Glacier Heights (4★ Deluxe)',
+    luxury: 'The Khyber Himalayan Glamping Sonamarg (5★ Luxury)'
+  },
+  manali: {
+    standard: 'Hotel Snow Park / Treebo Trend Manali (3★ Standard)',
+    deluxe: 'The Manali Inn / Apple Country Resort (4★ Deluxe)',
+    luxury: 'The Himalayan Resort & Spa / Solang Valley Resort (5★ Luxury)'
+  },
+  shimla: {
+    standard: 'Hotel Willow Banks / Treebo Prime Shimla (3★ Standard)',
+    deluxe: 'Radisson Hotel Shimla / The Fern Surya Resort (4★ Deluxe)',
+    luxury: 'Wildflower Hall (Oberoi) / The Oberoi Cecil Shimla (5★ Luxury)'
+  },
+  jaipur: {
+    standard: 'Sarovar Portico / Treebo Trend Jaipur (3★ Standard)',
+    deluxe: 'Royal Orchid Central / Holiday Inn Jaipur (4★ Deluxe)',
+    luxury: 'ITC Rajputana / Rambagh Palace / Fairmont Jaipur (5★ Luxury)'
+  },
+  udaipur: {
+    standard: 'Hotel Lakend / Treebo Trend Udaipur (3★ Standard)',
+    deluxe: 'Radisson Blu Udaipur Palace / Fateh Garh (4★ Deluxe)',
+    luxury: 'The Leela Palace Udaipur / Taj Lake Palace (5★ Luxury)'
+  },
+  jodhpur: {
+    standard: 'Treebo Trend / The Fern Residency Jodhpur (3★ Standard)',
+    deluxe: 'Ranbanka Palace / Radisson Jodhpur (4★ Deluxe)',
+    luxury: 'Umaid Bhawan Palace / Taj Hari Mahal Jodhpur (5★ Luxury)'
+  },
+  jaisalmer: {
+    standard: 'Hotel Rang Mahal / Royal Desert Camp (3★ Standard)',
+    deluxe: 'Fort Rajwada / Desert Springs Resort (4★ Deluxe)',
+    luxury: 'Suryagarh Jaisalmer / Jaisalmer Marriott Resort (5★ Luxury)'
+  },
+  goa: {
+    standard: 'Treebo Trend / Whispering Palms Candolim (3★ Standard)',
+    deluxe: 'Fairfield by Marriott / Novotel Goa Candolim (4★ Deluxe)',
+    luxury: 'Taj Exotica Resort & Spa / W Goa Vagator (5★ Luxury)'
+  },
+  munnar: {
+    standard: 'Tea Valley Resort / Fort Munnar (3★ Standard)',
+    deluxe: 'The Leaf Munnar / Blanket Luxury Resort (4★ Deluxe)',
+    luxury: 'Fragrant Nature Munnar / Chandys Windy Woods (5★ Luxury)'
+  },
+  thekkady: {
+    standard: 'Hotel Sandra Palace / Treebo Trend (3★ Standard)',
+    deluxe: 'Greenwoods Resort / The Elephant Court Thekkady (4★ Deluxe)',
+    luxury: 'Spice Village (CGH Earth) / Poetree Sarovar (5★ Luxury)'
+  },
+  alleppey: {
+    standard: 'Standard Traditional AC Houseboat (3★ CP)',
+    deluxe: 'Deluxe 1-Bedroom Private Houseboat with All Meals (4★ Deluxe)',
+    luxury: 'Super Deluxe Glass-Roof Palace Houseboat / Lake Palace Resort (5★ Luxury)'
+  },
+  kovalam: {
+    standard: 'Hotel Sea Face / Treebo Trend Kovalam (3★ Standard)',
+    deluxe: 'Uday Samudra Leisure Beach Hotel (4★ Deluxe)',
+    luxury: 'The Leela Kovalam / Taj Green Cove Resort (5★ Luxury)'
+  },
+  haridwar: {
+    standard: 'Hotel Alpana / Treebo Trend Haridwar (3★ Standard)',
+    deluxe: 'Radisson Blu Haridwar / Godwin Hotel (4★ Deluxe)',
+    luxury: 'Amatra by the Ganges / Pilibhit House (IHCL) (5★ Luxury)'
+  },
+  rishikesh: {
+    standard: 'Hotel Ganga Kinare / Treebo Prime Rishikesh (3★ Standard)',
+    deluxe: 'Aloha On The Ganges / Sterling Palm Bliss (4★ Deluxe)',
+    luxury: 'Ananda in the Himalayas / Taj Rishikesh Resort (5★ Luxury)'
+  },
+  mussoorie: {
+    standard: 'Hotel SunGrace / Treebo Trend Mussoorie (3★ Standard)',
+    deluxe: 'The Fern Brentwood Resort / Fortune Resort Grace (4★ Deluxe)',
+    luxury: 'JW Marriott Mussoorie Walnut Grove / Jaypee Residency (5★ Luxury)'
+  },
+  nainital: {
+    standard: 'Hotel Himalaya / Treebo Trend Nainital (3★ Standard)',
+    deluxe: 'The Naini Retreat / Shervani Hilltop (4★ Deluxe)',
+    luxury: 'The Manu Maharani / Taj Corbett Resort & Spa (5★ Luxury)'
+  },
+  kedarnath: {
+    standard: 'GMVN Tourist Bungalow / Hotel Kedarpuram (3★ Standard)',
+    deluxe: 'Kedar River Retreat / Shivalik Valley Resort (4★ Deluxe)',
+    luxury: 'Kedar Valley Luxury Heli-Resort (5★ Luxury)'
+  },
+  badrinath: {
+    standard: 'Hotel Snow Crest / GMVN Badrinath (3★ Standard)',
+    deluxe: 'Sarovar Portico Badrinath (4★ Deluxe)',
+    luxury: 'Lord Palace / Sarovar Portico Luxury Suites (5★ Luxury)'
+  },
+  portblair: {
+    standard: 'Hotel Megapode Nest / Treebo Trend Port Blair (3★ Standard)',
+    deluxe: 'Symphony Samudra / Peerless Sarovar Portico (4★ Deluxe)',
+    luxury: 'Welcomhotel by ITC Bay Island Port Blair (5★ Luxury)'
+  },
+  havelock: {
+    standard: 'Havelock Holiday Beach Resort (3★ Standard)',
+    deluxe: 'Symphony Palms Beach Resort / Silver Sand Beach (4★ Deluxe)',
+    luxury: 'Taj Exotica Resort & Spa Andamans (5★ Luxury)'
+  },
+  neil: {
+    standard: 'Tango Beach Resort Neil Island (3★ Standard)',
+    deluxe: 'Summer Sands Beach Resort Neil (4★ Deluxe)',
+    luxury: 'Sea Shell Neil Island (5★ Luxury)'
+  },
+  leh: {
+    standard: 'Hotel Singge Palace / Treebo Trend Leh (3★ Standard)',
+    deluxe: 'The Grand Dragon Ladakh / Zen Ladakh (4★ Deluxe)',
+    luxury: 'The Chamba Camp Thiksey / Ladakh Sarai Luxury Resort (5★ Luxury)'
+  },
+  agra: {
+    standard: 'Hotel Howard Plaza The Fern / Treebo Trend Agra (3★ Standard)',
+    deluxe: 'Crystal Sarovar Premiere / DoubleTree by Hilton Agra (4★ Deluxe)',
+    luxury: 'The Oberoi Amarvilas / ITC Mughal Agra (5★ Luxury)'
+  },
+  amritsar: {
+    standard: 'Hotel City Park / Treebo Trend Amritsar (3★ Standard)',
+    deluxe: 'Radisson Blu Amritsar / Best Western Plus (4★ Deluxe)',
+    luxury: 'Taj Swarna / Hyatt Regency Amritsar (5★ Luxury)'
+  },
+  mathura: {
+    standard: 'Hotel Brijwasi Royal / Treebo Trend Mathura (3★ Standard)',
+    deluxe: 'The Grand Radhey / Nidhivan Sarovar Portico (4★ Deluxe)',
+    luxury: 'The Radha Ashok / Krishna Valley Luxury Resort (5★ Luxury)'
+  },
+  ujjain: {
+    standard: 'Hotel Imperial Grand / Treebo Trend Ujjain (3★ Standard)',
+    deluxe: 'Anjushree Hotel / Solitaire Hotel Ujjain (4★ Deluxe)',
+    luxury: 'Rudraksh Club & Resort / Shipra Heritage Resort (5★ Luxury)'
+  },
+  dwarka: {
+    standard: 'Hotel Guruprerna / Treebo Trend Dwarka (3★ Standard)',
+    deluxe: 'Hawthorn Suites by Wyndham Dwarka / Goverdhan Greens (4★ Deluxe)',
+    luxury: 'Mercure Dwarka / Lemon Tree Resort Dwarka (5★ Luxury)'
+  },
+  somnath: {
+    standard: 'Hotel Lords Inn / Treebo Trend Somnath (3★ Standard)',
+    deluxe: 'The Fern Residency Somnath / Sarovar Portico (4★ Deluxe)',
+    luxury: 'Pride Divine Resort Somnath (5★ Luxury)'
+  },
+  puri: {
+    standard: 'Hotel Golden Dust / Treebo Trend Puri (3★ Standard)',
+    deluxe: 'Toshali Sands Resort / Hans Coco Palms Puri (4★ Deluxe)',
+    luxury: 'Mayfair Waves Puri / Sterling Puri (5★ Luxury)'
+  },
+  darjeeling: {
+    standard: 'Hotel Sinclairs / Treebo Trend Darjeeling (3★ Standard)',
+    deluxe: 'The Elgin Darjeeling / Summit Swiss Heritage (4★ Deluxe)',
+    luxury: 'Mayfair Darjeeling / Windamere Heritage Hotel (5★ Luxury)'
+  },
+  gangtok: {
+    standard: 'Hotel Sonam Delek / Treebo Trend Gangtok (3★ Standard)',
+    deluxe: 'The Fern Denzong / Lemon Tree Hotel Gangtok (4★ Deluxe)',
+    luxury: 'Mayfair Spa Resort & Casino Gangtok (5★ Luxury)'
+  },
+  ooty: {
+    standard: 'Hotel Lakeview / Treebo Trend Ooty (3★ Standard)',
+    deluxe: 'Gem Park Ooty / Fortune Resort Sullivan Court (4★ Deluxe)',
+    luxury: 'Savoy - IHCL SeleQtions / Sterling Ooty Elk Hill (5★ Luxury)'
+  },
+  coorg: {
+    standard: 'Hotel Coorg International / Treebo Trend (3★ Standard)',
+    deluxe: 'The Tamara Coorg / Heritage Resort Coorg (4★ Deluxe)',
+    luxury: 'Evolve Back Coorg / Taj Madikeri Resort & Spa (5★ Luxury)'
+  },
+  kodaikanal: {
+    standard: 'Hotel Kodai International / Treebo Trend (3★ Standard)',
+    deluxe: 'The Carlton Kodaikanal / Sterling Kodai Lake (4★ Deluxe)',
+    luxury: 'Tamara Kodai / Heritage Luxury Kodai Resort (5★ Luxury)'
+  },
+  tirupati: {
+    standard: 'Hotel Bliss / Treebo Trend Tirupati (3★ Standard)',
+    deluxe: 'Fortune Select Grand Ridge / Marasa Sarovar Premiere (4★ Deluxe)',
+    luxury: 'Taj Tirupati / Minerva Grand Tirupati (5★ Luxury)'
+  },
+  shirdi: {
+    standard: 'Hotel Sai Leela / Treebo Trend Shirdi (3★ Standard)',
+    deluxe: 'St Laurn The Spiritual Resort / Sun-n-Sand Shirdi (4★ Deluxe)',
+    luxury: 'Shraddha Sarovar Portico / The Temple View 5★ (5★ Luxury)'
+  },
+  delhi: {
+    standard: 'Bloomrooms @ New Delhi Station / Treebo Trend (3★ Standard)',
+    deluxe: 'Radisson Blu Plaza Delhi Airport / Lemon Tree Premier (4★ Deluxe)',
+    luxury: 'The Leela Palace New Delhi / The Taj Mahal Hotel (5★ Luxury)'
+  },
+  mumbai: {
+    standard: 'Suba International / Treebo Trend Mumbai (3★ Standard)',
+    deluxe: 'Courtyard by Marriott Mumbai / Radisson Blu (4★ Deluxe)',
+    luxury: 'The Taj Mahal Palace / JW Marriott Juhu (5★ Luxury)'
+  }
+};
+
 export function PackageDetailClientView({ params }: { params: { destination: string; package: string } }) {
   const router = useRouter();
   const { user, login } = useAuth();
@@ -411,62 +634,197 @@ export function PackageDetailClientView({ params }: { params: { destination: str
   const discountPercent = Math.max(5, Math.round(((originalPricePerPerson - basePricePerPerson) / originalPricePerPerson) * 100));
 
   // Dynamic Tier-Based Hotel Resolution Helper (MakeMyTrip 3-Star, 4-Star & 5-Star Tiers)
-  const getTierHotelName = (originalHotel: string | undefined, dayTitle: string | undefined, tier: 'standard' | 'deluxe' | 'luxury') => {
+  const getTierHotelName = (
+    originalHotel: string | undefined,
+    dayTitleOrCity: string | undefined,
+    tier: 'standard' | 'deluxe' | 'luxury'
+  ) => {
     const raw = (originalHotel || '').toLowerCase();
-    const title = (dayTitle || '').toLowerCase();
+    const title = (dayTitleOrCity || '').toLowerCase();
+
+    // Check for departure day
+    if (
+      raw.includes('departure') ||
+      title.includes('departure') ||
+      raw.includes('airport drop') ||
+      raw.includes('check-out') ||
+      title.includes('airport / station') ||
+      title.includes('onward journey') ||
+      title.includes('drop to airport') ||
+      title.includes('checkout & fly')
+    ) {
+      return 'Check-out completed (Departure Day)';
+    }
 
     // Check for Houseboat
     if (raw.includes('houseboat') || title.includes('houseboat') || title.includes('shikara')) {
-      if (tier === 'standard') return 'Dal Lake Standard Heritage Houseboat (3★)';
+      if (tier === 'standard') return 'Dal Lake Standard Heritage Houseboat (3★ Standard)';
       if (tier === 'luxury') return 'Dal Lake Royal Palace Super Deluxe Houseboat (5★ Luxury)';
       return 'Dal Lake Luxury 4★ Heritage Houseboat (MAP with Dinner)';
     }
 
     // Check for Desert Camp
-    if (raw.includes('camp') || raw.includes('tent') || title.includes('dunes') || title.includes('camp')) {
-      if (tier === 'standard') return 'Sam Sand Dunes Comfort Swiss Desert Camp (3★)';
-      if (tier === 'luxury') return 'Suryagarh / Sam Luxury Glamping Desert Palace (5★)';
-      return 'Sam Sand Dunes Royal Swiss Desert Resort (4★ with Cultural Show)';
+    if (
+      raw.includes('camp') ||
+      raw.includes('tent') ||
+      title.includes('dunes') ||
+      title.includes('camp') ||
+      title.includes('safari stay')
+    ) {
+      if (tier === 'standard') return 'Sam Sand Dunes Comfort Swiss Desert Camp (3★ Standard)';
+      if (tier === 'luxury') return 'Suryagarh / Sam Luxury Glamping Desert Palace (5★ Luxury)';
+      return 'Sam Sand Dunes Royal Swiss Desert Resort (4★ Deluxe with Cultural Show)';
     }
 
-    // Extract city from dayTitle or pkg.destination
-    let cityName = pkg.destination?.split(',')[0]?.split(' ')[0] || 'City';
-    if (title.includes('gulmarg')) cityName = 'Gulmarg';
-    else if (title.includes('pahalgam')) cityName = 'Pahalgam';
-    else if (title.includes('srinagar')) cityName = 'Srinagar';
-    else if (title.includes('sonamarg')) cityName = 'Sonamarg';
-    else if (title.includes('manali')) cityName = 'Manali';
-    else if (title.includes('shimla')) cityName = 'Shimla';
-    else if (title.includes('munnar')) cityName = 'Munnar';
-    else if (title.includes('thekkady')) cityName = 'Thekkady';
-    else if (title.includes('alleppey')) cityName = 'Alleppey';
-    else if (title.includes('kovalam')) cityName = 'Kovalam';
-    else if (title.includes('jaipur')) cityName = 'Jaipur';
-    else if (title.includes('jodhpur')) cityName = 'Jodhpur';
-    else if (title.includes('udaipur')) cityName = 'Udaipur';
-    else if (title.includes('jaisalmer')) cityName = 'Jaisalmer';
-    else if (title.includes('havelock')) cityName = 'Havelock Island';
-    else if (title.includes('neil')) cityName = 'Neil Island';
-    else if (title.includes('port blair')) cityName = 'Port Blair';
-    else if (title.includes('varanasi')) cityName = 'Varanasi';
-    else if (title.includes('ayodhya')) cityName = 'Ayodhya';
-    else if (title.includes('prayagraj')) cityName = 'Prayagraj';
-    else if (title.includes('haridwar')) cityName = 'Haridwar';
-    else if (title.includes('rishikesh')) cityName = 'Rishikesh';
-    else if (title.includes('mussoorie')) cityName = 'Mussoorie';
-    else if (title.includes('nainital')) cityName = 'Nainital';
-    else if (title.includes('leh')) cityName = 'Leh';
-    else if (title.includes('nubra')) cityName = 'Nubra Valley';
-    else if (title.includes('pangong')) cityName = 'Pangong Tso';
-    else if (title.includes('goa') || raw.includes('goa')) cityName = 'Goa';
+    // Target destination key matching:
+    let matchedKey: string | null = null;
 
+    // Strict priority checks:
+    if (
+      title.includes('sarnath') ||
+      title.includes('kashi') ||
+      title.includes('dashashwamedh') ||
+      title.includes('banaras') ||
+      raw.includes('kashi') ||
+      raw.includes('varanasi')
+    ) {
+      matchedKey = 'varanasi';
+    } else if (
+      title.includes('sangam') ||
+      title.includes('anand bhavan') ||
+      raw.includes('prayagraj') ||
+      title.includes('prayagraj')
+    ) {
+      matchedKey = 'prayagraj';
+    } else if (
+      title.includes('janmabhoomi') ||
+      title.includes('kanak bhawan') ||
+      title.includes('hanuman garhi') ||
+      title.includes('saryu') ||
+      title.includes('ayodhya') ||
+      raw.includes('ayodhya') ||
+      raw.includes('ramayana')
+    ) {
+      matchedKey = 'ayodhya';
+    } else if (title.includes('gulmarg') || raw.includes('gulmarg')) {
+      matchedKey = 'gulmarg';
+    } else if (title.includes('pahalgam') || raw.includes('pahalgam')) {
+      matchedKey = 'pahalgam';
+    } else if (title.includes('sonamarg') || raw.includes('sonamarg')) {
+      matchedKey = 'sonamarg';
+    } else if (title.includes('srinagar') || raw.includes('srinagar')) {
+      matchedKey = 'srinagar';
+    } else if (title.includes('manali') || raw.includes('manali') || title.includes('solang') || title.includes('rohtang')) {
+      matchedKey = 'manali';
+    } else if (title.includes('shimla') || raw.includes('shimla') || title.includes('kufri')) {
+      matchedKey = 'shimla';
+    } else if (title.includes('havelock') || raw.includes('havelock')) {
+      matchedKey = 'havelock';
+    } else if (title.includes('neil') || raw.includes('neil')) {
+      matchedKey = 'neil';
+    } else if (title.includes('port blair') || title.includes('portblair') || raw.includes('port blair')) {
+      matchedKey = 'portblair';
+    } else if (title.includes('munnar') || raw.includes('munnar')) {
+      matchedKey = 'munnar';
+    } else if (title.includes('thekkady') || raw.includes('thekkady')) {
+      matchedKey = 'thekkady';
+    } else if (title.includes('alleppey') || raw.includes('alleppey')) {
+      matchedKey = 'alleppey';
+    } else if (title.includes('kovalam') || raw.includes('kovalam')) {
+      matchedKey = 'kovalam';
+    } else if (title.includes('jaisalmer') || raw.includes('jaisalmer')) {
+      matchedKey = 'jaisalmer';
+    } else if (title.includes('jodhpur') || raw.includes('jodhpur')) {
+      matchedKey = 'jodhpur';
+    } else if (title.includes('udaipur') || raw.includes('udaipur')) {
+      matchedKey = 'udaipur';
+    } else if (title.includes('jaipur') || raw.includes('jaipur')) {
+      matchedKey = 'jaipur';
+    } else if (title.includes('haridwar') || raw.includes('haridwar')) {
+      matchedKey = 'haridwar';
+    } else if (title.includes('rishikesh') || raw.includes('rishikesh')) {
+      matchedKey = 'rishikesh';
+    } else if (title.includes('mussoorie') || raw.includes('mussoorie')) {
+      matchedKey = 'mussoorie';
+    } else if (title.includes('nainital') || raw.includes('nainital')) {
+      matchedKey = 'nainital';
+    } else if (title.includes('kedarnath') || raw.includes('kedarnath')) {
+      matchedKey = 'kedarnath';
+    } else if (title.includes('badrinath') || raw.includes('badrinath')) {
+      matchedKey = 'badrinath';
+    } else if (title.includes('leh') || raw.includes('leh') || title.includes('ladakh') || title.includes('pangong')) {
+      matchedKey = 'leh';
+    } else if (title.includes('goa') || raw.includes('goa')) {
+      matchedKey = 'goa';
+    } else if (title.includes('agra') || raw.includes('agra') || title.includes('taj mahal')) {
+      matchedKey = 'agra';
+    } else if (title.includes('amritsar') || raw.includes('amritsar') || title.includes('golden temple')) {
+      matchedKey = 'amritsar';
+    } else if (title.includes('mathura') || raw.includes('mathura') || title.includes('vrindavan')) {
+      matchedKey = 'mathura';
+    } else if (title.includes('ujjain') || raw.includes('ujjain') || title.includes('mahakal')) {
+      matchedKey = 'ujjain';
+    } else if (title.includes('dwarka') || raw.includes('dwarka')) {
+      matchedKey = 'dwarka';
+    } else if (title.includes('somnath') || raw.includes('somnath')) {
+      matchedKey = 'somnath';
+    } else if (title.includes('puri') || raw.includes('puri') || title.includes('jagannath')) {
+      matchedKey = 'puri';
+    } else if (title.includes('darjeeling') || raw.includes('darjeeling')) {
+      matchedKey = 'darjeeling';
+    } else if (title.includes('gangtok') || raw.includes('gangtok')) {
+      matchedKey = 'gangtok';
+    } else if (title.includes('ooty') || raw.includes('ooty')) {
+      matchedKey = 'ooty';
+    } else if (title.includes('coorg') || raw.includes('coorg')) {
+      matchedKey = 'coorg';
+    } else if (title.includes('kodaikanal') || raw.includes('kodaikanal')) {
+      matchedKey = 'kodaikanal';
+    } else if (title.includes('tirupati') || raw.includes('tirupati')) {
+      matchedKey = 'tirupati';
+    } else if (title.includes('shirdi') || raw.includes('shirdi')) {
+      matchedKey = 'shirdi';
+    } else if (title.includes('delhi') || raw.includes('delhi')) {
+      matchedKey = 'delhi';
+    } else if (title.includes('mumbai') || raw.includes('mumbai')) {
+      matchedKey = 'mumbai';
+    }
+
+    // Direct registry scan against title, hotel, or city
+    if (!matchedKey) {
+      for (const k of Object.keys(DESTINATION_HOTEL_TIERS)) {
+        if (title.includes(k) || raw.includes(k)) {
+          matchedKey = k;
+          break;
+        }
+      }
+    }
+
+    // Destination slug fallback
+    if (!matchedKey) {
+      const destClean = (pkg.destinationSlug || pkg.destination || '').toLowerCase();
+      for (const k of Object.keys(DESTINATION_HOTEL_TIERS)) {
+        if (destClean.includes(k)) {
+          matchedKey = k;
+          break;
+        }
+      }
+    }
+
+    if (matchedKey && DESTINATION_HOTEL_TIERS[matchedKey]) {
+      return DESTINATION_HOTEL_TIERS[matchedKey][tier];
+    }
+
+    // Generic fallback for any other city
+    const cityName = pkg.destination?.split(',')[0]?.split(' ')[0] || 'City';
+    const cleanCity = cityName.charAt(0).toUpperCase() + cityName.slice(1);
     if (tier === 'standard') {
-      return `${cityName} Sarovar Portico / Treebo Prime Comfort Inn (3★ Standard)`;
+      return `Ginger / Treebo Trend ${cleanCity} (3★ Standard)`;
     }
     if (tier === 'luxury') {
-      return `${cityName} Radisson Blu / Grand Marriott Palace Resort (5★ Luxury)`;
+      return `Taj / Radisson Blu ${cleanCity} Luxury Palace (5★ Luxury)`;
     }
-    return `${cityName} Lemon Tree Premier / The Fern Resort & Suites (4★ Deluxe)`;
+    return `Fortune / Lemon Tree Premier ${cleanCity} (4★ Deluxe)`;
   };
 
   // Dynamic Total Calculation
@@ -714,6 +1072,12 @@ export function PackageDetailClientView({ params }: { params: { destination: str
                       {idx < pkg.hotels.length - 1 && <span className="text-slate-300 ml-1">|</span>}
                     </span>
                   ))}
+                  <span className={`text-[11px] font-black px-2.5 py-1 rounded-lg uppercase tracking-wider flex items-center space-x-1 ${
+                    tourTier === 'standard' ? 'bg-slate-200 text-slate-800' : tourTier === 'deluxe' ? 'bg-brand-100 text-brand-800' : 'bg-amber-100 text-amber-900'
+                  }`}>
+                    <Hotel className="w-3 h-3" />
+                    <span>{tourTier === 'standard' ? '3★ Standard Category' : tourTier === 'deluxe' ? '4★ Deluxe Category' : '5★ Luxury Category'}</span>
+                  </span>
                 </div>
               )}
             </div>
@@ -1249,11 +1613,16 @@ export function PackageDetailClientView({ params }: { params: { destination: str
                 {/* Night Stay Breakdown */}
                 {pkg.hotels && pkg.hotels.length > 0 && (
                   <div className="p-4 bg-amber-50/70 border border-amber-200 rounded-2xl space-y-2">
-                    <span className="font-black text-xs text-amber-950 block">Night Stay City Breakdown:</span>
+                    <div className="flex items-center justify-between">
+                      <span className="font-black text-xs text-amber-950 block">Night Stay City & Hotel Breakdown:</span>
+                      <span className="text-[10px] font-black bg-amber-400 text-slate-950 px-2 py-0.5 rounded-md uppercase">
+                        {tourTier === 'standard' ? '3★ Standard' : tourTier === 'deluxe' ? '4★ Deluxe' : '5★ Luxury'}
+                      </span>
+                    </div>
                     <div className="flex flex-wrap gap-2 text-xs font-bold text-amber-900">
                       {pkg.hotels.map((h, idx) => (
-                        <span key={idx} className="bg-white border border-amber-300 px-3 py-1 rounded-xl shadow-2xs">
-                          🌙 {h.nights} Nights in {h.city} ({h.name})
+                        <span key={idx} className="bg-white border border-amber-300 px-3 py-1.5 rounded-xl shadow-2xs">
+                          🌙 {h.nights} Nights in {h.city} ({getTierHotelName(h.name, h.city, tourTier)})
                         </span>
                       ))}
                     </div>
@@ -1311,7 +1680,13 @@ export function PackageDetailClientView({ params }: { params: { destination: str
                     },
                     {
                       question: `What hotel category is provided in this package?`,
-                      answer: `This package includes ${pkg.hotelCategory || '4 Star Deluxe'} accommodations with clean, hygienic rooms, private bath, and daily breakfast.`
+                      answer: `This package is currently configured with ${
+                        tourTier === 'standard'
+                          ? '3-Star Standard accommodations (e.g. Treebo Trend / Hotel Ramayana / Kashi Heritage)'
+                          : tourTier === 'deluxe'
+                          ? '4-Star Deluxe accommodations (e.g. Park Inn by Radisson / Radisson Hotel / Lemon Tree Premier)'
+                          : '5-Star Luxury accommodations (e.g. Praveg Tent City Royal Suites / Taj Ganges / BrijRama Palace)'
+                      } with clean, hygienic rooms, private bath, and daily buffet breakfast. You can toggle between 3★, 4★, and 5★ anytime to customize your stay.`
                     },
                     {
                       question: `Are sightseeing transfers private or shared?`,
