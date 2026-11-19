@@ -627,56 +627,63 @@ function computeB2BPackagePricing(
   days: number,
   pkgIndex: number
 ): { startingPrice: number; discountPrice: number } {
-  // 1. Hotel Room Rate (User B2B Benchmarks)
+  // 1. Hotel Room Rate with Real Indian B2B Seasonal Rates
   const isHill = ['kashmir', 'himachal', 'uttarakhand', 'ladakh', 'sikkim', 'darjeeling', 'spiti'].includes(sector.destinationSlug);
-  const isPilgrimage = ['ayodhya', 'varanasi', 'char-dham', 'mathura', 'tirupati', 'ujjain', 'dwarka', 'puri', 'shirdi'].includes(sector.destinationSlug);
+  const isPilgrim = ['ayodhya', 'varanasi', 'char-dham', 'mathura', 'tirupati', 'ujjain', 'dwarka', 'puri', 'shirdi'].includes(sector.destinationSlug);
+  const isLeisure = ['goa', 'kerala', 'rajasthan', 'andaman', 'jaisalmer', 'jaipur', 'udaipur', 'jodhpur'].includes(sector.destinationSlug);
 
-  // Default meal plan: Hill stations use MAP (Breakfast + Dinner), others use CP (Room + Breakfast)
-  let roomNightRate = 3200; // 3 Star CP
+  // Base Room Night Rate (Per Room / Night for 2 Adults)
+  let roomNightRate = 3200;
   if (hotelTier === '3 Star') {
-    roomNightRate = isHill ? 4000 : 3200;
+    // 3-Star: Pilgrimage MAP ₹3,800, Hill MAP ₹4,200, Winter Peak Leisure ₹4,000, Plains ₹3,200
+    roomNightRate = isPilgrim ? 3800 : isHill ? 4200 : isLeisure ? 4000 : 3200;
   } else if (hotelTier === '4 Star') {
-    roomNightRate = isHill ? 7200 : 5800;
-  } else if (hotelTier === '5 Star') {
-    roomNightRate = isHill ? 14000 : 11000;
-  }
-
-  // Pilgrimage high-demand circuit adjustment (+10%)
-  if (isPilgrimage) {
-    roomNightRate = Math.round(roomNightRate * 1.10);
+    // 4-Star: Pilgrimage MAP ₹6,800, Hill MAP ₹7,800, Winter Peak Leisure ₹7,500, Plains ₹5,800
+    roomNightRate = isPilgrim ? 6800 : isHill ? 7800 : isLeisure ? 7500 : 5800;
+  } else {
+    // 5-Star (Commercial 5★): Pilgrimage ₹13,000, Hill ₹15,000, Winter Peak Leisure ₹14,500, Plains ₹11,500
+    roomNightRate = isPilgrim ? 13000 : isHill ? 15000 : isLeisure ? 14500 : 11500;
   }
 
   // Special experience supplement per booking (Houseboats, Desert Safari Tents, Ferries, Safaris)
   let specialStay = 0;
   if (sector.destinationSlug === 'kashmir') {
-    specialStay = 7500; // 1N Dal Lake Luxury 4★ Houseboat (MAP)
+    specialStay = hotelTier === '3 Star' ? 5000 : hotelTier === '4 Star' ? 7500 : 10000; // Dal Lake Houseboat
   } else if (sector.destinationSlug === 'kerala') {
-    specialStay = 11500; // 1N Alleppey 1-Bedroom Private Houseboat (All Meals)
+    specialStay = hotelTier === '3 Star' ? 8500 : hotelTier === '4 Star' ? 12000 : 16000; // Alleppey Private Houseboat
   } else if ((sector.destinationSlug === 'rajasthan' || sector.destinationSlug === 'jaisalmer') && pkgIndex % 2 === 0) {
-    specialStay = 4500; // 1N Jaisalmer Desert Camp (Swiss Tent + Camel + Folk Dance + Dinner)
+    specialStay = hotelTier === '3 Star' ? 3500 : hotelTier === '4 Star' ? 5000 : 7500; // Jaisalmer Desert Camp
   } else if (sector.destinationSlug === 'andaman') {
-    specialStay = 10400; // Makruzz / Nautika Private Cruise Ferry for 2 pax (PB -> Havelock -> Neil -> PB)
+    specialStay = 5200 * 2; // Makruzz / Nautika Cruise Ferry for 2 pax (PB -> Havelock -> Neil -> PB)
   } else if (['corbett', 'ranthambore', 'sasan-gir', 'kaziranga'].includes(sector.destinationSlug)) {
     specialStay = 7500; // Dedicated Jungle Jeep Safari (Permit + Gypsy + Guide)
   }
 
   const totalHotelCost = (nights * roomNightRate) + specialStay;
 
-  // 2. Outstation Cab Rate (User B2B Cab Rate Card)
-  let cabRatePerDay = 2800; // Plains Sedan Outstation Rate
-  if (isHill) {
-    cabRatePerDay = ['ladakh', 'spiti'].includes(sector.destinationSlug) ? 7200 : 3500; // Hill Sedan / 4x4
-  } else if (sector.isInternational) {
+  // 2. Outstation Cab Rate by Vehicle and Tier (Multi-day 250 km running)
+  let cabRatePerDay = 3000;
+  if (hotelTier === '3 Star') {
+    cabRatePerDay = isHill ? (['ladakh', 'spiti'].includes(sector.destinationSlug) ? 7500 : 3800) : 3000; // Sedan
+  } else if (hotelTier === '4 Star') {
+    cabRatePerDay = isHill ? (['ladakh', 'spiti'].includes(sector.destinationSlug) ? 8500 : 5000) : 4200; // Ertiga / Innova Std
+  } else {
+    cabRatePerDay = isHill ? (['ladakh', 'spiti'].includes(sector.destinationSlug) ? 9500 : 6500) : 5800; // Innova Crysta
+  }
+
+  if (sector.isInternational) {
     cabRatePerDay = 3500; // International airport & private transfers
   }
 
+  // Sightseeing Entry, Tolls & Buffer
+  const bufferCost = (hotelTier === '3 Star' ? 1200 : hotelTier === '4 Star' ? 1800 : 2500) * 2;
   const totalCabCost = days * cabRatePerDay;
 
-  // Net Cost for 2 Adults (Twin Sharing 1 Room + 1 Dedicated Outstation Cab)
-  const netCostForTwo = totalHotelCost + totalCabCost;
+  // Net Cost for 2 Adults (Twin Sharing 1 Room + 1 Dedicated Outstation Cab + Buffer)
+  const netCostForTwo = totalHotelCost + totalCabCost + bufferCost;
 
-  // 20% Guaranteed Agency Profit Margin
-  const sellingPriceForTwo = netCostForTwo * 1.20;
+  // 22% Guaranteed Agency Profit Margin
+  const sellingPriceForTwo = netCostForTwo * 1.22;
 
   // Base per-person starting rate (twin sharing)
   const startingPrice = Math.round((sellingPriceForTwo / 2) / 100) * 100;
@@ -755,12 +762,12 @@ const DESTINATION_ITINERARY_FLOWS: Record<string, { title: string; desc: string;
 
 function getBrandedHotelName(city: string, hotelTier: string): string {
   if (hotelTier === '5 Star' || hotelTier === 'Luxury Resort') {
-    return city + ' Radisson Blu / Grand Marriott Palace Resort';
+    return city + ' Radisson Blu / Courtyard by Marriott (5★ Commercial Luxury)';
   }
   if (hotelTier === '4 Star') {
-    return city + ' Lemon Tree Premier / The Fern Resort & Suites';
+    return city + ' Park Inn by Radisson / Lemon Tree Premier (4★ Deluxe)';
   }
-  return city + ' Sarovar Portico / Treebo Prime Comfort Inn';
+  return city + ' Treebo Trend / Ginger Hotel (3★ Standard)';
 }
 
 function buildSectorDayItinerary(

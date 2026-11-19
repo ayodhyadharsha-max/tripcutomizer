@@ -48,8 +48,8 @@ const DESTINATION_HOTEL_TIERS: Record<string, { standard: string; deluxe: string
   },
   varanasi: {
     standard: 'Hotel Kashi Heritage / Treebo Prime Varanasi (3★ Standard)',
-    deluxe: 'Radisson Hotel Varanasi / Madin Hotel (4★ Deluxe)',
-    luxury: 'Taj Ganges Varanasi / BrijRama Palace Heritage (5★ Luxury)'
+    deluxe: 'Madin Hotel / The Amayaa Varanasi (4★ Deluxe)',
+    luxury: 'Radisson Hotel Varanasi / Ramada Plaza by Wyndham JHV (5★ Luxury)'
   },
   prayagraj: {
     standard: 'Hotel Kanha Shyam / Hotel Milan Palace (3★ Standard)',
@@ -59,17 +59,17 @@ const DESTINATION_HOTEL_TIERS: Record<string, { standard: string; deluxe: string
   srinagar: {
     standard: 'Hotel Solar Residency / Grand Boulevard Srinagar (3★ Standard)',
     deluxe: 'Grand Mumtaz Srinagar / The Fern Residency (4★ Deluxe)',
-    luxury: 'Vivanta Dal View by Taj / The Lalit Grand Palace (5★ Luxury)'
+    luxury: 'Radisson Collection Srinagar / Vivanta Dal View (5★ Luxury)'
   },
   gulmarg: {
     standard: 'Hotel Hilltop / Pine Palace Resort Gulmarg (3★ Standard)',
     deluxe: 'The Vintage Gulmarg / Royal Park Resort (4★ Deluxe)',
-    luxury: 'The Khyber Himalayan Resort & Spa Gulmarg (5★ Luxury)'
+    luxury: 'Royal Park Resort / The Vintage Luxury Suites Gulmarg (5★ Luxury)'
   },
   pahalgam: {
     standard: 'Hotel Mountview / Pine Spring Pahalgam (3★ Standard)',
     deluxe: 'Hotel Pine N Peak / Kolahoi Green Resort (4★ Deluxe)',
-    luxury: 'Pahalgam Hotel / Radisson Golf Resort Pahalgam (5★ Luxury)'
+    luxury: 'Radisson Golf Resort Pahalgam / Kolahoi Green Luxury (5★ Luxury)'
   },
   sonamarg: {
     standard: 'Hotel Snowland / Villa Himalaya Sonamarg (3★ Standard)',
@@ -79,37 +79,37 @@ const DESTINATION_HOTEL_TIERS: Record<string, { standard: string; deluxe: string
   manali: {
     standard: 'Hotel Snow Park / Treebo Trend Manali (3★ Standard)',
     deluxe: 'The Manali Inn / Apple Country Resort (4★ Deluxe)',
-    luxury: 'The Himalayan Resort & Spa / Solang Valley Resort (5★ Luxury)'
+    luxury: 'Solang Valley Resort / Manuallaya The Resort Spa (5★ Luxury)'
   },
   shimla: {
     standard: 'Hotel Willow Banks / Treebo Prime Shimla (3★ Standard)',
-    deluxe: 'Radisson Hotel Shimla / The Fern Surya Resort (4★ Deluxe)',
-    luxury: 'Wildflower Hall (Oberoi) / The Oberoi Cecil Shimla (5★ Luxury)'
+    deluxe: 'The Fern Surya Resort / Fortune Select Cedar Trail (4★ Deluxe)',
+    luxury: 'Radisson Hotel Shimla / Welcomhotel by ITC Shimla (5★ Luxury)'
   },
   jaipur: {
     standard: 'Sarovar Portico / Treebo Trend Jaipur (3★ Standard)',
-    deluxe: 'Royal Orchid Central / Holiday Inn Jaipur (4★ Deluxe)',
-    luxury: 'ITC Rajputana / Rambagh Palace / Fairmont Jaipur (5★ Luxury)'
+    deluxe: 'Royal Orchid Central / Lemon Tree Premier Jaipur (4★ Deluxe)',
+    luxury: 'Radisson Blu Jaipur / Holiday Inn City Centre (5★ Luxury)'
   },
   udaipur: {
     standard: 'Hotel Lakend / Treebo Trend Udaipur (3★ Standard)',
-    deluxe: 'Radisson Blu Udaipur Palace / Fateh Garh (4★ Deluxe)',
-    luxury: 'The Leela Palace Udaipur / Taj Lake Palace (5★ Luxury)'
+    deluxe: 'Fateh Garh Heritage / Justa Rajputana Udaipur (4★ Deluxe)',
+    luxury: 'Radisson Blu Udaipur Palace / Justa Sajjangarh Resort (5★ Luxury)'
   },
   jodhpur: {
     standard: 'Treebo Trend / The Fern Residency Jodhpur (3★ Standard)',
-    deluxe: 'Ranbanka Palace / Radisson Jodhpur (4★ Deluxe)',
-    luxury: 'Umaid Bhawan Palace / Taj Hari Mahal Jodhpur (5★ Luxury)'
+    deluxe: 'Ranbanka Palace / Zone by The Park Jodhpur (4★ Deluxe)',
+    luxury: 'Radisson Jodhpur / Welcomhotel by ITC Jodhpur (5★ Luxury)'
   },
   jaisalmer: {
     standard: 'Hotel Rang Mahal / Royal Desert Camp (3★ Standard)',
-    deluxe: 'Fort Rajwada / Desert Springs Resort (4★ Deluxe)',
-    luxury: 'Suryagarh Jaisalmer / Jaisalmer Marriott Resort (5★ Luxury)'
+    deluxe: 'Desert Springs Resort / Desert Tulip Hotel & Resort (4★ Deluxe)',
+    luxury: 'Jaisalmer Marriott Resort / Fort Rajwada Luxury Wing (5★ Luxury)'
   },
   goa: {
     standard: 'Treebo Trend / Whispering Palms Candolim (3★ Standard)',
     deluxe: 'Fairfield by Marriott / Novotel Goa Candolim (4★ Deluxe)',
-    luxury: 'Taj Exotica Resort & Spa / W Goa Vagator (5★ Luxury)'
+    luxury: 'Radisson Blu Resort Goa / Fairfield by Marriott Benaulim (5★ Luxury)'
   },
   munnar: {
     standard: 'Tea Valley Resort / Fort Munnar (3★ Standard)',
@@ -129,27 +129,27 @@ const DESTINATION_HOTEL_TIERS: Record<string, { standard: string; deluxe: string
   kovalam: {
     standard: 'Hotel Sea Face / Treebo Trend Kovalam (3★ Standard)',
     deluxe: 'Uday Samudra Leisure Beach Hotel (4★ Deluxe)',
-    luxury: 'The Leela Kovalam / Taj Green Cove Resort (5★ Luxury)'
+    luxury: 'Uday Samudra Luxury Suites / Turtle on the Beach (5★ Luxury)'
   },
   haridwar: {
     standard: 'Hotel Alpana / Treebo Trend Haridwar (3★ Standard)',
-    deluxe: 'Radisson Blu Haridwar / Godwin Hotel (4★ Deluxe)',
-    luxury: 'Amatra by the Ganges / Pilibhit House (IHCL) (5★ Luxury)'
+    deluxe: 'Golden Tulip Haridwar / Regenta Central (4★ Deluxe)',
+    luxury: 'Radisson Blu Haridwar / Godwin Hotel (5★ Luxury)'
   },
   rishikesh: {
     standard: 'Hotel Ganga Kinare / Treebo Prime Rishikesh (3★ Standard)',
-    deluxe: 'Aloha On The Ganges / Sterling Palm Bliss (4★ Deluxe)',
-    luxury: 'Ananda in the Himalayas / Taj Rishikesh Resort (5★ Luxury)'
+    deluxe: 'The Grand Shiva / Regenta Inn On The Ganges (4★ Deluxe)',
+    luxury: 'Aloha On The Ganges / Sterling Palm Bliss (5★ Luxury)'
   },
   mussoorie: {
     standard: 'Hotel SunGrace / Treebo Trend Mussoorie (3★ Standard)',
     deluxe: 'The Fern Brentwood Resort / Fortune Resort Grace (4★ Deluxe)',
-    luxury: 'JW Marriott Mussoorie Walnut Grove / Jaypee Residency (5★ Luxury)'
+    luxury: 'Jaypee Residency Manor / Welcomhotel The Savoy (5★ Luxury)'
   },
   nainital: {
     standard: 'Hotel Himalaya / Treebo Trend Nainital (3★ Standard)',
     deluxe: 'The Naini Retreat / Shervani Hilltop (4★ Deluxe)',
-    luxury: 'The Manu Maharani / Taj Corbett Resort & Spa (5★ Luxury)'
+    luxury: 'The Manu Maharani / Shervani Hilltop Luxury Wing (5★ Luxury)'
   },
   kedarnath: {
     standard: 'GMVN Tourist Bungalow / Hotel Kedarpuram (3★ Standard)',
@@ -164,12 +164,12 @@ const DESTINATION_HOTEL_TIERS: Record<string, { standard: string; deluxe: string
   portblair: {
     standard: 'Hotel Megapode Nest / Treebo Trend Port Blair (3★ Standard)',
     deluxe: 'Symphony Samudra / Peerless Sarovar Portico (4★ Deluxe)',
-    luxury: 'Welcomhotel by ITC Bay Island Port Blair (5★ Luxury)'
+    luxury: 'Symphony Samudra Luxury Suites / Peerless Sarovar (5★ Luxury)'
   },
   havelock: {
     standard: 'Havelock Holiday Beach Resort (3★ Standard)',
     deluxe: 'Symphony Palms Beach Resort / Silver Sand Beach (4★ Deluxe)',
-    luxury: 'Taj Exotica Resort & Spa Andamans (5★ Luxury)'
+    luxury: 'Symphony Palms Beach Resort / Silver Sand Luxury (5★ Luxury)'
   },
   neil: {
     standard: 'Tango Beach Resort Neil Island (3★ Standard)',
@@ -179,17 +179,17 @@ const DESTINATION_HOTEL_TIERS: Record<string, { standard: string; deluxe: string
   leh: {
     standard: 'Hotel Singge Palace / Treebo Trend Leh (3★ Standard)',
     deluxe: 'The Grand Dragon Ladakh / Zen Ladakh (4★ Deluxe)',
-    luxury: 'The Chamba Camp Thiksey / Ladakh Sarai Luxury Resort (5★ Luxury)'
+    luxury: 'The Grand Dragon Luxury Suites / Zen Ladakh (5★ Luxury)'
   },
   agra: {
     standard: 'Hotel Howard Plaza The Fern / Treebo Trend Agra (3★ Standard)',
-    deluxe: 'Crystal Sarovar Premiere / DoubleTree by Hilton Agra (4★ Deluxe)',
-    luxury: 'The Oberoi Amarvilas / ITC Mughal Agra (5★ Luxury)'
+    deluxe: 'Crystal Sarovar Premiere / Four Points by Sheraton (4★ Deluxe)',
+    luxury: 'DoubleTree by Hilton Agra / Crystal Sarovar (5★ Luxury)'
   },
   amritsar: {
     standard: 'Hotel City Park / Treebo Trend Amritsar (3★ Standard)',
-    deluxe: 'Radisson Blu Amritsar / Best Western Plus (4★ Deluxe)',
-    luxury: 'Taj Swarna / Hyatt Regency Amritsar (5★ Luxury)'
+    deluxe: 'Best Western Plus / Bloom Hotel Amritsar (4★ Deluxe)',
+    luxury: 'Radisson Blu Amritsar / Hyatt Regency Amritsar (5★ Luxury)'
   },
   mathura: {
     standard: 'Hotel Brijwasi Royal / Treebo Trend Mathura (3★ Standard)',
@@ -229,12 +229,12 @@ const DESTINATION_HOTEL_TIERS: Record<string, { standard: string; deluxe: string
   ooty: {
     standard: 'Hotel Lakeview / Treebo Trend Ooty (3★ Standard)',
     deluxe: 'Gem Park Ooty / Fortune Resort Sullivan Court (4★ Deluxe)',
-    luxury: 'Savoy - IHCL SeleQtions / Sterling Ooty Elk Hill (5★ Luxury)'
+    luxury: 'Fortune Resort Sullivan Court / Sterling Ooty Elk Hill (5★ Luxury)'
   },
   coorg: {
     standard: 'Hotel Coorg International / Treebo Trend (3★ Standard)',
     deluxe: 'The Tamara Coorg / Heritage Resort Coorg (4★ Deluxe)',
-    luxury: 'Evolve Back Coorg / Taj Madikeri Resort & Spa (5★ Luxury)'
+    luxury: 'The Tamara Coorg / Heritage Luxury Resort Coorg (5★ Luxury)'
   },
   kodaikanal: {
     standard: 'Hotel Kodai International / Treebo Trend (3★ Standard)',
@@ -244,7 +244,7 @@ const DESTINATION_HOTEL_TIERS: Record<string, { standard: string; deluxe: string
   tirupati: {
     standard: 'Hotel Bliss / Treebo Trend Tirupati (3★ Standard)',
     deluxe: 'Fortune Select Grand Ridge / Marasa Sarovar Premiere (4★ Deluxe)',
-    luxury: 'Taj Tirupati / Minerva Grand Tirupati (5★ Luxury)'
+    luxury: 'Minerva Grand Tirupati / Fortune Select Grand (5★ Luxury)'
   },
   shirdi: {
     standard: 'Hotel Sai Leela / Treebo Trend Shirdi (3★ Standard)',
@@ -253,13 +253,13 @@ const DESTINATION_HOTEL_TIERS: Record<string, { standard: string; deluxe: string
   },
   delhi: {
     standard: 'Bloomrooms @ New Delhi Station / Treebo Trend (3★ Standard)',
-    deluxe: 'Radisson Blu Plaza Delhi Airport / Lemon Tree Premier (4★ Deluxe)',
-    luxury: 'The Leela Palace New Delhi / The Taj Mahal Hotel (5★ Luxury)'
+    deluxe: 'Lemon Tree Premier / Fortune Park East Delhi (4★ Deluxe)',
+    luxury: 'Radisson Blu Plaza Delhi Airport / The Grand New Delhi (5★ Luxury)'
   },
   mumbai: {
     standard: 'Suba International / Treebo Trend Mumbai (3★ Standard)',
     deluxe: 'Courtyard by Marriott Mumbai / Radisson Blu (4★ Deluxe)',
-    luxury: 'The Taj Mahal Palace / JW Marriott Juhu (5★ Luxury)'
+    luxury: 'Courtyard by Marriott Mumbai / Radisson Blu Mumbai (5★ Luxury)'
   }
 };
 
@@ -626,12 +626,108 @@ export function PackageDetailClientView({ params }: { params: { destination: str
     effectiveAdultsCount === 4 ? 1.05 :
     1.00;
 
-  const tierMultiplier = tourTier === 'standard' ? 0.85 : tourTier === 'deluxe' ? 1.0 : 1.45;
-  const dealBase = Math.min(pkg.startingPrice, pkg.discountPrice || pkg.startingPrice);
-  const mrpBase = Math.max(pkg.startingPrice, pkg.discountPrice || Math.round(dealBase * 1.25));
-  const basePricePerPerson = Math.round(dealBase * paxMultiplier * tierMultiplier);
-  const originalPricePerPerson = Math.round(mrpBase * paxMultiplier * tierMultiplier);
-  const discountPercent = Math.max(5, Math.round(((originalPricePerPerson - basePricePerPerson) / originalPricePerPerson) * 100));
+  // Comprehensive B2B Pricing Engine (incorporates seasonal rates, room tier, outstation cabs & 22% margin)
+  const calculateTierPrice = (tier: 'standard' | 'deluxe' | 'luxury') => {
+    if (pkg.isInternational) {
+      const intlMultiplier = tier === 'standard' ? 0.85 : tier === 'deluxe' ? 1.0 : 1.45;
+      return Math.round(pkg.startingPrice * intlMultiplier);
+    }
+
+    const dest = (pkg.destinationSlug || pkg.destination || '').toLowerCase();
+    const nights = Math.max(1, pkg.durationNights || 1);
+    const days = Math.max(1, pkg.durationDays || (nights + 1));
+
+    const isPilgrim =
+      dest.includes('ayodhya') ||
+      dest.includes('varanasi') ||
+      dest.includes('mathura') ||
+      dest.includes('vrindavan') ||
+      dest.includes('ujjain') ||
+      dest.includes('char-dham') ||
+      dest.includes('haridwar') ||
+      dest.includes('rishikesh') ||
+      dest.includes('dwarka') ||
+      dest.includes('puri') ||
+      dest.includes('tirupati') ||
+      dest.includes('shirdi');
+
+    const isHill =
+      dest.includes('kashmir') ||
+      dest.includes('himachal') ||
+      dest.includes('manali') ||
+      dest.includes('shimla') ||
+      dest.includes('ladakh') ||
+      dest.includes('sikkim') ||
+      dest.includes('darjeeling') ||
+      dest.includes('uttarakhand') ||
+      dest.includes('mussoorie') ||
+      dest.includes('nainital');
+
+    const isLeisure =
+      dest.includes('goa') ||
+      dest.includes('kerala') ||
+      dest.includes('rajasthan') ||
+      dest.includes('jaipur') ||
+      dest.includes('udaipur') ||
+      dest.includes('jaisalmer') ||
+      dest.includes('jodhpur') ||
+      dest.includes('andaman');
+
+    // 1. Hotel Room Rate per Room / Night (Twin Sharing = 2 Pax)
+    let roomRate = 3400; // Base 3★ CP
+    if (tier === 'standard') {
+      // 3-Star: Pilgrimage MAP ₹3,800, Hill MAP ₹4,200, Winter Leisure ₹4,000, Plains ₹3,200
+      roomRate = isPilgrim ? 3800 : isHill ? 4200 : isLeisure ? 4000 : 3200;
+    } else if (tier === 'deluxe') {
+      // 4-Star: Pilgrimage MAP ₹6,800, Hill MAP ₹7,800, Winter Leisure ₹7,500, Plains ₹5,800
+      roomRate = isPilgrim ? 6800 : isHill ? 7800 : isLeisure ? 7500 : 5800;
+    } else {
+      // 5-Star (Commercial 5★): Pilgrimage ₹13,000, Hill ₹15,000, Winter Leisure ₹14,500, Plains ₹11,500
+      roomRate = isPilgrim ? 13000 : isHill ? 15000 : isLeisure ? 14500 : 11500;
+    }
+
+    // 2. Outstation Cab Rate per Day (Peak Season / Multi-day 250 km running)
+    let cabRate = 3000;
+    if (tier === 'standard') {
+      cabRate = isHill ? (dest.includes('ladakh') ? 7500 : 3800) : 3000; // Sedan
+    } else if (tier === 'deluxe') {
+      cabRate = isHill ? (dest.includes('ladakh') ? 8500 : 5000) : 4200; // Ertiga / Innova Std
+    } else {
+      cabRate = isHill ? (dest.includes('ladakh') ? 9500 : 6500) : 5800; // Innova Crysta
+    }
+
+    // 3. Special Add-ons (Houseboats, Desert Camps, Makruzz Ferry)
+    let specialAddon = 0;
+    if (dest.includes('kashmir')) {
+      specialAddon = tier === 'standard' ? 5000 : tier === 'deluxe' ? 7500 : 10000;
+    } else if (dest.includes('kerala')) {
+      specialAddon = tier === 'standard' ? 8500 : tier === 'deluxe' ? 12000 : 16000;
+    } else if (dest.includes('jaisalmer') || (dest.includes('rajasthan') && nights >= 4)) {
+      specialAddon = tier === 'standard' ? 3500 : tier === 'deluxe' ? 5000 : 7500;
+    } else if (dest.includes('andaman')) {
+      specialAddon = 5200 * 2; // Makruzz cruise ferry for 2 pax
+    } else if (dest.includes('corbett') || dest.includes('ranthambore') || dest.includes('gir')) {
+      specialAddon = 7500; // Dedicated Jeep Safari
+    }
+
+    // 4. Sightseeing Passes & Tolls buffer (per couple)
+    const bufferCost = (tier === 'standard' ? 1200 : tier === 'deluxe' ? 1800 : 2500) * 2;
+
+    const totalHotelCost = (nights * roomRate) + specialAddon;
+    const totalCabCost = days * cabRate;
+    const netCostForTwo = totalHotelCost + totalCabCost + bufferCost;
+
+    // 22% Guaranteed Agency Profit Margin
+    const sellingPriceForTwo = netCostForTwo * 1.22;
+    const calculatedPerPerson = Math.round((sellingPriceForTwo / 2) / 100) * 100;
+
+    return calculatedPerPerson;
+  };
+
+  const calculatedBaseRate = calculateTierPrice(tourTier);
+  const basePricePerPerson = Math.round(calculatedBaseRate * paxMultiplier);
+  const originalPricePerPerson = Math.round(basePricePerPerson * 1.25);
+  const discountPercent = 20;
 
   // Dynamic Tier-Based Hotel Resolution Helper (MakeMyTrip 3-Star, 4-Star & 5-Star Tiers)
   const getTierHotelName = (
@@ -934,7 +1030,7 @@ export function PackageDetailClientView({ params }: { params: { destination: str
     // Pass encoded passenger list & applied coupon discount to checkout
     const encodedPassengers = encodeURIComponent(JSON.stringify(passengers));
     router.push(
-      `/booking/checkout?slug=${pkg.slug}&pax=${totalTravellersCount}&tier=${tourTier}&date=${travelDate}&city=${encodeURIComponent(joiningCity)}&lead=${encodeURIComponent(leadName)}&paxData=${encodedPassengers}&coupon=${appliedCoupon?.code || ''}&discount=${couponDiscountAmount}`
+      `/booking/checkout?slug=${pkg.slug}&pax=${totalTravellersCount}&tier=${tourTier}&price=${basePricePerPerson}&date=${travelDate}&city=${encodeURIComponent(joiningCity)}&lead=${encodeURIComponent(leadName)}&paxData=${encodedPassengers}&coupon=${appliedCoupon?.code || ''}&discount=${couponDiscountAmount}`
     );
   };
 
@@ -966,7 +1062,7 @@ export function PackageDetailClientView({ params }: { params: { destination: str
     })),
     offers: {
       '@type': 'Offer',
-      price: dealBase,
+      price: basePricePerPerson,
       priceCurrency: 'INR',
       availability: 'https://schema.org/InStock',
       url: typeof window !== 'undefined' ? window.location.href : `https://www.tripcustomizer.com/holidays/${pkg.destinationSlug}/${pkg.slug}`,

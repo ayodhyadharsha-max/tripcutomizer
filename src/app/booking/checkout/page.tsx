@@ -68,6 +68,7 @@ export default function BookingCheckoutPage() {
       }
 
       const tierParam = params.get('tier') || 'deluxe';
+      const parsedUrlPrice = priceStr ? parseInt(priceStr, 10) : null;
       const tierMultiplier = tierParam === 'standard' ? 0.85 : tierParam === 'super_deluxe' || tierParam === 'luxury' ? 1.45 : 1.0;
       const travelersCount = paxStr ? Math.max(1, parseInt(paxStr, 10)) : 2;
       const paxMultiplier =
@@ -82,7 +83,7 @@ export default function BookingCheckoutPage() {
           name: matched.name,
           destination: matched.destination,
           duration: `${matched.durationDays} Days / ${matched.durationNights} Nights`,
-          pricePerPerson: Math.round(matched.startingPrice * paxMultiplier * tierMultiplier),
+          pricePerPerson: parsedUrlPrice || Math.round(matched.startingPrice * paxMultiplier * tierMultiplier),
           travelersCount: travelersCount,
         });
         setHasBookingContext(true);
