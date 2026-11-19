@@ -646,14 +646,18 @@ function computeB2BPackagePricing(
     roomNightRate = Math.round(roomNightRate * 1.10);
   }
 
-  // Special experience supplement per booking (Houseboats, Desert Safari Tents)
+  // Special experience supplement per booking (Houseboats, Desert Safari Tents, Ferries, Safaris)
   let specialStay = 0;
   if (sector.destinationSlug === 'kashmir') {
-    specialStay = 7500; // 1N Dal Lake Luxury Houseboat
+    specialStay = 7500; // 1N Dal Lake Luxury 4★ Houseboat (MAP)
   } else if (sector.destinationSlug === 'kerala') {
-    specialStay = 8500; // 1N Alleppey Houseboat with all meals
-  } else if (sector.destinationSlug === 'rajasthan' && pkgIndex % 2 === 0) {
-    specialStay = 4500; // 1N Jaisalmer Desert Camp
+    specialStay = 11500; // 1N Alleppey 1-Bedroom Private Houseboat (All Meals)
+  } else if ((sector.destinationSlug === 'rajasthan' || sector.destinationSlug === 'jaisalmer') && pkgIndex % 2 === 0) {
+    specialStay = 4500; // 1N Jaisalmer Desert Camp (Swiss Tent + Camel + Folk Dance + Dinner)
+  } else if (sector.destinationSlug === 'andaman') {
+    specialStay = 10400; // Makruzz / Nautika Private Cruise Ferry for 2 pax (PB -> Havelock -> Neil -> PB)
+  } else if (['corbett', 'ranthambore', 'sasan-gir', 'kaziranga'].includes(sector.destinationSlug)) {
+    specialStay = 7500; // Dedicated Jungle Jeep Safari (Permit + Gypsy + Guide)
   }
 
   const totalHotelCost = (nights * roomNightRate) + specialStay;
@@ -814,6 +818,8 @@ function generateSynthesizedPackage(
       'Entry tickets for monuments, camera fees, and optional sports',
       'Personal expenses such as laundry, phone calls, and alcoholic drinks',
       'Local Taxi Union vehicles (e.g. Pahalgam Aru/Betaab Valley, Gulmarg Phase 2, Rohtang Pass, Nathula Pass) as per local government mandate payable on actuals',
+      'Wildlife Jeep Safari permits (non-refundable upon booking as per Forest Dept rules)',
+      'Dec 20 – Jan 5 Christmas/New Year Gala Dinner & peak supplements as mandated by resorts',
       '5% GST Government Tax (Calculated transparently at checkout)'
     ],
     theme: themeObj.theme,
