@@ -720,7 +720,7 @@ export function HolidayListingView({
                   variant="primary"
                   className="w-full font-bold text-xs py-3"
                 >
-                  Apply Filters ({filteredPackages.length} Packages)
+                  Apply Filters ({filteredPackages.length.toLocaleString('en-IN')} Packages)
                 </Button>
               </div>
             </div>
@@ -741,7 +741,7 @@ export function HolidayListingView({
             {/* Header Control Bar */}
             <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
               <span className="font-bold text-slate-800">
-                Showing <span className="text-brand-600 font-black">{filteredPackages.length}</span> Tour Packages
+                Showing <span className="text-brand-600 font-black">{filteredPackages.length.toLocaleString('en-IN')}</span> Tour Packages
               </span>
 
               <div className="flex items-center space-x-2 w-full sm:w-auto justify-end">

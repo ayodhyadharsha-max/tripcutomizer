@@ -783,12 +783,9 @@ function initializeCatalog(): { all: HolidayPackage[]; lookup: Map<string, Holid
     lookup.set(pkg.id.toLowerCase().replace(/^pkg-/, ''), pkg);
   }
 
-  // 2. TIER 2: Synthesize representative diverse packages per sector (high-performance 12 tiers per sector)
-  const MAX_SYNTH_PER_SECTOR = 12;
-
+  // 2. TIER 2: Synthesize complete verified OTA packages per sector (Full 5,500+ pan-India & global inventory)
   OTA_DOMESTIC_SECTORS.forEach((sector, sIdx) => {
-    const limit = Math.min(sector.count, MAX_SYNTH_PER_SECTOR);
-    for (let pIdx = 0; pIdx < limit; pIdx++) {
+    for (let pIdx = 0; pIdx < sector.count; pIdx++) {
       const pkg = generateSynthesizedPackage(sector, sIdx, pIdx);
       all.push(pkg);
       lookup.set(pkg.id.toLowerCase(), pkg);
@@ -797,8 +794,7 @@ function initializeCatalog(): { all: HolidayPackage[]; lookup: Map<string, Holid
   });
 
   OTA_INTERNATIONAL_SECTORS.forEach((sector, sIdx) => {
-    const limit = Math.min(sector.count, MAX_SYNTH_PER_SECTOR);
-    for (let pIdx = 0; pIdx < limit; pIdx++) {
+    for (let pIdx = 0; pIdx < sector.count; pIdx++) {
       const pkg = generateSynthesizedPackage(sector, sIdx + OTA_DOMESTIC_SECTORS.length, pIdx);
       all.push(pkg);
       lookup.set(pkg.id.toLowerCase(), pkg);
@@ -817,7 +813,7 @@ export function getAllCatalogPackages(): HolidayPackage[] {
 }
 
 export function getCatalogPackageCount(): number {
-  return 5500;
+  return initializeCatalog().all.length;
 }
 
 export function findCatalogPackage(
