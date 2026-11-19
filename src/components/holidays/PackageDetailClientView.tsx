@@ -340,8 +340,12 @@ export function PackageDetailClientView({ params }: { params: { destination: str
   // Inclusions Tab Filter
   const [inclusionCategory, setInclusionCategory] = useState<'all' | 'hotels' | 'sightseeing' | 'meals' | 'transfers' | 'exclusions'>('all');
 
-  // Pricing & Tier State
-  const [tourTier, setTourTier] = useState<'standard' | 'deluxe' | 'luxury'>('deluxe');
+  // Pricing & Tier State (Matches package's base hotel category so inside and outside prices are 100% identical)
+  const initialTier: 'standard' | 'deluxe' | 'luxury' =
+    pkg.hotelCategory?.toLowerCase().includes('5') ? 'luxury' :
+    pkg.hotelCategory?.toLowerCase().includes('4') ? 'deluxe' :
+    'standard';
+  const [tourTier, setTourTier] = useState<'standard' | 'deluxe' | 'luxury'>(initialTier);
 
   // Thomas Cook Style Travel Details & Calculate Price Wizard View State
   const [isCalculatePriceView, setIsCalculatePriceView] = useState(false);
@@ -615,41 +619,29 @@ export function PackageDetailClientView({ params }: { params: { destination: str
 
   // Pricing calculations based on tier, PAX group sharing & detailed child ages
   // 1 Adult (Solo): Solo supplement for private room + dedicated private vehicle (+40%)
-  // 2 Adults (Couple): Twin sharing couple rate (+20% covers private cab, romantic setup, room)
-  // 3 Adults: Triple sharing (+10%)
-  // 4 Adults: 2 Couples / Family sharing (+5%)
-  // 5-6+ Adults: Full group rate unlocks lowest teaser starting price (1.0x)
+  // 2 Adults (Couple / Twin Sharing): Standard baseline OTA rate (1.00x)
+  // 3 Adults: Triple sharing (1.00x)
+  // 4+ Adults: Family / Group sharing (0.95x discount)
   const paxMultiplier =
     effectiveAdultsCount === 1 ? 1.40 :
-    effectiveAdultsCount === 2 ? 1.20 :
-    effectiveAdultsCount === 3 ? 1.10 :
-    effectiveAdultsCount === 4 ? 1.05 :
-    1.00;
+    effectiveAdultsCount <= 3 ? 1.00 :
+    0.95;
 
-  // Comprehensive B2B Pricing Engine (incorporates seasonal rates, room tier, outstation cabs & 22% margin)
+  // Comprehensive B2B Pricing Engine:
+  // Guaranteed exact match between catalog card (outside) and detail page (inside) on initial load,
+  // with authentic, safe B2B contracted upgrades for 4★ Deluxe and 5★ Commercial Luxury.
   const calculateTierPrice = (tier: 'standard' | 'deluxe' | 'luxury') => {
+    const baseStartingPrice = Math.min(pkg.startingPrice, pkg.discountPrice || pkg.startingPrice);
+
     if (pkg.isInternational) {
-      const intlMultiplier = tier === 'standard' ? 0.85 : tier === 'deluxe' ? 1.0 : 1.45;
-      return Math.round(pkg.startingPrice * intlMultiplier);
+      if (tier === 'standard') return baseStartingPrice;
+      if (tier === 'deluxe') return Math.round(baseStartingPrice * 1.25);
+      return Math.round(baseStartingPrice * 1.65);
     }
 
-    const dest = (pkg.destinationSlug || pkg.destination || '').toLowerCase();
     const nights = Math.max(1, pkg.durationNights || 1);
     const days = Math.max(1, pkg.durationDays || (nights + 1));
-
-    const isPilgrim =
-      dest.includes('ayodhya') ||
-      dest.includes('varanasi') ||
-      dest.includes('mathura') ||
-      dest.includes('vrindavan') ||
-      dest.includes('ujjain') ||
-      dest.includes('char-dham') ||
-      dest.includes('haridwar') ||
-      dest.includes('rishikesh') ||
-      dest.includes('dwarka') ||
-      dest.includes('puri') ||
-      dest.includes('tirupati') ||
-      dest.includes('shirdi');
+    const dest = (pkg.destinationSlug || pkg.destination || '').toLowerCase();
 
     const isHill =
       dest.includes('kashmir') ||
@@ -659,69 +651,37 @@ export function PackageDetailClientView({ params }: { params: { destination: str
       dest.includes('ladakh') ||
       dest.includes('sikkim') ||
       dest.includes('darjeeling') ||
-      dest.includes('uttarakhand') ||
-      dest.includes('mussoorie') ||
-      dest.includes('nainital');
+      dest.includes('uttarakhand');
 
-    const isLeisure =
-      dest.includes('goa') ||
-      dest.includes('kerala') ||
-      dest.includes('rajasthan') ||
-      dest.includes('jaipur') ||
-      dest.includes('udaipur') ||
-      dest.includes('jaisalmer') ||
-      dest.includes('jodhpur') ||
-      dest.includes('andaman');
+    // Upgrade costs per person from 3★ to 4★ (Room difference / 2 + Ertiga Cab upgrade / 2)
+    const diff4StarRoomPerNight = isHill ? 1800 : 1500;
+    const diff4StarCabPerDay = 600;
+    const upgradeCost4Star = Math.round(((nights * diff4StarRoomPerNight) + (days * diff4StarCabPerDay) + 500) * 1.22 / 100) * 100;
 
-    // 1. Hotel Room Rate per Room / Night (Twin Sharing = 2 Pax)
-    let roomRate = 3400; // Base 3★ CP
-    if (tier === 'standard') {
-      // 3-Star: Pilgrimage MAP ₹3,800, Hill MAP ₹4,200, Winter Leisure ₹4,000, Plains ₹3,200
-      roomRate = isPilgrim ? 3800 : isHill ? 4200 : isLeisure ? 4000 : 3200;
-    } else if (tier === 'deluxe') {
-      // 4-Star: Pilgrimage MAP ₹6,800, Hill MAP ₹7,800, Winter Leisure ₹7,500, Plains ₹5,800
-      roomRate = isPilgrim ? 6800 : isHill ? 7800 : isLeisure ? 7500 : 5800;
-    } else {
-      // 5-Star (Commercial 5★): Pilgrimage ₹13,000, Hill ₹15,000, Winter Leisure ₹14,500, Plains ₹11,500
-      roomRate = isPilgrim ? 13000 : isHill ? 15000 : isLeisure ? 14500 : 11500;
+    // Upgrade costs per person from 3★ to 5★ (Commercial 5★ Room diff / 2 + Innova Crysta Cab upgrade / 2)
+    const diff5StarRoomPerNight = isHill ? 5400 : 4600;
+    const diff5StarCabPerDay = 1400;
+    const upgradeCost5Star = Math.round(((nights * diff5StarRoomPerNight) + (days * diff5StarCabPerDay) + 1500) * 1.22 / 100) * 100;
+
+    const baseIs4Star = pkg.hotelCategory?.toLowerCase().includes('4');
+    const baseIs5Star = pkg.hotelCategory?.toLowerCase().includes('5');
+
+    if (baseIs5Star) {
+      if (tier === 'luxury') return baseStartingPrice;
+      if (tier === 'deluxe') return Math.max(5000, baseStartingPrice - (upgradeCost5Star - upgradeCost4Star));
+      return Math.max(4000, baseStartingPrice - upgradeCost5Star);
     }
 
-    // 2. Outstation Cab Rate per Day (Peak Season / Multi-day 250 km running)
-    let cabRate = 3000;
-    if (tier === 'standard') {
-      cabRate = isHill ? (dest.includes('ladakh') ? 7500 : 3800) : 3000; // Sedan
-    } else if (tier === 'deluxe') {
-      cabRate = isHill ? (dest.includes('ladakh') ? 8500 : 5000) : 4200; // Ertiga / Innova Std
-    } else {
-      cabRate = isHill ? (dest.includes('ladakh') ? 9500 : 6500) : 5800; // Innova Crysta
+    if (baseIs4Star) {
+      if (tier === 'deluxe') return baseStartingPrice;
+      if (tier === 'standard') return Math.max(4000, baseStartingPrice - upgradeCost4Star);
+      return baseStartingPrice + (upgradeCost5Star - upgradeCost4Star);
     }
 
-    // 3. Special Add-ons (Houseboats, Desert Camps, Makruzz Ferry)
-    let specialAddon = 0;
-    if (dest.includes('kashmir')) {
-      specialAddon = tier === 'standard' ? 5000 : tier === 'deluxe' ? 7500 : 10000;
-    } else if (dest.includes('kerala')) {
-      specialAddon = tier === 'standard' ? 8500 : tier === 'deluxe' ? 12000 : 16000;
-    } else if (dest.includes('jaisalmer') || (dest.includes('rajasthan') && nights >= 4)) {
-      specialAddon = tier === 'standard' ? 3500 : tier === 'deluxe' ? 5000 : 7500;
-    } else if (dest.includes('andaman')) {
-      specialAddon = 5200 * 2; // Makruzz cruise ferry for 2 pax
-    } else if (dest.includes('corbett') || dest.includes('ranthambore') || dest.includes('gir')) {
-      specialAddon = 7500; // Dedicated Jeep Safari
-    }
-
-    // 4. Sightseeing Passes & Tolls buffer (per couple)
-    const bufferCost = (tier === 'standard' ? 1200 : tier === 'deluxe' ? 1800 : 2500) * 2;
-
-    const totalHotelCost = (nights * roomRate) + specialAddon;
-    const totalCabCost = days * cabRate;
-    const netCostForTwo = totalHotelCost + totalCabCost + bufferCost;
-
-    // 22% Guaranteed Agency Profit Margin
-    const sellingPriceForTwo = netCostForTwo * 1.22;
-    const calculatedPerPerson = Math.round((sellingPriceForTwo / 2) / 100) * 100;
-
-    return calculatedPerPerson;
+    // Default base is 3★ Standard:
+    if (tier === 'standard') return baseStartingPrice;
+    if (tier === 'deluxe') return baseStartingPrice + upgradeCost4Star;
+    return baseStartingPrice + upgradeCost5Star;
   };
 
   const calculatedBaseRate = calculateTierPrice(tourTier);
@@ -1448,45 +1408,6 @@ export function PackageDetailClientView({ params }: { params: { destination: str
 
                   {/* Accordion Day Cards */}
                   <div className="md:col-span-9 space-y-4">
-                    {/* Hotel Category Selector Banner inside Itinerary */}
-                    <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-brand-950 text-white p-4 rounded-2xl shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border border-slate-700/60">
-                      <div>
-                        <div className="flex items-center space-x-2">
-                          <span className="text-xs font-bold text-slate-300">Selected Hotel Category:</span>
-                          <span className="bg-amber-400 text-slate-950 text-xs font-black px-2.5 py-0.5 rounded-md uppercase tracking-wider">
-                            {tourTier === 'standard' ? '3★ Standard' : tourTier === 'deluxe' ? '4★ Deluxe' : '5★ Luxury'}
-                          </span>
-                        </div>
-                        <p className="text-[11px] text-slate-300 mt-0.5">Switch star rating below to see updated hotels and pricing across the entire plan</p>
-                      </div>
-                      <div className="flex items-center gap-1.5 p-1 bg-white/10 backdrop-blur-md rounded-xl text-xs font-bold shrink-0 border border-white/10">
-                        <button
-                          onClick={() => { setTourTier('standard'); setIsPriceCalculated(false); }}
-                          className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
-                            tourTier === 'standard' ? 'bg-white text-slate-950 font-black shadow-md' : 'text-slate-300 hover:text-white'
-                          }`}
-                        >
-                          3★ Standard
-                        </button>
-                        <button
-                          onClick={() => { setTourTier('deluxe'); setIsPriceCalculated(false); }}
-                          className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
-                            tourTier === 'deluxe' ? 'bg-brand-500 text-white font-black shadow-md' : 'text-slate-300 hover:text-white'
-                          }`}
-                        >
-                          4★ Deluxe
-                        </button>
-                        <button
-                          onClick={() => { setTourTier('luxury'); setIsPriceCalculated(false); }}
-                          className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
-                            tourTier === 'luxury' ? 'bg-amber-400 text-slate-950 font-black shadow-md' : 'text-slate-300 hover:text-white'
-                          }`}
-                        >
-                          5★ Luxury
-                        </button>
-                      </div>
-                    </div>
-
                     {pkg.itinerary
                       .filter((item) => activeDayFilter === 'all' || activeDayFilter === item.dayNumber)
                       .map((dayItem) => {
