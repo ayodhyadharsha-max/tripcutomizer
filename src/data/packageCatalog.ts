@@ -620,6 +620,69 @@ function slugify(text: string): string {
     .replace(/^-+|-+$/g, '');
 }
 
+function computeB2BPackagePricing(
+  sector: SectorDefinition,
+  hotelTier: string,
+  nights: number,
+  days: number,
+  pkgIndex: number
+): { startingPrice: number; discountPrice: number } {
+  // 1. Hotel Room Rate (User B2B Benchmarks)
+  const isHill = ['kashmir', 'himachal', 'uttarakhand', 'ladakh', 'sikkim', 'darjeeling', 'spiti'].includes(sector.destinationSlug);
+  const isPilgrimage = ['ayodhya', 'varanasi', 'char-dham', 'mathura', 'tirupati', 'ujjain', 'dwarka', 'puri', 'shirdi'].includes(sector.destinationSlug);
+
+  // Default meal plan: Hill stations use MAP (Breakfast + Dinner), others use CP (Room + Breakfast)
+  let roomNightRate = 3200; // 3 Star CP
+  if (hotelTier === '3 Star') {
+    roomNightRate = isHill ? 4000 : 3200;
+  } else if (hotelTier === '4 Star') {
+    roomNightRate = isHill ? 7200 : 5800;
+  } else if (hotelTier === '5 Star') {
+    roomNightRate = isHill ? 14000 : 11000;
+  }
+
+  // Pilgrimage high-demand circuit adjustment (+10%)
+  if (isPilgrimage) {
+    roomNightRate = Math.round(roomNightRate * 1.10);
+  }
+
+  // Special experience supplement per booking (Houseboats, Desert Safari Tents)
+  let specialStay = 0;
+  if (sector.destinationSlug === 'kashmir') {
+    specialStay = 7500; // 1N Dal Lake Luxury Houseboat
+  } else if (sector.destinationSlug === 'kerala') {
+    specialStay = 8500; // 1N Alleppey Houseboat with all meals
+  } else if (sector.destinationSlug === 'rajasthan' && pkgIndex % 2 === 0) {
+    specialStay = 4500; // 1N Jaisalmer Desert Camp
+  }
+
+  const totalHotelCost = (nights * roomNightRate) + specialStay;
+
+  // 2. Outstation Cab Rate (User B2B Cab Rate Card)
+  let cabRatePerDay = 2800; // Plains Sedan Outstation Rate
+  if (isHill) {
+    cabRatePerDay = ['ladakh', 'spiti'].includes(sector.destinationSlug) ? 7200 : 3500; // Hill Sedan / 4x4
+  } else if (sector.isInternational) {
+    cabRatePerDay = 3500; // International airport & private transfers
+  }
+
+  const totalCabCost = days * cabRatePerDay;
+
+  // Net Cost for 2 Adults (Twin Sharing 1 Room + 1 Dedicated Outstation Cab)
+  const netCostForTwo = totalHotelCost + totalCabCost;
+
+  // 20% Guaranteed Agency Profit Margin
+  const sellingPriceForTwo = netCostForTwo * 1.20;
+
+  // Base per-person starting rate (twin sharing)
+  const startingPrice = Math.round((sellingPriceForTwo / 2) / 100) * 100;
+
+  // MRP Strike-through price (25% higher teaser discount)
+  const discountPrice = Math.round((startingPrice * 1.25) / 100) * 100;
+
+  return { startingPrice, discountPrice };
+}
+
 function generateSynthesizedPackage(
   sector: SectorDefinition,
   sectorIndex: number,
@@ -630,12 +693,13 @@ function generateSynthesizedPackage(
   const durObj = DURATIONS_CONFIG[pkgIndex % DURATIONS_CONFIG.length];
   const hotelTier = HOTEL_TIERS[pkgIndex % HOTEL_TIERS.length];
 
-  const totalTiers = 12;
-  const step = (sector.maxPrice - sector.minPrice) / Math.max(1, totalTiers - 1);
-  const rawStartingPrice = Math.round((sector.minPrice + (pkgIndex % totalTiers) * step) / 100) * 100;
-  const startingPrice = rawStartingPrice > 0 ? rawStartingPrice : sector.minPrice;
-  const discountMultiplier = 1.20 + ((pkgIndex % 4) * 0.05); // 20% to 35% higher original price
-  const discountPrice = Math.round((startingPrice * discountMultiplier) / 100) * 100;
+  const { startingPrice, discountPrice } = computeB2BPackagePricing(
+    sector,
+    hotelTier,
+    durObj.nights,
+    durObj.days,
+    pkgIndex
+  );
 
   const ratings = [4.7, 4.8, 4.9, 4.85, 4.95];
   const rating = ratings[pkgIndex % ratings.length];
@@ -749,6 +813,7 @@ function generateSynthesizedPackage(
       'Flight / Train Tickets (Can be added on request during booking)',
       'Entry tickets for monuments, camera fees, and optional sports',
       'Personal expenses such as laundry, phone calls, and alcoholic drinks',
+      'Local Taxi Union vehicles (e.g. Pahalgam Aru/Betaab Valley, Gulmarg Phase 2, Rohtang Pass, Nathula Pass) as per local government mandate payable on actuals',
       '5% GST Government Tax (Calculated transparently at checkout)'
     ],
     theme: themeObj.theme,
