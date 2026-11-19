@@ -296,7 +296,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 10500,
     "rating": 4.7,
     "reviewsCount": 140,
-    "heroImage": "/destinations/hero-beach.jpg",
+    "heroImage": "/destinations/up.jpg",
     "gallery": [],
     "highlights": [
       "Taj Mahal Sunrise Tour with Historian Guide",
@@ -726,7 +726,8 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "reviewsCount": 310,
     "heroImage": "/destinations/char-dham.jpg",
     "gallery": [
-      "/destinations/verified/varanasi-ganga-aarti.jpg"
+      "/destinations/up.jpg",
+      "/destinations/rajasthan.jpg"
     ],
     "highlights": [
       "Yamunotri, Gangotri, Kedarnath & Badrinath",
@@ -1782,7 +1783,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 15500,
     "rating": 4.9,
     "reviewsCount": 280,
-    "heroImage": "/destinations/hero-beach.jpg",
+    "heroImage": "/destinations/himachal.jpg",
     "gallery": [],
     "highlights": [
       "2N Jibhi Wooden Cottage Stay",
@@ -1897,7 +1898,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 29500,
     "rating": 4.9,
     "reviewsCount": 210,
-    "heroImage": "/destinations/hero-beach.jpg",
+    "heroImage": "/destinations/adventure.jpg",
     "gallery": [],
     "highlights": [
       "Shimla-Spiti-Manali 4x4 Chauffeur Road Tour",
@@ -2061,7 +2062,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 9900,
     "rating": 4.9,
     "reviewsCount": 320,
-    "heroImage": "/destinations/hero-beach.jpg",
+    "heroImage": "/destinations/spiritual.jpg",
     "gallery": [],
     "highlights": [
       "Golden Temple VIP Darshan & Night Illumination",
@@ -2458,7 +2459,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 14200,
     "rating": 4.8,
     "reviewsCount": 260,
-    "heroImage": "/destinations/hero-beach.jpg",
+    "heroImage": "/destinations/spiritual.jpg",
     "gallery": [],
     "highlights": [
       "2N Katra (Bhawan Darshan Yatra Parcha & Battery Car Support)",
@@ -2836,7 +2837,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 8500,
     "rating": 4.9,
     "reviewsCount": 310,
-    "heroImage": "/destinations/hero-beach.jpg",
+    "heroImage": "/destinations/spiritual.jpg",
     "gallery": [],
     "highlights": [
       "Khatu Shyam Ji VIP Darshan",
@@ -2921,7 +2922,8 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "reviewsCount": 165,
     "heroImage": "/destinations/verified/india-ranthambore.jpg",
     "gallery": [
-      "/destinations/verified/india-ranthambore.jpg"
+      "/destinations/rajasthan.jpg",
+      "/destinations/up.jpg"
     ],
     "highlights": [
       "2 Open Gypsy / Canter Safaris in Core Zones 1-5",
@@ -3020,7 +3022,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 16200,
     "rating": 4.7,
     "reviewsCount": 130,
-    "heroImage": "/destinations/hero-beach.jpg",
+    "heroImage": "/destinations/rajasthan.jpg",
     "gallery": [],
     "highlights": [
       "2N Mount Abu Dilwara Marble Temples & Nakki Lake",
@@ -3364,7 +3366,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 15500,
     "rating": 4.8,
     "reviewsCount": 200,
-    "heroImage": "/destinations/hero-beach.jpg",
+    "heroImage": "/destinations/gujarat.jpg",
     "gallery": [],
     "highlights": [
       "1N Kevadia Viewing Gallery Express VIP Tickets & Laser Show",
@@ -3462,7 +3464,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 18500,
     "rating": 4.8,
     "reviewsCount": 140,
-    "heroImage": "/destinations/hero-beach.jpg",
+    "heroImage": "/destinations/wildlife.jpg",
     "gallery": [],
     "highlights": [
       "1 Open Jeep Safari in Sasan Gir National Park",
@@ -3562,7 +3564,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 16800,
     "rating": 4.9,
     "reviewsCount": 350,
-    "heroImage": "/destinations/hero-beach.jpg",
+    "heroImage": "/destinations/spiritual.jpg",
     "gallery": [],
     "highlights": [
       "2N Ujjain Mahakal Corridor & Bhasma Aarti Protocol Guidance",
@@ -3679,7 +3681,8 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "reviewsCount": 130,
     "heroImage": "/destinations/verified/india-khajuraho.jpg",
     "gallery": [
-      "/destinations/verified/india-khajuraho.jpg"
+      "/destinations/verified/varanasi-ganga-aarti.jpg",
+      "/destinations/up.jpg"
     ],
     "highlights": [
       "2N Khajuraho Western Group Temples & Light Show",
@@ -3810,7 +3813,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 22000,
     "rating": 4.7,
     "reviewsCount": 145,
-    "heroImage": "/destinations/hero-beach.jpg",
+    "heroImage": "/destinations/luxury.jpg",
     "gallery": [],
     "highlights": [
       "2N Pachmarhi (Bee Falls, Dhoopgarh Sunset)",
@@ -4074,7 +4077,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 14500,
     "rating": 4.8,
     "reviewsCount": 160,
-    "heroImage": "/destinations/hero-beach.jpg",
+    "heroImage": "/destinations/spiritual.jpg",
     "gallery": [],
     "highlights": [
       "Ajanta Caves Rock-cut Buddhist Murals Tour",
@@ -4306,7 +4309,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 17500,
     "rating": 4.7,
     "reviewsCount": 180,
-    "heroImage": "/destinations/hero-beach.jpg",
+    "heroImage": "/destinations/himachal.jpg",
     "gallery": [],
     "highlights": [
       "1N Lonavala Tiger Point & Bhushi Dam",
@@ -4701,7 +4704,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 9500,
     "rating": 4.9,
     "reviewsCount": 480,
-    "heroImage": "/destinations/hero-beach.jpg",
+    "heroImage": "/destinations/spiritual.jpg",
     "gallery": [],
     "highlights": [
       "Special Entry Darshan Ticket (SED Rs 300) Pre-Booked",
@@ -4916,7 +4919,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 16500,
     "rating": 4.8,
     "reviewsCount": 140,
-    "heroImage": "/destinations/hero-beach.jpg",
+    "heroImage": "/destinations/verified/india-khajuraho.jpg",
     "gallery": [],
     "highlights": [
       "2N Hampi Virupaksha Temple, Stone Chariot & Coracle Boat Ride",
@@ -5031,7 +5034,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "discountPrice": 15800,
     "rating": 4.8,
     "reviewsCount": 230,
-    "heroImage": "/destinations/hero-beach.jpg",
+    "heroImage": "/destinations/luxury.jpg",
     "gallery": [],
     "highlights": [
       "2N Hyderabad Charminar, Golconda Fort & Full Day Ramoji VIP Star Experience",
@@ -5294,7 +5297,8 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "reviewsCount": 130,
     "heroImage": "/destinations/verified/india-kaziranga.jpg",
     "gallery": [
-      "/destinations/verified/india-kaziranga.jpg"
+      "/destinations/spiritual.jpg",
+      "/destinations/tamilnadu.jpg"
     ],
     "highlights": [
       "2N Kaziranga 1 Elephant + 1 Jeep Safari (One-Horned Rhino)",
