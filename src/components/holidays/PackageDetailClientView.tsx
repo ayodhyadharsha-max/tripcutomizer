@@ -403,12 +403,71 @@ export function PackageDetailClientView({ params }: { params: { destination: str
     effectiveAdultsCount === 4 ? 1.05 :
     1.00;
 
-  const tierMultiplier = tourTier === 'standard' ? 0.92 : tourTier === 'deluxe' ? 1.0 : 1.25;
+  const tierMultiplier = tourTier === 'standard' ? 0.85 : tourTier === 'deluxe' ? 1.0 : 1.45;
   const dealBase = Math.min(pkg.startingPrice, pkg.discountPrice || pkg.startingPrice);
   const mrpBase = Math.max(pkg.startingPrice, pkg.discountPrice || Math.round(dealBase * 1.25));
   const basePricePerPerson = Math.round(dealBase * paxMultiplier * tierMultiplier);
   const originalPricePerPerson = Math.round(mrpBase * paxMultiplier * tierMultiplier);
   const discountPercent = Math.max(5, Math.round(((originalPricePerPerson - basePricePerPerson) / originalPricePerPerson) * 100));
+
+  // Dynamic Tier-Based Hotel Resolution Helper (MakeMyTrip 3-Star, 4-Star & 5-Star Tiers)
+  const getTierHotelName = (originalHotel: string | undefined, dayTitle: string | undefined, tier: 'standard' | 'deluxe' | 'luxury') => {
+    const raw = (originalHotel || '').toLowerCase();
+    const title = (dayTitle || '').toLowerCase();
+
+    // Check for Houseboat
+    if (raw.includes('houseboat') || title.includes('houseboat') || title.includes('shikara')) {
+      if (tier === 'standard') return 'Dal Lake Standard Heritage Houseboat (3★)';
+      if (tier === 'luxury') return 'Dal Lake Royal Palace Super Deluxe Houseboat (5★ Luxury)';
+      return 'Dal Lake Luxury 4★ Heritage Houseboat (MAP with Dinner)';
+    }
+
+    // Check for Desert Camp
+    if (raw.includes('camp') || raw.includes('tent') || title.includes('dunes') || title.includes('camp')) {
+      if (tier === 'standard') return 'Sam Sand Dunes Comfort Swiss Desert Camp (3★)';
+      if (tier === 'luxury') return 'Suryagarh / Sam Luxury Glamping Desert Palace (5★)';
+      return 'Sam Sand Dunes Royal Swiss Desert Resort (4★ with Cultural Show)';
+    }
+
+    // Extract city from dayTitle or pkg.destination
+    let cityName = pkg.destination?.split(',')[0]?.split(' ')[0] || 'City';
+    if (title.includes('gulmarg')) cityName = 'Gulmarg';
+    else if (title.includes('pahalgam')) cityName = 'Pahalgam';
+    else if (title.includes('srinagar')) cityName = 'Srinagar';
+    else if (title.includes('sonamarg')) cityName = 'Sonamarg';
+    else if (title.includes('manali')) cityName = 'Manali';
+    else if (title.includes('shimla')) cityName = 'Shimla';
+    else if (title.includes('munnar')) cityName = 'Munnar';
+    else if (title.includes('thekkady')) cityName = 'Thekkady';
+    else if (title.includes('alleppey')) cityName = 'Alleppey';
+    else if (title.includes('kovalam')) cityName = 'Kovalam';
+    else if (title.includes('jaipur')) cityName = 'Jaipur';
+    else if (title.includes('jodhpur')) cityName = 'Jodhpur';
+    else if (title.includes('udaipur')) cityName = 'Udaipur';
+    else if (title.includes('jaisalmer')) cityName = 'Jaisalmer';
+    else if (title.includes('havelock')) cityName = 'Havelock Island';
+    else if (title.includes('neil')) cityName = 'Neil Island';
+    else if (title.includes('port blair')) cityName = 'Port Blair';
+    else if (title.includes('varanasi')) cityName = 'Varanasi';
+    else if (title.includes('ayodhya')) cityName = 'Ayodhya';
+    else if (title.includes('prayagraj')) cityName = 'Prayagraj';
+    else if (title.includes('haridwar')) cityName = 'Haridwar';
+    else if (title.includes('rishikesh')) cityName = 'Rishikesh';
+    else if (title.includes('mussoorie')) cityName = 'Mussoorie';
+    else if (title.includes('nainital')) cityName = 'Nainital';
+    else if (title.includes('leh')) cityName = 'Leh';
+    else if (title.includes('nubra')) cityName = 'Nubra Valley';
+    else if (title.includes('pangong')) cityName = 'Pangong Tso';
+    else if (title.includes('goa') || raw.includes('goa')) cityName = 'Goa';
+
+    if (tier === 'standard') {
+      return `${cityName} Sarovar Portico / Treebo Prime Comfort Inn (3★ Standard)`;
+    }
+    if (tier === 'luxury') {
+      return `${cityName} Radisson Blu / Grand Marriott Palace Resort (5★ Luxury)`;
+    }
+    return `${cityName} Lemon Tree Premier / The Fern Resort & Suites (4★ Deluxe)`;
+  };
 
   // Dynamic Total Calculation
   const subtotalBeforeGst = Math.round(
@@ -697,7 +756,7 @@ export function PackageDetailClientView({ params }: { params: { destination: str
               </div>
               <div>
                 <span className="font-bold text-slate-900 block text-[11px]">Hotels Stay</span>
-                <span className="text-[10px] font-semibold text-slate-500">{pkg.hotelCategory} Category</span>
+                <span className="text-[10px] font-bold text-brand-600">{tourTier === 'standard' ? '3★ Standard' : tourTier === 'deluxe' ? '4★ Deluxe' : '5★ Luxury'} Category</span>
               </div>
             </div>
 
@@ -929,10 +988,50 @@ export function PackageDetailClientView({ params }: { params: { destination: str
 
                   {/* Accordion Day Cards */}
                   <div className="md:col-span-9 space-y-4">
+                    {/* Hotel Category Selector Banner inside Itinerary */}
+                    <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-brand-950 text-white p-4 rounded-2xl shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border border-slate-700/60">
+                      <div>
+                        <div className="flex items-center space-x-2">
+                          <span className="text-xs font-bold text-slate-300">Selected Hotel Category:</span>
+                          <span className="bg-amber-400 text-slate-950 text-xs font-black px-2.5 py-0.5 rounded-md uppercase tracking-wider">
+                            {tourTier === 'standard' ? '3★ Standard' : tourTier === 'deluxe' ? '4★ Deluxe' : '5★ Luxury'}
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-slate-300 mt-0.5">Switch star rating below to see updated hotels and pricing across the entire plan</p>
+                      </div>
+                      <div className="flex items-center gap-1.5 p-1 bg-white/10 backdrop-blur-md rounded-xl text-xs font-bold shrink-0 border border-white/10">
+                        <button
+                          onClick={() => { setTourTier('standard'); setIsPriceCalculated(false); }}
+                          className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                            tourTier === 'standard' ? 'bg-white text-slate-950 font-black shadow-md' : 'text-slate-300 hover:text-white'
+                          }`}
+                        >
+                          3★ Standard
+                        </button>
+                        <button
+                          onClick={() => { setTourTier('deluxe'); setIsPriceCalculated(false); }}
+                          className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                            tourTier === 'deluxe' ? 'bg-brand-500 text-white font-black shadow-md' : 'text-slate-300 hover:text-white'
+                          }`}
+                        >
+                          4★ Deluxe
+                        </button>
+                        <button
+                          onClick={() => { setTourTier('luxury'); setIsPriceCalculated(false); }}
+                          className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                            tourTier === 'luxury' ? 'bg-amber-400 text-slate-950 font-black shadow-md' : 'text-slate-300 hover:text-white'
+                          }`}
+                        >
+                          5★ Luxury
+                        </button>
+                      </div>
+                    </div>
+
                     {pkg.itinerary
                       .filter((item) => activeDayFilter === 'all' || activeDayFilter === item.dayNumber)
                       .map((dayItem) => {
                         const isOpen = openDays.includes(dayItem.dayNumber);
+                        const dayHotel = getTierHotelName(dayItem.hotel, dayItem.title, tourTier);
                         return (
                           <Card key={dayItem.dayNumber} className="bg-white border-slate-200/80 rounded-2xl overflow-hidden shadow-xs hover:border-slate-300 transition-all">
                             {/* Card Header Header */}
@@ -952,7 +1051,7 @@ export function PackageDetailClientView({ params }: { params: { destination: str
                                   <div className="flex flex-wrap items-center gap-3 text-[11px] font-semibold text-slate-500">
                                     <span className="flex items-center space-x-1">
                                       <Hotel className="w-3.5 h-3.5 text-brand-600" />
-                                      <span>Stay: {dayItem.hotel || '3/4 Star Resort'}</span>
+                                      <span>Stay: {dayHotel}</span>
                                     </span>
                                     <span className="flex items-center space-x-1">
                                       <Utensils className="w-3.5 h-3.5 text-emerald-600" />
@@ -991,7 +1090,7 @@ export function PackageDetailClientView({ params }: { params: { destination: str
                                 <div className="flex flex-wrap items-center gap-4 text-slate-800 bg-emerald-50/60 p-3 rounded-xl border border-emerald-100">
                                   <div className="flex items-center space-x-1.5 font-bold">
                                     <Hotel className="w-4 h-4 text-emerald-700" />
-                                    <span>Hotel Check-in: {dayItem.hotel || 'Premium Stay'}</span>
+                                    <span>Hotel Check-in: {dayHotel}</span>
                                   </div>
                                   <div className="flex items-center space-x-1.5 font-bold">
                                     <Car className="w-4 h-4 text-emerald-700" />
@@ -1042,17 +1141,29 @@ export function PackageDetailClientView({ params }: { params: { destination: str
                         <Hotel className="w-5 h-5 text-brand-600" />
                         <span>Included Hotels & Accommodations</span>
                       </h3>
-                      <Badge variant="blue">{pkg.hotelCategory} Category</Badge>
+                      <Badge variant="blue">
+                        {tourTier === 'standard' ? '3★ Standard' : tourTier === 'deluxe' ? '4★ Deluxe' : '5★ Luxury'} Category
+                      </Badge>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {pkg.hotels && pkg.hotels.length > 0 ? (
-                        pkg.hotels.map((h, i) => (
-                          <div key={i} className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                            <div className="flex items-center justify-between">
-                              <span className="font-black text-sm text-slate-900">{h.name}</span>
-                              <span className="text-[10px] bg-amber-100 text-amber-900 font-bold px-2 py-0.5 rounded-md">
-                                {h.rating}
+                      {(pkg.hotels && pkg.hotels.length > 0 ? pkg.hotels : [{ name: pkg.destination, city: pkg.destination, rating: pkg.hotelCategory, nights: pkg.durationNights }]).map((h, i) => {
+                        const tierHotelName = getTierHotelName(h.name, h.city, tourTier);
+                        const tierRating = tourTier === 'standard' ? '3★ Standard' : tourTier === 'deluxe' ? '4★ Deluxe' : '5★ Luxury';
+                        const amenities = tourTier === 'standard'
+                          ? 'Free Wi-Fi • Buffet Breakfast • AC Room • 24x7 Hot Water'
+                          : tourTier === 'deluxe'
+                          ? 'Swimming Pool / View • Daily Buffet Breakfast • Tea/Coffee Maker • Room Service'
+                          : 'Luxury Spa • Fine-Dining Restaurant • Private Balcony • Concierge & Valet';
+
+                        return (
+                          <div key={i} className="p-4 bg-slate-50 rounded-2xl border border-slate-200/80 space-y-2 hover:border-brand-300 transition-all">
+                            <div className="flex items-start justify-between gap-2">
+                              <span className="font-black text-sm text-slate-900 leading-snug">{tierHotelName}</span>
+                              <span className={`text-[10px] font-black px-2 py-0.5 rounded-md shrink-0 ${
+                                tourTier === 'standard' ? 'bg-slate-200 text-slate-800' : tourTier === 'deluxe' ? 'bg-brand-100 text-brand-800' : 'bg-amber-100 text-amber-900'
+                              }`}>
+                                {tierRating}
                               </span>
                             </div>
                             <div className="text-xs text-slate-500 flex items-center space-x-2">
@@ -1060,14 +1171,12 @@ export function PackageDetailClientView({ params }: { params: { destination: str
                               <span>•</span>
                               <span>🌙 {h.nights} Nights Stay</span>
                             </div>
+                            <p className="text-[11px] text-emerald-700 font-semibold pt-1 border-t border-slate-200/60">
+                              ✓ {amenities}
+                            </p>
                           </div>
-                        ))
-                      ) : (
-                        <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                          <span className="font-bold text-slate-900 text-xs">Premium 3/4-Star Deluxe Resorts</span>
-                          <p className="text-xs text-slate-500">Handpicked comfortable stays with modern amenities and daily breakfast.</p>
-                        </div>
-                      )}
+                        );
+                      })}
                     </div>
                   </Card>
                 )}

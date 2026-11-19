@@ -68,7 +68,7 @@ export default function BookingCheckoutPage() {
       }
 
       const tierParam = params.get('tier') || 'deluxe';
-      const tierMultiplier = tierParam === 'standard' ? 0.92 : tierParam === 'super_deluxe' || tierParam === 'luxury' ? 1.25 : 1.0;
+      const tierMultiplier = tierParam === 'standard' ? 0.85 : tierParam === 'super_deluxe' || tierParam === 'luxury' ? 1.45 : 1.0;
       const travelersCount = paxStr ? Math.max(1, parseInt(paxStr, 10)) : 2;
       const paxMultiplier =
         travelersCount === 1 ? 1.40 :
