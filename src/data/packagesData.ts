@@ -312,7 +312,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Monument Entry Tickets"
     ],
     "theme": "Family",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -395,7 +395,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Train/Flight"
     ],
     "theme": "Spiritual",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast & Dinner",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -625,7 +625,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Airfare"
     ],
     "theme": "Spiritual",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast & Dinner",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -1070,7 +1070,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Adventure rides"
     ],
     "theme": "Family",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast & Dinner",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -1284,7 +1284,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Elephant Safari"
     ],
     "theme": "Wildlife",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "All Meals Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -1519,7 +1519,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Rohtang Pass Permit"
     ],
     "theme": "Honeymoon",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast & Dinner",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -1668,7 +1668,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Adventure sports"
     ],
     "theme": "Family",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast & Dinner",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -2079,7 +2079,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Train/Flight"
     ],
     "theme": "Spiritual",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -2163,7 +2163,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Flight Tickets"
     ],
     "theme": "Honeymoon",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast & Dinner",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -2312,7 +2312,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Leh Flight"
     ],
     "theme": "Group",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast & Dinner",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -2591,7 +2591,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Airfare"
     ],
     "theme": "Family",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast & Dinner",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -2738,7 +2738,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Train/Flight"
     ],
     "theme": "Family",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast & Dinner",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -2939,7 +2939,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Camera fees"
     ],
     "theme": "Wildlife",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "All Meals Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -3152,7 +3152,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Flight/Train to Bhuj"
     ],
     "theme": "Family",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "All Meals Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -3381,7 +3381,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Flight/Train"
     ],
     "theme": "Family",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -3481,7 +3481,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Camera fees"
     ],
     "theme": "Wildlife",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "All Meals Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -3580,7 +3580,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Flight/Train"
     ],
     "theme": "Spiritual",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast & Dinner",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -3698,7 +3698,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Airfare to Khajuraho"
     ],
     "theme": "Wildlife",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "All Meals Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -4094,7 +4094,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Monuments Fee"
     ],
     "theme": "Family",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -4194,7 +4194,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Flight Fare"
     ],
     "theme": "Honeymoon",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -4325,7 +4325,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal shopping"
     ],
     "theme": "Family",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -4573,7 +4573,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Airfare"
     ],
     "theme": "Honeymoon",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -4721,7 +4721,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal donations"
     ],
     "theme": "Spiritual",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast & Dinner",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -4804,7 +4804,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Train/Flight"
     ],
     "theme": "Honeymoon",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast & Dinner",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -4935,7 +4935,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Airfare"
     ],
     "theme": "Family",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast & Dinner",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -5049,7 +5049,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Airfare"
     ],
     "theme": "Family",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -5164,7 +5164,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Flight to Guwahati"
     ],
     "theme": "Family",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast & Dinner",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -5313,7 +5313,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Airfare"
     ],
     "theme": "Wildlife",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "All Meals Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -5591,7 +5591,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Airfare to IXB"
     ],
     "theme": "Family",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast & Dinner",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -5754,7 +5754,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Train/Flight"
     ],
     "theme": "Spiritual",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast & Dinner",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -5985,7 +5985,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Airfare"
     ],
     "theme": "Honeymoon",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -6133,7 +6133,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Kochi Flight"
     ],
     "theme": "Honeymoon",
-    "hotelCategory": "Luxury Resort",
+    "hotelCategory": "3 Star",
     "mealPlan": "All Meals Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -6268,7 +6268,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses & Tourism Dirham Fee"
     ],
     "theme": "Luxury",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -6419,7 +6419,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Spa Expenses & Flights"
     ],
     "theme": "Honeymoon",
-    "hotelCategory": "4 Star Villa",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -6569,7 +6569,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "National Park Entry Fees"
     ],
     "theme": "Beach & Adventure",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -6735,7 +6735,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Family & Entertainment",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -6870,7 +6870,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Scuba Diving Certification"
     ],
     "theme": "Luxury Honeymoon",
-    "hotelCategory": "5 Star Resort",
+    "hotelCategory": "3 Star",
     "mealPlan": "All Inclusive",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -7004,7 +7004,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "City Tourist Tax (CHF 4/night)"
     ],
     "theme": "Scenic & Heritage",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast & Indian Dinner",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -7186,7 +7186,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "E-Visa Stamping Fee"
     ],
     "theme": "Cultural & Cruise",
-    "hotelCategory": "4 Star Cruise",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast & Cruise Meals",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -7336,7 +7336,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Heritage & Tech",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -7502,7 +7502,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Domestic Flights in Australia"
     ],
     "theme": "Wildlife & Nature",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -7685,7 +7685,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Tourism Tax paid directly at hotel"
     ],
     "theme": "City Escapes & Theme Parks",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast Included",
     "flightsIncluded": true,
     "transfersIncluded": true,
@@ -8553,7 +8553,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses & Tips"
     ],
     "theme": "Nature & Snow Adventure",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Breakfast Only)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -8678,7 +8678,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Lakes & Alpine Adventure",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Breakfast Only)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -8806,7 +8806,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Canyons & Lakes Expedition",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Breakfast Only)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -9352,7 +9352,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Winter Special",
-    "hotelCategory": "3 Star / 4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Breakfast Only)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -9486,7 +9486,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Winter Special",
-    "hotelCategory": "3 Star / 4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Breakfast Only)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -9631,7 +9631,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Winter Special",
-    "hotelCategory": "3 Star / 4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Breakfast Only)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -9785,7 +9785,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Tips"
     ],
     "theme": "Island & Beach",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Breakfast Only)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -10062,7 +10062,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Tips"
     ],
     "theme": "Island & City Panorama",
-    "hotelCategory": "3 Star / 4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "MAP (Breakfast + Selected Lunches)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -10226,7 +10226,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Heritage & Hill Country",
-    "hotelCategory": "3 Star / 4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "MAP (Breakfast + Dinner)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -10377,7 +10377,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Wildlife & Nature",
-    "hotelCategory": "3 Star / 4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "MAP (Breakfast + Dinner)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -10521,7 +10521,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Grand Panorama",
-    "hotelCategory": "3 Star / 4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "MAP (Breakfast + Dinner)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -12530,7 +12530,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses & Tips"
     ],
     "theme": "Caucasus Scenic & Cultural",
-    "hotelCategory": "3 Star / 4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Daily Breakfast)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -12668,7 +12668,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Caucasus Heritage & Mountains",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Daily Breakfast)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -12816,7 +12816,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Black Sea Coast & Mountains",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Daily Breakfast)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -12981,7 +12981,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Private Luxury & Pop Culture",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Daily Breakfast)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -13114,7 +13114,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Private Family & Winter Romance",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Daily Breakfast)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -13243,7 +13243,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses & Tips"
     ],
     "theme": "Alpine Village & Traditions",
-    "hotelCategory": "3 Star / 4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Daily Breakfast)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -13378,7 +13378,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Kansai Cultural Group",
-    "hotelCategory": "3 Star / 4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Daily Breakfast)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -13506,7 +13506,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Hokkaido Nature & Wildlife",
-    "hotelCategory": "3 Star / 4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Daily Breakfast)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -13634,7 +13634,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Tokyo Metropolis & Mt Fuji",
-    "hotelCategory": "3 Star / 4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Daily Breakfast)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -13765,7 +13765,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Metropolitan & Highland Nature",
-    "hotelCategory": "3 Star / 4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Daily Breakfast)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -13907,7 +13907,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Grand Heritage & Highlands",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Daily Breakfast)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -14589,7 +14589,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Winter Luxury & Desert Safari",
-    "hotelCategory": "3 Star / 4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP + Special Dinners",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -14728,7 +14728,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Winter Grandeur & Shopping",
-    "hotelCategory": "3 Star / 4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP + Special Dinners",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -14873,7 +14873,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Comprehensive Arabia",
-    "hotelCategory": "3 Star / 4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP + Special Dinners",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -15031,7 +15031,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Pyramid Interior Entry Tickets"
     ],
     "theme": "Ancient Pyramids & Desert Safari",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Daily Breakfast)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -15147,7 +15147,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Mediterranean & Ancient Pharaohs",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Daily Breakfast)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -15277,7 +15277,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Nile River Cruise & Royal Tombs",
-    "hotelCategory": "5 Star Cruise / 4 Star Hotel",
+    "hotelCategory": "3 Star",
     "mealPlan": "Full Board on Cruise + CP in Cairo",
     "flightsIncluded": true,
     "transfersIncluded": true,
@@ -15436,7 +15436,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Tropical Beaches & Island Adventure",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Daily Breakfast)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -15567,7 +15567,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Cultural Romance & Cruise",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP + Sunset Dinner",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -15714,7 +15714,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Grand Adventure & Beach Club",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Daily Breakfast)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -15875,7 +15875,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Grand European Panorama",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "All Meals Included (Breakfast, Lunch, Dinner)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -16188,7 +16188,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Classic European Tour",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "All Meals Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -16445,7 +16445,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Exclusive Multi-Country",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "All Meals Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -16704,7 +16704,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "France & Swiss Alpine Wonders",
-    "hotelCategory": "3 Star / 4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast, Lunch & Dinner Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -16901,7 +16901,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Western Europe Grand Highlights",
-    "hotelCategory": "3 Star / 4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "Breakfast, Lunch & Dinner Included",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -17121,7 +17121,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Caucasus Heritage & Alpine Lakes",
-    "hotelCategory": "3 Star / 4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Daily Breakfast)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -17238,7 +17238,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Pagan Temples & Rock Architecture",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Daily Breakfast)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -17367,7 +17367,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Wine Country & Mineral Waters",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Daily Breakfast)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -17513,7 +17513,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Land of Fire & Caucasian Alps",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Daily Breakfast)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -17644,7 +17644,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Shopping & Caucasian Heritage",
-    "hotelCategory": "4 Star",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Daily Breakfast)",
     "flightsIncluded": false,
     "transfersIncluded": true,
@@ -17787,7 +17787,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "Personal Expenses"
     ],
     "theme": "Overnight Alpine Resort & Fire Wonders",
-    "hotelCategory": "4 Star Resort",
+    "hotelCategory": "3 Star",
     "mealPlan": "CP (Daily Breakfast)",
     "flightsIncluded": false,
     "transfersIncluded": true,

@@ -286,8 +286,8 @@ export const TrendingDestinations: React.FC = () => {
 
                 {/* Hover Reveal Bottom Mask & Price with Yellow Round Arrow Button */}
                 <div className="absolute inset-x-0 bottom-0 py-4 px-2 flex flex-col items-center justify-end text-center z-20 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black/80 via-black/50 to-transparent">
-                  <span className="text-[11px] font-medium text-slate-200 uppercase tracking-wider block drop-shadow">
-                    Starting at
+                  <span className="text-[11px] font-bold text-amber-300 uppercase tracking-wider block drop-shadow">
+                    3★ Starting at
                   </span>
                   <span className="text-white font-black text-base sm:text-lg tracking-tight block drop-shadow mb-2">
                     ₹ {item.startingPrice.toLocaleString('en-IN')}.00

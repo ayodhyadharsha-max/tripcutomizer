@@ -295,12 +295,8 @@ export function PackageDetailClientView({ params }: { params: { destination: str
   // Inclusions Tab Filter
   const [inclusionCategory, setInclusionCategory] = useState<'all' | 'hotels' | 'sightseeing' | 'meals' | 'transfers' | 'exclusions'>('all');
 
-  // Pricing & Tier State (Matches package's base hotel category so inside and outside prices are 100% identical)
-  const initialTier: 'standard' | 'deluxe' | 'luxury' =
-    pkg.hotelCategory?.toLowerCase().includes('5') ? 'luxury' :
-    pkg.hotelCategory?.toLowerCase().includes('4') ? 'deluxe' :
-    'standard';
-  const [tourTier, setTourTier] = useState<'standard' | 'deluxe' | 'luxury'>(initialTier);
+  // Pricing & Tier State: All packages strictly default to 3★ Standard baseline
+  const [tourTier, setTourTier] = useState<'standard' | 'deluxe' | 'luxury'>('standard');
 
   // Thomas Cook Style Travel Details & Calculate Price Wizard View State
   const [isCalculatePriceView, setIsCalculatePriceView] = useState(false);
@@ -618,22 +614,8 @@ export function PackageDetailClientView({ params }: { params: { destination: str
     const diff5StarCabPerDay = 1400;
     const upgradeCost5Star = Math.round(((nights * diff5StarRoomPerNight) + (days * diff5StarCabPerDay) + 1500) * 1.22 / 100) * 100;
 
-    const baseIs4Star = pkg.hotelCategory?.toLowerCase().includes('4');
-    const baseIs5Star = pkg.hotelCategory?.toLowerCase().includes('5');
-
-    if (baseIs5Star) {
-      if (tier === 'luxury') return baseStartingPrice;
-      if (tier === 'deluxe') return Math.max(5000, baseStartingPrice - (upgradeCost5Star - upgradeCost4Star));
-      return Math.max(4000, baseStartingPrice - upgradeCost5Star);
-    }
-
-    if (baseIs4Star) {
-      if (tier === 'deluxe') return baseStartingPrice;
-      if (tier === 'standard') return Math.max(4000, baseStartingPrice - upgradeCost4Star);
-      return baseStartingPrice + (upgradeCost5Star - upgradeCost4Star);
-    }
-
-    // Default base is 3★ Standard:
+    // All packages strictly default to 3★ Standard as baseline card starting price.
+    // Upgrades to 4★ Deluxe and 5★ Luxury apply dynamically only when explicitly selected:
     if (tier === 'standard') return baseStartingPrice;
     if (tier === 'deluxe') return baseStartingPrice + upgradeCost4Star;
     return baseStartingPrice + upgradeCost5Star;

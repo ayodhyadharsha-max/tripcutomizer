@@ -858,11 +858,12 @@ function generateSynthesizedPackage(
   const city = sector.cities[pkgIndex % sector.cities.length];
   const themeObj = THEMES_CONFIG[pkgIndex % THEMES_CONFIG.length];
   const durObj = DURATIONS_CONFIG[pkgIndex % DURATIONS_CONFIG.length];
-  const hotelTier = HOTEL_TIERS[pkgIndex % HOTEL_TIERS.length];
+  // All package cards across the catalog strictly default to 3-Star Standard baseline pricing
+  const hotelTier = '3-Star Standard';
 
   const { startingPrice, discountPrice } = computeB2BPackagePricing(
     sector,
-    hotelTier,
+    '3 Star',
     durObj.nights,
     durObj.days,
     pkgIndex

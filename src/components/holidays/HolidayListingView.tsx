@@ -831,8 +831,13 @@ export function HolidayListingView({
                               <Clock className="w-3.5 h-3.5 text-brand-600 mr-1" />
                               <span>{pkg.durationDays}D / {pkg.durationNights}N</span>
                             </span>
-                            <span className="bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md font-semibold">{pkg.hotelCategory}</span>
+                            <span className="bg-amber-50 text-amber-900 border border-amber-200/60 px-2 py-0.5 rounded-md font-bold text-xs inline-flex items-center">
+                              3★ Standard
+                            </span>
                             <span className="bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md font-semibold">{pkg.mealPlan}</span>
+                            <span className="text-[10px] text-brand-700 bg-brand-50 border border-brand-200/50 px-2 py-0.5 rounded-full font-bold">
+                              Upgradable to 4★ / 5★
+                            </span>
                           </div>
 
                           {/* Key Highlights */}
@@ -849,15 +854,18 @@ export function HolidayListingView({
                         {/* Price & Call to Actions */}
                         <div className="pt-3 border-t border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                           <div>
-                            {itemMrpPrice > itemDealPrice && (
-                              <span className="text-xs text-slate-400 line-through mr-2 font-semibold">
-                                {formatCurrency(itemMrpPrice)}
+                            <span className="text-[10px] text-slate-400 block font-bold uppercase tracking-wider">3★ Standard Twin Sharing</span>
+                            <div className="flex items-baseline space-x-1">
+                              {itemMrpPrice > itemDealPrice && (
+                                <span className="text-xs text-slate-400 line-through mr-1 font-semibold">
+                                  {formatCurrency(itemMrpPrice)}
+                                </span>
+                              )}
+                              <span className="text-xl sm:text-2xl font-black text-brand-700">
+                                {formatCurrency(itemDealPrice)}
                               </span>
-                            )}
-                            <span className="text-xl font-black text-brand-700">
-                              {formatCurrency(itemDealPrice)}
-                            </span>
-                            <span className="text-[10px] text-slate-500 font-bold"> / person</span>
+                              <span className="text-[10px] text-slate-500 font-bold"> / person</span>
+                            </div>
                           </div>
 
                           <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
