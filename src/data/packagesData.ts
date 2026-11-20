@@ -42,9 +42,9 @@ export interface HolidayPackage {
 export const DEMO_PACKAGES: HolidayPackage[] = [
   {
     "id": "pkg-up-1",
-    "name": "Ayodhya – Varanasi – Prayagraj Classic Heritage",
+    "name": "Ayodhya – Varanasi – Prayagraj Classic Heritage (4N/5D)",
     "slug": "ayodhya-varanasi-prayagraj-classic-heritage",
-    "destination": "Ayodhya Varanasi",
+    "destination": "Ayodhya Varanasi Prayagraj",
     "destinationSlug": "ayodhya-varanasi",
     "country": "India",
     "region": "North India",
@@ -60,14 +60,17 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "/destinations/verified/ayodhya-ram-mandir.jpg"
     ],
     "highlights": [
-      "1N Ayodhya Ram Mandir VIP Darshan",
-      "2N Varanasi Kashi Vishwanath & Ganga Aarti",
-      "1N Prayagraj Triveni Sangam & Sarnath"
+      "1N Ayodhya Ram Janmabhoomi VIP Darshan & Saryu Aarti",
+      "2N Varanasi Kashi Vishwanath Corridor & Reserved Ganga Aarti Boat",
+      "1N Prayagraj Triveni Sangam Holy Dip & Bade Hanuman Ji Darshan",
+      "Sarnath Buddhist Pilgrimage & Banarasi Silk Weaving Heritage Walk"
     ],
     "inclusions": [
-      "AC Private Innova Cab",
-      "3-Star Hotel Stay with Meals",
-      "VIP Aarti Boat Pass"
+      "Dedicated Private AC Innova / Sedan Cab for Full Tour",
+      "4-Star & 3-Star Selected Heritage Hotel Stays with Breakfast & Dinner",
+      "Reserved VIP Private Boat for Dashashwamedh Ghat Evening Ganga Aarti",
+      "Private Boat Ride at Prayagraj Triveni Sangam Confluence",
+      "All Inter-City Tolls, Parking, Driver Night Allowances & Interstate Taxes"
     ],
     "exclusions": [
       "Airfare/Train Tickets"
@@ -80,93 +83,104 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Varanasi",
     "hotels": [
       {
-        "name": "Hotel Ramayana Ayodhya",
+        "name": "Hotel Ramayana / Royal Heritage Ayodhya",
         "city": "Ayodhya",
         "rating": "3 Star",
         "nights": 1
       },
       {
-        "name": "Kashi Heritage Hotel",
+        "name": "Kashi Heritage Hotel / Treebo Varanasi",
         "city": "Varanasi",
         "rating": "3 Star",
         "nights": 2
+      },
+      {
+        "name": "Hotel Kanha Shyam / Legend Prayagraj",
+        "city": "Prayagraj",
+        "rating": "3 Star",
+        "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Ayodhya Arrival, Saryu Ghat & Warm Welcome",
-        "description": "Arrive in Ayodhya. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, visit Ram Ki Paidi and enjoy a serene stroll along the sacred Saryu riverbanks.",
+        "title": "Ayodhya Arrival, Saryu Ghat & Ram Ki Paidi Maha Aarti",
+        "description": "Arrive at Ayodhya Dham Airport (AYJ) or Railway Station. Meet our warm travel representative upon arrival and enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, visit Ram Ki Paidi and experience the divine Saryu Maha Aarti with hundreds of floating earthen diyas and sacred Vedic chanting.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Ayodhya",
-          "Hotel Check-in & Welcome Drink",
-          "Ram Ki Paidi Evening Leisure Stroll"
+          "Ayodhya Airport / Station Meet & Greet",
+          "Hotel Check-in & Sacred Welcome Drink",
+          "Ram Ki Paidi Evening Leisure Stroll",
+          "Saryu River Maha Aarti Darshan"
         ],
-        "hotel": "Hotel Ramayana Ayodhya",
+        "hotel": "Hotel Ramayana / Royal Heritage Ayodhya",
         "transfers": "Private AC Vehicle"
       },
       {
         "dayNumber": 2,
-        "title": "Ayodhya Ram Janmabhoomi VIP Darshan & Saryu Aarti",
-        "description": "Early morning visit for Ram Janmabhoomi VIP Darshan at Ayodhya. Explore Kanak Bhawan, Hanuman Garhi, and Dashrath Mahal. Evening experience divine Saryu River Aarti with glowing diyas and Vedic chanting.",
+        "title": "Ram Janmabhoomi VIP Darshan, Hanumangarhi & Drive to Varanasi",
+        "description": "Begin the morning with divine VIP Darshan of Ram Lalla at the grand Shri Ram Janmabhoomi Mandir. Climb the 76 steps to ancient Hanumangarhi temple for blessings, followed by visits to Kanak Bhawan and Dashrath Mahal. After lunch, embark on a smooth private AC highway drive to the sacred eternal city of Varanasi (Kashi). Check in at your hotel and witness the world-famous evening Ganga Aarti at Dashashwamedh Ghat from a reserved private boat on River Ganges.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Ram Janmabhoomi VIP Darshan",
-          "Hanuman Garhi Temple Visit",
-          "Saryu River Evening Aarti Pass"
+          "Shri Ram Janmabhoomi Mandir VIP Darshan",
+          "Hanumangarhi & Kanak Bhawan Visit",
+          "Scenic Highway Drive to Kashi (Varanasi)",
+          "Reserved Ganga Aarti Boat Pass at Dashashwamedh Ghat"
         ],
-        "hotel": "Hotel Ramayana Ayodhya",
+        "hotel": "Kashi Heritage Hotel / Treebo Varanasi",
         "transfers": "Private AC Vehicle"
       },
       {
         "dayNumber": 3,
-        "title": "Varanasi Kashi Vishwanath Corridor & Ganga Aarti Boat Pass",
-        "description": "Drive to holy city Varanasi (Kashi). Visit Shri Kashi Vishwanath Temple Corridor and Annapurna Temple. In the evening, witness spectacular Dashashwamedh Ghat Ganga Aarti from a reserved private boat.",
+        "title": "Kashi Vishwanath Jyotirlinga Darshan, Kaal Bhairav & Sarnath Excursion",
+        "description": "Early morning VIP Darshan at the sacred Shri Kashi Vishwanath Jyotirlinga corridor and Maa Annapurna Mandir. Visit the fierce guardian deity Kaal Bhairav and view the eternal flames of Manikarnika Ghat. In the afternoon, take an excursion to historical Sarnath where Lord Buddha delivered his first sermon. Explore Dhamek Stupa, Chaukhandi Stupa, and the Archaeological Museum followed by an evening Banarasi silk weaving artisan tour.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Kashi Vishwanath Corridor VIP Darshan",
-          "Reserved Ganga Aarti Boat Cruise",
-          "Manikarnika Ghat View"
+          "Kashi Vishwanath Jyotirlinga VIP Corridor Darshan",
+          "Maa Annapurna & Kaal Bhairav Temple Darshan",
+          "Sarnath Buddhist Stupa & Museum Tour",
+          "Banarasi Silk Weaving Heritage Walk"
         ],
-        "hotel": "Kashi Heritage Hotel",
+        "hotel": "Kashi Heritage Hotel / Treebo Varanasi",
         "transfers": "Private AC Vehicle"
       },
       {
         "dayNumber": 4,
-        "title": "Subah-e-Banaras Ghat Boat Ride & Sarnath Excursion",
-        "description": "Experience peaceful dawn boat ride on River Ganges witnessing Subah-e-Banaras rituals. Afternoon excursion to Sarnath where Lord Buddha gave his first sermon. Visit Dhamek Stupa & Archaeological Museum.",
+        "title": "Subah-e-Banaras Dawn Boat Ride, Drive to Prayagraj & Triveni Sangam Holy Dip",
+        "description": "Experience a peaceful sunrise boat cruise on the holy Ganges witnessing Subah-e-Banaras rituals and morning chants along the iconic ghats. After breakfast, drive to sacred Prayagraj (Allahabad). Take a holy boat ride to the sacred Triveni Sangam (confluence of holy rivers Ganga, Yamuna & invisible Saraswati) for a purifying dip and pooja. Visit the subterranean Bade Hanuman Ji Mandir (reclining posture), historical Anand Bhawan, and Alopi Devi Shaktipeeth. Check in for an overnight stay in Prayagraj.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Dawn Ganges Sunrise Boat Tour",
-          "Sarnath Buddhist Stupa & Museum",
-          "Banarasi Silk Weaving Center"
+          "Subah-e-Banaras Sunrise Ganges Boat Ride",
+          "Scenic Highway Drive to Prayagraj",
+          "Triveni Sangam Holy Dip & Boat Ride",
+          "Bade Hanuman Ji Temple Darshan",
+          "Anand Bhawan & Alopi Devi Shaktipeeth Visit"
         ],
-        "hotel": "Kashi Heritage Hotel",
+        "hotel": "Hotel Kanha Shyam / Legend Prayagraj",
         "transfers": "Private AC Vehicle"
       },
       {
         "dayNumber": 5,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Morning Pooja, Sacred Souvenir Shopping & Departure Transfer",
+        "description": "Enjoy a hearty breakfast at your hotel. Visit local sacred markets for authentic Sangam holy water (Gangajal), sacred brass pooja items, and regional sweets. Complete hotel check-out and board your dedicated private AC chauffeur transfer to Prayagraj (IXD) or Varanasi (VNS) Airport / Railway Station for your return journey home with divine blessings.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Hotel Buffet Breakfast & Check-out",
+          "Sacred Brass & Religious Keepsake Shopping",
+          "Private AC Airport / Railway Station Drop"
         ],
         "hotel": "Departure Day",
         "transfers": "Private AC Vehicle"
@@ -8218,12 +8232,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 4,
         "title": "Scenic Drive Phuket to Krabi",
-        "description": "Road transfer to Krabi. Relax at Ao Nang Beach.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Phuket, Krabi, Bangkok. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Ao Nang Beach"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Krabi Resort 3★",
         "transfers": "Private Transfer"
@@ -8372,13 +8388,15 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 2,
         "title": "Phi Phi Islands Speedboat Tour",
-        "description": "Full day Phi Phi Island tour with lunch.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Phuket, Krabi, Pattaya, Bangkok. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast",
           "Lunch"
         ],
         "activities": [
-          "Phi Phi Tour"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Phuket Hotel 3★",
         "transfers": "SIC Transfer"
@@ -8386,12 +8404,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 3,
         "title": "Phuket to Krabi Transfer – Ao Nang Beach",
-        "description": "Transfer to Krabi. Sunset walk at Ao Nang Beach.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Phuket, Krabi, Pattaya, Bangkok. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Ao Nang Beach"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Krabi Hotel 3★",
         "transfers": "Private Transfer"
@@ -8426,13 +8446,15 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 6,
         "title": "Coral Island Speedboat Tour with Lunch",
-        "description": "Coral Island speedboat tour and water sports.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Phuket, Krabi, Pattaya, Bangkok. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast",
           "Lunch"
         ],
         "activities": [
-          "Coral Island"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Pattaya Hotel 3★",
         "transfers": "SIC Transfer"
@@ -8828,12 +8850,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 2,
         "title": "Shymbulak Ski Resort & Medeo Rink",
-        "description": "Cable car ascent to Shymbulak Ski Resort.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Almaty. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Ski Resort Cable Car"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Almaty Luxury Hotel 4★",
         "transfers": "Private Transfer"
@@ -8881,12 +8905,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 6,
         "title": "Almaty Departure",
-        "description": "Breakfast, checkout, and private airport drop.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Drop"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -9563,12 +9589,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 6,
         "title": "Dubai Departure",
-        "description": "Breakfast, checkout, and private airport drop.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Drop"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -9693,12 +9721,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 5,
         "title": "Full Day Abu Dhabi City Tour",
-        "description": "Tour of Abu Dhabi city and Sheikh Zayed Mosque.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Dubai, Abu Dhabi. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Abu Dhabi Tour"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Dubai Hotel 3★/4★",
         "transfers": "SIC Transfer"
@@ -9719,12 +9749,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 7,
         "title": "Dubai Departure",
-        "description": "Breakfast, checkout, and private airport drop.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Drop"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -9849,12 +9881,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 5,
         "title": "Phu Quoc Departure",
-        "description": "Breakfast, checkout, and airport drop.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Drop"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -9991,12 +10025,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 6,
         "title": "Hanoi Departure",
-        "description": "Breakfast, checkout, and airport transfer.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Transfer"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "SIC Transfer"
@@ -10153,12 +10189,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 7,
         "title": "Ho Chi Minh Departure",
-        "description": "Breakfast, checkout, and airport transfer.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Transfer"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "SIC Transfer"
@@ -10386,12 +10424,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 1,
         "title": "Airport to Sigiriya",
-        "description": "Arrival, private transfer to Sigiriya.",
+        "description": "Arrive at Sigiriya, Kandy, Nuwara Eliya, Yala, Bentota airport / railway station. Meet our dedicated professional chauffeur at the arrivals terminal. Enjoy a seamless private air-conditioned transfer to your pre-booked hotel. Complete check-in formalities, unwind after your journey, and spend the evening enjoying leisure walks or exploring nearby local bazaars and food streets.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Scenic Drive"
+          "Airport / Station Meet & Greet",
+          "Private Hotel Check-in",
+          "Evening Leisure Walk"
         ],
         "hotel": "Sigiriya Hotel 3★",
         "transfers": "Private Transfer"
@@ -10530,12 +10570,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 1,
         "title": "Airport to Sigiriya",
-        "description": "Arrival and drive to Sigiriya.",
+        "description": "Arrive at Sigiriya, Kandy, Nuwara Eliya, Yala, Bentota, Colombo airport / railway station. Meet our dedicated professional chauffeur at the arrivals terminal. Enjoy a seamless private air-conditioned transfer to your pre-booked hotel. Complete check-in formalities, unwind after your journey, and spend the evening enjoying leisure walks or exploring nearby local bazaars and food streets.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Transfer"
+          "Airport / Station Meet & Greet",
+          "Private Hotel Check-in",
+          "Evening Leisure Walk"
         ],
         "hotel": "Sigiriya Hotel 3★",
         "transfers": "Private Transfer"
@@ -10571,13 +10613,15 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 4,
         "title": "Nuwara Eliya to Yala National Park",
-        "description": "Drive to Yala, afternoon wildlife safari.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Sigiriya, Kandy, Nuwara Eliya, Yala, Bentota, Colombo. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Yala Safari"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Yala Resort 3★",
         "transfers": "Private Transfer"
@@ -10585,13 +10629,15 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 5,
         "title": "Yala to Bentota Beach Resort",
-        "description": "Drive to Bentota. Relax on golden beaches.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Sigiriya, Kandy, Nuwara Eliya, Yala, Bentota, Colombo. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Bentota Beach"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Bentota Resort 3★",
         "transfers": "Private Transfer"
@@ -10613,12 +10659,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 7,
         "title": "Colombo Airport Departure",
-        "description": "Breakfast and transfer to airport.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Drop"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -10724,12 +10772,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 4,
         "title": "Pattaya to Bangkok Airport Departure",
-        "description": "Transfer to airport for return flight.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Drop"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "SIC Transfer"
@@ -10796,12 +10846,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 1,
         "title": "Bangkok Airport to Pattaya Transfer",
-        "description": "Arrival, transfer to Pattaya hotel.",
+        "description": "Arrive at Pattaya, Bangkok airport / railway station. Meet our dedicated professional chauffeur at the arrivals terminal. Enjoy a seamless private air-conditioned transfer to your pre-booked hotel. Complete check-in formalities, unwind after your journey, and spend the evening enjoying leisure walks or exploring nearby local bazaars and food streets.",
         "meals": [
           "None"
         ],
         "activities": [
-          "Transfer"
+          "Airport / Station Meet & Greet",
+          "Private Hotel Check-in",
+          "Evening Leisure Walk"
         ],
         "hotel": "Pattaya Hotel 3★",
         "transfers": "SIC Transfer"
@@ -10809,13 +10861,15 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 2,
         "title": "Coral Island Speedboat Tour",
-        "description": "Coral Island tour with lunch.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Pattaya, Bangkok. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast",
           "Lunch"
         ],
         "activities": [
-          "Coral Island"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Pattaya Hotel 3★",
         "transfers": "SIC Tour"
@@ -10823,12 +10877,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 3,
         "title": "Pattaya Free Day",
-        "description": "Free day for beach and shopping.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Pattaya, Bangkok. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Leisure"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Pattaya Hotel 3★",
         "transfers": "N/A"
@@ -10849,12 +10905,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 5,
         "title": "Bangkok Departure",
-        "description": "Checkout and transfer to airport.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Drop"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "SIC Transfer"
@@ -10926,12 +10984,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 1,
         "title": "Phuket Airport Transfer – Patong Beach",
-        "description": "Arrival, transfer to hotel.",
+        "description": "Arrive at Phuket airport / railway station. Meet our dedicated professional chauffeur at the arrivals terminal. Enjoy a seamless private air-conditioned transfer to your pre-booked hotel. Complete check-in formalities, unwind after your journey, and spend the evening enjoying leisure walks or exploring nearby local bazaars and food streets.",
         "meals": [
           "None"
         ],
         "activities": [
-          "Patong Beach"
+          "Airport / Station Meet & Greet",
+          "Private Hotel Check-in",
+          "Evening Leisure Walk"
         ],
         "hotel": "Phuket Hotel 3★",
         "transfers": "SIC Transfer"
@@ -10939,12 +10999,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 2,
         "title": "Phuket Half Day City Sightseeing",
-        "description": "Big Buddha, Karon Viewpoint, Wat Chalong.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Phuket. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "City Tour"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Phuket Hotel 3★",
         "transfers": "SIC Tour"
@@ -10952,12 +11014,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 3,
         "title": "Optional Phi Phi Island Speedboat Tour",
-        "description": "Free day or optional Phi Phi Island excursion.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Phuket. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Island Tour"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Phuket Hotel 3★",
         "transfers": "N/A"
@@ -10965,12 +11029,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 4,
         "title": "Phuket Departure",
-        "description": "Airport drop for return flight.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Drop"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "SIC Transfer"
@@ -11037,12 +11103,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 1,
         "title": "Arrival Transfer to Pattaya",
-        "description": "Arrival, transfer to Pattaya hotel.",
+        "description": "Arrive at Pattaya airport / railway station. Meet our dedicated professional chauffeur at the arrivals terminal. Enjoy a seamless private air-conditioned transfer to your pre-booked hotel. Complete check-in formalities, unwind after your journey, and spend the evening enjoying leisure walks or exploring nearby local bazaars and food streets.",
         "meals": [
           "None"
         ],
         "activities": [
-          "Beach Walk"
+          "Airport / Station Meet & Greet",
+          "Private Hotel Check-in",
+          "Evening Leisure Walk"
         ],
         "hotel": "Pattaya Hotel 3★",
         "transfers": "SIC Transfer"
@@ -11050,13 +11118,15 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 2,
         "title": "Coral Island Tour with Lunch",
-        "description": "Speedboat tour to Coral Island with lunch.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Pattaya. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast",
           "Lunch"
         ],
         "activities": [
-          "Coral Island"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Pattaya Hotel 3★",
         "transfers": "SIC Tour"
@@ -11064,12 +11134,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 3,
         "title": "Pattaya Sightseeing & Alcazar Show",
-        "description": "City tour and evening Alcazar Show.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Pattaya. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Alcazar Show"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Pattaya Hotel 3★",
         "transfers": "SIC Tour"
@@ -11077,12 +11149,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 4,
         "title": "Pattaya Free Day",
-        "description": "Leisure and shopping.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Pattaya. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Shopping"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Pattaya Hotel 3★",
         "transfers": "N/A"
@@ -11090,12 +11164,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 5,
         "title": "Pattaya Departure",
-        "description": "Airport drop for flight home.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Drop"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "SIC Transfer"
@@ -11275,12 +11351,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 1,
         "title": "Arrival Puerto Princesa – Hotel Transfer",
-        "description": "Arrival, private transfer to hotel. Free evening.",
+        "description": "Arrive at Puerto Princesa, Bohol airport / railway station. Meet our dedicated professional chauffeur at the arrivals terminal. Enjoy a seamless private air-conditioned transfer to your pre-booked hotel. Complete check-in formalities, unwind after your journey, and spend the evening enjoying leisure walks or exploring nearby local bazaars and food streets.",
         "meals": [
           "None"
         ],
         "activities": [
-          "Transfer"
+          "Airport / Station Meet & Greet",
+          "Private Hotel Check-in",
+          "Evening Leisure Walk"
         ],
         "hotel": "Puerto Princesa Hotel 3★",
         "transfers": "Private Transfer"
@@ -11416,12 +11494,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 3,
         "title": "Manila Free Leisure & Shopping Day",
-        "description": "Free day for shopping at SM Mall of Asia.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Manila. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Mall of Asia Shopping"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Manila Hotel 3★",
         "transfers": "N/A"
@@ -11429,12 +11509,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 4,
         "title": "Manila Departure",
-        "description": "Breakfast, checkout, and airport transfer.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Drop"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -11528,13 +11610,15 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 3,
         "title": "Kandy to Bentota (185 Kms / 5 Hrs+)",
-        "description": "Scenic drive down to Bentota beach resort.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Kandy, Bentota, Galle. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Bentota Beach"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Bentota Hotel 3★",
         "transfers": "Private Transfer"
@@ -11557,12 +11641,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 5,
         "title": "Bentota to Airport Departure",
-        "description": "Checkout and transfer to Colombo airport.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Drop"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -11633,12 +11719,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 1,
         "title": "Airport to Kandy",
-        "description": "Transfer to Kandy.",
+        "description": "Arrive at Kandy, Nuwara Eliya, Colombo airport / railway station. Meet our dedicated professional chauffeur at the arrivals terminal. Enjoy a seamless private air-conditioned transfer to your pre-booked hotel. Complete check-in formalities, unwind after your journey, and spend the evening enjoying leisure walks or exploring nearby local bazaars and food streets.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Transfer"
+          "Airport / Station Meet & Greet",
+          "Private Hotel Check-in",
+          "Evening Leisure Walk"
         ],
         "hotel": "Kandy Hotel 3★",
         "transfers": "Private Transfer"
@@ -11646,13 +11734,15 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 2,
         "title": "Kandy City Tour",
-        "description": "Tooth Relic Temple and Kandy cultural dance.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Kandy, Nuwara Eliya, Colombo. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Tooth Temple"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Kandy Hotel 3★",
         "transfers": "Private Tour"
@@ -11660,13 +11750,15 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 3,
         "title": "Kandy to Nuwara Eliya",
-        "description": "Tea estates, waterfalls, and Gregory Lake.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Kandy, Nuwara Eliya, Colombo. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Tea Country Tour"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Nuwara Eliya Hotel 3★",
         "transfers": "Private Transfer"
@@ -11688,12 +11780,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 5,
         "title": "Colombo Airport Departure",
-        "description": "Transfer to airport.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Drop"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -11758,12 +11852,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 1,
         "title": "Airport to Sigiriya",
-        "description": "Drive to Sigiriya.",
+        "description": "Arrive at Sigiriya, Kandy, Colombo airport / railway station. Meet our dedicated professional chauffeur at the arrivals terminal. Enjoy a seamless private air-conditioned transfer to your pre-booked hotel. Complete check-in formalities, unwind after your journey, and spend the evening enjoying leisure walks or exploring nearby local bazaars and food streets.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Transfer"
+          "Airport / Station Meet & Greet",
+          "Private Hotel Check-in",
+          "Evening Leisure Walk"
         ],
         "hotel": "Sigiriya Hotel 3★",
         "transfers": "Private Transfer"
@@ -11785,13 +11881,15 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 3,
         "title": "Sigiriya to Kandy",
-        "description": "Drive to Kandy, visit Tooth Relic Temple.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Sigiriya, Kandy, Colombo. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Tooth Temple"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Kandy Hotel 3★",
         "transfers": "Private Transfer"
@@ -11799,13 +11897,15 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 4,
         "title": "Kandy to Colombo",
-        "description": "Drive to Colombo, city tour and shopping.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Sigiriya, Kandy, Colombo. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Colombo City Tour"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Colombo Hotel 3★",
         "transfers": "Private Transfer"
@@ -11813,12 +11913,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 5,
         "title": "Colombo Airport Departure",
-        "description": "Airport drop.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Drop"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -11885,12 +11987,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 1,
         "title": "Airport to Yala National Park",
-        "description": "Arrival, drive to Yala.",
+        "description": "Arrive at Yala, Udawalawe, Mirissa, Bentota airport / railway station. Meet our dedicated professional chauffeur at the arrivals terminal. Enjoy a seamless private air-conditioned transfer to your pre-booked hotel. Complete check-in formalities, unwind after your journey, and spend the evening enjoying leisure walks or exploring nearby local bazaars and food streets.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Drive to Yala"
+          "Airport / Station Meet & Greet",
+          "Private Hotel Check-in",
+          "Evening Leisure Walk"
         ],
         "hotel": "Yala Hotel 3★",
         "transfers": "Private Transfer"
@@ -11913,13 +12017,15 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 3,
         "title": "Udawalawe to Mirissa Beach",
-        "description": "Drive to Mirissa coastal resort.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Yala, Udawalawe, Mirissa, Bentota. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Mirissa Beach"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Mirissa Hotel 3★",
         "transfers": "Private Transfer"
@@ -11941,12 +12047,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 5,
         "title": "Bentota Airport Departure",
-        "description": "Airport drop.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Drop"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -12010,12 +12118,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 1,
         "title": "Airport to Bentota",
-        "description": "Transfer to Bentota resort.",
+        "description": "Arrive at Bentota, Galle airport / railway station. Meet our dedicated professional chauffeur at the arrivals terminal. Enjoy a seamless private air-conditioned transfer to your pre-booked hotel. Complete check-in formalities, unwind after your journey, and spend the evening enjoying leisure walks or exploring nearby local bazaars and food streets.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Beach Walk"
+          "Airport / Station Meet & Greet",
+          "Private Hotel Check-in",
+          "Evening Leisure Walk"
         ],
         "hotel": "Bentota Hotel 3★",
         "transfers": "Private Transfer"
@@ -12023,13 +12133,15 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 2,
         "title": "Galle Fort Day Excursion",
-        "description": "Excursion to Galle Dutch Fort.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Bentota, Galle. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Galle Fort Tour"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Bentota Hotel 3★",
         "transfers": "Private Tour"
@@ -12037,12 +12149,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 3,
         "title": "Bentota to Airport Departure",
-        "description": "Transfer to airport.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Drop"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -12106,12 +12220,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 1,
         "title": "Airport to Colombo",
-        "description": "Transfer to Colombo.",
+        "description": "Arrive at Colombo, Bentota airport / railway station. Meet our dedicated professional chauffeur at the arrivals terminal. Enjoy a seamless private air-conditioned transfer to your pre-booked hotel. Complete check-in formalities, unwind after your journey, and spend the evening enjoying leisure walks or exploring nearby local bazaars and food streets.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Transfer"
+          "Airport / Station Meet & Greet",
+          "Private Hotel Check-in",
+          "Evening Leisure Walk"
         ],
         "hotel": "Colombo Hotel 3★",
         "transfers": "Private Transfer"
@@ -12119,13 +12235,15 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 2,
         "title": "Bentota Beach Day Trip",
-        "description": "Day trip to Bentota beach.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Colombo, Bentota. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Bentota Day Trip"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Colombo Hotel 3★",
         "transfers": "Private Tour"
@@ -12133,12 +12251,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 3,
         "title": "Colombo Shopping & Departure",
-        "description": "Shopping and airport transfer.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Drop"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -12202,12 +12322,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 1,
         "title": "Airport to Colombo",
-        "description": "Transfer to Colombo hotel.",
+        "description": "Arrive at Colombo, Bentota airport / railway station. Meet our dedicated professional chauffeur at the arrivals terminal. Enjoy a seamless private air-conditioned transfer to your pre-booked hotel. Complete check-in formalities, unwind after your journey, and spend the evening enjoying leisure walks or exploring nearby local bazaars and food streets.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Transfer"
+          "Airport / Station Meet & Greet",
+          "Private Hotel Check-in",
+          "Evening Leisure Walk"
         ],
         "hotel": "Colombo Hotel 3★",
         "transfers": "Private Transfer"
@@ -12215,13 +12337,15 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 2,
         "title": "Bentota Beach Day Trip",
-        "description": "Day trip to Bentota beach.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Colombo, Bentota. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Bentota Beach"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Colombo Hotel 3★",
         "transfers": "Private Tour"
@@ -12229,13 +12353,15 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 3,
         "title": "Colombo City Sightseeing & Shopping",
-        "description": "Colombo city tour and shopping.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Colombo, Bentota. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Colombo Shopping"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Colombo Hotel 3★",
         "transfers": "Private Tour"
@@ -12243,12 +12369,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 4,
         "title": "Colombo Airport Departure",
-        "description": "Transfer to airport.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Drop"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -12313,12 +12441,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 1,
         "title": "Airport to Kandy",
-        "description": "Transfer to Kandy, visit Tooth Relic Temple.",
+        "description": "Arrive at Kandy, Bentota, Colombo airport / railway station. Meet our dedicated professional chauffeur at the arrivals terminal. Enjoy a seamless private air-conditioned transfer to your pre-booked hotel. Complete check-in formalities, unwind after your journey, and spend the evening enjoying leisure walks or exploring nearby local bazaars and food streets.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Tooth Temple"
+          "Airport / Station Meet & Greet",
+          "Private Hotel Check-in",
+          "Evening Leisure Walk"
         ],
         "hotel": "Kandy Hotel 3★",
         "transfers": "Private Transfer"
@@ -12326,13 +12456,15 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 2,
         "title": "Kandy to Bentota Beach",
-        "description": "Drive to Bentota.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Kandy, Bentota, Colombo. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Bentota Beach"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Bentota Hotel 3★",
         "transfers": "Private Transfer"
@@ -12340,13 +12472,15 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 3,
         "title": "Bentota to Colombo City",
-        "description": "Drive to Colombo, city tour and shopping.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Kandy, Bentota, Colombo. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Colombo Tour"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Colombo Hotel 3★",
         "transfers": "Private Transfer"
@@ -12354,12 +12488,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 4,
         "title": "Colombo Departure",
-        "description": "Airport drop.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Drop"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -12424,12 +12560,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 1,
         "title": "Airport to Kandy",
-        "description": "Transfer to Kandy.",
+        "description": "Arrive at Kandy, Nuwara Eliya, Colombo airport / railway station. Meet our dedicated professional chauffeur at the arrivals terminal. Enjoy a seamless private air-conditioned transfer to your pre-booked hotel. Complete check-in formalities, unwind after your journey, and spend the evening enjoying leisure walks or exploring nearby local bazaars and food streets.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Tooth Temple"
+          "Airport / Station Meet & Greet",
+          "Private Hotel Check-in",
+          "Evening Leisure Walk"
         ],
         "hotel": "Kandy Hotel 3★",
         "transfers": "Private Transfer"
@@ -12437,13 +12575,15 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 2,
         "title": "Kandy to Nuwara Eliya",
-        "description": "Tea gardens and Gregory Lake.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Kandy, Nuwara Eliya, Colombo. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Tea Estate Tour"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Nuwara Eliya Hotel 3★",
         "transfers": "Private Transfer"
@@ -12451,13 +12591,15 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 3,
         "title": "Nuwara Eliya to Colombo",
-        "description": "Drive to Colombo, city tour and shopping.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Kandy, Nuwara Eliya, Colombo. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Colombo Shopping"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Colombo Hotel 3★",
         "transfers": "Private Transfer"
@@ -12465,12 +12607,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 4,
         "title": "Colombo Departure",
-        "description": "Airport drop.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Drop"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -14309,12 +14453,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 1,
         "title": "Kathmandu Arrival",
-        "description": "Airport pickup and drop to hotel.",
+        "description": "Arrive at Kathmandu, Pokhara airport / railway station. Meet our dedicated professional chauffeur at the arrivals terminal. Enjoy a seamless private air-conditioned transfer to your pre-booked hotel. Complete check-in formalities, unwind after your journey, and spend the evening enjoying leisure walks or exploring nearby local bazaars and food streets.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Pickup"
+          "Airport / Station Meet & Greet",
+          "Private Hotel Check-in",
+          "Evening Leisure Walk"
         ],
         "hotel": "Hotel Arts Kathmandu",
         "transfers": "Private Cab"
@@ -14816,12 +14962,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 6,
         "title": "Dubai Departure",
-        "description": "Check out and private transfer to airport.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Transfer"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -14974,12 +15122,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 7,
         "title": "Dubai Departure",
-        "description": "Check out and private airport transfer.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Transfer"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -15221,12 +15371,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 5,
         "title": "Cairo Departure",
-        "description": "Hotel check out and airport drop.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Drop"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -15511,12 +15663,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 5,
         "title": "Bali Departure",
-        "description": "Check out and airport drop.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Transfer"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private AC Car"
@@ -15584,12 +15738,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 1,
         "title": "Bali Arrival",
-        "description": "Airport pickup and drop to resort.",
+        "description": "Arrive at Bali, Ubud, Uluwatu airport / railway station. Meet our dedicated professional chauffeur at the arrivals terminal. Enjoy a seamless private air-conditioned transfer to your pre-booked hotel. Complete check-in formalities, unwind after your journey, and spend the evening enjoying leisure walks or exploring nearby local bazaars and food streets.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Pickup"
+          "Airport / Station Meet & Greet",
+          "Private Hotel Check-in",
+          "Evening Leisure Walk"
         ],
         "hotel": "Bali 4★ Resort",
         "transfers": "Private Transfer"
@@ -15658,12 +15814,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 6,
         "title": "Bali Departure",
-        "description": "Check out and airport drop.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Drop"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -15731,12 +15889,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 1,
         "title": "Bali Airport Arrival",
-        "description": "Airport pickup and drop to resort.",
+        "description": "Arrive at Bali, Nusa Penida, Seminyak, Ubud airport / railway station. Meet our dedicated professional chauffeur at the arrivals terminal. Enjoy a seamless private air-conditioned transfer to your pre-booked hotel. Complete check-in formalities, unwind after your journey, and spend the evening enjoying leisure walks or exploring nearby local bazaars and food streets.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Transfer"
+          "Airport / Station Meet & Greet",
+          "Private Hotel Check-in",
+          "Evening Leisure Walk"
         ],
         "hotel": "Bali 4★ Resort",
         "transfers": "Private Transfer"
@@ -15818,12 +15978,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 7,
         "title": "Bali Departure",
-        "description": "Check out and airport drop.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Drop"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -15969,14 +16131,16 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 6,
         "title": "Disneyland Paris Magic Day",
-        "description": "Full day at Disneyland Paris 1-Park pass.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of London, Paris, Brussels, Amsterdam, Black Forest, Mt Titlis, Venice, Rome, Vatican. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast",
           "Packed Lunch",
           "Dinner"
         ],
         "activities": [
-          "Disneyland Paris"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Paris 4★ Hotel",
         "transfers": "Coach Transfer"
@@ -16733,12 +16897,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 1,
         "title": "Paris CDG Airport Arrival",
-        "description": "Arrival at Paris CDG Airport. Transfer to hotel.",
+        "description": "Arrive at Paris, Geneva, Interlaken, Jungfraujoch, Engelberg, Zurich airport / railway station. Meet our dedicated professional chauffeur at the arrivals terminal. Enjoy a seamless private air-conditioned transfer to your pre-booked hotel. Complete check-in formalities, unwind after your journey, and spend the evening enjoying leisure walks or exploring nearby local bazaars and food streets.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Airport Transfer"
+          "Airport / Station Meet & Greet",
+          "Private Hotel Check-in",
+          "Evening Leisure Walk"
         ],
         "hotel": "Millennium CDG Paris",
         "transfers": "Coach Transfer"
@@ -16936,12 +17102,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 1,
         "title": "Paris CDG Arrival",
-        "description": "Arrival at Paris CDG Airport. Transfer to hotel.",
+        "description": "Arrive at Paris, Brussels, Amsterdam, Heidelberg, Interlaken, Mt Titlis, Zurich airport / railway station. Meet our dedicated professional chauffeur at the arrivals terminal. Enjoy a seamless private air-conditioned transfer to your pre-booked hotel. Complete check-in formalities, unwind after your journey, and spend the evening enjoying leisure walks or exploring nearby local bazaars and food streets.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Airport Transfer"
+          "Airport / Station Meet & Greet",
+          "Private Hotel Check-in",
+          "Evening Leisure Walk"
         ],
         "hotel": "Millennium CDG Paris",
         "transfers": "Coach Transfer"
@@ -16966,14 +17134,16 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 3,
         "title": "Disneyland Paris Day Tour",
-        "description": "Full day at Disneyland Paris with packed lunch.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Paris, Brussels, Amsterdam, Heidelberg, Interlaken, Mt Titlis, Zurich. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast",
           "Packed Lunch",
           "Dinner"
         ],
         "activities": [
-          "Disneyland Paris"
+          "Guided Heritage Sightseeing",
+          "Scenic Photography Stops",
+          "Local Artisan Market Tour"
         ],
         "hotel": "Millennium CDG Paris",
         "transfers": "Coach Transfer"
@@ -17181,12 +17351,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 4,
         "title": "Yerevan Airport Departure",
-        "description": "Check out and private transfer to EVN airport.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Transfer"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -17311,12 +17483,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 5,
         "title": "Yerevan Departure",
-        "description": "Check out and private transfer to airport.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Transfer"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -17384,12 +17558,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 1,
         "title": "Yerevan Arrival",
-        "description": "Airport pickup and drop to hotel.",
+        "description": "Arrive at Yerevan, Tsaghkadzor, Lake Sevan, Areni, Noravank, Jermuk airport / railway station. Meet our dedicated professional chauffeur at the arrivals terminal. Enjoy a seamless private air-conditioned transfer to your pre-booked hotel. Complete check-in formalities, unwind after your journey, and spend the evening enjoying leisure walks or exploring nearby local bazaars and food streets.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Pickup"
+          "Airport / Station Meet & Greet",
+          "Private Hotel Check-in",
+          "Evening Leisure Walk"
         ],
         "hotel": "Yerevan 4★ Hotel",
         "transfers": "Private Transfer"
@@ -17411,7 +17587,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 3,
         "title": "Tsaghkadzor Cable Car & Lake Sevan",
-        "description": "Ropeway up Tsaghkadzor and Lake Sevan peninsula.",
+        "description": "After an energizing breakfast, embark on an immersive guided tour exploring the iconic landmarks, scenic viewpoints, cultural heritage monuments, and bustling artisan craft markets of Yerevan, Tsaghkadzor, Lake Sevan, Areni, Noravank, Jermuk. Capture memorable photographs and enjoy authentic regional cuisine with your private chauffeur.",
         "meals": [
           "Breakfast"
         ],
@@ -17455,12 +17631,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 6,
         "title": "Yerevan Departure",
-        "description": "Check out and transfer to airport.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Transfer"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -17587,12 +17765,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 5,
         "title": "Baku Departure",
-        "description": "Check out and private airport transfer.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Transfer"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -17661,12 +17841,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 1,
         "title": "Baku Arrival",
-        "description": "Airport pickup and transfer to Baku hotel.",
+        "description": "Arrive at Baku, Absheron Peninsula, Gabala airport / railway station. Meet our dedicated professional chauffeur at the arrivals terminal. Enjoy a seamless private air-conditioned transfer to your pre-booked hotel. Complete check-in formalities, unwind after your journey, and spend the evening enjoying leisure walks or exploring nearby local bazaars and food streets.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Pickup"
+          "Airport / Station Meet & Greet",
+          "Private Hotel Check-in",
+          "Evening Leisure Walk"
         ],
         "hotel": "Baku 4★ Hotel",
         "transfers": "Private Transfer"
@@ -17730,12 +17912,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 6,
         "title": "Baku Departure",
-        "description": "Check out and airport drop.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Drop"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
@@ -17810,12 +17994,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 1,
         "title": "Baku Arrival",
-        "description": "Airport pickup and drop to Baku hotel.",
+        "description": "Arrive at Baku, Gabala, Absheron airport / railway station. Meet our dedicated professional chauffeur at the arrivals terminal. Enjoy a seamless private air-conditioned transfer to your pre-booked hotel. Complete check-in formalities, unwind after your journey, and spend the evening enjoying leisure walks or exploring nearby local bazaars and food streets.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Pickup"
+          "Airport / Station Meet & Greet",
+          "Private Hotel Check-in",
+          "Evening Leisure Walk"
         ],
         "hotel": "Winter Park Baku",
         "transfers": "Private Transfer"
@@ -17881,12 +18067,14 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       {
         "dayNumber": 6,
         "title": "Baku Departure",
-        "description": "Check out and private airport transfer.",
+        "description": "Savor a lavish buffet breakfast at your hotel. Complete check-out formalities. Depending on your flight or train schedule, enjoy last-minute shopping for local handicrafts, authentic spices, and specialty souvenirs before your private chauffeur transfers you to the airport or railway station for your onward journey home.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Airport Drop"
+          "Hotel Buffet Breakfast",
+          "Souvenir & Handicraft Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "N/A",
         "transfers": "Private Transfer"
