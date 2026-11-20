@@ -234,58 +234,61 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Delhi",
     "hotels": [
       {
-        "name": "Nidhivan Sarovar Portico",
-        "city": "Vrindavan",
-        "rating": "4 Star",
+        "name": "The Radha Ashok / Treebo Trend Mathura",
+        "city": "Mathura",
+        "rating": "3 Star",
         "nights": 2
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Mathura Vrindavan Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Mathura Vrindavan. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Arrival in Mathura, Shri Krishna Janmabhoomi & Vishram Ghat Yamuna Aarti",
+        "description": "Arrive at Mathura Junction or Delhi Airport. Meet your private chauffeur and transfer to your hotel in Mathura. Check-in and refresh. Visit the revered Shri Krishna Janmabhoomi Temple complex where Lord Krishna was born, Keshavdeo Temple, and Dwarkadhish Temple. In the evening, witness the soul-stirring Yamuna Aarti at Vishram Ghat with floating earthen lamps and Vedic chanting.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Mathura Vrindavan",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Mathura / Delhi Pickup",
+          "Shri Krishna Janmabhoomi Darshan",
+          "Dwarkadhish Mandir",
+          "Vishram Ghat Evening Yamuna Aarti"
         ],
-        "hotel": "Nidhivan Sarovar Portico",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Radha Ashok / Treebo Trend Mathura",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Mathura Vrindavan Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Mathura Vrindavan. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Vrindavan Banke Bihari, Nidhivan & Prem Mandir Laser Show",
+        "description": "Full day pilgrimage to holy Vrindavan. Begin with early morning blessings at the famous Banke Bihari Temple and Radha Vallabh Temple. Visit Nidhivan, the sacred grove where Lord Krishna is believed to perform Raas Leela every night. Post lunch, visit ISKCON Krishna Balaram Temple and conclude the evening at the magnificent white Italian marble Prem Mandir watching the divine musical fountain and laser light show.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Mathura Vrindavan Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Banke Bihari Temple VIP Darshan",
+          "Nidhivan Sacred Grove Tour",
+          "ISKCON Temple Kirtan",
+          "Prem Mandir Musical Fountain & Laser Show"
         ],
-        "hotel": "Nidhivan Sarovar Portico",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Radha Ashok / Treebo Trend Mathura",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Gokul Raman Reti, Barsana Radha Rani Temple & Departure",
+        "description": "After breakfast, excursion to Gokul to visit Raman Reti (where infant Krishna played in sand) and Chaurasi Khamba Temple. Proceed to Barsana to climb the holy steps of Shri Radha Rani Temple (Shriji Temple) atop Bhanugarh Hill for panoramic views. Relish authentic Mathura Pedas before your private transfer to Mathura Station or Delhi Airport for your return trip.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Gokul Raman Reti & Chaurasi Khamba",
+          "Barsana Radha Rani Mandir Darshan",
+          "Mathura Peda Souvenir Shopping",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -416,74 +419,83 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Lucknow",
     "hotels": [
       {
-        "name": "Clarks Avadh",
+        "name": "Fortune Park / Treebo Trend Lucknow",
         "city": "Lucknow",
-        "rating": "4 Star",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Hotel Ramayana / Royal Heritage Ayodhya",
+        "city": "Ayodhya",
+        "rating": "3 Star",
         "nights": 2
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Lucknow Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Lucknow. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Arrival in Lucknow, Bara Imambara & Hazratganj Cultural Walk",
+        "description": "Arrive at Lucknow Airport (LKO) / Charbagh Railway Station. Meet your private chauffeur and transfer to your hotel. Visit the grand architectural marvel Bara Imambara with its acoustic Bhool Bhulaiya labyrinth, Chhota Imambara, and the iconic Rumi Darwaza. Spend the evening strolling through Hazratganj enjoying authentic Chikankari embroidery shopping and royal Awadhi cuisine.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Lucknow",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Lucknow Airport / Station Pickup",
+          "Bara Imambara & Bhool Bhulaiya",
+          "Rumi Darwaza Photo Stop",
+          "Hazratganj Cultural Walk"
         ],
-        "hotel": "Clarks Avadh",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Fortune Park / Treebo Trend Lucknow",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Ayodhya Ram Janmabhoomi VIP Darshan & Saryu Aarti",
-        "description": "Early morning visit for Ram Janmabhoomi VIP Darshan at Ayodhya. Explore Kanak Bhawan, Hanuman Garhi, and Dashrath Mahal. Evening experience divine Saryu River Aarti with glowing diyas and Vedic chanting.",
+        "title": "Sacred Naimisharanya Teerth Yatra & Drive to Ayodhya",
+        "description": "Early morning drive to holy Naimisharanya (approx. 90 km), the sacred meditation forest of 88,000 rishis. Take a holy dip at Chakra Teerth, offer prayers at Maa Lalita Devi Shaktipeeth, Vyas Gaddi where Maharishi Ved Vyas composed the 18 Puranas, and Hanuman Garhi Naimish. In the afternoon, proceed via expressway to holy Ayodhya (approx. 3 hours). Check-in and relax.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Ram Janmabhoomi VIP Darshan",
-          "Hanuman Garhi Temple Visit",
-          "Saryu River Evening Aarti Pass"
+          "Chakra Teerth Sacred Snan",
+          "Maa Lalita Devi Shaktipeeth Darshan",
+          "Vyas Gaddi Meditation Spot",
+          "Expressway Drive to Ayodhya"
         ],
-        "hotel": "Clarks Avadh",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Ramayana / Royal Heritage Ayodhya",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Varanasi Kashi Vishwanath Corridor & Ganga Aarti Boat Pass",
-        "description": "Drive to holy city Varanasi (Kashi). Visit Shri Kashi Vishwanath Temple Corridor and Annapurna Temple. In the evening, witness spectacular Dashashwamedh Ghat Ganga Aarti from a reserved private boat.",
+        "title": "Ayodhya Ram Janmabhoomi VIP Darshan & Saryu Maha Aarti",
+        "description": "Full day spiritual experience in Shri Ram Janmabhoomi. Experience VIP Darshan at the grand Ram Mandir, visit Kanak Bhawan gifted to Mata Sita, Hanuman Garhi hill fort, and Dashrath Mahal. Afternoon visit to beautiful Surya Kund and Guptar Ghat. In the evening, attend the grand Saryu River Maha Aarti at Ram Ki Paidi surrounded by thousands of lamps and devotional music.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Kashi Vishwanath Corridor VIP Darshan",
-          "Reserved Ganga Aarti Boat Cruise",
-          "Manikarnika Ghat View"
+          "Ram Janmabhoomi Mandir VIP Darshan",
+          "Hanuman Garhi Temple Blessings",
+          "Kanak Bhawan & Dashrath Mahal",
+          "Evening Saryu River Maha Aarti Pass"
         ],
-        "hotel": "Clarks Avadh",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Ramayana / Royal Heritage Ayodhya",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 4,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Morning Temple Walk & Ayodhya / Lucknow Departure Drop",
+        "description": "Enjoy breakfast at the hotel. Visit local markets for authentic Ayodhya souvenirs and sacred prasad. Check-out and enjoy a private AC transfer to Ayodhya Maharishi Valmiki Airport (AYJ) or Lucknow Airport (LKO) for your onward flight with divine memories.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Morning Temple Walk",
+          "Souvenir & Prasad Shopping",
+          "Airport / Railway Station Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -531,74 +543,82 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Varanasi",
     "hotels": [
       {
-        "name": "Chitrakoot Bungalow",
-        "city": "Chitrakoot",
+        "name": "Kashi Heritage Hotel / Treebo Varanasi",
+        "city": "Varanasi",
         "rating": "3 Star",
         "nights": 2
+      },
+      {
+        "name": "Tourist Bungalow / Mandakini Resort Chitrakoot",
+        "city": "Chitrakoot",
+        "rating": "3 Star",
+        "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Varanasi Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Varanasi. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Arrival in Varanasi, Kashi Vishwanath & Dashashwamedh Ganga Aarti",
+        "description": "Arrive at Varanasi Airport / Railway Station. Private transfer to hotel. In the afternoon, visit Shri Kashi Vishwanath Jyotirlinga Temple Corridor and Annapurna Temple. In the evening, witness the world-famous Ganga Aarti from a reserved private boat at Dashashwamedh Ghat.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Varanasi",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Varanasi Airport / Station Pickup",
+          "Kashi Vishwanath Corridor VIP Darshan",
+          "Dashashwamedh Ghat Ganga Aarti Boat Pass"
         ],
-        "hotel": "Chitrakoot Bungalow",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Kashi Heritage Hotel / Treebo Varanasi",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Ayodhya Ram Janmabhoomi VIP Darshan & Saryu Aarti",
-        "description": "Early morning visit for Ram Janmabhoomi VIP Darshan at Ayodhya. Explore Kanak Bhawan, Hanuman Garhi, and Dashrath Mahal. Evening experience divine Saryu River Aarti with glowing diyas and Vedic chanting.",
+        "title": "Vindhyachal Maa Vindhyavasini Shaktipeeth & Drive to Chitrakoot",
+        "description": "After early breakfast, drive to Vindhyachal (approx. 2 hours). Offer prayers at the sacred Maa Vindhyavasini Shaktipeeth, Kali Khoh, and Ashtabhuja Temple (Trikona Parikrama). Continue drive to holy Chitrakoot (approx. 3.5 hours) where Lord Rama spent 11.5 years of exile. In the evening, attend the soothing Mandakini River Aarti at Ramghat.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Ram Janmabhoomi VIP Darshan",
-          "Hanuman Garhi Temple Visit",
-          "Saryu River Evening Aarti Pass"
+          "Maa Vindhyavasini Shaktipeeth Darshan",
+          "Kali Khoh & Ashtabhuja Temple",
+          "Drive to Chitrakoot",
+          "Ramghat Mandakini River Aarti"
         ],
-        "hotel": "Chitrakoot Bungalow",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Tourist Bungalow / Mandakini Resort Chitrakoot",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Varanasi Kashi Vishwanath Corridor & Ganga Aarti Boat Pass",
-        "description": "Drive to holy city Varanasi (Kashi). Visit Shri Kashi Vishwanath Temple Corridor and Annapurna Temple. In the evening, witness spectacular Dashashwamedh Ghat Ganga Aarti from a reserved private boat.",
+        "title": "Chitrakoot Holy Darshan: Kamadgiri, Gupt Godavari & Sati Anusuya",
+        "description": "Perform Kamadgiri Parikrama for divine blessings. Visit the underground caves of Gupt Godavari with crystal mountain streams, Sati Anusuya Ashram nestled in dense forests, and Bharat Milap Temple. In the afternoon, return drive to Varanasi. Relax at hotel in Varanasi.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Kashi Vishwanath Corridor VIP Darshan",
-          "Reserved Ganga Aarti Boat Cruise",
-          "Manikarnika Ghat View"
+          "Kamadgiri Hill Parikrama",
+          "Gupt Godavari Stream Caves",
+          "Sati Anusuya Ashram",
+          "Return Drive to Varanasi"
         ],
-        "hotel": "Chitrakoot Bungalow",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Kashi Heritage Hotel / Treebo Varanasi",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 4,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Sankat Mochan, Sarnath & Varanasi Departure Drop",
+        "description": "Morning visit to Sankat Mochan Hanuman Temple and Durga Kund. Excursion to Sarnath Dhamek Stupa and Archaeological Museum. Check-out and private transfer to Varanasi Airport / Railway Station for departure.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Sankat Mochan Temple Darshan",
+          "Sarnath Buddhist Heritage Excursion",
+          "Airport / Railway Station Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -646,74 +666,82 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Gaya",
     "hotels": [
       {
-        "name": "Lotus Nikko Bodh Gaya",
+        "name": "Hotel Bodhgaya Gautam / Treebo Bodhgaya",
         "city": "Bodh Gaya",
-        "rating": "4 Star",
+        "rating": "3 Star",
         "nights": 2
+      },
+      {
+        "name": "Hotel Maurya / Treebo Trend Patna",
+        "city": "Patna",
+        "rating": "3 Star",
+        "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Bodh Gaya Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Bodh Gaya. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Arrival in Gaya / Bodh Gaya, Mahabodhi Temple & Bodhi Tree",
+        "description": "Arrive at Gaya Airport / Railway Station. Private transfer to Bodh Gaya hotel. Visit the UNESCO World Heritage Mahabodhi Temple, the sacred Bodhi Tree where Lord Buddha attained enlightenment, the Vajrasana stone throne, and the Giant 80-Foot Buddha Statue. Evening meditation and butter lamp ceremony.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Bodh Gaya",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Gaya Station / Airport Pickup",
+          "Mahabodhi Temple UNESCO Darshan",
+          "Bodhi Tree & Meditation",
+          "80-Foot Giant Buddha Statue"
         ],
-        "hotel": "Lotus Nikko Bodh Gaya",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Bodhgaya Gautam / Treebo Bodhgaya",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Bodh Gaya Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Bodh Gaya. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Rajgir Vishwa Shanti Stupa, Glass Skywalk & Ancient Nalanda University",
+        "description": "Full day excursion to historic Rajgir and Nalanda. Take the aerial ropeway to Vishwa Shanti Stupa on Ratnagiri Hill and visit Griddhakuta (Vulture's Peak). Experience the thrilling Nature Safari Glass Skywalk suspended over deep canyons. Proceed to Nalanda (UNESCO) to explore the ruins of world's first residential university dating back to 5th century CE. Return to Bodh Gaya for night stay.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Bodh Gaya Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Rajgir Aerial Ropeway & Vishwa Shanti Stupa",
+          "Rajgir Glass Skywalk Experience",
+          "Nalanda University UNESCO Ruins Tour",
+          "Nalanda Archaeological Museum"
         ],
-        "hotel": "Lotus Nikko Bodh Gaya",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Bodhgaya Gautam / Treebo Bodhgaya",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Bodh Gaya. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Gaya Vishnupad Temple & Drive to Historic Patna",
+        "description": "Morning visit to sacred Vishnupad Temple in Gaya on the banks of Falgu River (imprint of Lord Vishnu's feet) and Mangla Gauri Shaktipeeth. Post lunch, drive to capital city Patna (approx. 3 hours). Visit Takht Sri Patna Sahib (birthplace of Guru Gobind Singh Ji) and the historic Golghar granary overlooking the Ganges.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Vishnupad Temple Holy Darshan",
+          "Mangla Gauri Shaktipeeth",
+          "Scenic Drive to Patna",
+          "Takht Sri Patna Sahib Gurudwara"
         ],
-        "hotel": "Lotus Nikko Bodh Gaya",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Maurya / Treebo Trend Patna",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 4,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Patna Museum & Patna Jayprakash Narayan Airport Departure Drop",
+        "description": "After breakfast, visit Bihar Museum showcasing ancient Mauryan and Gupta period sculptures. Complete check-out and private transfer to Patna Airport (PAT) / Patna Junction for your onward journey.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Bihar Museum Guided Walk",
+          "Patna Airport / Railway Station Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -765,167 +793,203 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Haridwar",
     "hotels": [
       {
-        "name": "Sarovar Portico Badrinath",
-        "city": "Badrinath",
-        "rating": "4 Star",
+        "name": "Barkot Char Dham Camp / Hotel Chauhan",
+        "city": "Barkot",
+        "rating": "3 Star",
         "nights": 2
+      },
+      {
+        "name": "Hotel Gangotri Heritage / Uttarkashi Inn",
+        "city": "Uttarkashi",
+        "rating": "3 Star",
+        "nights": 2
+      },
+      {
+        "name": "Hotel Mandakini / Shivalik Guptkashi",
+        "city": "Guptkashi",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "GMVN Tourist Bunglow / Kedarnath Guesthouse",
+        "city": "Kedarnath",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Hotel Joshimath Inn / Pipalkoti Resort",
+        "city": "Pipalkoti",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Hotel Snow Crest / Badrinath Heritage",
+        "city": "Badrinath",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Hotel Ganga Kinare / Tapovan Resort Rishikesh",
+        "city": "Rishikesh",
+        "rating": "3 Star",
+        "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Char Dham Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Char Dham. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Haridwar / Dehradun Arrival, Transfer to Barkot via Kempty Falls",
+        "description": "Pickup from Haridwar / Dehradun Airport. Drive along the scenic Yamuna Valley via Mussoorie and Kempty Falls to Barkot (2,118m). Check in at your Himalayan river camp and prepare for Yamunotri trek.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Char Dham",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Haridwar / Dehradun Pickup",
+          "Kempty Falls Scenic Stop",
+          "Barkot Alpine Camp Check-in"
         ],
-        "hotel": "Sarovar Portico Badrinath",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Barkot Char Dham Camp / Hotel Chauhan",
+        "transfers": "Private AC Innova / Bolero"
       },
       {
         "dayNumber": 2,
-        "title": "Haridwar to Barkot via Mussoorie Kempty Falls",
-        "description": "Drive towards Barkot / Yamunotri base through picturesque mountain roads. En route halt at Mussoorie Kempty Falls. On arrival check-in to your resort in Barkot.",
+        "title": "Yamunotri Dham Darshan: Janki Chatti Trek & Surya Kund Snan",
+        "description": "Drive to Janki Chatti. Trek 6 km to sacred Yamunotri Dham. Cook rice in boiling water of natural thermal spring Surya Kund, take holy bath in Divya Shila, and offer prayers at Maa Yamuna Temple. Trek back to Janki Chatti and drive back to Barkot.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Mussoorie Kempty Falls Halt",
-          "Barkot Scenic Drive",
-          "Resort Check-in & Dinner"
+          "Yamunotri Dham Holy Trek",
+          "Surya Kund Thermal Spring Puja",
+          "Maa Yamuna Temple VIP Darshan"
         ],
-        "hotel": "Sarovar Portico Badrinath",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Barkot Char Dham Camp / Hotel Chauhan",
+        "transfers": "Private Mountain Vehicle"
       },
       {
         "dayNumber": 3,
-        "title": "Barkot to Yamunotri Dham Trek & Holy Darshan",
-        "description": "Early morning drive to Janki Chatti. Start 6 km trek to Yamunotri Dham temple. Cook rice in Surya Kund hot springs and seek blessings at Yamunotri Temple. Trek back to Barkot.",
+        "title": "Barkot to Uttarkashi: Kashi Vishwanath Temple & Bhagirathi Valley",
+        "description": "Drive to holy town Uttarkashi on the banks of Bhagirathi River. Visit the ancient Kashi Vishwanath Temple and the massive Shakti Temple with its divine copper Trishul. Check in at hotel.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Yamunotri Temple Darshan",
-          "Surya Kund Hot Springs",
-          "Janki Chatti Trek"
+          "Scenic Bhagirathi Valley Drive",
+          "Kashi Vishwanath Temple Darshan",
+          "Shakti Mandir Trishul Puja"
         ],
-        "hotel": "Sarovar Portico Badrinath",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Gangotri Heritage / Uttarkashi Inn",
+        "transfers": "Private Mountain Vehicle"
       },
       {
         "dayNumber": 4,
-        "title": "Barkot to Uttarkashi (Kashi Vishwanath Temple)",
-        "description": "Drive to Uttarkashi along the Bhagirathi River. Visit ancient Kashi Vishwanath Temple of Uttarkashi and Shakti Temple housing the giant divine brass trident.",
+        "title": "Gangotri Dham Holy Darshan, Harsil Valley & Bhagirathi Shila",
+        "description": "Drive through picturesque apple orchards of Harsil Valley to holy Gangotri Dham (3,100m). Take holy dip in icy Bhagirathi River, visit Maa Ganga Temple, Submerged Shivling, and Bhagirathi Shila. Return to Uttarkashi.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Uttarkashi Kashi Vishwanath Temple",
-          "Shakti Temple Brass Trishul",
-          "Bhagirathi River Valley Stroll"
+          "Harsil Valley Apple Orchard Stop",
+          "Maa Ganga Mandir VIP Darshan",
+          "Bhagirathi River Holy Snan"
         ],
-        "hotel": "Sarovar Portico Badrinath",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Gangotri Heritage / Uttarkashi Inn",
+        "transfers": "Private Mountain Vehicle"
       },
       {
         "dayNumber": 5,
-        "title": "Uttarkashi to Gangotri Dham & Holy River Puja",
-        "description": "Excursion to Gangotri Dham via scenic Harsil Valley. Perform holy puja at Gangotri Temple on the banks of River Bhagirathi. Return to Uttarkashi.",
+        "title": "Uttarkashi to Guptkashi via Mandakini Valley",
+        "description": "Scenic cross-mountain drive along the confluence of Alaknanda and Mandakini rivers towards Guptkashi. Visit ancient Ardhanarishwar Temple and Kashi Vishwanath Temple in Guptkashi. Get medical slip / biometric clearance for Kedarnath.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Gangotri Dham Temple Puja",
-          "Harsil Apple Orchard Valley",
-          "Bhagirathi River Ghats"
+          "Cross-Valley Himalayan Drive",
+          "Ardhanarishwar Temple Darshan",
+          "Kedarnath Biometric Verification"
         ],
-        "hotel": "Sarovar Portico Badrinath",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Mandakini / Shivalik Guptkashi",
+        "transfers": "Private Mountain Vehicle"
       },
       {
         "dayNumber": 6,
-        "title": "Uttarkashi to Guptkashi / Phata Valley",
-        "description": "Scenic mountain drive to Guptkashi in Mandakini Valley. Visit Vishwanath Temple and Manikarnik Kund in Guptkashi. Overnight stay.",
+        "title": "Guptkashi to Kedarnath Dham Trek / Helicopter & Evening Aarti",
+        "description": "Transfer to Sonprayag / Gaurikund or Phata Helipad. Trek 16 km along Mandakini River or take approved helicopter to sacred Kedarnath Dham (3,583m). Arrive at holy shrine surrounded by snow-capped Kedarnath peaks. Attend divine evening Sandhya Aarti.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Guptkashi Vishwanath Temple",
-          "Mandakini River Valley Drive",
-          "Overnight Resort Stay"
+          "Sonprayag to Gaurikund Shuttle",
+          "Sacred Kedarnath Mountain Trek / Heli Flight",
+          "Kedarnath Evening Temple Aarti"
         ],
-        "hotel": "Sarovar Portico Badrinath",
-        "transfers": "Private AC Vehicle"
+        "hotel": "GMVN Tourist Bunglow / Kedarnath Guesthouse",
+        "transfers": "Private Mountain Vehicle & Trek/Heli"
       },
       {
         "dayNumber": 7,
-        "title": "Guptkashi to Kedarnath Dham Trek / Helicopter & Evening Aarti",
-        "description": "Proceed to Sonprayag / Gaurikund or Phata Helipad. Trek or fly by helicopter to Kedarnath Dham. Witness awe-inspiring evening Aarti at Lord Shiva’s holy shrine.",
+        "title": "Kedarnath Dawn Abhishek Darshan & Trek Down to Guptkashi / Pipalkoti",
+        "description": "Early morning witness golden sunrise over Kedarnath Dome. Attend Holy Morning Abhishek Puja at Jyotirlinga. Trek / fly down to Gaurikund. Board vehicle and proceed to Pipalkoti along Alaknanda river gorge.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Kedarnath Temple Darshan",
-          "Sonprayag Gaurikund Trek",
-          "Kedarnath Evening Aarti"
+          "Kedarnath Morning Jyotirlinga Abhishek",
+          "Scenic Descent Trek to Gaurikund",
+          "Transfer to Pipalkoti"
         ],
-        "hotel": "Sarovar Portico Badrinath",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Joshimath Inn / Pipalkoti Resort",
+        "transfers": "Private Mountain Vehicle"
       },
       {
         "dayNumber": 8,
-        "title": "Kedarnath Morning Darshan & Trek Down to Guptkashi",
-        "description": "Attend early morning Abhishekam at Kedarnath Temple. Trek down to Sonprayag and return to resort in Guptkashi for well-deserved rest.",
+        "title": "Pipalkoti to Badrinath Dham, Mana First Village & Tapt Kund Snan",
+        "description": "Drive through Joshimath to holy Badrinath Dham (3,133m). Take holy dip in natural sulphur thermal spring Tapt Kund. Experience VIP Darshan of Lord Badri Vishal. In afternoon, visit Mana village (India's first village on Tibet border), Vyas Gufa, Ganesh Gufa, and Bhim Pul over Saraswati River. Attend evening Swarna Aarti.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Kedarnath Morning Abhishekam",
-          "Trek Down to Sonprayag",
-          "Resort Relaxation"
+          "Tapt Kund Holy Thermal Snan",
+          "Shri Badrinath Vishal VIP Darshan",
+          "Mana First Village & Vyas Gufa",
+          "Badrinath Evening Swarna Aarti"
         ],
-        "hotel": "Sarovar Portico Badrinath",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Snow Crest / Badrinath Heritage",
+        "transfers": "Private Mountain Vehicle"
       },
       {
         "dayNumber": 9,
-        "title": "Guptkashi to Badrinath Dham via Joshimath",
-        "description": "Drive to Badrinath Dham via Joshimath Narsingh Temple. Take a hot water dip at Tapt Kund and attend Badrinath Temple evening Aarti.",
+        "title": "Badrinath to Rishikesh via Vishnuprayag, Nandprayag & Devprayag",
+        "description": "Drive down following the holy Panch Prayags. Witness the divine confluence of rivers Alaknanda and Bhagirathi at Devprayag forming the holy Ganga. Arrive in Rishikesh by evening. Attend Ganga Aarti at Triveni Ghat.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Badrinath Temple Evening Aarti",
-          "Tapt Kund Thermal Bath",
-          "Joshimath Narsingh Temple"
+          "Panch Prayag Scenic River Confluences",
+          "Devprayag Sangam Photo Stop",
+          "Triveni Ghat Evening Ganga Aarti"
         ],
-        "hotel": "Sarovar Portico Badrinath",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Ganga Kinare / Tapovan Resort Rishikesh",
+        "transfers": "Private Mountain Vehicle"
       },
       {
         "dayNumber": 10,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Rishikesh Ram Jhula, Lakshman Jhula & Dehradun / Haridwar Departure",
+        "description": "Enjoy breakfast overlooking the Ganges. Visit Ram Jhula, Swarg Ashram, and local Ayurvedic bazaars. Transfer to Dehradun Airport (DED) or Haridwar Junction for departure with life-transforming blessings.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Ram Jhula & Swarg Ashram Walk",
+          "Departure Airport / Station Drop"
         ],
         "hotel": "Departure Day",
         "transfers": "Private AC Vehicle"
@@ -976,74 +1040,80 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Delhi",
     "hotels": [
       {
-        "name": "The Vikram Vantage Park Nainital",
+        "name": "The Manu Maharani / Treebo Nainital",
         "city": "Nainital",
-        "rating": "4 Star",
+        "rating": "3 Star",
         "nights": 2
+      },
+      {
+        "name": "Ranikhet Club / Woodsvilla Resort",
+        "city": "Ranikhet",
+        "rating": "3 Star",
+        "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Nainital Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Nainital. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Kathgodam / Delhi Arrival, Drive to Nainital & Naini Lake Boating",
+        "description": "Pickup from Kathgodam Railway Station or Delhi. Drive through pine-scented Kumaon foothills to Nainital. Check in at hotel. Enjoy a peaceful boating session on emerald Naini Lake, visit Naina Devi Temple, and stroll along Mall Road in the evening.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Nainital",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Kathgodam / Delhi Pickup",
+          "Naini Lake Yacht / Paddle Boating",
+          "Naina Devi Shaktipeeth Darshan",
+          "Mall Road Evening Walk"
         ],
-        "hotel": "The Vikram Vantage Park Nainital",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Manu Maharani / Treebo Nainital",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Nainital Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Nainital. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Lake District Excursion: Bhimtal, Sattal & Naukuchiatal",
+        "description": "Explore the famous lakes around Nainital. Visit Bhimtal with its island aquarium, seven interconnected freshwater lakes of Sattal surrounded by dense oak forests, and 9-cornered Naukuchiatal famous for kayaking and paragliding.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nainital Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Bhimtal Island Aquarium Boat Ride",
+          "Sattal Kayaking & Birdwatching",
+          "Naukuchiatal Adventure Sports"
         ],
-        "hotel": "The Vikram Vantage Park Nainital",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Manu Maharani / Treebo Nainital",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Nainital. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Mukteshwar Himalayan Panorama & Drive to Queen's Meadow Ranikhet",
+        "description": "Drive to scenic Mukteshwar (2,286m). Visit 350-year-old Mukteshwar Shiva Temple and Chauli Ki Jali cliff rock overhang with jaw-dropping views of Trishul and Nanda Devi peaks. Proceed to Ranikhet. Visit Chaubatia Apple Orchards and Jhula Devi Temple adorned with thousands of copper bells.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Mukteshwar Temple & Chauli Ki Jali Viewpoint",
+          "Ranikhet Chaubatia Apple Orchards",
+          "Jhula Devi Temple & Golf Course"
         ],
-        "hotel": "The Vikram Vantage Park Nainital",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Ranikhet Club / Woodsvilla Resort",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 4,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Ranikhet Golf Course Walk & Kathgodam / Delhi Departure",
+        "description": "Morning walk across the high-altitude Ranikhet 9-hole golf grounds with pine views. Check-out and private transfer to Kathgodam Railway Station or Delhi Airport.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Golf Course Pine Forest Walk",
+          "Departure Transfer to Kathgodam / Delhi"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -1091,74 +1161,81 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Delhi",
     "hotels": [
       {
-        "name": "Jaypee Residency Manor Mussoorie",
+        "name": "Hotel Madhuban / Treebo Trend Dehradun",
+        "city": "Dehradun",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Fortune Resort Grace / Treebo Mussoorie",
         "city": "Mussoorie",
-        "rating": "5 Star",
+        "rating": "3 Star",
         "nights": 2
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Mussoorie Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Mussoorie. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Dehradun Arrival, Robber's Cave & Sahastradhara",
+        "description": "Arrive at Dehradun Jolly Grant Airport / Dehradun Railway Station. Meet your private driver. Explore Guchhupani (Robber's Cave) walking in freezing ankle-deep canyon water streams, and visit sulfur springs at Sahastradhara. Evening free in Paltan Bazaar.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Mussoorie",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Dehradun Airport / Station Pickup",
+          "Robbers Cave Canyon Stream Walk",
+          "Sahastradhara Sulphur Spring",
+          "Paltan Bazaar Walk"
         ],
-        "hotel": "Jaypee Residency Manor Mussoorie",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Madhuban / Treebo Trend Dehradun",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Mussoorie Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Mussoorie. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Scenic Climb to Mussoorie, Kempty Falls & Mall Road",
+        "description": "Drive up the serpentine winding road to Queen of Hills - Mussoorie (approx. 1.5 hours). Visit cascading Kempty Falls and enjoy a refreshing splash. Take the ropeway cable car to Gun Hill (second highest point in Mussoorie) for panoramic views of Doon Valley. Evening stroll along Camel's Back Road and Library Chowk Mall Road.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Mussoorie Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Kempty Falls Splash Tour",
+          "Gun Hill Ropeway Cable Car",
+          "Camel's Back Road Scenic Walk",
+          "Mall Road Leisure"
         ],
-        "hotel": "Jaypee Residency Manor Mussoorie",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Fortune Resort Grace / Treebo Mussoorie",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Mussoorie. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Dhanaulti Alpine Eco Park & Surkanda Devi Temple Ropeway",
+        "description": "Day excursion to misty Dhanaulti (2,286m). Walk among sky-scraping deodar trees at Amber and Dhara Eco Parks. Continue to Kaddukhal and take the thrilling ropeway to sacred Surkanda Devi Temple (3,030m) with 360-degree snow-capped Garhwal Himalayan vistas.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Dhanaulti Deodar Eco Park Trail",
+          "Surkanda Devi Temple Mountain Ropeway",
+          "Garhwal Himalayan Snow Range View"
         ],
-        "hotel": "Jaypee Residency Manor Mussoorie",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Fortune Resort Grace / Treebo Mussoorie",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 4,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Company Garden, Lal Tibba & Dehradun Departure Drop",
+        "description": "Visit colorful Company Garden flower nursery and telescope view at Lal Tibba (highest point in Mussoorie). Check-out and private transfer to Dehradun Airport or Railway Station for onward journey.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Company Garden & Lal Tibba View",
+          "Dehradun Airport / Station Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -1206,58 +1283,65 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Delhi",
     "hotels": [
       {
-        "name": "Rishikesh Riverside Resort",
+        "name": "Hotel Ganga Lahari / Treebo Haridwar",
+        "city": "Haridwar",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Aloha On The Ganges / Treebo Rishikesh",
         "city": "Rishikesh",
         "rating": "3 Star",
-        "nights": 2
+        "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Rishikesh Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Rishikesh. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Haridwar Arrival, Mansa Devi Cable Car & Har Ki Pauri Ganga Aarti",
+        "description": "Arrive at Haridwar Railway Station or Dehradun Airport. Meet chauffeur and transfer to hotel. Ride the Udankhatola ropeway cable car to hilltop Mansa Devi and Chandi Devi temples. In the evening, gather at Har Ki Pauri to witness the world-renowned grand Ganga Aarti with hundreds of floating floral diyas.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Rishikesh",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Haridwar Pickup",
+          "Mansa Devi Ropeway Darshan",
+          "Har Ki Pauri VIP Ganga Aarti Pass"
         ],
-        "hotel": "Rishikesh Riverside Resort",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Ganga Lahari / Treebo Haridwar",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Rishikesh Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Rishikesh. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Drive to Rishikesh, Shivpuri White Water Rafting & Beatle Ashram",
+        "description": "Short morning drive to Yoga Capital of the World - Rishikesh. Gear up at Shivpuri for exhilarating 16 km Grade III White Water Rafting down the holy Ganges including body surfing and cliff jumping. Check-in at resort. Afternoon visit to historic Beatles Ashram (Chaurasi Kutia) and Ram Jhula.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Rishikesh Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Shivpuri to Rishikesh 16km River Rafting",
+          "Cliff Jumping & Body Surfing",
+          "Beatles Ashram Heritage Tour",
+          "Ram Jhula Walk"
         ],
-        "hotel": "Rishikesh Riverside Resort",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Aloha On The Ganges / Treebo Rishikesh",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Triveni Ghat Dawn Puja, Lakshman Jhula & Departure",
+        "description": "Morning peaceful meditation and Maha Aarti at Triveni Ghat. Walk across iconic Lakshman Jhula and visit Parmarth Niketan. Complete check-out and private transfer to Haridwar Railway Station or Dehradun Airport.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Triveni Ghat Dawn Meditation",
+          "Lakshman Jhula & Parmarth Niketan",
+          "Airport / Railway Station Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -1305,58 +1389,59 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Delhi",
     "hotels": [
       {
-        "name": "Corbett River Creek Resort",
+        "name": "Corbett Machaan Resort / Treebo Corbett",
         "city": "Jim Corbett",
-        "rating": "4 Star",
+        "rating": "3 Star",
         "nights": 2
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Corbett Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Corbett. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Arrival at Jim Corbett, Garjiya Devi Temple & Kosi River Walk",
+        "description": "Pickup from Ramnagar Railway Station or Delhi Airport. Drive to Corbett National Park. Check-in at your forest wildlife resort. In the afternoon, visit sacred Garjiya Devi Temple perched on a massive rock in middle of Kosi River, and Corbett Museum at Dhangarhi. Evening bonfire and wildlife documentary screening at resort.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Corbett",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Ramnagar / Delhi Pickup",
+          "Garjiya Devi Temple Visit",
+          "Corbett Museum Dhangarhi",
+          "Evening Wildlife Film & Bonfire"
         ],
-        "hotel": "Corbett River Creek Resort",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Corbett Machaan Resort / Treebo Corbett",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Corbett Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Corbett. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Open 4x4 Jeep Safari in Core Tiger Zone (Bijrani / Jhirna)",
+        "description": "Early morning 4x4 open Gypsy Jeep Safari inside the core safari zone (Bijrani / Jhirna / Dhela) with an expert naturalist tracker. Spot Royal Bengal Tigers, Asian elephants, spotted deer, barking deer, and over 600 species of birds. Return to resort for breakfast. Afternoon at leisure by pool or optional second sunset safari.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Corbett Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Early Morning 4x4 Jeep Jungle Safari",
+          "Royal Bengal Tiger Tracking",
+          "Forest Bird Watching Tour",
+          "Resort Pool & Nature Leisure"
         ],
-        "hotel": "Corbett River Creek Resort",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Corbett Machaan Resort / Treebo Corbett",
+        "transfers": "4x4 Open Safari Gypsy"
       },
       {
         "dayNumber": 3,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Morning Birding Trail, Breakfast & Ramnagar / Delhi Departure",
+        "description": "Wake up to bird songs and enjoy a guided morning nature walk along Kosi riverbed. Hearty buffet breakfast. Check out and private AC transfer to Ramnagar Railway Station or Delhi Airport for departure.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Guided Nature Birding Trail",
+          "Ramnagar / Delhi Airport Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -1407,90 +1492,102 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Rishikesh",
     "hotels": [
       {
-        "name": "Auli Himalayan Resort",
-        "city": "Auli",
+        "name": "Hotel Mount View / Joshimath Inn",
+        "city": "Joshimath",
         "rating": "3 Star",
         "nights": 2
+      },
+      {
+        "name": "Chopta Meadows Eco Camp / Resort",
+        "city": "Chopta",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Hotel Ganga Kinare / Tapovan Resort Rishikesh",
+        "city": "Rishikesh",
+        "rating": "3 Star",
+        "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Auli Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Auli. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Rishikesh / Haridwar to Joshimath via Devprayag & Rudraprayag",
+        "description": "Pickup from Rishikesh / Haridwar early morning. Drive through dramatic Alaknanda river canyons visiting divine river confluences at Devprayag (Bhagirathi + Alaknanda) and Rudraprayag (Mandakini + Alaknanda). Arrive at Joshimath gateway. Check in at hotel.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Auli",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Rishikesh / Haridwar Pickup",
+          "Devprayag Sangam Photo Stop",
+          "Scenic High Mountain Drive to Joshimath"
         ],
-        "hotel": "Auli Himalayan Resort",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Mount View / Joshimath Inn",
+        "transfers": "Private Mountain Vehicle"
       },
       {
         "dayNumber": 2,
-        "title": "Auli Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Auli. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Auli Ropeway Ride, Ski Slopes & Panoramic Nanda Devi Views",
+        "description": "Board the 4 km long Auli Ropeway (Asia's highest & longest cable car) from Joshimath to Auli (3,050m). Walk along pristine alpine ski slopes, visit the shimmering artificial snow reservoir lake, and soak in awe-inspiring views of Nanda Devi peak (7,816m), Kamet, and Dunagiri.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Auli Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Joshimath to Auli Aerial Ropeway",
+          "Auli Alpine Artificial Lake Walk",
+          "Nanda Devi Himalayan Peak Panorama"
         ],
-        "hotel": "Auli Himalayan Resort",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Mount View / Joshimath Inn",
+        "transfers": "Cable Car Ropeway"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Auli. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Joshimath to Chopta & Sacred Tungnath – Chandrashila Summit Trek",
+        "description": "Drive to Chopta ('Mini Switzerland of India', 2,680m). Embark on the famous paved 4 km trek to Tungnath Mandir (3,680m) - the highest of Panch Kedar and world's highest Shiva temple. Energetic trekkers can continue 1.5 km further to Chandrashila Peak (4,000m) for breathtaking 360-degree Himalayan views. Overnight stay in Chopta alpine meadow camp.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Scenic Drive to Chopta Valley",
+          "Tungnath World's Highest Shiva Temple Trek",
+          "Chandrashila 4,000m Summit Panorama",
+          "Chopta Stargazing Camp Stay"
         ],
-        "hotel": "Auli Himalayan Resort",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Chopta Meadows Eco Camp / Resort",
+        "transfers": "Private Mountain Vehicle & Trek"
       },
       {
         "dayNumber": 4,
-        "title": "Auli Local Bazaars, Shopping & Culinary Evening",
-        "description": "Spend a relaxing day exploring local markets, craft shops, and authentic regional restaurants. Option for evening sunset cruise or cultural performance.",
+        "title": "Chopta to Rishikesh via Ukhimath & Evening Ganga Aarti",
+        "description": "Morning descent drive from Chopta via Ukhimath (winter seat of Kedarnath) and Srinagar Garhwal to Yoga Capital Rishikesh. Check in at riverside resort. In evening, attend peaceful Ganga Aarti at Triveni Ghat.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Local Artisan Market Shopping",
-          "Regional Food Tasting",
-          "Evening Sunset Activity"
+          "Scenic Mountain Descent Drive",
+          "Ukhimath Omkareshwar Temple Visit",
+          "Rishikesh Triveni Ghat Ganga Aarti"
         ],
-        "hotel": "Auli Himalayan Resort",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Ganga Kinare / Tapovan Resort Rishikesh",
+        "transfers": "Private Mountain Vehicle"
       },
       {
         "dayNumber": 5,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Rishikesh Ram Jhula Walk & Dehradun / Haridwar Departure",
+        "description": "Morning walk across Ram Jhula suspension bridge. Visit local organic tea and Ayurvedic handicraft stores. Check out and private transfer to Dehradun Airport or Haridwar Railway Station for departure.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Ram Jhula Heritage Walk",
+          "Airport / Railway Station Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -1540,106 +1637,111 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Delhi",
     "hotels": [
       {
-        "name": "The Manali Inn",
+        "name": "Hotel Willow Banks / Treebo Shimla",
+        "city": "Shimla",
+        "rating": "3 Star",
+        "nights": 2
+      },
+      {
+        "name": "The Manali Inn / Snow Valley Resorts",
         "city": "Manali",
-        "rating": "4 Star",
+        "rating": "3 Star",
         "nights": 3
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Manali Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Manali. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Chandigarh / Delhi to Shimla, Mall Road & Ridge Stroll",
+        "description": "Pickup from Chandigarh Airport / Station or Delhi. Scenic drive ascending through Shivalik ranges to Queen of Hill Stations - Shimla (2,205m). Check-in at hotel. Evening walk at iconic Mall Road, historic Ridge, Christ Church, and Scandal Point.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Manali",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Chandigarh / Delhi Pickup",
+          "Shimla Hill Climb",
+          "Mall Road, Ridge & Christ Church Heritage Walk"
         ],
-        "hotel": "The Manali Inn",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Willow Banks / Treebo Shimla",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Manali Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Manali. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Kufri Adventure Park, Green Valley & Jakhoo Temple Ropeway",
+        "description": "Excursion to alpine Kufri (2,622m). Pass through dense Green Valley pine forests. Enjoy horse ride / yak ride to Mahasu Peak and Himalayan nature park. Afternoon return to Shimla, ride the Jakhoo Ropeway to the 108-foot Lord Hanuman Statue at Jakhoo Hill.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Manali Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Green Valley Pine Forest Stop",
+          "Kufri Mahasu Peak Adventure",
+          "Jakhoo Temple Hill Ropeway"
         ],
-        "hotel": "The Manali Inn",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Willow Banks / Treebo Shimla",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Manali. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Scenic Drive from Shimla to Manali via Kullu Valley & Pandoh Dam",
+        "description": "Check out and drive to Manali (approx. 7 hours) alongside the roaring Beas River. Stop at picturesque Pandoh Dam, Hanogi Mata Temple, and Kullu Shawl Weaving Factory. Enjoy optional river rafting in Kullu. Arrive in Manali, check in and relax.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Pandoh Dam Scenic Viewpoint",
+          "Kullu Shawl Industry Guided Tour",
+          "Kullu Beas White Water Rafting Stop",
+          "Manali Check-in"
         ],
-        "hotel": "The Manali Inn",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Manali Inn / Snow Valley Resorts",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 4,
-        "title": "Manali Local Bazaars, Shopping & Culinary Evening",
-        "description": "Spend a relaxing day exploring local markets, craft shops, and authentic regional restaurants. Option for evening sunset cruise or cultural performance.",
+        "title": "Atal Tunnel Engineering Marvel, Sissu Lahaul Valley & Solang Adventure",
+        "description": "Drive through the 9.02 km Atal Tunnel (world's longest highway tunnel above 10,000 ft) into snow-clad Lahaul Valley. Explore Sissu Waterfall and glaciers. In afternoon, visit Solang Valley for thrilling adventure activities: paragliding, zorbing, quad biking, and cable car ride.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Local Artisan Market Shopping",
-          "Regional Food Tasting",
-          "Evening Sunset Activity"
+          "Atal Tunnel Engineering Drive",
+          "Sissu Lahaul Valley Snow Waterfall",
+          "Solang Valley Paragliding & Adventure Sports"
         ],
-        "hotel": "The Manali Inn",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Manali Inn / Snow Valley Resorts",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 5,
-        "title": "Exploring Hidden Gems & Scenic Countryside of Manali",
-        "description": "Delight in a day exploring off-the-beaten-path villages, panoramic viewpoints, and tranquil nature spots across Manali with your private chauffeur.",
+        "title": "Manali Local Heritage: Hadimba Temple, Vashisht Hot Springs & Old Manali",
+        "description": "Visit the 450-year-old wooden pagoda Hadimba Devi Temple set in giant cedar forests, Manu Temple, Tibetan Monasteries, and natural sulfur hot springs at Vashisht. Evening explore bohemian cafes and live music of Old Manali and Mall Road.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Hidden Spot Discovery",
-          "Panoramic Viewpoint Stop",
-          "Countryside Private Cab Tour"
+          "Hadimba Devi Ancient Cedar Temple",
+          "Vashisht Natural Sulphur Hot Springs",
+          "Old Manali Cafe Trail & Mall Road Shopping"
         ],
-        "hotel": "The Manali Inn",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Manali Inn / Snow Valley Resorts",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 6,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Breakfast & Chandigarh / Delhi Departure Drop",
+        "description": "Hearty breakfast with panoramic snow peak views. Check out and private transfer to Bhuntar / Chandigarh Airport or Delhi for return journey.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Check-out & Transfer to Chandigarh / Delhi Airport / Station"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -1689,90 +1791,96 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Pathankot",
     "hotels": [
       {
-        "name": "Indraprastha Resort Dalhousie",
+        "name": "Fortune Park Moksha / Treebo McLeodGanj",
+        "city": "Dharamshala",
+        "rating": "3 Star",
+        "nights": 2
+      },
+      {
+        "name": "Grand View Hotel / Treebo Dalhousie",
         "city": "Dalhousie",
-        "rating": "4 Star",
+        "rating": "3 Star",
         "nights": 2
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Dharamshala Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Dharamshala. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Gaggal / Pathankot Arrival, McLeodGanj Dalai Lama Temple & Bhagsunag",
+        "description": "Pickup from Gaggal Dharamshala Airport (DHM) or Pathankot Station. Drive up to Little Lhasa - McLeodGanj. Visit the spiritual residence of His Holiness the Dalai Lama at Tsuglagkhang Complex, Kalachakra Temple, and picturesque Bhagsunag Waterfall.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Dharamshala",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Airport / Station Pickup",
+          "Dalai Lama Tsuglagkhang Complex Darshan",
+          "Bhagsunag Temple & Waterfall Walk"
         ],
-        "hotel": "Indraprastha Resort Dalhousie",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Fortune Park Moksha / Treebo McLeodGanj",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Dharamshala Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Dharamshala. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "St. John Church, HPCA Cricket Stadium & Norbulingka Institute",
+        "description": "Visit St. John in the Wilderness neo-Gothic stone church built in 1852. Head down to Dharamshala to tour the world's most scenic international HPCA Cricket Stadium with Dhauladhar mountain backdrop. Afternoon visit to Norbulingka Tibetan Cultural Institute preserving traditional thangka painting and woodcraft.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Dharamshala Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "St. John in the Wilderness Church",
+          "HPCA International Cricket Stadium Tour",
+          "Norbulingka Tibetan Handicraft Center"
         ],
-        "hotel": "Indraprastha Resort Dalhousie",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Fortune Park Moksha / Treebo McLeodGanj",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Dharamshala. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Scenic Mountain Drive to Dalhousie & Subhash Baoli",
+        "description": "Check out and drive through winding pine-covered Dhauladhar mountain passes to colonial hill station Dalhousie (approx. 4 hours). Check in at heritage hotel. Afternoon visit to Subhash Baoli, Panchpula waterfalls, and sunset walk along Garam Sadak.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Scenic Valley Cross-Mountain Drive",
+          "Subhash Baoli Natural Spring",
+          "Panchpula Waterfalls Memorial",
+          "Garam Sadak Sunset Walk"
         ],
-        "hotel": "Indraprastha Resort Dalhousie",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Grand View Hotel / Treebo Dalhousie",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 4,
-        "title": "Dharamshala Local Bazaars, Shopping & Culinary Evening",
-        "description": "Spend a relaxing day exploring local markets, craft shops, and authentic regional restaurants. Option for evening sunset cruise or cultural performance.",
+        "title": "Khajjiar 'Mini Switzerland of India' & Kalatop Wildlife Sanctuary",
+        "description": "Full day excursion to saucer-shaped emerald meadow Khajjiar (1,920m). Surrounded by towering deodar forests, Khajjiar Lake features a floating island. Enjoy zorbing, horse riding, and visit 12th-century Khajji Nag Temple. Stroll through Kalatop Wildlife Sanctuary.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Local Artisan Market Shopping",
-          "Regional Food Tasting",
-          "Evening Sunset Activity"
+          "Khajjiar Mini Switzerland Meadow Tour",
+          "Zorbing & Alpine Horse Riding",
+          "Kalatop Cedar Forest Nature Trail"
         ],
-        "hotel": "Indraprastha Resort Dalhousie",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Grand View Hotel / Treebo Dalhousie",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 5,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Colonial Church Walk & Pathankot / Gaggal Departure Drop",
+        "description": "Visit St. John's Church and St. Francis Church. Check out and private transfer to Pathankot Cantt Railway Station or Gaggal Airport for your onward flight.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Colonial Heritage Walk",
+          "Transfer to Pathankot / Gaggal Airport / Station"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -1820,74 +1928,87 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Delhi",
     "hotels": [
       {
-        "name": "Jibhi Wooden Chalet",
+        "name": "The Hosteller Kasol / Alpine River Camp",
+        "city": "Kasol",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Kheerganga Alpine Meadow Camps",
+        "city": "Kheerganga",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "The Hidden Burrow / Pinewood Resort Jibhi",
         "city": "Jibhi",
         "rating": "3 Star",
-        "nights": 2
+        "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Kasol Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Kasol. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Bhuntar / Chandigarh to Kasol, Manikaran Sahib & Chalal Trail",
+        "description": "Pickup from Bhuntar Airport / Chandigarh. Drive along Parvati River into hippie haven Kasol. Check in at riverside camp. Visit holy Manikaran Sahib Gurudwara and dip in healing natural hot water springs. Evening walk across cable suspension bridge to Chalal village for Israeli cuisine.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Kasol",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Bhuntar / Chandigarh Pickup",
+          "Manikaran Sahib Gurudwara Hot Springs",
+          "Chalal Pine Forest Cafe Trail"
         ],
-        "hotel": "Jibhi Wooden Chalet",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Hosteller Kasol / Alpine River Camp",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Kasol Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Kasol. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Barshaini to Kheerganga Trek & Natural Sulphur Hot Spring Bath",
+        "description": "Drive to Barshaini. Embark on the 12 km scenic trek to Kheerganga through Rudranag waterfall, pine forests, and apple orchards. Reach the mountaintop meadow (2,960m). Soak in the heavenly natural warm sulphur pool overlooking snow peaks. Overnight in alpine camp under a star-studded sky.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Kasol Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Barshaini to Kheerganga Alpine Trek",
+          "Rudranag Waterfall Stop",
+          "Parvati Kund Natural Hot Sulphur Bath",
+          "Stargazing Bonfire Camp"
         ],
-        "hotel": "Jibhi Wooden Chalet",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Kheerganga Alpine Meadow Camps",
+        "transfers": "Private Vehicle & Trek"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Kasol. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Descend to Barshaini & Drive to Fairytale Jibhi / Tirthan Valley",
+        "description": "Enjoy sunrise over Parvati Valley. Trek down to Barshaini. Board private vehicle and drive through Aut tunnel into tranquil Banjar and Jibhi / Tirthan Valley. Visit cascading Jibhi Waterfall and historic 1500-year-old multi-story wooden Chehni Kothi tower. Check in at wooden riverside lodge.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Trek Down to Barshaini",
+          "Scenic Drive to Banjar & Jibhi",
+          "Jibhi Waterfall Wooden Bridges",
+          "Chehni Kothi Heritage Tower"
         ],
-        "hotel": "Jibhi Wooden Chalet",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Hidden Burrow / Pinewood Resort Jibhi",
+        "transfers": "Private Mountain Vehicle"
       },
       {
         "dayNumber": 4,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Tirthan River Trout Walk & Aut / Chandigarh Departure Drop",
+        "description": "Morning stroll along crystal-clear Tirthan River (UNESCO Great Himalayan National Park eco-zone). Check out and private transfer to Aut junction / Bhuntar / Chandigarh for departure.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Tirthan River Walk & Trout Spotting",
+          "Transfer to Aut / Chandigarh / Delhi"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -1936,122 +2057,139 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Shimla",
     "hotels": [
       {
-        "name": "Kaza Grand Hotel",
+        "name": "The Grand Shambala / Echor Kalpa",
+        "city": "Kalpa",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Hotel Spiti Heritage / Deyzor Kaza",
         "city": "Kaza",
         "rating": "3 Star",
-        "nights": 2
+        "nights": 3
+      },
+      {
+        "name": "Chandratal Lake Deluxe Alpine Camp",
+        "city": "Chandratal",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "The Manali Inn / Snow Valley Resorts",
+        "city": "Manali",
+        "rating": "3 Star",
+        "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Spiti Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Spiti. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Shimla to Kalpa via Kinnaur Valley & Kinner Kailash View",
+        "description": "Early morning pickup from Shimla. Drive along Hindustan-Tibet Highway through dramatic rock-cut cliffs of Kinnaur along Sutlej River. Reach picturesque apple hamlet Kalpa (2,960m). Golden sunset view of the sacred 79-foot Shiva lingam rock of Kinner Kailash peak.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Spiti",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Hindustan-Tibet Road Journey",
+          "Rock-Cut Kinnaur Gorges",
+          "Kalpa Apple Orchards & Kinner Kailash View"
         ],
-        "hotel": "Kaza Grand Hotel",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Grand Shambala / Echor Kalpa",
+        "transfers": "4x4 / Mountain SUV"
       },
       {
         "dayNumber": 2,
-        "title": "Spiti Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Spiti. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Kalpa to Kaza via Nako Lake & 1000-Year-Old Tabo Monastery",
+        "description": "Drive through Khab confluence of Sutlej and Spiti rivers. Visit sacred Nako Lake and ancient Padmasambhava footprints. Stop at UNESCO-listed Tabo Monastery ('Ajanta of the Himalayas') founded in 996 CE with preserved clay statues. Continue past Dhankar cliff-hanging monastery to Kaza (3,800m).",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Spiti Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Khab River Confluence",
+          "Nako Lake Walk",
+          "1000-Year-Old Tabo Monastery UNESCO Tour",
+          "Dhankar Monastery Cliff View"
         ],
-        "hotel": "Kaza Grand Hotel",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Spiti Heritage / Deyzor Kaza",
+        "transfers": "4x4 / Mountain SUV"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Spiti. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Key Monastery Fortress, Kibber Village & Asia's Highest Chicham Bridge",
+        "description": "Visit iconic 11th-century Key Monastery perched fortress-like on a hillock overlooking Spiti River. Drive up to wildlife haven Kibber (4,270m) and cross the breathtaking Chicham Bridge suspended 150m above a terrifying gorge—Asia's highest suspension bridge.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Key Gompa Monastery & Herbal Tea Blessing",
+          "Kibber Wildlife & Snow Leopard Sanctuary",
+          "Chicham Bridge Engineering Marvel"
         ],
-        "hotel": "Kaza Grand Hotel",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Spiti Heritage / Deyzor Kaza",
+        "transfers": "4x4 / Mountain SUV"
       },
       {
         "dayNumber": 4,
-        "title": "Spiti Local Bazaars, Shopping & Culinary Evening",
-        "description": "Spend a relaxing day exploring local markets, craft shops, and authentic regional restaurants. Option for evening sunset cruise or cultural performance.",
+        "title": "Hikkim Highest Post Office, Komic Highest Village & Langza Buddha",
+        "description": "Tour the famous high-altitude villages. Post a handwritten postcard from Hikkim (world's highest post office at 4,400m). Visit Komic (4,587m - world's highest village connected by motorable road) and ancient Lundup Tsemo Gompa. Stop at Langza to photograph the golden Buddha statue facing Chau Chau Kang Nilda peak.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Local Artisan Market Shopping",
-          "Regional Food Tasting",
-          "Evening Sunset Activity"
+          "Postcard from World's Highest Post Office Hikkim",
+          "Komic World's Highest Motorable Village",
+          "Langza Giant Buddha Statue & Fossil Trail"
         ],
-        "hotel": "Kaza Grand Hotel",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Spiti Heritage / Deyzor Kaza",
+        "transfers": "4x4 / Mountain SUV"
       },
       {
         "dayNumber": 5,
-        "title": "Exploring Hidden Gems & Scenic Countryside of Spiti",
-        "description": "Delight in a day exploring off-the-beaten-path villages, panoramic viewpoints, and tranquil nature spots across Spiti with your private chauffeur.",
+        "title": "Kaza to Sacred Crescent Lake Chandratal via Kunzum Pass",
+        "description": "Drive across high-altitude Kunzum Pass (4,551m) adorned with Buddhist prayer flags. Take blessings at Kunzum Mata Temple. Descend towards the heavenly blue crescent Chandratal Lake (4,300m). Trek to the lake perimeter and witness magical color shifts from turquoise to deep emerald. Camp under Milky Way.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Hidden Spot Discovery",
-          "Panoramic Viewpoint Stop",
-          "Countryside Private Cab Tour"
+          "Kunzum Pass 4,551m Stupa Parikrama",
+          "Sacred Chandratal Lake Holy Trek",
+          "High Altitude Milky Way Stargazing Camp"
         ],
-        "hotel": "Kaza Grand Hotel",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Chandratal Lake Deluxe Alpine Camp",
+        "transfers": "4x4 / Mountain SUV"
       },
       {
         "dayNumber": 6,
-        "title": "Spiti Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Spiti. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Chandratal to Manali via Batal, Chhatru & Atal Tunnel",
+        "description": "Traverse the rugged off-road water crossings of Batal and Chhatru along the Chandra River gorge. Stop at legendary Chacha-Chachi Dhaba. Cross into Kullu Valley through the modern Atal Tunnel. Arrive in Manali, check-in and celebrate trip completion with a hot shower.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Spiti Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Chandra River Off-Road Water Crossings",
+          "Chacha Chachi Dhaba Batal Stop",
+          "Atal Tunnel Drive to Manali"
         ],
-        "hotel": "Kaza Grand Hotel",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Manali Inn / Snow Valley Resorts",
+        "transfers": "4x4 / Mountain SUV"
       },
       {
         "dayNumber": 7,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Manali Leisure & Chandigarh / Delhi Departure Drop",
+        "description": "Relaxed breakfast. Check-out and private transfer to Chandigarh Airport / Railway Station or Delhi for onward journey.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Check-out & Transfer to Chandigarh / Delhi Airport / Station"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -2184,103 +2322,122 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Srinagar",
     "hotels": [
       {
-        "name": "Heritage Luxury Houseboat",
+        "name": "Heritage Luxury Houseboat on Dal Lake",
         "city": "Srinagar",
-        "rating": "5 Star",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Hotel Pine Spring / Treebo Pahalgam",
+        "city": "Pahalgam",
+        "rating": "3 Star",
+        "nights": 2
+      },
+      {
+        "name": "Hotel Royal Castle / Treebo Gulmarg",
+        "city": "Gulmarg",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Hotel Grand Boulevard / Treebo Srinagar",
+        "city": "Srinagar",
+        "rating": "3 Star",
         "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Kashmir Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Kashmir. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Srinagar Arrival, Dal Lake Luxury Houseboat & Shikara Sunset Ride",
+        "description": "Arrive at Srinagar Sheikh-ul-Alam International Airport (SXR). Warm traditional Kashmiri welcome with Kahwa. Transfer and check-in to a handcrafted cedar wood luxury houseboat on Dal Lake / Nigeen Lake. In the evening, enjoy a romantic 1-hour Shikara boat ride visiting the floating flower & vegetable market and Char Chinar.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Kashmir",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Srinagar Airport Pickup with Kashmiri Kahwa",
+          "Luxury Houseboat Check-in",
+          "Sunset Dal Lake Shikara Ride",
+          "Floating Market & Char Chinar"
         ],
-        "hotel": "Heritage Luxury Houseboat",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Heritage Luxury Houseboat on Dal Lake",
+        "transfers": "Private AC Vehicle & Shikara"
       },
       {
         "dayNumber": 2,
-        "title": "Srinagar to Gulmarg Cable Car Gondola & Snow Points",
-        "description": "Full day excursion to Gulmarg (Meadow of Flowers). Take world's highest Gulmarg Cable Car Gondola Ride to Phase 1 (Kongdoori) & Phase 2 (Apharwat Peak) for skiing and snow sports.",
+        "title": "Mughal Gardens Tour & Drive to Valley of Shepherds Pahalgam",
+        "description": "Visit world-famous Mughal Gardens: Shalimar Bagh (Abode of Love) built by Jahangir for Nur Jahan, Nishat Bagh (Garden of Pleasure), and Chashme Shahi royal spring. Post lunch, drive to Pahalgam (2,130m) along Lidder River, passing through purple saffron fields of Pampore and 1100-year-old Avantipur temple ruins. Check-in at Pahalgam resort.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Gulmarg Gondola Cable Car Ride",
-          "Apharwat Peak Snow Sports",
-          "Golf Course Walk"
+          "Shalimar & Nishat Mughal Gardens",
+          "Pampore Saffron Fields Stop",
+          "Avantipur Ruins Visit",
+          "Scenic Lidder Valley Drive"
         ],
-        "hotel": "Heritage Luxury Houseboat",
+        "hotel": "Hotel Pine Spring / Treebo Pahalgam",
         "transfers": "Private AC Vehicle"
       },
       {
         "dayNumber": 3,
-        "title": "Gulmarg to Pahalgam (Valley of Shepherds)",
-        "description": "Drive to Pahalgam via Pampore Saffron Fields & Avantipur Ruins. Check-in to riverside hotel along Lidder River. Afternoon walk along Lidder valley.",
+        "title": "Pahalgam Valley Excursion: Betaab Valley, Aru Valley & Chandanwari",
+        "description": "Full day excursion by local union vehicle to the pristine valleys of Pahalgam: Betaab Valley (named after Bollywood film Betaab) with its lush emerald meadows and willow trees, Aru Valley wildlife hamlet, and Chandanwari (starting point of Amarnath Yatra) featuring snow bridges. Evening stroll along Lidder riverbank.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Pampore Saffron Field Visit",
-          "Avantipur Sun Temple Ruins",
-          "Lidder River Walk"
+          "Betaab Valley Alpine Meadow Tour",
+          "Aru Valley Scenic Eco Village",
+          "Chandanwari Snow Bridge Point",
+          "Lidder River Nature Walk"
         ],
-        "hotel": "Heritage Luxury Houseboat",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Pine Spring / Treebo Pahalgam",
+        "transfers": "Local Union Vehicle"
       },
       {
         "dayNumber": 4,
-        "title": "Pahalgam Betaab Valley, Aru Valley & Baisaran Trek",
-        "description": "Explore Betaab Valley (Bollywood shooting location), Aru Valley wildlife sanctuary, and option pony ride to Baisaran Meadow (Mini Switzerland of Kashmir).",
+        "title": "Pahalgam to Meadow of Flowers Gulmarg & Gondola Ride",
+        "description": "Drive to Gulmarg (2,650m), India's premier ski paradise. Check-in at hotel. Board the famous Gulmarg Gondola (Asia's highest cable car): Phase 1 takes you to Kongdoori Valley (3,100m) and Phase 2 reaches Apharwat Peak (4,200m) near the Line of Control with powdery snow. Evening visit to St. Mary's colonial stone church and golf course.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Betaab Valley Sightseeing",
-          "Aru Valley Nature Walk",
-          "Baisaran Pony Trek"
+          "Gulmarg Gondola Phase 1 & 2 Cable Car",
+          "Apharwat Peak Snow Walk & Ski Slopes",
+          "St. Mary's Colonial Church Heritage Stop"
         ],
-        "hotel": "Heritage Luxury Houseboat",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Royal Castle / Treebo Gulmarg",
+        "transfers": "Private AC Vehicle & Gondola"
       },
       {
         "dayNumber": 5,
-        "title": "Pahalgam to Sonmarg (Meadow of Gold) & Thajiwas Glacier",
-        "description": "Drive to Sonmarg surrounded by snow-capped peaks. Pony ride to Thajiwas Glacier and Sindh River stream. Return to Srinagar Luxury Houseboat.",
+        "title": "Gulmarg to Srinagar, Shankaracharya Temple & Old City Artisan Walk",
+        "description": "Morning descent drive back to Srinagar. Ascend the hill to the sacred 9th-century Shankaracharya Temple offering bird's-eye views of Srinagar city and Dal Lake. Visit the revered Hazratbal Dargah. In the afternoon, explore the old city craft quarters for authentic Kashmiri Pashmina shawls, walnut wood carving, and saffron.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Sonmarg Sindh River Excursion",
-          "Thajiwas Glacier Pony Ride",
-          "Overnight Houseboat Stay"
+          "Shankaracharya Temple Panoramic Darshan",
+          "Hazratbal White Marble Shrine",
+          "Pashmina & Walnut Wood Artisan Market"
         ],
-        "hotel": "Heritage Luxury Houseboat",
+        "hotel": "Hotel Grand Boulevard / Treebo Srinagar",
         "transfers": "Private AC Vehicle"
       },
       {
         "dayNumber": 6,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Traditional Kashmiri Breakfast & Srinagar Airport Departure Drop",
+        "description": "Enjoy a hearty breakfast with authentic Kashmiri bread (Girda) and Kahwa. Complete check-out. Private transfer to Srinagar Airport for your return flight with unforgettable memories of Paradise on Earth.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Check-out & Srinagar Airport Departure Transfer"
         ],
         "hotel": "Departure Day",
         "transfers": "Private AC Vehicle"
@@ -2333,119 +2490,133 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Leh",
     "hotels": [
       {
-        "name": "The Grand Dragon Leh",
+        "name": "The Grand Dragon / Hotel Singge Palace Leh",
         "city": "Leh",
-        "rating": "5 Star",
+        "rating": "3 Star",
+        "nights": 3
+      },
+      {
+        "name": "Nubra Organic Retreat / Echor Camp Nubra",
+        "city": "Nubra Valley",
+        "rating": "3 Star",
         "nights": 2
+      },
+      {
+        "name": "Pangong Deluxe Lakefront Camp",
+        "city": "Pangong Tso",
+        "rating": "3 Star",
+        "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Ladakh Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Ladakh. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Leh Arrival, Acclimatization Rest & Shanti Stupa Sunset",
+        "description": "Fly into Kushok Bakula Rimpochee Airport Leh (3,524m). High-altitude acclimatization rest in hotel with garlic soup and fluids. In late afternoon, visit Leh Palace and climb to Japanese Peace Pagoda Shanti Stupa for sunset over Stok Kangri range. Stroll in Leh Main Bazaar.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Ladakh",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Leh Airport Meet & Greet",
+          "Acclimatization Rest",
+          "Shanti Stupa Sunset Panorama",
+          "Leh Main Market Walk"
         ],
-        "hotel": "The Grand Dragon Leh",
+        "hotel": "The Grand Dragon / Hotel Singge Palace Leh",
         "transfers": "Private AC Vehicle"
       },
       {
         "dayNumber": 2,
-        "title": "Ladakh Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Ladakh. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Sham Valley Tour: Magnetic Hill, Sangam & Pathar Sahib Gurudwara",
+        "description": "Drive along Indus River on Srinagar-Leh Highway. Visit Hall of Fame War Memorial museum, optical illusion Magnetic Hill where vehicles defy gravity, sacred Gurudwara Pathar Sahib (built by Indian Army), and Sangam—the majestic confluence of muddy Zanskar and turquoise Indus rivers.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Ladakh Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Hall of Fame War Memorial",
+          "Magnetic Hill Defying Gravity Experience",
+          "Gurudwara Pathar Sahib Darshan",
+          "Indus & Zanskar River Sangam Viewpoint"
         ],
-        "hotel": "The Grand Dragon Leh",
+        "hotel": "The Grand Dragon / Hotel Singge Palace Leh",
         "transfers": "Private AC Vehicle"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Ladakh. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Leh to Nubra Valley via World's Highest Khardung La Pass (17,582 ft)",
+        "description": "Ascend the legendary Khardung La Pass (17,582 ft / 5,359m)—one of the world's highest motorable roads. Photo stop at the iconic pass summit. Descend into mystical Nubra Valley ('Valley of Flowers'). Visit Diskit Monastery with its colossal 106-foot Maitreya Buddha statue. In evening, enjoy double-humped Bactrian camel ride at white sand dunes of Hunder.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Khardung La Pass 17,582 ft Summit Photo",
+          "Diskit Monastery & Giant Maitreya Buddha",
+          "Hunder White Sand Dunes Bactrian Camel Safari"
         ],
-        "hotel": "The Grand Dragon Leh",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Nubra Organic Retreat / Echor Camp Nubra",
+        "transfers": "Private Mountain Vehicle"
       },
       {
         "dayNumber": 4,
-        "title": "Ladakh Local Bazaars, Shopping & Culinary Evening",
-        "description": "Spend a relaxing day exploring local markets, craft shops, and authentic regional restaurants. Option for evening sunset cruise or cultural performance.",
+        "title": "Excursion to Indo-Pak Border Village Turtuk & Balti Culture",
+        "description": "Full day excursion along the Shyok River to scenic border village Turtuk (opened to tourists in 2010), part of Gilgit-Baltistan reclaimed in 1971. Walk through apricot and walnut orchards, visit traditional Balti wooden heritage house and natural cold storage caves. Return to Nubra.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Local Artisan Market Shopping",
-          "Regional Food Tasting",
-          "Evening Sunset Activity"
+          "Turtuk Indo-Pak Border Village Tour",
+          "Balti Heritage House & Apricot Orchards",
+          "Natural Mountain Rock Cold Storage Caves"
         ],
-        "hotel": "The Grand Dragon Leh",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Nubra Organic Retreat / Echor Camp Nubra",
+        "transfers": "Private Mountain Vehicle"
       },
       {
         "dayNumber": 5,
-        "title": "Exploring Hidden Gems & Scenic Countryside of Ladakh",
-        "description": "Delight in a day exploring off-the-beaten-path villages, panoramic viewpoints, and tranquil nature spots across Ladakh with your private chauffeur.",
+        "title": "Nubra to Pangong Tso via Dramatic Shyok River Route",
+        "description": "Drive along the wild and barren Shyok River gorge directly towards magical Pangong Tso (4,350m). First glimpse of the intense blue saltwater lake spanning across India and Tibet. Watch the lake water shift colors between turquoise, cyan, and violet. Check in at deluxe lakefront alpine camp.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Hidden Spot Discovery",
-          "Panoramic Viewpoint Stop",
-          "Countryside Private Cab Tour"
+          "Off-Road Shyok River Canyon Drive",
+          "First Glimpse of Pangong Tso Lake",
+          "3 Idiots Shooting Point Photo Stop",
+          "Lakeside Sunset Walk & Milky Way Stargazing"
         ],
-        "hotel": "The Grand Dragon Leh",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Pangong Deluxe Lakefront Camp",
+        "transfers": "Private Mountain Vehicle"
       },
       {
         "dayNumber": 6,
-        "title": "Ladakh Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Ladakh. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Pangong Sunrise, Drive to Leh via Chang La Pass (17,590 ft) & Thiksey",
+        "description": "Early morning witness magical golden sunrise reflections across Pangong Lake. Drive back to Leh crossing rugged Chang La Pass (17,590 ft). En route visit 12-story Thiksey Monastery (resembling Potala Palace) and Shey Palace. Evening free for souvenir shopping in Leh.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Ladakh Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Sunrise Over Pangong Tso",
+          "Chang La Pass 17,590 ft Crossing",
+          "Thiksey Monastery Maitreya Temple",
+          "Shey Palace & Copper Buddha"
         ],
-        "hotel": "The Grand Dragon Leh",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Grand Dragon / Hotel Singge Palace Leh",
+        "transfers": "Private Mountain Vehicle"
       },
       {
         "dayNumber": 7,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Breakfast & Leh Kushok Bakula Airport Departure Drop",
+        "description": "Enjoy breakfast overlooking snow peaks. Private transfer to Leh Airport for your return flight with unforgettable memories of the Land of High Passes.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Check-out & Leh Kushok Bakula Airport Departure Drop"
         ],
         "hotel": "Departure Day",
         "transfers": "Private AC Vehicle"
@@ -2497,74 +2668,81 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Jammu",
     "hotels": [
       {
-        "name": "Fortune Park Katra",
+        "name": "Hotel The White Katra / Treebo Katra",
         "city": "Katra",
-        "rating": "4 Star",
+        "rating": "3 Star",
         "nights": 2
+      },
+      {
+        "name": "Hotel Vardaan / Skyview Resort Patnitop",
+        "city": "Patnitop",
+        "rating": "3 Star",
+        "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Vaishno Devi Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Vaishno Devi. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Jammu Arrival, Transfer to Katra & Yatra Registration",
+        "description": "Arrive at Jammu Tawi Railway Station or Jammu Airport. Private transfer to Katra base camp (approx. 1.5 hours). Check-in at hotel. Obtain your RFID Yatra Access Card at Banganga. Evening free for rest and preparation for holy trek.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Vaishno Devi",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Jammu Airport / Station Pickup",
+          "Scenic Highway Transfer to Katra",
+          "RFID Yatra Registration Pass Collection"
         ],
-        "hotel": "Fortune Park Katra",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel The White Katra / Treebo Katra",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Vaishno Devi Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Vaishno Devi. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Maa Vaishno Devi Holy Bhawan Darshan & Bhairon Ghati Ropeway",
+        "description": "Early morning embark on 13 km holy pilgrimage trek to Maa Vaishno Devi Bhawan (option to use helicopter, battery car, or pony). Visit sacred Ardhkuwari Cave (Garbhjun), reach Holy Bhawan for divine darshan of Natural Pindies (Maha Kali, Maha Lakshmi, Maha Saraswati). Take cable car ropeway to Bhairon Baba Temple to conclude yatra. Return to Katra hotel.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Vaishno Devi Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Maa Vaishno Devi Holy Cave VIP Darshan",
+          "Ardhkuwari Temple Holy Cave",
+          "Bhairon Ghati Ropeway Cable Car",
+          "Return Descent to Katra Base"
         ],
-        "hotel": "Fortune Park Katra",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel The White Katra / Treebo Katra",
+        "transfers": "Trek / Battery Car / Ropeway"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Vaishno Devi. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Sacred Shivkhori Cave Darshan & Drive to Pine Hill Station Patnitop",
+        "description": "Drive to holy Shivkhori (approx. 2.5 hours), a 200m natural limestone cave containing a 4 ft self-manifested Shiva Lingam with perpetual milky water dripping from cave roof. Post darshan, drive up to scenic pine-forested hill station Patnitop (2,024m). Check-in at resort and stroll through Circular Road pine trails.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Shivkhori Natural Limestone Cave Darshan",
+          "Scenic Mountain Drive to Patnitop",
+          "Patnitop Pine Forest Circular Road Sunset Walk"
         ],
-        "hotel": "Fortune Park Katra",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Vardaan / Skyview Resort Patnitop",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 4,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Sanasar Meadow, Nag Temple & Jammu Departure Drop",
+        "description": "Visit ancient Nag Temple (believed to be 600 years old) and nearby saucer-shaped alpine meadow Sanasar. Check out and private drive back to Jammu Tawi Railway Station or Jammu Airport for departure.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Ancient Nag Temple Blessings",
+          "Sanasar Alpine Meadow View",
+          "Jammu Airport / Station Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -2612,106 +2790,122 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Jaipur",
     "hotels": [
       {
-        "name": "Alsisar Haveli Jaipur",
+        "name": "Shahpura House / Treebo Jaipur",
         "city": "Jaipur",
-        "rating": "4 Star",
+        "rating": "3 Star",
+        "nights": 2
+      },
+      {
+        "name": "Ranbanka Palace / Treebo Jodhpur",
+        "city": "Jodhpur",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Fateh Garh / Treebo Udaipur",
+        "city": "Udaipur",
+        "rating": "3 Star",
         "nights": 2
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Rajasthan Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Rajasthan. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Jaipur Pink City Arrival, City Palace & Chokhi Dhani Cultural Village",
+        "description": "Arrive at Jaipur Sanganer Airport / Railway Station. Private transfer to heritage hotel. Visit City Palace royal museum, astronomical Jantar Mantar (UNESCO), and photo stop at iconic honeycomb Hawa Mahal. In evening, experience authentic Rajasthani village culture, puppet dance, camel rides, and traditional Dal Baati Churma feast at Chokhi Dhani.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Rajasthan",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Jaipur Airport / Station Pickup",
+          "City Palace & Jantar Mantar UNESCO Tour",
+          "Hawa Mahal Photo Stop",
+          "Chokhi Dhani Cultural Village & Dinner"
         ],
-        "hotel": "Alsisar Haveli Jaipur",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Shahpura House / Treebo Jaipur",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Jaipur Amber Fort & City Palace Heritage Tour",
-        "description": "Full day Jaipur tour. Elephant / Jeep ride up to Amber Fort. Visit Jal Mahal, Hawa Mahal (Palace of Winds), City Palace museum, and Jantar Mantar observatory.",
+        "title": "Amber Fort Elephant / Jeep Ride, Jal Mahal & Nahargarh Sunset",
+        "description": "Morning ascend to majestic hilltop Amber Fort by open jeep or elephant. Explore Sheesh Mahal (Mirror Palace) and Maota Lake. Visit water-palace Jal Mahal and drive up to Nahargarh Fort for a breathtaking sunset over the entire Pink City. Evening shopping at Johari Bazaar for blue pottery and gems.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Amber Fort Elephant / Jeep Ride",
-          "Hawa Mahal & City Palace",
-          "Jantar Mantar UNESCO Monument"
+          "Amber Fort Jeep Ride & Sheesh Mahal Tour",
+          "Jal Mahal Lake Stop",
+          "Nahargarh Fort Panoramic Sunset",
+          "Johari Bazaar Handicraft Shopping"
         ],
-        "hotel": "Alsisar Haveli Jaipur",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Shahpura House / Treebo Jaipur",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Jaipur to Jodhpur (Blue City & Mehrangarh Fort)",
-        "description": "Drive to Jodhpur. Visit towering Mehrangarh Fort standing 400 ft above the Blue City, Jaswant Thada royal cenotaphs, and Umaid Bhawan Palace museum.",
+        "title": "Jaipur to Blue City Jodhpur, Mehrangarh Fort & Jaswant Thada",
+        "description": "Scenic morning highway drive to Sun City Jodhpur (approx. 5.5 hours). Check-in at hotel. Ascend to imposing Mehrangarh Fort perched 400 ft above the blue-painted houses. Visit royal white marble memorial Jaswant Thada and museum at Umaid Bhawan Palace. Evening walk at Clock Tower (Ghanta Ghar) and Sardar Market.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Mehrangarh Fort Guided Tour",
-          "Jaswant Thada Royal Cenotaphs",
-          "Blue City Market Stroll"
+          "Scenic Highway Drive to Jodhpur",
+          "Mehrangarh Fort Guided Museum Tour",
+          "Jaswant Thada White Marble Cenotaph",
+          "Clock Tower & Sardar Market Walk"
         ],
-        "hotel": "Alsisar Haveli Jaipur",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Ranbanka Palace / Treebo Jodhpur",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 4,
-        "title": "Jodhpur to Jaisalmer Thar Desert Safari & Camp Stay",
-        "description": "Drive to golden city Jaisalmer. Proceed to Sam Sand Dunes. Enjoy camel safari across Thar desert dunes, Rajasthani folk dance performance & camp stay under stars.",
+        "title": "Jodhpur to Lake City Udaipur via Ranakpur 1444-Pillar Marble Temples",
+        "description": "Drive through Aravalli hills to romantic Venice of the East - Udaipur. Stop at Ranakpur to marvel at the 15th-century Jain Temple featuring 1,444 intricately hand-carved non-identical marble pillars. Continue to Udaipur. In the evening, enjoy a private sunset boat ride on serene Lake Pichola admiring Jag Mandir Island Palace.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Thar Desert Camel Safari",
-          "Sam Sand Dunes Sunset",
-          "Rajasthani Folk Dance & Camp Fire"
+          "Ranakpur Jain Marble Temple Architecture Tour",
+          "Scenic Aravalli Mountain Drive",
+          "Lake Pichola Sunset Boat Cruise",
+          "Jag Mandir Island View"
         ],
-        "hotel": "Alsisar Haveli Jaipur",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Fateh Garh / Treebo Udaipur",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 5,
-        "title": "Jaisalmer Golden Fort & Haveli Heritage Walk",
-        "description": "Visit living Jaisalmer Fort (Sonar Qila), Patwon Ki Haveli, Nathmal Ki Haveli, and Gadisar Lake. Drive onwards to Udaipur via Ranakpur Jain Temple.",
+        "title": "Udaipur City Palace, Jagdish Temple, Saheliyon Ki Bari & Bagore Ki Haveli",
+        "description": "Explore the colossal City Palace complex overlooking Lake Pichola. Visit 1651 CE Jagdish Temple and royal garden Saheliyon Ki Bari with marble fountains. Afternoon visit to Sajjangarh Monsoon Palace atop Bansdara peak. Conclude with Dharohar Rajasthani folk dance and puppet show at Bagore Ki Haveli at Gangaur Ghat.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Jaisalmer Living Fort Walk",
-          "Patwon Ki Haveli Architecture",
-          "Gadisar Lake Boat Ride"
+          "Udaipur City Palace Guided Museum Tour",
+          "Jagdish Temple Darshan",
+          "Saheliyon Ki Bari Royal Fountains",
+          "Bagore Ki Haveli Evening Folk Dance Show"
         ],
-        "hotel": "Alsisar Haveli Jaipur",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Fateh Garh / Treebo Udaipur",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 6,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Fateh Sagar Lake Stroll & Udaipur Airport Departure Drop",
+        "description": "Relaxed breakfast overlooking Aravalli hills. Visit Fateh Sagar Lake and Nehru Garden. Check-out and private transfer to Udaipur Maharana Pratap Airport (UDR) or Railway Station for onward journey.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Fateh Sagar Lake Walk",
+          "Udaipur Airport / Station Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -2759,74 +2953,88 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Jodhpur",
     "hotels": [
       {
-        "name": "Sam Desert Swiss Camp",
+        "name": "Lallgarh Palace / Treebo Bikaner",
+        "city": "Bikaner",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Hotel Rang Mahal / Treebo Jaisalmer",
         "city": "Jaisalmer",
-        "rating": "4 Star",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Royal Desert Camp Sam Sand Dunes",
+        "city": "Sam Sand Dunes",
+        "rating": "3 Star",
         "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Jaisalmer Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Jaisalmer. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Bikaner Arrival, Junagarh Fort & Karni Mata Rat Temple",
+        "description": "Pickup from Bikaner Railway Station or Jodhpur Airport. Check in at Bikaner hotel. Tour the impregnable red sandstone Junagarh Fort and Anup Mahal palace. Excursion to sacred Deshnoke Karni Mata Temple famous for over 25,000 revered holy black rats (and auspicious white rats). Visit ICAR Camel Breeding Farm. Relish authentic Bikaneri Bhujia.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Jaisalmer",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Bikaner Station Pickup",
+          "Junagarh Fort Royal Palace Tour",
+          "Deshnoke Karni Mata Temple Blessings",
+          "National Camel Research Centre"
         ],
-        "hotel": "Sam Desert Swiss Camp",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Lallgarh Palace / Treebo Bikaner",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Jaisalmer Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Jaisalmer. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Drive to Golden City Jaisalmer, Sonar Qila & Havelis",
+        "description": "Morning drive through the Thar Desert to the living sandstone wonder - Jaisalmer (approx. 5 hours). Check-in at hotel. Tour the living Golden Fort (Sonar Qila) where one-fourth of the city's population still resides. Explore intricately carved Patwon Ki Haveli, Salim Singh Ki Haveli, and tranquil Gadisar Lake at sunset.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Jaisalmer Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Thar Desert Highway Journey",
+          "Jaisalmer Living Fort (Sonar Qila) Walk",
+          "Patwon Ki Haveli Stone Carving Tour",
+          "Gadisar Lake Sunset Stroll"
         ],
-        "hotel": "Sam Desert Swiss Camp",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Rang Mahal / Treebo Jaisalmer",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Jaisalmer. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Kuldhara Abandoned Ghost Village & Sam Sand Dunes Desert Safari",
+        "description": "Visit the eerie 13th-century abandoned ghost village of Kuldhara. Proceed to Sam Sand Dunes. Check into your luxury Swiss desert tent with traditional tikka welcome. Experience thrilling 4x4 open Gypsy Dune Bashing and a sunset Camel Safari over golden ripples of sand. In evening, enjoy Rajasthani Kalbelia folk dance, fire show, and royal buffet dinner under starry sky.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Kuldhara Ghost Village Heritage Tour",
+          "Sam Sand Dunes 4x4 Dune Bashing",
+          "Sunset Desert Camel Safari",
+          "Kalbelia Folk Dance & Gala Camp Dinner"
         ],
-        "hotel": "Sam Desert Swiss Camp",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Royal Desert Camp Sam Sand Dunes",
+        "transfers": "Private AC Sedan & 4x4 Gypsy"
       },
       {
         "dayNumber": 4,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Sunrise Over Desert Dunes & Jaisalmer / Jodhpur Departure",
+        "description": "Witness golden desert sunrise over sand dunes. Relish hearty breakfast with fresh piping hot Jalebis. Check out and private transfer to Jaisalmer Airport / Railway Station or Jodhpur Airport for return journey.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Dune Sunrise Photography",
+          "Transfer to Jaisalmer / Jodhpur Airport / Station"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -2960,58 +3168,59 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Jaipur",
     "hotels": [
       {
-        "name": "Ranthambore Kothi Resort",
+        "name": "Ranthambore Heritage Haveli / Treebo Ranthambore",
         "city": "Ranthambore",
-        "rating": "4 Star",
+        "rating": "3 Star",
         "nights": 2
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Ranthambore Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Ranthambore. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Sawai Madhopur / Jaipur Arrival, Check-in & Ancient Ranthambore Fort",
+        "description": "Pickup from Sawai Madhopur Railway Station or Jaipur Airport. Transfer to your wildlife jungle resort in Ranthambore. Check in and refresh. In afternoon, drive up to the 10th-century UNESCO World Heritage Ranthambore Fort perched high on a cliff. Visit sacred Trinetra Ganesha Temple and enjoy panoramic views of Padam Talao and hunting lodges.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Ranthambore",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Sawai Madhopur / Jaipur Pickup",
+          "Resort Check-in",
+          "Ranthambore Fort UNESCO Heritage Tour",
+          "Trinetra Ganesha Temple Darshan"
         ],
-        "hotel": "Ranthambore Kothi Resort",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Ranthambore Heritage Haveli / Treebo Ranthambore",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Ranthambore Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Ranthambore. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Morning & Afternoon 4x4 Gypsy Tiger Safaris in Core Jungle Zones",
+        "description": "Full day wildlife adventure. Set out at dawn in an open-top 4x4 Gypsy with a government naturalist guide into core tiger territories (Zones 1-5). Track Royal Bengal Tigers, Indian leopards, sloth bears, marsh crocodiles, and sambar deer. Return to resort for breakfast and pool leisure. In the afternoon, embark on second safari exploring different terrain around Rajbagh Lake.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Ranthambore Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Dawn 4x4 Gypsy Tiger Tracking Safari",
+          "Wildlife Birding & Photography",
+          "Afternoon Core Zone Jungle Safari",
+          "Evening Bonfire & Naturalist Talk"
         ],
-        "hotel": "Ranthambore Kothi Resort",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Ranthambore Heritage Haveli / Treebo Ranthambore",
+        "transfers": "4x4 Open Safari Gypsy"
       },
       {
         "dayNumber": 3,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Morning Village Safari, Handicraft Guild & Departure Drop",
+        "description": "Morning visit to Dastkar Ranthambore women's craft initiative supporting village artisans with block printing and patchwork. Check-out and private transfer to Sawai Madhopur Station or Jaipur Airport.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Dastkar Village Handicraft Visit",
+          "Sawai Madhopur / Jaipur Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -3058,74 +3267,82 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Udaipur",
     "hotels": [
       {
-        "name": "Hotel Hillock Mount Abu",
+        "name": "Hotel Hilltone / Treebo Mount Abu",
         "city": "Mount Abu",
-        "rating": "4 Star",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Pushkar Resort / Treebo Trend Pushkar",
+        "city": "Pushkar",
+        "rating": "3 Star",
         "nights": 2
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Mount Abu Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Mount Abu. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Udaipur / Abu Road Arrival, Mount Abu Dilwara Temples & Nakki Lake",
+        "description": "Pickup from Abu Road Railway Station or Udaipur Airport. Drive up to Rajasthan's only hill station - Mount Abu (1,220m). Visit the world-famous 11th-century Dilwara Jain Temples with peerless translucent white marble carvings. In evening, enjoy paddle boating on picturesque Nakki Lake and watch sunset at Sunset Point.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Mount Abu",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Abu Road / Udaipur Pickup",
+          "Dilwara Marble Temples Guided Tour",
+          "Nakki Lake Boating & Toad Rock",
+          "Sunset Point Mountain Panorama"
         ],
-        "hotel": "Hotel Hillock Mount Abu",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Hilltone / Treebo Mount Abu",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Mount Abu Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Mount Abu. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Drive to Ajmer Sharif Dargah & Holy Pushkar Sarovar",
+        "description": "Descend from Mount Abu and drive through Rajasthan plains to Sufi pilgrimage center Ajmer (approx. 5 hours). Visit the revered Dargah of Khwaja Moinuddin Chishti offering floral chadar. Continue short drive to holy holy Pushkar. Check in at resort. In evening, witness the tranquil Maha Aarti at Varaha Ghat on Pushkar Sarovar.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Mount Abu Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Scenic Highway Drive to Ajmer",
+          "Khwaja Gharib Nawaz Dargah Sharif Ziyarat",
+          "Pushkar Sarovar Holy Ghats Walk",
+          "Varaha Ghat Evening Maha Aarti"
         ],
-        "hotel": "Hotel Hillock Mount Abu",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Pushkar Resort / Treebo Trend Pushkar",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Mount Abu. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Pushkar Brahma Temple, Savitri Hill Ropeway & Desert Camel Safari",
+        "description": "Offer prayers at the rare Jagatpita Brahma Temple (one of the very few temples dedicated to Lord Brahma in the world). Take the modern ropeway to Savitri Devi Temple atop Ratnagiri Hill for panoramic views of Pushkar town and Thar desert dunes. In afternoon, enjoy desert camel cart safari through countryside rose fields and sand dunes.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Jagatpita Brahma Mandir VIP Darshan",
+          "Savitri Devi Temple Aerial Ropeway",
+          "Desert Sand Dunes Camel Cart Safari",
+          "Pushkar Rose Farm Walk"
         ],
-        "hotel": "Hotel Hillock Mount Abu",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Pushkar Resort / Treebo Trend Pushkar",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 4,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Pushkar Bazaar Handicraft Walk & Ajmer / Jaipur Departure Drop",
+        "description": "Morning stroll in vibrant Pushkar bazaar famous for silver jewelry, leather bags, and rose water (gulkand). Check-out and private transfer to Ajmer Railway Station or Jaipur Airport for departure.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Pushkar Artisan Bazaar Shopping",
+          "Ajmer / Jaipur Airport / Station Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -3173,74 +3390,81 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Bhuj",
     "hotels": [
       {
-        "name": "Rann Utsav Tent City",
-        "city": "Dhordo Kutch",
-        "rating": "5 Star",
+        "name": "Regenta Resort Bhuj / Treebo Bhuj",
+        "city": "Bhuj",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "White Rann Luxury Tent Resort Dhordo",
+        "city": "Dhordo",
+        "rating": "3 Star",
         "nights": 2
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Kutch Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Kutch. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Bhuj Arrival, Aina Mahal, Prag Mahal & Bhujodi Artisan Village",
+        "description": "Arrive at Bhuj Airport / Railway Station. Private transfer to hotel. Visit 18th-century mirror-palace Aina Mahal, Italian Gothic bell tower Prag Mahal, and Kutch Museum. In afternoon, visit Bhujodi weaving village and meet national award-winning artisans practicing Rogan art and Ajrakh block printing.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Kutch",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Bhuj Airport / Station Pickup",
+          "Aina Mahal & Prag Mahal Heritage Tour",
+          "Bhujodi Village Handloom Weaving Walk"
         ],
-        "hotel": "Rann Utsav Tent City",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Regenta Resort Bhuj / Treebo Bhuj",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Kutch Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Kutch. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Drive to Dhordo, Kalo Dungar (Black Hill) & Sunset on White Salt Desert",
+        "description": "Drive north into the Great Rann of Kutch. Check in at your luxury air-conditioned Bhunga / tent resort in Dhordo. Excursion to Kalo Dungar (Black Hill - highest point in Kutch at 462m) with panoramic views of the Indo-Pak border and Dattatreya Temple. In evening, step onto the surreal endless White Salt Desert to witness an unforgettable sunset with live Kuthi folk music.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Kutch Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Kalo Dungar High Peak Panorama",
+          "Dattatreya Temple & Jackal Feeding Point",
+          "Sunset on Endless White Salt Desert",
+          "Kutchi Folk Music & Dance Performance"
         ],
-        "hotel": "Rann Utsav Tent City",
-        "transfers": "Private AC Vehicle"
+        "hotel": "White Rann Luxury Tent Resort Dhordo",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Kutch. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "White Rann Sunrise & Coastal Mandvi Beach Excursion",
+        "description": "Experience the ethereal sunrise across the glistening white salt desert. After breakfast, day excursion to coastal port town Mandvi. Tour the majestic Vijay Vilas Palace (built of red sandstone where royal family still resides), walk on Mandvi Beach, and visit 400-year-old traditional wooden shipbuilding yard along Rukmavati River.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Sunrise Over White Rann Salt Flats",
+          "Vijay Vilas Palace Royal Heritage Tour",
+          "Mandvi Beach & Wind Farm View",
+          "Traditional Wooden Shipbuilding Yard Walk"
         ],
-        "hotel": "Rann Utsav Tent City",
-        "transfers": "Private AC Vehicle"
+        "hotel": "White Rann Luxury Tent Resort Dhordo",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 4,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Hodka Village Craft Shopping & Bhuj Departure Drop",
+        "description": "Visit traditional Hodka artisan hamlet for authentic Kutchi embroidery, patchwork, and mirror-work souvenirs. Complete check-out and private transfer to Bhuj Airport / Railway Station for departure.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Hodka Artisan Village Shopping",
+          "Bhuj Airport / Railway Station Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -3288,74 +3512,83 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Rajkot",
     "hotels": [
       {
-        "name": "Hawthorn Suites Dwarka",
+        "name": "Goverdhan Greens / Treebo Dwarka",
         "city": "Dwarka",
-        "rating": "4 Star",
+        "rating": "3 Star",
         "nights": 2
+      },
+      {
+        "name": "The Fern Residency / Treebo Somnath",
+        "city": "Somnath",
+        "rating": "3 Star",
+        "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Dwarka Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Dwarka. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Jamnagar / Rajkot to Holy Dwarka, Gomti Ghat & Dwarkadhish Evening Aarti",
+        "description": "Pickup from Jamnagar Airport / Railway Station or Rajkot. Drive to the sacred kingdom of Lord Krishna - Dwarka (approx. 2.5 hours). Check-in at hotel. Visit holy Gomti Ghat and take holy dip. In the evening, attend the divine Sandhya Aarti and Flag Changing Ceremony (Dhwajaji) atop the 78-meter high spire of Shri Dwarkadhish Mandir (Jagat Mandir).",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Dwarka",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Jamnagar / Rajkot Pickup",
+          "Gomti Ghat Holy Snan",
+          "Shri Dwarkadhish Mandir VIP Darshan",
+          "Dhwajaji Flag Changing Ceremony"
         ],
-        "hotel": "Hawthorn Suites Dwarka",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Goverdhan Greens / Treebo Dwarka",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Dwarka Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Dwarka. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Bet Dwarka Island Boat Tour, Nageshwar Jyotirlinga & Rukmini Temple",
+        "description": "Morning drive to Okha port and board passenger ferry to Bet Dwarka island where Lord Krishna resided and met his friend Sudama. Visit the sacred Bet Dwarkadhish temple. Return to mainland to visit Nageshwar Jyotirlinga (one of the 12 sacred Jyotirlingas with a 85-foot Shiva statue), Gopi Talav, and 2500-year-old Rukmini Devi Temple. Sunset at Dwarka Beach lighthouse.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Dwarka Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Bet Dwarka Island Ferry Boat Ride",
+          "Nageshwar Jyotirlinga VIP Pooja",
+          "Gopi Talav Holy Pond",
+          "Rukmini Devi Temple Ancient Architecture"
         ],
-        "hotel": "Hawthorn Suites Dwarka",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Goverdhan Greens / Treebo Dwarka",
+        "transfers": "Private AC Sedan & Ferry"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Dwarka. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Dwarka to Somnath via Porbandar (Kirti Mandir) & Somnath Jyotirlinga Aarti",
+        "description": "Scenic coastal highway drive to holy Somnath via Porbandar (approx. 4 hours). In Porbandar, visit Kirti Mandir (birthplace of Mahatma Gandhi) and Sudama Temple. Proceed to Somnath. Check in at hotel. In evening, experience divine VIP Darshan at First Jyotirlinga Somnath Temple on the shore of the Arabian Sea. Watch the grand Sound & Light Show on the temple walls.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Porbandar Kirti Mandir & Sudama Temple Stop",
+          "Somnath Jyotirlinga Evening VIP Darshan",
+          "Arabian Sea Shore Walk",
+          "Somnath Sound & Light Projection Show"
         ],
-        "hotel": "Hawthorn Suites Dwarka",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Fern Residency / Treebo Somnath",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 4,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Bhalka Teerth, Triveni Sangam & Veraval / Diu Departure Drop",
+        "description": "Visit Bhalka Teerth (sacred spot where Lord Krishna rested and departed for his heavenly abode) and Triveni Sangam (confluence of Hiran, Kapila, and Saraswati rivers). Check out and private transfer to Veraval Railway Station or Diu / Rajkot Airport for onward journey.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Bhalka Teerth Lord Krishna Spot",
+          "Triveni Sangam River Confluence",
+          "Veraval / Diu / Rajkot Airport Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -3402,58 +3635,66 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Ahmedabad",
     "hotels": [
       {
-        "name": "Tent City Narmada Kevadia",
+        "name": "Hyatt Regency / Treebo Ahmedabad",
+        "city": "Ahmedabad",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Tent City 1 / Fern Sardar Sarovar Kevadia",
         "city": "Kevadia",
-        "rating": "4 Star",
+        "rating": "3 Star",
         "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Statue of Unity Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Statue of Unity. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Ahmedabad Arrival, Sabarmati Ashram & Adalaj Stepwell Heritage",
+        "description": "Arrive at Ahmedabad Sardar Vallabhbhai Patel International Airport / Railway Station. Private transfer to hotel. Visit Sabarmati Ashram where Mahatma Gandhi led the independence movement, the 5-story subterranean architectural marvel Adalaj Stepwell (1498 CE), and intricate stone lattice work at Sidi Saiyyed Mosque. Evening stroll at Sabarmati Riverfront promenade.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Statue of Unity",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Ahmedabad Airport / Station Pickup",
+          "Sabarmati Gandhi Ashram Guided Tour",
+          "Adalaj Stepwell Subterranean Architecture",
+          "Sabarmati Riverfront Promenade Walk"
         ],
-        "hotel": "Tent City Narmada Kevadia",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hyatt Regency / Treebo Ahmedabad",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Statue of Unity Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Statue of Unity. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Drive to Kevadia, Statue of Unity Viewing Gallery & Laser Light Show",
+        "description": "Morning expressway drive to Kevadia (approx. 3.5 hours). Check-in at hotel / luxury tent. Visit the colossal 182-meter Statue of Unity (world's tallest statue). Ride high-speed express elevators to Viewing Gallery at 153 meters (chest height of Sardar Patel) with breathtaking views of Sardar Sarovar Dam and Narmada River. Visit Valley of Flowers and Sardar Patel Museum. Evening watch spectacular 3D Projection Mapping Laser Light Show.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Statue of Unity Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Expressway Drive to Kevadia",
+          "Statue of Unity 153m Viewing Gallery Entry",
+          "Sardar Sarovar Dam & Valley of Flowers",
+          "Spectacular Evening Laser Projection Show"
         ],
-        "hotel": "Tent City Narmada Kevadia",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Tent City 1 / Fern Sardar Sarovar Kevadia",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Jungle Safari, Miyawaki Forest & Vadodara / Ahmedabad Departure Drop",
+        "description": "Visit state-of-the-art Kevadia Jungle Safari Zoo, Cactus Garden, and dense Miyawaki Forest. Check-out and private transfer to Vadodara Airport (approx. 1.5 hours) or Ahmedabad Airport for onward flight.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Kevadia Jungle Safari & Zoo Tour",
+          "Ekta Nursery & Miyawaki Forest",
+          "Vadodara / Ahmedabad Airport Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -3502,58 +3743,65 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Rajkot",
     "hotels": [
       {
-        "name": "The Fern Gir Forest Resort",
+        "name": "The Fern Gir Forest Resort / Treebo Gir",
         "city": "Sasan Gir",
-        "rating": "4 Star",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Hotel Leo / Treebo Junagadh",
+        "city": "Junagadh",
+        "rating": "3 Star",
         "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Sasan Gir Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Sasan Gir. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Rajkot / Diu Arrival, Drive to Sasan Gir & Afternoon Jeep Safari",
+        "description": "Pickup from Rajkot Airport / Diu Airport. Scenic drive to Sasan Gir National Park—the sole remaining natural habitat of the endangered Asiatic Lion. Check-in at jungle resort. In afternoon, embark on an open 4x4 Gypsy Safari in Gir Jungle Trail with forest naturalist. Spot Asiatic Lions, leopards, chital, sambar, and nilgai. Evening cultural Siddi Dhamal African-origin folk dance at resort.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Sasan Gir",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Rajkot / Diu Pickup",
+          "Resort Check-in",
+          "Open 4x4 Gypsy Asiatic Lion Safari",
+          "Siddi Dhamal Cultural Dance Performance"
         ],
-        "hotel": "The Fern Gir Forest Resort",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Fern Gir Forest Resort / Treebo Gir",
+        "transfers": "Private AC Sedan & 4x4 Gypsy"
       },
       {
         "dayNumber": 2,
-        "title": "Sasan Gir Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Sasan Gir. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Devalia Safari Park & Drive to Junagadh Girnar Ropeway Adventure",
+        "description": "Morning safari at Devalia Interpretation Zone. Drive to historic city Junagadh (approx. 1.5 hours). Check in at hotel. Experience Asia's longest ropeway cable car (2.3 km) soaring up Mount Girnar (1,061m) to sacred Ambaji Temple with breathtaking aerial views of the Kathiawar peninsula. Visit ancient Uparkot Fort and fairy-tale Indo-Gothic Mahabat Maqbara palace.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Sasan Gir Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Devalia Safari Park Lion Sighting",
+          "Girnar Mountain Aerial Ropeway Ride",
+          "Ambaji Temple Hill Darshan",
+          "Mahabat Maqbara & Uparkot Fort Architecture"
         ],
-        "hotel": "The Fern Gir Forest Resort",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Leo / Treebo Junagadh",
+        "transfers": "Private AC Sedan & Ropeway"
       },
       {
         "dayNumber": 3,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Junagadh Heritage Walk & Rajkot / Diu Departure Drop",
+        "description": "Explore Junagadh old bazaars for famous Kesar mangoes (seasonal) and bandhani sarees. Check-out and private transfer to Rajkot Airport or Junagadh Junction for departure.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Junagadh Heritage Market Walk",
+          "Transfer to Rajkot / Diu Airport / Station"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -3601,74 +3849,88 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Indore",
     "hotels": [
       {
-        "name": "Anjushree Ujjain",
+        "name": "Hotel Anushree / Treebo Ujjain",
         "city": "Ujjain",
-        "rating": "4 Star",
-        "nights": 2
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Narmada Resort / Hotel Omkareshwar",
+        "city": "Omkareshwar",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Effotel by Sayaji / Treebo Indore",
+        "city": "Indore",
+        "rating": "3 Star",
+        "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Ujjain Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Ujjain. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Indore Arrival, Drive to Ujjain, Shri Mahakaleshwar Jyotirlinga & Mahakal Lok",
+        "description": "Pickup from Indore Devi Ahilyabai Holkar Airport (IDR). Drive to sacred city Ujjain on the banks of Shipra River (approx. 1.5 hours). Check-in at hotel. Visit holy Shri Mahakaleshwar Jyotirlinga (Dakshinmukhi swayambhu lingam). Stroll through the magnificent 900-meter long Shri Mahakal Lok Corridor adorned with 108 sculpted Shiva pillars. Visit sacred Harsiddhi Mata Shaktipeeth, Kal Bhairav Temple, and attend Shipra River Aarti at Ram Ghat.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Ujjain",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Indore Airport Meet & Greet",
+          "Shri Mahakaleshwar Jyotirlinga VIP Darshan",
+          "Mahakal Lok Grand Corridor Walk",
+          "Kal Bhairav Temple & Ram Ghat Aarti"
         ],
-        "hotel": "Anjushree Ujjain",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Anushree / Treebo Ujjain",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Ujjain Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Ujjain. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Mahakal Bhasma Aarti & Drive to Sacred Island Omkareshwar Jyotirlinga",
+        "description": "Early dawn (4:00 AM) witness the world-famous divine Bhasma Aarti at Mahakaleshwar Mandir. Post breakfast, drive south across Narmada Valley to island Omkareshwar (shaped like the sacred Om symbol - approx. 3.5 hours). Board a private boat across sacred Narmada River. Offer prayers at Omkareshwar Jyotirlinga and Mamleshwar Jyotirlinga (Amareshwar) across the river.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Ujjain Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Mahakaleshwar Dawn Bhasma Aarti Pass",
+          "Scenic Drive to Narmada Island Omkareshwar",
+          "Sacred Narmada River Private Boat Ride",
+          "Twin Jyotirlinga (Omkareshwar & Mamleshwar) Darshan"
         ],
-        "hotel": "Anjushree Ujjain",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Narmada Resort / Hotel Omkareshwar",
+        "transfers": "Private AC Sedan & Boat"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Ujjain. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Omkareshwar Parikrama & Drive to Food Capital Indore (Sarafa Night Bazaar)",
+        "description": "Morning walk on the Omkareshwar suspension bridge and Sangam point. Drive to cleanest city of India - Indore (approx. 2.5 hours). Visit 7-story Holkar Rajwada Palace, Lal Bagh Palace, and Khajrana Ganesh Temple. In evening, experience India's premier street-food fiesta at famous Sarafa Night Bazaar (jewelry market turning into food street at 9 PM) and Chhappan Dukan (56 Shops) enjoying Garadu, Poha, and Jaleba.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Omkareshwar Suspension Bridge Walk",
+          "Indore Rajwada & Lal Bagh Palace Tour",
+          "Khajrana Ganesh Temple Blessings",
+          "Sarafa Night Food Street Tour (56 Dukan)"
         ],
-        "hotel": "Anjushree Ujjain",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Effotel by Sayaji / Treebo Indore",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 4,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Authentic Indori Poha Breakfast & Indore Airport Departure Drop",
+        "description": "Relish authentic Indori Poha, Jalebi, and Shikanji breakfast. Check-out and private transfer to Indore Devi Ahilyabai Holkar International Airport for return journey with Jyotirlinga blessings.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Indori Culinary Breakfast Walk",
+          "Indore Airport Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -3719,90 +3981,98 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Khajuraho",
     "hotels": [
       {
-        "name": "Taj Chandela Khajuraho",
+        "name": "Radisson Hotel / Treebo Khajuraho",
         "city": "Khajuraho",
-        "rating": "5 Star",
+        "rating": "3 Star",
+        "nights": 2
+      },
+      {
+        "name": "Tiger Den Resort / Treebo Bandhavgarh",
+        "city": "Bandhavgarh",
+        "rating": "3 Star",
         "nights": 2
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Khajuraho Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Khajuraho. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Khajuraho Arrival, Western Group of Temples & Evening Sound & Light Show",
+        "description": "Arrive at Khajuraho Airport (HJR) / Railway Station. Private transfer to hotel. Explore the UNESCO World Heritage Western Group of Temples renowned for Nagara architectural brilliance and intricate stone sculptures: Kandariya Mahadeva Temple, Lakshmana Temple, and Chitragupta Temple. In evening, watch the Amitabh Bachchan-narrated Sound & Light Show on temple lawns.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Khajuraho",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Khajuraho Airport Pickup",
+          "Western Group of Temples UNESCO Tour",
+          "Kandariya Mahadeva Architectural Marvel",
+          "Evening Sound & Light Show"
         ],
-        "hotel": "Taj Chandela Khajuraho",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Radisson Hotel / Treebo Khajuraho",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Khajuraho Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Khajuraho. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Eastern & Southern Temples & Raneh Falls Grand Canyon Excursion",
+        "description": "Visit the Eastern Group (Parsvanath Jain Temple) and Southern Group (Dulhadev Temple). In afternoon, excursion to Raneh Falls (approx. 20 km) on Ken River, featuring a dramatic 30-meter deep pure granite canyon in shades of pink, green, and red, and the Ken Gharial Sanctuary.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Khajuraho Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Eastern Jain Temples Guided Tour",
+          "Southern Group Temples Visit",
+          "Raneh Falls Crystalline Granite Canyon",
+          "Ken Gharial Crocodile Sanctuary"
         ],
-        "hotel": "Taj Chandela Khajuraho",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Radisson Hotel / Treebo Khajuraho",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Khajuraho. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Scenic Drive from Khajuraho to Bandhavgarh Tiger Reserve",
+        "description": "Scenic highway drive across Vindhya hill forests to Bandhavgarh National Park (approx. 5 hours)—having the highest density of Royal Bengal Tigers in India and the historic land of white tigers. Check-in at your jungle lodge. Evening nature walk and tribal Baiga folk dance around the bonfire.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Scenic Vindhyan Forest Drive",
+          "Bandhavgarh Lodge Check-in",
+          "Guided Nature Walk & Birdwatching",
+          "Baiga Tribal Folk Dance & Bonfire"
         ],
-        "hotel": "Taj Chandela Khajuraho",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Tiger Den Resort / Treebo Bandhavgarh",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 4,
-        "title": "Khajuraho Local Bazaars, Shopping & Culinary Evening",
-        "description": "Spend a relaxing day exploring local markets, craft shops, and authentic regional restaurants. Option for evening sunset cruise or cultural performance.",
+        "title": "Morning & Afternoon Open 4x4 Gypsy Safaris in Tala / Magdhi Core Zones",
+        "description": "Full day tiger safari expedition. Early morning open 4x4 Gypsy Safari in prime Tala core zone passing ancient caves, Shesh Shaiya (35 ft reclining Vishnu statue under green canopy), and Bandhavgarh Fort hill. Spot tigers, leopards, Indian bison (gaur), and deer. Return to lodge for lunch. Afternoon second safari in Magdhi / Khitauli zone for wildlife action.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Local Artisan Market Shopping",
-          "Regional Food Tasting",
-          "Evening Sunset Activity"
+          "Dawn 4x4 Gypsy Tiger Safari in Tala Zone",
+          "Ancient Shesh Shaiya 10th-Century Reclining Vishnu",
+          "Afternoon Magdhi Core Zone Safari",
+          "Naturalist Wildlife Presentation"
         ],
-        "hotel": "Taj Chandela Khajuraho",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Tiger Den Resort / Treebo Bandhavgarh",
+        "transfers": "4x4 Open Safari Gypsy"
       },
       {
         "dayNumber": 5,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Breakfast & Jabalpur / Khajuraho Airport Departure Drop",
+        "description": "Enjoy breakfast overlooking the forest. Check-out and private transfer to Jabalpur Airport (approx. 3.5 hours) or Katni / Umaria Railway Station for departure.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Check-out & Transfer to Jabalpur / Khajuraho Airport / Station"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -3851,90 +4121,97 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Jabalpur",
     "hotels": [
       {
-        "name": "MPT Champak Bungalow Pachmarhi",
+        "name": "Vrindavan Gopala Resort / Treebo Jabalpur",
+        "city": "Jabalpur",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Pachmarhi Foothills Resort / Treebo Pachmarhi",
         "city": "Pachmarhi",
         "rating": "3 Star",
-        "nights": 2
+        "nights": 3
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Pachmarhi Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Pachmarhi. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Jabalpur Arrival, Bhedaghat Marble Rocks Boating & Dhuandhar Falls",
+        "description": "Arrive at Jabalpur Dumna Airport / Railway Station. Meet chauffeur and transfer to hotel. Drive to Bhedaghat (approx. 25 km) on holy Narmada River. Enjoy boat ride between 100-foot towering pure white Marble Rocks illuminated by sunlight. Visit roaring Dhuandhar Waterfalls (where mist looks like smoke) and 10th-century Chausath Yogini Temple.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Pachmarhi",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Jabalpur Airport Pickup",
+          "Bhedaghat Narmada River Marble Rocks Boat Ride",
+          "Dhuandhar Waterfalls Mist Cascade",
+          "Chausath Yogini Temple 64 Deities"
         ],
-        "hotel": "MPT Champak Bungalow Pachmarhi",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Vrindavan Gopala Resort / Treebo Jabalpur",
+        "transfers": "Private AC Sedan & Boat"
       },
       {
         "dayNumber": 2,
-        "title": "Pachmarhi Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Pachmarhi. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Scenic Satpura Drive to Queen of Satpura Pachmarhi & Sunset Point",
+        "description": "Scenic cross-mountain drive through Satpura Tiger Reserve hill ranges to Pachmarhi (1,067m - approx. 4.5 hours). Check in at colonial cottage resort. Afternoon visit to Priyadarshini Point (where Captain Forsyth discovered Pachmarhi in 1857), Handi Khoh 300-foot deep horse-shoe ravine, and sunset at Dhoopgarh (highest point in MP at 1,352m).",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Pachmarhi Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Scenic Satpura Mountain Pass Drive",
+          "Priyadarshini Forsyth Point View",
+          "Handi Khoh Canyon Gorge",
+          "Dhoopgarh Highest Peak Sunset Panorama"
         ],
-        "hotel": "MPT Champak Bungalow Pachmarhi",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Pachmarhi Foothills Resort / Treebo Pachmarhi",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Pachmarhi. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Bee Falls Water Cascade Bath, Jata Shankar Cave & Pandav Caves",
+        "description": "Full day Pachmarhi exploration by 4x4 open Gypsy. Descend to the roaring Bee Falls and enjoy a refreshing splash in natural pools. Visit holy cave shrine Jata Shankar where stalactite and stalagmite formations resemble Shiva's matted hair, ancient Buddhist Pandav Caves, and peaceful Apsara Vihar fairy pool.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Bee Falls Natural Cascade Bath",
+          "Jata Shankar Stalactite Holy Cave",
+          "Pandav Caves 5 Rock-Cut Chambers",
+          "Apsara Vihar Natural Swimming Pool"
         ],
-        "hotel": "MPT Champak Bungalow Pachmarhi",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Pachmarhi Foothills Resort / Treebo Pachmarhi",
+        "transfers": "Local 4x4 Open Gypsy"
       },
       {
         "dayNumber": 4,
-        "title": "Pachmarhi Local Bazaars, Shopping & Culinary Evening",
-        "description": "Spend a relaxing day exploring local markets, craft shops, and authentic regional restaurants. Option for evening sunset cruise or cultural performance.",
+        "title": "Chauragarh Shiva Peak, Reechgarh Natural Amphitheatre & Duchess Falls",
+        "description": "Visit sacred Chauragarh Temple perched atop a hill where devotees carry heavy iron tridents (trishuls). Walk through narrow limestone rock crevice of Reechgarh natural amphitheatre. Explore Duchess Falls scenic trail and enjoy sunset at Rajendragiri landscaped garden.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Local Artisan Market Shopping",
-          "Regional Food Tasting",
-          "Evening Sunset Activity"
+          "Chauragarh Hill Holy Trident Pilgrimage",
+          "Reechgarh Natural Limestone Cave Walk",
+          "Rajendragiri Landscaped Botanical Sunset"
         ],
-        "hotel": "MPT Champak Bungalow Pachmarhi",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Pachmarhi Foothills Resort / Treebo Pachmarhi",
+        "transfers": "Local 4x4 Open Gypsy"
       },
       {
         "dayNumber": 5,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Pachmarhi to Pipariya / Jabalpur / Bhopal Departure Drop",
+        "description": "Enjoy breakfast overlooking sal and teak forests. Check out and private transfer to Pipariya Railway Station (approx. 1 hour) or Jabalpur / Bhopal Airport for return flight.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Check-out & Transfer to Pipariya / Jabalpur / Bhopal Airport / Station"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -3983,90 +4260,109 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Pune",
     "hotels": [
       {
-        "name": "Sun N Sand Shirdi",
+        "name": "Hotel Pride / Treebo Pune",
+        "city": "Pune",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Hotel Sai Jhelum / Treebo Shirdi",
         "city": "Shirdi",
-        "rating": "4 Star",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "The Fern Residency / Treebo Aurangabad",
+        "city": "Aurangabad",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Hotel Express Inn / Treebo Nashik",
+        "city": "Nashik",
+        "rating": "3 Star",
         "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Shirdi Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Shirdi. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Pune Arrival, Bhimashankar Jyotirlinga Darshan & Pune Return",
+        "description": "Pickup from Pune International Airport / Pune Junction. Drive through Western Ghats to Bhimashankar Jyotirlinga situated in the Sahyadri hills in dense forest (source of Bhima River). Offer prayers at the 13th-century Nagara-style temple. Return to Pune for hotel check-in and dinner.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Shirdi",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Pune Airport Pickup",
+          "Bhimashankar Jyotirlinga VIP Darshan",
+          "Sahyadri Western Ghats Scenic Drive"
         ],
-        "hotel": "Sun N Sand Shirdi",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Pride / Treebo Pune",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Shirdi Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Shirdi. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Pune to Shirdi via Shani Shingnapur & Sai Baba Temple Evening Aarti",
+        "description": "Drive to holy village Shani Shingnapur where houses have no doors and Lord Shani is worshipped as a black stone slab in open air. Continue drive to holy Shirdi (approx. 2 hours). Check in at hotel. Experience VIP Darshan at Shri Sai Baba Samadhi Mandir, Dwarkamai mosque, Chavadi, and Gurusthan. Attend soul-stirring Dhoop Aarti.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Shirdi Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Shani Shingnapur Open Shrine Darshan",
+          "Shirdi Sai Baba Samadhi VIP Darshan",
+          "Dwarkamai & Chavadi Sacred Walk",
+          "Evening Sai Baba Dhoop Aarti"
         ],
-        "hotel": "Sun N Sand Shirdi",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Sai Jhelum / Treebo Shirdi",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Shirdi. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Grishneshwar Jyotirlinga, Ellora Caves & Drive to Aurangabad",
+        "description": "Drive to holy Grishneshwar (approx. 2.5 hours) - the 12th and final Jyotirlinga of Lord Shiva rebuilt by Ahilyabai Holkar. Post darshan, visit adjacent UNESCO World Heritage Ellora Caves, especially the monolithic rock-cut Kailasa Temple (Cave 16) carved out of a single cliff from top to bottom. Drive to Aurangabad, visit Bibi Ka Maqbara.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Grishneshwar Jyotirlinga VIP Darshan",
+          "Kailasa Temple Ellora Caves UNESCO Tour",
+          "Bibi Ka Maqbara Taj of Deccan Visit"
         ],
-        "hotel": "Sun N Sand Shirdi",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Fern Residency / Treebo Aurangabad",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 4,
-        "title": "Shirdi Local Bazaars, Shopping & Culinary Evening",
-        "description": "Spend a relaxing day exploring local markets, craft shops, and authentic regional restaurants. Option for evening sunset cruise or cultural performance.",
+        "title": "Drive to Holy Nashik, Trimbakeshwar Jyotirlinga & Panchavati",
+        "description": "Morning drive across Maharashtra plateau to holy pilgrim city Nashik on Godavari River (approx. 3.5 hours). Check-in at hotel. Drive to Trimbakeshwar Jyotirlinga at the foothills of Brahmagiri Mountain (source of sacred Godavari River) housing the 3-faced lingam (Brahma, Vishnu, Mahesh). In afternoon, tour Panchavati: Sita Gufa, Kalaram Mandir, and Ramkund.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Local Artisan Market Shopping",
-          "Regional Food Tasting",
-          "Evening Sunset Activity"
+          "Trimbakeshwar Jyotirlinga Holy Darshan",
+          "Kushavarta Holy Kund Snan",
+          "Panchavati Sita Gufa & Kalaram Mandir",
+          "Ramkund Godavari Evening Aarti"
         ],
-        "hotel": "Sun N Sand Shirdi",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Express Inn / Treebo Nashik",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 5,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Nashik Sula Vineyards Tour & Mumbai / Pune Departure Drop",
+        "description": "Visit pioneer wine estate Sula Vineyards for a guided winery tour and grape tasting (optional). Check-out and private transfer to Mumbai Chhatrapati Shivaji Maharaj International Airport (approx. 3.5 hours) or Pune Airport for departure.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Sula Vineyards Winery Walk",
+          "Mumbai / Pune Airport Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -4115,58 +4411,61 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Aurangabad",
     "hotels": [
       {
-        "name": "Lemon Tree Hotel Aurangabad",
+        "name": "The Fern Residency / Treebo Aurangabad",
         "city": "Aurangabad",
-        "rating": "4 Star",
+        "rating": "3 Star",
         "nights": 2
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Aurangabad Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Aurangabad. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Aurangabad Arrival, Ellora Caves (Kailasa Temple) & Daulatabad Fort",
+        "description": "Pickup from Aurangabad Airport (IXU) / Railway Station. Private transfer to hotel. Explore UNESCO World Heritage Ellora Caves (34 rock-cut monasteries & temples spanning Buddhist, Hindu, and Jain traditions). Marvel at Kailasa Temple (Cave 16) - largest monolithic rock-cut monument in human history. Visit 12th-century impregnable hilltop Daulatabad Fort and Chand Minar.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Aurangabad",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Aurangabad Airport Pickup",
+          "Ellora Caves UNESCO World Heritage Tour",
+          "Kailasa Monolithic Temple Marvel",
+          "Daulatabad Hilltop Fort & Moat Walk"
         ],
-        "hotel": "Lemon Tree Hotel Aurangabad",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Fern Residency / Treebo Aurangabad",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Aurangabad Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Aurangabad. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Full Day Excursion to Ancient Ajanta Caves (UNESCO)",
+        "description": "Full day excursion to horseshoe-shaped Waghur river canyon housing the world-famous Ajanta Caves (approx. 2 hours each way). Explore 30 rock-cut Buddhist cave monuments dating from 2nd century BCE to 480 CE, adorned with masterclass ancient mural wall paintings and exquisite statues depicting Jataka tales and Buddha's life.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Aurangabad Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Ajanta Caves Horseshoe Gorge Excursion",
+          "Ancient Buddhist Fresco Paintings Tour",
+          "Cave 1 & 2 Bodhisattva Padmapani Viewing",
+          "Waghur River Canyon Viewpoint"
         ],
-        "hotel": "Lemon Tree Hotel Aurangabad",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Fern Residency / Treebo Aurangabad",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Bibi Ka Maqbara, Paithani Silk Weaving & Departure Drop",
+        "description": "Visit Bibi Ka Maqbara (known as the 'Taj of the Deccan' built by Azam Shah) and historic Panchakki water mill powered by mountain springs. Visit a traditional Paithani silk handloom weaving center. Check out and private transfer to Aurangabad Airport / Railway Station.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Bibi Ka Maqbara Taj of the Deccan",
+          "Panchakki Medieval Hydraulic Water Mill",
+          "Paithani Saree Weaving Center",
+          "Airport / Railway Station Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -4215,90 +4514,100 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Goa",
     "hotels": [
       {
-        "name": "Novotel Goa Resort & Spa",
-        "city": "Goa",
-        "rating": "4 Star",
-        "nights": 4
+        "name": "Treebo Trend Calangute Beach Resort",
+        "city": "North Goa",
+        "rating": "3 Star",
+        "nights": 2
+      },
+      {
+        "name": "Treebo Trend Colva White Sands Resort",
+        "city": "South Goa",
+        "rating": "3 Star",
+        "nights": 2
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Goa Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Goa. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Goa Airport Arrival, North Goa Beach Resort & Baga Nightlife",
+        "description": "Arrive at Dabolim Airport (GOI) or Manohar International Airport Mopa (GOX). Private transfer to North Goa resort. Check-in and relax with a welcome drink. Evening stroll along lively Calangute Beach and Baga Beach. Experience bustling nightlife and beach shacks at Tito's Lane.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Goa",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Goa Airport Pickup",
+          "Resort Check-in",
+          "Calangute & Baga Beach Sunset Walk",
+          "Tito's Lane Night Market & Beach Shacks"
         ],
-        "hotel": "Novotel Goa Resort & Spa",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Treebo Trend Calangute Beach Resort",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Goa Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Goa. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "North Goa Forts & Water Sports: Aguada, Parasailing & Chapora Sunset",
+        "description": "Visit 17th-century Portuguese Fort Aguada and its historic 4-story lighthouse. Head to Sinquerim Beach for thrilling water sports combo: parasailing over Arabian Sea, jet ski ride, banana boat ride, and bumper tube ride. Afternoon visit to bohemian Anjuna Beach and iconic Chapora Fort (Dil Chahta Hai point) for panoramic sunset over Vagator Beach.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Goa Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Fort Aguada & Portuguese Lighthouse Tour",
+          "5-in-1 Water Sports Combo (Parasailing, Jet Ski)",
+          "Anjuna Beach Rock Formations",
+          "Chapora Fort Cliff Sunset Panorama"
         ],
-        "hotel": "Novotel Goa Resort & Spa",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Treebo Trend Calangute Beach Resort",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Goa. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Old Goa Heritage Churches, Fontainhas Latin Walk & Mandovi Cruise",
+        "description": "Transfer to South Goa. Tour UNESCO World Heritage Old Goa churches: Basilica of Bom Jesus (relics of St. Francis Xavier) and Se Cathedral (largest church in Asia). Heritage walking tour in Fontainhas (Panjim Latin Quarter) with colorful Portuguese villas and bakeries. In evening, enjoy a 1-hour sunset cruise on River Mandovi with Goan folk music and DJ.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Basilica of Bom Jesus UNESCO World Heritage Tour",
+          "Se Cathedral Golden Bell Viewing",
+          "Fontainhas Latin Quarter Walking Tour",
+          "Mandovi River Sunset Cruise & Cultural Dance"
         ],
-        "hotel": "Novotel Goa Resort & Spa",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Treebo Trend Colva White Sands Resort",
+        "transfers": "Private AC Sedan & Cruise"
       },
       {
         "dayNumber": 4,
-        "title": "Goa Local Bazaars, Shopping & Culinary Evening",
-        "description": "Spend a relaxing day exploring local markets, craft shops, and authentic regional restaurants. Option for evening sunset cruise or cultural performance.",
+        "title": "Dudhsagar Waterfalls Jeep Safari & Sahakari Spice Plantation Feast",
+        "description": "Early morning drive to Mollem National Park. Board 4x4 open jungle jeep crossing streams to the foot of magnificent 4-tiered 310m high Dudhsagar Waterfalls. Enjoy swimming in natural forest pool with lifejackets. Proceed to Sahakari Spice Plantation for a guided spice tour, traditional welcome garland, and royal Goan buffet lunch served on banana leaf.",
         "meals": [
           "Breakfast",
+          "Lunch",
           "Dinner"
         ],
         "activities": [
-          "Local Artisan Market Shopping",
-          "Regional Food Tasting",
-          "Evening Sunset Activity"
+          "4x4 Open Jungle Jeep Stream Crossing",
+          "Dudhsagar Waterfalls Natural Pool Swim",
+          "Sahakari Spice Farm Guided Walk",
+          "Authentic Goan Buffet Lunch"
         ],
-        "hotel": "Novotel Goa Resort & Spa",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Treebo Trend Colva White Sands Resort",
+        "transfers": "Private AC Sedan & 4x4 Jeep"
       },
       {
         "dayNumber": 5,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Colva Beach Morning Walk & Goa Airport Departure Drop",
+        "description": "Morning peaceful walk along pristine white sands of Colva Beach. Enjoy breakfast overlooking swaying coconut palms. Check-out and private transfer to Goa Airport (GOI / GOX) or Madgaon Junction for return journey.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Colva Beach Morning Leisure",
+          "Goa Airport / Madgaon Station Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -4346,74 +4655,82 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Mumbai",
     "hotels": [
       {
-        "name": "Le Meridien Mahabaleshwar Resort",
+        "name": "Fariyas Resort / Treebo Lonavala",
+        "city": "Lonavala",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Evershine Resort / Treebo Mahabaleshwar",
         "city": "Mahabaleshwar",
-        "rating": "5 Star",
+        "rating": "3 Star",
         "nights": 2
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Mahabaleshwar Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Mahabaleshwar. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Mumbai / Pune Pickup, Lonavala Bhushi Dam & Tiger's Leap",
+        "description": "Pickup from Mumbai / Pune Airport. Ascend the scenic Western Ghats expressway to twin hill stations Lonavala & Khandala. Check in at hotel. Visit Bhushi Dam water steps, Tiger's Leap cliff offering 650m vertical drop, 2nd-century BCE rock-cut Karla Caves, and sunset at Lion's Point. Taste authentic Lonavala chikki and chocolate fudge.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Mahabaleshwar",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Mumbai / Pune Pickup",
+          "Bhushi Dam Waterfall Steps",
+          "Tiger's Leap & Lion's Point Cliff View",
+          "Karla Caves Ancient Buddhist Chaitya"
         ],
-        "hotel": "Le Meridien Mahabaleshwar Resort",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Fariyas Resort / Treebo Lonavala",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Mahabaleshwar Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Mahabaleshwar. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Scenic Drive to Mahabaleshwar via Panchgani (Table Land & Mapro Garden)",
+        "description": "Scenic cross-mountain drive south to strawberry capital Mahabaleshwar (approx. 4 hours). Stop at Panchgani: Table Land (Asia's second longest volcanic plateau), Sydney Point, and Mapro Garden for strawberry cream and wood-fired pizza. Arrive in Mahabaleshwar, check in at resort. In evening, enjoy peaceful boat ride on Venna Lake.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Mahabaleshwar Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Scenic Western Ghats Mountain Drive",
+          "Panchgani Table Land Plateau Horse Ride",
+          "Mapro Garden Strawberry Tasting",
+          "Venna Lake Evening Paddle Boating"
         ],
-        "hotel": "Le Meridien Mahabaleshwar Resort",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Evershine Resort / Treebo Mahabaleshwar",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Mahabaleshwar. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Arthur's Seat Panorama, Elephant's Head & Historic Pratapgad Fort",
+        "description": "Explore the scenic viewpoints of Mahabaleshwar: Arthur's Seat (Queen of all points) overlooking deep Savitri river valley, Elephant's Head Point, and Old Mahabaleshwar 16th-century Panchganga Shiva Temple (source of 5 holy rivers). In afternoon, excursion to impregnable mountain fortress Pratapgad Fort where Shivaji Maharaj defeated Afzal Khan.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Arthur's Seat Deep Canyon Viewpoint",
+          "Elephant's Head Rock Formation",
+          "Old Mahabaleshwar Panchganga Temple",
+          "Pratapgad Chhatrapati Shivaji Fortress Tour"
         ],
-        "hotel": "Le Meridien Mahabaleshwar Resort",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Evershine Resort / Treebo Mahabaleshwar",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 4,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Strawberry Farm Tour & Pune / Mumbai Departure Drop",
+        "description": "Morning visit to local strawberry farm to pick fresh berries. Check out and descend through picturesque Ghats to Pune Airport (approx. 3 hours) or Mumbai Airport (approx. 5 hours) for departure.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Strawberry Farm Tour & Souvenir Shopping",
+          "Pune / Mumbai Airport Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -4462,90 +4779,106 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Madurai",
     "hotels": [
       {
-        "name": "Daiwik Hotels Rameshwaram",
+        "name": "Heritage Madurai / Treebo Madurai",
+        "city": "Madurai",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Daiwik Hotel / Treebo Rameshwaram",
         "city": "Rameshwaram",
-        "rating": "4 Star",
+        "rating": "3 Star",
         "nights": 2
+      },
+      {
+        "name": "Sparsa Resort / Treebo Kanyakumari",
+        "city": "Kanyakumari",
+        "rating": "3 Star",
+        "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Rameshwaram Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Rameshwaram. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Madurai Arrival, Meenakshi Amman Temple & Night Chariot Ceremony",
+        "description": "Arrive at Madurai International Airport (IXM) / Madurai Junction. Private transfer to hotel. Visit 17th-century Indo-Saracenic Thirumalai Nayakkar Palace. In the evening, visit the world-famous Meenakshi Sundareswarar Temple complex with 14 towering gopurams and Hall of Thousand Pillars. Witness the mesmerizing night ceremony (Palliarai Puja) where Lord Sundareswarar is carried to Goddess Meenakshi's shrine.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Rameshwaram",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Madurai Airport Pickup",
+          "Thirumalai Nayakkar Palace Light Show",
+          "Meenakshi Amman Temple Architectural Tour",
+          "Night Palliarai Silver Chariot Ceremony"
         ],
-        "hotel": "Daiwik Hotels Rameshwaram",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Heritage Madurai / Treebo Madurai",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Rameshwaram Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Rameshwaram. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Pamban Sea Bridge Drive to Rameshwaram, 22 Teertham Snan & Jyotirlinga Darshan",
+        "description": "Drive to holy island Rameshwaram across the iconic 2 km Pamban Sea Bridge over turquoise ocean waters (approx. 3.5 hours). Check-in at hotel. Perform sacred ritual bath in the sea at Agnitheertham and holy bath in all 22 Temple Teerthams (wells) inside Sri Ramanathaswamy Temple. Experience VIP Darshan at the Jyotirlinga and walk the world's longest pillared corridor (1,212 pillars).",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Rameshwaram Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Pamban Sea Bridge Scenic Drive",
+          "Agnitheertham Seashore Holy Snan",
+          "22 Sacred Temple Wells (Teertham) Bathing Ritual",
+          "Ramanathaswamy Jyotirlinga Longest Corridor Darshan"
         ],
-        "hotel": "Daiwik Hotels Rameshwaram",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Daiwik Hotel / Treebo Rameshwaram",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Rameshwaram. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Dhanushkodi Ghost Town, Ram Setu Vantage Point & Kalam National Memorial",
+        "description": "Morning drive to Dhanushkodi—the submerged ghost town destroyed in 1964 cyclone. Walk along Arichal Munai (tip of Indian landmass) where Bay of Bengal meets the rough Arabian Sea and see floating stones of Ram Setu (Adam's Bridge). On return, visit the inspiring Dr. APJ Abdul Kalam National Memorial and Lakshmana Teertham.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Dhanushkodi Ghost Town Ruins Tour",
+          "Arichal Munai Land's End & Ram Setu Point",
+          "Floating Ram Setu Coral Stones Viewing",
+          "Dr. APJ Abdul Kalam Memorial"
         ],
-        "hotel": "Daiwik Hotels Rameshwaram",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Daiwik Hotel / Treebo Rameshwaram",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 4,
-        "title": "Rameshwaram Local Bazaars, Shopping & Culinary Evening",
-        "description": "Spend a relaxing day exploring local markets, craft shops, and authentic regional restaurants. Option for evening sunset cruise or cultural performance.",
+        "title": "Drive to Kanyakumari, Vivekananda Rock Memorial & Three Oceans Sunset",
+        "description": "Scenic coastal drive south to Kanyakumari (Land's End of India - approx. 5.5 hours) where Indian Ocean, Arabian Sea, and Bay of Bengal converge. Board government passenger ferry to Vivekananda Rock Memorial and 133-foot Thiruvalluvar Statue. In evening, watch dramatic sunset over three oceans from Sunset Point.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Local Artisan Market Shopping",
-          "Regional Food Tasting",
-          "Evening Sunset Activity"
+          "Scenic Coastal Highway Drive",
+          "Vivekananda Rock Memorial Ferry Tour",
+          "133-Foot Thiruvalluvar Statue Viewing",
+          "Triveni Sangam Three Oceans Sunset"
         ],
-        "hotel": "Daiwik Hotels Rameshwaram",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Sparsa Resort / Treebo Kanyakumari",
+        "transfers": "Private AC Sedan & Ferry"
       },
       {
         "dayNumber": 5,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Sunrise Over Ocean, Bhagavathi Amman Temple & Trivandrum / Madurai Drop",
+        "description": "Witness spectacular sunrise over the ocean. Visit 3000-year-old Kanyakumari Bhagavathi Amman Temple and Gandhi Memorial Mandapam. Check-out and private transfer to Trivandrum International Airport (TRV - approx. 2.5 hours) or Madurai Airport for departure.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Ocean Sunrise Photography",
+          "Kanyakumari Bhagavathi Amman Darshan",
+          "Trivandrum / Madurai Airport Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -4594,106 +4927,128 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Cochin",
     "hotels": [
       {
-        "name": "Tea County Munnar",
+        "name": "Fragrant Nature / Treebo Munnar",
         "city": "Munnar",
-        "rating": "4 Star",
+        "rating": "3 Star",
         "nights": 2
+      },
+      {
+        "name": "Elephant Court / Treebo Thekkady",
+        "city": "Thekkady",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Luxury AC Deluxe Backwater Houseboat",
+        "city": "Alleppey",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Uday Samudra Beach Resort / Treebo Kovalam",
+        "city": "Kovalam",
+        "rating": "3 Star",
+        "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Kerala Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Kerala. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Cochin Arrival, Cheeyappara Waterfalls & Misty Tea Hills Munnar",
+        "description": "Arrive at Cochin International Airport (COK) / Ernakulam Junction. Meet private chauffeur. Scenic drive ascending Western Ghats through lush tea plantations. En route admire tumbling Cheeyappara and Valara waterfalls. Arrive in misty Munnar (1,600m). Check in at resort and enjoy evening mountain breeze.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Kerala",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Cochin Airport Pickup",
+          "Cheeyappara & Valara Waterfalls Photo Stop",
+          "Munnar Tea Plantation Valley Climb"
         ],
-        "hotel": "Tea County Munnar",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Fragrant Nature / Treebo Munnar",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Munnar Tea Plantations, Eravikulam & Mattupetty Dam",
-        "description": "Full day Munnar hill station tour. Visit Eravikulam National Park (home to endangered Nilgiri Tahr), Tata Tea Museum, Mattupetty Dam, and Echo Point.",
+        "title": "Eravikulam National Park (Nilgiri Tahr), Tea Museum & Mattupetty Dam",
+        "description": "Visit Eravikulam National Park (home to endangered mountain goat Nilgiri Tahr) with views of Anamudi (highest peak in South India at 2,695m). Tour KDHP Tata Tea Museum and learn tea processing with tasting. In afternoon, visit Mattupetty Dam, Echo Point, and speed boating at Kundala Lake.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Eravikulam National Park Safari",
-          "Tata Tea Museum & Plantation",
-          "Mattupetty Dam Boating"
+          "Eravikulam National Park Nilgiri Tahr Safari",
+          "Tata Tea Museum & Tea Tasting",
+          "Mattupetty Dam & Echo Point",
+          "Kundala Lake Speedboating"
         ],
-        "hotel": "Tea County Munnar",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Fragrant Nature / Treebo Munnar",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Munnar to Thekkady Periyar Wildlife Sanctuary",
-        "description": "Scenic drive through spice plantations to Thekkady. Boat safari on Periyar Lake inside Periyar Tiger Reserve. Evening Kathakali dance & Kalaripayattu martial arts show.",
+        "title": "Munnar to Thekkady (Periyar Wildlife), Spice Plantation & Kathakali Show",
+        "description": "Scenic winding drive through Cardamom Hills to Thekkady / Periyar (approx. 3 hours). Check-in at jungle resort. Guided spice plantation walking tour smelling green cardamom, black pepper, cinnamon, and vanilla. In evening, watch classical Kathakali dance drama and ancient Kalaripayattu martial art performance.",
         "meals": [
           "Breakfast",
+          "Dinner"
+        ],
+        "activities": [
+          "Scenic Mountain Ridge Drive",
+          "Guided Organic Spice Plantation Walk",
+          "Kathakali Classical Dance Drama Pass",
+          "Kalaripayattu Ancient Martial Arts Show"
+        ],
+        "hotel": "Elephant Court / Treebo Thekkady",
+        "transfers": "Private AC Sedan"
+      },
+      {
+        "dayNumber": 4,
+        "title": "Periyar Lake Boat Safari & Private Luxury Alleppey Backwater Houseboat",
+        "description": "Early morning boat cruise on Periyar Lake inside tiger reserve spotting wild elephants, bisons, and otters on water banks. Post breakfast, drive to Venice of the East - Alleppey (approx. 3.5 hours). Check-in at 12:30 PM to your private AC Deluxe Houseboat. Cruise through serene canals, paddy fields, and coconut lagoons. Relish authentic Kerala Sadhya on board.",
+        "meals": [
+          "Breakfast",
+          "Lunch",
           "Dinner"
         ],
         "activities": [
           "Periyar Lake Wildlife Boat Safari",
-          "Spice Plantation Guided Walk",
-          "Kathakali Cultural Show"
+          "Alleppey Houseboat Check-in & Welcome Coconut",
+          "Serene Backwater Canal Cruising",
+          "Traditional Karimeen Fish & Kerala Feast on Board"
         ],
-        "hotel": "Tea County Munnar",
-        "transfers": "Private AC Vehicle"
-      },
-      {
-        "dayNumber": 4,
-        "title": "Thekkady to Alleppey Houseboat Backwater Cruise",
-        "description": "Drive to Alleppey backwaters. Board private traditional Kettuvallam Houseboat. Cruise through palm-fringed canals, paddy fields, and rural Kerala villages.",
-        "meals": [
-          "Breakfast",
-          "Dinner"
-        ],
-        "activities": [
-          "Private Houseboat Check-in",
-          "Alleppey Backwaters Cruise",
-          "Traditional Kerala Seafood Lunch"
-        ],
-        "hotel": "Tea County Munnar",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Luxury AC Deluxe Backwater Houseboat",
+        "transfers": "Private AC Sedan & Houseboat"
       },
       {
         "dayNumber": 5,
-        "title": "Alleppey to Kovalam Beach & Trivandrum City",
-        "description": "Drive to Kovalam. Visit Lighthouse Beach, Hawah Beach, and Samudra Beach. Afternoon excursion to Sree Padmanabhaswamy Temple in Trivandrum.",
+        "title": "Houseboat Disembarkation, Drive to Kovalam Lighthouse Beach & Sunset",
+        "description": "Enjoy peaceful sunrise over backwaters. Disembark houseboat at 9:00 AM. Drive south to world-famous crescent beach Kovalam (approx. 3.5 hours). Check-in at beach resort. In afternoon, climb the 30-meter high striped Lighthouse at Lighthouse Beach for 360-degree ocean views. Stroll along Hawah Beach and Samudra Beach at sunset.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Kovalam Lighthouse Beach Sunset",
-          "Padmanabhaswamy Temple Visit",
-          "Napier Museum & Art Gallery"
+          "Houseboat Morning Sunrise Cruise",
+          "Scenic Coastal Drive to Kovalam",
+          "Kovalam Lighthouse Spiral Climb & Ocean View",
+          "Hawah Beach Sunset Stroll"
         ],
-        "hotel": "Tea County Munnar",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Uday Samudra Beach Resort / Treebo Kovalam",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 6,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Padmanabhaswamy Temple & Trivandrum Airport Departure Drop",
+        "description": "Morning visit to sacred Sree Padmanabhaswamy Temple in Thiruvananthapuram (richest temple in the world with Dravidian architecture). Complete check-out and private transfer to Trivandrum International Airport (TRV - approx. 30 mins) for return flight.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Sree Padmanabhaswamy Temple Darshan",
+          "Trivandrum Airport Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -4825,90 +5180,105 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Bangalore",
     "hotels": [
       {
-        "name": "Evolve Back Coorg",
+        "name": "Royal Orchid Metropole / Treebo Mysore",
+        "city": "Mysore",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Heritage Resort / Treebo Coorg",
         "city": "Coorg",
-        "rating": "5 Star",
+        "rating": "3 Star",
         "nights": 2
+      },
+      {
+        "name": "Fortune Resort Sullivan Court / Treebo Ooty",
+        "city": "Ooty",
+        "rating": "3 Star",
+        "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Coorg Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Coorg. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Bangalore Pickup, Royal Mysore Palace & Brindavan Gardens",
+        "description": "Pickup from Bangalore Airport / City. Drive to Royal Heritage City Mysore (approx. 3 hours). Visit the opulent Mysore Palace (Amba Vilas) with its stained glass ceilings and golden throne. Ascend Chamundi Hill to visit Chamundeshwari Temple and colossal Nandi Bull statue. In evening, visit illuminated musical fountains at Brindavan Gardens.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Coorg",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Bangalore Airport Pickup",
+          "Mysore Palace Royal Architecture Tour",
+          "Chamundeshwari Hilltop Temple Darshan",
+          "Brindavan Gardens Musical Fountain Show"
         ],
-        "hotel": "Evolve Back Coorg",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Royal Orchid Metropole / Treebo Mysore",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Coorg Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Coorg. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Drive to Scotland of India Coorg, Bylakuppe Golden Temple & Dubare Elephants",
+        "description": "Scenic drive ascending to coffee country Coorg (Madikeri - approx. 2.5 hours). Visit Bylakuppe Tibetan Settlement—largest in South India—and marvel at the 40-foot gilded statues inside Namdroling Monastery (Golden Temple). Visit Dubare Elephant Camp on Cauvery riverbank for elephant bathing. Check in at Coorg resort and watch sunset at Raja's Seat.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Coorg Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Bylakuppe Golden Temple Tibetan Monastery",
+          "Dubare Elephant Camp River Experience",
+          "Raja's Seat Sunset Valley Viewpoint"
         ],
-        "hotel": "Evolve Back Coorg",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Heritage Resort / Treebo Coorg",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Coorg. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Abbey Falls, Guided Coffee & Pepper Plantation Walk & Talacauvery",
+        "description": "Walk down through dense spice greenery to roaring Abbey Falls. Take a guided walking tour inside an organic coffee estate learning bean cultivation, cardamoms, and black pepper. Drive up Brahmagiri Hill to Talacauvery (sacred origin of River Cauvery) and Bhagamandala Triveni Sangam.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Abbey Falls Rainforest Cascade",
+          "Guided Arabica Coffee Plantation Trail",
+          "Talacauvery Sacred River Origin Pilgrimage",
+          "Bhagamandala Sangam Temple"
         ],
-        "hotel": "Evolve Back Coorg",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Heritage Resort / Treebo Coorg",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 4,
-        "title": "Coorg Local Bazaars, Shopping & Culinary Evening",
-        "description": "Spend a relaxing day exploring local markets, craft shops, and authentic regional restaurants. Option for evening sunset cruise or cultural performance.",
+        "title": "Coorg to Queen of Hill Stations Ooty via Bandipur / Mudumalai Safari",
+        "description": "Scenic drive through Bandipur and Mudumalai Tiger Reserves spotting wild elephants and spotted deer along the highway. Ascend the 36 hairpin bends of Kalhatty Ghat to Queen of Hill Stations - Ooty (2,240m). Check-in at hotel. Visit Government Botanical Garden, Ooty Lake boating, and Dodabetta Peak (highest in Nilgiris).",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Local Artisan Market Shopping",
-          "Regional Food Tasting",
-          "Evening Sunset Activity"
+          "Bandipur Wildlife Forest Corridor Drive",
+          "36 Hairpin Kalhatty Ghat Mountain Climb",
+          "Ooty Botanical Garden Exotic Flora",
+          "Ooty Lake Boating & Dodabetta Peak"
         ],
-        "hotel": "Evolve Back Coorg",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Fortune Resort Sullivan Court / Treebo Ooty",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 5,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Nilgiri Mountain Toy Train & Coimbatore / Bangalore Departure Drop",
+        "description": "Experience the UNESCO World Heritage Nilgiri Mountain Toy Train joyride from Ooty to Coonoor through tunnels, bridges, and tea terraces. Visit Sim's Park and Dolphin's Nose. Private transfer to Coimbatore Airport (CJB - approx. 2.5 hours) or Bangalore for departure.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Nilgiri Mountain Toy Train Joyride (UNESCO)",
+          "Coonoor Sim's Park Botanical Walk",
+          "Coimbatore / Bangalore Airport Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan & Toy Train"
       }
     ],
     "faqs": [
@@ -4956,74 +5326,82 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Hospet",
     "hotels": [
       {
-        "name": "Heritage Resort Hampi",
+        "name": "Heritage Resort Hampi / Treebo Hospet",
         "city": "Hampi",
-        "rating": "4 Star",
+        "rating": "3 Star",
         "nights": 2
+      },
+      {
+        "name": "The Badami Court / Treebo Badami",
+        "city": "Badami",
+        "rating": "3 Star",
+        "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Hampi Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Hampi. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Hubli / Hospet Arrival, Check-in & Virupaksha Temple Sunset",
+        "description": "Pickup from Hubli Airport / Hospet Junction. Drive into UNESCO World Heritage Hampi—the capital of the 14th-century Vijayanagara Empire surrounded by surreal granite boulder landscapes. Check in at hotel. Visit 7th-century operating Virupaksha Temple, Kadalekalu Ganesha, and climb Hemakuta Hill for a magical sunset over ancient ruins.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Hampi",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Hubli / Hospet Pickup",
+          "Virupaksha Temple Sacred Architecture",
+          "Hemakuta Hill Sunset Boulder Landscape",
+          "Kadalekalu Ganesha Monolith"
         ],
-        "hotel": "Heritage Resort Hampi",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Heritage Resort Hampi / Treebo Hospet",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Hampi Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Hampi. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Vijaya Vittala Stone Chariot, Musical Pillars, Royal Enclosure & Coracle Ride",
+        "description": "Explore the architectural pinnacle of Vijayanagara: Vijaya Vittala Temple complex featuring the iconic Stone Chariot and musical stone pillars. Cross the Tungabhadra River in a traditional round woven Coracle boat. In afternoon, visit Royal Enclosure: Queen's Bath, Lotus Mahal, Elephant Stables, and Hazara Rama Temple with Ramayana friezes.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Hampi Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Vijaya Vittala Temple & Stone Chariot (UNESCO)",
+          "56 Musical Stone Pillars Demonstration",
+          "Tungabhadra River Round Coracle Boat Ride",
+          "Lotus Mahal & Royal Elephant Stables"
         ],
-        "hotel": "Heritage Resort Hampi",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Heritage Resort Hampi / Treebo Hospet",
+        "transfers": "Private AC Sedan & Coracle"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Hampi. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Drive to Aihole & Pattadakal UNESCO Temples & Badami Cave Temples",
+        "description": "Drive north to Aihole ('Cradle of Indian Temple Architecture') visiting Durga Temple with apsidal sanctum. Proceed to Pattadakal (UNESCO World Heritage) where early Chalukya kings were crowned, showcasing harmonious Dravidian and Nagara stone shrines. Continue to Badami (Vatapi). Tour 4 spectacular 6th-century rock-cut Badami Cave Temples overlooking sacred Agastya Lake.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Aihole 5th-Century Durga Temple Guided Tour",
+          "Pattadakal UNESCO Group of Chalukyan Monuments",
+          "Badami Rock-Cut Cave Temples (Shiva, Vishnu, Jain)",
+          "Agastya Lake & Bhutanatha Temple Sunset"
         ],
-        "hotel": "Heritage Resort Hampi",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Badami Court / Treebo Badami",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 4,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Badami Fort, Banashankari Temple & Hubli / Belgaum Departure Drop",
+        "description": "Morning visit to Badami Fort and ancient Banashankari Temple. Check out and private transfer to Hubli Airport / Railway Station (approx. 2.5 hours) or Belgaum for return journey.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Badami Fort Archaeological Walk",
+          "Hubli / Belgaum Airport Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -5070,74 +5448,83 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Hyderabad",
     "hotels": [
       {
-        "name": "Taj Krishna Hyderabad",
+        "name": "The Park / Treebo Hyderabad",
         "city": "Hyderabad",
-        "rating": "5 Star",
+        "rating": "3 Star",
         "nights": 2
+      },
+      {
+        "name": "Grand Akka Mahadevi / Haritha Srisailam",
+        "city": "Srisailam",
+        "rating": "3 Star",
+        "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Hyderabad Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Hyderabad. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Hyderabad Arrival, Charminar, Golconda Fort & Hussain Sagar Laser Show",
+        "description": "Arrive at Rajiv Gandhi International Airport (HYD) / Secunderabad Junction. Private transfer to hotel. Tour 1591 CE iconic Charminar, Mecca Masjid, and opulent Chowmahalla Palace. Ascend acoustic wonder Golconda Fort. In evening, boat ride on Hussain Sagar Lake to Buddha Statue and watch laser water show at Lumbini Park. Relish world-famous Hyderabadi Dum Biryani.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Hyderabad",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Hyderabad Airport Pickup",
+          "Charminar & Laad Bazaar Pearl Shopping",
+          "Golconda Fort Acoustic Tour",
+          "Hussain Sagar Lake Boat Ride & Biryani Dinner"
         ],
-        "hotel": "Taj Krishna Hyderabad",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Park / Treebo Hyderabad",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Hyderabad Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Hyderabad. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Full Day Extravaganza at Ramoji Film City (Guinness World Record)",
+        "description": "Spend full day at Ramoji Film City—the world's largest integrated film studio complex spanning 2,000 acres. Tour grand sets of blockbuster films like Baahubali (Mahishmati Kingdom), Bollywood sets, London Street, Japanese gardens, live wild west stunt show, Spirit of Ramoji dance parade, and eco-zone bird park.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Hyderabad Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Ramoji Film City Guided Studio Tour",
+          "Baahubali Film Set Walkthrough",
+          "Live Stunt Show & Action Theatre",
+          "Fundustan Kids World & Bird Park"
         ],
-        "hotel": "Taj Krishna Hyderabad",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Park / Treebo Hyderabad",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Hyderabad. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Scenic Drive through Nallamala Forest to Holy Srisailam Jyotirlinga",
+        "description": "Drive through tiger-inhabited Nallamala Forest along Krishna River gorge to holy town Srisailam (approx. 4.5 hours). Check-in at hotel. Experience divine VIP Darshan at Sri Mallikarjuna Swamy Jyotirlinga (one of only 3 places in India that is both a Jyotirlinga and a Shaktipeeth - Bhramaramba Devi). Ride ropeway to Patala Ganga riverbank.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Nallamala Forest Ghat Road Drive",
+          "Sri Mallikarjuna Swamy Jyotirlinga VIP Darshan",
+          "Bhramaramba Devi Shaktipeeth Puja",
+          "Patala Ganga Ropeway & Krishna River Walk"
         ],
-        "hotel": "Taj Krishna Hyderabad",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Grand Akka Mahadevi / Haritha Srisailam",
+        "transfers": "Private AC Sedan & Ropeway"
       },
       {
         "dayNumber": 4,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Srisailam Dam Viewpoint & Hyderabad Airport Departure Drop",
+        "description": "Visit colossal Srisailam Dam on Krishna River and Sakshi Ganapati Temple. Check out and private drive back to Hyderabad Rajiv Gandhi International Airport for departure.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Srisailam Dam Engineering Viewpoint",
+          "Sakshi Ganapati Temple Darshan",
+          "Hyderabad Airport Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -5185,106 +5572,122 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Guwahati",
     "hotels": [
       {
-        "name": "Polo Towers Shillong",
+        "name": "Hotel Vivanta / Treebo Guwahati",
+        "city": "Guwahati",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Polo Towers / Treebo Shillong",
         "city": "Shillong",
-        "rating": "4 Star",
+        "rating": "3 Star",
+        "nights": 2
+      },
+      {
+        "name": "Polo Orchid Resort Cherrapunji",
+        "city": "Cherrapunji",
+        "rating": "3 Star",
         "nights": 2
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Meghalaya Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Meghalaya. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Guwahati Arrival, Kamakhya Temple Darshan & Drive to Shillong via Umiam Lake",
+        "description": "Arrive at Lokpriya Gopinath Bordoloi International Airport Guwahati (GAU) / Guwahati Junction. Private transfer. Ascend Nilachal Hill for VIP Darshan at the sacred Kamakhya Devi Temple (one of the 51 Shaktipeeths). Post blessings, embark on a picturesque drive to Scotland of the East - Shillong (approx. 3.5 hours). Stop at vast Umiam Lake (Barapani) for water sports. Check in at hotel and walk along Police Bazar in evening.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Meghalaya",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Guwahati Airport Pickup",
+          "Maa Kamakhya Devi Temple VIP Darshan",
+          "Umiam Lake Water Sports Stop",
+          "Shillong Police Bazar Evening Walk"
         ],
-        "hotel": "Polo Towers Shillong",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Polo Towers / Treebo Shillong",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Meghalaya Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Meghalaya. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Shillong Heritage: Don Bosco Museum, Elephant Falls & Shillong Peak",
+        "description": "Tour Shillong's premier highlights. Visit 7-story Don Bosco Museum of Indigenous Cultures showcasing Northeast tribal heritage. Drive to roaring 3-tiered Elephant Falls surrounded by fern gullies, and ascend Shillong Peak (highest point in Meghalaya at 1,965m) for panoramic views of the city. Visit Lady Hydari Park and Ward's Lake.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Meghalaya Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Don Bosco Indigenous Culture Museum",
+          "Elephant Falls 3-Tiered Cascade",
+          "Shillong Peak Mountain Panorama",
+          "Ward's Lake Wooden Bridge Walk"
         ],
-        "hotel": "Polo Towers Shillong",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Polo Towers / Treebo Shillong",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Meghalaya. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Shillong to Cherrapunji (Sohra), Mawkdok Zipline & Nohkalikai Falls",
+        "description": "Drive to Cherrapunji (Sohra - one of the wettest places on earth). Cross dramatic deep gorges at Mawkdok Dympep Valley and enjoy thrilling zipline experience across canyons. Visit towering Nohkalikai Falls (tallest plunge waterfall in India dropping 340m), Seven Sisters Falls (Nohsngithiang), and explore stalactites inside Mawsmai Limestone Cave. Check in at Cherrapunji resort.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Mawkdok Dympep Valley Zipline Adventure",
+          "Nohkalikai Falls India's Tallest Plunge View",
+          "Seven Sisters Falls Scenic Viewpoint",
+          "Mawsmai Limestone Cave Exploration"
         ],
-        "hotel": "Polo Towers Shillong",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Polo Orchid Resort Cherrapunji",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 4,
-        "title": "Meghalaya Local Bazaars, Shopping & Culinary Evening",
-        "description": "Spend a relaxing day exploring local markets, craft shops, and authentic regional restaurants. Option for evening sunset cruise or cultural performance.",
+        "title": "Living Root Bridge Trek: Nongriat Double Decker & Rainbow Falls",
+        "description": "Trek into the subtropical rainforest of Nongriat village. Descend stone steps through dense jungle, crossing iron cable suspension bridges to witness the world-famous Double Decker Living Root Bridge—a bio-engineering wonder woven from the aerial roots of Ficus elastica trees by Khasi tribes over centuries. Swim in crystal-clear turquoise natural rock pools at Rainbow Falls. Return to resort.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Local Artisan Market Shopping",
-          "Regional Food Tasting",
-          "Evening Sunset Activity"
+          "Double Decker Living Root Bridge Guided Trek",
+          "Nongriat Tribal Village Walk",
+          "Natural Turquoise Rock Pool Swim",
+          "Living Root Bridge Bio-Engineering Photography"
         ],
-        "hotel": "Polo Towers Shillong",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Polo Orchid Resort Cherrapunji",
+        "transfers": "Private AC Sedan & Trek"
       },
       {
         "dayNumber": 5,
-        "title": "Exploring Hidden Gems & Scenic Countryside of Meghalaya",
-        "description": "Delight in a day exploring off-the-beaten-path villages, panoramic viewpoints, and tranquil nature spots across Meghalaya with your private chauffeur.",
+        "title": "Crystal Clear Umngot River Dawki Boating & Cleanest Village Mawlynnong",
+        "description": "Excursion to Indo-Bangladesh border border town Dawki. Enjoy boat ride on the emerald Umngot River where water is so transparent that boats appear to float on air. Walk across border pillar at Tamabil. Proceed to Mawlynnong—awarded 'Cleanest Village in Asia'. Walk along bamboo-paved streets, climb Sky View bamboo watchtower, and visit Jingmaham Single Living Root Bridge at Riwai.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Hidden Spot Discovery",
-          "Panoramic Viewpoint Stop",
-          "Countryside Private Cab Tour"
+          "Umngot River Glass-Clear Boating",
+          "Indo-Bangladesh Border Photo Point",
+          "Mawlynnong Cleanest Village in Asia Walk",
+          "Riwai Single Living Root Bridge"
         ],
-        "hotel": "Polo Towers Shillong",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Vivanta / Treebo Guwahati",
+        "transfers": "Private AC Sedan & Boat"
       },
       {
         "dayNumber": 6,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Brahmaputra Sunrise & Guwahati Airport Departure Drop",
+        "description": "Morning peaceful view of mighty Brahmaputra River. Check-out and private transfer to Guwahati Airport (GAU) for your onward flight with pristine memories of Meghalaya.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Brahmaputra River Morning Stroll",
+          "Guwahati Airport Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -5334,74 +5737,83 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Jorhat",
     "hotels": [
       {
-        "name": "IORA The Retreat Kaziranga",
+        "name": "Borgos Resort / Treebo Kaziranga",
         "city": "Kaziranga",
-        "rating": "4 Star",
+        "rating": "3 Star",
         "nights": 2
+      },
+      {
+        "name": "Prashanti Eco Tourism Resort Majuli",
+        "city": "Majuli",
+        "rating": "3 Star",
+        "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Kaziranga Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Kaziranga. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Guwahati / Jorhat to Kaziranga National Park & Orchid Park",
+        "description": "Pickup from Guwahati Airport / Jorhat Airport. Scenic drive through lush green tea gardens of Assam to UNESCO World Heritage Kaziranga National Park (approx. 4.5 hours from Guwahati / 2 hours from Jorhat). Check-in at jungle resort. In afternoon, visit Kaziranga National Orchid and Biodiversity Park housing over 500 varieties of wild orchids, medicinal plants, and traditional Bihu cultural dance performance.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Kaziranga",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Guwahati / Jorhat Pickup",
+          "Assam Tea Garden Drive",
+          "Kaziranga Orchid Biodiversity Park Tour",
+          "Bihu Cultural Dance & Folk Performance"
         ],
-        "hotel": "IORA The Retreat Kaziranga",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Borgos Resort / Treebo Kaziranga",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Kaziranga Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Kaziranga. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Elephant Safari & Afternoon Open 4x4 Jeep Safari in Core Rhinoceros Zones",
+        "description": "Early morning at 5:30 AM embark on an Elephant Safari in Western Range (Bagori) to observe the Great Indian One-Horned Rhinoceros grazing in tall elephant grass at arm's length. Return to resort for breakfast. In afternoon, 4x4 open Jeep Safari in Central Range (Kohora) tracking wild Asian elephants, wild water buffaloes, swamp deer (barasingha), Bengal tigers, and pelicans around Donga water body.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Kaziranga Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Dawn Elephant Safari One-Horned Rhino Sighting",
+          "Assam Tea Estate Walk",
+          "Afternoon 4x4 Open Jeep Safari (Central Kohora Zone)",
+          "Waterbird Photography at Donga Beel"
         ],
-        "hotel": "IORA The Retreat Kaziranga",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Borgos Resort / Treebo Kaziranga",
+        "transfers": "4x4 Open Jeep & Elephant"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Kaziranga. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Drive to Neemati Ghat, Ferry across Brahmaputra to Majuli River Island",
+        "description": "Drive to Neemati Ghat and board government ferry boat across the mighty Brahmaputra River to Majuli—the world's largest inhabited river island (approx. 1.5 hours ferry). Explore the 15th-century Neo-Vaishnavite Satras: Kamalabari Satra (classical music and dance), Auniati Satra (ancient artifacts & royal swords), and Natun Samaguri Satra where artisans create traditional mythological bamboo and clay masks. Overnight in traditional bamboo eco-cottage.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Mighty Brahmaputra River Ferry Cruise",
+          "Majuli World's Largest River Island Tour",
+          "Kamalabari & Auniati Vaishnavite Satras",
+          "Traditional Bamboo Mask-Making Workshop"
         ],
-        "hotel": "IORA The Retreat Kaziranga",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Prashanti Eco Tourism Resort Majuli",
+        "transfers": "Private AC Sedan & Ferry"
       },
       {
         "dayNumber": 4,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Majuli Bird Watching, Ferry to Mainland & Jorhat / Guwahati Drop",
+        "description": "Early morning bird watching along wetlands of Majuli spotting migratory birds. Return ferry across Brahmaputra to Neemati Ghat. Private transfer to Jorhat Airport (approx. 45 mins) or Guwahati Airport for departure.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Wetland Bird Watching",
+          "Return Brahmaputra Ferry",
+          "Jorhat / Guwahati Airport Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan & Ferry"
       }
     ],
     "faqs": [
@@ -5449,122 +5861,143 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Guwahati",
     "hotels": [
       {
-        "name": "Hotel Dragon Tawang",
+        "name": "Prashanti Cottage Bhalukpong",
+        "city": "Bhalukpong",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Pemaling Lords Eco Inn Dirang",
+        "city": "Dirang",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Hotel Tawang Heights / Treebo Tawang",
         "city": "Tawang",
         "rating": "3 Star",
-        "nights": 2
+        "nights": 3
+      },
+      {
+        "name": "Hotel Siphiyang Phong Bomdila",
+        "city": "Bomdila",
+        "rating": "3 Star",
+        "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Tawang Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Tawang. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Guwahati Arrival, Inner Line Permit & Drive to Bhalukpong",
+        "description": "Pickup from Guwahati Airport (GAU). Process Inner Line Permits (ILP). Drive along the north bank of Brahmaputra into the Himalayan foothills of Arunachal Pradesh along Kameng River to Bhalukpong (approx. 4.5 hours). Check in at riverside eco-lodge.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Tawang",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Guwahati Airport Pickup",
+          "Arunachal Inner Line Permit Check",
+          "Scenic Kameng River Valley Drive"
         ],
-        "hotel": "Hotel Dragon Tawang",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Prashanti Cottage Bhalukpong",
+        "transfers": "Private Mountain SUV"
       },
       {
         "dayNumber": 2,
-        "title": "Tawang Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Tawang. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Bhalukpong to Dirang via Tipi Orchidarium & Dirang Dzong",
+        "description": "Drive deeper into West Kameng district to Dirang (1,497m - approx. 4 hours). En route visit Tipi Orchidarium housing over 7,500 species of rare orchids. Visit historic 500-year-old Dirang Dzong (Monpa stone fortress) and natural hot water sulphur springs along Dirang Chu River. Visit apple and kiwi orchards.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Tawang Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Tipi Orchid Research Centre & Botanical Walk",
+          "Dirang Dzong 17th-Century Monpa Fortress",
+          "Dirang Chu Natural Hot Water Springs"
         ],
-        "hotel": "Hotel Dragon Tawang",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Pemaling Lords Eco Inn Dirang",
+        "transfers": "Private Mountain SUV"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Tawang. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Dirang to Tawang crossing High Sela Pass (13,700 ft) & Jaswant Garh",
+        "description": "Ascend the formidable snow-clad Sela Pass (13,700 ft / 4,175m) decorated with colourful Buddhist prayer flags. Admire the sacred glacial Sela Lake. Visit Jaswant Garh 1962 Indo-China War Memorial honoring Param Vir Chakra hero Rifleman Jaswant Singh Rawat. Stop at roaring Nuranang (Jung) Waterfalls dropping 100m. Arrive in holy Tawang (3,048m).",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Sela Pass 13,700 ft Summit Crossing",
+          "Glacial Sela Lake Photography Stop",
+          "Jaswant Garh 1962 War Memorial",
+          "Nuranang (Jung) Waterfalls Cascade"
         ],
-        "hotel": "Hotel Dragon Tawang",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Tawang Heights / Treebo Tawang",
+        "transfers": "Private Mountain SUV"
       },
       {
         "dayNumber": 4,
-        "title": "Tawang Local Bazaars, Shopping & Culinary Evening",
-        "description": "Spend a relaxing day exploring local markets, craft shops, and authentic regional restaurants. Option for evening sunset cruise or cultural performance.",
+        "title": "Tawang Monastery (Asia's 2nd Largest), Urgelling & War Memorial",
+        "description": "Visit the 400-year-old Tawang Monastery (Galden Namgyal Lhatse) founded in 1681 CE—the largest monastery in India and second largest in the world after Lhasa's Potala Palace. Marvel at the 28-foot gilded Buddha statue and library of ancient gold-ink Buddhist scriptures. Visit Urgelling Monastery (birthplace of the 6th Dalai Lama) and evening emotional Sound & Light Show at Tawang War Memorial.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Local Artisan Market Shopping",
-          "Regional Food Tasting",
-          "Evening Sunset Activity"
+          "Tawang Monastery (Galden Namgyal Lhatse) Tour",
+          "28-Foot Gilded Buddha Statue & Museum",
+          "Urgelling Monastery Dalai Lama Birthplace",
+          "Tawang War Memorial Sound & Light Show"
         ],
-        "hotel": "Hotel Dragon Tawang",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Tawang Heights / Treebo Tawang",
+        "transfers": "Private Mountain SUV"
       },
       {
         "dayNumber": 5,
-        "title": "Exploring Hidden Gems & Scenic Countryside of Tawang",
-        "description": "Delight in a day exploring off-the-beaten-path villages, panoramic viewpoints, and tranquil nature spots across Tawang with your private chauffeur.",
+        "title": "Excursion to Indo-China Border Bum La Pass (15,200 ft) & Madhuri Lake",
+        "description": "Excursion by special local 4x4 vehicles to Bum La Pass (15,200 ft / 4,633m) on the actual Line of Actual Control (LAC) between India and China. Interact with Indian Army soldiers and touch the border heap of stones. Visit sacred turquoise Sangetsar Lake (popularly known as Madhuri Lake after Koyla film shooting) surrounded by dead pine tree trunks standing in water, and high-altitude PTSO Lake.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Hidden Spot Discovery",
-          "Panoramic Viewpoint Stop",
-          "Countryside Private Cab Tour"
+          "Indo-China Border Bum La Pass 15,200 ft Experience",
+          "Meeting Indian Army Soldiers at Border LAC",
+          "Sangetsar (Madhuri) Glacial Lake Walk",
+          "Panga Teng Tso (PTSO) Alpine Lake"
         ],
-        "hotel": "Hotel Dragon Tawang",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Tawang Heights / Treebo Tawang",
+        "transfers": "Local 4x4 Mountain SUV"
       },
       {
         "dayNumber": 6,
-        "title": "Tawang Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Tawang. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Tawang to Bomdila via Bomdila Monastery & Apple Orchards",
+        "description": "Drive back through mountain valleys to district headquarters Bomdila (2,217m - approx. 6 hours). Check in at hotel. Visit the majestic Upper Gompa (GRL Monastery) and Lower Gompa. Walk through apple orchards and craft center producing Monpa carpets and wood carvings. Enjoy panoramic views of Kangto and Gorichen snow peaks from Bomdila Viewpoint.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Tawang Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Scenic Mountain Ridge Highway Journey",
+          "Bomdila Upper Monastery (GRL Gompa) Prayer Hall",
+          "Monpa Traditional Carpet Craft Center",
+          "Snow Range Peak Viewpoint Sunset"
         ],
-        "hotel": "Hotel Dragon Tawang",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Siphiyang Phong Bomdila",
+        "transfers": "Private Mountain SUV"
       },
       {
         "dayNumber": 7,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Bomdila to Guwahati Airport Departure Drop",
+        "description": "Descent drive from Bomdila via Kalaktang down into the plains of Assam to Guwahati Airport (GAU - approx. 6 hours) for your onward flight with epic memories of Arunachal.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Scenic Mountain Descent to Assam Plains",
+          "Guwahati Airport Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private Mountain SUV"
       }
     ],
     "faqs": [
@@ -5612,122 +6045,139 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Bagdogra",
     "hotels": [
       {
-        "name": "Mayfair Spa Resort Gangtok",
+        "name": "The Elgin Nor-Khill / Treebo Gangtok",
         "city": "Gangtok",
-        "rating": "5 Star",
+        "rating": "3 Star",
+        "nights": 3
+      },
+      {
+        "name": "The Chumbi Mountain Retreat / Treebo Pelling",
+        "city": "Pelling",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "The Elgin Darjeeling / Treebo Darjeeling",
+        "city": "Darjeeling",
+        "rating": "3 Star",
         "nights": 2
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "North East Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in North East. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Bagdogra / NJP Arrival, Scenic Teesta River Drive to Gangtok",
+        "description": "Arrive at Bagdogra Airport (IXB) / New Jalpaiguri Railway Station (NJP). Private transfer winding along emerald green Teesta River into the Kingdom of Sikkim to capital Gangtok (1,650m - approx. 4.5 hours). Check-in at hotel. Evening stroll along pedestrianized MG Marg, taste authentic steamed Momos and Thukpa.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in North East",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Bagdogra / NJP Pickup",
+          "Teesta River Canyon Drive",
+          "MG Marg Pedestrian Promenade Walk"
         ],
-        "hotel": "Mayfair Spa Resort Gangtok",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Elgin Nor-Khill / Treebo Gangtok",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "North East Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of North East. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Excursion to Sacred Glacial Tsomgo (Changu) Lake (12,310 ft) & Baba Mandir",
+        "description": "Drive on dramatic high-altitude military road towards Indo-China border to sacred Tsomgo Lake (12,310 ft / 3,753m)—a high-altitude glacial oval lake reflecting changing sky hues. Enjoy yak ride around lake. Continue to historic Baba Harbhajan Singh Mandir (13,123 ft) honoring an Indian soldier revered by troops. View of Nathu La Pass ridge. Return to Gangtok.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "North East Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Tsomgo (Changu) Glacial Lake Excursion",
+          "Colourful Decorated Yak Ride on Snowbanks",
+          "Baba Harbhajan Singh Mandir Darshan",
+          "High Altitude Himalayan Pass Views"
         ],
-        "hotel": "Mayfair Spa Resort Gangtok",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Elgin Nor-Khill / Treebo Gangtok",
+        "transfers": "Private Mountain SUV"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near North East. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Gangtok to Pelling via Rumtek Monastery & Namchi Char Dham",
+        "description": "Visit ancient Rumtek Monastery (seat of the Karmapa Lama) with golden stupa. Drive across tea estates of Temi to Namchi to tour Siddheshwar Dham (re-creation of all 12 Jyotirlingas and Char Dhams under a colossal 108 ft Shiva statue) and Samdruptse 138 ft Guru Padmasambhava statue. Proceed to Pelling (2,150m) directly facing Mt. Kanchenjunga.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Rumtek Monastery Golden Stupa Tour",
+          "Namchi Char Dham & 108-Foot Shiva Statue",
+          "Samdruptse Giant Guru Rinpoche Monument",
+          "Scenic Drive to Pelling"
         ],
-        "hotel": "Mayfair Spa Resort Gangtok",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Chumbi Mountain Retreat / Treebo Pelling",
+        "transfers": "Private Mountain SUV"
       },
       {
         "dayNumber": 4,
-        "title": "North East Local Bazaars, Shopping & Culinary Evening",
-        "description": "Spend a relaxing day exploring local markets, craft shops, and authentic regional restaurants. Option for evening sunset cruise or cultural performance.",
+        "title": "Pelling Skywalk, Pemayangtse Monastery & Drive to Darjeeling",
+        "description": "Visit Pelling Glass Skywalk suspended over mist, 17th-century Pemayangtse Monastery ('Sublime Perfect Lotus'), and historic stone ruins of Rabdentse (2nd ancient capital of Sikkim) with breathtaking close-up views of Mount Kanchenjunga (8,586m). In afternoon, scenic cross-border drive to Queen of the Hills - Darjeeling (approx. 4 hours). Check in at heritage hotel.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Local Artisan Market Shopping",
-          "Regional Food Tasting",
-          "Evening Sunset Activity"
+          "Pelling Glass Skywalk Valley Experience",
+          "Pemayangtse Monastery Wood Carving Tour",
+          "Rabdentse Palace Ruins Kanchenjunga View",
+          "Scenic Drive to Darjeeling"
         ],
-        "hotel": "Mayfair Spa Resort Gangtok",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Elgin Darjeeling / Treebo Darjeeling",
+        "transfers": "Private Mountain SUV"
       },
       {
         "dayNumber": 5,
-        "title": "Exploring Hidden Gems & Scenic Countryside of North East",
-        "description": "Delight in a day exploring off-the-beaten-path villages, panoramic viewpoints, and tranquil nature spots across North East with your private chauffeur.",
+        "title": "Tiger Hill Sunrise Over Mt. Kanchenjunga, Batasia Loop & Himalayan Zoo",
+        "description": "Early morning at 4:00 AM ascend Tiger Hill (2,590m) to witness the sunrise turning the snows of Mt. Kanchenjunga and Mt. Everest from pink to brilliant gold. Visit Ghoom Monastery and Batasia Loop where the Toy Train takes a 360-degree spiral. Return to hotel for breakfast. Later visit Padmaja Naidu Himalayan Zoological Park (breeding red pandas & snow leopards), Himalayan Mountaineering Institute (HMI), and Happy Valley Tea Estate.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Hidden Spot Discovery",
-          "Panoramic Viewpoint Stop",
-          "Countryside Private Cab Tour"
+          "Tiger Hill Dawn Sunrise Over Kanchenjunga & Everest",
+          "Ghoom Monastery Ancient Maitreya Buddha",
+          "Batasia Loop War Memorial",
+          "Padmaja Naidu Zoo Red Panda & Snow Leopard Tour",
+          "Happy Valley Tea Garden Walk"
         ],
-        "hotel": "Mayfair Spa Resort Gangtok",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Elgin Darjeeling / Treebo Darjeeling",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 6,
-        "title": "North East Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of North East. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Darjeeling Himalayan Railway Toy Train Joyride & Glenary's Bakery Walk",
+        "description": "Experience the iconic steam-engine UNESCO World Heritage Darjeeling Himalayan Railway (DHR) Toy Train joyride from Darjeeling to Ghoom and back. Spend afternoon exploring Chowrasta Mall, Japanese Peace Pagoda, and enjoying tea and pastries at historic 130-year-old Glenary's Bakery.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "North East Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "UNESCO Heritage Steam Toy Train Joyride",
+          "Japanese Peace Pagoda Stupa",
+          "Darjeeling Mall Road & Chowrasta Walk",
+          "Glenary's Bakery Afternoon Tea"
         ],
-        "hotel": "Mayfair Spa Resort Gangtok",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Elgin Darjeeling / Treebo Darjeeling",
+        "transfers": "Private AC Sedan & Toy Train"
       },
       {
         "dayNumber": 7,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Mirik Lake Pine Walk & Bagdogra / NJP Departure Drop",
+        "description": "Drive down via scenic tea valleys. Stop at tranquil Mirik Lake (Sumendu Lake) surrounded by cardamom plantations and cryptomeria pine groves. Continue drive down to Bagdogra Airport (IXB) / NJP Railway Station for your onward journey.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Mirik Lake Pine Forest Stop",
+          "Bagdogra / NJP Airport / Station Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -5775,74 +6225,82 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Bhubaneswar",
     "hotels": [
       {
-        "name": "Mayfair Heritage Puri",
+        "name": "Fortune Park Sishmo / Treebo Bhubaneswar",
+        "city": "Bhubaneswar",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Mayfair Waves / Treebo Puri",
         "city": "Puri",
-        "rating": "4 Star",
+        "rating": "3 Star",
         "nights": 2
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Puri Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Puri. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Bhubaneswar Arrival, Lingaraj Temple, Dhauli Shanti Stupa & Drive to Puri",
+        "description": "Arrive at Biju Patnaik International Airport Bhubaneswar (BBI) / Bhubaneswar Junction. Private transfer. Tour City of Temples: 11th-century soaring spire of Lingaraj Temple, 10th-century gem Mukteswar Temple with torana arch, and rock-cut twin caves of Udayagiri & Khandagiri. Visit Dhauli Giri Shanti Stupa where Emperor Ashoka renounced war after Kalinga. Drive along marine highway to holy Puri (approx. 1.5 hours). Check in at beach resort.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Puri",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Bhubaneswar Airport Pickup",
+          "Lingaraj & Mukteswar Temple Architecture Tour",
+          "Dhauli Giri Peace Pagoda & Ashokan Rock Edicts",
+          "Scenic Highway Drive to Puri"
         ],
-        "hotel": "Mayfair Heritage Puri",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Mayfair Waves / Treebo Puri",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Puri Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Puri. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Shri Jagannath Temple VIP Darshan, Blue Flag Beach & Konark Sun Temple",
+        "description": "Early morning VIP Darshan at sacred Shri Jagannath Temple (one of the 4 holy Char Dham shrines) witnessing the divine deities Lord Jagannath, Balabhadra, and Subhadra, and visit Ananda Bazar (world's largest kitchen). Stroll on certified Golden Blue Flag Beach. In afternoon, drive along Marine Drive to UNESCO World Heritage Konark Sun Temple—the 13th-century stone chariot with 24 carved wheels pulled by 7 horses. Watch sunset at Chandrabhaga Beach.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Puri Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Shri Jagannath Temple VIP Darshan & Mahaprasad",
+          "Puri Golden Blue Flag Beach Stroll",
+          "Konark Sun Temple 13th-Century UNESCO Stone Chariot",
+          "Chandrabhaga Beach Sunset Panorama"
         ],
-        "hotel": "Mayfair Heritage Puri",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Mayfair Waves / Treebo Puri",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Puri. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Chilika Lake (Satapada) Lagoon Boat Safari & Irrawaddy Dolphin Spotting",
+        "description": "Drive to Satapada on Asia's largest brackish water lagoon - Chilika Lake (approx. 1.5 hours). Board motorized boat across the vast lagoon to spot playful endangered Irrawaddy Dolphins leaping in the water. Visit the Sea Mouth where Chilika Lake meets the roaring Bay of Bengal, and Rajhans Island. Return to Puri in evening for temple bazaar shopping for Khaja sweets and Sambalpuri handlooms.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Chilika Lake Motorized Boat Lagoon Safari",
+          "Irrawaddy Dolphin Spotting at Satapada",
+          "Chilika Sea Mouth Island Visit",
+          "Puri Grand Road Sweets & Handloom Market"
         ],
-        "hotel": "Mayfair Heritage Puri",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Mayfair Waves / Treebo Puri",
+        "transfers": "Private AC Sedan & Boat"
       },
       {
         "dayNumber": 4,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Raghurajpur Artisan Village & Bhubaneswar Airport Departure Drop",
+        "description": "Morning visit to heritage artisan village Raghurajpur where every household practices traditional Pattachitra scroll painting, palm-leaf engraving, and wooden toys. Continue to Bhubaneswar Airport (BBI) / Railway Station for departure with Mahaprabhu Jagannath's blessings.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Raghurajpur Heritage Craft Village Tour",
+          "Bhubaneswar Airport Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -5891,7 +6349,13 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Kolkata",
     "hotels": [
       {
-        "name": "Sundarban Jungle Camp",
+        "name": "The Peerless Inn / Treebo Kolkata",
+        "city": "Kolkata",
+        "rating": "3 Star",
+        "nights": 1
+      },
+      {
+        "name": "Sundarban Tiger Camp Eco Resort",
         "city": "Sundarbans",
         "rating": "3 Star",
         "nights": 2
@@ -5900,65 +6364,70 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Sundarbans Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Sundarbans. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Kolkata Arrival, Victoria Memorial, Howrah Bridge & Dakshineswar Kali",
+        "description": "Arrive at Netaji Subhash Chandra Bose International Airport Kolkata (CCU) / Howrah Junction. Private transfer to hotel. Tour colonial City of Joy: magnificent white marble Victoria Memorial Hall, drive across cantilever engineering marvel Howrah Bridge over Hooghly River, visit Princep Ghat, and offer prayers at 1855 CE Dakshineswar Kali Temple associated with Ramakrishna Paramahamsa. Evening ride in iconic yellow Ambassador cab.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Sundarbans",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Kolkata Airport / Station Pickup",
+          "Victoria Memorial White Marble Palace Tour",
+          "Howrah Bridge & Princep Ghat Hooghly River Walk",
+          "Dakshineswar Kali Temple Darshan"
         ],
-        "hotel": "Sundarban Jungle Camp",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Peerless Inn / Treebo Kolkata",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Sundarbans Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Sundarbans. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Drive to Godkhali, Motorized Boat Cruise into Sundarbans UNESCO Delta",
+        "description": "Early morning drive through Bengal countryside to Godkhali (approx. 3 hours). Board motorized safari boat into the world's largest mangrove forest delta - UNESCO World Heritage Sundarbans. Cruise along rivers Gomor, Durga Duani, and Pitchkhali. Check into your island jungle eco-resort. In afternoon, boat cruise to Sajnekhali Watchtower, Mangrove Interpretation Museum, and Crocodile Breeding Pond.",
         "meals": [
           "Breakfast",
+          "Lunch",
           "Dinner"
         ],
         "activities": [
-          "Sundarbans Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Scenic Countryside Drive to Godkhali Port",
+          "Sundarbans Delta Safari Boat Cruise",
+          "Sajnekhali Watchtower Wildlife Spotting",
+          "Mangrove Interpretation Centre & Crocodile Pond"
         ],
-        "hotel": "Sundarban Jungle Camp",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Sundarban Tiger Camp Eco Resort",
+        "transfers": "Private AC Sedan & Safari Boat"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Sundarbans. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Full Day Deep Mangrove Creeks Cruise: Dobanki Canopy Walk & Sudhanyakhali",
+        "description": "Full day boat expedition through narrow tidal creeks and dense sundari tree canopies with forest department guard. Cruise to Sudhanyakhali Watchtower overlooking sweet water pond where Royal Bengal Tigers, chital spotted deer, and wild boars come to drink. Visit Dobanki Watchtower featuring a 500-meter elevated canopy walk 20 feet above ground. Spot estuarine saltwater crocodiles, water monitor lizards, and kingfishers. Village Baul folk singer performance in evening.",
         "meals": [
           "Breakfast",
+          "Lunch",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Sudhanyakhali Watchtower Tiger Sighting Trail",
+          "Dobanki 500m Canopy Skywalk",
+          "Narrow Mangrove Creek Safari Navigation",
+          "Traditional Bengali Baul Folk Music Evening"
         ],
-        "hotel": "Sundarban Jungle Camp",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Sundarban Tiger Camp Eco Resort",
+        "transfers": "Sundarbans Safari Boat"
       },
       {
         "dayNumber": 4,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Village Island Walk, Return Cruise to Godkhali & Kolkata Airport Drop",
+        "description": "Morning guided walk through local island village to witness honey collection methods and paddy farming. Board boat for return cruise to Godkhali jetty. Re-board your private AC vehicle and transfer to Kolkata Airport (CCU) or Howrah / Sealdah Railway Station for departure.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Island Village Honey Hunter Walk",
+          "Return Delta Boat Cruise to Godkhali",
+          "Kolkata Airport / Railway Station Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Safari Boat & Private AC Sedan"
       }
     ],
     "faqs": [
@@ -6006,106 +6475,122 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Port Blair",
     "hotels": [
       {
-        "name": "Barefoot at Havelock",
-        "city": "Havelock Island",
-        "rating": "5 Star",
+        "name": "Hotel Megapode Resort / Treebo Port Blair",
+        "city": "Port Blair",
+        "rating": "3 Star",
         "nights": 2
+      },
+      {
+        "name": "Symphony Palms Beach Resort Havelock",
+        "city": "Havelock Island",
+        "rating": "3 Star",
+        "nights": 2
+      },
+      {
+        "name": "Pearl Park Beach Resort Neil Island",
+        "city": "Neil Island",
+        "rating": "3 Star",
+        "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Andaman Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Andaman. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Port Blair Arrival, Cellular Jail National Memorial & Light and Sound Show",
+        "description": "Arrive at Veer Savarkar International Airport Port Blair (IXZ). Meet and greet. Transfer to sea-facing hotel. In afternoon, tour the historic Cellular Jail (Kala Pani) national memorial, visit Veer Savarkar's cell and central tower. In evening, watch the moving Light and Sound Show narrating the saga of Indian freedom fighters.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Andaman",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Port Blair Airport Pickup",
+          "Cellular Jail Kala Pani Historical Tour",
+          "Cellular Jail Sound & Light Evening Show",
+          "Corbyn's Cove Beach Coconut Drink Stop"
         ],
-        "hotel": "Barefoot at Havelock",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Megapode Resort / Treebo Port Blair",
+        "transfers": "Private AC Sedan"
       },
       {
         "dayNumber": 2,
-        "title": "Andaman Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Andaman. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Premium Catamaran Cruise to Havelock Island & Radhanagar Beach Sunset",
+        "description": "Board high-speed premium catamaran cruise (Makruzz / Nautika) across azure waters to Swaraj Dweep (Havelock Island - approx. 1.5 hours). Check in at your beachfront resort. In afternoon, visit world-famous Radhanagar Beach (Beach No. 7), rated among the best beaches in Asia by Time Magazine. Walk on powdered white sand and watch majestic sunset.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Andaman Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Premium Catamaran Ferry Cruise to Havelock",
+          "Beachfront Resort Check-in",
+          "Radhanagar Beach White Sand Walk & Sunset",
+          "Tropical Beachfront Dining"
         ],
-        "hotel": "Barefoot at Havelock",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Symphony Palms Beach Resort Havelock",
+        "transfers": "Private AC Vehicle & Catamaran Ferry"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Andaman. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Elephant Beach Speedboat Ride, Live Coral Reef Snorkeling & Water Sports",
+        "description": "Board speedboat to Elephant Beach renowned for vibrant shallow coral reefs. Enjoy an included guided snorkeling session with expert PADI instructors spotting clownfish, sea anemones, and parrotfish. Optional sea karting, underwater sea walk, or jet ski. Afternoon leisure at resort private beach.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Elephant Beach Speedboat Adventure",
+          "Guided Coral Reef Snorkeling Experience",
+          "Underwater Sea Walk / Jet Ski Options",
+          "Vijaynagar Beach Leisure"
         ],
-        "hotel": "Barefoot at Havelock",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Symphony Palms Beach Resort Havelock",
+        "transfers": "Private AC Vehicle & Speedboat"
       },
       {
         "dayNumber": 4,
-        "title": "Andaman Local Bazaars, Shopping & Culinary Evening",
-        "description": "Spend a relaxing day exploring local markets, craft shops, and authentic regional restaurants. Option for evening sunset cruise or cultural performance.",
+        "title": "Catamaran to Neil Island, Natural Living Rock Bridge & Laxmanpur Sunset",
+        "description": "Board inter-island catamaran to serene Shaheed Dweep (Neil Island - approx. 1 hour). Check in at beach resort. Visit Bharatpur Beach for coral viewing in glass-bottom boats, admire the geological marvel Natural Living Coral Rock Bridge (Howrah Bridge), and witness spectacular sunset from Laxmanpur Beach.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Local Artisan Market Shopping",
-          "Regional Food Tasting",
-          "Evening Sunset Activity"
+          "Catamaran Cruise to Neil Island",
+          "Natural Living Coral Rock Bridge Photography",
+          "Bharatpur Beach Glass Bottom Boat Ride",
+          "Laxmanpur Beach White Sand Sunset"
         ],
-        "hotel": "Barefoot at Havelock",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Pearl Park Beach Resort Neil Island",
+        "transfers": "Private AC Vehicle & Catamaran Ferry"
       },
       {
         "dayNumber": 5,
-        "title": "Exploring Hidden Gems & Scenic Countryside of Andaman",
-        "description": "Delight in a day exploring off-the-beaten-path villages, panoramic viewpoints, and tranquil nature spots across Andaman with your private chauffeur.",
+        "title": "Neil to Port Blair Catamaran Return, Chidiya Tapu Sunset & Pearl Shopping",
+        "description": "Morning return catamaran ferry back to Port Blair. Check in at hotel. In afternoon, excursion to Chidiya Tapu (Bird Island) through coastal mangrove forests for a panoramic sunset over the Andaman Sea. Visit Sagarika Government Emporium for authentic mother-of-pearl crafts, seashell jewelry, and wooden artifacts.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Hidden Spot Discovery",
-          "Panoramic Viewpoint Stop",
-          "Countryside Private Cab Tour"
+          "Return Catamaran Cruise to Port Blair",
+          "Chidiya Tapu Mangrove Coastline Drive",
+          "Chidiya Tapu Sunset Point Panorama",
+          "Sagarika Handicraft & Pearl Shopping"
         ],
-        "hotel": "Barefoot at Havelock",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Megapode Resort / Treebo Port Blair",
+        "transfers": "Private AC Vehicle & Catamaran Ferry"
       },
       {
         "dayNumber": 6,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Port Blair Veer Savarkar Airport Departure Drop",
+        "description": "Enjoy breakfast overlooking the harbor. Check-out and private transfer to Port Blair Airport (IXZ) for onward flight with sun-kissed memories of Andaman emerald islands.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Port Blair Harbor Breakfast",
+          "Veer Savarkar Airport Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Sedan"
       }
     ],
     "faqs": [
@@ -6154,90 +6639,103 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Kochi",
     "hotels": [
       {
-        "name": "Bangaram Island Resort",
-        "city": "Bangaram Lakshadweep",
-        "rating": "5 Star",
+        "name": "Agatti Island Beach Resort Deluxe AC Cottage",
+        "city": "Agatti Island",
+        "rating": "3 Star",
+        "nights": 2
+      },
+      {
+        "name": "Bangaram Island Beach Resort Lagoon Cottage",
+        "city": "Bangaram Island",
+        "rating": "3 Star",
         "nights": 2
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Lakshadweep Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Lakshadweep. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Flight into Agatti Island, Turquoise Lagoon Welcome & Glass-Bottom Boating",
+        "description": "Fly into Agatti Airport (AGX)—one of the world's most scenic runways on a narrow sliver of sand surrounded by an endless turquoise lagoon. Traditional coconut water welcome. Transfer to beach resort. In afternoon, enjoy glass-bottom boat ride observing living brain corals, sea turtles, and colorful reef fishes right beneath your feet. Sunset beach walk.",
         "meals": [
+          "Lunch",
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Lakshadweep",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Scenic Agatti Island Runway Landing",
+          "Tender Boat Lagoon Transfer",
+          "Glass-Bottom Boat Coral Reef Viewing",
+          "Agatti Lagoon Sunset Walk"
         ],
-        "hotel": "Bangaram Island Resort",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Agatti Island Beach Resort Deluxe AC Cottage",
+        "transfers": "Boat & Electric Buggy"
       },
       {
         "dayNumber": 2,
-        "title": "Lakshadweep Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Lakshadweep. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Agatti Coral Reef Snorkeling, Kayaking & Local Village Culture",
+        "description": "Morning guided snorkeling session at Agatti house reef in waist-deep crystal clear water with certified instructors. Enjoy ocean kayaking and stand-up paddleboarding. In afternoon, guided village tour of Agatti island: visit the Eastern Jetty, tuna fish canning factory, coconut fiber processing unit, and local island museum.",
         "meals": [
           "Breakfast",
+          "Lunch",
           "Dinner"
         ],
         "activities": [
-          "Lakshadweep Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Guided House Reef Snorkeling Tour",
+          "Ocean Kayaking in Calm Lagoon Waters",
+          "Agatti Island Village Cultural Walk",
+          "Tuna Processing Center & Coconut Crafts"
         ],
-        "hotel": "Bangaram Island Resort",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Agatti Island Beach Resort Deluxe AC Cottage",
+        "transfers": "Local Island Transport"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Lakshadweep. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Speedboat across Emerald Sea to Uninhabited Paradise Bangaram Island",
+        "description": "Board high-speed boat across the open sea to uninhabited tear-drop shaped tropical paradise - Bangaram Island (approx. 45 mins). Check in at your wooden beachfront lagoon cottage. Walk barefoot on talcum-powder white sands. In afternoon, excursion by boat to tiny neighboring sandbanks of Thinnakara and Parali islands surrounded by baby sharks and sea turtles.",
         "meals": [
           "Breakfast",
+          "Lunch",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "High-Speed Emerald Lagoon Boat Transfer",
+          "Bangaram Island Beachfront Cottage Check-in",
+          "Thinnakara & Parali Island Sandbank Excursion",
+          "Sea Turtle & Baby Reef Shark Spotting"
         ],
-        "hotel": "Bangaram Island Resort",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Bangaram Island Beach Resort Lagoon Cottage",
+        "transfers": "High-Speed Boat"
       },
       {
         "dayNumber": 4,
-        "title": "Lakshadweep Local Bazaars, Shopping & Culinary Evening",
-        "description": "Spend a relaxing day exploring local markets, craft shops, and authentic regional restaurants. Option for evening sunset cruise or cultural performance.",
+        "title": "Bangaram Shipwreck Snorkeling, Scuba Diving & Beach Barbecue Under Stars",
+        "description": "Full day marine adventure on Bangaram. Boat excursion to Princess Royal shipwreck site for world-class scuba diving / snorkeling with schools of barracudas, sting rays, and reef sharks. Relax on secluded white sand spit. In evening, romantic candlelight beach barbecue dinner under the canopy of unpolluted island stars.",
         "meals": [
           "Breakfast",
+          "Lunch",
           "Dinner"
         ],
         "activities": [
-          "Local Artisan Market Shopping",
-          "Regional Food Tasting",
-          "Evening Sunset Activity"
+          "Princess Royal Shipwreck Diving / Snorkeling",
+          "Lagoon Sand Spit Walking",
+          "Coral Reef Photography",
+          "Candlelight Beach Barbecue Dinner"
         ],
-        "hotel": "Bangaram Island Resort",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Bangaram Island Beach Resort Lagoon Cottage",
+        "transfers": "Speedboat"
       },
       {
         "dayNumber": 5,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Speedboat to Agatti & Agatti Airport Departure Drop to Kochi",
+        "description": "Early morning boat transfer across emerald lagoon back to Agatti Island. Transfer to Agatti Airport (AGX) for your scheduled flight back to Kochi with memories of India's most pristine coral paradise.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Morning Lagoon Speedboat Transfer",
+          "Agatti Airport Departure Drop to Kochi"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Speedboat & Electric Buggy"
       }
     ],
     "faqs": [
@@ -6590,122 +7088,134 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Delhi / Kolkata / Mumbai",
     "hotels": [
       {
-        "name": "Deevana Patong Resort Phuket",
+        "name": "Best Western Patong Beach / Ibis Phuket",
         "city": "Phuket",
-        "rating": "4 Star",
+        "rating": "3 Star",
+        "nights": 3
+      },
+      {
+        "name": "Centara Life Maris Resort / Aonang Villa Krabi",
+        "city": "Krabi",
+        "rating": "3 Star",
         "nights": 3
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Thailand Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Thailand. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Phuket Arrival, Patong Beach Resort & Bangla Road Evening",
+        "description": "Arrive at Phuket International Airport (HKT). Private AC transfer to your beach resort in Patong. Check-in and relax. Evening stroll along bustling Patong Beach. Explore neon-lit Bangla Road nightlife, street seafood stalls, and live music venues.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Thailand",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Phuket Airport Private Transfer",
+          "Patong Beach Sunset Stroll",
+          "Bangla Road Walking Street Exploration"
         ],
-        "hotel": "Deevana Patong Resort Phuket",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Best Western Patong Beach / Ibis Phuket",
+        "transfers": "Private AC Minivan"
       },
       {
         "dayNumber": 2,
-        "title": "Thailand Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Thailand. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Phi Phi Islands Speedboat Tour: Maya Bay, Pileh Lagoon & Viking Cave",
+        "description": "Full day speedboat tour across Andaman Sea. Visit world-famous Maya Bay (filming site of The Beach), swim in emerald waters of Pileh Lagoon enclosed by towering limestone cliffs, observe ancient swiftlet nests at Viking Cave, see wild crab-eating macaques at Monkey Beach, and enjoy snorkeling over coral reefs at Bamboo Island with Thai buffet lunch.",
         "meals": [
           "Breakfast",
+          "Lunch",
           "Dinner"
         ],
         "activities": [
-          "Thailand Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Speedboat Cruise to Phi Phi Don & Phi Phi Leh",
+          "Maya Bay National Park Walk",
+          "Pileh Lagoon Cliff Swimming",
+          "Viking Cave & Monkey Beach Viewing",
+          "Buffet Lunch & Coral Snorkeling"
         ],
-        "hotel": "Deevana Patong Resort Phuket",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Best Western Patong Beach / Ibis Phuket",
+        "transfers": "Speedboat & Minivan"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Thailand. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Phuket City Tour: Big Buddha, Wat Chalong & Promthep Cape Sunset",
+        "description": "Tour cultural and scenic landmarks of Phuket. Ascend Nakkerd Hill to the 45-meter tall white Burmese marble Big Buddha with 360-degree island views. Visit Wat Chalong (most revered Buddhist temple in Phuket). Explore Sino-Portuguese colonial shophouses in Phuket Old Town, and conclude with an iconic sunset at Promthep Cape (southernmost tip of Phuket).",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Big Buddha 45m Marble Statue Viewpoint",
+          "Wat Chalong Sacred Temple Blessings",
+          "Phuket Old Town Sino-Portuguese Heritage Walk",
+          "Promthep Cape Sunset Panorama"
         ],
-        "hotel": "Deevana Patong Resort Phuket",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Best Western Patong Beach / Ibis Phuket",
+        "transfers": "Private AC Minivan"
       },
       {
         "dayNumber": 4,
-        "title": "Thailand Local Bazaars, Shopping & Culinary Evening",
-        "description": "Spend a relaxing day exploring local markets, craft shops, and authentic regional restaurants. Option for evening sunset cruise or cultural performance.",
+        "title": "Scenic Transfer to Krabi (Ao Nang) via Phang Nga Bay & Ao Nang Beach",
+        "description": "Scenic private drive along Phang Nga coast to Krabi (Ao Nang - approx. 3 hours). Pass dramatic karst limestone pinnacles rising out of emerald rice paddies. Check-in at your Krabi resort. Evening free to stroll along Ao Nang beachside promenade and night bazaar.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Local Artisan Market Shopping",
-          "Regional Food Tasting",
-          "Evening Sunset Activity"
+          "Scenic Coastal Drive to Krabi",
+          "Ao Nang Beachfront Resort Check-in",
+          "Ao Nang Walking Street & Seafood Night Market"
         ],
-        "hotel": "Deevana Patong Resort Phuket",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Centara Life Maris Resort / Aonang Villa Krabi",
+        "transfers": "Private AC Minivan"
       },
       {
         "dayNumber": 5,
-        "title": "Exploring Hidden Gems & Scenic Countryside of Thailand",
-        "description": "Delight in a day exploring off-the-beaten-path villages, panoramic viewpoints, and tranquil nature spots across Thailand with your private chauffeur.",
+        "title": "Krabi 4 Islands Speedboat Tour: Phra Nang Cave, Chicken Island & Poda",
+        "description": "Board speedboat to Krabi's famous 4 Islands: visit Phra Nang Cave Beach on Railay Peninsula (famous for sacred fertility shrine & rock climbers), witness the sandbar connecting Tup Island & Mor Island at low tide (Thale Waek), cruise past Chicken Island rock formation for guided coral snorkeling, and relax on powder-white sands of Poda Island with picnic lunch.",
         "meals": [
           "Breakfast",
+          "Lunch",
           "Dinner"
         ],
         "activities": [
-          "Hidden Spot Discovery",
-          "Panoramic Viewpoint Stop",
-          "Countryside Private Cab Tour"
+          "Speedboat Tour to Krabi 4 Islands",
+          "Phra Nang Cave Beach Princess Shrine",
+          "Tup Island Sandbar Natural Phenomenon",
+          "Chicken Island Coral Reef Snorkeling",
+          "Poda Island Beach Relaxation"
         ],
-        "hotel": "Deevana Patong Resort Phuket",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Centara Life Maris Resort / Aonang Villa Krabi",
+        "transfers": "Speedboat & Minivan"
       },
       {
         "dayNumber": 6,
-        "title": "Thailand Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Thailand. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Emerald Pool (Sa Morakot), Hot Springs Waterfall & Tiger Cave Temple",
+        "description": "Jungle eco-excursion into Khao Phra Bang Khram Nature Reserve. Walk through lowland rainforest trail to the natural crystal spring Emerald Pool (Sa Morakot) and soak in warm turquoise waters. Relax in cascading natural thermal mineral pools at Krabi Hot Springs. Visit Tiger Cave Temple (Wat Tham Suea) with its golden hilltop shrine reached by 1,237 steps.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Thailand Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Emerald Pool Natural Mineral Swim",
+          "Krabi Hot Springs Waterfall Thermal Soak",
+          "Tiger Cave Temple Mountain Shrine Guided Tour"
         ],
-        "hotel": "Deevana Patong Resort Phuket",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Centara Life Maris Resort / Aonang Villa Krabi",
+        "transfers": "Private AC Minivan"
       },
       {
         "dayNumber": 7,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Krabi / Phuket Airport Departure Drop",
+        "description": "Enjoy breakfast overlooking limestone karsts. Check-out and private transfer to Krabi International Airport (KBV) or Phuket Airport (HKT) for your onward flight.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Resort Check-out",
+          "Krabi / Phuket Airport Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Minivan"
       }
     ],
     "faqs": [
@@ -6756,90 +7266,92 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Delhi / Chennai / Mumbai",
     "hotels": [
       {
-        "name": "Hotel Boss Singapore",
+        "name": "Hotel Boss / V Hotel Lavender Singapore",
         "city": "Singapore",
-        "rating": "4 Star",
+        "rating": "3 Star",
         "nights": 4
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Singapore Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Singapore. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Singapore Changi Arrival, Jewel Rain Vortex & Marina Bay Sands SkyPark",
+        "description": "Arrive at world-best Singapore Changi Airport (SIN). Marvel at the 40-meter indoor HSBC Rain Vortex waterfall and Shiseido Forest Valley inside Jewel Changi. Private transfer to hotel. In late afternoon, ascend to Marina Bay Sands SkyPark Observation Deck on 57th floor for panoramic skyline views. In evening, stroll Gardens by the Bay to watch Garden Rhapsody light and sound show at Supertree Grove.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Singapore",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Changi Airport Meet & Greet",
+          "Jewel Changi Rain Vortex Viewing",
+          "Marina Bay Sands SkyPark 57th Floor Entry",
+          "Gardens by the Bay Supertree Light Show"
         ],
-        "hotel": "Hotel Boss Singapore",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Boss / V Hotel Lavender Singapore",
+        "transfers": "Private AC Coach"
       },
       {
         "dayNumber": 2,
-        "title": "Singapore Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Singapore. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Full Day Universal Studios Singapore at Resorts World Sentosa",
+        "description": "Full day of movie magic at Universal Studios Singapore on Sentosa Island. Experience 6 themed zones: ride the world's tallest dueling roller coasters Battlestar Galactica (Human vs Cylon), thrill in Transformers The Ride 3D, escape the curse in Revenge of the Mummy, explore Jurassic Park Rapids Adventure, and meet beloved Minions in New York zone.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Singapore Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Universal Studios Singapore Full Day Unlimited Access",
+          "Battlestar Galactica Roller Coaster",
+          "Transformers 3D Hyper-Realistic Dark Ride",
+          "Revenge of the Mummy Indoor Coaster"
         ],
-        "hotel": "Hotel Boss Singapore",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Boss / V Hotel Lavender Singapore",
+        "transfers": "Private AC Coach"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Singapore. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Sentosa Cable Car, S.E.A. Aquarium, Madame Tussauds & Wings of Time",
+        "description": "Take the scenic Singapore Cable Car soaring over Keppel Harbour into Sentosa. Explore S.E.A. Aquarium—one of the largest aquariums in the world housing over 100,000 marine animals including manta rays and hammerhead sharks behind giant viewing panels. Visit Madame Tussauds with Marvel 4D and Images of Singapore. In evening, watch Wings of Time award-winning multi-sensory water, laser, and firework show on Siloso Beach.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Singapore Mount Faber Cable Car Sky Pass",
+          "S.E.A. Aquarium Giant Open Ocean Tank",
+          "Madame Tussauds & Marvel 4D Experience",
+          "Wings of Time Spectacular Fireworks Laser Show"
         ],
-        "hotel": "Hotel Boss Singapore",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Boss / V Hotel Lavender Singapore",
+        "transfers": "Private AC Coach & Cable Car"
       },
       {
         "dayNumber": 4,
-        "title": "Singapore Local Bazaars, Shopping & Culinary Evening",
-        "description": "Spend a relaxing day exploring local markets, craft shops, and authentic regional restaurants. Option for evening sunset cruise or cultural performance.",
+        "title": "Singapore City Tour, DUCKtours Amphibious Ride & Chinatown / Little India",
+        "description": "Explore the lion city: photo stop at iconic Merlion Park, tour Thian Hock Keng Temple in Chinatown, vibrant Little India spice bazaar, and Kampong Glam Arab Street with Sultan Mosque. Embark on the award-winning Singapore DUCKtours—an amphibious WWII military craft splashing from city roads straight into Marina Bay waters. Evening shopping along Orchard Road.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Local Artisan Market Shopping",
-          "Regional Food Tasting",
-          "Evening Sunset Activity"
+          "Merlion Park Landmark Photo Stop",
+          "Singapore DUCKtours Amphibious Land & Water Ride",
+          "Chinatown & Little India Cultural Heritage Tour",
+          "Orchard Road Shopping Promenade"
         ],
-        "hotel": "Hotel Boss Singapore",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Boss / V Hotel Lavender Singapore",
+        "transfers": "Private AC Coach & DUCKboat"
       },
       {
         "dayNumber": 5,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Singapore Changi Airport Departure Drop",
+        "description": "Enjoy breakfast. Complete check-out. Depending on flight timings, explore Duty-Free at Changi Airport before boarding flight home with futuristic Singapore memories.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Check-out & Changi Airport Private Transfer"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Coach"
       }
     ],
     "faqs": [
@@ -6891,90 +7403,95 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Delhi / Bengaluru / Mumbai",
     "hotels": [
       {
-        "name": "Adaaran Select Hudhuranfushi",
+        "name": "Sun Siyam Olhuveli / Adaaran Club Rannalhi",
         "city": "Maldives",
-        "rating": "5 Star",
+        "rating": "4 Star Resort",
         "nights": 4
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Maldives Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Maldives. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Male Velana Airport Arrival, Speedboat / Seaplane Transfer to Overwater Villa",
+        "description": "Arrive at Velana International Airport Male (MLE). Meet resort representative at airport counter. Embark on an exhilarating speedboat or scenic seaplane flight over pristine turquoise atolls to your private island luxury resort. Check in to your Deluxe Overwater Villa perched directly above the lagoon with private sun deck and stairs leading down to coral reefs.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Maldives",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Male Airport VIP Meet & Assist",
+          "Speedboat / Seaplane Lagoon Transfer",
+          "Overwater Villa Check-in & Welcome Cocktails",
+          "Stargazing from Private Overwater Deck"
         ],
-        "hotel": "Adaaran Select Hudhuranfushi",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Sun Siyam Olhuveli / Adaaran Club Rannalhi",
+        "transfers": "Resort Speedboat / Seaplane"
       },
       {
         "dayNumber": 2,
-        "title": "Maldives Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Maldives. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Guided House Reef Snorkeling, Ocean Kayaking & Sunset Dolphin Cruise",
+        "description": "Wake up to panoramic Indian Ocean sunrise. Put on complimentary snorkel gear and explore vibrant house reef directly from your villa steps spotting sea turtles, blacktip reef sharks, and clownfish. Enjoy complimentary kayak and stand-up paddleboarding. In late afternoon, board traditional wooden Dhoni boat for Sunset Dolphin Cruise watching spinner dolphins leaping alongside the bow.",
         "meals": [
           "Breakfast",
+          "Lunch",
           "Dinner"
         ],
         "activities": [
-          "Maldives Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Direct-from-Villa House Reef Snorkeling",
+          "Lagoon Ocean Kayaking & Paddleboarding",
+          "Sunset Dolphin Safari on Traditional Dhoni",
+          "Live International Dinner Buffet"
         ],
-        "hotel": "Adaaran Select Hudhuranfushi",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Sun Siyam Olhuveli / Adaaran Club Rannalhi",
+        "transfers": "Resort Dhoni Boat"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Maldives. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Deserted Sandbank Picnic, Coral Gardening & Balinese Spa Treatment",
+        "description": "Morning boat excursion to an uninhabited pristine white Sandbank in middle of the ocean. Walk barefoot surrounded by 360 degrees of cyan water. Participate in resort coral reef restoration planting. In afternoon, pamper your senses with a rejuvenating 60-minute couple's Balinese massage in an overwater spa pavilion with glass floor viewing marine life.",
         "meals": [
           "Breakfast",
+          "Lunch",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Deserted Sandbank Private Island Tour",
+          "Coral Reef Planting Conservation Experience",
+          "Overwater Spa Pavilion Balinese Massage",
+          "Beachfront Cocktail Hour"
         ],
-        "hotel": "Adaaran Select Hudhuranfushi",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Sun Siyam Olhuveli / Adaaran Club Rannalhi",
+        "transfers": "Speedboat"
       },
       {
         "dayNumber": 4,
-        "title": "Maldives Local Bazaars, Shopping & Culinary Evening",
-        "description": "Spend a relaxing day exploring local markets, craft shops, and authentic regional restaurants. Option for evening sunset cruise or cultural performance.",
+        "title": "Underwater Dining / Snorkel Safari & Romantic Candlelight Beach Dinner",
+        "description": "Day at complete tropical leisure. Optional motorized water sports (jet ski, parasailing, seabob) or scuba diving certification dive. Indulge in an exquisite 4-course romantic candlelight beach dinner served on white sands beneath the tropical night sky with sound of gentle waves.",
         "meals": [
           "Breakfast",
+          "Lunch",
           "Dinner"
         ],
         "activities": [
-          "Local Artisan Market Shopping",
-          "Regional Food Tasting",
-          "Evening Sunset Activity"
+          "Tropical Atoll Leisure & Infinity Pool",
+          "Optional Motorized Watersports & Jet Ski",
+          "Private Candlelight 4-Course Beachfront Dinner"
         ],
-        "hotel": "Adaaran Select Hudhuranfushi",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Sun Siyam Olhuveli / Adaaran Club Rannalhi",
+        "transfers": "Resort Buggy"
       },
       {
         "dayNumber": 5,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Floating Breakfast, Speedboat Transfer to Male Airport & Departure",
+        "description": "Enjoy an iconic Floating Breakfast served in your private plunge pool or overwater sundeck. Check-out and speedboat transfer back to Velana International Airport Male for return flight.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Iconic Floating Breakfast Experience",
+          "Return Speedboat Transfer to Male Airport"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Resort Speedboat"
       }
     ],
     "faqs": [
@@ -7025,138 +7542,154 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Delhi / Mumbai",
     "hotels": [
       {
-        "name": "Hotel Astoria Lucerne & Hotel Novotel Zurich",
+        "name": "Hotel Novotel Zurich City West",
+        "city": "Zurich",
+        "rating": "3 Star",
+        "nights": 2
+      },
+      {
+        "name": "Hotel Astoria / Ibis Styles Lucerne",
         "city": "Lucerne",
-        "rating": "4 Star",
-        "nights": 7
+        "rating": "3 Star",
+        "nights": 2
+      },
+      {
+        "name": "Hotel Metropole / Krebs Interlaken",
+        "city": "Interlaken",
+        "rating": "3 Star",
+        "nights": 3
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Switzerland Europe Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Switzerland Europe. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Zurich Arrival, Lake Zurich Promenade & Bahnhofstrasse Luxury Walk",
+        "description": "Arrive at Zurich Airport (ZRH). Private transfer to hotel. Explore global financial capital Zurich: stroll along pedestrianized Bahnhofstrasse (one of the world's most exclusive shopping avenues), walk through medieval Old Town (Altstadt), visit Grossmunster and Fraumunster churches with Marc Chagall stained glass windows, and enjoy sunset walk along Lake Zurich promenade.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Switzerland Europe",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Zurich Airport Private Transfer",
+          "Bahnhofstrasse Shopping Boulevard Walk",
+          "Fraumunster & Grossmunster Medieval Old Town",
+          "Lake Zurich Waterfront Sunset Promenade"
         ],
-        "hotel": "Hotel Astoria Lucerne & Hotel Novotel Zurich",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Novotel Zurich City West",
+        "transfers": "Private AC Coach"
       },
       {
         "dayNumber": 2,
-        "title": "Switzerland Europe Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Switzerland Europe. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Rhine Falls (Europe's Largest Waterfall) & Stein am Rhein Medieval Town",
+        "description": "Morning excursion north to Schaffhausen to witness thunderous roaring Rhine Falls—Europe's most powerful waterfall. Take boat ride right up to the central rock in the middle of churning spray. Proceed to fairytale village Stein am Rhein renowned for extraordinarily well-preserved medieval half-timbered houses with painted stone facades. Return to Zurich.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Switzerland Europe Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Rhine Falls Waterfall Panorama & Boat Ride",
+          "Rock Climb in Middle of Rhine Falls",
+          "Stein am Rhein Medieval Fresco Village Guided Tour"
         ],
-        "hotel": "Hotel Astoria Lucerne & Hotel Novotel Zurich",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Novotel Zurich City West",
+        "transfers": "Private AC Coach & Boat"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Switzerland Europe. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Zurich to Lucerne, Chapel Bridge, Lion Monument & Lake Lucerne Paddle Cruise",
+        "description": "Drive to picturesque storybook city Lucerne nestled beneath Mount Pilatus (approx. 1 hour). Check-in at hotel. Walk across 14th-century wooden covered Chapel Bridge (Kapellbrücke) and Water Tower, visit poignant Lion Monument (Löwendenkmal) carved into sandstone cliff, and enjoy a scenic 1-hour cruise on Lake Lucerne with mountain views.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Scenic Drive to Lake Lucerne",
+          "14th-Century Wooden Chapel Bridge Walk",
+          "Lion Monument Sandstone Carving",
+          "Lake Lucerne Scenic Steamer Boat Cruise"
         ],
-        "hotel": "Hotel Astoria Lucerne & Hotel Novotel Zurich",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Astoria / Ibis Styles Lucerne",
+        "transfers": "Private AC Coach & Boat"
       },
       {
         "dayNumber": 4,
-        "title": "Switzerland Europe Local Bazaars, Shopping & Culinary Evening",
-        "description": "Spend a relaxing day exploring local markets, craft shops, and authentic regional restaurants. Option for evening sunset cruise or cultural performance.",
+        "title": "Mount Titlis Rotair Cable Car, Ice Flyer & Titlis Cliff Walk (3,041m)",
+        "description": "Ascend Engelberg valley to board the world's first revolving cable car - Titlis Rotair, rotating 360 degrees as it climbs to eternal snows of Mount Titlis (3,041m). Walk through 150m glacier cave with blue ice walls, brave the Titlis Cliff Walk (Europe's highest suspension bridge soaring over 500m abyss), ride the Ice Flyer chairlift over crevasses, and enjoy snow tubing.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Local Artisan Market Shopping",
-          "Regional Food Tasting",
-          "Evening Sunset Activity"
+          "Titlis Rotair 360-Degree Revolving Cable Car",
+          "Glacier Cave Walk with Ice Sculptures",
+          "Titlis Cliff Walk Highest Suspension Bridge",
+          "Ice Flyer Glacial Chairlift Ride"
         ],
-        "hotel": "Hotel Astoria Lucerne & Hotel Novotel Zurich",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Astoria / Ibis Styles Lucerne",
+        "transfers": "Private AC Coach & Cable Car"
       },
       {
         "dayNumber": 5,
-        "title": "Exploring Hidden Gems & Scenic Countryside of Switzerland Europe",
-        "description": "Delight in a day exploring off-the-beaten-path villages, panoramic viewpoints, and tranquil nature spots across Switzerland Europe with your private chauffeur.",
+        "title": "GoldenPass Panoramic Train to Interlaken & Harder Kulm Sunset",
+        "description": "Board the world-famous GoldenPass Express panoramic train through Brunig Pass alongside turquoise lakes Brienz and Thun to Interlaken nestled between lakes. Check in at hotel. In late afternoon, ride the historic funicular railway up to Harder Kulm (1,322m) 'Top of Interlaken' overlooking Eiger, Mönch, and Jungfrau peaks.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Hidden Spot Discovery",
-          "Panoramic Viewpoint Stop",
-          "Countryside Private Cab Tour"
+          "GoldenPass Scenic Panoramic Train Journey",
+          "Interlaken Alpine Resort Check-in",
+          "Harder Kulm Funicular Climb & Two-Lakes Bridge Sunset"
         ],
-        "hotel": "Hotel Astoria Lucerne & Hotel Novotel Zurich",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Metropole / Krebs Interlaken",
+        "transfers": "Panoramic Train & Funicular"
       },
       {
         "dayNumber": 6,
-        "title": "Switzerland Europe Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Switzerland Europe. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Jungfraujoch 'Top of Europe' (3,454m) via Eiger Express Gondola",
+        "description": "Highlight of Swiss Alps: ride modern 3S tricable Eiger Express gondola from Grindelwald Terminal soaring past north face of Eiger to Eigergletscher station, board cogwheel train through mountain tunnel arriving at Jungfraujoch (3,454m)—highest railway station in Europe. Step onto Sphinx Observatory terrace overlooking Europe's longest glacier (Aletsch Glacier - 22 km), explore Ice Palace, and visit Alpine Sensation.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Switzerland Europe Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Eiger Express State-of-the-Art Tri-Cable Gondola",
+          "Jungfraubahn Cogwheel Alpine Train",
+          "Sphinx Observation Terrace Aletsch Glacier Panorama",
+          "Ice Palace Glacial Sculptures Tour"
         ],
-        "hotel": "Hotel Astoria Lucerne & Hotel Novotel Zurich",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Metropole / Krebs Interlaken",
+        "transfers": "Eiger Express & Mountain Train"
       },
       {
         "dayNumber": 7,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Switzerland Europe. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Fairytale Lauterbrunnen 72 Waterfalls Valley & Grindelwald First Walk",
+        "description": "Explore magical Lauterbrunnen valley of 72 cascading waterfalls, including Staubbach Falls tumbling 300m off vertical cliffs. Proceed to alpine adventure hub Grindelwald First: walk the steel cantilevered First Cliff Walk by Tissot hugging sheer rock faces. Afternoon free in Interlaken for Swiss chocolate and Victorinox Swiss Army knife shopping.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Lauterbrunnen Valley of 72 Waterfalls Walk",
+          "Staubbach Falls Cascade Viewing",
+          "Grindelwald First Cliff Walk by Tissot",
+          "Swiss Lindt Chocolate & Clock Shopping"
         ],
-        "hotel": "Hotel Astoria Lucerne & Hotel Novotel Zurich",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Metropole / Krebs Interlaken",
+        "transfers": "Private AC Coach & Gondola"
       },
       {
         "dayNumber": 8,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Scenic Transfer to Zurich Airport & Departure",
+        "description": "Enjoy breakfast overlooking alpine meadows. Private AC coach transfer to Zurich International Airport (ZRH - approx. 2 hours) for your onward flight with golden memories of Switzerland.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Swiss Alpine Breakfast",
+          "Zurich Airport Departure Transfer"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Coach"
       }
     ],
     "faqs": [
@@ -7207,106 +7740,125 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Delhi / Kolkata",
     "hotels": [
       {
-        "name": "Paradise Elegance Ha Long Cruise",
-        "city": "Ha Long",
-        "rating": "5 Star",
+        "name": "The Light Hotel / Treebo Hanoi Old Quarter",
+        "city": "Hanoi",
+        "rating": "3 Star",
+        "nights": 2
+      },
+      {
+        "name": "Paradise Elegance / Athena Luxury Halong Cruise",
+        "city": "Halong Bay",
+        "rating": "4 Star Cruise",
         "nights": 1
+      },
+      {
+        "name": "Belle Maison Hadana / Treebo Hoi An",
+        "city": "Hoi An",
+        "rating": "3 Star",
+        "nights": 2
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Vietnam Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Vietnam. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Hanoi Arrival, Old Quarter Cyclo Ride & Water Puppet Show",
+        "description": "Arrive at Noi Bai International Airport Hanoi (HAN). Meet your private English-speaking guide. Transfer to hotel in Old Quarter. Experience traditional 1-hour Cyclo (three-wheeled rickshaw) tour through the 36 Guild Streets of Old Quarter. Walk around tranquil Hoan Kiem Lake and cross scarlet Huc Bridge to Ngoc Son Temple. In evening, attend famous traditional Thang Long Water Puppet Show.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Vietnam",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Hanoi Airport Private Pickup",
+          "Old Quarter 36 Guilds Cyclo Rickshaw Ride",
+          "Hoan Kiem Lake & Ngoc Son Temple Walk",
+          "Thang Long Traditional Water Puppet Theatre"
         ],
-        "hotel": "Paradise Elegance Ha Long Cruise",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Light Hotel / Treebo Hanoi Old Quarter",
+        "transfers": "Private AC Minivan & Cyclo"
       },
       {
         "dayNumber": 2,
-        "title": "Vietnam Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Vietnam. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Hanoi Heritage: Ho Chi Minh Complex, Temple of Literature & Train Street",
+        "description": "Tour Hanoi historical landmarks: visit Ho Chi Minh Mausoleum complex, Ba Dinh Square, President's Stilt House, and 11th-century One Pillar Pagoda. Tour 1070 CE Temple of Literature (Van Mieu)—Vietnam's first imperial university. Experience sipping authentic egg coffee at famous Hanoi Train Street as the train rushes inches past cafes.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Vietnam Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Ho Chi Minh Mausoleum & Stilt House Tour",
+          "One Pillar Pagoda Architectural Icon",
+          "Temple of Literature Imperial University",
+          "Hanoi Train Street Egg Coffee Experience"
         ],
-        "hotel": "Paradise Elegance Ha Long Cruise",
-        "transfers": "Private AC Vehicle"
+        "hotel": "The Light Hotel / Treebo Hanoi Old Quarter",
+        "transfers": "Private AC Minivan"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Vietnam. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Expressway to Halong Bay, Luxury Cruise, Sung Sot Cave & Kayaking",
+        "description": "Drive via modern expressway through Red River Delta to UNESCO World Heritage Halong Bay (approx. 2.5 hours). Embark on luxury 5-star cruise. Enjoy welcome drink and seafood buffet lunch as cruise navigates through thousands of towering limestone karsts. Explore colossal Sung Sot (Surprise) Cave with illuminated stalactites, kayak through Luon Cave lagoon, watch sunset from sundeck, and try night squid fishing.",
         "meals": [
           "Breakfast",
+          "Lunch",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Red River Delta Highway Drive",
+          "5-Star Luxury Halong Cruise Embarkation",
+          "Sung Sot (Surprise Cave) Geological Exploration",
+          "Luon Cave Kayaking / Bamboo Boat",
+          "Sundeck Sunset Cocktail & Squid Fishing"
         ],
-        "hotel": "Paradise Elegance Ha Long Cruise",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Paradise Elegance / Athena Luxury Halong Cruise",
+        "transfers": "Private AC Minivan & Cruise"
       },
       {
         "dayNumber": 4,
-        "title": "Vietnam Local Bazaars, Shopping & Culinary Evening",
-        "description": "Spend a relaxing day exploring local markets, craft shops, and authentic regional restaurants. Option for evening sunset cruise or cultural performance.",
+        "title": "Sunrise Tai Chi, Ti Top Island, Fly to Da Nang & Lantern Town Hoi An",
+        "description": "Early morning Tai Chi session on sundeck as sun rises over limestone peaks. Hike up Ti Top Island for 360-degree panoramic view of Halong Bay and swim on crescent beach. Disembark cruise and transfer to Hanoi Airport for short flight to Da Nang. Drive to UNESCO World Heritage Hoi An Ancient Town (approx. 45 mins). Stroll along lantern-lit streets, Japanese Covered Bridge, and release glowing paper lanterns on Thu Bon River.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Local Artisan Market Shopping",
-          "Regional Food Tasting",
-          "Evening Sunset Activity"
+          "Dawn Sunrise Tai Chi on Sundeck",
+          "Ti Top Island Mountain Panorama & Swim",
+          "Flight to Da Nang & Hoi An Transfer",
+          "Hoi An Ancient Lantern Town River Night Walk"
         ],
-        "hotel": "Paradise Elegance Ha Long Cruise",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Belle Maison Hadana / Treebo Hoi An",
+        "transfers": "Cruise, Minivan & Domestic Flight"
       },
       {
         "dayNumber": 5,
-        "title": "Exploring Hidden Gems & Scenic Countryside of Vietnam",
-        "description": "Delight in a day exploring off-the-beaten-path villages, panoramic viewpoints, and tranquil nature spots across Vietnam with your private chauffeur.",
+        "title": "Sun World Ba Na Hills, World's Longest Cable Car & Iconic Golden Bridge",
+        "description": "Excursion to Ba Na Hills mountain resort (1,487m). Ride Guinness World Record single-track cable car soaring above misty waterfalls. Walk across world-famous Golden Bridge (Cau Vang) held aloft by two colossal mossy stone giant hands appearing to sprout from the mountain cliff. Explore French Village with Gothic cathedral, Le Jardin D'Amour flower gardens, and Fantasy Park.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Hidden Spot Discovery",
-          "Panoramic Viewpoint Stop",
-          "Countryside Private Cab Tour"
+          "Ba Na Hills World-Record Cable Car Ascent",
+          "Golden Bridge Giant Stone Hands Walk",
+          "French Village Gothic Architecture Tour",
+          "Le Jardin D'Amour Alpine Gardens"
         ],
-        "hotel": "Paradise Elegance Ha Long Cruise",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Belle Maison Hadana / Treebo Hoi An",
+        "transfers": "Private AC Minivan & Cable Car"
       },
       {
         "dayNumber": 6,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Marble Mountains, Dragon Bridge & Da Nang Airport Departure Drop",
+        "description": "Visit sacred Marble Mountains (Ngu Hanh Son) exploring limestone caves and Buddhist sanctuaries. Photo stop at fire-breathing Dragon Bridge in Da Nang. Private transfer to Da Nang International Airport (DAD) for onward flight.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Marble Mountains Cave Sanctuaries Tour",
+          "Da Nang Dragon Bridge Photo Stop",
+          "Da Nang Airport Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Minivan"
       }
     ],
     "faqs": [
@@ -7357,122 +7909,138 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Delhi / Mumbai",
     "hotels": [
       {
-        "name": "Shinjuku Granbell Hotel Tokyo",
+        "name": "Hotel Gracery Shinjuku / Sunshine City Prince Tokyo",
         "city": "Tokyo",
-        "rating": "4 Star",
-        "nights": 4
+        "rating": "3 Star",
+        "nights": 3
+      },
+      {
+        "name": "Miyako Hotel Kyoto Hachijo / Ibis Kyoto",
+        "city": "Kyoto",
+        "rating": "3 Star",
+        "nights": 2
+      },
+      {
+        "name": "Hotel Granvia Osaka / Hearton Hotel Osaka",
+        "city": "Osaka",
+        "rating": "3 Star",
+        "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Japan Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Japan. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Tokyo Narita / Haneda Arrival, Shinjuku & Shibuya Crossing Walk",
+        "description": "Arrive at Tokyo Narita (NRT) or Haneda Airport (HND). Meet assistant and transfer to hotel. Experience Tokyo's buzzing modern energy: walk across world-famous Shibuya Scramble Crossing (busiest pedestrian intersection in the world), take photo with loyal Hachiko Statue, and take high-speed elevator to Shibuya Sky open-air rooftop observation deck for sparkling night skyline views.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Japan",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Tokyo Airport Meet & Greet Transfer",
+          "Shibuya Scramble Crossing Walk",
+          "Hachiko Memorial Statue Photo Stop",
+          "Shibuya Sky 360-Degree Observation Deck"
         ],
-        "hotel": "Shinjuku Granbell Hotel Tokyo",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Gracery Shinjuku / Sunshine City Prince Tokyo",
+        "transfers": "Private AC Coach"
       },
       {
         "dayNumber": 2,
-        "title": "Japan Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Japan. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Asakusa Senso-ji Temple, Nakamise Street, Akihabara & Meiji Shrine",
+        "description": "Visit Tokyo's oldest temple - 7th-century Senso-ji in Asakusa passing beneath giant red Kaminarimon (Thunder Gate) lantern. Stroll Nakamise shopping street for traditional senbei rice crackers. Explore anime and gaming wonderland Akihabara Electric Town. In afternoon, walk through towering forested cedar gate of tranquil Meiji Jingu Shinto Shrine and explore Harajuku Takeshita Street.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Japan Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Asakusa Senso-ji Temple & Kaminarimon Gate",
+          "Nakamise Traditional Edo Street Food Trail",
+          "Akihabara Anime & Electronics Culture",
+          "Meiji Jingu Shinto Shrine Sacred Forest Walk"
         ],
-        "hotel": "Shinjuku Granbell Hotel Tokyo",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Gracery Shinjuku / Sunshine City Prince Tokyo",
+        "transfers": "Private AC Coach"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Japan. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Mount Fuji 5th Station, Lake Ashi Pirate Cruise & Hakone Ropeway",
+        "description": "Full day excursion to sacred Mount Fuji (UNESCO). Drive up to Mt. Fuji 5th Station at 2,300 meters above sea level overlooking sea of clouds. Proceed to Hakone national park: embark on a cruise across volcanic crater Lake Ashi on a replica pirate ship with Mount Fuji reflections. Ride Hakone Ropeway over steaming volcanic sulfur vents of Owakudani valley and taste legendary black eggs (kuro-tamago).",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Mount Fuji 5th Station High Altitude Viewpoint",
+          "Lake Ashi Pirate Ship Scenic Cruise",
+          "Hakone Ropeway Cable Car Ride",
+          "Owakudani Active Volcanic Valley Black Egg Trail"
         ],
-        "hotel": "Shinjuku Granbell Hotel Tokyo",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Gracery Shinjuku / Sunshine City Prince Tokyo",
+        "transfers": "Private AC Coach, Ship & Ropeway"
       },
       {
         "dayNumber": 4,
-        "title": "Japan Local Bazaars, Shopping & Culinary Evening",
-        "description": "Spend a relaxing day exploring local markets, craft shops, and authentic regional restaurants. Option for evening sunset cruise or cultural performance.",
+        "title": "Shinkansen Bullet Train to Kyoto, Fushimi Inari Torii Gates & Gion",
+        "description": "Board the ultra-fast Shinkansen Bullet Train (traveling at 300 km/h) from Tokyo to cultural heart of Japan - Kyoto (approx. 2 hours 15 mins). Check-in at hotel. Visit Fushimi Inari Taisha Shrine walking through thousands of vermilion Torii gates snaking up sacred Inari mountain. In evening, walking tour of historic Gion geisha district along cobblestone Hanami-koji street.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Local Artisan Market Shopping",
-          "Regional Food Tasting",
-          "Evening Sunset Activity"
+          "Shinkansen Bullet Train 300 km/h Experience",
+          "Fushimi Inari 10,000 Vermilion Torii Gates Path",
+          "Gion Historic Wooden Tea House Geisha District Walk"
         ],
-        "hotel": "Shinjuku Granbell Hotel Tokyo",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Miyako Hotel Kyoto Hachijo / Ibis Kyoto",
+        "transfers": "Shinkansen Bullet Train & Coach"
       },
       {
         "dayNumber": 5,
-        "title": "Exploring Hidden Gems & Scenic Countryside of Japan",
-        "description": "Delight in a day exploring off-the-beaten-path villages, panoramic viewpoints, and tranquil nature spots across Japan with your private chauffeur.",
+        "title": "Arashiyama Bamboo Grove, Golden Pavilion (Kinkaku-ji) & Transfer to Osaka",
+        "description": "Walk through mystical soaring stalks of Arashiyama Bamboo Grove, cross historic wooden Togetsukyo Bridge, and visit UNESCO World Heritage Tenryu-ji Temple Zen garden. Visit iconic Kinkaku-ji (Golden Pavilion)—a Zen temple whose top two floors are completely covered in pure gold leaf reflecting in Kyoko-chi mirror pond. Short evening transfer to vibrant Osaka.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Hidden Spot Discovery",
-          "Panoramic Viewpoint Stop",
-          "Countryside Private Cab Tour"
+          "Arashiyama Soaring Bamboo Forest Walk",
+          "Togetsukyo Moon Crossing Bridge",
+          "Kinkaku-ji Golden Pavilion Pure Gold Leaf Marvel",
+          "Scenic Transfer to Osaka"
         ],
-        "hotel": "Shinjuku Granbell Hotel Tokyo",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Granvia Osaka / Hearton Hotel Osaka",
+        "transfers": "Private AC Coach"
       },
       {
         "dayNumber": 6,
-        "title": "Japan Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Japan. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Osaka Castle, Dotonbori Street Food Fiesta & Umeda Sky Building",
+        "description": "Tour 16th-century Osaka Castle surrounded by stone walls and moats. Ascend Umeda Sky Building Floating Garden Observatory suspended 173m between twin towers. In evening, plunge into neon food haven Dotonbori: photograph the iconic running Glico Man sign, giant moving mechanical crab, and feast on street food specialties like Takoyaki (octopus balls) and Okonomiyaki.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Japan Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Osaka Castle Samurai Heritage Museum",
+          "Umeda Sky Building Floating Observatory",
+          "Dotonbori Glico Man Neon Sign Walk",
+          "Authentic Takoyaki & Okonomiyaki Street Food Tour"
         ],
-        "hotel": "Shinjuku Granbell Hotel Tokyo",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Hotel Granvia Osaka / Hearton Hotel Osaka",
+        "transfers": "Private AC Coach"
       },
       {
         "dayNumber": 7,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Osaka Kansai International Airport Departure Drop",
+        "description": "Enjoy breakfast. Complete check-out and private transfer to Kansai International Airport Osaka (KIX) for your flight home with timeless memories of Japan.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Japanese Breakfast Buffet",
+          "Osaka Kansai Airport Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Coach"
       }
     ],
     "faqs": [
@@ -7523,138 +8091,149 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Delhi / Mumbai / Singapore",
     "hotels": [
       {
-        "name": "Rydges World Square Sydney",
+        "name": "Rydges Sydney Harbour / Treebo Sydney",
         "city": "Sydney",
-        "rating": "4 Star",
+        "rating": "3 Star",
         "nights": 4
+      },
+      {
+        "name": "Novotel Cairns Oasis Resort / Treebo Cairns",
+        "city": "Cairns",
+        "rating": "3 Star",
+        "nights": 3
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Australia Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Australia. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Sydney Arrival, Darling Harbour Stroll & Sydney Tower Eye 360",
+        "description": "Arrive at Sydney Kingsford Smith Airport (SYD). Meet private guide and transfer to hotel. Explore Darling Harbour waterfront promenade. Ascend to observation deck of Sydney Tower Eye (highest point in Sydney at 250m) for breathtaking 360-degree views stretching from golden beaches to Blue Mountains. Evening dining at Cockle Bay Wharf.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Australia",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "Sydney Airport Meet & Greet Transfer",
+          "Darling Harbour Waterfront Walk",
+          "Sydney Tower Eye Observation Deck Entry"
         ],
-        "hotel": "Rydges World Square Sydney",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Rydges Sydney Harbour / Treebo Sydney",
+        "transfers": "Private AC Coach"
       },
       {
         "dayNumber": 2,
-        "title": "Australia Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Australia. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Sydney Opera House Guided Tour, Harbour Bridge & Bondi Beach Coastal Walk",
+        "description": "Guided architectural tour inside world-heritage icon Sydney Opera House discovering famous sail roofs and performance halls. Walk along the historic Rocks district and across Sydney Harbour Bridge pedestrian pathway. Drive past affluent eastern suburbs to world-famous Bondi Beach: walk the scenic coastal cliff path to Tamarama Beach watching surfers in rolling Pacific waves.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Australia Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Sydney Opera House Official Guided Inside Tour",
+          "Sydney Harbour Bridge Pylon Lookout Walk",
+          "The Rocks Historic Cobblestone Quarter",
+          "Bondi to Tamarama Coastal Cliffside Walk"
         ],
-        "hotel": "Rydges World Square Sydney",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Rydges Sydney Harbour / Treebo Sydney",
+        "transfers": "Private AC Coach"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Australia. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Blue Mountains UNESCO World Heritage, Scenic World & Three Sisters",
+        "description": "Full day tour to Blue Mountains National Park. Stop at Echo Point to admire legendary Three Sisters sandstone rock formation overlooking vast Jamison Valley blue haze created by eucalyptus oil vapors. At Scenic World, ride the Scenic Railway (world's steepest passenger railway descending 52-degree incline), ride Scenic Cableway, and glide on glass-floor Scenic Skyway 270m above canyon floor. Walk rainforest boardwalk.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Echo Point Three Sisters Rock Viewing",
+          "Scenic World 3-in-1 Rides (Railway, Cableway, Skyway)",
+          "Jamison Valley Ancient Rainforest Walk",
+          "Katoomba Waterfalls Scenic Stop"
         ],
-        "hotel": "Rydges World Square Sydney",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Rydges Sydney Harbour / Treebo Sydney",
+        "transfers": "Private AC Coach"
       },
       {
         "dayNumber": 4,
-        "title": "Australia Local Bazaars, Shopping & Culinary Evening",
-        "description": "Spend a relaxing day exploring local markets, craft shops, and authentic regional restaurants. Option for evening sunset cruise or cultural performance.",
+        "title": "Flight to Tropical Cairns & Esplanade Lagoon Sunset Stroll",
+        "description": "Transfer to Sydney Airport for domestic flight to tropical Cairns in North Queensland—the gateway to Great Barrier Reef and Daintree Rainforest. Arrive in Cairns, check in at resort. Afternoon walk along palm-fringed Cairns Esplanade and swim in the oceanfront saltwater swimming lagoon.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Local Artisan Market Shopping",
-          "Regional Food Tasting",
-          "Evening Sunset Activity"
+          "Sydney Airport Transfer & Domestic Flight to Cairns",
+          "Cairns Tropical Resort Check-in",
+          "Cairns Esplanade Lagoon Oceanfront Stroll"
         ],
-        "hotel": "Rydges World Square Sydney",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Novotel Cairns Oasis Resort / Treebo Cairns",
+        "transfers": "Private Coach & Domestic Flight"
       },
       {
         "dayNumber": 5,
-        "title": "Exploring Hidden Gems & Scenic Countryside of Australia",
-        "description": "Delight in a day exploring off-the-beaten-path villages, panoramic viewpoints, and tranquil nature spots across Australia with your private chauffeur.",
+        "title": "Full Day Outer Great Barrier Reef Luxury Catamaran Cruise & Snorkel",
+        "description": "Board high-speed luxury catamaran cruise to an activity pontoon anchored at Outer Great Barrier Reef (UNESCO World Heritage)—the largest living organism on planet earth. Enjoy guided coral reef snorkeling with all gear provided, tour the reef in a semi-submersible glass-bottom submarine, visit the underwater observatory chamber, and relish a hot and cold buffet seafood lunch.",
         "meals": [
           "Breakfast",
+          "Lunch",
           "Dinner"
         ],
         "activities": [
-          "Hidden Spot Discovery",
-          "Panoramic Viewpoint Stop",
-          "Countryside Private Cab Tour"
+          "Outer Great Barrier Reef High-Speed Cruise",
+          "All-Inclusive Guided Coral Reef Snorkeling",
+          "Semi-Submersible Submarine Coral Tour",
+          "Underwater Marine Observatory Window Viewing",
+          "Tropical Buffet Lunch on Reef Pontoon"
         ],
-        "hotel": "Rydges World Square Sydney",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Novotel Cairns Oasis Resort / Treebo Cairns",
+        "transfers": "Luxury Reef Catamaran Cruise"
       },
       {
         "dayNumber": 6,
-        "title": "Australia Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Australia. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Kuranda Rainforest Scenic Railway & Skyrail Rainforest Cableway",
+        "description": "Board historic Kuranda Scenic Railway vintage wooden carriages climbing through Barron Gorge National Park past tunnels, bridges, and roaring Barron Falls to mountain village Kuranda. Explore Kuranda Heritage Markets and Australian Butterfly Sanctuary. Return gliding just meters above World Heritage tropical canopy on the 7.5 km Skyrail Rainforest Cableway.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Australia Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Kuranda Scenic Railway Heritage Mountain Train",
+          "Barron Falls Waterfall Lookout Stop",
+          "Kuranda Rainforest Heritage Village Markets",
+          "Skyrail Rainforest Cableway Canopy Glide"
         ],
-        "hotel": "Rydges World Square Sydney",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Novotel Cairns Oasis Resort / Treebo Cairns",
+        "transfers": "Historic Train, Skyrail & Coach"
       },
       {
         "dayNumber": 7,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Australia. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Cairns Tropical Leisure, Aboriginal Cultural Experience & Farewell Dinner",
+        "description": "Day at leisure in tropical Cairns. Visit Tjapukai or Pamagirri Aboriginal Cultural Centre to experience traditional boomerang throwing, didgeridoo playing, and spear demonstrations. Enjoy a farewell Australian dinner at seaside marina.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Aboriginal Cultural Boomerang Experience",
+          "Cairns Marina Souvenir Shopping",
+          "Australian Seafood Farewell Dinner"
         ],
-        "hotel": "Rydges World Square Sydney",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Novotel Cairns Oasis Resort / Treebo Cairns",
+        "transfers": "Private AC Coach"
       },
       {
         "dayNumber": 8,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Cairns / Sydney Airport Departure Drop",
+        "description": "Enjoy breakfast. Check-out and private transfer to Cairns International Airport (CNS) or connecting flight via Sydney for your onward flight home with magnificent Australian memories.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Resort Check-out",
+          "Cairns Airport Departure Transfer"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Coach"
       }
     ],
     "faqs": [
@@ -7706,90 +8285,100 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
     "departureCity": "Delhi / Mumbai / Chennai",
     "hotels": [
       {
-        "name": "Mercure Kuala Lumpur Shaw Parade",
+        "name": "Ibis Kuala Lumpur City Centre / Treebo KL",
         "city": "Kuala Lumpur",
-        "rating": "4 Star",
-        "nights": 4
+        "rating": "3 Star",
+        "nights": 3
+      },
+      {
+        "name": "Resorts World Genting - First World Hotel",
+        "city": "Genting Highlands",
+        "rating": "3 Star",
+        "nights": 1
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Malaysia Arrival, Warm Welcome & Leisure Evening",
-        "description": "Arrive in Malaysia. Meet and greet by our dedicated travel representative upon arrival. Enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, enjoy a leisure stroll around the local market or scenic promenade.",
+        "title": "Kuala Lumpur Arrival, Petronas Twin Towers SkyBridge & KLCC Lake Symphony",
+        "description": "Arrive at Kuala Lumpur International Airport (KLIA/KLIA2). Meet driver and transfer to hotel in golden triangle. Ascend to the 41st floor double-decker SkyBridge and 86th floor observation deck of the world's tallest twin towers—Petronas Twin Towers (452m). In evening, watch illuminated Lake Symphony musical water fountain light show at KLCC Park and explore Bukit Bintang street food.",
         "meals": [
           "Dinner"
         ],
         "activities": [
-          "Arrival Transfer in Malaysia",
-          "Hotel Check-in & Welcome Drink",
-          "Evening Leisure Stroll"
+          "KLIA Airport Private Transfer",
+          "Petronas Twin Towers SkyBridge & 86th Floor Entry",
+          "KLCC Park Lake Symphony Light & Sound Show",
+          "Bukit Bintang Jalan Alor Street Food Walk"
         ],
-        "hotel": "Mercure Kuala Lumpur Shaw Parade",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Ibis Kuala Lumpur City Centre / Treebo KL",
+        "transfers": "Private AC Coach"
       },
       {
         "dayNumber": 2,
-        "title": "Malaysia Guided Heritage Sightseeing & Top Attractions",
-        "description": "Enjoy a comprehensive guided sightseeing tour covering the major cultural, historical, and natural landmarks of Malaysia. Includedentry vouchers and private cab transfers provided throughout the day.",
+        "title": "Batu Caves Rainbow Steps, Lord Murugan Statue & KL City Tour",
+        "description": "Drive to sacred Batu Caves—a 400-million-year-old limestone hill. Marvel at the 140-foot colossal golden Lord Murugan statue and climb 272 colorful rainbow steps into Cathedral Cave. Return to city: tour King's Palace (Istana Negara), National Monument, Merdeka Square (Independence Square), Sultan Abdul Samad Moorish building, and National Mosque (Masjid Negara).",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Malaysia Guided City Tour",
-          "Historical Monument Visits",
-          "Local Cultural Experience"
+          "Batu Caves 140-Foot Golden Murugan Statue",
+          "272 Rainbow Steps Cathedral Cave Climb",
+          "King's Palace (Istana Negara) Guard Changing",
+          "Merdeka Square & Sultan Abdul Samad Building"
         ],
-        "hotel": "Mercure Kuala Lumpur Shaw Parade",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Ibis Kuala Lumpur City Centre / Treebo KL",
+        "transfers": "Private AC Coach"
       },
       {
         "dayNumber": 3,
-        "title": "Scenic Nature Excursion & Adventure Activities",
-        "description": "Full day excursion to surrounding scenic mountain viewpoints, lakes, or island beaches near Malaysia. Enjoy curated photo opportunities and local tasting experiences.",
+        "title": "Drive to Genting Highlands, Awana SkyWay Cable Car & Skytropolis Theme Park",
+        "description": "Drive north ascending Titiwangsa mountains to Genting Highlands (approx. 1 hour). Board Awana SkyWay gondola cable car gliding over 130-million-year-old rainforest with a stop at Chin Swee Caves Temple featuring a 9-story pagoda. Check in at mountain resort. Spend afternoon at Skytropolis Indoor Theme Park and SkyAvenue retail and entertainment hub.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Nature Viewpoint Excursion",
-          "Curated Adventure Activity",
-          "Scenic Photo Stops"
+          "Awana SkyWay Gondola Cable Car Ride",
+          "Chin Swee Caves Temple & 9-Story Pagoda",
+          "Skytropolis Indoor Theme Park Unlimited Rides",
+          "SkyAvenue Casino & Entertainment Walk"
         ],
-        "hotel": "Mercure Kuala Lumpur Shaw Parade",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Resorts World Genting - First World Hotel",
+        "transfers": "Private AC Coach & Cable Car"
       },
       {
         "dayNumber": 4,
-        "title": "Malaysia Local Bazaars, Shopping & Culinary Evening",
-        "description": "Spend a relaxing day exploring local markets, craft shops, and authentic regional restaurants. Option for evening sunset cruise or cultural performance.",
+        "title": "Genting SkyWorlds Outdoor Theme Park, Putrajaya Tour & KL Return",
+        "description": "Morning thrills at world-class Genting SkyWorlds Outdoor Theme Park featuring 9 movie-inspired worlds including Ice Age, Night at the Museum, and Rio. In afternoon, descend mountain and visit administrative capital Putrajaya: admire pink granite Putra Mosque, Prime Minister's office Perdana Putra, and Putrajaya Lake cruise. Return to Kuala Lumpur for night stay.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Local Artisan Market Shopping",
-          "Regional Food Tasting",
-          "Evening Sunset Activity"
+          "Genting SkyWorlds Outdoor Theme Park Attractions",
+          "Putrajaya Administrative Capital Guided Tour",
+          "Pink Granite Putra Mosque Architectural Tour",
+          "Perdana Putra Prime Minister Complex View"
         ],
-        "hotel": "Mercure Kuala Lumpur Shaw Parade",
-        "transfers": "Private AC Vehicle"
+        "hotel": "Ibis Kuala Lumpur City Centre / Treebo KL",
+        "transfers": "Private AC Coach"
       },
       {
         "dayNumber": 5,
-        "title": "Souvenir Shopping & Departure Transfer",
-        "description": "Savor a lavish morning breakfast at your hotel. Check-out and proceed for last-minute souvenir shopping at local bazaars. Later, board your private AC transfer to the airport / railway station for your onward journey home with unforgettable memories.",
+        "title": "Central Market Souvenir Shopping & KLIA Airport Departure Drop",
+        "description": "Morning visit to historic Central Market (Pasar Seni) and Chinatown Petaling Street for Malaysian pewter, batik sarongs, and souvenirs. Check-out and private transfer to Kuala Lumpur International Airport (KLIA) for your onward flight.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Check-out",
-          "Local Souvenir Shopping",
-          "Departure Airport / Station Transfer"
+          "Central Market Cultural Handicraft Shopping",
+          "Chinatown Petaling Street Souvenir Walk",
+          "KLIA Airport Departure Drop"
         ],
         "hotel": "Departure Day",
-        "transfers": "Private AC Vehicle"
+        "transfers": "Private AC Coach"
       }
     ],
     "faqs": [
