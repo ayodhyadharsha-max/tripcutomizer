@@ -8520,7 +8520,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Hotel Check-out",
           "Airport Transfer"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Airport Transfer"
       }
     ],
@@ -8632,7 +8632,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Shopping"
         ],
         "hotel": "Phuket 3★ Hotel",
-        "transfers": "N/A"
+        "transfers": "At Leisure / Local Exploration"
       },
       {
         "dayNumber": 4,
@@ -8699,7 +8699,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Transfer"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -8883,7 +8883,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Transfer"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -9084,7 +9084,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Transfer"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -9225,7 +9225,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Green Bazaar Shopping",
           "Airport Transfer"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Airport Transfer"
       }
     ],
@@ -9356,7 +9356,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Transfer"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -9502,7 +9502,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -9623,7 +9623,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Shopping"
         ],
         "hotel": "Da Nang Beach Hotel 3★",
-        "transfers": "N/A"
+        "transfers": "At Leisure / Local Exploration"
       },
       {
         "dayNumber": 5,
@@ -9635,7 +9635,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Transfer"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "SIC Transfer"
       }
     ],
@@ -9765,7 +9765,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Transfer"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "SIC Transfer"
       }
     ],
@@ -9899,7 +9899,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Transfer"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "SIC Transfer"
       }
     ],
@@ -10028,7 +10028,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Gold Souk Shopping"
         ],
         "hotel": "Dubai Hotel 3★ / 4★",
-        "transfers": "N/A"
+        "transfers": "At Leisure / Local Exploration"
       },
       {
         "dayNumber": 5,
@@ -10040,7 +10040,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Airport Transfer"
       }
     ],
@@ -10186,7 +10186,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -10332,7 +10332,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Shopping"
         ],
         "hotel": "Dubai Hotel 3★/4★",
-        "transfers": "N/A"
+        "transfers": "At Leisure / Local Exploration"
       },
       {
         "dayNumber": 7,
@@ -10346,7 +10346,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -10450,7 +10450,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Water Sports"
         ],
         "hotel": "Phu Quoc Beach Resort 4★",
-        "transfers": "N/A"
+        "transfers": "At Leisure / Local Exploration"
       },
       {
         "dayNumber": 4,
@@ -10478,7 +10478,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -10622,7 +10622,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "SIC Transfer"
       }
     ],
@@ -10731,7 +10731,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Beach Leisure"
         ],
         "hotel": "Phu Quoc Resort 4★",
-        "transfers": "N/A"
+        "transfers": "At Leisure / Local Exploration"
       },
       {
         "dayNumber": 4,
@@ -10786,7 +10786,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "SIC Transfer"
       }
     ],
@@ -10927,7 +10927,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Colombo City Tour",
           "Airport Transfer"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private AC Vehicle"
       }
     ],
@@ -11091,7 +11091,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Transfer"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -11256,7 +11256,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -11355,7 +11355,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Shopping"
         ],
         "hotel": "Pattaya Hotel 3★",
-        "transfers": "N/A"
+        "transfers": "At Leisure / Local Exploration"
       },
       {
         "dayNumber": 4,
@@ -11369,7 +11369,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "SIC Transfer"
       }
     ],
@@ -11475,7 +11475,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Local Artisan Market Tour"
         ],
         "hotel": "Pattaya Hotel 3★",
-        "transfers": "N/A"
+        "transfers": "At Leisure / Local Exploration"
       },
       {
         "dayNumber": 4,
@@ -11502,7 +11502,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "SIC Transfer"
       }
     ],
@@ -11612,7 +11612,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Local Artisan Market Tour"
         ],
         "hotel": "Phuket Hotel 3★",
-        "transfers": "N/A"
+        "transfers": "At Leisure / Local Exploration"
       },
       {
         "dayNumber": 4,
@@ -11626,7 +11626,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "SIC Transfer"
       }
     ],
@@ -11747,7 +11747,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Local Artisan Market Tour"
         ],
         "hotel": "Pattaya Hotel 3★",
-        "transfers": "N/A"
+        "transfers": "At Leisure / Local Exploration"
       },
       {
         "dayNumber": 5,
@@ -11761,7 +11761,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "SIC Transfer"
       }
     ],
@@ -11848,7 +11848,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Surfing / Beach"
         ],
         "hotel": "Siargao Resort 3★",
-        "transfers": "N/A"
+        "transfers": "At Leisure / Local Exploration"
       },
       {
         "dayNumber": 3,
@@ -11861,7 +11861,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Sugba Lagoon"
         ],
         "hotel": "Siargao Resort 3★",
-        "transfers": "N/A"
+        "transfers": "At Leisure / Local Exploration"
       },
       {
         "dayNumber": 4,
@@ -11873,7 +11873,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -11978,7 +11978,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Leisure"
         ],
         "hotel": "Puerto Princesa Hotel 3★",
-        "transfers": "N/A"
+        "transfers": "At Leisure / Local Exploration"
       },
       {
         "dayNumber": 4,
@@ -11990,7 +11990,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -12092,7 +12092,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Local Artisan Market Tour"
         ],
         "hotel": "Manila Hotel 3★",
-        "transfers": "N/A"
+        "transfers": "At Leisure / Local Exploration"
       },
       {
         "dayNumber": 4,
@@ -12106,7 +12106,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -12238,7 +12238,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -12377,7 +12377,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -12510,7 +12510,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -12644,7 +12644,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -12746,7 +12746,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -12848,7 +12848,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -12966,7 +12966,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -13085,7 +13085,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -13204,7 +13204,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -13346,7 +13346,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Shopping",
           "Airport Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -13498,7 +13498,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Shopping",
           "Airport Transfer"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -13663,7 +13663,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -13796,7 +13796,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Osaka Castle Park",
           "Airport Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Car"
       }
     ],
@@ -13927,7 +13927,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Transfer"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Car"
       }
     ],
@@ -14062,7 +14062,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Nagoya Castle",
           "Airport Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "AC Group Coach"
       }
     ],
@@ -14190,7 +14190,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Group Coach"
       }
     ],
@@ -14318,7 +14318,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Transfer"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Group Coach"
       }
     ],
@@ -14447,7 +14447,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Group Coach"
       }
     ],
@@ -14585,7 +14585,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private AC Transfer"
       }
     ],
@@ -14747,7 +14747,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -14850,7 +14850,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Durbar Square",
           "Airport Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Cab"
       }
     ],
@@ -14969,7 +14969,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Cab"
       }
     ],
@@ -15105,7 +15105,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Cab"
       }
     ],
@@ -15269,7 +15269,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Budhanilkantha Temple",
           "Airport Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Cab"
       }
     ],
@@ -15408,7 +15408,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Private Airport Transfer"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -15559,7 +15559,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -15719,7 +15719,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -15836,7 +15836,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Transfer"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -15968,7 +15968,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -16127,7 +16127,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Karnak Temple",
           "Airport Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -16260,7 +16260,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private AC Car"
       }
     ],
@@ -16411,7 +16411,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -16575,7 +16575,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -16891,7 +16891,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Rome Colosseum",
           "Airport Transfer"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Coach Transfer"
       }
     ],
@@ -17149,7 +17149,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Coach Transfer"
       }
     ],
@@ -17407,7 +17407,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Coach Transfer"
       }
     ],
@@ -17606,7 +17606,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Transfer"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Coach Transfer"
       }
     ],
@@ -17827,7 +17827,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "activities": [
           "Airport Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Coach Transfer"
       }
     ],
@@ -17948,7 +17948,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -18080,7 +18080,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -18228,7 +18228,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -18362,7 +18362,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -18509,7 +18509,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
@@ -18664,7 +18664,7 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
           "Souvenir & Handicraft Shopping",
           "Departure Airport / Station Drop"
         ],
-        "hotel": "N/A",
+        "hotel": "Departure Day",
         "transfers": "Private Transfer"
       }
     ],
