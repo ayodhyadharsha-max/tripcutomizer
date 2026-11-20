@@ -9,7 +9,7 @@ import { formatCurrency } from '@/lib/utils';
 import { Heart, Clock, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Honeymoon Tour Packages 2026: Romantic Couple Holiday Deals',
+  title: 'Honeymoon Tour Packages 2026: Romantic Couple Holiday Deals | Trip Customizer',
   description:
     'Book exclusive honeymoon tour packages with private pool villas, overwater bungalows, candlelight dinners, resort stays & romantic inclusions in Bali, Maldives, Switzerland, Paris & Kerala.',
   keywords: [

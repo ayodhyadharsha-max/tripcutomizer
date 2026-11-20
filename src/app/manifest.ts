@@ -41,7 +41,7 @@ export default function manifest(): MetadataRoute.Manifest {
         name: 'Custom Trip Wizard',
         short_name: 'Customize',
         description: 'Create a custom trip itinerary',
-        url: '/custom-trip',
+        url: '/customize-trip',
       },
     ],
   };

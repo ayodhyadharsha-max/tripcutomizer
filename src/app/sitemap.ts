@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { DEMO_PACKAGES } from '@/data/packagesData';
+import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { getAllProgrammaticSlugs } from '@/data/programmaticPackages';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -339,8 +340,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'manali', 'shimla', 'auli', 'nainital', 'mussoorie', 'udaipur', 'jaipur', 'jaisalmer', 'munnar', 'coorg', 'kutch'
   ];
 
+  const allCatalog = getAllCatalogPackages();
   const demoSlugs = DEMO_PACKAGES.map((p) => p.destinationSlug);
-  const destinationSlugs = Array.from(new Set([...targetIntlKeywords, ...targetSpiritualKeywords, ...demoSlugs]));
+  const catalogDestSlugs = allCatalog.map((p) => p.destinationSlug);
+  const destinationSlugs = Array.from(new Set([...targetIntlKeywords, ...targetSpiritualKeywords, ...demoSlugs, ...catalogDestSlugs]));
 
   const holidayDestinationPages: MetadataRoute.Sitemap = destinationSlugs.map((slug) => ({
     url: `${baseUrl}/holidays/${slug}`,
@@ -363,13 +366,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.88,
   }));
 
-  // 5. Package Detail Pages
-  const packagePages: MetadataRoute.Sitemap = DEMO_PACKAGES.map((pkg) => ({
-    url: `${baseUrl}/holidays/${pkg.destinationSlug}/${pkg.slug}`,
-    lastModified: currentDate,
-    changeFrequency: 'weekly',
-    priority: 0.85,
-  }));
+  // 5. Package Detail Pages (All Verified Packages in Catalog with Strict Deduplication)
+  const seenUrls = new Set<string>();
+  const packagePages: MetadataRoute.Sitemap = [];
+
+  for (const pkg of allCatalog) {
+    const url = `${baseUrl}/holidays/${pkg.destinationSlug}/${pkg.slug}`;
+    if (!seenUrls.has(url)) {
+      seenUrls.add(url);
+      packagePages.push({
+        url,
+        lastModified: currentDate,
+        changeFrequency: 'weekly',
+        priority: 0.85,
+      });
+    }
+  }
 
   // 6. Programmatic SEO Landing Pages (/packages/[slug])
   const programmaticPackagePages: MetadataRoute.Sitemap = getAllProgrammaticSlugs().map((slug) => ({

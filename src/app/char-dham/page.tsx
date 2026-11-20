@@ -4,7 +4,7 @@ import { DEMO_PACKAGES } from '@/data/packagesData';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
 export const metadata: Metadata = {
-  title: 'Char Dham Yatra Sacred Tour Package 2026 (Ayodhya & Delhi Departure)',
+  title: 'Char Dham Yatra Sacred Tour Package 2026 (Ayodhya & Delhi Departure) | Trip Customizer',
   description:
     'Book 10N/11D Char Dham Yatra divine tour package covering Yamunotri, Gangotri, Kedarnath & Badrinath. Includes AC transport, hotel stays, puja assistance & meals.',
   keywords: [

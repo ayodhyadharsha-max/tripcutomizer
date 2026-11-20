@@ -7,7 +7,7 @@ import { Card } from '@/components/ui/Card';
 import { BookOpen, User, Calendar, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Travel Blog & Destination Guides 2026',
+  title: 'Travel Blog & Destination Guides 2026 | Trip Customizer',
   description:
     'Expert travel guides, visa-free destinations for Indians, winter getaways, budget international trips under ₹25k, and romantic honeymoon ideas for 2026.',
   keywords: [

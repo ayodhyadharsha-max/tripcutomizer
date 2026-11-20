@@ -4,7 +4,7 @@ import { BuildTripWizard } from '@/components/homepage/BuildTripWizard';
 import { Container } from '@/components/ui/Container';
 
 export const metadata: Metadata = {
-  title: 'Custom Trip Architect Wizard: Design Your Customized Tour Package',
+  title: 'Custom Trip Architect Wizard: Design Your Customized Tour Package | Trip Customizer',
   description:
     'Tailor-make your dream vacation in 60 seconds. Choose destination, 4-star hotels, flights, and sightseeing vouchers with instant pricing & 24x7 expert support.',
   keywords: [

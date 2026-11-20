@@ -9,45 +9,12 @@ function getMatchedPackage(destinationParam: string, packageParam: string): Holi
   const decodedPkgParam = decodeURIComponent(packageParam || '').toLowerCase().trim();
   const decodedDestParam = decodeURIComponent(destinationParam || '').toLowerCase().trim();
 
-  // Multi-tier package lookup:
-  // 1. Exact slug match
-  let matchedPkg = DEMO_PACKAGES.find((p) => p.slug.toLowerCase() === decodedPkgParam);
-
-  // 2. Exact ID match (e.g., "pkg-up-1" or "pkg-dubai-winter-sale-4n5d")
-  if (!matchedPkg) {
-    matchedPkg = DEMO_PACKAGES.find((p) => p.id.toLowerCase() === decodedPkgParam);
-  }
-
-  // 3. Match ID with "pkg-" prefix added
-  if (!matchedPkg) {
-    matchedPkg = DEMO_PACKAGES.find((p) => p.id.toLowerCase() === `pkg-${decodedPkgParam}`);
-  }
-
-  // 4. Match slug or ID with "pkg-" prefix stripped
-  if (!matchedPkg) {
-    const strippedParam = decodedPkgParam.replace(/^pkg-/, '');
-    matchedPkg = DEMO_PACKAGES.find(
-      (p) => p.slug.toLowerCase() === strippedParam || p.id.toLowerCase().replace(/^pkg-/, '') === strippedParam
-    );
-  }
-
-  // 5. Substring match on slug, name, or ID
-  if (!matchedPkg) {
-    matchedPkg = DEMO_PACKAGES.find(
-      (p) =>
-        p.slug.toLowerCase().includes(decodedPkgParam) ||
-        decodedPkgParam.includes(p.slug.toLowerCase()) ||
-        p.name.toLowerCase().includes(decodedPkgParam)
-    );
-  }
-
-  // 6. Expanded 4,800+ OTA catalog lookup
-  if (!matchedPkg) {
-    matchedPkg = findCatalogPackage(decodedDestParam, decodedPkgParam);
-  }
-
-  // 7. Return matched package or null
-  return matchedPkg || null;
+  // Multi-tier package lookup (Exact match first across DEMO and 3,690+ catalog packages)
+  return (
+    findCatalogPackage(decodedDestParam, decodedPkgParam) ||
+    DEMO_PACKAGES.find((p) => p.slug.toLowerCase() === decodedPkgParam || p.id.toLowerCase() === decodedPkgParam) ||
+    null
+  );
 }
 
 export async function generateMetadata({
@@ -66,7 +33,7 @@ export async function generateMetadata({
   const price = Math.min(pkg.startingPrice || 0, pkg.discountPrice || pkg.startingPrice || 0) || pkg.startingPrice || 14999;
   const duration = `${pkg.durationDays}D / ${pkg.durationNights}N`;
 
-  const title = `${pkg.name} (${duration}) — ₹${price.toLocaleString('en-IN')}`;
+  const title = `${pkg.name} (${duration}) — ₹${price.toLocaleString('en-IN')} | Trip Customizer`;
   const overviewText = pkg.highlights && pkg.highlights.length > 0 ? pkg.highlights.join('. ') : pkg.name;
   const description = `${overviewText.slice(0, 155)}. Book customized ${pkg.destination} tour packages with 4-star hotels, flights, breakfast, private cabs & 24x7 support.`;
   const canonicalUrl = `https://www.tripcustomizer.com/holidays/${pkg.destinationSlug}/${pkg.slug}`;

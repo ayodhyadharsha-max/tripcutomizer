@@ -14,8 +14,20 @@ export async function generateMetadata({ params }: { params: { destination: stri
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
 
-  const title = `${destName} Tour Packages 2026`;
-  const description = `Book customized ${destName} holiday packages with 4-star hotels, flights, private transfers, visa assistance, and 24x7 expert desk support. Best prices starting @ ₹14,999.`;
+  const allCatalog = getAllCatalogPackages();
+  const matched = allCatalog.filter((p) => {
+    const dSlug = p.destinationSlug.toLowerCase();
+    const dest = p.destination.toLowerCase();
+    return dSlug === rawSlug || dSlug.includes(rawSlug) || dest.includes(rawSlug);
+  });
+
+  const minPrice = matched.length > 0
+    ? Math.min(...matched.map((p) => Math.min(p.startingPrice || 14999, p.discountPrice || p.startingPrice || 14999)))
+    : 14999;
+
+  const heroImg = matched[0]?.heroImage || 'https://www.tripcustomizer.com/destinations/hero-holidays.jpg';
+  const title = `${destName} Tour Packages 2026: Starting @ ₹${minPrice.toLocaleString('en-IN')} | Trip Customizer`;
+  const description = `Book customized ${destName} holiday packages with 4-star hotels, flights, private transfers, visa assistance, and 24x7 expert desk support. Best verified deals starting @ ₹${minPrice.toLocaleString('en-IN')}.`;
   const canonicalUrl = `https://www.tripcustomizer.com/holidays/${rawSlug}`;
 
   return {
@@ -40,7 +52,7 @@ export async function generateMetadata({ params }: { params: { destination: stri
       type: 'website',
       images: [
         {
-          url: 'https://www.tripcustomizer.com/destinations/hero-holidays.jpg',
+          url: heroImg,
           width: 1200,
           height: 630,
           alt: `${destName} Holiday Packages`,
@@ -51,7 +63,7 @@ export async function generateMetadata({ params }: { params: { destination: stri
       card: 'summary_large_image',
       title,
       description,
-      images: ['https://www.tripcustomizer.com/destinations/hero-holidays.jpg'],
+      images: [heroImg],
     },
   };
 }
