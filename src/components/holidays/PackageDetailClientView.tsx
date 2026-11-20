@@ -669,118 +669,195 @@ export function PackageDetailClientView({ params }: { params: { destination: str
       return 'Sam Sand Dunes Royal Swiss Desert Resort (4★ Deluxe with Cultural Show)';
     }
 
-    // Target destination key matching:
+    // If tier is 3-Star Standard and originalHotel is already defined, return it directly
+    if (tier === 'standard' && originalHotel && originalHotel.trim().length > 3) {
+      return originalHotel.includes('3★') ? originalHotel : `${originalHotel} (3★ Standard)`;
+    }
+
+    // Target destination key matching - check raw (hotel name/city) FIRST to ensure accuracy
     let matchedKey: string | null = null;
 
-    // Strict priority checks:
-    if (
-      title.includes('sarnath') ||
-      title.includes('kashi') ||
-      title.includes('dashashwamedh') ||
-      title.includes('banaras') ||
-      raw.includes('kashi') ||
-      raw.includes('varanasi')
-    ) {
-      matchedKey = 'varanasi';
-    } else if (
-      title.includes('sangam') ||
-      title.includes('anand bhavan') ||
-      raw.includes('prayagraj') ||
-      title.includes('prayagraj')
-    ) {
-      matchedKey = 'prayagraj';
-    } else if (
-      title.includes('janmabhoomi') ||
-      title.includes('kanak bhawan') ||
-      title.includes('hanuman garhi') ||
-      title.includes('saryu') ||
-      title.includes('ayodhya') ||
-      raw.includes('ayodhya') ||
-      raw.includes('ramayana')
-    ) {
+    if (raw.includes('ayodhya') || raw.includes('ramayana')) {
       matchedKey = 'ayodhya';
-    } else if (title.includes('gulmarg') || raw.includes('gulmarg')) {
-      matchedKey = 'gulmarg';
-    } else if (title.includes('pahalgam') || raw.includes('pahalgam')) {
-      matchedKey = 'pahalgam';
-    } else if (title.includes('sonamarg') || raw.includes('sonamarg')) {
-      matchedKey = 'sonamarg';
-    } else if (title.includes('srinagar') || raw.includes('srinagar')) {
+    } else if (raw.includes('varanasi') || raw.includes('kashi') || raw.includes('banaras')) {
+      matchedKey = 'varanasi';
+    } else if (raw.includes('prayagraj') || raw.includes('kanha shyam')) {
+      matchedKey = 'prayagraj';
+    } else if (raw.includes('srinagar')) {
       matchedKey = 'srinagar';
-    } else if (title.includes('manali') || raw.includes('manali') || title.includes('solang') || title.includes('rohtang')) {
+    } else if (raw.includes('gulmarg')) {
+      matchedKey = 'gulmarg';
+    } else if (raw.includes('pahalgam')) {
+      matchedKey = 'pahalgam';
+    } else if (raw.includes('sonamarg')) {
+      matchedKey = 'sonamarg';
+    } else if (raw.includes('manali')) {
       matchedKey = 'manali';
-    } else if (title.includes('shimla') || raw.includes('shimla') || title.includes('kufri')) {
+    } else if (raw.includes('shimla') || raw.includes('kufri')) {
       matchedKey = 'shimla';
-    } else if (title.includes('havelock') || raw.includes('havelock')) {
+    } else if (raw.includes('havelock')) {
       matchedKey = 'havelock';
-    } else if (title.includes('neil') || raw.includes('neil')) {
+    } else if (raw.includes('neil')) {
       matchedKey = 'neil';
-    } else if (title.includes('port blair') || title.includes('portblair') || raw.includes('port blair')) {
+    } else if (raw.includes('port blair') || raw.includes('portblair')) {
       matchedKey = 'portblair';
-    } else if (title.includes('munnar') || raw.includes('munnar')) {
+    } else if (raw.includes('munnar')) {
       matchedKey = 'munnar';
-    } else if (title.includes('thekkady') || raw.includes('thekkady')) {
+    } else if (raw.includes('thekkady')) {
       matchedKey = 'thekkady';
-    } else if (title.includes('alleppey') || raw.includes('alleppey')) {
+    } else if (raw.includes('alleppey')) {
       matchedKey = 'alleppey';
-    } else if (title.includes('kovalam') || raw.includes('kovalam')) {
+    } else if (raw.includes('kovalam')) {
       matchedKey = 'kovalam';
-    } else if (title.includes('jaisalmer') || raw.includes('jaisalmer')) {
+    } else if (raw.includes('jaisalmer')) {
       matchedKey = 'jaisalmer';
-    } else if (title.includes('jodhpur') || raw.includes('jodhpur')) {
+    } else if (raw.includes('jodhpur')) {
       matchedKey = 'jodhpur';
-    } else if (title.includes('udaipur') || raw.includes('udaipur')) {
+    } else if (raw.includes('udaipur')) {
       matchedKey = 'udaipur';
-    } else if (title.includes('jaipur') || raw.includes('jaipur')) {
+    } else if (raw.includes('jaipur')) {
       matchedKey = 'jaipur';
-    } else if (title.includes('haridwar') || raw.includes('haridwar')) {
+    } else if (raw.includes('haridwar')) {
       matchedKey = 'haridwar';
-    } else if (title.includes('rishikesh') || raw.includes('rishikesh')) {
+    } else if (raw.includes('rishikesh')) {
       matchedKey = 'rishikesh';
-    } else if (title.includes('mussoorie') || raw.includes('mussoorie')) {
+    } else if (raw.includes('mussoorie')) {
       matchedKey = 'mussoorie';
-    } else if (title.includes('nainital') || raw.includes('nainital')) {
+    } else if (raw.includes('nainital')) {
       matchedKey = 'nainital';
-    } else if (title.includes('kedarnath') || raw.includes('kedarnath')) {
+    } else if (raw.includes('kedarnath')) {
       matchedKey = 'kedarnath';
-    } else if (title.includes('badrinath') || raw.includes('badrinath')) {
+    } else if (raw.includes('badrinath')) {
       matchedKey = 'badrinath';
-    } else if (title.includes('leh') || raw.includes('leh') || title.includes('ladakh') || title.includes('pangong')) {
+    } else if (raw.includes('leh') || raw.includes('ladakh')) {
       matchedKey = 'leh';
-    } else if (title.includes('goa') || raw.includes('goa')) {
+    } else if (raw.includes('goa')) {
       matchedKey = 'goa';
-    } else if (title.includes('agra') || raw.includes('agra') || title.includes('taj mahal')) {
+    } else if (raw.includes('agra')) {
       matchedKey = 'agra';
-    } else if (title.includes('amritsar') || raw.includes('amritsar') || title.includes('golden temple')) {
+    } else if (raw.includes('amritsar')) {
       matchedKey = 'amritsar';
-    } else if (title.includes('mathura') || raw.includes('mathura') || title.includes('vrindavan')) {
+    } else if (raw.includes('mathura') || raw.includes('vrindavan')) {
       matchedKey = 'mathura';
-    } else if (title.includes('ujjain') || raw.includes('ujjain') || title.includes('mahakal')) {
+    } else if (raw.includes('ujjain')) {
       matchedKey = 'ujjain';
-    } else if (title.includes('dwarka') || raw.includes('dwarka')) {
+    } else if (raw.includes('dwarka')) {
       matchedKey = 'dwarka';
-    } else if (title.includes('somnath') || raw.includes('somnath')) {
+    } else if (raw.includes('somnath')) {
       matchedKey = 'somnath';
-    } else if (title.includes('puri') || raw.includes('puri') || title.includes('jagannath')) {
+    } else if (raw.includes('puri')) {
       matchedKey = 'puri';
-    } else if (title.includes('darjeeling') || raw.includes('darjeeling')) {
+    } else if (raw.includes('darjeeling')) {
       matchedKey = 'darjeeling';
-    } else if (title.includes('gangtok') || raw.includes('gangtok')) {
+    } else if (raw.includes('gangtok')) {
       matchedKey = 'gangtok';
-    } else if (title.includes('ooty') || raw.includes('ooty')) {
+    } else if (raw.includes('ooty')) {
       matchedKey = 'ooty';
-    } else if (title.includes('coorg') || raw.includes('coorg')) {
+    } else if (raw.includes('coorg')) {
       matchedKey = 'coorg';
-    } else if (title.includes('kodaikanal') || raw.includes('kodaikanal')) {
+    } else if (raw.includes('kodaikanal')) {
       matchedKey = 'kodaikanal';
-    } else if (title.includes('tirupati') || raw.includes('tirupati')) {
+    } else if (raw.includes('tirupati')) {
       matchedKey = 'tirupati';
-    } else if (title.includes('shirdi') || raw.includes('shirdi')) {
+    } else if (raw.includes('shirdi')) {
       matchedKey = 'shirdi';
-    } else if (title.includes('delhi') || raw.includes('delhi')) {
+    } else if (raw.includes('delhi')) {
       matchedKey = 'delhi';
-    } else if (title.includes('mumbai') || raw.includes('mumbai')) {
+    } else if (raw.includes('mumbai')) {
       matchedKey = 'mumbai';
+    }
+
+    // Secondary fallback: if raw did not match, check day title or city
+    if (!matchedKey) {
+      if (title.includes('ayodhya') || title.includes('janmabhoomi') || title.includes('saryu')) {
+        matchedKey = 'ayodhya';
+      } else if (title.includes('varanasi') || title.includes('kashi') || title.includes('dashashwamedh') || title.includes('sarnath')) {
+        matchedKey = 'varanasi';
+      } else if (title.includes('prayagraj') || title.includes('sangam')) {
+        matchedKey = 'prayagraj';
+      } else if (title.includes('gulmarg')) {
+        matchedKey = 'gulmarg';
+      } else if (title.includes('pahalgam')) {
+        matchedKey = 'pahalgam';
+      } else if (title.includes('sonamarg')) {
+        matchedKey = 'sonamarg';
+      } else if (title.includes('srinagar')) {
+        matchedKey = 'srinagar';
+      } else if (title.includes('manali') || title.includes('solang')) {
+        matchedKey = 'manali';
+      } else if (title.includes('shimla') || title.includes('kufri')) {
+        matchedKey = 'shimla';
+      } else if (title.includes('havelock')) {
+        matchedKey = 'havelock';
+      } else if (title.includes('neil')) {
+        matchedKey = 'neil';
+      } else if (title.includes('port blair') || title.includes('portblair')) {
+        matchedKey = 'portblair';
+      } else if (title.includes('munnar')) {
+        matchedKey = 'munnar';
+      } else if (title.includes('thekkady')) {
+        matchedKey = 'thekkady';
+      } else if (title.includes('alleppey')) {
+        matchedKey = 'alleppey';
+      } else if (title.includes('kovalam')) {
+        matchedKey = 'kovalam';
+      } else if (title.includes('jaisalmer')) {
+        matchedKey = 'jaisalmer';
+      } else if (title.includes('jodhpur')) {
+        matchedKey = 'jodhpur';
+      } else if (title.includes('udaipur')) {
+        matchedKey = 'udaipur';
+      } else if (title.includes('jaipur')) {
+        matchedKey = 'jaipur';
+      } else if (title.includes('haridwar')) {
+        matchedKey = 'haridwar';
+      } else if (title.includes('rishikesh')) {
+        matchedKey = 'rishikesh';
+      } else if (title.includes('mussoorie')) {
+        matchedKey = 'mussoorie';
+      } else if (title.includes('nainital')) {
+        matchedKey = 'nainital';
+      } else if (title.includes('kedarnath')) {
+        matchedKey = 'kedarnath';
+      } else if (title.includes('badrinath')) {
+        matchedKey = 'badrinath';
+      } else if (title.includes('leh') || title.includes('ladakh')) {
+        matchedKey = 'leh';
+      } else if (title.includes('goa')) {
+        matchedKey = 'goa';
+      } else if (title.includes('agra')) {
+        matchedKey = 'agra';
+      } else if (title.includes('amritsar')) {
+        matchedKey = 'amritsar';
+      } else if (title.includes('mathura') || title.includes('vrindavan')) {
+        matchedKey = 'mathura';
+      } else if (title.includes('ujjain') || title.includes('mahakal')) {
+        matchedKey = 'ujjain';
+      } else if (title.includes('dwarka')) {
+        matchedKey = 'dwarka';
+      } else if (title.includes('somnath')) {
+        matchedKey = 'somnath';
+      } else if (title.includes('puri') || title.includes('jagannath')) {
+        matchedKey = 'puri';
+      } else if (title.includes('darjeeling')) {
+        matchedKey = 'darjeeling';
+      } else if (title.includes('gangtok')) {
+        matchedKey = 'gangtok';
+      } else if (title.includes('ooty')) {
+        matchedKey = 'ooty';
+      } else if (title.includes('coorg')) {
+        matchedKey = 'coorg';
+      } else if (title.includes('kodaikanal')) {
+        matchedKey = 'kodaikanal';
+      } else if (title.includes('tirupati')) {
+        matchedKey = 'tirupati';
+      } else if (title.includes('shirdi')) {
+        matchedKey = 'shirdi';
+      } else if (title.includes('delhi')) {
+        matchedKey = 'delhi';
+      } else if (title.includes('mumbai')) {
+        matchedKey = 'mumbai';
+      }
     }
 
     // Direct registry scan against title, hotel, or city

@@ -60,17 +60,18 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
       "/destinations/verified/ayodhya-ram-mandir.jpg"
     ],
     "highlights": [
-      "1N Ayodhya Ram Janmabhoomi VIP Darshan & Saryu Aarti",
-      "2N Varanasi Kashi Vishwanath Corridor & Reserved Ganga Aarti Boat",
-      "1N Prayagraj Triveni Sangam Holy Dip & Bade Hanuman Ji Darshan",
-      "Sarnath Buddhist Pilgrimage & Banarasi Silk Weaving Heritage Walk"
+      "2N Ayodhya: Shri Ram Janmabhoomi VIP Darshan, Kanak Bhawan & Saryu Maha Aarti",
+      "Prayagraj Day Excursion: Triveni Sangam Holy Snan Boat, Reclining Bade Hanuman Ji & Anand Bhawan",
+      "2N Varanasi: Subah-e-Banaras Dawn Boat, Kashi Vishwanath Corridor & Dashashwamedh Ghat Aarti",
+      "Sarnath Buddhist Stupa, Sankat Mochan Temple & Banarasi Silk Weaving Tour"
     ],
     "inclusions": [
-      "Dedicated Private AC Innova / Sedan Cab for Full Tour",
-      "4-Star & 3-Star Selected Heritage Hotel Stays with Breakfast & Dinner",
-      "Reserved VIP Private Boat for Dashashwamedh Ghat Evening Ganga Aarti",
-      "Private Boat Ride at Prayagraj Triveni Sangam Confluence",
-      "All Inter-City Tolls, Parking, Driver Night Allowances & Interstate Taxes"
+      "4 Nights 3-Star Hotel Stay (2N Ayodhya + 2N Varanasi)",
+      "Daily Buffet Breakfast & Dinner at All Hotels",
+      "Dedicated Private AC Cab (Sedan / Ertiga) for Complete Circuit Transfers & Sightseeing",
+      "Reserved Front-Row Boat Pass for Evening Dashashwamedh Ghat Ganga Aarti",
+      "Private Boat for Holy Snan at Triveni Sangam in Prayagraj",
+      "All Toll Taxes, State Tourist Permits, Fuel & Driver Night Allowances Included"
     ],
     "exclusions": [
       "Airfare/Train Tickets"
@@ -86,101 +87,99 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "name": "Hotel Ramayana / Royal Heritage Ayodhya",
         "city": "Ayodhya",
         "rating": "3 Star",
-        "nights": 1
-      },
-      {
-        "name": "Kashi Heritage Hotel / Treebo Varanasi",
-        "city": "Varanasi",
-        "rating": "3 Star",
         "nights": 2
       },
       {
-        "name": "Hotel Kanha Shyam / Legend Prayagraj",
-        "city": "Prayagraj",
+        "name": "Kashi Heritage Hotel / Treebo Prime Varanasi",
+        "city": "Varanasi",
         "rating": "3 Star",
-        "nights": 1
+        "nights": 2
       }
     ],
     "itinerary": [
       {
         "dayNumber": 1,
-        "title": "Ayodhya Arrival, Saryu Ghat & Ram Ki Paidi Maha Aarti",
-        "description": "Arrive at Ayodhya Dham Airport (AYJ) or Railway Station. Meet our warm travel representative upon arrival and enjoy a comfortable private AC transfer to your hotel. Complete check-in formalities and relax after your journey. In the evening, visit Ram Ki Paidi and experience the divine Saryu Maha Aarti with hundreds of floating earthen diyas and sacred Vedic chanting.",
+        "title": "Ayodhya Arrival, Kanak Bhawan & Ram Ki Paidi Saryu Leisure",
+        "description": "Arrive at Ayodhya Dham Airport (AYJ) / Ayodhya Junction. Meet your dedicated private chauffeur upon arrival and transfer to your hotel in Ayodhya. Complete check-in formalities and relax. In the afternoon, visit sacred Kanak Bhawan, historic Hanuman Garhi hill fort, and Dashrath Mahal. In the evening, visit Ram Ki Paidi along the tranquil Saryu riverbanks for a serene sunset walk.",
         "meals": [
           "Dinner"
         ],
         "activities": [
           "Ayodhya Airport / Station Meet & Greet",
-          "Hotel Check-in & Sacred Welcome Drink",
-          "Ram Ki Paidi Evening Leisure Stroll",
-          "Saryu River Maha Aarti Darshan"
+          "Hotel Check-in & Refresh",
+          "Kanak Bhawan & Hanuman Garhi Darshan",
+          "Dashrath Mahal Heritage Visit",
+          "Ram Ki Paidi Saryu River Stroll"
         ],
         "hotel": "Hotel Ramayana / Royal Heritage Ayodhya",
         "transfers": "Private AC Vehicle"
       },
       {
         "dayNumber": 2,
-        "title": "Ram Janmabhoomi VIP Darshan, Hanumangarhi & Drive to Varanasi",
-        "description": "Begin the morning with divine VIP Darshan of Ram Lalla at the grand Shri Ram Janmabhoomi Mandir. Climb the 76 steps to ancient Hanumangarhi temple for blessings, followed by visits to Kanak Bhawan and Dashrath Mahal. After lunch, embark on a smooth private AC highway drive to the sacred eternal city of Varanasi (Kashi). Check in at your hotel and witness the world-famous evening Ganga Aarti at Dashashwamedh Ghat from a reserved private boat on River Ganges.",
+        "title": "Shri Ram Janmabhoomi VIP Darshan, Surya Kund & Grand Saryu Maha Aarti",
+        "description": "Full day divine pilgrimage in holy Ayodhya. Early morning proceed for blessed VIP Darshan of Shri Ram Lalla at the grand Shri Ram Janmabhoomi Mandir. Explore the majestic temple complex, Sita Ki Rasoi, beautifully restored Surya Kund, and sacred Guptar Ghat. In the evening, gather at Ram Ki Paidi to witness the mesmerizing grand Saryu River Maha Aarti with thousands of illuminated earthen lamps, sacred conch sounds, and Vedic chanting.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
           "Shri Ram Janmabhoomi Mandir VIP Darshan",
-          "Hanumangarhi & Kanak Bhawan Visit",
-          "Scenic Highway Drive to Kashi (Varanasi)",
-          "Reserved Ganga Aarti Boat Pass at Dashashwamedh Ghat"
+          "Surya Kund Heritage Complex",
+          "Guptar Ghat Saryu Riverbank Visit",
+          "Ram Ki Paidi Grand Saryu River Maha Aarti Pass"
         ],
-        "hotel": "Kashi Heritage Hotel / Treebo Varanasi",
+        "hotel": "Hotel Ramayana / Royal Heritage Ayodhya",
         "transfers": "Private AC Vehicle"
       },
       {
         "dayNumber": 3,
-        "title": "Kashi Vishwanath Jyotirlinga Darshan, Kaal Bhairav & Sarnath Excursion",
-        "description": "Early morning VIP Darshan at the sacred Shri Kashi Vishwanath Jyotirlinga corridor and Maa Annapurna Mandir. Visit the fierce guardian deity Kaal Bhairav and view the eternal flames of Manikarnika Ghat. In the afternoon, take an excursion to historical Sarnath where Lord Buddha delivered his first sermon. Explore Dhamek Stupa, Chaukhandi Stupa, and the Archaeological Museum followed by an evening Banarasi silk weaving artisan tour.",
+        "title": "Drive Ayodhya to Prayagraj, Triveni Sangam Holy Snan & Drive to Varanasi Stay",
+        "description": "After breakfast, check out from Ayodhya and embark on a comfortable private AC drive to sacred Prayagraj (approx. 3.5 hours). Board a private boat to holy Triveni Sangam—the sacred confluence of rivers Ganga, Yamuna, and mystical Saraswati—for a purifying holy dip (Snan) and prayer rituals. Visit the subterranean Bade Hanuman Ji Temple (famous reclining posture), historic Anand Bhawan (ancestral home of the Nehru family), and sacred Alopi Devi Shaktipeeth. Post lunch/afternoon, proceed on the smooth NH19 expressway to world oldest living spiritual capital Varanasi (approx. 2.5 hours). Arrive in Varanasi, check in at your hotel and relax for the evening.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Kashi Vishwanath Jyotirlinga VIP Corridor Darshan",
-          "Maa Annapurna & Kaal Bhairav Temple Darshan",
-          "Sarnath Buddhist Stupa & Museum Tour",
-          "Banarasi Silk Weaving Heritage Walk"
+          "Scenic Highway Drive to Prayagraj",
+          "Triveni Sangam Private Boat & Holy Dip (Snan)",
+          "Bade Hanuman Ji Reclining Temple Darshan",
+          "Anand Bhawan Heritage Museum Tour",
+          "Alopi Devi Shaktipeeth Visit",
+          "Expressway Drive to Varanasi & Hotel Check-in"
         ],
-        "hotel": "Kashi Heritage Hotel / Treebo Varanasi",
+        "hotel": "Kashi Heritage Hotel / Treebo Prime Varanasi",
         "transfers": "Private AC Vehicle"
       },
       {
         "dayNumber": 4,
-        "title": "Subah-e-Banaras Dawn Boat Ride, Drive to Prayagraj & Triveni Sangam Holy Dip",
-        "description": "Experience a peaceful sunrise boat cruise on the holy Ganges witnessing Subah-e-Banaras rituals and morning chants along the iconic ghats. After breakfast, drive to sacred Prayagraj (Allahabad). Take a holy boat ride to the sacred Triveni Sangam (confluence of holy rivers Ganga, Yamuna & invisible Saraswati) for a purifying dip and pooja. Visit the subterranean Bade Hanuman Ji Mandir (reclining posture), historical Anand Bhawan, and Alopi Devi Shaktipeeth. Check in for an overnight stay in Prayagraj.",
+        "title": "Subah-e-Banaras Dawn Boat, Kashi Vishwanath, Sarnath & Dashashwamedh Aarti",
+        "description": "Experience the ethereal Subah-e-Banaras dawn boat ride along the Ganga ghats witnessing morning rituals, sunrise reflections, and classical Vedic chants. Visit the magnificent Shri Kashi Vishwanath Jyotirlinga Temple Corridor, Annapurna Mandir, and Kaal Bhairav Temple. In the afternoon, take an excursion to sacred Sarnath where Gautama Buddha delivered his first sermon. Explore Dhamek Stupa, Chaukhandi Stupa, and the Archaeological Museum. In the evening, witness the world-famous grand Ganga Aarti at Dashashwamedh Ghat from a reserved private boat on holy River Ganges.",
         "meals": [
           "Breakfast",
           "Dinner"
         ],
         "activities": [
-          "Subah-e-Banaras Sunrise Ganges Boat Ride",
-          "Scenic Highway Drive to Prayagraj",
-          "Triveni Sangam Holy Dip & Boat Ride",
-          "Bade Hanuman Ji Temple Darshan",
-          "Anand Bhawan & Alopi Devi Shaktipeeth Visit"
+          "Subah-e-Banaras Dawn Ganges Sunrise Boat Tour",
+          "Shri Kashi Vishwanath Corridor VIP Darshan",
+          "Annapurna & Kaal Bhairav Temple Darshan",
+          "Sarnath Buddhist Stupa & Archaeological Museum",
+          "Dashashwamedh Ghat Ganga Aarti Reserved Boat Pass"
         ],
-        "hotel": "Hotel Kanha Shyam / Legend Prayagraj",
+        "hotel": "Kashi Heritage Hotel / Treebo Prime Varanasi",
         "transfers": "Private AC Vehicle"
       },
       {
         "dayNumber": 5,
-        "title": "Morning Pooja, Sacred Souvenir Shopping & Departure Transfer",
-        "description": "Enjoy a hearty breakfast at your hotel. Visit local sacred markets for authentic Sangam holy water (Gangajal), sacred brass pooja items, and regional sweets. Complete hotel check-out and board your dedicated private AC chauffeur transfer to Prayagraj (IXD) or Varanasi (VNS) Airport / Railway Station for your return journey home with divine blessings.",
+        "title": "Sankat Mochan Temple, BHU Vishwanath & Varanasi Departure Drop",
+        "description": "Enjoy breakfast at the hotel. Visit the famous Sankat Mochan Hanuman Temple, Durga Kund, and the grand New Vishwanath Temple (BHU). Complete check-out formalities. Stroll through Godowlia bazaar for authentic Banarasi silk sarees, brass lamps, and Kashi sweets. Depending on your flight or train schedule, your private chauffeur will drop you at Varanasi Lal Bahadur Shastri International Airport (VNS) or Varanasi Cantt / Pt. Deen Dayal Upadhyaya Junction for your onward journey with divine blessings.",
         "meals": [
           "Breakfast"
         ],
         "activities": [
-          "Hotel Buffet Breakfast & Check-out",
-          "Sacred Brass & Religious Keepsake Shopping",
-          "Private AC Airport / Railway Station Drop"
+          "Sankat Mochan Hanuman Temple Darshan",
+          "BHU New Vishwanath Temple Visit",
+          "Banarasi Silk Saree & Souvenir Shopping",
+          "Varanasi Airport / Railway Station Departure Drop"
         ],
         "hotel": "Departure Day",
         "transfers": "Private AC Vehicle"
