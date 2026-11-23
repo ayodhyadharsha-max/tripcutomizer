@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/Button';
 import { HolidayPackage } from '@/data/packagesData';
 import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { formatCurrency } from '@/lib/utils';
+import { getPackageHotelBadgeInfo } from '@/lib/packageUtils';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 import { cloudStore } from '@/lib/cloudStore';
 import { sendWeb3FormLead } from '@/lib/web3forms';
@@ -560,7 +561,7 @@ export function tripcustomizerHolidayView() {
                     {pkg.name}
                   </h3>
                   <p className="text-xs text-slate-300 font-semibold">
-                    3★ Standard from <span className="text-amber-400 font-black text-sm">{formatCurrency(pkg.startingPrice)}</span>
+                    {getPackageHotelBadgeInfo(pkg.hotelCategory).badgeLabel} from <span className="text-amber-400 font-black text-sm">{formatCurrency(pkg.startingPrice)}</span>
                   </p>
                 </div>
 

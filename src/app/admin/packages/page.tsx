@@ -757,10 +757,13 @@ export default function AdminPackagesPage() {
                       )}
                     </td>
 
-                    {/* Category */}
+                    {/* Category & Hotel Star Rating */}
                     <td className="p-3 whitespace-nowrap">
-                      <span className="bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded text-[10px]">
+                      <span className="bg-slate-100 text-slate-700 font-bold px-2 py-0.5 rounded text-[10px] block mb-1">
                         {pkg.theme}
+                      </span>
+                      <span className="text-[10px] font-extrabold text-amber-900 bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded inline-block">
+                        {pkg.hotelCategory || '4-Star Deluxe'}
                       </span>
                     </td>
 
@@ -1107,7 +1110,7 @@ export default function AdminPackagesPage() {
                       <div>
                         <span className="font-bold text-slate-900 block line-clamp-1">{p.name}</span>
                         <span className="text-[10px] text-slate-500">
-                          {p.destination} • {p.durationDays}D/{p.durationNights}N • {p.theme}
+                          {p.destination} • {p.durationDays}D/{p.durationNights}N • <strong className="text-amber-800">{p.hotelCategory || '4-Star Deluxe'}</strong>
                         </span>
                       </div>
                       <span className="font-black text-brand-700">{formatCurrency(p.startingPrice)}</span>

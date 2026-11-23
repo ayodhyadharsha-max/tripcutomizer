@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/Button';
 import { HolidayPackage } from '@/data/packagesData';
 import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { formatCurrency } from '@/lib/utils';
+import { getPackageHotelBadgeInfo } from '@/lib/packageUtils';
 import { cloudStore } from '@/lib/cloudStore';
 import { sendWeb3FormLead } from '@/lib/web3forms';
 import {
@@ -781,6 +782,7 @@ export function HolidayListingView({
                   const itemDealPrice = Math.min(pkg.startingPrice, pkg.discountPrice || pkg.startingPrice);
                   const itemMrpPrice = Math.max(pkg.startingPrice, pkg.discountPrice || Math.round(itemDealPrice * 1.25));
                   const savingsPercent = itemMrpPrice > itemDealPrice ? Math.round(((itemMrpPrice - itemDealPrice) / itemMrpPrice) * 100) : 0;
+                  const hotelBadge = getPackageHotelBadgeInfo(pkg.hotelCategory);
 
                   return (
                   <Card
@@ -832,12 +834,12 @@ export function HolidayListingView({
                               <Clock className="w-3.5 h-3.5 text-brand-600 mr-1" />
                               <span>{pkg.durationDays}D / {pkg.durationNights}N</span>
                             </span>
-                            <span className="bg-amber-50 text-amber-900 border border-amber-200/60 px-2 py-0.5 rounded-md font-bold text-xs inline-flex items-center">
-                              3★ Standard
+                            <span className={`border px-2 py-0.5 rounded-md font-bold text-xs inline-flex items-center ${hotelBadge.badgeClass}`}>
+                              {hotelBadge.badgeLabel}
                             </span>
                             <span className="bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md font-semibold">{pkg.mealPlan}</span>
                             <span className="text-[10px] text-brand-700 bg-brand-50 border border-brand-200/50 px-2 py-0.5 rounded-full font-bold">
-                              Upgradable to 4★ / 5★
+                              {hotelBadge.optionsLabel}
                             </span>
                           </div>
 
@@ -862,7 +864,7 @@ export function HolidayListingView({
                         {/* Price & Call to Actions */}
                         <div className="pt-3 border-t border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                           <div>
-                            <span className="text-[10px] text-slate-400 block font-bold uppercase tracking-wider">3★ Standard Twin Sharing</span>
+                            <span className="text-[10px] text-slate-400 block font-bold uppercase tracking-wider">{hotelBadge.twinSharingLabel}</span>
                             <div className="flex items-baseline space-x-1">
                               {itemMrpPrice > itemDealPrice && (
                                 <span className="text-xs text-slate-400 line-through mr-1 font-semibold">

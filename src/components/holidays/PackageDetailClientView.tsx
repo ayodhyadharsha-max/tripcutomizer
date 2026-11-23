@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/Badge';
 import { HolidayPackage } from '@/data/packagesData';
 import { findCatalogPackage, getAllCatalogPackages } from '@/data/packageCatalog';
 import { formatCurrency } from '@/lib/utils';
+import { getPackageBaselineTier, getPackageHotelBadgeInfo } from '@/lib/packageUtils';
 import { useAuth } from '@/context/AuthContext';
 import { cloudStore, CoTraveller } from '@/lib/cloudStore';
 import { sendWeb3FormLead } from '@/lib/web3forms';
@@ -499,8 +500,15 @@ export function PackageDetailClientView({
   // Inclusions Tab Filter
   const [inclusionCategory, setInclusionCategory] = useState<'all' | 'hotels' | 'sightseeing' | 'meals' | 'transfers' | 'exclusions'>('all');
 
-  // Pricing & Tier State: All packages strictly default to 3★ Standard baseline
-  const [tourTier, setTourTier] = useState<'standard' | 'deluxe' | 'luxury'>('standard');
+  // Pricing & Tier State: Defaults to the package's native baseline hotel category (3★ Standard, 4★ Deluxe, or 5★ Luxury)
+  const baselineTier = useMemo(() => getPackageBaselineTier(pkg.hotelCategory), [pkg.hotelCategory]);
+  const [tourTier, setTourTier] = useState<'standard' | 'deluxe' | 'luxury'>(() => getPackageBaselineTier(pkg?.hotelCategory));
+
+  useEffect(() => {
+    if (pkg?.hotelCategory) {
+      setTourTier(getPackageBaselineTier(pkg.hotelCategory));
+    }
+  }, [pkg?.id, pkg?.hotelCategory]);
 
   // Thomas Cook Style Travel Details & Calculate Price Wizard View State
   const [isCalculatePriceView, setIsCalculatePriceView] = useState(false);
@@ -782,17 +790,12 @@ export function PackageDetailClientView({
     effectiveAdultsCount <= 3 ? 1.00 :
     0.95;
 
-  // Comprehensive B2B Pricing Engine:
+  // Comprehensive Dynamic Multi-Tier Pricing Engine:
   // Guaranteed exact match between catalog card (outside) and detail page (inside) on initial load,
-  // with authentic, safe B2B contracted upgrades for 4★ Deluxe and 5★ Commercial Luxury.
-  const calculateTierPrice = (tier: 'standard' | 'deluxe' | 'luxury') => {
+  // respecting whether the package baseline is 3★ Standard, 4★ Deluxe, or 5★ Luxury.
+  const calculateTierPrice = (targetTier: 'standard' | 'deluxe' | 'luxury'): number => {
     const baseStartingPrice = Math.min(pkg.startingPrice, pkg.discountPrice || pkg.startingPrice);
-
-    if (pkg.isInternational) {
-      if (tier === 'standard') return baseStartingPrice;
-      if (tier === 'deluxe') return Math.round(baseStartingPrice * 1.25);
-      return Math.round(baseStartingPrice * 1.65);
-    }
+    const baseTier = baselineTier;
 
     const nights = Math.max(1, pkg.durationNights || 1);
     const days = Math.max(1, pkg.durationDays || (nights + 1));
@@ -811,24 +814,55 @@ export function PackageDetailClientView({
     // Upgrade costs per person from 3★ to 4★ (Room difference / 2 + Ertiga Cab upgrade / 2)
     const diff4StarRoomPerNight = isHill ? 1800 : 1500;
     const diff4StarCabPerDay = 600;
-    const upgradeCost4Star = Math.round(((nights * diff4StarRoomPerNight) + (days * diff4StarCabPerDay) + 500) * 1.22 / 100) * 100;
+    const upgradeCost3to4 = Math.round(((nights * diff4StarRoomPerNight) + (days * diff4StarCabPerDay) + 500) * 1.22 / 100) * 100;
 
-    // Upgrade costs per person from 3★ to 5★ (Commercial 5★ Room diff / 2 + Innova Crysta Cab upgrade / 2)
-    const diff5StarRoomPerNight = isHill ? 5400 : 4600;
-    const diff5StarCabPerDay = 1400;
-    const upgradeCost5Star = Math.round(((nights * diff5StarRoomPerNight) + (days * diff5StarCabPerDay) + 1500) * 1.22 / 100) * 100;
+    // Upgrade costs per person from 4★ to 5★ (Commercial 5★ Room diff / 2 + Innova Crysta Cab upgrade / 2)
+    const diff5StarRoomPerNight = isHill ? 3600 : 3100;
+    const diff5StarCabPerDay = 800;
+    const upgradeCost4to5 = Math.round(((nights * diff5StarRoomPerNight) + (days * diff5StarCabPerDay) + 1000) * 1.22 / 100) * 100;
 
-    // All packages strictly default to 3★ Standard as baseline card starting price.
-    // Upgrades to 4★ Deluxe and 5★ Luxury apply dynamically only when explicitly selected:
-    if (tier === 'standard') return baseStartingPrice;
-    if (tier === 'deluxe') return baseStartingPrice + upgradeCost4Star;
-    return baseStartingPrice + upgradeCost5Star;
+    const upgradeCost3to5 = upgradeCost3to4 + upgradeCost4to5;
+
+    // International packages dynamic tier calculation
+    if (pkg.isInternational) {
+      if (baseTier === 'standard') {
+        if (targetTier === 'standard') return baseStartingPrice;
+        if (targetTier === 'deluxe') return Math.round(baseStartingPrice * 1.25);
+        return Math.round(baseStartingPrice * 1.65);
+      } else if (baseTier === 'deluxe') {
+        if (targetTier === 'deluxe') return baseStartingPrice;
+        if (targetTier === 'standard') return Math.max(9999, Math.round(baseStartingPrice / 1.25));
+        return Math.round(baseStartingPrice * 1.32);
+      } else {
+        // baseTier === 'luxury'
+        if (targetTier === 'luxury') return baseStartingPrice;
+        if (targetTier === 'deluxe') return Math.max(9999, Math.round(baseStartingPrice / 1.32));
+        return Math.max(9999, Math.round(baseStartingPrice / 1.65));
+      }
+    }
+
+    // Domestic Package Pricing based on package baseline tier
+    if (baseTier === 'standard') {
+      if (targetTier === 'standard') return baseStartingPrice;
+      if (targetTier === 'deluxe') return baseStartingPrice + upgradeCost3to4;
+      return baseStartingPrice + upgradeCost3to5;
+    } else if (baseTier === 'deluxe') {
+      if (targetTier === 'deluxe') return baseStartingPrice;
+      if (targetTier === 'standard') return Math.max(4999, baseStartingPrice - upgradeCost3to4);
+      return baseStartingPrice + upgradeCost4to5;
+    } else {
+      // baseTier === 'luxury'
+      if (targetTier === 'luxury') return baseStartingPrice;
+      if (targetTier === 'deluxe') return Math.max(4999, baseStartingPrice - upgradeCost4to5);
+      return Math.max(4999, baseStartingPrice - upgradeCost3to5);
+    }
   };
 
   const calculatedBaseRate = calculateTierPrice(tourTier);
   const basePricePerPerson = Math.round(calculatedBaseRate * paxMultiplier);
+  const isBaselineTier = tourTier === baselineTier;
   const originalPricePerPerson =
-    tourTier === 'standard' && pkg.discountPrice && pkg.discountPrice > pkg.startingPrice
+    isBaselineTier && pkg.discountPrice && pkg.discountPrice > pkg.startingPrice
       ? Math.round(pkg.discountPrice * paxMultiplier)
       : Math.round(basePricePerPerson * 1.20);
   const discountPercent =
@@ -2024,27 +2058,36 @@ export function PackageDetailClientView({
                 <div className="grid grid-cols-3 gap-1.5 p-1 bg-slate-100 rounded-xl text-xs font-bold">
                   <button
                     onClick={() => { setTourTier('standard'); setIsPriceCalculated(false); }}
-                    className={`py-2 rounded-lg transition-all cursor-pointer ${
+                    className={`py-2 rounded-lg transition-all cursor-pointer flex flex-col items-center justify-center ${
                       tourTier === 'standard' ? 'bg-white text-slate-950 shadow-xs' : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
-                    3★ Standard
+                    <span>3★ Standard</span>
+                    {baselineTier === 'standard' && (
+                      <span className="text-[9px] text-emerald-600 font-extrabold uppercase tracking-wider">Included</span>
+                    )}
                   </button>
                   <button
                     onClick={() => { setTourTier('deluxe'); setIsPriceCalculated(false); }}
-                    className={`py-2 rounded-lg transition-all cursor-pointer ${
+                    className={`py-2 rounded-lg transition-all cursor-pointer flex flex-col items-center justify-center ${
                       tourTier === 'deluxe' ? 'bg-brand-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
-                    4★ Deluxe
+                    <span>4★ Deluxe</span>
+                    {baselineTier === 'deluxe' && (
+                      <span className={`text-[9px] font-extrabold uppercase tracking-wider ${tourTier === 'deluxe' ? 'text-amber-300' : 'text-brand-600'}`}>Included</span>
+                    )}
                   </button>
                   <button
                     onClick={() => { setTourTier('luxury'); setIsPriceCalculated(false); }}
-                    className={`py-2 rounded-lg transition-all cursor-pointer ${
+                    className={`py-2 rounded-lg transition-all cursor-pointer flex flex-col items-center justify-center ${
                       tourTier === 'luxury' ? 'bg-amber-500 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
-                    5★ Luxury
+                    <span>5★ Luxury</span>
+                    {baselineTier === 'luxury' && (
+                      <span className={`text-[9px] font-extrabold uppercase tracking-wider ${tourTier === 'luxury' ? 'text-amber-200' : 'text-amber-600'}`}>Included</span>
+                    )}
                   </button>
                 </div>
               </div>
