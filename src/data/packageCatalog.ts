@@ -1000,47 +1000,55 @@ export function getCatalogPackageCount(): number {
 }
 
 export function findCatalogPackage(
-  destinationParam?: string,
-  packageParam?: string
+  param1?: string,
+  param2?: string
 ): HolidayPackage | undefined {
   const { lookup, all } = initializeCatalog();
-  const decodedPkg = decodeURIComponent(packageParam || '').toLowerCase().trim();
-  const decodedDest = decodeURIComponent(destinationParam || '').toLowerCase().trim();
+  const p1 = decodeURIComponent(param1 || '').toLowerCase().trim();
+  const p2 = decodeURIComponent(param2 || '').toLowerCase().trim();
 
-  if (!decodedPkg && !decodedDest) return all[0];
+  if (!p1 && !p2) return all[0];
 
-  // 1. Exact match in full catalog lookup map (O(1))
-  if (decodedPkg) {
-    const direct = lookup.get(decodedPkg);
+  // Candidates to test for exact package ID or slug match:
+  // If p2 is provided, test p2 first (standard signature: findCatalogPackage(destination, packageSlug))
+  const pkgCandidates = p2 ? [p2, p1] : [p1];
+
+  for (const candidate of pkgCandidates) {
+    if (!candidate) continue;
+
+    // Direct lookup map match
+    const direct = lookup.get(candidate);
     if (direct) return direct;
 
-    const stripped = decodedPkg.replace(/^pkg-/, '');
+    const stripped = candidate.replace(/^pkg-/, '');
     const strippedMatch = lookup.get(stripped);
     if (strippedMatch) return strippedMatch;
 
-    const withPrefix = lookup.get('pkg-' + decodedPkg);
+    const withPrefix = lookup.get('pkg-' + candidate);
     if (withPrefix) return withPrefix;
-  }
 
-  // 2. Substring match in all verified packages
-  if (decodedPkg) {
-    const otaSubstr = all.find(
+    // Substring / Slug match across all packages
+    const otaMatch = all.find(
       (p) =>
-        p.slug.toLowerCase().includes(decodedPkg) ||
-        decodedPkg.includes(p.slug.toLowerCase()) ||
-        p.name.toLowerCase().includes(decodedPkg)
+        p.slug.toLowerCase() === candidate ||
+        p.id.toLowerCase() === candidate ||
+        p.slug.toLowerCase().includes(candidate) ||
+        candidate.includes(p.slug.toLowerCase()) ||
+        p.name.toLowerCase().includes(candidate)
     );
-    if (otaSubstr) return otaSubstr;
+    if (otaMatch) return otaMatch;
   }
 
-  // 3. Destination match fallback
-  if (decodedDest) {
+  // Destination match fallback
+  const destCandidates = p1 ? [p1, p2] : [p2];
+  for (const dest of destCandidates) {
+    if (!dest) continue;
     const destMatch = all.find(
       (p) =>
-        p.destinationSlug.toLowerCase() === decodedDest ||
-        (p.citySlugs && p.citySlugs.includes(decodedDest)) ||
-        (p.stateSlug && p.stateSlug.toLowerCase() === decodedDest) ||
-        p.destination.toLowerCase().includes(decodedDest)
+        p.destinationSlug.toLowerCase() === dest ||
+        (p.citySlugs && p.citySlugs.includes(dest)) ||
+        (p.stateSlug && p.stateSlug.toLowerCase() === dest) ||
+        p.destination.toLowerCase().includes(dest)
     );
     if (destMatch) return destMatch;
   }

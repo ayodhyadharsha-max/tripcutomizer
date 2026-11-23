@@ -118,62 +118,78 @@ export function tripcustomizerHolidayView() {
   const bestSellingIndia = allVerifiedCatalog.filter((p) => !p.isInternational).slice(0, 3);
   const currentBestSelling = bestSellingCategory === 'INTERNATIONAL' ? bestSellingIntl : bestSellingIndia;
 
-  // International Holiday Region Cards
+  // Dynamic Starting Price Resolution Helper
+  const getDestPrice = (slug: string, fallback: number) => {
+    const clean = slug.toLowerCase().trim();
+    const matched = allVerifiedCatalog.filter(
+      (p) =>
+        p.destinationSlug.toLowerCase() === clean ||
+        (p.citySlugs && p.citySlugs.includes(clean)) ||
+        (p.stateSlug && p.stateSlug.toLowerCase() === clean) ||
+        p.destination.toLowerCase().includes(clean)
+    );
+    if (matched.length > 0) {
+      return Math.min(...matched.map((p) => p.startingPrice));
+    }
+    return fallback;
+  };
+
+  // International Holiday Region Cards (Matched 100% to live verified package starting prices)
   const intlRegionCards: Record<string, { title: string; price: number; image: string; slug: string }[]> = {
     Europe: [
-      { title: 'Switzerland', price: 137200, image: '/destinations/switzerland.jpg', slug: 'switzerland' },
-      { title: 'France', price: 80200, image: '/destinations/france.jpg', slug: 'france' },
-      { title: 'United Kingdom', price: 89800, image: '/destinations/uk.jpg', slug: 'uk' },
+      { title: 'Switzerland', price: getDestPrice('switzerland', 63499), image: '/destinations/switzerland.jpg', slug: 'switzerland' },
+      { title: 'France', price: getDestPrice('europe', 63499), image: '/destinations/france.jpg', slug: 'europe' },
+      { title: 'United Kingdom', price: getDestPrice('europe', 63499), image: '/destinations/uk.jpg', slug: 'europe' },
     ],
     Asia: [
-      { title: 'Singapore', price: 37800, image: '/destinations/singapore.jpg', slug: 'singapore' },
-      { title: 'Bali & Indonesia', price: 28500, image: '/destinations/bali.jpg', slug: 'bali' },
-      { title: 'Japan & Cherry Blossom', price: 125000, image: '/destinations/japan.jpg', slug: 'japan' },
+      { title: 'Singapore', price: getDestPrice('singapore', 29999), image: '/destinations/singapore.jpg', slug: 'singapore' },
+      { title: 'Bali & Indonesia', price: getDestPrice('bali', 19999), image: '/destinations/bali.jpg', slug: 'bali' },
+      { title: 'Japan & Cherry Blossom', price: getDestPrice('japan', 55999), image: '/destinations/japan.jpg', slug: 'japan' },
     ],
     Oceania: [
-      { title: 'Australia Extravaganza', price: 185000, image: '/destinations/australia.jpg', slug: 'australia' },
-      { title: 'New Zealand Adventure', price: 167300, image: '/destinations/new-zealand.jpg', slug: 'new-zealand' },
+      { title: 'Australia Extravaganza', price: getDestPrice('australia', 61499), image: '/destinations/australia.jpg', slug: 'australia' },
+      { title: 'New Zealand Adventure', price: getDestPrice('australia', 61499), image: '/destinations/new-zealand.jpg', slug: 'australia' },
     ],
     'Middle East': [
-      { title: 'Dubai & Abu Dhabi', price: 34500, image: '/destinations/dubai.jpg', slug: 'dubai' },
-      { title: 'Turkey & Cappadocia', price: 78000, image: '/destinations/turkey.jpg', slug: 'turkey' },
+      { title: 'Dubai & Abu Dhabi', price: getDestPrice('dubai', 25999), image: '/destinations/dubai.jpg', slug: 'dubai' },
+      { title: 'Turkey & Cappadocia', price: getDestPrice('turkey', 25999), image: '/destinations/turkey.jpg', slug: 'turkey' },
     ],
     Africa: [
-      { title: 'South Africa Safari', price: 115000, image: '/destinations/south-africa.jpg', slug: 'south-africa' },
-      { title: 'Egypt Pyramids & Nile', price: 49000, image: '/destinations/egypt.jpg', slug: 'egypt' },
+      { title: 'South Africa Safari', price: getDestPrice('south-africa', 56999), image: '/destinations/south-africa.jpg', slug: 'south-africa' },
+      { title: 'Egypt Pyramids & Nile', price: getDestPrice('egypt', 25999), image: '/destinations/egypt.jpg', slug: 'egypt' },
     ],
     America: [
-      { title: 'USA East Coast & West Coast', price: 245000, image: '/destinations/usa.jpg', slug: 'usa' },
+      { title: 'USA East Coast & West Coast', price: getDestPrice('usa', 61499), image: '/destinations/usa.jpg', slug: 'usa' },
     ],
   };
 
   // India & Around Region Cards (Matched 100% to live verified package starting prices)
   const indiaRegionCards: Record<string, { title: string; price: number; image: string; slug: string }[]> = {
     North: [
-      { title: 'Kashmir', price: 38700, image: '/destinations/kashmir.jpg', slug: 'kashmir' },
-      { title: 'Himachal Pradesh', price: 34200, image: '/destinations/himachal.jpg', slug: 'himachal' },
-      { title: 'Uttarakhand', price: 15600, image: '/destinations/uttarakhand.jpg', slug: 'uttarakhand' },
-      { title: 'Uttar Pradesh (Kashi)', price: 19900, image: '/destinations/up.jpg', slug: 'ayodhya-varanasi' },
+      { title: 'Kashmir', price: getDestPrice('kashmir', 21999), image: '/destinations/kashmir.jpg', slug: 'kashmir' },
+      { title: 'Himachal Pradesh', price: getDestPrice('himachal', 16999), image: '/destinations/himachal.jpg', slug: 'himachal' },
+      { title: 'Uttarakhand', price: getDestPrice('uttarakhand', 16999), image: '/destinations/uttarakhand.jpg', slug: 'uttarakhand' },
+      { title: 'Uttar Pradesh (Kashi)', price: getDestPrice('ayodhya', 13499), image: '/destinations/up.jpg', slug: 'ayodhya-varanasi' },
     ],
     South: [
-      { title: 'Kerala Backwaters', price: 34500, image: '/destinations/kerala.jpg', slug: 'kerala' },
-      { title: 'Coorg & Wayanad', price: 22300, image: '/destinations/coorg.jpg', slug: 'coorg' },
-      { title: 'Tamil Nadu Temples', price: 19900, image: '/destinations/tamilnadu.jpg', slug: 'rameshwaram' },
+      { title: 'Kerala Backwaters', price: getDestPrice('kerala', 21999), image: '/destinations/kerala.jpg', slug: 'kerala' },
+      { title: 'Coorg & Wayanad', price: getDestPrice('coorg', 16999), image: '/destinations/coorg.jpg', slug: 'coorg' },
+      { title: 'Tamil Nadu Temples', price: getDestPrice('tamilnadu', 16999), image: '/destinations/tamilnadu.jpg', slug: 'tamilnadu' },
     ],
     East: [
-      { title: 'Sikkim & Darjeeling', price: 32600, image: '/destinations/sikkim.jpg', slug: 'sikkim' },
-      { title: 'Meghalaya Scotland of East', price: 27500, image: '/destinations/meghalaya.jpg', slug: 'meghalaya' },
-      { title: 'Puri Jagannath Odisha', price: 18200, image: '/destinations/puri.jpg', slug: 'puri' },
+      { title: 'Sikkim & Darjeeling', price: getDestPrice('sikkim', 18999), image: '/destinations/sikkim.jpg', slug: 'sikkim' },
+      { title: 'Meghalaya Scotland of East', price: getDestPrice('north-east', 18999), image: '/destinations/meghalaya.jpg', slug: 'north-east' },
+      { title: 'Puri Jagannath Odisha', price: getDestPrice('puri', 16999), image: '/destinations/puri.jpg', slug: 'puri' },
     ],
     West: [
-      { title: 'Rajasthan Forts & Palaces', price: 27500, image: '/destinations/rajasthan.jpg', slug: 'rajasthan' },
-      { title: 'Goa Beaches & Watersports', price: 22300, image: '/destinations/goa.jpg', slug: 'goa' },
-      { title: 'Gujarat Rann of Kutch', price: 23500, image: '/destinations/gujarat.jpg', slug: 'kutch' },
+      { title: 'Rajasthan Forts & Palaces', price: getDestPrice('rajasthan', 15999), image: '/destinations/rajasthan.jpg', slug: 'rajasthan' },
+      { title: 'Goa Beaches & Watersports', price: getDestPrice('goa', 16999), image: '/destinations/goa.jpg', slug: 'goa' },
+      { title: 'Gujarat Rann of Kutch', price: getDestPrice('gujarat', 13499), image: '/destinations/gujarat.jpg', slug: 'kutch' },
     ],
     Around: [
-      { title: 'Bhutan Dragon Kingdom', price: 48000, image: '/destinations/bhutan.jpg', slug: 'bhutan' },
-      { title: 'Nepal Kathmandu & Pokhara', price: 15000, image: '/destinations/nepal.jpg', slug: 'nepal' },
-      { title: 'Sri Lanka Coastal Paradise', price: 29000, image: '/destinations/sri-lanka.jpg', slug: 'sri-lanka' },
+      { title: 'Bhutan Dragon Kingdom', price: getDestPrice('bhutan', 24999), image: '/destinations/bhutan.jpg', slug: 'bhutan' },
+      { title: 'Nepal Kathmandu & Pokhara', price: getDestPrice('nepal', 17999), image: '/destinations/nepal.jpg', slug: 'nepal' },
+      { title: 'Sri Lanka Coastal Paradise', price: getDestPrice('sri-lanka', 17999), image: '/destinations/sri-lanka.jpg', slug: 'sri-lanka' },
     ],
   };
 
@@ -182,14 +198,14 @@ export function tripcustomizerHolidayView() {
     {
       title: 'Singapore',
       subtitle: 'Feel the Magic, Live the Adventure.',
-      price: 37800,
+      price: getDestPrice('singapore', 29999),
       image: '/destinations/singapore.jpg',
       slug: 'singapore',
     },
     {
       title: 'Rajasthan',
       subtitle: 'Grandeur, Reimagined.',
-      price: 27500,
+      price: getDestPrice('rajasthan', 15999),
       image: '/destinations/rajasthan.jpg',
       slug: 'rajasthan',
     },

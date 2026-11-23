@@ -622,8 +622,14 @@ export function PackageDetailClientView({ params }: { params: { destination: str
 
   const calculatedBaseRate = calculateTierPrice(tourTier);
   const basePricePerPerson = Math.round(calculatedBaseRate * paxMultiplier);
-  const originalPricePerPerson = Math.round(basePricePerPerson * 1.25);
-  const discountPercent = 20;
+  const originalPricePerPerson =
+    tourTier === 'standard' && pkg.discountPrice && pkg.discountPrice > pkg.startingPrice
+      ? Math.round(pkg.discountPrice * paxMultiplier)
+      : Math.round(basePricePerPerson * 1.20);
+  const discountPercent =
+    originalPricePerPerson > basePricePerPerson
+      ? Math.round(((originalPricePerPerson - basePricePerPerson) / originalPricePerPerson) * 100)
+      : 18;
 
   // Dynamic Tier-Based Hotel Resolution Helper (MakeMyTrip 3-Star, 4-Star & 5-Star Tiers)
   const getTierHotelName = (
@@ -1811,7 +1817,7 @@ export function PackageDetailClientView({ params }: { params: { destination: str
                   <span className="text-xs text-slate-500 font-semibold">/ adult</span>
                 </div>
                 <span className="text-[10px] text-slate-500 block font-medium">
-                  {effectiveAdultsCount === 1 ? 'Solo Traveler Rate (Private Room & Cab Included)' : effectiveAdultsCount === 2 ? 'Twin Sharing Couple Rate (Per Adult)' : 'Group Saver Rate (Per Adult)'}
+                  {effectiveAdultsCount === 1 ? 'Solo Traveler Rate (Private Room & Cab Included)' : effectiveAdultsCount === 2 ? `Twin Sharing Couple Rate • Total ${formatCurrency(effectiveAdultsCount * basePricePerPerson)} for 2 Adults` : `Group Saver Rate • Total ${formatCurrency(effectiveAdultsCount * basePricePerPerson)} for ${effectiveAdultsCount} Adults`}
                 </span>
               </div>
 
@@ -2528,7 +2534,7 @@ export function PackageDetailClientView({ params }: { params: { destination: str
                       <span className="text-3xl font-black text-slate-900">{formatCurrency(basePricePerPerson)}</span>
                     </div>
                     <span className="text-xs text-slate-500 font-semibold block mt-0.5">
-                      {effectiveAdultsCount === 1 ? 'Solo Traveler Rate (Private Room & Cab Included)' : effectiveAdultsCount === 2 ? 'Twin Sharing Couple Rate (Per Adult)' : 'Group Saver Rate (Per Adult)'}
+                      {effectiveAdultsCount === 1 ? 'Solo Traveler Rate (Private Room & Cab Included)' : effectiveAdultsCount === 2 ? `Twin Sharing Couple Rate • Total ${formatCurrency(effectiveAdultsCount * basePricePerPerson)} for 2 Adults` : `Group Saver Rate • Total ${formatCurrency(effectiveAdultsCount * basePricePerPerson)} for ${effectiveAdultsCount} Adults`}
                     </span>
                   </div>
 

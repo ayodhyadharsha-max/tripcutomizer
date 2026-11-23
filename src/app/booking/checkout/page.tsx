@@ -67,23 +67,17 @@ export default function BookingCheckoutPage() {
         matched = getAllCatalogPackages().find((p) => p.name.toLowerCase().includes(title.toLowerCase()));
       }
 
-      const tierParam = params.get('tier') || 'deluxe';
       const parsedUrlPrice = priceStr ? parseInt(priceStr, 10) : null;
-      const tierMultiplier = tierParam === 'standard' ? 0.85 : tierParam === 'super_deluxe' || tierParam === 'luxury' ? 1.45 : 1.0;
       const travelersCount = paxStr ? Math.max(1, parseInt(paxStr, 10)) : 2;
-      const paxMultiplier =
-        travelersCount === 1 ? 1.40 :
-        travelersCount === 2 ? 1.20 :
-        travelersCount === 3 ? 1.10 :
-        travelersCount === 4 ? 1.05 :
-        1.00;
+      const defaultMatchedPrice = matched ? matched.startingPrice : 14999;
+      const finalPricePerPerson = parsedUrlPrice && parsedUrlPrice > 0 ? parsedUrlPrice : defaultMatchedPrice;
 
       if (matched) {
         setPkgInfo({
           name: matched.name,
           destination: matched.destination,
           duration: `${matched.durationDays} Days / ${matched.durationNights} Nights`,
-          pricePerPerson: parsedUrlPrice || Math.round(matched.startingPrice * paxMultiplier * tierMultiplier),
+          pricePerPerson: finalPricePerPerson,
           travelersCount: travelersCount,
         });
         setHasBookingContext(true);
@@ -92,7 +86,7 @@ export default function BookingCheckoutPage() {
           name: title || 'Customized Holiday Package',
           destination: dest || 'India',
           duration: '5 Days / 4 Nights',
-          pricePerPerson: priceStr ? parseInt(priceStr, 10) : 14500,
+          pricePerPerson: finalPricePerPerson,
           travelersCount: travelersCount,
         });
         setHasBookingContext(true);
