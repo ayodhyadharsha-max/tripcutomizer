@@ -1112,16 +1112,16 @@ export const HYDERABAD_CITYSCAPE_PACKAGE: HolidayPackage = {
     'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=1200&q=80&fm=webp&fit=crop',
   ],
   highlights: [
+    'Full-Day Ramoji Film City studio tour & Snow World indoor snow park',
+    'Nizam Heritage Trail: Charminar, Mecca Masjid & Chowmohalla Palace',
+    'World-famous Salarjung Museum & Hyderabadi pearl shopping',
+    'Hussain Sagar Lake boat cruise to monolithic Buddha statue',
     'Clean Verified 3-Star Accommodations (Hotel Deccan Serai / Treebo Trend)',
-    'Iconic Charminar, Mecca Masjid & Laad Bazaar Heritage Walk',
-    'Full-Day Ramoji Film City Studio Tour with Entertainment Shows',
-    'Historical Golconda Fort Citadel & Royal Qutb Shahi Tombs Visit',
-    'Salar Jung Museum Art Galleries & Monolithic Buddha Boat Ride',
     'Private AC Sedan Cab reserved exclusively for your travel group',
   ],
   inclusions: [
     '4 Nights stay in verified 3-Star Standard hotels (Hotel Deccan Serai / Treebo Trend)',
-    'Daily wholesome breakfast included at hotel',
+    'Daily Breakfast & Dinner Included (MAP Plan)',
     'Private AC Sedan vehicle for all airport/station transfers and scheduled sightseeing',
     'Full-day Ramoji Film City tour excursion with entry passes included',
     'Hussain Sagar Lake boat cruise ticket to monolithic Buddha statue',
@@ -1228,7 +1228,7 @@ export const HYDERABAD_CITYSCAPE_PACKAGE: HolidayPackage = {
   ],
   theme: 'Cityscape Escape',
   hotelCategory: '3-Star Standard',
-  mealPlan: 'Daily Breakfast Included',
+  mealPlan: 'Breakfast & Dinner Included',
   flightsIncluded: false,
   transfersIncluded: true,
   departureCity: 'Flexible Origin / Hyderabad Pickup',
@@ -1316,8 +1316,39 @@ export function getAllCatalogPackages(): HolidayPackage[] {
       const rawCustom = localStorage.getItem('tc_cloud_custom_packages_v1');
       const customPackages: HolidayPackage[] = rawCustom ? JSON.parse(rawCustom) : [];
 
-      const activeLegacy = isLegacyDeleted ? [] : baseCatalog;
-      return [...customPackages, ...activeLegacy];
+      // Curated map to override stale localStorage items
+      const curatedMap = new Map<string, HolidayPackage>();
+      CURATED_CUSTOM_PACKAGES.forEach((cp) => {
+        curatedMap.set(cp.id.toLowerCase(), cp);
+        curatedMap.set(cp.slug.toLowerCase(), cp);
+      });
+
+      let hasUpdates = false;
+      const sanitizedCustom = customPackages.map((cp) => {
+        const cur = curatedMap.get(cp.id.toLowerCase()) || curatedMap.get(cp.slug.toLowerCase());
+        if (cur) {
+          hasUpdates = true;
+          return { ...cp, ...cur };
+        }
+        return cp;
+      });
+
+      if (hasUpdates) {
+        try {
+          localStorage.setItem('tc_cloud_custom_packages_v1', JSON.stringify(sanitizedCustom));
+        } catch {}
+      }
+
+      // Avoid duplicates between sanitizedCustom and baseCatalog
+      const customIds = new Set(
+        sanitizedCustom.map((p) => p.id.toLowerCase()).concat(sanitizedCustom.map((p) => p.slug.toLowerCase()))
+      );
+      const nonDuplicateBase = baseCatalog.filter(
+        (p) => !customIds.has(p.id.toLowerCase()) && !customIds.has(p.slug.toLowerCase())
+      );
+
+      const activeLegacy = isLegacyDeleted ? [] : nonDuplicateBase;
+      return [...sanitizedCustom, ...activeLegacy];
     } catch (e) {
       return baseCatalog;
     }
