@@ -4,13 +4,13 @@ import Image from 'next/image';
 import { permanentRedirect } from 'next/navigation';
 import { Container } from '@/components/ui/Container';
 import { Card } from '@/components/ui/Card';
-import { DEMO_PACKAGES } from '@/data/packagesData';
+import { getCatalogPackagesByDestination } from '@/data/packageCatalog';
 import { formatCurrency } from '@/lib/utils';
 import { MapPin, Sun, DollarSign, FileCheck, Compass, ArrowRight, ChevronRight } from 'lucide-react';
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const destSlug = params.slug.toLowerCase().trim();
-  const packages = DEMO_PACKAGES.filter((p) => p.destinationSlug === destSlug);
+  const packages = getCatalogPackagesByDestination(destSlug);
   if (packages.length === 0) {
     const cleanSlug = destSlug
       .replace(/-tour-packages?$/, '')
@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 export default function DestinationMasterSeoPage({ params }: { params: { slug: string } }) {
   const destSlug = params.slug.toLowerCase().trim();
-  const packages = DEMO_PACKAGES.filter((p) => p.destinationSlug === destSlug);
+  const packages = getCatalogPackagesByDestination(destSlug);
   if (packages.length === 0) {
     const cleanSlug = destSlug
       .replace(/-tour-packages?$/, '')

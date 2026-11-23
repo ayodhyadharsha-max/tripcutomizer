@@ -3,13 +3,14 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Container } from '@/components/ui/Container';
 import { Card } from '@/components/ui/Card';
-import { DEMO_PACKAGES } from '@/data/packagesData';
+import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { formatCurrency } from '@/lib/utils';
 import { Anchor, Clock, Star, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
 export default function CruisesPage() {
-  const cruisePkgs = DEMO_PACKAGES.filter((p) => p.theme === 'Cruise' || p.slug.includes('cruise'));
-  const pkg = cruisePkgs[0] || DEMO_PACKAGES[5];
+  const allCatalog = getAllCatalogPackages();
+  const cruisePkgs = allCatalog.filter((p) => p.theme === 'Cruise' || p.slug.includes('cruise') || p.slug.includes('boat') || p.destinationSlug === 'kerala');
+  const pkg = cruisePkgs[0] || allCatalog[0];
 
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',

@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { DEMO_PACKAGES } from '@/data/packagesData';
+import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
 export const metadata: Metadata = {
@@ -45,7 +45,8 @@ export const metadata: Metadata = {
 };
 
 export default function CharDhamPage() {
-  const matchedPackages = DEMO_PACKAGES.filter((p) =>
+  const allCatalog = getAllCatalogPackages();
+  const matchedPackages = allCatalog.filter((p) =>
     p.destinationSlug.toLowerCase().includes('char-dham') ||
     p.destinationSlug.toLowerCase().includes('kedarnath') ||
     p.name.toLowerCase().includes('char dham') ||
@@ -126,7 +127,7 @@ export default function CharDhamPage() {
         title="Char Dham Yatra Sacred Tour Package 2026 (Ayodhya & Delhi Departure)"
         subtitle="Embark on the holy 10N/11D yatra covering Yamunotri, Gangotri, Kedarnath & Badrinath with AC transport, hotel stays, and puja assistance."
         defaultDestinationSlug="char-dham"
-        initialPackages={matchedPackages.length > 0 ? matchedPackages : DEMO_PACKAGES.slice(0, 3)}
+        initialPackages={matchedPackages.length > 0 ? matchedPackages : allCatalog.slice(0, 3)}
       />
     </>
   );

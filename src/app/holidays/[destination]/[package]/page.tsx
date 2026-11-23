@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { DEMO_PACKAGES, HolidayPackage } from '@/data/packagesData';
+import { HolidayPackage } from '@/data/packagesData';
 import { findCatalogPackage } from '@/data/packageCatalog';
 import { PackageDetailClientView } from '@/components/holidays/PackageDetailClientView';
 
@@ -9,12 +9,7 @@ function getMatchedPackage(destinationParam: string, packageParam: string): Holi
   const decodedPkgParam = decodeURIComponent(packageParam || '').toLowerCase().trim();
   const decodedDestParam = decodeURIComponent(destinationParam || '').toLowerCase().trim();
 
-  // Multi-tier package lookup (Exact match first across DEMO and 3,690+ catalog packages)
-  return (
-    findCatalogPackage(decodedDestParam, decodedPkgParam) ||
-    DEMO_PACKAGES.find((p) => p.slug.toLowerCase() === decodedPkgParam || p.id.toLowerCase() === decodedPkgParam) ||
-    null
-  );
+  return findCatalogPackage(decodedDestParam, decodedPkgParam) || null;
 }
 
 export async function generateMetadata({

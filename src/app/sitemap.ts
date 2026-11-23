@@ -1,5 +1,4 @@
 import { MetadataRoute } from 'next';
-import { DEMO_PACKAGES } from '@/data/packagesData';
 import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { getAllProgrammaticSlugs } from '@/data/programmaticPackages';
 
@@ -341,9 +340,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const allCatalog = getAllCatalogPackages();
-  const demoSlugs = DEMO_PACKAGES.map((p) => p.destinationSlug);
   const catalogDestSlugs = allCatalog.map((p) => p.destinationSlug);
-  const destinationSlugs = Array.from(new Set([...targetIntlKeywords, ...targetSpiritualKeywords, ...demoSlugs, ...catalogDestSlugs]));
+  const destinationSlugs = Array.from(new Set([...targetIntlKeywords, ...targetSpiritualKeywords, ...catalogDestSlugs]));
 
   const holidayDestinationPages: MetadataRoute.Sitemap = destinationSlugs.map((slug) => ({
     url: `${baseUrl}/holidays/${slug}`,

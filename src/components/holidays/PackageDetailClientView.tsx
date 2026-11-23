@@ -8,8 +8,8 @@ import { Container } from '@/components/ui/Container';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
-import { DEMO_PACKAGES, HolidayPackage } from '@/data/packagesData';
-import { findCatalogPackage } from '@/data/packageCatalog';
+import { HolidayPackage } from '@/data/packagesData';
+import { findCatalogPackage, getAllCatalogPackages } from '@/data/packageCatalog';
 import { formatCurrency } from '@/lib/utils';
 import { useAuth } from '@/context/AuthContext';
 import { cloudStore, CoTraveller } from '@/lib/cloudStore';
@@ -270,11 +270,10 @@ export function PackageDetailClientView({ params }: { params: { destination: str
   const decodedPkgParam = decodeURIComponent(params.package || '').toLowerCase().trim();
   const decodedDestParam = decodeURIComponent(params.destination || '').toLowerCase().trim();
 
-  // Multi-tier package lookup (Exact match first across DEMO and 3,690+ catalog packages)
+  // Multi-tier package lookup (Exact match across live verified catalog packages)
   const pkg: HolidayPackage =
     findCatalogPackage(decodedDestParam, decodedPkgParam) ||
-    DEMO_PACKAGES.find((p) => p.slug.toLowerCase() === decodedPkgParam || p.id.toLowerCase() === decodedPkgParam) ||
-    DEMO_PACKAGES[0];
+    getAllCatalogPackages()[0];
 
   // Active Main Sub-Tab State
   const [activeTab, setActiveTab] = useState<'itinerary' | 'inclusions' | 'summary' | 'highlights' | 'faqs'>('itinerary');

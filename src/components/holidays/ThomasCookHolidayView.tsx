@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { Container } from '@/components/ui/Container';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { DEMO_PACKAGES, HolidayPackage } from '@/data/packagesData';
+import { HolidayPackage } from '@/data/packagesData';
 import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { formatCurrency } from '@/lib/utils';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
@@ -113,8 +113,9 @@ export function tripcustomizerHolidayView() {
   const currentTrending = trendingCategory === 'INTERNATIONAL' ? internationalTrending : indiaTrending;
 
   // Best Selling Packages Data
-  const bestSellingIntl = DEMO_PACKAGES.filter((p) => p.isInternational).slice(0, 3);
-  const bestSellingIndia = DEMO_PACKAGES.filter((p) => !p.isInternational).slice(0, 3);
+  const allVerifiedCatalog = getAllCatalogPackages();
+  const bestSellingIntl = allVerifiedCatalog.filter((p) => p.isInternational).slice(0, 3);
+  const bestSellingIndia = allVerifiedCatalog.filter((p) => !p.isInternational).slice(0, 3);
   const currentBestSelling = bestSellingCategory === 'INTERNATIONAL' ? bestSellingIntl : bestSellingIndia;
 
   // International Holiday Region Cards

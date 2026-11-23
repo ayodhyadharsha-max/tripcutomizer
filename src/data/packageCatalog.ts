@@ -1,4 +1,4 @@
-import { DEMO_PACKAGES, HolidayPackage, ItineraryDay } from './packagesData';
+import { HolidayPackage, ItineraryDay } from './packagesData';
 
 export interface SectorDefinition {
   region: string;
@@ -1227,22 +1227,15 @@ function initializeCatalog(): { all: HolidayPackage[]; lookup: Map<string, Holid
   const lookup = new Map<string, HolidayPackage>();
   const all: HolidayPackage[] = [];
 
-  // 1. TIER 1: Add existing 130 detailed packages first (top priority)
-  for (const pkg of DEMO_PACKAGES) {
-    all.push(pkg);
-    lookup.set(pkg.id.toLowerCase(), pkg);
-    lookup.set(pkg.slug.toLowerCase(), pkg);
-    lookup.set('pkg-' + pkg.slug.toLowerCase(), pkg);
-    lookup.set(pkg.id.toLowerCase().replace(/^pkg-/, ''), pkg);
-  }
-
-  // 2. TIER 2: Synthesize complete verified OTA packages per sector (Full 5,500+ pan-India & global inventory)
+  // Synthesize complete verified live OTA packages per sector
   OTA_DOMESTIC_SECTORS.forEach((sector, sIdx) => {
     for (let pIdx = 0; pIdx < sector.count; pIdx++) {
       const pkg = generateSynthesizedPackage(sector, sIdx, pIdx);
       all.push(pkg);
       lookup.set(pkg.id.toLowerCase(), pkg);
       lookup.set(pkg.slug.toLowerCase(), pkg);
+      lookup.set('pkg-' + pkg.slug.toLowerCase(), pkg);
+      lookup.set(pkg.id.toLowerCase().replace(/^pkg-/, ''), pkg);
     }
   });
 
@@ -1252,6 +1245,8 @@ function initializeCatalog(): { all: HolidayPackage[]; lookup: Map<string, Holid
       all.push(pkg);
       lookup.set(pkg.id.toLowerCase(), pkg);
       lookup.set(pkg.slug.toLowerCase(), pkg);
+      lookup.set('pkg-' + pkg.slug.toLowerCase(), pkg);
+      lookup.set(pkg.id.toLowerCase().replace(/^pkg-/, ''), pkg);
     }
   });
 
@@ -1279,27 +1274,7 @@ export function findCatalogPackage(
 
   if (!decodedPkg && !decodedDest) return all[0];
 
-  // 1. Exact ID match in DEMO_PACKAGES (Tier 1 Handcrafted priority)
-  let matched = DEMO_PACKAGES.find((p) => p.id.toLowerCase() === decodedPkg);
-  if (matched) return matched;
-
-  // 2. Exact slug match in DEMO_PACKAGES
-  matched = DEMO_PACKAGES.find((p) => p.slug.toLowerCase() === decodedPkg);
-  if (matched) return matched;
-
-  // 3. Match ID with pkg- prefix added or stripped
-  if (decodedPkg) {
-    matched = DEMO_PACKAGES.find((p) => p.id.toLowerCase() === 'pkg-' + decodedPkg);
-    if (matched) return matched;
-
-    const stripped = decodedPkg.replace(/^pkg-/, '');
-    matched = DEMO_PACKAGES.find(
-      (p) => p.slug.toLowerCase() === stripped || p.id.toLowerCase().replace(/^pkg-/, '') === stripped
-    );
-    if (matched) return matched;
-  }
-
-  // 4. Exact match in full catalog lookup map (O(1) for all 5,450 OTA packages)
+  // 1. Exact match in full catalog lookup map (O(1))
   if (decodedPkg) {
     const direct = lookup.get(decodedPkg);
     if (direct) return direct;
@@ -1312,18 +1287,7 @@ export function findCatalogPackage(
     if (withPrefix) return withPrefix;
   }
 
-  // 5. Substring match in DEMO_PACKAGES
-  if (decodedPkg) {
-    matched = DEMO_PACKAGES.find(
-      (p) =>
-        p.slug.toLowerCase().includes(decodedPkg) ||
-        decodedPkg.includes(p.slug.toLowerCase()) ||
-        p.name.toLowerCase().includes(decodedPkg)
-    );
-    if (matched) return matched;
-  }
-
-  // 6. Substring match in all OTA packages
+  // 2. Substring match in all verified packages
   if (decodedPkg) {
     const otaSubstr = all.find(
       (p) =>
@@ -1334,11 +1298,13 @@ export function findCatalogPackage(
     if (otaSubstr) return otaSubstr;
   }
 
-  // 7. Destination match fallback
+  // 3. Destination match fallback
   if (decodedDest) {
     const destMatch = all.find(
       (p) =>
         p.destinationSlug.toLowerCase() === decodedDest ||
+        (p.citySlugs && p.citySlugs.includes(decodedDest)) ||
+        (p.stateSlug && p.stateSlug.toLowerCase() === decodedDest) ||
         p.destination.toLowerCase().includes(decodedDest)
     );
     if (destMatch) return destMatch;

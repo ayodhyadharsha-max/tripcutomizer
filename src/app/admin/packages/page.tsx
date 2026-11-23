@@ -3,12 +3,12 @@
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { DEMO_PACKAGES } from '@/data/packagesData';
+import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { formatCurrency } from '@/lib/utils';
 import { Compass, Plus, Edit, Trash2 } from 'lucide-react';
 
 export default function AdminPackagesPage() {
-  const [packages, setPackages] = useState(DEMO_PACKAGES);
+  const [packages, setPackages] = useState(() => getAllCatalogPackages());
 
   return (
     <div className="space-y-6">

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { Container } from '@/components/ui/Container';
 import { Card } from '@/components/ui/Card';
-import { DEMO_PACKAGES } from '@/data/packagesData';
+import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { formatCurrency } from '@/lib/utils';
 import { Heart, Clock, ArrowRight } from 'lucide-react';
 
@@ -59,7 +59,18 @@ export default function HoneymoonPage() {
     ],
   };
 
-  const honeymoonPackages = DEMO_PACKAGES.filter((p) => p.theme === 'Honeymoon' || p.slug.includes('bali') || p.slug.includes('maldives'));
+  const allCatalog = getAllCatalogPackages();
+  const honeymoonPackages = allCatalog.filter(
+    (p) =>
+      p.theme === 'Honeymoon' ||
+      p.slug.includes('honeymoon') ||
+      p.slug.includes('bali') ||
+      p.slug.includes('maldives') ||
+      p.destinationSlug === 'bali' ||
+      p.destinationSlug === 'maldives' ||
+      p.destinationSlug === 'kerala' ||
+      p.destinationSlug === 'switzerland'
+  ).slice(0, 18);
 
   const itemListJsonLd = {
     '@context': 'https://schema.org',
