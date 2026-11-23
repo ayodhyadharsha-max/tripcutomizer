@@ -501,13 +501,19 @@ export function parsePackagesFromCsv(csvText: string): { packages: HolidayPackag
   const errors: string[] = [];
   const packages: HolidayPackage[] = [];
 
-  const lines = csvText.split(/\r?\n/).filter((l) => l.trim().length > 0);
+  // Strip UTF-8 BOM if present
+  const cleanCsvText = csvText.replace(/^\uFEFF/, '').trim();
+  const lines = cleanCsvText.split(/\r?\n/).filter((l) => l.trim().length > 0);
   if (lines.length < 2) {
     return { packages: [], errors: ['CSV file is empty or missing data rows.'] };
   }
 
+  // Detect delimiter: semicolon if first line has ; and no commas
+  const firstLine = lines[0];
+  const delimiter = firstLine.includes(';') && !firstLine.includes(',') ? ';' : ',';
+
   // Parse CSV line taking into account quoted strings
-  const parseCsvLine = (text: string): string[] => {
+  const parseCsvLine = (text: string, delim: string = ','): string[] => {
     const result: string[] = [];
     let cur = '';
     let inQuotes = false;
@@ -520,7 +526,7 @@ export function parsePackagesFromCsv(csvText: string): { packages: HolidayPackag
         } else {
           inQuotes = !inQuotes;
         }
-      } else if (c === ',' && !inQuotes) {
+      } else if (c === delim && !inQuotes) {
         result.push(cur.trim());
         cur = '';
       } else {
@@ -531,33 +537,75 @@ export function parsePackagesFromCsv(csvText: string): { packages: HolidayPackag
     return result;
   };
 
-  const headers = parseCsvLine(lines[0]).map((h) => h.toLowerCase().replace(/[^a-z0-9_]/g, ''));
+  const headers = parseCsvLine(lines[0], delimiter).map((h) => h.toLowerCase().replace(/[^a-z0-9]/g, ''));
+
+  const cleanNum = (val: any, fallback: number = 0): number => {
+    if (typeof val === 'number') return isNaN(val) ? fallback : val;
+    const str = String(val || '').replace(/[^0-9.]/g, '');
+    const num = parseFloat(str);
+    return isNaN(num) ? fallback : num;
+  };
 
   for (let rowIdx = 1; rowIdx < lines.length; rowIdx++) {
     const rawLine = lines[rowIdx].trim();
     if (!rawLine) continue;
 
-    const values = parseCsvLine(rawLine);
+    const values = parseCsvLine(rawLine, delimiter);
     const rowMap: Record<string, string> = {};
     headers.forEach((h, idx) => {
       rowMap[h] = values[idx] || '';
     });
 
-    const name = rowMap['name'] || rowMap['packagename'] || rowMap['title'];
-    const destination = rowMap['destination'] || rowMap['city'] || 'India';
+    const name =
+      rowMap['name'] ||
+      rowMap['packagename'] ||
+      rowMap['title'] ||
+      rowMap['tourname'] ||
+      rowMap['package'] ||
+      rowMap['tour'] ||
+      rowMap['holidayname'] ||
+      rowMap['holiday'];
+
+    const destination =
+      rowMap['destination'] ||
+      rowMap['destinationslug'] ||
+      rowMap['city'] ||
+      rowMap['place'] ||
+      rowMap['location'] ||
+      rowMap['state'] ||
+      'India';
+
     if (!name) {
       errors.push(`Row ${rowIdx + 1}: Package Name is required.`);
       continue;
     }
 
-    const durationDays = parseInt(rowMap['durationdays'] || rowMap['days'] || '5', 10) || 5;
-    const durationNights = parseInt(rowMap['durationnights'] || rowMap['nights'] || String(durationDays - 1), 10) || (durationDays - 1);
-    const startingPrice = parseFloat(rowMap['startingprice'] || rowMap['price'] || '19999') || 19999;
-    const discountPrice = parseFloat(rowMap['discountprice'] || rowMap['mrpprice'] || '0') || Math.round(startingPrice * 1.18);
-    const theme = rowMap['theme'] || rowMap['category'] || 'Holiday Explorer';
-    const hotelCategory = rowMap['hotelcategory'] || '4-Star Deluxe';
-    const mealPlan = rowMap['mealplan'] || 'Breakfast Included';
-    const destinationSlug = rowMap['destinationslug'] || slugify(destination);
+    // Smart duration parsing (e.g. "5 Days", "4N/5D", "5", etc.)
+    const durRaw = String(rowMap['durationdays'] || rowMap['duration'] || rowMap['days'] || '').trim();
+    const dMatch = durRaw.match(/(\d+)\s*(?:d|days?)/i);
+    const nMatch = durRaw.match(/(\d+)\s*(?:n|nights?)/i);
+    let durationDays = 5;
+    if (dMatch) durationDays = parseInt(dMatch[1], 10);
+    else if (parseInt(durRaw, 10)) durationDays = parseInt(durRaw, 10);
+
+    const nightsRaw = String(rowMap['durationnights'] || rowMap['nights'] || '').trim();
+    let durationNights = Math.max(durationDays - 1, 1);
+    if (nMatch) durationNights = parseInt(nMatch[1], 10);
+    else if (nightsRaw && parseInt(nightsRaw, 10)) durationNights = parseInt(nightsRaw, 10);
+
+    const startingPrice = cleanNum(
+      rowMap['startingprice'] || rowMap['price'] || rowMap['cost'] || rowMap['amount'],
+      19999
+    );
+    const discountPrice = cleanNum(
+      rowMap['discountprice'] || rowMap['mrpprice'] || rowMap['mrp'] || rowMap['originalprice'],
+      Math.round(startingPrice * 1.18)
+    );
+
+    const theme = rowMap['theme'] || rowMap['category'] || rowMap['type'] || 'Holiday Explorer';
+    const hotelCategory = rowMap['hotelcategory'] || rowMap['hotel'] || '4-Star Deluxe';
+    const mealPlan = rowMap['mealplan'] || rowMap['meals'] || 'Breakfast Included';
+    const destinationSlug = rowMap['destinationslug'] ? slugify(rowMap['destinationslug']) : slugify(destination);
     const heroImage = rowMap['heroimage'] || `/destinations/${destinationSlug}.jpg`;
 
     // Parse semicolon / pipe separated lists
@@ -569,12 +617,12 @@ export function parsePackagesFromCsv(csvText: string): { packages: HolidayPackag
         .filter((s) => s.length > 0);
     };
 
-    const highlights = parseList(rowMap['highlights']);
-    const inclusions = parseList(rowMap['inclusions']);
-    const exclusions = parseList(rowMap['exclusions']);
+    const highlights = parseList(rowMap['highlights'] || rowMap['activities']);
+    const inclusions = parseList(rowMap['inclusions'] || rowMap['includes']);
+    const exclusions = parseList(rowMap['exclusions'] || rowMap['excludes']);
 
     // Parse itinerary string (e.g. "Day 1: ... | Day 2: ...")
-    const itineraryRaw = parseList(rowMap['itinerary']);
+    const itineraryRaw = parseList(rowMap['itinerary'] || rowMap['days']);
     const itinerary: ItineraryDay[] = itineraryRaw.map((dayText, dIdx) => {
       const parts = dayText.split(/[:-]/);
       const title = parts.length > 1 ? parts.slice(1).join(' - ').trim() : dayText;
@@ -585,7 +633,7 @@ export function parsePackagesFromCsv(csvText: string): { packages: HolidayPackag
         meals: ['Breakfast'],
         activities: [title || 'Local Sightseeing'],
         hotel: `${destination} 4-Star Hotel / Resort`,
-        transfers: 'Private AC Cab'
+        transfers: 'Private AC Cab',
       };
     });
 
@@ -599,7 +647,7 @@ export function parsePackagesFromCsv(csvText: string): { packages: HolidayPackag
           meals: d === durationDays ? ['Breakfast'] : ['Breakfast', 'Dinner'],
           activities: [`Day ${d} Sightseeing in ${destination}`],
           hotel: `${destination} 4-Star Hotel`,
-          transfers: 'Private AC Cab'
+          transfers: 'Private AC Cab',
         });
       }
     }
@@ -638,17 +686,17 @@ export function parsePackagesFromCsv(csvText: string): { packages: HolidayPackag
       flightsIncluded: false,
       transfersIncluded: true,
       departureCity: rowMap['departurecity'] || 'Flexible Origin',
-      batch_source: 'mmt_sync', // CRITICAL: Tag as MMT Sync
+      batch_source: 'mmt_sync',
       itinerary,
       hotels: [
-        { name: `${destination} 4-Star Deluxe Resort`, city: destination, rating: '4.8', nights: durationNights }
+        { name: `${destination} 4-Star Deluxe Resort`, city: destination, rating: '4.8', nights: durationNights },
       ],
       faqs: [
         {
           question: `Can this ${name} package be customized?`,
-          answer: `Yes, you can customize the hotel tier, vehicle type, and daily sightseeing based on your personal travel preferences.`
-        }
-      ]
+          answer: `Yes, you can customize the hotel tier, vehicle type, and daily sightseeing based on your personal travel preferences.`,
+        },
+      ],
     });
   }
 
@@ -660,8 +708,16 @@ export function parsePackagesFromJson(jsonText: string): { packages: HolidayPack
   const errors: string[] = [];
   const packages: HolidayPackage[] = [];
 
+  const cleanNum = (val: any, fallback: number = 0): number => {
+    if (typeof val === 'number') return isNaN(val) ? fallback : val;
+    const str = String(val || '').replace(/[^0-9.]/g, '');
+    const num = parseFloat(str);
+    return isNaN(num) ? fallback : num;
+  };
+
   try {
-    const parsed = JSON.parse(jsonText);
+    const cleanJsonText = jsonText.replace(/^\uFEFF/, '').trim();
+    const parsed = JSON.parse(cleanJsonText);
     const items: any[] = Array.isArray(parsed) ? parsed : parsed.packages && Array.isArray(parsed.packages) ? parsed.packages : [parsed];
 
     if (items.length === 0) {
@@ -669,16 +725,17 @@ export function parsePackagesFromJson(jsonText: string): { packages: HolidayPack
     }
 
     items.forEach((item, idx) => {
-      if (!item.name) {
+      const name = item.name || item.title || item.packageName;
+      if (!name) {
         errors.push(`Item ${idx + 1}: "name" is required.`);
         return;
       }
-      const destination = item.destination || 'India';
-      const destinationSlug = item.destinationSlug || slugify(destination);
-      const durationDays = Number(item.durationDays) || (item.itinerary ? item.itinerary.length : 5);
-      const durationNights = Number(item.durationNights) || (durationDays - 1);
-      const startingPrice = Number(item.startingPrice) || 19999;
-      const discountPrice = Number(item.discountPrice) || Math.round(startingPrice * 1.18);
+      const destination = item.destination || item.city || 'India';
+      const destinationSlug = item.destinationSlug ? slugify(item.destinationSlug) : slugify(destination);
+      const durationDays = cleanNum(item.durationDays, item.itinerary ? item.itinerary.length : 5) || 5;
+      const durationNights = cleanNum(item.durationNights, durationDays - 1) || Math.max(durationDays - 1, 1);
+      const startingPrice = cleanNum(item.startingPrice || item.price, 19999);
+      const discountPrice = cleanNum(item.discountPrice || item.mrpPrice, Math.round(startingPrice * 1.18));
 
       const baseNameSlug = slugify(item.name);
       const customSlug = item.slug ? slugify(String(item.slug)) : null;
@@ -726,8 +783,8 @@ export function parsePackagesFromJson(jsonText: string): { packages: HolidayPack
         durationNights,
         startingPrice,
         discountPrice,
-        rating: Number(item.rating) || 4.8,
-        reviewsCount: Number(item.reviewsCount) || 120,
+        rating: cleanNum(item.rating, 4.8),
+        reviewsCount: cleanNum(item.reviewsCount, 120),
         heroImage: item.heroImage || `/destinations/${destinationSlug}.jpg`,
         gallery: Array.isArray(item.gallery) && item.gallery.length > 0 ? item.gallery : [item.heroImage || `/destinations/${destinationSlug}.jpg`],
         highlights: Array.isArray(item.highlights) && item.highlights.length > 0 ? item.highlights : [`Top ${destination} sights`, 'Private Cabs', '4-Star Stays'],

@@ -836,9 +836,12 @@ export const cloudStore = {
 
   saveCustomPackages: (newPackages: HolidayPackage[]): void => {
     const existing = cloudStore.getCustomPackages();
-    const existingIds = new Set(existing.map((p) => p.id));
-    const toAdd = newPackages.filter((p) => !existingIds.has(p.id));
-    const updated = [...toAdd, ...existing];
+    const map = new Map<string, HolidayPackage>();
+    // Seed with existing packages
+    existing.forEach((p) => map.set(p.id, p));
+    // Upsert new packages (updates existing with new content or appends new packages)
+    newPackages.forEach((p) => map.set(p.id, p));
+    const updated = Array.from(map.values());
     setStoredData(STORAGE_KEYS.CUSTOM_PACKAGES, updated);
     if (typeof window !== 'undefined') {
       window.dispatchEvent(new Event('cloudstore_update'));

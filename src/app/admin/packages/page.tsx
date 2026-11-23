@@ -183,6 +183,7 @@ export default function AdminPackagesPage() {
     const file = e.target.files?.[0];
     if (!file) return;
     processSelectedFile(file);
+    e.target.value = ''; // Reset so choosing the same or updated file triggers onChange every time
   };
 
   const processSelectedFile = (file: File) => {
@@ -304,7 +305,10 @@ export default function AdminPackagesPage() {
       setUploadedFile(null);
       setParsedPreviewPackages([]);
       setUploadProgress(null);
+      if (fileInputRef.current) fileInputRef.current.value = '';
       setActiveBatchFilter('mmt_sync');
+      setSelectedDestination('all');
+      setSearchQuery('');
       setCurrentPage(1);
 
       if (serverWarning) {
@@ -325,7 +329,10 @@ export default function AdminPackagesPage() {
       setUploadedFile(null);
       setParsedPreviewPackages([]);
       setUploadProgress(null);
+      if (fileInputRef.current) fileInputRef.current.value = '';
       setActiveBatchFilter('mmt_sync');
+      setSelectedDestination('all');
+      setSearchQuery('');
       setCurrentPage(1);
 
       triggerNotification(
@@ -467,6 +474,7 @@ export default function AdminPackagesPage() {
               setUploadedFile(null);
               setParsedPreviewPackages([]);
               setParseErrors([]);
+              if (fileInputRef.current) fileInputRef.current.value = '';
             }}
             className="text-xs font-bold bg-brand-600 hover:bg-brand-700 text-white flex items-center space-x-1.5 shadow-sm"
           >
