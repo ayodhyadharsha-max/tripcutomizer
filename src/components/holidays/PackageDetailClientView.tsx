@@ -331,6 +331,13 @@ export function PackageDetailClientView({
     }
   }, [decodedPkgParam, decodedDestParam, activePkg]);
 
+  // Dynamically update browser tab title to match package name
+  useEffect(() => {
+    if (activePkg?.name && activePkg.name !== 'Loading Package...') {
+      document.title = `${activePkg.name} | Trip Customizer`;
+    }
+  }, [activePkg?.name]);
+
   // Safe reference for state hooks before render (strictly typed)
   const pkg: HolidayPackage = activePkg || getAllCatalogPackages()[0];
 

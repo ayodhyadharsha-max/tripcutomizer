@@ -13,22 +13,48 @@ async function getMatchedPackage(destinationParam: string, packageParam: string)
   const decodedPkgParam = decodeURIComponent(packageParam || '').toLowerCase().trim();
   const decodedDestParam = decodeURIComponent(destinationParam || '').toLowerCase().trim();
 
-  // 1. Direct Supabase Query by slug or id
+  if (!decodedPkgParam) return null;
+
+  // 1. Direct Supabase Query: check exact slug, then id, then substring
   try {
     const supabaseServer = getSupabaseServer();
     if (supabaseServer) {
-      const { data, error } = await supabaseServer
+      // A. Exact slug match
+      const { data: slugData, error: slugErr } = await supabaseServer
         .from('packages')
         .select('*')
-        .or(`slug.eq.${decodedPkgParam},id.eq.${decodedPkgParam}`)
+        .eq('slug', decodedPkgParam)
         .maybeSingle();
 
-      if (data && !error) {
-        return mapSupabaseRowToPackage(data);
+      if (slugData && !slugErr) {
+        return mapSupabaseRowToPackage(slugData);
+      }
+
+      // B. Exact id match
+      const { data: idData, error: idErr } = await supabaseServer
+        .from('packages')
+        .select('*')
+        .eq('id', decodedPkgParam)
+        .maybeSingle();
+
+      if (idData && !idErr) {
+        return mapSupabaseRowToPackage(idData);
+      }
+
+      // C. Substring / ilike match on slug
+      const { data: likeData } = await supabaseServer
+        .from('packages')
+        .select('*')
+        .ilike('slug', `%${decodedPkgParam}%`)
+        .limit(1)
+        .maybeSingle();
+
+      if (likeData) {
+        return mapSupabaseRowToPackage(likeData);
       }
     }
   } catch (err) {
-    // Graceful fallback if Supabase table is empty or uninitialized
+    console.warn('[getMatchedPackage] Supabase fetch error:', err);
   }
 
   // 2. Look in persistent server store fallback
@@ -59,19 +85,24 @@ export async function generateMetadata({
   params: { destination: string; package: string };
 }): Promise<Metadata> {
   const pkg = await getMatchedPackage(params.destination, params.package);
+
   if (!pkg) {
+    const cleanTitle = (params.package || params.destination || 'Tour Package')
+      .split('-')
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(' ');
+
     return {
-      title: 'Tour Package Not Found',
-      description: 'The requested tour package could not be found.',
-      robots: { index: false, follow: false },
+      title: `${cleanTitle} | Trip Customizer`,
+      description: `Book customized ${params.destination} holiday package with 4-star hotels, private transfers, and 24x7 support.`,
     };
   }
+
+  const title = `${pkg.name} | Trip Customizer`;
   const price = Math.min(pkg.startingPrice || 0, pkg.discountPrice || pkg.startingPrice || 0) || pkg.startingPrice || 14999;
   const duration = `${pkg.durationDays}D / ${pkg.durationNights}N`;
-
-  const title = `${pkg.name} (${duration}) — ₹${price.toLocaleString('en-IN')} | Trip Customizer`;
   const overviewText = pkg.highlights && pkg.highlights.length > 0 ? pkg.highlights.join('. ') : pkg.name;
-  const description = `${overviewText.slice(0, 155)}. Book customized ${pkg.destination} tour packages with 4-star hotels, flights, breakfast, private cabs & 24x7 support.`;
+  const description = `${overviewText.slice(0, 155)}. Book customized ${pkg.destination} tour packages (${duration}) starting at ₹${price.toLocaleString('en-IN')} with 4-star hotels, flights, breakfast, private cabs & 24x7 support.`;
   const canonicalUrl = `https://www.tripcustomizer.com/holidays/${pkg.destinationSlug}/${pkg.slug}`;
   const imageUrl = pkg.heroImage || 'https://www.tripcustomizer.com/destinations/hero-holidays.jpg';
 
