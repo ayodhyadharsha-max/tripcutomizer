@@ -1,79 +1,65 @@
 import { HolidayPackage } from '@/data/packagesData';
 
-// Specific target package requested by user
-export function isTargetHyderabadPackage(pkgOrSlug?: any): boolean {
-  if (!pkgOrSlug) return false;
-  const slug = typeof pkgOrSlug === 'string' ? pkgOrSlug : (pkgOrSlug.slug || pkgOrSlug.id || '');
-  return slug.toLowerCase().includes('andhra-pradesh-premium-hyderabad-getaway');
+export interface PackageTierConfig {
+  baselineTier: 'standard' | 'deluxe' | 'luxury';
+  allowedTiers: ('standard' | 'deluxe' | 'luxury')[];
+  cardBadgeLabel: string;
+  cardTwinSharingLabel: string;
+  cardOptionsLabel: string;
+  cardBadgeClass: string;
 }
 
-// Check if a package is strictly a Premium / Luxury tier package (no 3-star allowed)
-// Strictly scoped to the specified package
-export function isPremiumPackage(
-  pkgOrCategory?: { name?: string; slug?: string; hotelCategory?: string; theme?: string } | string
-): boolean {
-  if (!pkgOrCategory) return false;
-  return isTargetHyderabadPackage(pkgOrCategory);
-}
+// User-specified overrides for specific packages one by one
+export const CUSTOM_PACKAGE_TIER_OVERRIDES: Record<string, Partial<PackageTierConfig>> = {
+  // Links added by user will be explicitly configured here
+};
 
-// Resolve baseline hotel tier of a package ('standard' | 'deluxe' | 'luxury')
 export function getPackageBaselineTier(
   hotelCategory?: string,
   pkgName?: string,
   pkgSlug?: string
 ): 'standard' | 'deluxe' | 'luxury' {
-  if (pkgSlug && isTargetHyderabadPackage(pkgSlug)) {
-    return 'luxury';
-  }
-  const cat = (hotelCategory || '').toLowerCase();
-  if (cat.includes('5') || cat.includes('luxury') || cat.includes('5-star') || cat.includes('5★')) {
-    return 'luxury';
-  }
-  if (cat.includes('4') || cat.includes('deluxe') || cat.includes('4-star') || cat.includes('4★')) {
-    return 'deluxe';
+  const cleanSlug = (pkgSlug || '').toLowerCase().trim();
+  if (cleanSlug && CUSTOM_PACKAGE_TIER_OVERRIDES[cleanSlug]?.baselineTier) {
+    return CUSTOM_PACKAGE_TIER_OVERRIDES[cleanSlug]!.baselineTier!;
   }
   return 'standard';
 }
 
-// Get dynamic UI labels and badge styling for listing cards based on package hotel tier
+export function isPremiumPackage(
+  pkgOrCategory?: { id?: string; name?: string; slug?: string; hotelCategory?: string; theme?: string } | string
+): boolean {
+  if (!pkgOrCategory) return false;
+  const slug = typeof pkgOrCategory === 'string' ? pkgOrCategory : (pkgOrCategory.slug || pkgOrCategory.id || '');
+  const cleanSlug = slug.toLowerCase().trim();
+  if (CUSTOM_PACKAGE_TIER_OVERRIDES[cleanSlug]) {
+    const allowed = CUSTOM_PACKAGE_TIER_OVERRIDES[cleanSlug]?.allowedTiers;
+    return Boolean(allowed && !allowed.includes('standard'));
+  }
+  return false;
+}
+
+// Get dynamic UI labels and badge styling for listing cards
+// Defaults all cards across the catalog to 3★ Standard with upgrade options
 export function getPackageHotelBadgeInfo(
   hotelCategory?: string,
   pkgName?: string,
   pkgSlug?: string
 ) {
-  // ONLY for that specific Hyderabad package, show 5-star card badge
-  if (pkgSlug && isTargetHyderabadPackage(pkgSlug)) {
+  const cleanSlug = (pkgSlug || '').toLowerCase().trim();
+  const override = cleanSlug ? CUSTOM_PACKAGE_TIER_OVERRIDES[cleanSlug] : undefined;
+
+  if (override) {
     return {
-      tier: 'luxury' as const,
-      badgeLabel: '5★ Luxury',
-      twinSharingLabel: '5★ Luxury Twin Sharing',
-      optionsLabel: '4★ Deluxe & 5★ Luxury Available',
-      badgeClass: 'bg-amber-100 text-amber-950 border-amber-300',
+      tier: override.baselineTier || 'standard',
+      badgeLabel: override.cardBadgeLabel || '3★ Standard',
+      twinSharingLabel: override.cardTwinSharingLabel || '3★ Standard Twin Sharing',
+      optionsLabel: override.cardOptionsLabel || 'Upgradable to 4★ / 5★',
+      badgeClass: override.cardBadgeClass || 'bg-amber-50 text-amber-900 border-amber-200/60',
     };
   }
 
-  const tier = getPackageBaselineTier(hotelCategory);
-
-  if (tier === 'luxury') {
-    return {
-      tier: 'luxury' as const,
-      badgeLabel: '5★ Luxury',
-      twinSharingLabel: '5★ Luxury Twin Sharing',
-      optionsLabel: 'Customizable • 3★ / 4★ Available',
-      badgeClass: 'bg-amber-100 text-amber-950 border-amber-300',
-    };
-  }
-
-  if (tier === 'deluxe') {
-    return {
-      tier: 'deluxe' as const,
-      badgeLabel: '4★ Deluxe',
-      twinSharingLabel: '4★ Deluxe Twin Sharing',
-      optionsLabel: 'Customizable • 3★ / 5★ Available',
-      badgeClass: 'bg-brand-50 text-brand-900 border-brand-200',
-    };
-  }
-
+  // Default for all cards across catalog: 3★ Standard baseline
   return {
     tier: 'standard' as const,
     badgeLabel: '3★ Standard',
@@ -82,5 +68,6 @@ export function getPackageHotelBadgeInfo(
     badgeClass: 'bg-amber-50 text-amber-900 border-amber-200/60',
   };
 }
+
 
 
