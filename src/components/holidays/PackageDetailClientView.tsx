@@ -263,12 +263,12 @@ const DESTINATION_HOTEL_TIERS: Record<string, { standard: string; deluxe: string
     luxury: 'Courtyard by Marriott Mumbai / Radisson Blu Mumbai (5★ Luxury)'
   },
   hyderabad: {
-    standard: 'Novotel Hyderabad Convention Centre / Lemon Tree Premier Hitec City (4★ Deluxe)',
+    standard: 'Hotel Deccan Serai / Treebo Trend Hyderabad (3★ Standard)',
     deluxe: 'Novotel Hyderabad Convention Centre / Radisson Hyderabad Hitec City (4★ Deluxe)',
     luxury: 'Taj Krishna Banjara Hills / ITC Kakatiya / Trident Hyderabad (5★ Luxury)'
   },
   andhra: {
-    standard: 'Novotel Hyderabad / Lemon Tree Premier (4★ Deluxe)',
+    standard: 'Hotel Deccan Serai / Treebo Trend (3★ Standard)',
     deluxe: 'Novotel Hyderabad / Radisson Hitec City (4★ Deluxe)',
     luxury: 'Taj Krishna Banjara Hills / ITC Kakatiya (5★ Luxury)'
   }
@@ -921,12 +921,7 @@ export function PackageDetailClientView({
         .replace(/\s*\([345]-Star[^)]*\)/gi, '')
         .trim();
 
-      if (
-        isPremium ||
-        cleaned.toLowerCase().includes('standard') ||
-        cleaned.toLowerCase().includes('3-star') ||
-        cleaned.toLowerCase().includes('3★')
-      ) {
+      if (isPremium) {
         cleaned = cleaned
           .replace(/\b3\s*(?:-| )?(?:Star|★)?\s*Standard\b/gi, '')
           .replace(/\b3\s*(?:-| )?(?:Star|★)\b/gi, '')
@@ -940,14 +935,11 @@ export function PackageDetailClientView({
       return cleaned;
     };
 
-    // If originalHotel is already defined and is NOT a generic 3-Star placeholder
+    // If originalHotel is already defined
     if (
       originalHotel &&
       originalHotel.trim().length > 3 &&
-      !originalHotel.toLowerCase().includes('3-star') &&
-      !originalHotel.toLowerCase().includes('3★') &&
-      !originalHotel.toLowerCase().includes('standard') &&
-      !originalHotel.toLowerCase().includes('hotel / resort')
+      (!isPremium || (!originalHotel.toLowerCase().includes('3-star') && !originalHotel.toLowerCase().includes('standard')))
     ) {
       const cleaned = cleanHotelName(originalHotel);
       if (cleaned.length > 2) return cleaned;

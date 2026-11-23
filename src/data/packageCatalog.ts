@@ -1088,8 +1088,156 @@ export const HYDERABAD_PREMIUM_PACKAGE: HolidayPackage = {
   batch_source: 'mmt_sync',
 };
 
+export const HYDERABAD_CITYSCAPE_PACKAGE: HolidayPackage = {
+  id: 'pkg-mmt-andhra-pradesh-hyderabad-cityscape-escape-4n5d-5d4n-mmt-1',
+  slug: 'andhra-pradesh-hyderabad-cityscape-escape-4n5d-5d4n-mmt-1',
+  name: 'Hyderabad Cityscape Escape (4N/5D)',
+  destination: 'Andhra Pradesh',
+  destinationSlug: 'andhra-pradesh',
+  state: 'Andhra Pradesh & Telangana',
+  stateSlug: 'andhra-pradesh',
+  country: 'India',
+  region: 'South India',
+  isInternational: false,
+  durationDays: 5,
+  durationNights: 4,
+  startingPrice: 14999,
+  discountPrice: 18999,
+  rating: 4.8,
+  reviewsCount: 142,
+  heroImage: 'https://images.unsplash.com/photo-1572455857811-045fb4255b5d?w=1200&q=80&fm=webp&fit=crop',
+  gallery: [
+    'https://images.unsplash.com/photo-1572455857811-045fb4255b5d?w=1200&q=80&fm=webp&fit=crop',
+    'https://images.unsplash.com/photo-1605007493699-ce65834f8a00?w=1200&q=80&fm=webp&fit=crop',
+    'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=1200&q=80&fm=webp&fit=crop',
+  ],
+  highlights: [
+    'Clean Verified 3-Star Accommodations (Hotel Deccan Serai / Treebo Trend)',
+    'Iconic Charminar, Mecca Masjid & Laad Bazaar Heritage Walk',
+    'Full-Day Ramoji Film City Studio Tour with Entertainment Shows',
+    'Historical Golconda Fort Citadel & Royal Qutb Shahi Tombs Visit',
+    'Salar Jung Museum Art Galleries & Monolithic Buddha Boat Ride',
+    'Private AC Sedan Cab reserved exclusively for your travel group',
+  ],
+  inclusions: [
+    '4 Nights stay in verified 3-Star Standard hotels (Hotel Deccan Serai / Treebo Trend)',
+    'Daily wholesome breakfast included at hotel',
+    'Private AC Sedan vehicle for all airport/station transfers and scheduled sightseeing',
+    'Full-day Ramoji Film City tour excursion with entry passes included',
+    'Hussain Sagar Lake boat cruise ticket to monolithic Buddha statue',
+    'All toll taxes, parking fees, driver allowance, and 5% GST included',
+    '24x7 Trip Customizer on-trip phone assistance',
+  ],
+  exclusions: [
+    'Airfare or train tickets (available upon request at live rates)',
+    'Monument camera tickets, joy rides, and personal adventure activities',
+    'Personal expenses like laundry, room service, alcoholic drinks, and driver tips',
+    'Any meals or beverages not explicitly listed in package inclusions',
+  ],
+  itinerary: [
+    {
+      dayNumber: 1,
+      title: 'Arrival in Hyderabad & Historic Charminar & Laad Bazaar Walk',
+      description: 'Arrive at Rajiv Gandhi International Airport (HYD) or Hyderabad / Secunderabad Railway Station. Meet our private chauffeur and transfer to your verified 3-Star hotel. After check-in and leisure, proceed to the iconic Charminar, Mecca Masjid, Chowmahalla Palace, and Laad Bazaar famous for lacquer bangles and pearls.',
+      meals: ['Breakfast'],
+      activities: [
+        'Private Airport / Railway Station Pickup & Hotel Check-in',
+        'Charminar & Mecca Masjid Heritage Walk',
+        'Chowmahalla Palace Nizami Architecture Visit',
+        'Laad Bazaar Traditional Choodi & Pearl Shopping',
+      ],
+      hotel: 'Hotel Deccan Serai / Treebo Trend Hyderabad',
+      transfers: 'Private AC Cab Airport / Station Pickup & City Sightseeing',
+    },
+    {
+      dayNumber: 2,
+      title: 'Full-Day Ramoji Film City Cinematic Tour & Studio Shows',
+      description: 'Enjoy delicious morning breakfast at hotel. Embark on a full-day private excursion to the world-famous Ramoji Film City. Discover the magical film sets, live stunt shows, Action Studio, Eureka cultural performances, and thematic Mughal & Japanese gardens. Return to hotel in the evening.',
+      meals: ['Breakfast'],
+      activities: [
+        'Full-Day Excursion to Ramoji Film City Studio Tour',
+        'Live Action Stunt Shows & Eureka Dance Performances',
+        'Film Set Explorations & Action Studio Illusions',
+        'Eco-Zone Bird Park & Butterfly Garden Walk',
+      ],
+      hotel: 'Hotel Deccan Serai / Treebo Trend Hyderabad',
+      transfers: 'Private AC Cab Full-Day Ramoji Film City Sightseeing',
+    },
+    {
+      dayNumber: 3,
+      title: 'Golconda Fort, Royal Qutb Shahi Tombs & Salar Jung Museum',
+      description: 'Morning breakfast at hotel. Head to the legendary medieval Golconda Fort, known for its acoustic clapping portico and royal palaces. Visit the nearby Qutb Shahi Tombs set within landscaped gardens. Continue to the renowned Salar Jung Museum housing rare antiquities and the Veiled Rebecca sculpture.',
+      meals: ['Breakfast'],
+      activities: [
+        'Golconda Fort Citadel Tour with Clapping Portico & Royal Pavilions',
+        'Qutb Shahi Royal Tombs & Garden Monuments Tour',
+        'Salar Jung Museum Rare Antiquities & Musical Clock Viewing',
+      ],
+      hotel: 'Hotel Deccan Serai / Treebo Trend Hyderabad',
+      transfers: 'Private AC Cab for Full-Day Heritage Sightseeing',
+    },
+    {
+      dayNumber: 4,
+      title: 'Birla Mandir, Hussain Sagar Boat Cruise, Lumbini Park & NTR Gardens',
+      description: 'After morning breakfast, visit the pristine white marble Birla Mandir perched atop Naubat Pahad overlooking the city. Take a scenic boat cruise on Hussain Sagar Lake to the monolithic Buddha Statue. In the evening, explore Lumbini Park with its musical dancing fountain and relax at NTR Gardens.',
+      meals: ['Breakfast'],
+      activities: [
+        'Birla Mandir White Marble Temple Visit on Naubat Pahad',
+        'Hussain Sagar Lake Scenic Boat Ride to Buddha Statue',
+        'Lumbini Park Musical Dancing Fountain Show',
+        'NTR Gardens Leisure Walk & Scenic Viewpoints',
+      ],
+      hotel: 'Hotel Deccan Serai / Treebo Trend Hyderabad',
+      transfers: 'Private AC Cab for Lake & Temple Sightseeing',
+    },
+    {
+      dayNumber: 5,
+      title: 'Shilparamam Arts & Crafts Village & Departure Transfer',
+      description: 'Enjoy breakfast at hotel and complete check-out formalities. Depending on your departure flight or train timing, visit Shilparamam Arts & Crafts Village for traditional handloom textiles and handicrafts. Chauffeur transfer to Hyderabad Airport or Railway Station for your return journey.',
+      meals: ['Breakfast'],
+      activities: [
+        'Morning Breakfast & Hotel Check-out',
+        'Shilparamam Cultural Arts & Crafts Village Shopping',
+        'Private AC Vehicle Drop to Airport / Railway Station',
+      ],
+      hotel: 'Check-out completed (Departure Day)',
+      transfers: 'Private AC Cab Departure Airport / Railway Station Drop',
+    },
+  ],
+  hotels: [
+    {
+      name: 'Hotel Deccan Serai / Treebo Trend Hyderabad',
+      city: 'Hyderabad',
+      rating: '4.8',
+      nights: 4,
+    },
+  ],
+  faqs: [
+    {
+      question: 'What hotel category is provided in this package?',
+      answer: 'This package includes verified 3-Star Standard accommodations (Hotel Deccan Serai / Treebo Trend Hyderabad) with clean, hygienic AC rooms, attached bath, and daily breakfast. You can upgrade to 4-Star Deluxe or 5-Star Luxury anytime.',
+    },
+    {
+      question: 'Is Ramoji Film City entry ticket included in this tour?',
+      answer: 'Yes, full-day Ramoji Film City general entry tickets with studio tour and live entertainment shows are included with private cab transfers.',
+    },
+    {
+      question: 'Can this Hyderabad tour package be customized?',
+      answer: 'Yes! All travel dates, hotel choices (3★, 4★, or 5★), vehicle type, and sightseeing spots are 100% customizable.',
+    },
+  ],
+  theme: 'Cityscape Escape',
+  hotelCategory: '3-Star Standard',
+  mealPlan: 'Daily Breakfast Included',
+  flightsIncluded: false,
+  transfersIncluded: true,
+  departureCity: 'Flexible Origin / Hyderabad Pickup',
+  batch_source: 'mmt_sync',
+};
+
 export const CURATED_CUSTOM_PACKAGES: HolidayPackage[] = [
   HYDERABAD_PREMIUM_PACKAGE,
+  HYDERABAD_CITYSCAPE_PACKAGE,
 ];
 
 function initializeCatalog(): { all: HolidayPackage[]; lookup: Map<string, HolidayPackage> } {
