@@ -79,7 +79,33 @@ all.forEach((pkg, idx) => {
     }
   });
 
-  // 4. Zero Zig-Zag Routes check for specific sectors:
+  let duplicateDayTitles = 0;
+  let midTripArrivals = 0;
+  let preLastDayDepartures = 0;
+
+  // Check duplicate day titles & arrival/departure positioning
+  const seenDayTitles = new Set<string>();
+  pkg.itinerary.forEach((day, idx) => {
+    if (seenDayTitles.has(day.title)) {
+      duplicateDayTitles++;
+      console.error(`Pkg ${pkg.id} has duplicate day title on Day ${day.dayNumber}: "${day.title}"`);
+    }
+    seenDayTitles.add(day.title);
+
+    if (idx > 0 && day.title.toLowerCase().startsWith('arrival')) {
+      midTripArrivals++;
+      console.error(`Pkg ${pkg.id} has post-Day 1 arrival on Day ${day.dayNumber}: "${day.title}"`);
+    }
+
+    if (idx < pkg.itinerary.length - 1 && (day.title.toLowerCase().includes('departure') || day.title.toLowerCase().includes('drop at'))) {
+      preLastDayDepartures++;
+      console.error(`Pkg ${pkg.id} has pre-last-day departure on Day ${day.dayNumber}: "${day.title}"`);
+    }
+  });
+
+  if (duplicateDayTitles > 0 || midTripArrivals > 0 || preLastDayDepartures > 0) {
+    circuitValidationErrors++;
+  }
   if (pkg.destinationSlug === 'kerala' && pkg.durationDays >= 4) {
     // Check that Alleppey Houseboat is on the 2nd-last night (last stay night)
     const lastStayDay = pkg.itinerary[pkg.durationDays - 2];

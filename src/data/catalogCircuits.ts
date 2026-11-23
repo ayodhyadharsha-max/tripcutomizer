@@ -3035,7 +3035,11 @@ export function getSectorCircuit(
           stageIdx = Math.min(n, stages.length - 1);
         }
       } else {
-        stageIdx = n % stages.length;
+        if (n === 0) {
+          stageIdx = 0;
+        } else {
+          stageIdx = 1 + ((n - 1) % Math.max(1, stages.length - 1));
+        }
       }
 
       const stg = stages[stageIdx] || stages[0];
@@ -3071,56 +3075,147 @@ export function getSectorCircuit(
       nightStays[3] = { city: 'Varanasi', hotel: getBrandedHotelName('Varanasi', hotelTier) };
     }
 
-    // Build the itinerary days: exact length = totalDays
+    // Build the itinerary days: exact length = totalDays, ZERO REPEATING TITLES OR POST-DAY 1 ARRIVALS
     const itinerary: ItineraryDay[] = [];
-    for (let d = 1; d <= totalDays; d++) {
-      if (d === totalDays) {
-        // Last Day (Departure Day)
+    const day1Stage = stages[0];
+    itinerary.push({
+      dayNumber: 1,
+      title: day1Stage.title,
+      description: day1Stage.desc,
+      meals: ['Dinner'],
+      activities: day1Stage.acts,
+      hotel: nightStays[0].hotel,
+      transfers: day1Stage.transfers || 'Private AC Cab Airport / Station Meet & Greet'
+    });
+
+    // Middle days: strictly drawn from stages.slice(1) excluding houseboat stage (which is reserved for 2nd-last night)
+    const midStages = stages.slice(1).filter((s) => !s.stayCity?.includes('Houseboat'));
+    for (let d = 2; d < totalDays; d++) {
+      const midIdx = d - 2;
+      const stayCity = nightStays[d - 1].city.replace(' Houseboat', '').replace(' Desert Camp', '');
+      const assignedHotel = nightStays[d - 1].hotel;
+
+      // Special handling for Ayodhya 4N/5D (User explicitly specified flow)
+      if (sector.destinationSlug === 'ayodhya' && totalDays === 5) {
+        if (d === 2) {
+          itinerary.push({
+            dayNumber: 2,
+            title: stages[1].title,
+            description: stages[1].desc,
+            meals: ['Breakfast'],
+            activities: stages[1].acts,
+            hotel: assignedHotel,
+            transfers: 'Dedicated Private AC Cab for Full Day Ayodhya Temple Sightseeing'
+          });
+          continue;
+        }
+        if (d === 3) {
+          itinerary.push({
+            dayNumber: 3,
+            title: stages[2].title,
+            description: stages[2].desc,
+            meals: ['Breakfast'],
+            activities: stages[2].acts,
+            hotel: assignedHotel,
+            transfers: 'Private AC Vehicle Transfer Ayodhya -> Prayagraj -> Varanasi'
+          });
+          continue;
+        }
+        if (d === 4) {
+          itinerary.push({
+            dayNumber: 4,
+            title: stages[3].title,
+            description: stages[3].desc,
+            meals: ['Breakfast'],
+            activities: stages[3].acts,
+            hotel: assignedHotel,
+            transfers: 'Dedicated Private AC Cab for Full Day Varanasi & Sarnath Sightseeing'
+          });
+          continue;
+        }
+      }
+
+      // Special handling for 2nd-last day in Kerala (Alleppey Houseboat day)
+      if (sector.destinationSlug === 'kerala' && d === totalDays - 1) {
+        const hbStage = stages.find((s) => s.stayCity?.includes('Houseboat')) || stages[3];
         itinerary.push({
-          dayNumber: totalDays,
-          title: master.departureStage.title,
-          description: master.departureStage.desc,
-          meals: ['Breakfast'],
-          activities: master.departureStage.acts,
-          hotel: 'Check-out completed',
-          transfers: 'Private AC Cab Departure Airport / Station Transfer'
+          dayNumber: d,
+          title: hbStage.title,
+          description: hbStage.desc,
+          meals: ['Breakfast', 'Lunch', 'Dinner'],
+          activities: hbStage.acts,
+          hotel: assignedHotel,
+          transfers: 'Private AC Cab Transfer to Alleppey Houseboat Jetty'
         });
-      } else {
-        // Sightseeing / Transfer Day
-        let stageIdx = 0;
-        if (d === 1) {
-          stageIdx = 0;
-        } else if (d === totalDays - 1 && sector.destinationSlug === 'kerala') {
-          stageIdx = 3; // Houseboat day
-        } else if (d === totalDays - 1 && sector.destinationSlug === 'kashmir') {
-          stageIdx = 5; // Houseboat day
-        } else {
-          stageIdx = (d - 1) % stages.length;
-        }
+        continue;
+      }
 
-        // Exact match for Ayodhya 4N/5D
-        if (sector.destinationSlug === 'ayodhya' && totalDays === 5) {
-          if (d === 1) stageIdx = 0;
-          if (d === 2) stageIdx = 1;
-          if (d === 3) stageIdx = 2; // Prayagraj Sangam & drive to Varanasi
-          if (d === 4) stageIdx = 3; // Kashi Vishwanath & Ganga Aarti
-        }
+      // Special handling for final stay day in Kashmir (Srinagar Houseboat day)
+      if (sector.destinationSlug === 'kashmir' && d === totalDays - 1) {
+        const hbStage = stages.find((s) => s.stayCity?.includes('Houseboat')) || stages[5];
+        itinerary.push({
+          dayNumber: d,
+          title: hbStage.title,
+          description: hbStage.desc,
+          meals: ['Breakfast'],
+          activities: hbStage.acts,
+          hotel: assignedHotel,
+          transfers: 'Dedicated Private AC Cab Transfer to Dal Lake Houseboat'
+        });
+        continue;
+      }
 
-        const stg = stages[stageIdx] || stages[0];
-        const assignedHotel = nightStays[d - 1].hotel;
-        const meals = d === 1 ? ['Dinner'] : stg.stayCity?.includes('Houseboat') ? ['Breakfast', 'Lunch', 'Dinner'] : ['Breakfast'];
-
+      if (midIdx < midStages.length) {
+        const stg = midStages[midIdx];
+        const isHouseboat = stg.stayCity?.includes('Houseboat') || assignedHotel.includes('Houseboat');
         itinerary.push({
           dayNumber: d,
           title: stg.title,
           description: stg.desc,
-          meals: meals,
+          meals: isHouseboat ? ['Breakfast', 'Lunch', 'Dinner'] : ['Breakfast'],
           activities: stg.acts,
           hotel: assignedHotel,
-          transfers: stg.transfers || (d === 1 ? 'Private AC Cab Airport / Station Meet & Greet' : 'Dedicated Private AC Cab for Full Day Excursion & Transfers')
+          transfers: stg.transfers || 'Dedicated Private AC Cab for Full Day Sightseeing & Transfers'
+        });
+      } else {
+        const extraNum = midIdx - midStages.length + 1;
+        const extraTitles = [
+          `${stayCity} Scenic Vistas, Artisan Village & Cultural Immersion`,
+          `${stayCity} Countryside Trail, Organic Plantations & Heritage Walk`,
+          `${stayCity} Sacred Shrines, Ancient Architecture & Sunset Viewpoint`,
+          `${stayCity} Alpine Valleys, Mountain Passes & Photography Safari`
+        ];
+        const extraTitle = extraTitles[(extraNum - 1) % extraTitles.length];
+        const extraDesc = `After breakfast, embark on an in-depth excursion through ${stayCity}'s scenic outskirts, traditional artisan craft clusters, and panoramic viewpoints with your private chauffeur. Savor regional culinary delicacies and enjoy the relaxed mountain/heritage ambience.`;
+        const extraActs = [
+          `${stayCity} Panoramic Viewpoint Stroll`,
+          'Artisan Heritage Craft Workshop Visit',
+          'Traditional Cultural & Food Trail',
+          'Scenic Nature Photography & Evening Relaxation'
+        ];
+
+        itinerary.push({
+          dayNumber: d,
+          title: `Day ${d}: ${extraTitle}`,
+          description: extraDesc,
+          meals: ['Breakfast'],
+          activities: extraActs,
+          hotel: assignedHotel,
+          transfers: 'Dedicated Private AC Cab for Full Day Local Sightseeing'
         });
       }
     }
+
+    // Last Day (Departure Day)
+    itinerary.push({
+      dayNumber: totalDays,
+      title: master.departureStage.title,
+      description: master.departureStage.desc,
+      meals: ['Breakfast'],
+      activities: master.departureStage.acts,
+      hotel: 'Check-out completed',
+      transfers: 'Private AC Cab Departure Airport / Station Transfer'
+    });
 
     // Calculate covered cities in chronological order
     const coveredSet = new Set<string>();
