@@ -3050,12 +3050,59 @@ export function getSectorCircuit(
       });
     }
 
-    // Special override for Kerala: ensure Alleppey Houseboat is on the 2nd-last night (last stay night)
-    if (sector.destinationSlug === 'kerala' && totalNights >= 2) {
-      nightStays[totalNights - 1] = {
-        city: 'Alleppey Houseboat',
-        hotel: getBrandedHotelName('Alleppey Houseboat', hotelTier)
-      };
+    // Dedicated Geographic Night Stays for Kerala Circuits (Zero Zig-Zag, 100% Real Geography)
+    if (sector.destinationSlug === 'kerala') {
+      if (totalNights === 3) {
+        // 3N/4D: Munnar (2N) + Alleppey Houseboat (1N)
+        nightStays[0] = { city: 'Munnar', hotel: getBrandedHotelName('Munnar', hotelTier) };
+        nightStays[1] = { city: 'Munnar', hotel: getBrandedHotelName('Munnar', hotelTier) };
+        nightStays[2] = { city: 'Alleppey Houseboat', hotel: getBrandedHotelName('Alleppey Houseboat', hotelTier) };
+      } else if (totalNights === 4) {
+        // 4N/5D: Munnar (2N) + Thekkady (1N) + Alleppey Houseboat (1N)
+        nightStays[0] = { city: 'Munnar', hotel: getBrandedHotelName('Munnar', hotelTier) };
+        nightStays[1] = { city: 'Munnar', hotel: getBrandedHotelName('Munnar', hotelTier) };
+        nightStays[2] = { city: 'Thekkady', hotel: getBrandedHotelName('Thekkady', hotelTier) };
+        nightStays[3] = { city: 'Alleppey Houseboat', hotel: getBrandedHotelName('Alleppey Houseboat', hotelTier) };
+      } else if (totalNights === 5) {
+        // 5N/6D: Munnar (2N) + Thekkady (1N) + Alleppey Houseboat (1N) + Kovalam Beach (1N)
+        nightStays[0] = { city: 'Munnar', hotel: getBrandedHotelName('Munnar', hotelTier) };
+        nightStays[1] = { city: 'Munnar', hotel: getBrandedHotelName('Munnar', hotelTier) };
+        nightStays[2] = { city: 'Thekkady', hotel: getBrandedHotelName('Thekkady', hotelTier) };
+        nightStays[3] = { city: 'Alleppey Houseboat', hotel: getBrandedHotelName('Alleppey Houseboat', hotelTier) };
+        nightStays[4] = { city: 'Kovalam', hotel: getBrandedHotelName('Kovalam', hotelTier) };
+      } else if (totalNights === 6) {
+        // 6N/7D: Munnar (2N) + Thekkady (1N) + Alleppey Houseboat (1N) + Kovalam Beach (2N)
+        nightStays[0] = { city: 'Munnar', hotel: getBrandedHotelName('Munnar', hotelTier) };
+        nightStays[1] = { city: 'Munnar', hotel: getBrandedHotelName('Munnar', hotelTier) };
+        nightStays[2] = { city: 'Thekkady', hotel: getBrandedHotelName('Thekkady', hotelTier) };
+        nightStays[3] = { city: 'Alleppey Houseboat', hotel: getBrandedHotelName('Alleppey Houseboat', hotelTier) };
+        nightStays[4] = { city: 'Kovalam', hotel: getBrandedHotelName('Kovalam', hotelTier) };
+        nightStays[5] = { city: 'Kovalam', hotel: getBrandedHotelName('Kovalam', hotelTier) };
+      } else if (totalNights === 7) {
+        // 7N/8D: Munnar (2N) + Thekkady (1N) + Alleppey Houseboat (1N) + Kovalam (2N) + Cochin (1N)
+        nightStays[0] = { city: 'Munnar', hotel: getBrandedHotelName('Munnar', hotelTier) };
+        nightStays[1] = { city: 'Munnar', hotel: getBrandedHotelName('Munnar', hotelTier) };
+        nightStays[2] = { city: 'Thekkady', hotel: getBrandedHotelName('Thekkady', hotelTier) };
+        nightStays[3] = { city: 'Alleppey Houseboat', hotel: getBrandedHotelName('Alleppey Houseboat', hotelTier) };
+        nightStays[4] = { city: 'Kovalam', hotel: getBrandedHotelName('Kovalam', hotelTier) };
+        nightStays[5] = { city: 'Kovalam', hotel: getBrandedHotelName('Kovalam', hotelTier) };
+        nightStays[6] = { city: 'Cochin', hotel: getBrandedHotelName('Cochin', hotelTier) };
+      } else if (totalNights >= 8) {
+        // 8N/9D+ and 11N/12D: Wayanad (2N) + Munnar (2N) + Thekkady (1N) + Alleppey Houseboat (1N) + Kovalam (2N)
+        nightStays[0] = { city: 'Wayanad', hotel: getBrandedHotelName('Wayanad', hotelTier) };
+        nightStays[1] = { city: 'Wayanad', hotel: getBrandedHotelName('Wayanad', hotelTier) };
+        nightStays[2] = { city: 'Munnar', hotel: getBrandedHotelName('Munnar', hotelTier) };
+        nightStays[3] = { city: 'Munnar', hotel: getBrandedHotelName('Munnar', hotelTier) };
+        nightStays[4] = { city: 'Thekkady', hotel: getBrandedHotelName('Thekkady', hotelTier) };
+        nightStays[5] = { city: 'Alleppey Houseboat', hotel: getBrandedHotelName('Alleppey Houseboat', hotelTier) };
+        nightStays[6] = { city: 'Kovalam', hotel: getBrandedHotelName('Kovalam', hotelTier) };
+        for (let extra = 7; extra < totalNights; extra++) {
+          nightStays[extra] = {
+            city: extra % 2 === 0 ? 'Kovalam' : 'Cochin',
+            hotel: getBrandedHotelName(extra % 2 === 0 ? 'Kovalam' : 'Cochin', hotelTier)
+          };
+        }
+      }
     }
 
     // Special override for Kashmir: ensure Srinagar Houseboat is on the final stay night
@@ -3135,17 +3182,110 @@ export function getSectorCircuit(
         }
       }
 
-      // Special handling for 2nd-last day in Kerala (Alleppey Houseboat day)
-      if (sector.destinationSlug === 'kerala' && d === totalDays - 1) {
-        const hbStage = stages.find((s) => s.stayCity?.includes('Houseboat')) || stages[3];
+      // Special handling for Kerala (Exact Geographic Sequence with Alleppey Houseboat & Kovalam)
+      if (sector.destinationSlug === 'kerala') {
+        let kStage = stages[0];
+        if (totalDays === 4) {
+          // 3N/4D: Day 1 Munnar, Day 2 Munnar (stages[1]), Day 3 Alleppey Houseboat (stages[3]), Day 4 Drop
+          kStage = d === 2 ? stages[1] : stages[3];
+        } else if (totalDays === 5) {
+          // 4N/5D: Day 1 Munnar, Day 2 Munnar, Day 3 Thekkady, Day 4 Alleppey Houseboat, Day 5 Drop
+          kStage = stages[d - 1];
+        } else if (totalDays === 6) {
+          // 5N/6D: Day 1 Munnar, Day 2 Munnar, Day 3 Thekkady, Day 4 Alleppey Houseboat, Day 5 Kovalam, Day 6 Drop
+          kStage = stages[d - 1];
+        } else if (totalDays === 7) {
+          // 6N/7D: Day 1 Munnar, Day 2 Munnar, Day 3 Thekkady, Day 4 Alleppey Houseboat, Day 5 Kovalam, Day 6 Kovalam, Day 7 Drop
+          kStage = stages[d - 1];
+        } else if (totalDays === 8) {
+          // 7N/8D: Day 1 Munnar, Day 2 Munnar, Day 3 Thekkady, Day 4 Alleppey Houseboat, Day 5 Kovalam, Day 6 Kovalam, Day 7 Cochin, Day 8 Drop
+          kStage = stages[d - 1];
+        } else {
+          // Extended days: Wayanad / Kumarakom / Varkala / Marari extensions with unique non-repeating titles
+          if (d - 1 < stages.length) {
+            kStage = stages[d - 1];
+          } else {
+            const keralaExtendedStages: CircuitStage[] = [
+              {
+                city: "Wayanad",
+                title: "Wayanad Highland Excursion: Edakkal Caves, Chembra Peak & Tea Plantations",
+                desc: "Journey into the misty highlands of Wayanad. Trek up to ancient prehistoric petroglyphs at Edakkal Caves, marvel at Chembra Peak's heart-shaped lake, and tour lush organic coffee and tea estates.",
+                acts: [
+                  "Edakkal Prehistoric Rock Engravings",
+                  "Chembra Peak Scenic Viewpoint",
+                  "Wayanad Organic Coffee & Tea Estate Walk",
+                  "Banasura Sagar Dam Visit"
+                ],
+                stayCity: "Wayanad",
+                transfers: "Dedicated Private AC Cab for Wayanad Highland Excursion"
+              },
+              {
+                city: "Kumarakom",
+                title: "Kumarakom Bird Sanctuary & Vembanad Lake Sunset Stroll",
+                desc: "Explore Kumarakom on the eastern bank of Vembanad Lake. Walk through the Kumarakom Bird Sanctuary to spot migratory birds, egrets, and kingfishers, followed by an evening sunset stroll along peaceful backwater bunds.",
+                acts: [
+                  "Kumarakom Bird Sanctuary Trail",
+                  "Vembanad Backwater Shore Walk",
+                  "Traditional Village Coir Making Demonstration",
+                  "Scenic Sunset Lagoon Views"
+                ],
+                stayCity: "Kumarakom",
+                transfers: "Dedicated Private AC Cab for Kumarakom Excursion & Sightseeing"
+              },
+              {
+                city: "Varkala",
+                title: "Varkala Cliff Beach, Janardhana Swami Temple & Natural Mineral Springs",
+                desc: "Discover dramatic red laterite cliffs bordering Papanasam Beach in Varkala. Visit the 2,000-year-old Janardhana Swami Temple and taste fresh seaside organic cafe delights perched high above the Arabian Sea.",
+                acts: [
+                  "Varkala North Cliff Panoramic Walk",
+                  "Papanasam Beach Holy Waters",
+                  "Janardhana Swami Temple Darshan",
+                  "Cliffside Sunset Cafe Experience"
+                ],
+                stayCity: "Varkala",
+                transfers: "Dedicated Private AC Cab for Varkala Coastal Tour"
+              },
+              {
+                city: "Marari",
+                title: "Marari Quiet Coastal Village, Traditional Coir Craft & Sunset Hammocks",
+                desc: "Spend an idyllic day in peaceful Mararikulam. Stroll through tranquil palm groves, observe traditional fisherman dhows on Marari Beach, learn artisanal coconut fiber coir weaving, and unwind in coastal tranquility.",
+                acts: [
+                  "Marari Beach Morning Walk",
+                  "Traditional Coir Weaving Demonstration",
+                  "Organic Herb Garden Tour",
+                  "Arabian Sea Sunset Relaxation"
+                ],
+                stayCity: "Marari",
+                transfers: "Dedicated Private AC Cab for Marari Beach Excursion"
+              },
+              {
+                city: "Cochin",
+                title: "Athirappilly & Vazhachal Waterfalls Wilderness Safari",
+                desc: "Excursion to the 'Niagara of India'—the majestic 80-foot Athirappilly Waterfalls plunging through Sholayar rainforests, followed by scenic Vazhachal cascade views and endemic birdwatching in riparian forests.",
+                acts: [
+                  "Athirappilly Waterfall Base Trek",
+                  "Sholayar Rainforest Viewpoints",
+                  "Vazhachal Forest Cascade Walk",
+                  "Endemic Wildlife & Hornbill Spotting"
+                ],
+                stayCity: "Cochin",
+                transfers: "Dedicated Private AC Cab for Athirappilly Waterfalls Excursion"
+              }
+            ];
+            const extIdx = (d - 1) - stages.length;
+            kStage = keralaExtendedStages[extIdx % keralaExtendedStages.length];
+          }
+        }
+
+        const isHouseboat = kStage.stayCity?.includes('Houseboat') || assignedHotel.includes('Houseboat');
         itinerary.push({
           dayNumber: d,
-          title: hbStage.title,
-          description: hbStage.desc,
-          meals: ['Breakfast', 'Lunch', 'Dinner'],
-          activities: hbStage.acts,
+          title: kStage.title,
+          description: kStage.desc,
+          meals: isHouseboat ? ['Breakfast', 'Lunch', 'Dinner'] : ['Breakfast'],
+          activities: kStage.acts,
           hotel: assignedHotel,
-          transfers: 'Private AC Cab Transfer to Alleppey Houseboat Jetty'
+          transfers: kStage.transfers || (isHouseboat ? 'Private AC Cab Transfer to Alleppey Houseboat Jetty' : 'Dedicated Private AC Cab for Full Day Sightseeing & Transfers')
         });
         continue;
       }

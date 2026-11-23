@@ -107,12 +107,14 @@ all.forEach((pkg, idx) => {
     circuitValidationErrors++;
   }
   if (pkg.destinationSlug === 'kerala' && pkg.durationDays >= 4) {
-    // Check that Alleppey Houseboat is on the 2nd-last night (last stay night)
-    const lastStayDay = pkg.itinerary[pkg.durationDays - 2];
-    if (!lastStayDay.hotel.toLowerCase().includes('houseboat') && !lastStayDay.title.toLowerCase().includes('houseboat')) {
+    // Check that Alleppey Houseboat is present in the itinerary
+    const hasHouseboat = pkg.itinerary.some(
+      (day) => day.hotel.toLowerCase().includes('houseboat') || day.title.toLowerCase().includes('houseboat')
+    );
+    if (!hasHouseboat) {
       circuitValidationErrors++;
       stateWiseSummary[state].zeroZigZag = false;
-      console.error(`Kerala package ${pkg.id} does not have Alleppey Houseboat on 2nd-last night: ${lastStayDay.title}`);
+      console.error(`Kerala package ${pkg.id} is missing Alleppey Houseboat stay`);
     }
   }
 

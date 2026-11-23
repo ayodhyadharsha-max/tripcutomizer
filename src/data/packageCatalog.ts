@@ -750,11 +750,15 @@ function generateSynthesizedPackage(
   const gallerySecondary = sectorPool[(pkgIndex + 1) % sectorPool.length] || assignedHeroImage;
   const galleryTertiary = sectorPool[(pkgIndex + 2) % sectorPool.length] || assignedHeroImage;
 
+  // Build clean night-stay breakdown string for the package card (e.g. 2N Munnar • 1N Thekkady • 1N Alleppey Houseboat • 1N Kovalam)
+  const stayBreakdown = circuit.hotels.map((h) => `${h.nights}N ${h.city}`).join(' • ');
+
   // Theme-specific tailored highlight
   const themeHighlights = HIGHLIGHTS_MAP[themeObj.theme] || [];
   const combinedHighlights = [
+    stayBreakdown,
     ...circuit.highlights.slice(0, 3),
-    ...themeHighlights.slice(0, 2)
+    ...themeHighlights.slice(0, 1)
   ];
 
   return {

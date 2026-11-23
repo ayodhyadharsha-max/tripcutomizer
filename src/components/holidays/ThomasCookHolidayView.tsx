@@ -72,7 +72,7 @@ export function tripcustomizerHolidayView() {
   // State for Specials Banner Slide
   const [specialsSlide, setSpecialsSlide] = useState(0);
 
-  // Filter view toggle (Show all 5,500+ packages with filters vs tripcustomizer homepage layout)
+  // Filter view toggle (Show all 3,500+ packages with filters vs tripcustomizer homepage layout)
   const [activeTab, setActiveTab] = useState<'HOME' | 'ALL_PACKAGES'>('HOME');
 
   // FAQ Active Accordion
@@ -277,33 +277,72 @@ export function tripcustomizerHolidayView() {
     },
   ];
 
-  // SEO Categories Matrix
-  const seoCategories = [
-    'Trending International Tour Packages',
-    'Most Popular Spiritual Tour Packages',
-    'Trending Destinations in India',
-    'Trending International Honeymoon Packages',
-    'Trending India Honeymoon Packages',
-    'Trending Travel Themes',
-    'Most Popular India Tourism',
-    'Most Popular International Tourism',
-  ];
+  // Curated Clean SEO Tag Matrix for Footer / Holiday Directory
+  const SEO_DIRECTORY_MATRIX: Record<string, string[]> = {
+    'Trending International Tour Packages': [
+      'Dubai tour packages', 'Bali tour packages', 'Thailand tour packages', 'Singapore tour packages',
+      'Maldives luxury packages', 'Vietnam tour packages', 'Europe vacation packages', 'Switzerland tour packages',
+      'Paris tour packages', 'Mauritius tour packages', 'Malaysia tour packages', 'Baku tour packages',
+      'Georgia tour packages', 'Turkey tour packages', 'Egypt tour packages', 'Australia tour packages'
+    ],
+    'Most Popular Spiritual Tour Packages': [
+      'Ayodhya Ram Mandir VIP Darshan Tour', 'Varanasi Kashi Vishwanath Ganga Aarti',
+      'Char Dham Yatra 2026 by Helicopter', 'Kedarnath Badrinath Do Dham Tour',
+      'Dwarka Somnath Gujarat Teerth Yatra', 'Tirupati Balaji VIP Darshan',
+      'Shirdi Sai Baba Temple Tour', 'Rameshwaram Madurai Temple Tour',
+      'Amritsar Golden Temple & Wagah Border', 'Mathura Vrindavan Gokul Tour',
+      'Ujjain Mahakaleshwar Jyotirlinga Tour', 'Puri Jagannath Mandir Darshan Tour'
+    ],
+    'Trending Destinations in India': [
+      'Kerala Backwaters & Munnar Hills', 'Kashmir Dal Lake & Gulmarg Snow Tour',
+      'Goa Beach Vacation with North & South Tour', 'Himachal Shimla Manali Solang Tour',
+      'Rajasthan Royal Jaipur Jodhpur Udaipur Tour', 'Andaman Havelock Radhanagar Beach',
+      'Ladakh Pangong Lake & Khardung La Tour', 'Sikkim Gangtok Darjeeling Tea Estate Tour',
+      'Meghalaya Shillong Cherrapunji Living Root Bridges', 'Uttarakhand Nainital Mussoorie Corbett'
+    ],
+    'Trending International Honeymoon Packages': [
+      'Maldives Overwater Villa Honeymoon', 'Bali Private Pool Villa Honeymoon',
+      'Switzerland Alpine Romantic Train Tour', 'Paris & Eiffel Tower Romantic Tour',
+      'Greece Santorini Sunset Honeymoon', 'Mauritius Luxury Beachfront Resort Honeymoon',
+      'Thailand Phuket Krabi Speedboat Honeymoon', 'Seychelles Tropical Island Honeymoon'
+    ],
+    'Trending India Honeymoon Packages': [
+      'Kerala Munnar Tea Hills & Alleppey Houseboat Honeymoon',
+      'Kashmir Srinagar Houseboat & Gulmarg Snow Honeymoon',
+      'Manali Rohtang Pass & Solang Valley Honeymoon',
+      'Udaipur Lake Pichola Heritage Palace Honeymoon',
+      'Goa Candlelight Beach Dinner Honeymoon',
+      'Andaman Neil & Havelock Island Scuba Honeymoon',
+      'Coorg Coffee Plantation & Luxury Villa Honeymoon'
+    ],
+    'Trending Travel Themes': [
+      'Luxury Backwater Houseboats', 'Himalayan Snow & Skiing Expeditions',
+      'Heritage Royal Forts & Palaces', 'Wildlife Jeep Safari Expeditions',
+      'Romantic Private Island Villas', 'Sacred Jyotirlinga & Dham Yatras',
+      'Visa-Free International Escapes', 'Family Summer Vacation Specials'
+    ],
+    'Most Popular India Tourism': [
+      "God's Own Country Kerala", 'Paradise on Earth Kashmir',
+      'Land of Kings Rajasthan', 'Spiritual Kashi Varanasi',
+      'Pearl of the Orient Goa', 'Queen of Hills Shimla & Manali',
+      'Valley of Gods Haridwar & Rishikesh'
+    ],
+    'Most Popular International Tourism': [
+      'City of Gold Dubai UAE', 'Island of the Gods Bali',
+      'Land of Smiles Thailand', 'Lion City Singapore',
+      'Sunny Tropical Maldives', 'Land of the Ascending Dragon Vietnam',
+      'Land of Fire Azerbaijan Baku'
+    ]
+  };
 
-  const seoTags = [
-    'Turkey tour packages', 'Singapore tour packages', 'Malaysia tour packages', 'Bali tour packages',
-    'Dubai tour packages', 'Mauritius tour packages', 'Maldives tour packages', 'Vietnam tour packages',
-    'Cambodia tour packages', 'Seychelles tour packages', 'Australia tour packages', 'Europe tour packages',
-    'South Africa tour packages', 'Egypt tour packages', 'Spain tour packages', 'USA tour packages',
-    'Japan tour packages', 'Thailand tour packages', 'Azerbaijan tour packages', 'Baku tour packages',
-    'Georgia tour packages', 'Kazakhstan tour packages'
-  ];
+  const seoCategories = Object.keys(SEO_DIRECTORY_MATRIX);
 
   if (activeTab === 'ALL_PACKAGES') {
     return (
       <div>
         <div className="bg-slate-900 text-white py-3 border-b border-slate-800">
           <Container className="flex items-center justify-between text-xs">
-            <span className="font-bold text-slate-300">Showing All 5,500+ Pan-India & Global Packages with Filters</span>
+            <span className="font-bold text-slate-300">Showing All 3,500+ Pan-India & Global Packages with Filters</span>
             <button
               onClick={() => setActiveTab('HOME')}
               className="bg-brand-600 hover:bg-brand-500 text-white px-3 py-1 rounded-full font-bold transition-all"
@@ -315,8 +354,8 @@ export function tripcustomizerHolidayView() {
         <HolidayListingView
           initialPackages={getAllCatalogPackages()}
           title="Holiday Tour Packages & Destinations"
-          subtitle="Discover 5,500+ curated international and domestic India tour itineraries with flights, luxury hotels & private transfers."
-          badgeText="5,500+ Verified Tour Packages"
+          subtitle="Discover 3,500+ curated international and domestic India tour itineraries with flights, luxury hotels & private transfers."
+          badgeText="3,500+ Verified Tour Packages"
           defaultCategory="ALL"
           defaultRegion="ALL"
         />
@@ -348,7 +387,7 @@ export function tripcustomizerHolidayView() {
             Perfect Holidays, Crafted Just for You
           </h1>
           <p className="text-slate-200 text-xs sm:text-lg font-medium mb-6 sm:mb-8 drop-shadow-sm">
-            Explore 5,500+ curated tour packages across India & worldwide destinations
+            Explore 3,500+ curated tour packages across India & worldwide destinations
           </p>
 
           {/* Large Search Bar */}
@@ -687,7 +726,7 @@ export function tripcustomizerHolidayView() {
               className="hidden sm:flex items-center space-x-1.5 bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold text-xs px-4 py-2 rounded-xl transition-all"
             >
               <SlidersHorizontal className="w-4 h-4" />
-              <span>Browse All 5,500+ Packages with Filters →</span>
+              <span>Browse All 3,500+ Packages with Filters →</span>
             </button>
           </div>
 
@@ -1097,7 +1136,7 @@ export function tripcustomizerHolidayView() {
             <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
               <div className="bg-gradient-to-b from-orange-500/90 to-amber-600/90 backdrop-blur-md p-4 sm:p-5 rounded-2xl sm:rounded-3xl text-white shadow-lg">
                 <h3 className="font-black text-sm sm:text-base mb-0.5 sm:mb-1">Trusted Advisor</h3>
-                <p className="text-[11px] sm:text-xs text-orange-100 leading-snug">Trusted Since 1881, Designed for Modern Journeys.</p>
+                <p className="text-[11px] sm:text-xs text-orange-100 leading-snug">Trusted Since 2010, Designed for Modern Journeys.</p>
               </div>
 
               <div className="bg-gradient-to-b from-orange-600/90 to-rose-600/90 backdrop-blur-md p-4 sm:p-5 rounded-2xl sm:rounded-3xl text-white shadow-lg">
@@ -1291,7 +1330,7 @@ export function tripcustomizerHolidayView() {
 
             {/* Right Blue Pill Tag Matrix */}
             <div className="lg:col-span-8 flex flex-wrap gap-2 sm:gap-2.5 items-start">
-              {seoTags.map((tag, idx) => (
+              {(SEO_DIRECTORY_MATRIX[seoCategories[seoCategory]] || SEO_DIRECTORY_MATRIX[seoCategories[0]]).map((tag, idx) => (
                 <Link
                   key={idx}
                   href={`/holidays?search=${encodeURIComponent(tag.split(' ')[0])}`}
@@ -1304,13 +1343,13 @@ export function tripcustomizerHolidayView() {
           </div>
         </div>
 
-        {/* SECTION 15: EXPLORE ALL 5,500+ PACKAGES WITH FILTERS BANNER */}
+        {/* SECTION 15: EXPLORE ALL 3,500+ PACKAGES WITH FILTERS BANNER */}
         <div className="bg-gradient-to-r from-brand-900 via-brand-800 to-slate-900 text-white rounded-3xl p-6 sm:p-10 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="space-y-2 text-center sm:text-left">
             <span className="bg-accent-400/20 text-accent-400 border border-accent-400/30 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full inline-block">
               COMPLETE TOUR DIRECTORY
             </span>
-            <h3 className="text-xl sm:text-4xl font-black">Looking for all 5,500+ Packages & Filters?</h3>
+            <h3 className="text-xl sm:text-4xl font-black">Looking for all 3,500+ Packages & Filters?</h3>
             <p className="text-slate-300 text-xs sm:text-sm max-w-xl">
               Filter packages by price, hotel star rating, duration, and theme using our complete interactive sidebar filter.
             </p>
@@ -1320,7 +1359,7 @@ export function tripcustomizerHolidayView() {
             onClick={() => setActiveTab('ALL_PACKAGES')}
             className="w-full sm:w-auto bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs sm:text-sm px-6 py-3.5 sm:px-8 sm:py-4 rounded-2xl shadow-xl hover:scale-105 transition-all shrink-0"
           >
-            BROWSE ALL 5,500+ PACKAGES →
+            BROWSE ALL 3,500+ PACKAGES →
           </button>
         </div>
       </Container>
@@ -1333,7 +1372,7 @@ export function tripcustomizerHolidayView() {
         </a>
         <button onClick={() => setActiveTab('ALL_PACKAGES')} className="flex items-center space-x-1 text-[11px] font-extrabold text-white bg-brand-700 hover:bg-brand-800 px-3 py-2 rounded-full shadow-md shrink-0">
           <SlidersHorizontal className="w-3.5 h-3.5" />
-          <span>5,500+ Packages</span>
+          <span>3,500+ Packages</span>
         </button>
         <Link href="/customize-trip" className="flex items-center space-x-1 text-[11px] font-black text-slate-950 bg-amber-400 hover:bg-amber-300 px-3 py-2 rounded-full shadow-sm shrink-0">
           <Sparkles className="w-3.5 h-3.5" />

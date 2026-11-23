@@ -24,7 +24,8 @@ import {
   SlidersHorizontal,
   RotateCcw,
   Sparkles,
-  PhoneCall
+  PhoneCall,
+  Building2
 } from 'lucide-react';
 
 function SearchQuerySync({ onQueryFound }: { onQueryFound: (q: string) => void }) {
@@ -840,9 +841,16 @@ export function HolidayListingView({
                             </span>
                           </div>
 
-                          {/* Key Highlights */}
-                          <div className="space-y-1 mb-4 bg-slate-50 p-3 rounded-2xl border border-slate-100">
-                            {pkg.highlights.slice(0, 2).map((h, i) => (
+                          {/* Key Highlights & City Night Stay Breakdown */}
+                          <div className="space-y-1.5 mb-4 bg-slate-50 p-3 rounded-2xl border border-slate-100">
+                            {/* Distinct Stay Summary Breakdown */}
+                            {pkg.highlights[0] && (
+                              <div className="flex items-center space-x-1.5 text-xs font-extrabold text-brand-900 pb-1 mb-1 border-b border-slate-200/80">
+                                <Building2 className="w-3.5 h-3.5 text-brand-600 shrink-0" />
+                                <span className="line-clamp-1">{pkg.highlights[0]}</span>
+                              </div>
+                            )}
+                            {pkg.highlights.slice(1, 4).map((h, i) => (
                               <div key={i} className="flex items-start space-x-2 text-xs text-slate-600">
                                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
                                 <span className="line-clamp-1 font-semibold">{h}</span>

@@ -511,12 +511,12 @@ export default function BookingCheckoutPage() {
             </div>
             <h1 className="text-2xl sm:text-3xl font-black text-slate-900 mb-2">No Tour Package Selected</h1>
             <p className="text-slate-500 text-sm mb-8 max-w-md mx-auto">
-              You haven&apos;t selected a holiday package or travel itinerary yet. Please explore our 5,500+ tour packages or customize a trip to proceed to checkout.
+              You haven&apos;t selected a holiday package or travel itinerary yet. Please explore our 3,500+ curated tour packages or customize a trip to proceed to checkout.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link href="/holidays">
                 <Button variant="primary" size="lg" className="w-full sm:w-auto font-black px-6">
-                  Explore 5,500+ Tour Packages →
+                  Explore 3,500+ Tour Packages →
                 </Button>
               </Link>
               <Link href="/customize-trip">

@@ -130,7 +130,7 @@ export const AppDownloadBanner: React.FC = () => {
                         <span>🏖️</span> Holidays
                       </span>
                       <span className="bg-brand-50 text-brand-700 font-bold text-[5px] px-1 py-0.2 rounded border border-brand-200">
-                        120+ Packages
+                        3,500+ Curated Packages
                       </span>
                     </div>
 
