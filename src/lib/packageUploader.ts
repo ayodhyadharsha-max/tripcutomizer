@@ -240,8 +240,11 @@ export function parsePackagesFromCsv(csvText: string): { packages: HolidayPackag
       }
     }
 
-    const uniqueId = `pkg-mmt-${slugify(destinationSlug)}-${Date.now()}-${rowIdx}`;
-    const slug = `${destinationSlug}-${slugify(name)}-${durationDays}d${durationNights}n-mmt-${rowIdx}`;
+    const baseNameSlug = slugify(name);
+    const customSlug = rowMap['slug'] ? slugify(rowMap['slug']) : null;
+    const slug = customSlug || `${destinationSlug}-${baseNameSlug}-${durationDays}d${durationNights}n-mmt-${rowIdx}`;
+    const customId = rowMap['id'] ? rowMap['id'].trim() : null;
+    const uniqueId = customId || `pkg-mmt-${slug}`;
 
     packages.push({
       id: uniqueId,
@@ -313,8 +316,10 @@ export function parsePackagesFromJson(jsonText: string): { packages: HolidayPack
       const startingPrice = Number(item.startingPrice) || 19999;
       const discountPrice = Number(item.discountPrice) || Math.round(startingPrice * 1.18);
 
-      const uniqueId = item.id || `pkg-mmt-${slugify(destinationSlug)}-${Date.now()}-${idx + 1}`;
-      const slug = item.slug || `${destinationSlug}-${slugify(item.name)}-${durationDays}d${durationNights}n-mmt-${idx + 1}`;
+      const baseNameSlug = slugify(item.name);
+      const customSlug = item.slug ? slugify(String(item.slug)) : null;
+      const slug = customSlug || `${destinationSlug}-${baseNameSlug}-${durationDays}d${durationNights}n-mmt-${idx + 1}`;
+      const uniqueId = item.id ? String(item.id).trim() : `pkg-mmt-${slug}`;
 
       const itinerary: ItineraryDay[] = Array.isArray(item.itinerary) && item.itinerary.length > 0
         ? item.itinerary.map((d: any, dIdx: number) => ({

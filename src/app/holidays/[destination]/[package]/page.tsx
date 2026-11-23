@@ -1,15 +1,32 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 import { HolidayPackage } from '@/data/packagesData';
 import { findCatalogPackage } from '@/data/packageCatalog';
+import { findServerPackage } from '@/lib/serverPackageStore';
 import { PackageDetailClientView } from '@/components/holidays/PackageDetailClientView';
 
 function getMatchedPackage(destinationParam: string, packageParam: string): HolidayPackage | null {
   const decodedPkgParam = decodeURIComponent(packageParam || '').toLowerCase().trim();
   const decodedDestParam = decodeURIComponent(destinationParam || '').toLowerCase().trim();
 
-  return findCatalogPackage(decodedDestParam, decodedPkgParam) || null;
+  // 1. Look in persistent server store (Supabase, Prisma, file store)
+  const serverPkg = findServerPackage(decodedDestParam, decodedPkgParam);
+  if (serverPkg) return serverPkg;
+
+  // 2. Look in static catalog
+  const catalogPkg = findCatalogPackage(decodedDestParam, decodedPkgParam);
+  if (catalogPkg) {
+    if (
+      catalogPkg.slug.toLowerCase() === decodedPkgParam ||
+      catalogPkg.id.toLowerCase() === decodedPkgParam ||
+      decodedPkgParam.includes(catalogPkg.slug.toLowerCase()) ||
+      catalogPkg.slug.toLowerCase().includes(decodedPkgParam)
+    ) {
+      return catalogPkg;
+    }
+  }
+
+  return null;
 }
 
 export async function generateMetadata({
@@ -79,7 +96,8 @@ export default function ServerPackageDetailPage({
 }) {
   const pkg = getMatchedPackage(params.destination, params.package);
   if (!pkg) {
-    notFound();
+    // If not found in server SSR, render client view to check local cloudStore / client API
+    return <PackageDetailClientView params={params} initialPackage={null} />;
   }
   const price = Math.min(pkg.startingPrice || 0, pkg.discountPrice || pkg.startingPrice || 0) || pkg.startingPrice || 14999;
   const overviewText = pkg.highlights && pkg.highlights.length > 0 ? pkg.highlights.join('. ') : pkg.name;
@@ -201,7 +219,7 @@ export default function ServerPackageDetailPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
       )}
-      <PackageDetailClientView params={params} />
+      <PackageDetailClientView params={params} initialPackage={pkg} />
     </>
   );
 }

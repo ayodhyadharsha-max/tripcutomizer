@@ -86,6 +86,9 @@ export default function AdminPackagesPage() {
 
   useEffect(() => {
     refreshCatalogData();
+    cloudStore.syncCustomPackagesFromServer().then(() => {
+      refreshCatalogData();
+    });
 
     // Listen to storage events across tabs
     const handleStorageUpdate = () => refreshCatalogData();
@@ -212,7 +215,7 @@ export default function AdminPackagesPage() {
   };
 
   // Confirm Bulk Upload & Save to Database
-  const handleConfirmImport = () => {
+  const handleConfirmImport = async () => {
     if (parsedPreviewPackages.length === 0) return;
 
     // Enforce batch_source = 'mmt_sync' on all imported packages
@@ -221,6 +224,7 @@ export default function AdminPackagesPage() {
       batch_source: 'mmt_sync',
     }));
 
+    // 1. Instant client-side persistence
     cloudStore.saveCustomPackages(sanitizedToImport);
     refreshCatalogData();
     setIsUploadModalOpen(false);
@@ -229,10 +233,25 @@ export default function AdminPackagesPage() {
     setActiveBatchFilter('mmt_sync');
     setCurrentPage(1);
 
-    triggerNotification(
-      `Successfully imported ${sanitizedToImport.length} MMT Sync packages into the database.`,
-      'success'
-    );
+    // 2. Server DB persistence (Supabase / Prisma / server store)
+    try {
+      const res = await fetch('/api/packages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ packages: sanitizedToImport }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        triggerNotification(
+          `Successfully saved ${sanitizedToImport.length} MMT Sync packages to database & live catalog.`,
+          'success'
+        );
+      } else {
+        triggerNotification(`Saved locally. Server note: ${data.error || 'Sync pending'}`, 'info');
+      }
+    } catch {
+      triggerNotification(`Saved locally in browser. Syncing to database in background.`, 'info');
+    }
   };
 
   // Handle Delete All Legacy Packages

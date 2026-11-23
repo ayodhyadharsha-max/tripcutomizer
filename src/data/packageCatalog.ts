@@ -1022,7 +1022,8 @@ export function findCatalogPackage(
   param1?: string,
   param2?: string
 ): HolidayPackage | undefined {
-  const { lookup, all } = initializeCatalog();
+  const all = getAllCatalogPackages();
+  const { lookup } = initializeCatalog();
   const p1 = decodeURIComponent(param1 || '').toLowerCase().trim();
   const p2 = decodeURIComponent(param2 || '').toLowerCase().trim();
 
@@ -1046,11 +1047,19 @@ export function findCatalogPackage(
     const withPrefix = lookup.get('pkg-' + candidate);
     if (withPrefix) return withPrefix;
 
-    // Substring / Slug match across all packages
-    const otaMatch = all.find(
+    // Exact match across all packages (including custom MMT Sync packages)
+    const exactMatch = all.find(
       (p) =>
         p.slug.toLowerCase() === candidate ||
         p.id.toLowerCase() === candidate ||
+        candidate === p.slug.toLowerCase().replace(/^pkg-/, '') ||
+        candidate === p.id.toLowerCase().replace(/^pkg-/, '')
+    );
+    if (exactMatch) return exactMatch;
+
+    // Substring / Slug match across all packages
+    const otaMatch = all.find(
+      (p) =>
         p.slug.toLowerCase().includes(candidate) ||
         candidate.includes(p.slug.toLowerCase()) ||
         p.name.toLowerCase().includes(candidate)
@@ -1058,21 +1067,24 @@ export function findCatalogPackage(
     if (otaMatch) return otaMatch;
   }
 
-  // Destination match fallback
-  const destCandidates = p1 ? [p1, p2] : [p2];
-  for (const dest of destCandidates) {
-    if (!dest) continue;
-    const destMatch = all.find(
-      (p) =>
-        p.destinationSlug.toLowerCase() === dest ||
-        (p.citySlugs && p.citySlugs.includes(dest)) ||
-        (p.stateSlug && p.stateSlug.toLowerCase() === dest) ||
-        p.destination.toLowerCase().includes(dest)
-    );
-    if (destMatch) return destMatch;
+  // Destination match fallback: ONLY performed if no specific package slug (p2) was requested
+  if (!p2) {
+    const destCandidates = [p1];
+    for (const dest of destCandidates) {
+      if (!dest) continue;
+      const destMatch = all.find(
+        (p) =>
+          p.destinationSlug.toLowerCase() === dest ||
+          (p.citySlugs && p.citySlugs.includes(dest)) ||
+          (p.stateSlug && p.stateSlug.toLowerCase() === dest) ||
+          p.destination.toLowerCase().includes(dest)
+      );
+      if (destMatch) return destMatch;
+    }
+    return all[0];
   }
 
-  return all[0];
+  return undefined;
 }
 
 export function getCatalogPackagesByDestination(destinationSlug: string): HolidayPackage[] {

@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getAllCatalogPackages } from '@/data/packageCatalog';
+import { getServerCustomPackages } from '@/lib/serverPackageStore';
 import { getAllProgrammaticPackages } from '@/data/programmaticPackages';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 import { AEODirectAnswerBox } from '@/components/holidays/AEODirectAnswerBox';
@@ -222,9 +223,23 @@ function matchPackagesForDestination(rawSlug: string, allCatalog: ReturnType<typ
 
     if (
       (rawSlug === 'up' || rawSlug === 'uttar-pradesh' || rawSlug === 'ayodhya') &&
-      (dest.includes('ayodhya') || dest.includes('varanasi') || dest.includes('lucknow') || dest.includes('mathura'))
+      (dest.includes('ayodhya') || dest.includes('varanasi') || dest.includes('lucknow') || dest.includes('mathura') || dest.includes('uttar pradesh') || dSlug === 'uttar-pradesh' || p.stateSlug === 'uttar-pradesh' || p.slug.includes('uttar-pradesh'))
     ) {
       return true;
+    }
+
+    // Direct match for MMT Sync bulk-uploaded packages
+    if (p.batch_source === 'mmt_sync') {
+      if (
+        dSlug === rawSlug ||
+        dSlug.includes(rawSlug) ||
+        rawSlug.includes(dSlug) ||
+        dest.includes(rawSlug) ||
+        p.slug.includes(rawSlug) ||
+        (p.stateSlug && p.stateSlug === rawSlug)
+      ) {
+        return true;
+      }
     }
 
     // Additional international aliases
@@ -264,7 +279,8 @@ export async function generateMetadata({ params }: { params: { destination: stri
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
 
-  const allCatalog = getAllCatalogPackages();
+  const serverCustom = getServerCustomPackages();
+  const allCatalog = [...serverCustom, ...getAllCatalogPackages()];
   const matched = matchPackagesForDestination(rawSlug, allCatalog);
 
   const minPrice = matched.length > 0
@@ -316,7 +332,8 @@ export async function generateMetadata({ params }: { params: { destination: stri
 
 export default function DestinationListingPage({ params }: { params: { destination: string } }) {
   const rawSlug = params.destination.toLowerCase().trim();
-  const allCatalog = getAllCatalogPackages();
+  const serverCustom = getServerCustomPackages();
+  const allCatalog = [...serverCustom, ...getAllCatalogPackages()];
   const matchedPackages = matchPackagesForDestination(rawSlug, allCatalog);
 
   if (matchedPackages.length === 0) {

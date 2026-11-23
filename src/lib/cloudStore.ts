@@ -791,22 +791,74 @@ export const cloudStore = {
     return getStoredData<HolidayPackage[]>(STORAGE_KEYS.CUSTOM_PACKAGES, []);
   },
 
+  syncCustomPackagesFromServer: async (): Promise<HolidayPackage[]> => {
+    if (typeof window === 'undefined') return [];
+    try {
+      const res = await fetch('/api/packages');
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && Array.isArray(data.packages)) {
+          const local = cloudStore.getCustomPackages();
+          const map = new Map<string, HolidayPackage>();
+          local.forEach((p) => map.set(p.id, p));
+          data.packages.forEach((p: HolidayPackage) => map.set(p.id, p));
+          const merged = Array.from(map.values());
+          setStoredData(STORAGE_KEYS.CUSTOM_PACKAGES, merged);
+
+          if (typeof data.isLegacyDeleted === 'boolean') {
+            setStoredData(STORAGE_KEYS.LEGACY_PACKAGES_DELETED, data.isLegacyDeleted);
+          }
+          return merged;
+        }
+      }
+    } catch {}
+    return cloudStore.getCustomPackages();
+  },
+
   saveCustomPackages: (newPackages: HolidayPackage[]): void => {
     const existing = cloudStore.getCustomPackages();
     const existingIds = new Set(existing.map((p) => p.id));
     const toAdd = newPackages.filter((p) => !existingIds.has(p.id));
     const updated = [...toAdd, ...existing];
     setStoredData(STORAGE_KEYS.CUSTOM_PACKAGES, updated);
+
+    // Asynchronously persist to backend database and server store
+    if (typeof window !== 'undefined') {
+      try {
+        fetch('/api/packages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ packages: newPackages }),
+        }).catch(() => {});
+      } catch {}
+    }
   },
 
   setAllCustomPackages: (packages: HolidayPackage[]): void => {
     setStoredData(STORAGE_KEYS.CUSTOM_PACKAGES, packages);
+    if (typeof window !== 'undefined') {
+      try {
+        fetch('/api/packages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ packages }),
+        }).catch(() => {});
+      } catch {}
+    }
   },
 
   deleteCustomPackage: (id: string): void => {
     const existing = cloudStore.getCustomPackages();
     const updated = existing.filter((p) => p.id !== id);
     setStoredData(STORAGE_KEYS.CUSTOM_PACKAGES, updated);
+
+    if (typeof window !== 'undefined') {
+      try {
+        fetch(`/api/packages?id=${encodeURIComponent(id)}`, {
+          method: 'DELETE',
+        }).catch(() => {});
+      } catch {}
+    }
   },
 
   isLegacyPackagesDeleted: (): boolean => {
@@ -815,10 +867,28 @@ export const cloudStore = {
 
   deleteLegacyPackages: (): void => {
     setStoredData(STORAGE_KEYS.LEGACY_PACKAGES_DELETED, true);
+    if (typeof window !== 'undefined') {
+      try {
+        fetch('/api/packages', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'delete_legacy' }),
+        }).catch(() => {});
+      } catch {}
+    }
   },
 
   restoreLegacyPackages: (): void => {
     setStoredData(STORAGE_KEYS.LEGACY_PACKAGES_DELETED, false);
+    if (typeof window !== 'undefined') {
+      try {
+        fetch('/api/packages', {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'restore_legacy' }),
+        }).catch(() => {});
+      } catch {}
+    }
   },
 };
 

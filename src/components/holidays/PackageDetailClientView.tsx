@@ -263,17 +263,76 @@ const DESTINATION_HOTEL_TIERS: Record<string, { standard: string; deluxe: string
   }
 };
 
-export function PackageDetailClientView({ params }: { params: { destination: string; package: string } }) {
+export function PackageDetailClientView({
+  params,
+  initialPackage,
+}: {
+  params: { destination: string; package: string };
+  initialPackage?: HolidayPackage | null;
+}) {
   const router = useRouter();
   const { user, login } = useAuth();
 
   const decodedPkgParam = decodeURIComponent(params.package || '').toLowerCase().trim();
   const decodedDestParam = decodeURIComponent(params.destination || '').toLowerCase().trim();
 
-  // Multi-tier package lookup (Exact match across live verified catalog packages)
-  const pkg: HolidayPackage =
-    findCatalogPackage(decodedDestParam, decodedPkgParam) ||
-    getAllCatalogPackages()[0];
+  // Multi-tier package lookup:
+  // 1. initialPackage (from server SSR)
+  // 2. Direct check in cloudStore custom packages (browser)
+  // 3. Exact match in catalog
+  const [activePkg, setActivePkg] = useState<HolidayPackage | null>(() => {
+    if (initialPackage) return initialPackage;
+
+    if (typeof window !== 'undefined') {
+      const customList = cloudStore.getCustomPackages();
+      const customMatch = customList.find(
+        (p) =>
+          p.slug.toLowerCase() === decodedPkgParam ||
+          p.id.toLowerCase() === decodedPkgParam ||
+          decodedPkgParam.includes(p.slug.toLowerCase()) ||
+          p.slug.toLowerCase().includes(decodedPkgParam)
+      );
+      if (customMatch) return customMatch;
+    }
+
+    const found = findCatalogPackage(decodedDestParam, decodedPkgParam);
+    if (
+      found &&
+      (found.slug.toLowerCase() === decodedPkgParam ||
+        found.id.toLowerCase() === decodedPkgParam ||
+        decodedPkgParam.includes(found.slug.toLowerCase()) ||
+        found.slug.toLowerCase().includes(decodedPkgParam))
+    ) {
+      return found;
+    }
+
+    return null;
+  });
+
+  const [isLoadingApi, setIsLoadingApi] = useState<boolean>(!activePkg);
+
+  useEffect(() => {
+    if (!activePkg) {
+      setIsLoadingApi(true);
+      fetch(
+        `/api/packages?slug=${encodeURIComponent(decodedPkgParam)}&destination=${encodeURIComponent(decodedDestParam)}`
+      )
+        .then((r) => r.json())
+        .then((data) => {
+          if (data.success && data.package) {
+            setActivePkg(data.package);
+            cloudStore.saveCustomPackages([data.package]);
+          }
+        })
+        .catch(() => {})
+        .finally(() => {
+          setIsLoadingApi(false);
+        });
+    }
+  }, [decodedPkgParam, decodedDestParam, activePkg]);
+
+  // Safe reference for state hooks before render (strictly typed)
+  const pkg: HolidayPackage = activePkg || getAllCatalogPackages()[0];
 
   // Active Main Sub-Tab State
   const [activeTab, setActiveTab] = useState<'itinerary' | 'inclusions' | 'summary' | 'highlights' | 'faqs'>('itinerary');
@@ -1077,6 +1136,40 @@ export function PackageDetailClientView({ params }: { params: { destination: str
           },
         ],
   };
+
+  if (isLoadingApi && !activePkg) {
+    return (
+      <div className="min-h-[70vh] bg-slate-50 flex items-center justify-center p-6">
+        <div className="text-center space-y-4">
+          <Loader2 className="w-10 h-10 animate-spin text-brand-600 mx-auto" />
+          <p className="text-sm font-bold text-slate-700">Loading tour package details...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!activePkg) {
+    return (
+      <div className="min-h-[70vh] bg-slate-50 flex items-center justify-center p-6">
+        <div className="max-w-md w-full bg-white p-8 rounded-3xl border border-slate-200 shadow-xl text-center space-y-4">
+          <div className="w-14 h-14 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mx-auto">
+            <AlertTriangle className="w-8 h-8" />
+          </div>
+          <h2 className="text-xl font-black text-slate-900">Tour Package Not Found</h2>
+          <p className="text-xs text-slate-500">
+            The requested package ({params.package}) was not found or is currently being updated.
+          </p>
+          <div className="pt-2">
+            <Link href="/holidays">
+              <Button variant="accent" size="md" className="font-bold text-xs">
+                Browse All Packages →
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-slate-50 min-h-screen py-6 pb-24 text-slate-800">
