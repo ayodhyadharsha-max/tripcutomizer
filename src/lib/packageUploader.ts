@@ -105,6 +105,370 @@ export const SAMPLE_JSON_CONTENT = [
   }
 ];
 
+// Predefined Popular Destinations for MMT Text Parser
+export const POPULAR_DESTINATIONS = [
+  'Himachal Pradesh',
+  'Kerala',
+  'Kashmir',
+  'Uttar Pradesh',
+  'Uttarakhand',
+  'Rajasthan',
+  'Goa',
+  'Andaman & Nicobar',
+  'Ladakh',
+  'North East & Sikkim',
+  'Gujarat',
+  'Karnataka & Coorg',
+  'Tamil Nadu & Ooty',
+  'Dubai & UAE',
+  'Bali, Indonesia',
+  'Thailand',
+  'Vietnam',
+  'Singapore',
+  'Maldives',
+  'Europe & Switzerland',
+  'Baku & Azerbaijan',
+  'Nepal & Bhutan',
+  'Sri Lanka',
+];
+
+// Sample MMT Raw Copied Text
+export const SAMPLE_MMT_RAW_TEXT = `BEST SELLER
+A Memorable Trip to Manali & Kasol
+3N/4D
+2N Manali • 1N Kasol
+3 Star Hotels
+Round Trip Cab Transfers Included
+Highlights: Solang Valley Excursion • Hadimba Temple & Mall Road • Manikaran Sahib Gurudwara Hot Springs
+₹ 14,999 /Person
+Total Price ₹ 29,998
+
+---------------------------------------
+
+CUSTOMISABLE
+Scenic Munnar Hills & Alleppey Houseboat
+4N/5D
+2N Munnar • 1N Thekkady • 1N Alleppey Houseboat
+4 Star Deluxe Hotels
+Daily Buffet Breakfast Included
+Highlights: Eravikulam National Park • Tata Tea Gardens • Periyar Lake Boat Ride • Private Houseboat Cruise
+₹ 19,499 /Person
+
+---------------------------------------
+
+POPULAR
+Kashmir Paradise Valley with Gulmarg Gondola
+5N/6D
+3N Srinagar • 1N Gulmarg • 1N Pahalgam
+4 Star Deluxe & Dal Lake Luxury Houseboat
+Daily Breakfast & Dinner Included
+Highlights: Dal Lake Shikara Ride • Gulmarg Gondola Cable Car • Betaab Valley Pahalgam • Mughal Gardens
+₹ 24,990 /Person`;
+
+// Smart Parser for Raw Text Copied from MakeMyTrip
+export function parseRawMmtText(
+  rawText: string,
+  defaultDestination: string = 'Himachal Pradesh'
+): { packages: HolidayPackage[]; errors: string[] } {
+  const errors: string[] = [];
+  const packages: HolidayPackage[] = [];
+
+  const noiseKeywords = [
+    'customisable', 'customizable', 'best seller', 'super saver', 'deal of the day',
+    'top rated', 'mmt assured', 'recommended', 'trending', 'family special', 'honeymoon special',
+    'flight included', 'without flights', 'exclusive deal', 'popular', 'limited period offer',
+    'view details', 'book now', 'select departure', 't&c apply', 'per person on twin sharing',
+    'total price', 'emi from', 'starts from', 'starting from'
+  ];
+
+  const isNoiseLine = (line: string): boolean => {
+    const clean = line.toLowerCase().replace(/[^a-z0-9\s]/g, '').trim();
+    if (!clean) return true;
+    return noiseKeywords.some((k) => clean === k || clean.startsWith(k + ' ') || clean.endsWith(' ' + k));
+  };
+
+  const rawLines = rawText.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+  if (rawLines.length === 0) {
+    return { packages: [], errors: ['No text provided to parse. Please paste package text from MakeMyTrip.'] };
+  }
+
+  // Segment raw lines into individual package blocks
+  const blocks: string[][] = [];
+  let currentBlock: string[] = [];
+
+  for (let i = 0; i < rawLines.length; i++) {
+    const line = rawLines[i];
+
+    // Explicit markdown/divider lines
+    if (/^[-=_\*~]{3,}$/.test(line)) {
+      if (currentBlock.length > 0) {
+        blocks.push(currentBlock);
+        currentBlock = [];
+      }
+      continue;
+    }
+
+    const hasPrice = currentBlock.some((l) => /(?:₹|INR|Rs\.?)\s*[\d,]{4,7}/i.test(l));
+    const hasDuration = currentBlock.some((l) => /\d+\s*N(?:ights?)?\s*[/•\-&,\s]+\s*\d+\s*D/i.test(l));
+    const isDurationLine = /\d+\s*N(?:ights?)?\s*[/•\-&,\s]+\s*\d+\s*D/i.test(line);
+    const isPriceLine = /(?:₹|INR|Rs\.?)\s*[\d,]{4,7}/i.test(line);
+
+    // If current block already gathered a full package card (has price & duration), start next package
+    if (
+      hasPrice &&
+      hasDuration &&
+      !isDurationLine &&
+      !isPriceLine &&
+      !isNoiseLine(line) &&
+      line.length > 4 &&
+      !line.includes('•')
+    ) {
+      blocks.push(currentBlock);
+      currentBlock = [];
+    }
+
+    currentBlock.push(line);
+  }
+
+  if (currentBlock.length > 0) {
+    blocks.push(currentBlock);
+  }
+
+  blocks.forEach((bLines, bIdx) => {
+    // 1. Extract Package Title / Name
+    let name = '';
+    for (const l of bLines) {
+      if (
+        !isNoiseLine(l) &&
+        !/\d+\s*N(?:ights?)?\s*[/•\-&,\s]+\s*\d+\s*D/i.test(l) &&
+        !/(?:₹|INR|Rs\.?)/i.test(l) &&
+        !l.includes('•') &&
+        l.length > 3
+      ) {
+        name = l.replace(/^[\d\.\)\-\s]+/, '').trim();
+        break;
+      }
+    }
+    if (!name) name = `${defaultDestination} MMT Explorer Tour ${bIdx + 1}`;
+
+    // 2. Extract Duration (Nights & Days)
+    let durationNights = 4;
+    let durationDays = 5;
+    for (const l of bLines) {
+      const durMatch = l.match(/(\d+)\s*N(?:ights?)?\s*[/•\-&,\s]+\s*(\d+)\s*D/i);
+      if (durMatch) {
+        durationNights = parseInt(durMatch[1], 10);
+        durationDays = parseInt(durMatch[2], 10);
+        break;
+      }
+      const daysMatch = l.match(/(\d+)\s*D(?:ays?)?\s*[/•\-&,\s]+\s*(\d+)\s*N/i);
+      if (daysMatch) {
+        durationDays = parseInt(daysMatch[1], 10);
+        durationNights = parseInt(daysMatch[2], 10);
+        break;
+      }
+    }
+
+    // 3. Extract Stays / Covered Cities
+    const stayCities: { nights: number; city: string }[] = [];
+    for (const l of bLines) {
+      if (/\d+\s*N\s+[A-Za-z]/i.test(l)) {
+        const parts = l.split(/[•,\|\-]/);
+        for (const p of parts) {
+          const m = p.trim().match(/(\d+)\s*N\s+([A-Za-z\s]+)/i);
+          if (m) {
+            stayCities.push({ nights: parseInt(m[1], 10), city: m[2].trim() });
+          }
+        }
+      }
+    }
+
+    // 4. Extract Starting and Discount Prices
+    const prices: number[] = [];
+    for (const l of bLines) {
+      const matches = l.matchAll(/(?:₹|INR|Rs\.?)\s*([\d,]{4,7})/gi);
+      for (const m of matches) {
+        const num = parseInt(m[1].replace(/,/g, ''), 10);
+        if (num >= 3000 && num <= 500000) {
+          prices.push(num);
+        }
+      }
+    }
+    const startingPrice = prices.length > 0 ? Math.min(...prices) : durationNights * 3800 + 4999;
+    const discountPrice = prices.length > 1 ? Math.max(...prices) : Math.round(startingPrice * 1.18);
+
+    // 5. Star Category
+    let hotelCategory = '4-Star Deluxe';
+    const allText = bLines.join(' ');
+    if (/5\s*(?:Star|★)|Luxury/i.test(allText)) hotelCategory = '5-Star Luxury';
+    else if (/3\s*(?:Star|★)|Standard/i.test(allText)) hotelCategory = '3-Star Standard';
+
+    // 6. Meal Plan
+    let mealPlan = 'Daily Breakfast Included';
+    if (/All Meals|AP Plan|Breakfast, Lunch & Dinner/i.test(allText)) {
+      mealPlan = 'All Meals Included (Breakfast, Lunch & Dinner)';
+    } else if (/Breakfast & Dinner|MAP Plan|Half Board/i.test(allText)) {
+      mealPlan = 'Daily Breakfast & Dinner Included';
+    }
+
+    // 7. Extract Highlights / Activities
+    const highlights: string[] = [];
+    for (const l of bLines) {
+      if (/highlights?:?/i.test(l) || /activities?:?/i.test(l)) {
+        const cleaned = l.replace(/^.*?(?:highlights?:?|activities?:?)/i, '').trim();
+        cleaned.split(/[•|;]/).forEach((h) => {
+          const tr = h.trim();
+          if (tr.length > 3) highlights.push(tr);
+        });
+      } else if (l.includes('•') && !/\d+N/i.test(l)) {
+        l.split('•').forEach((h) => {
+          const tr = h.trim();
+          if (tr.length > 3 && !isNoiseLine(tr)) highlights.push(tr);
+        });
+      }
+    }
+
+    // Fallback highlights if none parsed
+    if (highlights.length === 0) {
+      if (stayCities.length > 0) {
+        stayCities.forEach((sc) => {
+          highlights.push(`${sc.city} Local Sightseeing & Top Attractions`);
+        });
+      } else {
+        highlights.push(`${defaultDestination} Scenic Landscapes & Sights`);
+        highlights.push('Private AC Cab Transfers');
+        highlights.push('Handpicked Comfortable Stays');
+      }
+    }
+
+    // Destination & Slugs
+    const destination = defaultDestination || (stayCities[0] ? stayCities[0].city : 'India');
+    const destinationSlug = slugify(destination);
+    const baseNameSlug = slugify(name);
+    const slug = `${destinationSlug}-${baseNameSlug}-${durationDays}d${durationNights}n-mmt-${bIdx + 1}`;
+    const id = `pkg-mmt-${slug}`;
+
+    const isInternational = [
+      'dubai', 'uae', 'bali', 'indonesia', 'thailand', 'vietnam', 'singapore', 'maldives',
+      'europe', 'switzerland', 'baku', 'azerbaijan', 'almaty', 'kazakhstan', 'sri-lanka', 'nepal', 'bhutan'
+    ].some((s) => destinationSlug.includes(s));
+
+    // 8. Synthesize Structured Day-by-Day Itinerary
+    const itinerary: ItineraryDay[] = [];
+    const primaryCity = stayCities[0]?.city || destination;
+
+    // Day 1: Arrival & check-in
+    itinerary.push({
+      dayNumber: 1,
+      title: `Arrival & Scenic Transfer to ${primaryCity}`,
+      description: `Arrive at the nearest airport or railway station. Meet our tour representative and proceed via private cab to ${primaryCity}. Check in at your verified ${hotelCategory} accommodation and relax after your journey.`,
+      meals: mealPlan.includes('Dinner') ? ['Dinner'] : ['Welcome Drink on Arrival'],
+      activities: [`Arrival in ${primaryCity}`, 'Hotel Check-in & Leisure'],
+      hotel: `${primaryCity} ${hotelCategory} Hotel / Resort`,
+      transfers: 'Private AC Cab Transfers',
+    });
+
+    // Intermediate Days: Sightseeing based on stay split & highlights
+    for (let d = 2; d < durationDays; d++) {
+      const stayIndex = Math.min(Math.floor(((d - 2) / Math.max(durationDays - 2, 1)) * stayCities.length), stayCities.length - 1);
+      const activeCity = stayCities[stayIndex]?.city || primaryCity;
+      const highlightItem = highlights[(d - 2) % highlights.length] || `${activeCity} Exploration`;
+
+      itinerary.push({
+        dayNumber: d,
+        title: `Day ${d}: ${activeCity} Exploration - ${highlightItem}`,
+        description: `Enjoy delicious morning breakfast at hotel. Embark on a private sightseeing tour visiting key highlights including ${highlightItem} and local scenic view points. Return to hotel in the evening.`,
+        meals: mealPlan.includes('Dinner') ? ['Breakfast', 'Dinner'] : ['Breakfast'],
+        activities: [highlightItem, `${activeCity} Scenic Tour`],
+        hotel: `${activeCity} ${hotelCategory} Hotel / Resort`,
+        transfers: 'Private AC Vehicle for Sightseeing',
+      });
+    }
+
+    // Final Day: Check-out & departure
+    itinerary.push({
+      dayNumber: durationDays,
+      title: `Day ${durationDays}: Hotel Check-out & Departure Transfer`,
+      description: `Enjoy buffet breakfast at hotel. Complete check-out formalities. Our private cab will transfer you to the airport or railway station for your onward return journey with pleasant memories.`,
+      meals: ['Breakfast'],
+      activities: ['Hotel Check-out', 'Departure Airport / Station Transfer'],
+      hotel: `${primaryCity} ${hotelCategory} Hotel`,
+      transfers: 'Private AC Cab Drop',
+    });
+
+    // 9. Standard Inclusions & Exclusions
+    const inclusions = [
+      `${durationNights} Nights stay in verified ${hotelCategory} hotels`,
+      mealPlan,
+      'Private AC Cab for all inter-city transfers and scheduled sightseeing',
+      'All toll taxes, parking fees, fuel surcharges, and driver allowances included',
+      '24x7 Trip Customizer on-trip dedicated concierge assistance',
+    ];
+
+    const exclusions = [
+      'Airfare or train tickets (unless explicitly selected in itinerary)',
+      'Monument entrance tickets, ropeway/cable car passes, and safari charges',
+      'Personal expenses (laundry, room service, telephone calls, tips)',
+      'Any meals or beverages not explicitly listed in package inclusions',
+    ];
+
+    // Hotels array
+    const hotelsList = stayCities.length > 0
+      ? stayCities.map((sc) => ({
+          name: `${sc.city} ${hotelCategory} Hotel`,
+          city: sc.city,
+          rating: '4.8',
+          nights: sc.nights,
+        }))
+      : [{ name: `${destination} ${hotelCategory} Resort`, city: destination, rating: '4.8', nights: durationNights }];
+
+    packages.push({
+      id,
+      name,
+      slug,
+      destination,
+      destinationSlug,
+      state: destination,
+      stateSlug: destinationSlug,
+      country: isInternational ? destination : 'India',
+      region: isInternational ? 'International' : 'India',
+      isInternational,
+      durationDays,
+      durationNights,
+      startingPrice,
+      discountPrice,
+      rating: 4.8,
+      reviewsCount: 120 + ((bIdx * 11) % 60),
+      heroImage: `/destinations/${destinationSlug}.jpg`,
+      gallery: [`/destinations/${destinationSlug}.jpg`],
+      highlights,
+      inclusions,
+      exclusions,
+      theme: 'Holiday Explorer',
+      hotelCategory,
+      mealPlan,
+      flightsIncluded: false,
+      transfersIncluded: true,
+      departureCity: 'Flexible Origin',
+      batch_source: 'mmt_sync',
+      itinerary,
+      hotels: hotelsList,
+      faqs: [
+        {
+          question: `Can this ${name} package be customized?`,
+          answer: `Yes, all hotel categories, cab types, duration, and sightseeing spots are 100% customizable upon request.`,
+        },
+        {
+          question: `What vehicle is provided for transfers?`,
+          answer: `Dedicated private AC Sedan (Dzire/Etios) for 2-4 travelers or AC SUV (Innova/Ertiga) for 5-7 travelers.`,
+        },
+      ],
+    });
+  });
+
+  return { packages, errors };
+}
+
 // Trigger Download of Sample CSV
 export function downloadSampleCsv(): void {
   const blob = new Blob([SAMPLE_CSV_CONTENT], { type: 'text/csv;charset=utf-8;' });

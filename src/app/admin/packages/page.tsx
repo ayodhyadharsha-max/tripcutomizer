@@ -13,6 +13,9 @@ import {
   downloadSampleJson,
   parsePackagesFromCsv,
   parsePackagesFromJson,
+  parseRawMmtText,
+  POPULAR_DESTINATIONS,
+  SAMPLE_MMT_RAW_TEXT,
 } from '@/lib/packageUploader';
 import {
   Compass,
@@ -36,6 +39,8 @@ import {
   ExternalLink,
   ShieldAlert,
   Sparkles,
+  ClipboardPaste,
+  Loader2,
 } from 'lucide-react';
 
 export default function AdminPackagesPage() {
@@ -56,6 +61,18 @@ export default function AdminPackagesPage() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isTemplateMenuOpen, setIsTemplateMenuOpen] = useState(false);
   const [notification, setNotification] = useState<{ message: string; type: 'success' | 'info' | 'error' } | null>(null);
+
+  // Upload Modal State & Modes
+  const [uploadModalTab, setUploadModalTab] = useState<'paste' | 'file'>('paste');
+  const [mmtDestination, setMmtDestination] = useState<string>('Himachal Pradesh');
+  const [mmtRawText, setMmtRawText] = useState<string>('');
+  const [uploadProgress, setUploadProgress] = useState<{
+    completed: number;
+    total: number;
+    percent: number;
+    currentChunk: number;
+    totalChunks: number;
+  } | null>(null);
 
   // Upload Processing State
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
@@ -214,47 +231,120 @@ export default function AdminPackagesPage() {
     reader.readAsText(file);
   };
 
-  // Confirm Bulk Upload & Save to Database
+  // Parse Raw MMT Text Handler
+  const handleParseMmtText = () => {
+    if (!mmtRawText.trim()) {
+      setParseErrors(['Please paste some MakeMyTrip text first or click "Load Sample MMT Text".']);
+      return;
+    }
+    setIsProcessingFile(true);
+    setParseErrors([]);
+
+    try {
+      const result = parseRawMmtText(mmtRawText, mmtDestination);
+      setParsedPreviewPackages(result.packages);
+      setParseErrors(result.errors);
+      if (result.packages.length > 0) {
+        triggerNotification(
+          `✨ Successfully parsed ${result.packages.length} package${result.packages.length > 1 ? 's' : ''} for ${mmtDestination}!`,
+          'success'
+        );
+      } else {
+        triggerNotification('No valid packages could be parsed from the provided text. Check format.', 'error');
+      }
+    } catch (err: any) {
+      setParseErrors([`Parser error: ${err?.message || 'Unknown error'}`]);
+    } finally {
+      setIsProcessingFile(false);
+    }
+  };
+
+  // Confirm Bulk Upload & Save to Database (Chunked Auto-Batching in batches of 25)
   const handleConfirmImport = async () => {
     if (parsedPreviewPackages.length === 0) return;
 
     // Enforce batch_source = 'mmt_sync' on all imported packages
     const sanitizedToImport = parsedPreviewPackages.map((p) => ({
       ...p,
-      batch_source: 'mmt_sync',
+      batch_source: 'mmt_sync' as const,
     }));
 
     setIsProcessingFile(true);
+    const CHUNK_SIZE = 25;
+    const totalPackages = sanitizedToImport.length;
+    const chunks: HolidayPackage[][] = [];
+    for (let i = 0; i < totalPackages; i += CHUNK_SIZE) {
+      chunks.push(sanitizedToImport.slice(i, i + CHUNK_SIZE));
+    }
+    const totalChunks = chunks.length;
+
+    setUploadProgress({
+      completed: 0,
+      total: totalPackages,
+      percent: 0,
+      currentChunk: 1,
+      totalChunks,
+    });
+
+    let successfullyImportedCount = 0;
 
     try {
-      // 1. Direct Supabase server persistence
-      const res = await fetch('/api/packages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ packages: sanitizedToImport }),
-      });
+      for (let chunkIdx = 0; chunkIdx < totalChunks; chunkIdx++) {
+        const currentBatch = chunks[chunkIdx];
+        const chunkNumber = chunkIdx + 1;
 
-      const data = await res.json().catch(() => ({}));
+        setUploadProgress({
+          completed: successfullyImportedCount,
+          total: totalPackages,
+          percent: Math.round((successfullyImportedCount / totalPackages) * 100),
+          currentChunk: chunkNumber,
+          totalChunks,
+        });
 
-      if (!res.ok || !data.success) {
-        const errorDetail = data.details ? ` (${data.details})` : '';
-        const errorMessage = data.error || 'Failed to save packages to Supabase database.';
-        triggerNotification(`❌ Supabase Error: ${errorMessage}${errorDetail}`, 'error');
-        setIsProcessingFile(false);
-        return;
+        // 1. Direct Supabase server persistence per chunk
+        const res = await fetch('/api/packages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ packages: currentBatch }),
+        });
+
+        const data = await res.json().catch(() => ({}));
+
+        if (!res.ok || !data.success) {
+          const errorDetail = data.details ? ` (${data.details})` : '';
+          const errorMessage = data.error || 'Failed to save packages to Supabase database.';
+          triggerNotification(
+            `❌ Supabase Error on Batch ${chunkNumber}/${totalChunks}: ${errorMessage}${errorDetail}`,
+            'error'
+          );
+          setIsProcessingFile(false);
+          setUploadProgress(null);
+          return;
+        }
+
+        successfullyImportedCount += currentBatch.length;
+        setUploadProgress({
+          completed: successfullyImportedCount,
+          total: totalPackages,
+          percent: Math.round((successfullyImportedCount / totalPackages) * 100),
+          currentChunk: chunkNumber,
+          totalChunks,
+        });
       }
 
-      // 2. Only on verified DB success, sync client store and close modal
+      // 2. Only on verified DB success across all chunks, sync client store and close modal
       cloudStore.saveCustomPackages(sanitizedToImport);
       refreshCatalogData();
       setIsUploadModalOpen(false);
       setUploadedFile(null);
       setParsedPreviewPackages([]);
+      setMmtRawText('');
+      setUploadProgress(null);
       setActiveBatchFilter('mmt_sync');
       setCurrentPage(1);
 
       triggerNotification(
-        `✅ Successfully saved ${sanitizedToImport.length} MMT Sync packages to live Supabase database!`,
+        `✅ Successfully saved ${totalPackages} MMT Sync packages to live Supabase database across ${totalChunks} batch${totalChunks > 1 ? 'es' : ''}!`,
         'success'
       );
     } catch (netErr: any) {
@@ -262,6 +352,7 @@ export default function AdminPackagesPage() {
         `❌ Network Error: Could not connect to /api/packages (${netErr?.message || 'Check network connection'}).`,
         'error'
       );
+      setUploadProgress(null);
     } finally {
       setIsProcessingFile(false);
     }
@@ -740,11 +831,11 @@ export default function AdminPackagesPage() {
       </Card>
 
       {/* ======================================================== */}
-      {/* 1. BULK PACKAGE UPLOADER MODAL (.JSON & .CSV)             */}
+      {/* 1. BULK PACKAGE UPLOADER MODAL (.JSON, .CSV & RAW MMT)   */}
       {/* ======================================================== */}
       {isUploadModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto animate-in fade-in">
-          <div className="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl border border-slate-200 space-y-5 my-8">
+          <div className="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl border border-slate-200 space-y-5 my-8 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between border-b border-slate-100 pb-4">
               <div>
                 <h3 className="text-lg font-black text-slate-900 flex items-center space-x-2">
@@ -752,78 +843,230 @@ export default function AdminPackagesPage() {
                   <span>Bulk Package Uploader</span>
                 </h3>
                 <p className="text-xs text-slate-500 mt-0.5">
-                  Import packages from MakeMyTrip or custom files (.json or .csv). All new items are automatically tagged as{' '}
+                  Import packages via MakeMyTrip raw text or custom files (.json / .csv). All new items are automatically tagged as{' '}
                   <strong className="text-emerald-700 font-mono">batch_source = &apos;mmt_sync&apos;</strong>.
                 </p>
               </div>
               <button
-                onClick={() => setIsUploadModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600 p-1 rounded-lg"
+                onClick={() => {
+                  if (!isProcessingFile) {
+                    setIsUploadModalOpen(false);
+                    setUploadProgress(null);
+                  }
+                }}
+                disabled={isProcessingFile}
+                className="text-slate-400 hover:text-slate-600 p-1 rounded-lg disabled:opacity-50"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Drag & Drop File Upload Box */}
-            <div
-              onClick={() => fileInputRef.current?.click()}
-              onDragOver={(e) => e.preventDefault()}
-              onDrop={(e) => {
-                e.preventDefault();
-                const file = e.dataTransfer.files?.[0];
-                if (file) processSelectedFile(file);
-              }}
-              className="border-2 border-dashed border-slate-300 hover:border-brand-500 hover:bg-brand-50/30 rounded-2xl p-8 text-center cursor-pointer transition-all space-y-3"
-            >
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept=".json,.csv"
-                onChange={handleFileChange}
-                className="hidden"
-              />
+            {/* Modal Tabs: Paste MMT Text vs Upload CSV/JSON File */}
+            <div className="flex items-center space-x-2 border-b border-slate-200 pb-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setUploadModalTab('paste');
+                  setParseErrors([]);
+                }}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  uploadModalTab === 'paste'
+                    ? 'bg-brand-50 text-brand-700 shadow-2xs border border-brand-200'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                }`}
+              >
+                <ClipboardPaste className="w-4 h-4 text-brand-600" />
+                <span>📝 Paste MMT Text</span>
+              </button>
 
-              <div className="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center mx-auto shadow-2xs">
-                <FileText className="w-6 h-6" />
-              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setUploadModalTab('file');
+                  setParseErrors([]);
+                }}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  uploadModalTab === 'file'
+                    ? 'bg-brand-50 text-brand-700 shadow-2xs border border-brand-200'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                }`}
+              >
+                <Upload className="w-4 h-4 text-brand-600" />
+                <span>📁 Upload File (.json / .csv)</span>
+              </button>
+            </div>
 
-              <div>
-                <span className="text-xs font-black text-slate-900 block">
-                  {uploadedFile ? uploadedFile.name : 'Click to select or drag & drop .json / .csv file'}
-                </span>
-                <span className="text-[11px] text-slate-500 mt-1 block">
-                  Supports .json (Array of packages) and .csv (Excel / Spreadsheet)
-                </span>
-              </div>
+            {/* TAB 1: PASTE MMT RAW TEXT */}
+            {uploadModalTab === 'paste' && (
+              <div className="space-y-4">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-slate-50 p-3 rounded-2xl border border-slate-200/80">
+                  <div className="flex-1">
+                    <label className="block text-[11px] font-black text-slate-700 uppercase tracking-wider mb-1">
+                      Target Destination
+                    </label>
+                    <select
+                      value={mmtDestination}
+                      onChange={(e) => setMmtDestination(e.target.value)}
+                      className="w-full text-xs font-bold text-slate-800 bg-white border border-slate-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                    >
+                      {POPULAR_DESTINATIONS.map((dest) => (
+                        <option key={dest} value={dest}>
+                          {dest}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
 
-              {uploadedFile && (
-                <div className="text-[11px] font-bold text-brand-700 bg-brand-50 inline-block px-3 py-1 rounded-full">
-                  Size: {(uploadedFile.size / 1024).toFixed(1)} KB • Status: Ready
+                  <div className="flex items-center space-x-2 self-end sm:self-center pt-2 sm:pt-4">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setMmtRawText(SAMPLE_MMT_RAW_TEXT);
+                        setParseErrors([]);
+                      }}
+                      className="text-[11px] font-bold text-brand-700 hover:text-brand-800 bg-white border border-brand-200 hover:bg-brand-50/50 px-3 py-2 rounded-xl transition-colors cursor-pointer"
+                    >
+                      Load Sample MMT Text
+                    </button>
+                    {mmtRawText && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setMmtRawText('');
+                          setParsedPreviewPackages([]);
+                          setParseErrors([]);
+                        }}
+                        className="text-[11px] font-bold text-slate-500 hover:text-slate-800 bg-white border border-slate-200 px-2.5 py-2 rounded-xl transition-colors cursor-pointer"
+                      >
+                        Clear
+                      </button>
+                    )}
+                  </div>
                 </div>
-              )}
-            </div>
 
-            {/* Download Sample Quick Links */}
-            <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl text-xs font-bold text-slate-600">
-              <span className="text-[11px]">Need the template format?</span>
-              <div className="space-x-2">
-                <button
-                  type="button"
-                  onClick={downloadSampleCsv}
-                  className="text-[11px] text-emerald-700 hover:underline font-bold"
-                >
-                  Download Sample CSV
-                </button>
-                <span className="text-slate-300">•</span>
-                <button
-                  type="button"
-                  onClick={downloadSampleJson}
-                  className="text-[11px] text-brand-700 hover:underline font-bold"
-                >
-                  Download Sample JSON
-                </button>
+                <div>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label className="text-xs font-bold text-slate-700">
+                      Raw MakeMyTrip Holiday Listing Text:
+                    </label>
+                    {mmtRawText && (
+                      <span className="text-[10px] text-slate-400 font-mono">
+                        {mmtRawText.length} characters
+                      </span>
+                    )}
+                  </div>
+                  <textarea
+                    rows={7}
+                    value={mmtRawText}
+                    onChange={(e) => setMmtRawText(e.target.value)}
+                    placeholder="Copy & paste text directly from MakeMyTrip holidays page (package titles, 3N/4D duration, stays split, inclusions, starting prices)... or click 'Load Sample MMT Text' above to test."
+                    className="w-full font-mono text-xs text-slate-800 p-3 border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500 bg-slate-50/50"
+                  />
+                </div>
+
+                <div className="flex justify-end">
+                  <Button
+                    type="button"
+                    variant="primary"
+                    size="sm"
+                    disabled={isProcessingFile || !mmtRawText.trim()}
+                    onClick={handleParseMmtText}
+                    className="text-xs font-black bg-brand-600 hover:bg-brand-700 text-white flex items-center space-x-1.5"
+                  >
+                    <Sparkles className="w-4 h-4" />
+                    <span>Smart Parse MMT Packages</span>
+                  </Button>
+                </div>
               </div>
-            </div>
+            )}
+
+            {/* TAB 2: FILE UPLOAD (.JSON / .CSV) */}
+            {uploadModalTab === 'file' && (
+              <div className="space-y-4">
+                {/* Drag & Drop File Upload Box */}
+                <div
+                  onClick={() => fileInputRef.current?.click()}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    const file = e.dataTransfer.files?.[0];
+                    if (file) processSelectedFile(file);
+                  }}
+                  className="border-2 border-dashed border-slate-300 hover:border-brand-500 hover:bg-brand-50/30 rounded-2xl p-8 text-center cursor-pointer transition-all space-y-3"
+                >
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept=".json,.csv"
+                    onChange={handleFileChange}
+                    className="hidden"
+                  />
+
+                  <div className="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center mx-auto shadow-2xs">
+                    <FileText className="w-6 h-6" />
+                  </div>
+
+                  <div>
+                    <span className="text-xs font-black text-slate-900 block">
+                      {uploadedFile ? uploadedFile.name : 'Click to select or drag & drop .json / .csv file'}
+                    </span>
+                    <span className="text-[11px] text-slate-500 mt-1 block">
+                      Supports .json (Array of packages) and .csv (Excel / Spreadsheet)
+                    </span>
+                  </div>
+
+                  {uploadedFile && (
+                    <div className="text-[11px] font-bold text-brand-700 bg-brand-50 inline-block px-3 py-1 rounded-full">
+                      Size: {(uploadedFile.size / 1024).toFixed(1)} KB • Status: Ready
+                    </div>
+                  )}
+                </div>
+
+                {/* Download Sample Quick Links */}
+                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl text-xs font-bold text-slate-600">
+                  <span className="text-[11px]">Need the template format?</span>
+                  <div className="space-x-2">
+                    <button
+                      type="button"
+                      onClick={downloadSampleCsv}
+                      className="text-[11px] text-emerald-700 hover:underline font-bold"
+                    >
+                      Download Sample CSV
+                    </button>
+                    <span className="text-slate-300">•</span>
+                    <button
+                      type="button"
+                      onClick={downloadSampleJson}
+                      className="text-[11px] text-brand-700 hover:underline font-bold"
+                    >
+                      Download Sample JSON
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Chunked Upload Progress Indicator */}
+            {uploadProgress && (
+              <div className="p-4 bg-brand-50 border border-brand-200 rounded-2xl space-y-2 animate-in fade-in">
+                <div className="flex items-center justify-between text-xs font-bold text-brand-900">
+                  <span className="flex items-center space-x-2">
+                    <Loader2 className="w-4 h-4 animate-spin text-brand-600" />
+                    <span>Importing into Supabase ({uploadProgress.completed} of {uploadProgress.total} packages)...</span>
+                  </span>
+                  <span>Batch {uploadProgress.currentChunk} of {uploadProgress.totalChunks} ({uploadProgress.percent}%)</span>
+                </div>
+                <div className="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
+                  <div
+                    className="bg-brand-600 h-full rounded-full transition-all duration-300 ease-out"
+                    style={{ width: `${uploadProgress.percent}%` }}
+                  />
+                </div>
+                <p className="text-[10px] text-brand-700">
+                  Chunked in batches of 25 packages to prevent server timeouts and payload limits.
+                </p>
+              </div>
+            )}
 
             {/* Parsing Errors Banner */}
             {parseErrors.length > 0 && (
@@ -867,7 +1110,7 @@ export default function AdminPackagesPage() {
                   ))}
                   {parsedPreviewPackages.length > 4 && (
                     <div className="p-2 text-center text-[10px] text-slate-400 font-bold bg-slate-50">
-                      + {parsedPreviewPackages.length - 4} more packages in file
+                      + {parsedPreviewPackages.length - 4} more packages ready
                     </div>
                   )}
                 </div>
@@ -879,7 +1122,11 @@ export default function AdminPackagesPage() {
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => setIsUploadModalOpen(false)}
+                disabled={isProcessingFile}
+                onClick={() => {
+                  setIsUploadModalOpen(false);
+                  setUploadProgress(null);
+                }}
                 className="text-xs font-bold"
               >
                 Cancel
@@ -887,11 +1134,18 @@ export default function AdminPackagesPage() {
               <Button
                 variant="primary"
                 size="sm"
-                disabled={parsedPreviewPackages.length === 0}
+                disabled={parsedPreviewPackages.length === 0 || isProcessingFile}
                 onClick={handleConfirmImport}
-                className="text-xs font-black bg-brand-600 hover:bg-brand-700 text-white"
+                className="text-xs font-black bg-brand-600 hover:bg-brand-700 text-white flex items-center space-x-2"
               >
-                Import {parsedPreviewPackages.length} MMT Sync Packages
+                {isProcessingFile ? (
+                  <>
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    <span>Importing {parsedPreviewPackages.length} Packages...</span>
+                  </>
+                ) : (
+                  <span>Import {parsedPreviewPackages.length} MMT Sync Packages</span>
+                )}
               </Button>
             </div>
           </div>
