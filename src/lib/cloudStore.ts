@@ -421,6 +421,25 @@ const initCloudListeners = () => {
           setStoredData(STORAGE_KEYS.LEADS, merged);
         }
       }, () => {});
+
+      // Packages listener from Cloud Firestore
+      onSnapshot(collection(db, 'packages'), (snapshot) => {
+        if (!snapshot.empty) {
+          const cloudPkgs: HolidayPackage[] = [];
+          snapshot.forEach((docSnap) => {
+            cloudPkgs.push(docSnap.data() as HolidayPackage);
+          });
+
+          const localPkgs = getStoredData<HolidayPackage[]>(STORAGE_KEYS.CUSTOM_PACKAGES, []);
+          const pkgMap = new Map<string, HolidayPackage>();
+          localPkgs.forEach((p) => pkgMap.set(p.id, p));
+          cloudPkgs.forEach((p) => pkgMap.set(p.id, p));
+
+          const merged = Array.from(pkgMap.values());
+          setStoredData(STORAGE_KEYS.CUSTOM_PACKAGES, merged);
+          window.dispatchEvent(new Event('cloudstore_update'));
+        }
+      }, () => {});
     } catch (e) {}
   }
 };
@@ -821,6 +840,20 @@ export const cloudStore = {
     const toAdd = newPackages.filter((p) => !existingIds.has(p.id));
     const updated = [...toAdd, ...existing];
     setStoredData(STORAGE_KEYS.CUSTOM_PACKAGES, updated);
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('cloudstore_update'));
+    }
+
+    // Sync to Cloud Firestore if available
+    if (db && process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
+      try {
+        newPackages.forEach((pkg) => {
+          setDoc(doc(db, 'packages', pkg.id), pkg, { merge: true }).catch(() => {});
+        });
+      } catch (e) {
+        console.warn('Firestore package sync note:', e);
+      }
+    }
 
     // Asynchronously persist to backend database and server store
     if (typeof window !== 'undefined') {
