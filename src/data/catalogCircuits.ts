@@ -3128,7 +3128,17 @@ export function getSectorCircuit(
       const cleanCity = ns.city.replace(' Houseboat', '').replace(' Desert Camp', '');
       coveredSet.add(cleanCity);
     });
-    // Add transit cities if applicable
+    // Add all route cities actively visited in the itinerary days (e.g. Gulmarg, Sonamarg, Prayagraj, etc.)
+    itinerary.forEach((day) => {
+      master.routeCities.forEach((rc) => {
+        if (
+          day.title.toLowerCase().includes(rc.toLowerCase()) ||
+          day.description.toLowerCase().includes(rc.toLowerCase())
+        ) {
+          coveredSet.add(rc);
+        }
+      });
+    });
     if (sector.destinationSlug === 'ayodhya' && totalDays >= 4) {
       coveredSet.add('Prayagraj');
     }

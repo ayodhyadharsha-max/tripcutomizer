@@ -698,10 +698,10 @@ function computeB2BPackagePricing(
 function generateSynthesizedPackage(
   sector: SectorDefinition,
   sectorIndex: number,
-  pkgIndex: number
+  pkgIndex: number,
+  durObj: { label: string; days: number; nights: number },
+  themeObj: { raw: string; theme: string; suffix: string }
 ): HolidayPackage {
-  const themeObj = THEMES_CONFIG[pkgIndex % THEMES_CONFIG.length];
-  const durObj = DURATIONS_CONFIG[pkgIndex % DURATIONS_CONFIG.length];
   // All package cards across the catalog strictly default to 3-Star Standard baseline pricing
   const hotelTier = '3-Star Standard';
 
@@ -726,9 +726,9 @@ function generateSynthesizedPackage(
   const reviewsCount = 85 + ((pkgIndex * 13) % 240);
 
   const prefix = sector.isInternational ? 'int' : 'dom';
-  const id = 'pkg-ota-' + prefix + '-' + (sectorIndex + 1) + '-' + (pkgIndex + 1);
-  const name = sector.region + ' – ' + circuit.circuitTitle + ' (' + durObj.label + ')';
-  const slug = sector.destinationSlug + '-' + slugify(circuit.entryCity) + '-' + slugify(themeObj.raw) + '-' + durObj.days + 'd' + durObj.nights + 'n-' + (sectorIndex + 1) + '-' + (pkgIndex + 1);
+  const id = 'pkg-ota-' + prefix + '-' + (sectorIndex + 1) + '-' + pkgIndex;
+  const name = sector.region + ' – ' + circuit.circuitTitle + ' ' + themeObj.raw + ' (' + durObj.label + ')';
+  const slug = sector.destinationSlug + '-' + slugify(circuit.entryCity) + '-' + slugify(themeObj.raw) + '-' + durObj.days + 'd' + durObj.nights + 'n-' + (sectorIndex + 1) + '-' + pkgIndex;
 
   const faqs = [
     {
@@ -749,6 +749,13 @@ function generateSynthesizedPackage(
   const assignedHeroImage = sectorPool[pkgIndex % sectorPool.length];
   const gallerySecondary = sectorPool[(pkgIndex + 1) % sectorPool.length] || assignedHeroImage;
   const galleryTertiary = sectorPool[(pkgIndex + 2) % sectorPool.length] || assignedHeroImage;
+
+  // Theme-specific tailored highlight
+  const themeHighlights = HIGHLIGHTS_MAP[themeObj.theme] || [];
+  const combinedHighlights = [
+    ...circuit.highlights.slice(0, 3),
+    ...themeHighlights.slice(0, 2)
+  ];
 
   return {
     id,
@@ -777,7 +784,7 @@ function generateSynthesizedPackage(
       gallerySecondary,
       galleryTertiary
     ],
-    highlights: circuit.highlights,
+    highlights: combinedHighlights,
     inclusions: circuit.inclusions,
     exclusions: circuit.exclusions,
     theme: themeObj.theme,
@@ -803,26 +810,39 @@ function initializeCatalog(): { all: HolidayPackage[]; lookup: Map<string, Holid
   const lookup = new Map<string, HolidayPackage>();
   const all: HolidayPackage[] = [];
 
-  // Synthesize complete verified live OTA packages per sector
+  // Generate 100% clean, non-duplicate master packages (Industry Standard Architecture)
+  let pkgSeq = 1;
   OTA_DOMESTIC_SECTORS.forEach((sector, sIdx) => {
-    for (let pIdx = 0; pIdx < sector.count; pIdx++) {
-      const pkg = generateSynthesizedPackage(sector, sIdx, pIdx);
-      all.push(pkg);
-      lookup.set(pkg.id.toLowerCase(), pkg);
-      lookup.set(pkg.slug.toLowerCase(), pkg);
-      lookup.set('pkg-' + pkg.slug.toLowerCase(), pkg);
-      lookup.set(pkg.id.toLowerCase().replace(/^pkg-/, ''), pkg);
+    for (const durObj of DURATIONS_CONFIG) {
+      for (const themeObj of THEMES_CONFIG) {
+        const pkg = generateSynthesizedPackage(sector, sIdx, pkgSeq, durObj, themeObj);
+        all.push(pkg);
+        lookup.set(pkg.id.toLowerCase(), pkg);
+        lookup.set(pkg.slug.toLowerCase(), pkg);
+        lookup.set('pkg-' + pkg.slug.toLowerCase(), pkg);
+        lookup.set(pkg.id.toLowerCase().replace(/^pkg-/, ''), pkg);
+        pkgSeq++;
+      }
     }
   });
 
   OTA_INTERNATIONAL_SECTORS.forEach((sector, sIdx) => {
-    for (let pIdx = 0; pIdx < sector.count; pIdx++) {
-      const pkg = generateSynthesizedPackage(sector, sIdx + OTA_DOMESTIC_SECTORS.length, pIdx);
-      all.push(pkg);
-      lookup.set(pkg.id.toLowerCase(), pkg);
-      lookup.set(pkg.slug.toLowerCase(), pkg);
-      lookup.set('pkg-' + pkg.slug.toLowerCase(), pkg);
-      lookup.set(pkg.id.toLowerCase().replace(/^pkg-/, ''), pkg);
+    for (const durObj of DURATIONS_CONFIG) {
+      for (const themeObj of THEMES_CONFIG) {
+        const pkg = generateSynthesizedPackage(
+          sector,
+          sIdx + OTA_DOMESTIC_SECTORS.length,
+          pkgSeq,
+          durObj,
+          themeObj
+        );
+        all.push(pkg);
+        lookup.set(pkg.id.toLowerCase(), pkg);
+        lookup.set(pkg.slug.toLowerCase(), pkg);
+        lookup.set('pkg-' + pkg.slug.toLowerCase(), pkg);
+        lookup.set(pkg.id.toLowerCase().replace(/^pkg-/, ''), pkg);
+        pkgSeq++;
+      }
     }
   });
 
