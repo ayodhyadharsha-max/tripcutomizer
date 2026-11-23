@@ -13,9 +13,6 @@ import {
   downloadSampleJson,
   parsePackagesFromCsv,
   parsePackagesFromJson,
-  parseRawMmtText,
-  POPULAR_DESTINATIONS,
-  SAMPLE_MMT_RAW_TEXT,
 } from '@/lib/packageUploader';
 import {
   Compass,
@@ -39,7 +36,6 @@ import {
   ExternalLink,
   ShieldAlert,
   Sparkles,
-  ClipboardPaste,
   Loader2,
 } from 'lucide-react';
 
@@ -62,10 +58,7 @@ export default function AdminPackagesPage() {
   const [isTemplateMenuOpen, setIsTemplateMenuOpen] = useState(false);
   const [notification, setNotification] = useState<{ message: string; type: 'success' | 'info' | 'error' } | null>(null);
 
-  // Upload Modal State & Modes
-  const [uploadModalTab, setUploadModalTab] = useState<'paste' | 'file'>('paste');
-  const [mmtDestination, setMmtDestination] = useState<string>('Himachal Pradesh');
-  const [mmtRawText, setMmtRawText] = useState<string>('');
+  // Upload Progress State for Chunked Auto-Batching
   const [uploadProgress, setUploadProgress] = useState<{
     completed: number;
     total: number;
@@ -231,34 +224,6 @@ export default function AdminPackagesPage() {
     reader.readAsText(file);
   };
 
-  // Parse Raw MMT Text Handler
-  const handleParseMmtText = () => {
-    if (!mmtRawText.trim()) {
-      setParseErrors(['Please paste some MakeMyTrip text first or click "Load Sample MMT Text".']);
-      return;
-    }
-    setIsProcessingFile(true);
-    setParseErrors([]);
-
-    try {
-      const result = parseRawMmtText(mmtRawText, mmtDestination);
-      setParsedPreviewPackages(result.packages);
-      setParseErrors(result.errors);
-      if (result.packages.length > 0) {
-        triggerNotification(
-          `✨ Successfully parsed ${result.packages.length} package${result.packages.length > 1 ? 's' : ''} for ${mmtDestination}!`,
-          'success'
-        );
-      } else {
-        triggerNotification('No valid packages could be parsed from the provided text. Check format.', 'error');
-      }
-    } catch (err: any) {
-      setParseErrors([`Parser error: ${err?.message || 'Unknown error'}`]);
-    } finally {
-      setIsProcessingFile(false);
-    }
-  };
-
   // Confirm Bulk Upload & Save to Database (Chunked Auto-Batching in batches of 25)
   const handleConfirmImport = async () => {
     if (parsedPreviewPackages.length === 0) return;
@@ -338,7 +303,6 @@ export default function AdminPackagesPage() {
       setIsUploadModalOpen(false);
       setUploadedFile(null);
       setParsedPreviewPackages([]);
-      setMmtRawText('');
       setUploadProgress(null);
       setActiveBatchFilter('mmt_sync');
       setCurrentPage(1);
@@ -360,7 +324,6 @@ export default function AdminPackagesPage() {
       setIsUploadModalOpen(false);
       setUploadedFile(null);
       setParsedPreviewPackages([]);
-      setMmtRawText('');
       setUploadProgress(null);
       setActiveBatchFilter('mmt_sync');
       setCurrentPage(1);
@@ -859,7 +822,7 @@ export default function AdminPackagesPage() {
                   <span>Bulk Package Uploader</span>
                 </h3>
                 <p className="text-xs text-slate-500 mt-0.5">
-                  Import packages via MakeMyTrip raw text or custom files (.json / .csv). All new items are automatically tagged as{' '}
+                  Upload packages via .json or .csv files with auto-batching. All new items are automatically tagged as{' '}
                   <strong className="text-emerald-700 font-mono">batch_source = &apos;mmt_sync&apos;</strong>.
                 </p>
               </div>
@@ -877,190 +840,66 @@ export default function AdminPackagesPage() {
               </button>
             </div>
 
-            {/* Modal Tabs: Paste MMT Text vs Upload CSV/JSON File */}
-            <div className="flex items-center space-x-2 border-b border-slate-200 pb-2">
-              <button
-                type="button"
-                onClick={() => {
-                  setUploadModalTab('paste');
-                  setParseErrors([]);
-                }}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                  uploadModalTab === 'paste'
-                    ? 'bg-brand-50 text-brand-700 shadow-2xs border border-brand-200'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
-                }`}
-              >
-                <ClipboardPaste className="w-4 h-4 text-brand-600" />
-                <span>📝 Paste MMT Text</span>
-              </button>
+            {/* Drag & Drop File Upload Box */}
+            <div
+              onClick={() => fileInputRef.current?.click()}
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={(e) => {
+                e.preventDefault();
+                const file = e.dataTransfer.files?.[0];
+                if (file) processSelectedFile(file);
+              }}
+              className="border-2 border-dashed border-slate-300 hover:border-brand-500 hover:bg-brand-50/30 rounded-2xl p-8 text-center cursor-pointer transition-all space-y-3"
+            >
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".json,.csv"
+                onChange={handleFileChange}
+                className="hidden"
+              />
 
-              <button
-                type="button"
-                onClick={() => {
-                  setUploadModalTab('file');
-                  setParseErrors([]);
-                }}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                  uploadModalTab === 'file'
-                    ? 'bg-brand-50 text-brand-700 shadow-2xs border border-brand-200'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
-                }`}
-              >
-                <Upload className="w-4 h-4 text-brand-600" />
-                <span>📁 Upload File (.json / .csv)</span>
-              </button>
+              <div className="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center mx-auto shadow-2xs">
+                <FileText className="w-6 h-6" />
+              </div>
+
+              <div>
+                <span className="text-xs font-black text-slate-900 block">
+                  {uploadedFile ? uploadedFile.name : 'Click to select or drag & drop .json / .csv file'}
+                </span>
+                <span className="text-[11px] text-slate-500 mt-1 block">
+                  Supports .json (Array of packages) and .csv (Excel / Spreadsheet)
+                </span>
+              </div>
+
+              {uploadedFile && (
+                <div className="text-[11px] font-bold text-brand-700 bg-brand-50 inline-block px-3 py-1 rounded-full">
+                  Size: {(uploadedFile.size / 1024).toFixed(1)} KB • Status: Ready
+                </div>
+              )}
             </div>
 
-            {/* TAB 1: PASTE MMT RAW TEXT */}
-            {uploadModalTab === 'paste' && (
-              <div className="space-y-4">
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-slate-50 p-3 rounded-2xl border border-slate-200/80">
-                  <div className="flex-1">
-                    <label className="block text-[11px] font-black text-slate-700 uppercase tracking-wider mb-1">
-                      Target Destination
-                    </label>
-                    <select
-                      value={mmtDestination}
-                      onChange={(e) => setMmtDestination(e.target.value)}
-                      className="w-full text-xs font-bold text-slate-800 bg-white border border-slate-300 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
-                    >
-                      {POPULAR_DESTINATIONS.map((dest) => (
-                        <option key={dest} value={dest}>
-                          {dest}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="flex items-center space-x-2 self-end sm:self-center pt-2 sm:pt-4">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setMmtRawText(SAMPLE_MMT_RAW_TEXT);
-                        setParseErrors([]);
-                      }}
-                      className="text-[11px] font-bold text-brand-700 hover:text-brand-800 bg-white border border-brand-200 hover:bg-brand-50/50 px-3 py-2 rounded-xl transition-colors cursor-pointer"
-                    >
-                      Load Sample MMT Text
-                    </button>
-                    {mmtRawText && (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setMmtRawText('');
-                          setParsedPreviewPackages([]);
-                          setParseErrors([]);
-                        }}
-                        className="text-[11px] font-bold text-slate-500 hover:text-slate-800 bg-white border border-slate-200 px-2.5 py-2 rounded-xl transition-colors cursor-pointer"
-                      >
-                        Clear
-                      </button>
-                    )}
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex items-center justify-between mb-1.5">
-                    <label className="text-xs font-bold text-slate-700">
-                      Raw MakeMyTrip Holiday Listing Text:
-                    </label>
-                    {mmtRawText && (
-                      <span className="text-[10px] text-slate-400 font-mono">
-                        {mmtRawText.length} characters
-                      </span>
-                    )}
-                  </div>
-                  <textarea
-                    rows={7}
-                    value={mmtRawText}
-                    onChange={(e) => setMmtRawText(e.target.value)}
-                    placeholder="Copy & paste text directly from MakeMyTrip holidays page (package titles, 3N/4D duration, stays split, inclusions, starting prices)... or click 'Load Sample MMT Text' above to test."
-                    className="w-full font-mono text-xs text-slate-800 p-3 border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500 bg-slate-50/50"
-                  />
-                </div>
-
-                <div className="flex justify-end">
-                  <Button
-                    type="button"
-                    variant="primary"
-                    size="sm"
-                    disabled={isProcessingFile || !mmtRawText.trim()}
-                    onClick={handleParseMmtText}
-                    className="text-xs font-black bg-brand-600 hover:bg-brand-700 text-white flex items-center space-x-1.5"
-                  >
-                    <Sparkles className="w-4 h-4" />
-                    <span>Smart Parse MMT Packages</span>
-                  </Button>
-                </div>
-              </div>
-            )}
-
-            {/* TAB 2: FILE UPLOAD (.JSON / .CSV) */}
-            {uploadModalTab === 'file' && (
-              <div className="space-y-4">
-                {/* Drag & Drop File Upload Box */}
-                <div
-                  onClick={() => fileInputRef.current?.click()}
-                  onDragOver={(e) => e.preventDefault()}
-                  onDrop={(e) => {
-                    e.preventDefault();
-                    const file = e.dataTransfer.files?.[0];
-                    if (file) processSelectedFile(file);
-                  }}
-                  className="border-2 border-dashed border-slate-300 hover:border-brand-500 hover:bg-brand-50/30 rounded-2xl p-8 text-center cursor-pointer transition-all space-y-3"
+            {/* Download Sample Quick Links */}
+            <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl text-xs font-bold text-slate-600">
+              <span className="text-[11px]">Need the template format?</span>
+              <div className="space-x-2">
+                <button
+                  type="button"
+                  onClick={downloadSampleCsv}
+                  className="text-[11px] text-emerald-700 hover:underline font-bold"
                 >
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept=".json,.csv"
-                    onChange={handleFileChange}
-                    className="hidden"
-                  />
-
-                  <div className="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center mx-auto shadow-2xs">
-                    <FileText className="w-6 h-6" />
-                  </div>
-
-                  <div>
-                    <span className="text-xs font-black text-slate-900 block">
-                      {uploadedFile ? uploadedFile.name : 'Click to select or drag & drop .json / .csv file'}
-                    </span>
-                    <span className="text-[11px] text-slate-500 mt-1 block">
-                      Supports .json (Array of packages) and .csv (Excel / Spreadsheet)
-                    </span>
-                  </div>
-
-                  {uploadedFile && (
-                    <div className="text-[11px] font-bold text-brand-700 bg-brand-50 inline-block px-3 py-1 rounded-full">
-                      Size: {(uploadedFile.size / 1024).toFixed(1)} KB • Status: Ready
-                    </div>
-                  )}
-                </div>
-
-                {/* Download Sample Quick Links */}
-                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl text-xs font-bold text-slate-600">
-                  <span className="text-[11px]">Need the template format?</span>
-                  <div className="space-x-2">
-                    <button
-                      type="button"
-                      onClick={downloadSampleCsv}
-                      className="text-[11px] text-emerald-700 hover:underline font-bold"
-                    >
-                      Download Sample CSV
-                    </button>
-                    <span className="text-slate-300">•</span>
-                    <button
-                      type="button"
-                      onClick={downloadSampleJson}
-                      className="text-[11px] text-brand-700 hover:underline font-bold"
-                    >
-                      Download Sample JSON
-                    </button>
-                  </div>
-                </div>
+                  Download Sample CSV
+                </button>
+                <span className="text-slate-300">•</span>
+                <button
+                  type="button"
+                  onClick={downloadSampleJson}
+                  className="text-[11px] text-brand-700 hover:underline font-bold"
+                >
+                  Download Sample JSON
+                </button>
               </div>
-            )}
+            </div>
 
             {/* Chunked Upload Progress Indicator */}
             {uploadProgress && (
