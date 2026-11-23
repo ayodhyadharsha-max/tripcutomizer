@@ -212,7 +212,7 @@ export function HolidayListingView({
       // 1. Search keyword filter
       let matchesSearch = true;
       if (rawQuery) {
-        const pkgText = `${pkg.name} ${pkg.destination} ${pkg.destinationSlug} ${pkg.country} ${pkg.region} ${pkg.theme} ${pkg.hotelCategory} ${pkg.mealPlan} ${pkg.highlights.join(' ')} ${pkg.inclusions.join(' ')} ${pkg.hotels.map((h) => h.name + ' ' + h.city).join(' ')}`.toLowerCase();
+        const pkgText = `${pkg.name} ${pkg.destination} ${pkg.destinationSlug} ${pkg.state || ''} ${(pkg.coveredCities || []).join(' ')} ${(pkg.citySlugs || []).join(' ')} ${pkg.country} ${pkg.region} ${pkg.theme} ${pkg.hotelCategory} ${pkg.mealPlan} ${pkg.highlights.join(' ')} ${pkg.inclusions.join(' ')} ${pkg.hotels.map((h) => h.name + ' ' + h.city).join(' ')}`.toLowerCase();
         
         if (pkgText.includes(rawQuery)) {
           matchesSearch = true;

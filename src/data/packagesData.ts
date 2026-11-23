@@ -14,6 +14,12 @@ export interface HolidayPackage {
   slug: string;
   destination: string;
   destinationSlug: string;
+  state?: string;
+  stateSlug?: string;
+  coveredCities?: string[];
+  citySlugs?: string[];
+  entryCity?: string;
+  exitCity?: string;
   country: string;
   region: string;
   isInternational: boolean;
@@ -190,7 +196,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Is VIP Ganga Aarti included?",
         "answer": "Yes, private boat front view seats included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Ayodhya",
+      "Varanasi",
+      "Prayagraj"
+    ],
+    "citySlugs": [
+      "ayodhya",
+      "varanasi",
+      "prayagraj"
+    ],
+    "state": "Uttar Pradesh",
+    "stateSlug": "uttar-pradesh",
+    "entryCity": "Ayodhya",
+    "exitCity": "Prayagraj"
   },
   {
     "id": "pkg-up-2",
@@ -295,7 +315,23 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "E-Rickshaw included?",
         "answer": "Yes, battery rickshaw pass included for Parikrama."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Mathura",
+      "Vrindavan",
+      "Gokul",
+      "Barsana"
+    ],
+    "citySlugs": [
+      "mathura",
+      "vrindavan",
+      "gokul",
+      "barsana"
+    ],
+    "state": "Uttar Pradesh",
+    "stateSlug": "uttar-pradesh",
+    "entryCity": "Mathura",
+    "exitCity": "Barsana"
   },
   {
     "id": "pkg-up-3",
@@ -378,7 +414,17 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Is Taj Mahal closed on Friday?",
         "answer": "Yes, Taj Mahal is closed on Fridays."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Agra"
+    ],
+    "citySlugs": [
+      "agra"
+    ],
+    "state": "Uttar Pradesh",
+    "stateSlug": "uttar-pradesh",
+    "entryCity": "Agra",
+    "exitCity": "Agra"
   },
   {
     "id": "pkg-up-4",
@@ -502,7 +548,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Naimisharanya distance?",
         "answer": "2 hours drive from Lucknow."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Lucknow",
+      "Ayodhya",
+      "Naimisharanya"
+    ],
+    "citySlugs": [
+      "lucknow",
+      "ayodhya",
+      "naimisharanya"
+    ],
+    "state": "Uttar Pradesh",
+    "stateSlug": "uttar-pradesh",
+    "entryCity": "Lucknow",
+    "exitCity": "Naimisharanya"
   },
   {
     "id": "pkg-up-5",
@@ -625,7 +685,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Ropeway included?",
         "answer": "Yes, VIP ropeway passes included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Varanasi",
+      "Chitrakoot",
+      "Vindhyachal"
+    ],
+    "citySlugs": [
+      "varanasi",
+      "chitrakoot",
+      "vindhyachal"
+    ],
+    "state": "Uttar Pradesh",
+    "stateSlug": "uttar-pradesh",
+    "entryCity": "Varanasi",
+    "exitCity": "Vindhyachal"
   },
   {
     "id": "pkg-up-6",
@@ -748,7 +822,25 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Glass Skywalk pass included?",
         "answer": "Yes, VIP entry tickets included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Bodh Gaya",
+      "Patna",
+      "Gaya",
+      "Rajgir",
+      "Nalanda"
+    ],
+    "citySlugs": [
+      "bodh-gaya",
+      "patna",
+      "gaya",
+      "rajgir",
+      "nalanda"
+    ],
+    "state": "Bihar",
+    "stateSlug": "bihar",
+    "entryCity": "Bodh Gaya",
+    "exitCity": "Nalanda"
   },
   {
     "id": "pkg-uk-7",
@@ -999,7 +1091,37 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Heli ticket support?",
         "answer": "Yes, IRCTC heli slot assistance provided."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Barkot",
+      "Uttarkashi",
+      "Guptkashi",
+      "Kedarnath",
+      "Pipalkoti",
+      "Badrinath",
+      "Rishikesh",
+      "Haridwar",
+      "Gangotri",
+      "Yamunotri",
+      "Dehradun"
+    ],
+    "citySlugs": [
+      "barkot",
+      "uttarkashi",
+      "guptkashi",
+      "kedarnath",
+      "pipalkoti",
+      "badrinath",
+      "rishikesh",
+      "haridwar",
+      "gangotri",
+      "yamunotri",
+      "dehradun"
+    ],
+    "state": "Uttarakhand",
+    "stateSlug": "uttarakhand",
+    "entryCity": "Barkot",
+    "exitCity": "Dehradun"
   },
   {
     "id": "pkg-uk-8",
@@ -1120,7 +1242,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Boating passes included?",
         "answer": "Yes, complimentary Naini Lake boating included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Nainital",
+      "Ranikhet",
+      "Delhi"
+    ],
+    "citySlugs": [
+      "nainital",
+      "ranikhet",
+      "delhi"
+    ],
+    "state": "Uttarakhand",
+    "stateSlug": "uttarakhand",
+    "entryCity": "Nainital",
+    "exitCity": "Delhi"
   },
   {
     "id": "pkg-uk-9",
@@ -1242,7 +1378,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Dhanaulti distance?",
         "answer": "1 hour scenic drive from Mussoorie."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Dehradun",
+      "Mussoorie"
+    ],
+    "citySlugs": [
+      "dehradun",
+      "mussoorie"
+    ],
+    "state": "Uttarakhand",
+    "stateSlug": "uttarakhand",
+    "entryCity": "Dehradun",
+    "exitCity": "Mussoorie"
   },
   {
     "id": "pkg-uk-10",
@@ -1348,7 +1496,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Rafting age limit?",
         "answer": "14 years and above for 16km rafting."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Haridwar",
+      "Rishikesh"
+    ],
+    "citySlugs": [
+      "haridwar",
+      "rishikesh"
+    ],
+    "state": "Uttarakhand",
+    "stateSlug": "uttarakhand",
+    "entryCity": "Haridwar",
+    "exitCity": "Rishikesh"
   },
   {
     "id": "pkg-uk-11",
@@ -1448,7 +1608,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Jeep safari included?",
         "answer": "Yes, 1 Open Jeep safari permit and guide included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Jim Corbett",
+      "Corbett",
+      "Delhi"
+    ],
+    "citySlugs": [
+      "jim-corbett",
+      "corbett",
+      "delhi"
+    ],
+    "state": "Uttarakhand",
+    "stateSlug": "uttarakhand",
+    "entryCity": "Jim Corbett",
+    "exitCity": "Delhi"
   },
   {
     "id": "pkg-uk-12",
@@ -1594,7 +1768,27 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Is Tungnath trek difficult?",
         "answer": "Moderate 3.5km trek suitable for beginners."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Joshimath",
+      "Chopta",
+      "Rishikesh",
+      "Haridwar",
+      "Auli",
+      "Dehradun"
+    ],
+    "citySlugs": [
+      "joshimath",
+      "chopta",
+      "rishikesh",
+      "haridwar",
+      "auli",
+      "dehradun"
+    ],
+    "state": "Uttarakhand",
+    "stateSlug": "uttarakhand",
+    "entryCity": "Joshimath",
+    "exitCity": "Dehradun"
   },
   {
     "id": "pkg-hp-13",
@@ -1748,7 +1942,27 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Atal Tunnel covered?",
         "answer": "Yes, Atal Tunnel & Solang Valley full day excursion included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Shimla",
+      "Manali",
+      "Kullu",
+      "Kufri",
+      "Solang",
+      "Delhi"
+    ],
+    "citySlugs": [
+      "shimla",
+      "manali",
+      "kullu",
+      "kufri",
+      "solang",
+      "delhi"
+    ],
+    "state": "Himachal Pradesh",
+    "stateSlug": "himachal-pradesh",
+    "entryCity": "Shimla",
+    "exitCity": "Delhi"
   },
   {
     "id": "pkg-hp-14",
@@ -1887,7 +2101,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Khajjiar distance?",
         "answer": "1 hour scenic drive from Dalhousie."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Dharamshala",
+      "Dalhousie"
+    ],
+    "citySlugs": [
+      "dharamshala",
+      "dalhousie"
+    ],
+    "state": "Himachal Pradesh",
+    "stateSlug": "himachal-pradesh",
+    "entryCity": "Dharamshala",
+    "exitCity": "Dalhousie"
   },
   {
     "id": "pkg-hp-15",
@@ -2015,7 +2241,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Kheerganga trek length?",
         "answer": "12km scenic forest trek with hot spring top camp."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Kasol",
+      "Kheerganga",
+      "Jibhi"
+    ],
+    "citySlugs": [
+      "kasol",
+      "kheerganga",
+      "jibhi"
+    ],
+    "state": "Himachal Pradesh",
+    "stateSlug": "himachal-pradesh",
+    "entryCity": "Kasol",
+    "exitCity": "Jibhi"
   },
   {
     "id": "pkg-hp-16",
@@ -2196,7 +2436,29 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Is oxygen cylinder provided?",
         "answer": "Yes, emergency oxygen cylinders are carried in all Spiti 4x4 vehicles."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Kalpa",
+      "Kaza",
+      "Chandratal",
+      "Manali",
+      "Shimla",
+      "Spiti",
+      "Delhi"
+    ],
+    "citySlugs": [
+      "kalpa",
+      "kaza",
+      "chandratal",
+      "manali",
+      "shimla",
+      "spiti",
+      "delhi"
+    ],
+    "state": "Himachal Pradesh",
+    "stateSlug": "himachal-pradesh",
+    "entryCity": "Kalpa",
+    "exitCity": "Delhi"
   },
   {
     "id": "pkg-pb-17",
@@ -2280,7 +2542,17 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Wagah seating assistance?",
         "answer": "Yes, we coordinate early arrival for prime viewing seats."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Amritsar"
+    ],
+    "citySlugs": [
+      "amritsar"
+    ],
+    "state": "Punjab",
+    "stateSlug": "punjab",
+    "entryCity": "Amritsar",
+    "exitCity": "Amritsar"
   },
   {
     "id": "pkg-jk-18",
@@ -2447,7 +2719,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Gondola tickets confirmed?",
         "answer": "Yes, pre-booked Phase 1 & 2 tickets included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Srinagar",
+      "Pahalgam",
+      "Gulmarg"
+    ],
+    "citySlugs": [
+      "srinagar",
+      "pahalgam",
+      "gulmarg"
+    ],
+    "state": "Jammu and Kashmir",
+    "stateSlug": "jammu-and-kashmir",
+    "entryCity": "Srinagar",
+    "exitCity": "Gulmarg"
   },
   {
     "id": "pkg-lk-19",
@@ -2626,7 +2912,25 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Inner Line Permit included?",
         "answer": "Yes, complete Wildlife & Inner Line permits included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Leh",
+      "Nubra Valley",
+      "Pangong Tso",
+      "Nubra",
+      "Pangong"
+    ],
+    "citySlugs": [
+      "leh",
+      "nubra-valley",
+      "pangong-tso",
+      "nubra",
+      "pangong"
+    ],
+    "state": "Ladakh",
+    "stateSlug": "ladakh",
+    "entryCity": "Leh",
+    "exitCity": "Pangong"
   },
   {
     "id": "pkg-jk-20",
@@ -2749,7 +3053,23 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Helicopter ticket assistance?",
         "answer": "Yes, Katra-Sanjichhat heli ticket booking support provided."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Katra",
+      "Patnitop",
+      "Vaishno Devi",
+      "Jammu"
+    ],
+    "citySlugs": [
+      "katra",
+      "patnitop",
+      "vaishno-devi",
+      "jammu"
+    ],
+    "state": "Jammu and Kashmir",
+    "stateSlug": "jammu-and-kashmir",
+    "entryCity": "Katra",
+    "exitCity": "Jammu"
   },
   {
     "id": "pkg-rj-21",
@@ -2912,7 +3232,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Boat ride included?",
         "answer": "Yes, private Lake Pichola boat ride included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Jaipur",
+      "Jodhpur",
+      "Udaipur"
+    ],
+    "citySlugs": [
+      "jaipur",
+      "jodhpur",
+      "udaipur"
+    ],
+    "state": "Rajasthan",
+    "stateSlug": "rajasthan",
+    "entryCity": "Jaipur",
+    "exitCity": "Udaipur"
   },
   {
     "id": "pkg-rj-22",
@@ -3041,7 +3375,23 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Dune bashing included?",
         "answer": "Yes, 4x4 Jeep dune bashing & camel safari included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Bikaner",
+      "Jaisalmer",
+      "Sam Sand Dunes",
+      "Jodhpur"
+    ],
+    "citySlugs": [
+      "bikaner",
+      "jaisalmer",
+      "sam-sand-dunes",
+      "jodhpur"
+    ],
+    "state": "Rajasthan",
+    "stateSlug": "rajasthan",
+    "entryCity": "Bikaner",
+    "exitCity": "Jodhpur"
   },
   {
     "id": "pkg-rj-23",
@@ -3124,7 +3474,17 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "VIP darshan assistance?",
         "answer": "Yes, early morning VIP lines assistance provided."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Khatu Shyam"
+    ],
+    "citySlugs": [
+      "khatu-shyam"
+    ],
+    "state": "Rajasthan",
+    "stateSlug": "rajasthan",
+    "entryCity": "Khatu Shyam",
+    "exitCity": "Khatu Shyam"
   },
   {
     "id": "pkg-rj-24",
@@ -3227,7 +3587,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Are core zone permits guaranteed?",
         "answer": "Yes, core zones 1-5 permits pre-booked."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Ranthambore",
+      "Jaipur"
+    ],
+    "citySlugs": [
+      "ranthambore",
+      "jaipur"
+    ],
+    "state": "Rajasthan",
+    "stateSlug": "rajasthan",
+    "entryCity": "Ranthambore",
+    "exitCity": "Jaipur"
   },
   {
     "id": "pkg-rj-25",
@@ -3349,7 +3721,23 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Ajmer Dargah pass?",
         "answer": "Yes, VIP Ziyarat pass included for Ajmer Sharif."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Mount Abu",
+      "Pushkar",
+      "Jaipur",
+      "Udaipur"
+    ],
+    "citySlugs": [
+      "mount-abu",
+      "pushkar",
+      "jaipur",
+      "udaipur"
+    ],
+    "state": "Rajasthan",
+    "stateSlug": "rajasthan",
+    "entryCity": "Mount Abu",
+    "exitCity": "Udaipur"
   },
   {
     "id": "pkg-gj-26",
@@ -3471,7 +3859,23 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "White Rann permit included?",
         "answer": "Yes, mandatory Rann entry permit included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Bhuj",
+      "Dhordo",
+      "Rann of Kutch",
+      "Kutch"
+    ],
+    "citySlugs": [
+      "bhuj",
+      "dhordo",
+      "rann-of-kutch",
+      "kutch"
+    ],
+    "state": "Gujarat",
+    "stateSlug": "gujarat",
+    "entryCity": "Bhuj",
+    "exitCity": "Kutch"
   },
   {
     "id": "pkg-gj-27",
@@ -3595,7 +3999,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Bet Dwarka boat included?",
         "answer": "Yes, round-trip boat ferry for Bet Dwarka included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Dwarka",
+      "Somnath"
+    ],
+    "citySlugs": [
+      "dwarka",
+      "somnath"
+    ],
+    "state": "Gujarat",
+    "stateSlug": "gujarat",
+    "entryCity": "Dwarka",
+    "exitCity": "Somnath"
   },
   {
     "id": "pkg-gj-28",
@@ -3701,7 +4117,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Viewing Gallery ticket level?",
         "answer": "Express VIP 153m Viewing Gallery tickets included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Ahmedabad",
+      "Kevadia",
+      "Statue of Unity"
+    ],
+    "citySlugs": [
+      "ahmedabad",
+      "kevadia",
+      "statue-of-unity"
+    ],
+    "state": "Gujarat",
+    "stateSlug": "gujarat",
+    "entryCity": "Ahmedabad",
+    "exitCity": "Statue of Unity"
   },
   {
     "id": "pkg-gj-29",
@@ -3808,7 +4238,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Girnar ropeway included?",
         "answer": "Yes, round trip Girnar Asia's longest ropeway ticket included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Sasan Gir",
+      "Junagadh",
+      "Gir"
+    ],
+    "citySlugs": [
+      "sasan-gir",
+      "junagadh",
+      "gir"
+    ],
+    "state": "Gujarat",
+    "stateSlug": "gujarat",
+    "entryCity": "Sasan Gir",
+    "exitCity": "Gir"
   },
   {
     "id": "pkg-mp-30",
@@ -3937,7 +4381,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Bhasma Aarti assistance?",
         "answer": "Yes, online protocol application guidance provided."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Ujjain",
+      "Omkareshwar",
+      "Indore"
+    ],
+    "citySlugs": [
+      "ujjain",
+      "omkareshwar",
+      "indore"
+    ],
+    "state": "Madhya Pradesh",
+    "stateSlug": "madhya-pradesh",
+    "entryCity": "Ujjain",
+    "exitCity": "Indore"
   },
   {
     "id": "pkg-mp-31",
@@ -4079,7 +4537,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Safaris count?",
         "answer": "2 Open Gypsy core zone safaris included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Khajuraho",
+      "Bandhavgarh"
+    ],
+    "citySlugs": [
+      "khajuraho",
+      "bandhavgarh"
+    ],
+    "state": "Madhya Pradesh",
+    "stateSlug": "madhya-pradesh",
+    "entryCity": "Khajuraho",
+    "exitCity": "Bandhavgarh"
   },
   {
     "id": "pkg-mp-32",
@@ -4218,7 +4688,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Bhedaghat boat ride included?",
         "answer": "Yes, Narmada river marble rocks boat ride included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Jabalpur",
+      "Pachmarhi",
+      "Bhopal"
+    ],
+    "citySlugs": [
+      "jabalpur",
+      "pachmarhi",
+      "bhopal"
+    ],
+    "state": "Madhya Pradesh",
+    "stateSlug": "madhya-pradesh",
+    "entryCity": "Jabalpur",
+    "exitCity": "Bhopal"
   },
   {
     "id": "pkg-mh-33",
@@ -4369,7 +4853,25 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Shirdi VIP darshan included?",
         "answer": "Yes, pre-booked VIP entry passes included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Pune",
+      "Shirdi",
+      "Aurangabad",
+      "Nashik",
+      "Mumbai"
+    ],
+    "citySlugs": [
+      "pune",
+      "shirdi",
+      "aurangabad",
+      "nashik",
+      "mumbai"
+    ],
+    "state": "Maharashtra",
+    "stateSlug": "maharashtra",
+    "entryCity": "Pune",
+    "exitCity": "Mumbai"
   },
   {
     "id": "pkg-mh-34",
@@ -4472,7 +4974,17 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Are Ajanta caves closed on Monday?",
         "answer": "Yes, Ajanta is closed Mondays; Ellora is closed Tuesdays."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Aurangabad"
+    ],
+    "citySlugs": [
+      "aurangabad"
+    ],
+    "state": "Maharashtra",
+    "stateSlug": "maharashtra",
+    "entryCity": "Aurangabad",
+    "exitCity": "Aurangabad"
   },
   {
     "id": "pkg-ga-35",
@@ -4614,7 +5126,23 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Water sports voucher included?",
         "answer": "Yes, 5 water sports combo at Baga Beach included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "North Goa",
+      "South Goa",
+      "Baga",
+      "Dudhsagar"
+    ],
+    "citySlugs": [
+      "north-goa",
+      "south-goa",
+      "baga",
+      "dudhsagar"
+    ],
+    "state": "Goa",
+    "stateSlug": "goa",
+    "entryCity": "North Goa",
+    "exitCity": "Dudhsagar"
   },
   {
     "id": "pkg-mh-36",
@@ -4737,7 +5265,23 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Venna lake boating included?",
         "answer": "Yes, Venna Lake paddle boat ticket included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Lonavala",
+      "Mahabaleshwar",
+      "Mumbai",
+      "Pune"
+    ],
+    "citySlugs": [
+      "lonavala",
+      "mahabaleshwar",
+      "mumbai",
+      "pune"
+    ],
+    "state": "Maharashtra",
+    "stateSlug": "maharashtra",
+    "entryCity": "Lonavala",
+    "exitCity": "Pune"
   },
   {
     "id": "pkg-tn-37",
@@ -4885,7 +5429,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "22 Kund Snan guide included?",
         "answer": "Yes, priest guidance for 22 well holy bath included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Madurai",
+      "Rameshwaram",
+      "Kanyakumari"
+    ],
+    "citySlugs": [
+      "madurai",
+      "rameshwaram",
+      "kanyakumari"
+    ],
+    "state": "Tamil Nadu",
+    "stateSlug": "tamil-nadu",
+    "entryCity": "Madurai",
+    "exitCity": "Kanyakumari"
   },
   {
     "id": "pkg-kl-38",
@@ -5055,7 +5613,25 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Houseboat private?",
         "answer": "100% private houseboat with dedicated chef."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Munnar",
+      "Thekkady",
+      "Alleppey",
+      "Kovalam",
+      "Cochin"
+    ],
+    "citySlugs": [
+      "munnar",
+      "thekkady",
+      "alleppey",
+      "kovalam",
+      "cochin"
+    ],
+    "state": "Kerala",
+    "stateSlug": "kerala",
+    "entryCity": "Munnar",
+    "exitCity": "Cochin"
   },
   {
     "id": "pkg-ap-39",
@@ -5139,7 +5715,17 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Special Darshan ticket included?",
         "answer": "Yes, Rs 300 Special Entry Darshan pass included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Tirupati"
+    ],
+    "citySlugs": [
+      "tirupati"
+    ],
+    "state": "Andhra Pradesh",
+    "stateSlug": "andhra-pradesh",
+    "entryCity": "Tirupati",
+    "exitCity": "Tirupati"
   },
   {
     "id": "pkg-ka-40",
@@ -5285,7 +5871,27 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Toy train tickets included?",
         "answer": "Yes, Nilgiri Mountain Toy Train joyride tickets included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Mysore",
+      "Coorg",
+      "Ooty",
+      "Wayanad",
+      "Bangalore",
+      "Kodaikanal"
+    ],
+    "citySlugs": [
+      "mysore",
+      "coorg",
+      "ooty",
+      "wayanad",
+      "bangalore",
+      "kodaikanal"
+    ],
+    "state": "Karnataka",
+    "stateSlug": "karnataka",
+    "entryCity": "Mysore",
+    "exitCity": "Kodaikanal"
   },
   {
     "id": "pkg-ka-41",
@@ -5408,7 +6014,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Coracle boat ride included?",
         "answer": "Yes, traditional round coracle boat ride on Tungabhadra river included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Hampi",
+      "Badami"
+    ],
+    "citySlugs": [
+      "hampi",
+      "badami"
+    ],
+    "state": "Karnataka",
+    "stateSlug": "karnataka",
+    "entryCity": "Hampi",
+    "exitCity": "Badami"
   },
   {
     "id": "pkg-ts-42",
@@ -5531,7 +6149,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Ramoji VIP pass included?",
         "answer": "Yes, Ramoji VIP Star Experience ticket with buffet included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Hyderabad",
+      "Srisailam"
+    ],
+    "citySlugs": [
+      "hyderabad",
+      "srisailam"
+    ],
+    "state": "Telangana",
+    "stateSlug": "telangana",
+    "entryCity": "Hyderabad",
+    "exitCity": "Srisailam"
   },
   {
     "id": "pkg-ne-43",
@@ -5694,7 +6324,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Dawki river boating included?",
         "answer": "Yes, crystal clear Umngot river boating included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Guwahati",
+      "Shillong",
+      "Cherrapunji"
+    ],
+    "citySlugs": [
+      "guwahati",
+      "shillong",
+      "cherrapunji"
+    ],
+    "state": "Meghalaya",
+    "stateSlug": "meghalaya",
+    "entryCity": "Guwahati",
+    "exitCity": "Cherrapunji"
   },
   {
     "id": "pkg-as-44",
@@ -5820,7 +6464,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Elephant safari guaranteed?",
         "answer": "Yes, morning Elephant safari quota included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Kaziranga",
+      "Majuli",
+      "Guwahati"
+    ],
+    "citySlugs": [
+      "kaziranga",
+      "majuli",
+      "guwahati"
+    ],
+    "state": "Assam",
+    "stateSlug": "assam",
+    "entryCity": "Kaziranga",
+    "exitCity": "Guwahati"
   },
   {
     "id": "pkg-ar-45",
@@ -6004,7 +6662,25 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Bumla Pass Army permit included?",
         "answer": "Yes, official Army permit for Bumla Pass included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Bhalukpong",
+      "Dirang",
+      "Tawang",
+      "Bomdila",
+      "Guwahati"
+    ],
+    "citySlugs": [
+      "bhalukpong",
+      "dirang",
+      "tawang",
+      "bomdila",
+      "guwahati"
+    ],
+    "state": "Arunachal Pradesh",
+    "stateSlug": "arunachal-pradesh",
+    "entryCity": "Bhalukpong",
+    "exitCity": "Guwahati"
   },
   {
     "id": "pkg-sk-46",
@@ -6184,7 +6860,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Nathula Pass included?",
         "answer": "Yes, Nathula Pass permit included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Gangtok",
+      "Pelling",
+      "Darjeeling"
+    ],
+    "citySlugs": [
+      "gangtok",
+      "pelling",
+      "darjeeling"
+    ],
+    "state": "North East India",
+    "stateSlug": "north-east",
+    "entryCity": "Gangtok",
+    "exitCity": "Darjeeling"
   },
   {
     "id": "pkg-or-47",
@@ -6307,7 +6997,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Chilika Dolphin boat included?",
         "answer": "Yes, private motorboat charter for Dolphin watching included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Bhubaneswar",
+      "Puri",
+      "Konark"
+    ],
+    "citySlugs": [
+      "bhubaneswar",
+      "puri",
+      "konark"
+    ],
+    "state": "Odisha",
+    "stateSlug": "odisha",
+    "entryCity": "Bhubaneswar",
+    "exitCity": "Konark"
   },
   {
     "id": "pkg-wb-48",
@@ -6434,7 +7138,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Sundarbans boat private?",
         "answer": "Yes, licensed jungle boat safari included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Kolkata",
+      "Sundarbans"
+    ],
+    "citySlugs": [
+      "kolkata",
+      "sundarbans"
+    ],
+    "state": "West Bengal",
+    "stateSlug": "west-bengal",
+    "entryCity": "Kolkata",
+    "exitCity": "Sundarbans"
   },
   {
     "id": "pkg-an-49",
@@ -6597,7 +7313,23 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Catamaran ferry included?",
         "answer": "Yes, Makruzz AC Premium class seats included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Port Blair",
+      "Havelock Island",
+      "Neil Island",
+      "Havelock"
+    ],
+    "citySlugs": [
+      "port-blair",
+      "havelock-island",
+      "neil-island",
+      "havelock"
+    ],
+    "state": "Andaman and Nicobar",
+    "stateSlug": "andaman",
+    "entryCity": "Port Blair",
+    "exitCity": "Havelock"
   },
   {
     "id": "pkg-ld-50",
@@ -6742,7 +7474,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Mandatory permit handled?",
         "answer": "Yes, complete Lakshadweep Administration entry permit clearance handled by us."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Agatti Island",
+      "Bangaram Island",
+      "Kochi"
+    ],
+    "citySlugs": [
+      "agatti-island",
+      "bangaram-island",
+      "kochi"
+    ],
+    "state": "Lakshadweep",
+    "stateSlug": "lakshadweep",
+    "entryCity": "Agatti Island",
+    "exitCity": "Kochi"
   },
   {
     "id": "pkg-intl-dubai",
@@ -6893,7 +7639,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Is visa included?",
         "answer": "Yes, standard Dubai 30-day tourist visa assistance is included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Dubai",
+      "Abu Dhabi"
+    ],
+    "citySlugs": [
+      "dubai",
+      "abu-dhabi"
+    ],
+    "state": "United Arab Emirates",
+    "stateSlug": "united-arab-emirates",
+    "entryCity": "Dubai",
+    "exitCity": "Abu Dhabi"
   },
   {
     "id": "pkg-intl-bali",
@@ -7044,7 +7802,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Is visa on arrival available?",
         "answer": "Yes, Bali provides instant Visa on Arrival for Indian citizens."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Bali",
+      "Ubud",
+      "Nusa Penida"
+    ],
+    "citySlugs": [
+      "bali",
+      "ubud",
+      "nusa-penida"
+    ],
+    "state": "Indonesia",
+    "stateSlug": "indonesia",
+    "entryCity": "Bali",
+    "exitCity": "Nusa Penida"
   },
   {
     "id": "pkg-intl-thailand",
@@ -7222,7 +7994,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Is Thailand visa free?",
         "answer": "Yes, Thailand offers visa-free entry for Indian passport holders."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Phuket",
+      "Krabi"
+    ],
+    "citySlugs": [
+      "phuket",
+      "krabi"
+    ],
+    "state": "Thailand",
+    "stateSlug": "thailand",
+    "entryCity": "Phuket",
+    "exitCity": "Krabi"
   },
   {
     "id": "pkg-intl-singapore",
@@ -7358,7 +8142,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "How long is Singapore visa approval?",
         "answer": "E-visa process takes 3-4 working days."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Singapore",
+      "Sentosa"
+    ],
+    "citySlugs": [
+      "singapore",
+      "sentosa"
+    ],
+    "state": "Singapore",
+    "stateSlug": "singapore",
+    "entryCity": "Singapore",
+    "exitCity": "Sentosa"
   },
   {
     "id": "pkg-intl-maldives",
@@ -7498,7 +8294,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Is visa needed for Maldives?",
         "answer": "Free 30-day Visa on Arrival is granted for all Indian tourists."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Maldives",
+      "Male"
+    ],
+    "citySlugs": [
+      "maldives",
+      "male"
+    ],
+    "state": "Maldives",
+    "stateSlug": "maldives",
+    "entryCity": "Maldives",
+    "exitCity": "Male"
   },
   {
     "id": "pkg-intl-switzerland",
@@ -7696,7 +8504,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Do you provide Schengen visa processing?",
         "answer": "Yes, full Schengen visa documentation & appointment assistance is provided."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Zurich",
+      "Lucerne",
+      "Interlaken"
+    ],
+    "citySlugs": [
+      "zurich",
+      "lucerne",
+      "interlaken"
+    ],
+    "state": "Switzerland",
+    "stateSlug": "switzerland",
+    "entryCity": "Zurich",
+    "exitCity": "Interlaken"
   },
   {
     "id": "pkg-intl-vietnam",
@@ -7865,7 +8687,25 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Is Vietnam e-visa easy?",
         "answer": "Yes, Vietnam e-visa approval takes 3 working days online."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Hanoi",
+      "Halong Bay",
+      "Hoi An",
+      "Da Nang",
+      "Ho Chi Minh"
+    ],
+    "citySlugs": [
+      "hanoi",
+      "halong-bay",
+      "hoi-an",
+      "da-nang",
+      "ho-chi-minh"
+    ],
+    "state": "Vietnam",
+    "stateSlug": "vietnam",
+    "entryCity": "Hanoi",
+    "exitCity": "Ho Chi Minh"
   },
   {
     "id": "pkg-intl-japan",
@@ -8047,7 +8887,23 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Is Japan visa required?",
         "answer": "Yes, Japan e-visa assistance is provided."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Tokyo",
+      "Kyoto",
+      "Osaka",
+      "Mount Fuji"
+    ],
+    "citySlugs": [
+      "tokyo",
+      "kyoto",
+      "osaka",
+      "mount-fuji"
+    ],
+    "state": "Japan",
+    "stateSlug": "japan",
+    "entryCity": "Tokyo",
+    "exitCity": "Mount Fuji"
   },
   {
     "id": "pkg-intl-australia",
@@ -8240,7 +9096,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Is Australia visa process online?",
         "answer": "Yes, 100% online Subclass 600 tourist visa processed."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Sydney",
+      "Cairns"
+    ],
+    "citySlugs": [
+      "sydney",
+      "cairns"
+    ],
+    "state": "Australia",
+    "stateSlug": "australia",
+    "entryCity": "Sydney",
+    "exitCity": "Cairns"
   },
   {
     "id": "pkg-intl-malaysia",
@@ -8385,7 +9253,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Do Indian passport holders get Visa Free Entry to Malaysia?",
         "answer": "Yes, Malaysia offers Visa-Free entry for Indian citizens for up to 30 days."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Kuala Lumpur",
+      "Genting Highlands",
+      "Genting"
+    ],
+    "citySlugs": [
+      "kuala-lumpur",
+      "genting-highlands",
+      "genting"
+    ],
+    "state": "Malaysia",
+    "stateSlug": "malaysia",
+    "entryCity": "Kuala Lumpur",
+    "exitCity": "Genting"
   },
   {
     "id": "pkg-thailand-phuket-krabi-5n",
@@ -8547,7 +9429,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Are island boat tours included?",
         "answer": "Yes, full day Phi Phi Islands Speedboat tour and Krabi 4 Islands tour are included."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Phuket",
+      "Krabi"
+    ],
+    "citySlugs": [
+      "phuket",
+      "krabi"
+    ],
+    "state": "Thailand",
+    "stateSlug": "thailand",
+    "entryCity": "Phuket",
+    "exitCity": "Krabi"
   },
   {
     "id": "pkg-thailand-phuket-pattaya-bangkok-7n",
@@ -8728,7 +9622,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package price for 7N/8D Thailand Trio?",
         "answer": "The price is ₹29,200 per person (increased by ₹5k from flyer rate ₹24,200) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Phuket",
+      "Pattaya",
+      "Bangkok"
+    ],
+    "citySlugs": [
+      "phuket",
+      "pattaya",
+      "bangkok"
+    ],
+    "state": "Thailand",
+    "stateSlug": "thailand",
+    "entryCity": "Phuket",
+    "exitCity": "Bangkok"
   },
   {
     "id": "pkg-thailand-phuket-krabi-bangkok-7n",
@@ -8912,7 +9820,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package cost?",
         "answer": "Price is ₹32,000 per person (increased by ₹5k from flyer rate ₹27,000) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Phuket",
+      "Krabi",
+      "Bangkok"
+    ],
+    "citySlugs": [
+      "phuket",
+      "krabi",
+      "bangkok"
+    ],
+    "state": "Thailand",
+    "stateSlug": "thailand",
+    "entryCity": "Phuket",
+    "exitCity": "Bangkok"
   },
   {
     "id": "pkg-thailand-grand-4city-8n",
@@ -9119,7 +10041,23 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package cost?",
         "answer": "Price is ₹34,500 per person (increased by ₹5k from flyer rate ₹29,500) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Phuket",
+      "Krabi",
+      "Pattaya",
+      "Bangkok"
+    ],
+    "citySlugs": [
+      "phuket",
+      "krabi",
+      "pattaya",
+      "bangkok"
+    ],
+    "state": "Thailand",
+    "stateSlug": "thailand",
+    "entryCity": "Phuket",
+    "exitCity": "Bangkok"
   },
   {
     "id": "pkg-almaty-3n4d",
@@ -9246,7 +10184,17 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package price?",
         "answer": "Price is ₹34,000 per person (increased by ₹5k from flyer rate ₹29,000) for min 4 pax private tour."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Almaty"
+    ],
+    "citySlugs": [
+      "almaty"
+    ],
+    "state": "Kazakhstan",
+    "stateSlug": "kazakhstan",
+    "entryCity": "Almaty",
+    "exitCity": "Almaty"
   },
   {
     "id": "pkg-almaty-4n5d",
@@ -9373,7 +10321,17 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package cost?",
         "answer": "Price is ₹46,000 per person (increased by ₹5k from flyer rate ₹41,000) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Almaty"
+    ],
+    "citySlugs": [
+      "almaty"
+    ],
+    "state": "Kazakhstan",
+    "stateSlug": "kazakhstan",
+    "entryCity": "Almaty",
+    "exitCity": "Almaty"
   },
   {
     "id": "pkg-almaty-5n6d",
@@ -9519,7 +10477,17 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package cost?",
         "answer": "Price is ₹56,000 per person (increased by ₹5k from flyer rate ₹51,000) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Almaty"
+    ],
+    "citySlugs": [
+      "almaty"
+    ],
+    "state": "Kazakhstan",
+    "stateSlug": "kazakhstan",
+    "entryCity": "Almaty",
+    "exitCity": "Almaty"
   },
   {
     "id": "pkg-vietnam-danang-hoian-4n5d",
@@ -9652,7 +10620,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the price?",
         "answer": "Price is ₹27,000 per person (increased by ₹5k from flyer rate ₹22,000) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Da Nang",
+      "Hoi An"
+    ],
+    "citySlugs": [
+      "da-nang",
+      "hoi-an"
+    ],
+    "state": "Vietnam",
+    "stateSlug": "vietnam",
+    "entryCity": "Da Nang",
+    "exitCity": "Hoi An"
   },
   {
     "id": "pkg-vietnam-saigon-mekong-4n5d",
@@ -9782,7 +10762,17 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package cost?",
         "answer": "Price is ₹34,000 per person (increased by ₹5k from flyer rate ₹29,000) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Ho Chi Minh"
+    ],
+    "citySlugs": [
+      "ho-chi-minh"
+    ],
+    "state": "Vietnam",
+    "stateSlug": "vietnam",
+    "entryCity": "Ho Chi Minh",
+    "exitCity": "Ho Chi Minh"
   },
   {
     "id": "pkg-vietnam-hanoi-sapa-halong-4n5d",
@@ -9922,7 +10912,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package cost?",
         "answer": "Price is ₹38,000 per person (increased by ₹5k from flyer rate ₹33,000) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Hanoi",
+      "Sapa"
+    ],
+    "citySlugs": [
+      "hanoi",
+      "sapa"
+    ],
+    "state": "Vietnam",
+    "stateSlug": "vietnam",
+    "entryCity": "Hanoi",
+    "exitCity": "Sapa"
   },
   {
     "id": "pkg-dubai-4n5d-winter",
@@ -10057,7 +11059,17 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package pricing?",
         "answer": "3-Star Hotel option is ₹54,000 per person and 4-Star Hotel option is ₹60,000 per person (increased by ₹5k from flyer rates ₹49k/₹55k) for min 2 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Dubai"
+    ],
+    "citySlugs": [
+      "dubai"
+    ],
+    "state": "United Arab Emirates",
+    "stateSlug": "united-arab-emirates",
+    "entryCity": "Dubai",
+    "exitCity": "Dubai"
   },
   {
     "id": "pkg-dubai-5n6d-winter",
@@ -10203,7 +11215,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package pricing?",
         "answer": "3-Star option is ₹64,000 per person and 4-Star option is ₹70,000 per person (increased by ₹5k from flyer rates ₹59k/₹65k) for min 2 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Dubai",
+      "Abu Dhabi"
+    ],
+    "citySlugs": [
+      "dubai",
+      "abu-dhabi"
+    ],
+    "state": "United Arab Emirates",
+    "stateSlug": "united-arab-emirates",
+    "entryCity": "Dubai",
+    "exitCity": "Abu Dhabi"
   },
   {
     "id": "pkg-dubai-6n7d-winter",
@@ -10363,7 +11387,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package pricing?",
         "answer": "3-Star option is ₹69,000 per person and 4-Star option is ₹75,000 per person (increased by ₹5k from flyer rates ₹64k/₹70k) for min 2 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Dubai",
+      "Abu Dhabi"
+    ],
+    "citySlugs": [
+      "dubai",
+      "abu-dhabi"
+    ],
+    "state": "United Arab Emirates",
+    "stateSlug": "united-arab-emirates",
+    "entryCity": "Dubai",
+    "exitCity": "Abu Dhabi"
   },
   {
     "id": "pkg-vietnam-phuquoc-paradise-4n5d",
@@ -10495,7 +11531,17 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package price?",
         "answer": "Price is ₹35,500 per person (increased by ₹5k from flyer rate ₹30,500) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Phu Quoc"
+    ],
+    "citySlugs": [
+      "phu-quoc"
+    ],
+    "state": "Vietnam",
+    "stateSlug": "vietnam",
+    "entryCity": "Phu Quoc",
+    "exitCity": "Phu Quoc"
   },
   {
     "id": "pkg-vietnam-discovery-multicity-5n6d",
@@ -10645,7 +11691,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package price?",
         "answer": "Price is ₹39,000 per person (increased by ₹5k from flyer rate ₹34,000) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Da Nang",
+      "Hanoi",
+      "Hoi An"
+    ],
+    "citySlugs": [
+      "da-nang",
+      "hanoi",
+      "hoi-an"
+    ],
+    "state": "Vietnam",
+    "stateSlug": "vietnam",
+    "entryCity": "Da Nang",
+    "exitCity": "Hoi An"
   },
   {
     "id": "pkg-vietnam-essentials-saigon-vungtau-6n7d",
@@ -10809,7 +11869,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package price?",
         "answer": "Price is ₹51,000 per person (increased by ₹5k from flyer rate ₹46,000) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Phu Quoc",
+      "Ho Chi Minh",
+      "Saigon"
+    ],
+    "citySlugs": [
+      "phu-quoc",
+      "ho-chi-minh",
+      "saigon"
+    ],
+    "state": "Vietnam",
+    "stateSlug": "vietnam",
+    "entryCity": "Phu Quoc",
+    "exitCity": "Saigon"
   },
   {
     "id": "pkg-srilanka-4n5d-classic",
@@ -10962,7 +12036,25 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package price?",
         "answer": "Price is ₹38,500 per person MAP Plan (increased by ₹5k from flyer rate ₹33,500) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Sigiriya",
+      "Kandy",
+      "Nuwara Eliya",
+      "Bentota",
+      "Colombo"
+    ],
+    "citySlugs": [
+      "sigiriya",
+      "kandy",
+      "nuwara-eliya",
+      "bentota",
+      "colombo"
+    ],
+    "state": "Sri Lanka",
+    "stateSlug": "sri-lanka",
+    "entryCity": "Sigiriya",
+    "exitCity": "Colombo"
   },
   {
     "id": "pkg-srilanka-5n6d-wildlife",
@@ -11108,7 +12200,29 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package cost?",
         "answer": "Price is ₹44,000 per person MAP Plan (increased by ₹5k from flyer rate ₹39,000) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Multi-City",
+      "Colombo",
+      "Kandy",
+      "Nuwara Eliya",
+      "Bentota",
+      "Sigiriya",
+      "Yala"
+    ],
+    "citySlugs": [
+      "multi-city",
+      "colombo",
+      "kandy",
+      "nuwara-eliya",
+      "bentota",
+      "sigiriya",
+      "yala"
+    ],
+    "state": "Sri Lanka",
+    "stateSlug": "sri-lanka",
+    "entryCity": "Multi-City",
+    "exitCity": "Yala"
   },
   {
     "id": "pkg-srilanka-6n7d-panorama",
@@ -11273,7 +12387,29 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package cost?",
         "answer": "Price is ₹51,000 per person MAP Plan (increased by ₹5k from flyer rate ₹46,000) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Multi-City",
+      "Colombo",
+      "Kandy",
+      "Nuwara Eliya",
+      "Bentota",
+      "Sigiriya",
+      "Yala"
+    ],
+    "citySlugs": [
+      "multi-city",
+      "colombo",
+      "kandy",
+      "nuwara-eliya",
+      "bentota",
+      "sigiriya",
+      "yala"
+    ],
+    "state": "Sri Lanka",
+    "stateSlug": "sri-lanka",
+    "entryCity": "Multi-City",
+    "exitCity": "Yala"
   },
   {
     "id": "pkg-thailand-pattaya-budget-3n4d",
@@ -11386,7 +12522,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the price?",
         "answer": "Price is ₹14,000 per person (increased by ₹5k from flyer rate ₹9,000) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Pattaya",
+      "Bangkok"
+    ],
+    "citySlugs": [
+      "pattaya",
+      "bangkok"
+    ],
+    "state": "Thailand",
+    "stateSlug": "thailand",
+    "entryCity": "Pattaya",
+    "exitCity": "Bangkok"
   },
   {
     "id": "pkg-thailand-pattaya-bangkok-4n5d",
@@ -11525,7 +12673,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the price?",
         "answer": "Price is ₹17,000 per person (increased by ₹5k from flyer rate ₹12,000) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Pattaya",
+      "Bangkok"
+    ],
+    "citySlugs": [
+      "pattaya",
+      "bangkok"
+    ],
+    "state": "Thailand",
+    "stateSlug": "thailand",
+    "entryCity": "Pattaya",
+    "exitCity": "Bangkok"
   },
   {
     "id": "pkg-thailand-phuket-budget-3n4d",
@@ -11643,7 +12803,17 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the price?",
         "answer": "Price is ₹17,500 per person (increased by ₹5k from flyer rate ₹12,500) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Phuket"
+    ],
+    "citySlugs": [
+      "phuket"
+    ],
+    "state": "Thailand",
+    "stateSlug": "thailand",
+    "entryCity": "Phuket",
+    "exitCity": "Phuket"
   },
   {
     "id": "pkg-thailand-pattaya-extended-4n5d",
@@ -11778,7 +12948,17 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the price?",
         "answer": "Price is ₹18,000 per person (increased by ₹5k from flyer rate ₹13,000) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Pattaya"
+    ],
+    "citySlugs": [
+      "pattaya"
+    ],
+    "state": "Thailand",
+    "stateSlug": "thailand",
+    "entryCity": "Pattaya",
+    "exitCity": "Pattaya"
   },
   {
     "id": "pkg-philippines-siargao-3n4d",
@@ -11890,7 +13070,17 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the price?",
         "answer": "Price is ₹43,000 per person ($515 USD, increased by $60 USD / ₹5k INR from flyer rate $455 USD) for min 2 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Siargao"
+    ],
+    "citySlugs": [
+      "siargao"
+    ],
+    "state": "Philippines",
+    "stateSlug": "philippines",
+    "entryCity": "Siargao",
+    "exitCity": "Siargao"
   },
   {
     "id": "pkg-philippines-bohol-puertoprincesa-3n4d",
@@ -12007,7 +13197,17 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the price?",
         "answer": "Price is ₹37,500 per person ($450 USD, increased by $60 USD / ₹5k INR from flyer rate $390 USD) for min 2 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Puerto Princesa"
+    ],
+    "citySlugs": [
+      "puerto-princesa"
+    ],
+    "state": "Philippines",
+    "stateSlug": "philippines",
+    "entryCity": "Puerto Princesa",
+    "exitCity": "Puerto Princesa"
   },
   {
     "id": "pkg-philippines-manila-3n4d",
@@ -12123,7 +13323,17 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the price?",
         "answer": "Price is ₹44,000 per person ($530 USD, increased by $60 USD / ₹5k INR from flyer rate $470 USD) for min 2 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Manila"
+    ],
+    "citySlugs": [
+      "manila"
+    ],
+    "state": "Philippines",
+    "stateSlug": "philippines",
+    "entryCity": "Manila",
+    "exitCity": "Manila"
   },
   {
     "id": "pkg-srilanka-kandy-bentota-4n5d",
@@ -12261,7 +13471,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the price?",
         "answer": "Price is ₹40,000 per person MAP Plan (increased by ₹5k from flyer rate ₹35,000) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Kandy",
+      "Bentota",
+      "Galle"
+    ],
+    "citySlugs": [
+      "kandy",
+      "bentota",
+      "galle"
+    ],
+    "state": "Sri Lanka",
+    "stateSlug": "sri-lanka",
+    "entryCity": "Kandy",
+    "exitCity": "Galle"
   },
   {
     "id": "pkg-srilanka-kandy-nuwaraeliya-colombo-4n5d",
@@ -12394,7 +13618,23 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the price?",
         "answer": "Price is ₹40,000 per person MAP Plan (increased by ₹5k from flyer rate ₹35,000) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Multi-City",
+      "Colombo",
+      "Kandy",
+      "Nuwara Eliya"
+    ],
+    "citySlugs": [
+      "multi-city",
+      "colombo",
+      "kandy",
+      "nuwara-eliya"
+    ],
+    "state": "Sri Lanka",
+    "stateSlug": "sri-lanka",
+    "entryCity": "Multi-City",
+    "exitCity": "Nuwara Eliya"
   },
   {
     "id": "pkg-srilanka-sigiriya-kandy-colombo-4n5d",
@@ -12527,7 +13767,23 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the price?",
         "answer": "Price is ₹40,000 per person MAP Plan (increased by ₹5k from flyer rate ₹35,000) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Multi-City",
+      "Colombo",
+      "Kandy",
+      "Sigiriya"
+    ],
+    "citySlugs": [
+      "multi-city",
+      "colombo",
+      "kandy",
+      "sigiriya"
+    ],
+    "state": "Sri Lanka",
+    "stateSlug": "sri-lanka",
+    "entryCity": "Multi-City",
+    "exitCity": "Sigiriya"
   },
   {
     "id": "pkg-srilanka-yala-mirissa-bentota-4n5d",
@@ -12661,7 +13917,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the price?",
         "answer": "Price is ₹40,000 per person MAP Plan (increased by ₹5k from flyer rate ₹35,000) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Multi-City",
+      "Bentota",
+      "Yala"
+    ],
+    "citySlugs": [
+      "multi-city",
+      "bentota",
+      "yala"
+    ],
+    "state": "Sri Lanka",
+    "stateSlug": "sri-lanka",
+    "entryCity": "Multi-City",
+    "exitCity": "Yala"
   },
   {
     "id": "pkg-srilanka-bentota-galle-2n3d",
@@ -12763,7 +14033,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the price?",
         "answer": "Price is ₹29,000 per person MAP Plan (increased by ₹5k from flyer rate ₹24,000) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Bentota",
+      "Galle"
+    ],
+    "citySlugs": [
+      "bentota",
+      "galle"
+    ],
+    "state": "Sri Lanka",
+    "stateSlug": "sri-lanka",
+    "entryCity": "Bentota",
+    "exitCity": "Galle"
   },
   {
     "id": "pkg-srilanka-colombo-bentota-2n3d",
@@ -12865,7 +14147,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the price?",
         "answer": "Price is ₹29,000 per person MAP Plan (increased by ₹5k from flyer rate ₹24,000) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Colombo",
+      "Bentota"
+    ],
+    "citySlugs": [
+      "colombo",
+      "bentota"
+    ],
+    "state": "Sri Lanka",
+    "stateSlug": "sri-lanka",
+    "entryCity": "Colombo",
+    "exitCity": "Bentota"
   },
   {
     "id": "pkg-srilanka-colombo-3n4d",
@@ -12983,7 +14277,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the price?",
         "answer": "Price is ₹35,000 per person MAP Plan (increased by ₹5k from flyer rate ₹30,000) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Colombo",
+      "Bentota"
+    ],
+    "citySlugs": [
+      "colombo",
+      "bentota"
+    ],
+    "state": "Sri Lanka",
+    "stateSlug": "sri-lanka",
+    "entryCity": "Colombo",
+    "exitCity": "Bentota"
   },
   {
     "id": "pkg-srilanka-kandy-bentota-colombo-3n4d",
@@ -13102,7 +14408,23 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the price?",
         "answer": "Price is ₹35,000 per person MAP Plan (increased by ₹5k from flyer rate ₹30,000) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Multi-City",
+      "Colombo",
+      "Kandy",
+      "Bentota"
+    ],
+    "citySlugs": [
+      "multi-city",
+      "colombo",
+      "kandy",
+      "bentota"
+    ],
+    "state": "Sri Lanka",
+    "stateSlug": "sri-lanka",
+    "entryCity": "Multi-City",
+    "exitCity": "Bentota"
   },
   {
     "id": "pkg-srilanka-kandy-nuwaraeliya-colombo-3n4d",
@@ -13221,7 +14543,23 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the price?",
         "answer": "Price is ₹35,000 per person MAP Plan (increased by ₹5k from flyer rate ₹30,000) for min 4 pax."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Multi-City",
+      "Colombo",
+      "Kandy",
+      "Nuwara Eliya"
+    ],
+    "citySlugs": [
+      "multi-city",
+      "colombo",
+      "kandy",
+      "nuwara-eliya"
+    ],
+    "state": "Sri Lanka",
+    "stateSlug": "sri-lanka",
+    "entryCity": "Multi-City",
+    "exitCity": "Nuwara Eliya"
   },
   {
     "id": "pkg-georgia-tbilisi-gudauri-kazbegi-4n5d",
@@ -13359,7 +14697,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Do Indian passport holders need a visa for Georgia?",
         "answer": "Indian nationals with valid US, UK, Schengen, or GCC visas/residence permits get visa-free entry; others require an e-Visa."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Tbilisi",
+      "Kazbegi",
+      "Gudauri"
+    ],
+    "citySlugs": [
+      "tbilisi",
+      "kazbegi",
+      "gudauri"
+    ],
+    "state": "Georgia",
+    "stateSlug": "georgia",
+    "entryCity": "Tbilisi",
+    "exitCity": "Gudauri"
   },
   {
     "id": "pkg-georgia-tbilisi-kazbegi-mtskheta-5n6d",
@@ -13507,7 +14859,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package pricing?",
         "answer": "Price is $720 USD (~₹60,000) per person (increased by $60 / ₹5,000 from flyer rate $660)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Tbilisi",
+      "Kazbegi"
+    ],
+    "citySlugs": [
+      "tbilisi",
+      "kazbegi"
+    ],
+    "state": "Georgia",
+    "stateSlug": "georgia",
+    "entryCity": "Tbilisi",
+    "exitCity": "Kazbegi"
   },
   {
     "id": "pkg-georgia-tbilisi-batumi-prometheus-6n7d",
@@ -13672,7 +15036,23 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package pricing?",
         "answer": "Price is $643 USD (~₹53,500) per person (increased by $60 / ₹5,000 from flyer rate $583)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Tbilisi",
+      "Batumi",
+      "Kazbegi",
+      "Gudauri"
+    ],
+    "citySlugs": [
+      "tbilisi",
+      "batumi",
+      "kazbegi",
+      "gudauri"
+    ],
+    "state": "Georgia",
+    "stateSlug": "georgia",
+    "entryCity": "Tbilisi",
+    "exitCity": "Gudauri"
   },
   {
     "id": "pkg-japan-osaka-kyoto-nara-private-4n5d",
@@ -13805,7 +15185,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the total price for 2 people?",
         "answer": "Total price is ₹2,90,000 for 2 adults (₹1,45,000 per person, increased by ₹5,000 per person / ₹10,000 total from flyer rate ₹2,80,000)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Osaka",
+      "Kyoto",
+      "Nara"
+    ],
+    "citySlugs": [
+      "osaka",
+      "kyoto",
+      "nara"
+    ],
+    "state": "Japan",
+    "stateSlug": "japan",
+    "entryCity": "Osaka",
+    "exitCity": "Nara"
   },
   {
     "id": "pkg-japan-tokyo-disneyland-fuji-snow-private-4n5d",
@@ -13936,7 +15330,17 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the total price for 2 adults?",
         "answer": "Total price is ₹3,10,000 for 2 adults (₹1,55,000 per person, increased by ₹5,000 per person / ₹10,000 total from flyer rate ₹3,00,000)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Tokyo"
+    ],
+    "citySlugs": [
+      "tokyo"
+    ],
+    "state": "Japan",
+    "stateSlug": "japan",
+    "entryCity": "Tokyo",
+    "exitCity": "Tokyo"
   },
   {
     "id": "pkg-japan-nagoya-takayama-kanazawa-group-4n5d",
@@ -14071,7 +15475,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the group tour price?",
         "answer": "Price is ₹1,25,000 per person for minimum 10 pax (increased by ₹5,000 from flyer rate ₹1,20,000)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Takayama",
+      "Kanazawa"
+    ],
+    "citySlugs": [
+      "takayama",
+      "kanazawa"
+    ],
+    "state": "Japan",
+    "stateSlug": "japan",
+    "entryCity": "Takayama",
+    "exitCity": "Kanazawa"
   },
   {
     "id": "pkg-japan-osaka-kyoto-nara-group-4n5d",
@@ -14199,7 +15615,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the price?",
         "answer": "Price is ₹1,25,000 per person for minimum 10 pax (increased by ₹5,000 from flyer rate ₹1,20,000)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Osaka",
+      "Kyoto",
+      "Nara"
+    ],
+    "citySlugs": [
+      "osaka",
+      "kyoto",
+      "nara"
+    ],
+    "state": "Japan",
+    "stateSlug": "japan",
+    "entryCity": "Osaka",
+    "exitCity": "Nara"
   },
   {
     "id": "pkg-japan-sapporo-asahikawa-noboribetsu-group-4n5d",
@@ -14327,7 +15757,17 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the price?",
         "answer": "Price is ₹1,25,000 per person for minimum 10 pax (increased by ₹5,000 from flyer rate ₹1,20,000)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Sapporo"
+    ],
+    "citySlugs": [
+      "sapporo"
+    ],
+    "state": "Japan",
+    "stateSlug": "japan",
+    "entryCity": "Sapporo",
+    "exitCity": "Sapporo"
   },
   {
     "id": "pkg-japan-tokyo-fuji-group-4n5d",
@@ -14456,7 +15896,17 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the price?",
         "answer": "Price is ₹1,25,000 per person for minimum 10 pax (increased by ₹5,000 from flyer rate ₹1,20,000)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Tokyo"
+    ],
+    "citySlugs": [
+      "tokyo"
+    ],
+    "state": "Japan",
+    "stateSlug": "japan",
+    "entryCity": "Tokyo",
+    "exitCity": "Tokyo"
   },
   {
     "id": "pkg-malaysia-kl-genting-batu-caves-cameron-4n5d",
@@ -14598,7 +16048,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Is visa required for Indians in Malaysia?",
         "answer": "Malaysia provides Visa-Free Entry for Indian citizens (requires digital arrival card MDAC registration)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Kuala Lumpur",
+      "Cameron Highlands",
+      "Genting"
+    ],
+    "citySlugs": [
+      "kuala-lumpur",
+      "cameron-highlands",
+      "genting"
+    ],
+    "state": "Malaysia",
+    "stateSlug": "malaysia",
+    "entryCity": "Kuala Lumpur",
+    "exitCity": "Genting"
   },
   {
     "id": "pkg-malaysia-kl-genting-batu-melaka-ipoh-cameron-5n6d",
@@ -14756,7 +16220,23 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package price?",
         "answer": "Price is ₹63,500 per person (increased by ₹5,000 from flyer rate ₹58,500)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Kuala Lumpur",
+      "Ipoh",
+      "Cameron Highlands",
+      "Genting"
+    ],
+    "citySlugs": [
+      "kuala-lumpur",
+      "ipoh",
+      "cameron-highlands",
+      "genting"
+    ],
+    "state": "Malaysia",
+    "stateSlug": "malaysia",
+    "entryCity": "Kuala Lumpur",
+    "exitCity": "Genting"
   },
   {
     "id": "pkg-nepal-kathmandu-discovery-2n3d",
@@ -14863,7 +16343,17 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "Do Indians need a passport/visa for Nepal?",
         "answer": "Indian nationals do NOT need a visa. Entry is granted with valid Voter ID card or Passport."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Kathmandu"
+    ],
+    "citySlugs": [
+      "kathmandu"
+    ],
+    "state": "Nepal",
+    "stateSlug": "nepal",
+    "entryCity": "Kathmandu",
+    "exitCity": "Kathmandu"
   },
   {
     "id": "pkg-nepal-kathmandu-patan-bhaktapur-3n4d",
@@ -14978,7 +16468,17 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package price?",
         "answer": "Price is ₹20,000 per person (increased by ₹5,000 from flyer rate ₹15,000)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Kathmandu"
+    ],
+    "citySlugs": [
+      "kathmandu"
+    ],
+    "state": "Nepal",
+    "stateSlug": "nepal",
+    "entryCity": "Kathmandu",
+    "exitCity": "Kathmandu"
   },
   {
     "id": "pkg-nepal-kathmandu-pokhara-4n5d",
@@ -15114,7 +16614,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package price?",
         "answer": "Price is ₹26,000 per person (increased by ₹5,000 from flyer rate ₹21,000)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Kathmandu",
+      "Pokhara"
+    ],
+    "citySlugs": [
+      "kathmandu",
+      "pokhara"
+    ],
+    "state": "Nepal",
+    "stateSlug": "nepal",
+    "entryCity": "Kathmandu",
+    "exitCity": "Pokhara"
   },
   {
     "id": "pkg-nepal-muktinath-pilgrimage-special-5n6d",
@@ -15278,7 +16790,23 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package price?",
         "answer": "Price is ₹37,000 per person MAP Plan (increased by ₹5,000 from flyer rate ₹32,000)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Kathmandu",
+      "Pokhara",
+      "Jomsom",
+      "Muktinath"
+    ],
+    "citySlugs": [
+      "kathmandu",
+      "pokhara",
+      "jomsom",
+      "muktinath"
+    ],
+    "state": "Nepal",
+    "stateSlug": "nepal",
+    "entryCity": "Kathmandu",
+    "exitCity": "Muktinath"
   },
   {
     "id": "pkg-dubai-winter-sale-4n5d",
@@ -15417,7 +16945,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package pricing?",
         "answer": "Starting price for 3★ hotel is ₹54,000 per person (increased by ₹5,000 from flyer rate ₹49,000). 4★ hotel option is ₹60,000 per person."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Dubai",
+      "Abu Dhabi"
+    ],
+    "citySlugs": [
+      "dubai",
+      "abu-dhabi"
+    ],
+    "state": "United Arab Emirates",
+    "stateSlug": "united-arab-emirates",
+    "entryCity": "Dubai",
+    "exitCity": "Abu Dhabi"
   },
   {
     "id": "pkg-dubai-miracle-global-village-5n6d",
@@ -15568,7 +17108,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package pricing?",
         "answer": "Starting price for 3★ is ₹64,000 per person (increased by ₹5,000 from flyer rate ₹59,000). 4★ hotel option is ₹70,000 per person."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Dubai",
+      "Abu Dhabi"
+    ],
+    "citySlugs": [
+      "dubai",
+      "abu-dhabi"
+    ],
+    "state": "United Arab Emirates",
+    "stateSlug": "united-arab-emirates",
+    "entryCity": "Dubai",
+    "exitCity": "Abu Dhabi"
   },
   {
     "id": "pkg-dubai-ultimate-luxury-6n7d",
@@ -15728,7 +17280,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package pricing?",
         "answer": "Starting price for 3★ is ₹69,000 per person (increased by ₹5,000 from flyer rate ₹64,000). 4★ hotel option is ₹75,000 per person."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Dubai",
+      "Abu Dhabi"
+    ],
+    "citySlugs": [
+      "dubai",
+      "abu-dhabi"
+    ],
+    "state": "United Arab Emirates",
+    "stateSlug": "united-arab-emirates",
+    "entryCity": "Dubai",
+    "exitCity": "Abu Dhabi"
   },
   {
     "id": "pkg-egypt-cairo-pyramids-fayoum-3n4d",
@@ -15845,7 +17409,17 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package pricing?",
         "answer": "Starting price is ₹49,000 per person on double sharing basis for min 4 pax (increased by ₹5,000 from flyer rate ₹44,000)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Cairo"
+    ],
+    "citySlugs": [
+      "cairo"
+    ],
+    "state": "Egypt",
+    "stateSlug": "egypt",
+    "entryCity": "Cairo",
+    "exitCity": "Cairo"
   },
   {
     "id": "pkg-egypt-cairo-alexandria-pyramids-4n5d",
@@ -15977,7 +17551,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package pricing?",
         "answer": "Starting price is ₹54,000 per person on double sharing for min 4 pax (increased by ₹5,000 from flyer rate ₹49,000)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Cairo",
+      "Alexandria"
+    ],
+    "citySlugs": [
+      "cairo",
+      "alexandria"
+    ],
+    "state": "Egypt",
+    "stateSlug": "egypt",
+    "entryCity": "Cairo",
+    "exitCity": "Alexandria"
   },
   {
     "id": "pkg-egypt-nile-cruise-pharaohs-odyssey-5n6d",
@@ -16136,7 +17722,23 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package pricing?",
         "answer": "Price is ₹94,000 per person on double sharing for min 4 pax (increased by ₹5,000 from flyer rate ₹89,000). Includes 3 nights 5★ Nile Cruise with all meals and domestic Cairo-Aswan flight."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Cairo",
+      "Aswan to Luxor",
+      "Luxor",
+      "Aswan"
+    ],
+    "citySlugs": [
+      "cairo",
+      "aswan-to-luxor",
+      "luxor",
+      "aswan"
+    ],
+    "state": "Egypt",
+    "stateSlug": "egypt",
+    "entryCity": "Cairo",
+    "exitCity": "Aswan"
   },
   {
     "id": "pkg-bali-watersports-kintamani-nusa-penida-4n5d",
@@ -16269,7 +17871,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package price?",
         "answer": "Starting price is ₹28,500 per person on double sharing (increased by ₹5,000 from flyer rate ₹23,500)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Bali",
+      "Ubud",
+      "Nusa Penida"
+    ],
+    "citySlugs": [
+      "bali",
+      "ubud",
+      "nusa-penida"
+    ],
+    "state": "Indonesia",
+    "stateSlug": "indonesia",
+    "entryCity": "Bali",
+    "exitCity": "Nusa Penida"
   },
   {
     "id": "pkg-bali-gwk-sunset-cruise-ubud-massage-5n6d",
@@ -16420,7 +18036,19 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package price?",
         "answer": "Price is ₹34,500 per person on double sharing (increased by ₹5,000 from flyer rate ₹29,500)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Bali",
+      "Ubud"
+    ],
+    "citySlugs": [
+      "bali",
+      "ubud"
+    ],
+    "state": "Indonesia",
+    "stateSlug": "indonesia",
+    "entryCity": "Bali",
+    "exitCity": "Ubud"
   },
   {
     "id": "pkg-bali-ultimate-odyssey-nusa-atv-finns-6n7d",
@@ -16584,7 +18212,23 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package price?",
         "answer": "Price is ₹39,000 per person on double sharing (increased by ₹5,000 from flyer rate ₹34,000)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Bali",
+      "Ubud",
+      "Nusa Penida",
+      "Seminyak"
+    ],
+    "citySlugs": [
+      "bali",
+      "ubud",
+      "nusa-penida",
+      "seminyak"
+    ],
+    "state": "Indonesia",
+    "stateSlug": "indonesia",
+    "entryCity": "Bali",
+    "exitCity": "Seminyak"
   },
   {
     "id": "pkg-europe-grand-wonders-15n16d",
@@ -16900,7 +18544,31 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package pricing?",
         "answer": "Price is EUR 3600 (~₹3,30,000 INR) per adult on double sharing basis (increased by EUR 50 / ~₹5,000 from flyer rate EUR 3550). Includes guaranteed 4★ hotels, all meals, and driver tips."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Multi-City Europe",
+      "Paris",
+      "Rome",
+      "Venice",
+      "Florence",
+      "Zurich",
+      "Amsterdam",
+      "London"
+    ],
+    "citySlugs": [
+      "multi-city-europe",
+      "paris",
+      "rome",
+      "venice",
+      "florence",
+      "zurich",
+      "amsterdam",
+      "london"
+    ],
+    "state": "Europe Multi-Country",
+    "stateSlug": "europe-multi-country",
+    "entryCity": "Multi-City Europe",
+    "exitCity": "London"
   },
   {
     "id": "pkg-europe-best-paris-rome-12n13d",
@@ -17158,7 +18826,29 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package pricing?",
         "answer": "Price is EUR 2900 (~₹2,66,000 INR) per adult on double sharing (increased by EUR 50 / ~₹5,000 from flyer rate EUR 2850)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Multi-City Europe",
+      "Paris",
+      "Rome",
+      "Venice",
+      "Florence",
+      "Lucerne",
+      "Amsterdam"
+    ],
+    "citySlugs": [
+      "multi-city-europe",
+      "paris",
+      "rome",
+      "venice",
+      "florence",
+      "lucerne",
+      "amsterdam"
+    ],
+    "state": "Europe Multi-Country",
+    "stateSlug": "europe-multi-country",
+    "entryCity": "Multi-City Europe",
+    "exitCity": "Amsterdam"
   },
   {
     "id": "pkg-europe-grand-exclusive-london-rome-12n13d",
@@ -17416,7 +19106,31 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package pricing?",
         "answer": "Price is EUR 3050 (~₹2,80,000 INR) per adult on double sharing (increased by EUR 50 / ~₹5,000 from flyer rate EUR 3000)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Multi-City Europe",
+      "Paris",
+      "Rome",
+      "Venice",
+      "Florence",
+      "Lucerne",
+      "Zurich",
+      "London"
+    ],
+    "citySlugs": [
+      "multi-city-europe",
+      "paris",
+      "rome",
+      "venice",
+      "florence",
+      "lucerne",
+      "zurich",
+      "london"
+    ],
+    "state": "Europe Multi-Country",
+    "stateSlug": "europe-multi-country",
+    "entryCity": "Multi-City Europe",
+    "exitCity": "London"
   },
   {
     "id": "pkg-europe-fascinating-paris-geneva-jungfrau-7n8d",
@@ -17615,7 +19329,27 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package price?",
         "answer": "Price is EUR 2300 (~₹2,11,000 INR) per adult on double sharing (increased by EUR 50 / ~₹5,000 from flyer rate EUR 2250)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Paris",
+      "Geneva",
+      "Central Switzerland",
+      "Lucerne",
+      "Zurich",
+      "Interlaken"
+    ],
+    "citySlugs": [
+      "paris",
+      "geneva",
+      "central-switzerland",
+      "lucerne",
+      "zurich",
+      "interlaken"
+    ],
+    "state": "France & Switzerland",
+    "stateSlug": "france-switzerland",
+    "entryCity": "Paris",
+    "exitCity": "Interlaken"
   },
   {
     "id": "pkg-europe-beauty-paris-amsterdam-swiss-8n9d",
@@ -17836,7 +19570,31 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package price?",
         "answer": "Price is EUR 2650 (~₹2,43,000 INR) per adult on double sharing (increased by EUR 50 / ~₹5,000 from flyer rate EUR 2600)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Paris",
+      "Netherlands",
+      "Germany",
+      "Central Switzerland",
+      "Lucerne",
+      "Zurich",
+      "Interlaken",
+      "Amsterdam"
+    ],
+    "citySlugs": [
+      "paris",
+      "netherlands",
+      "germany",
+      "central-switzerland",
+      "lucerne",
+      "zurich",
+      "interlaken",
+      "amsterdam"
+    ],
+    "state": "France, Belgium, Netherlands, Germany, Switzerland",
+    "stateSlug": "france-belgium-netherlands-germany-switzerland",
+    "entryCity": "Paris",
+    "exitCity": "Amsterdam"
   },
   {
     "id": "pkg-armenia-yerevan-tsaghkadzor-sevan-3n4d",
@@ -17957,7 +19715,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package pricing?",
         "answer": "Price is $395 USD (~₹33,000) per person on double sharing (increased by $60 / ₹5,000 from flyer rate $335)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Yerevan",
+      "Tsaghkadzor",
+      "Sevan"
+    ],
+    "citySlugs": [
+      "yerevan",
+      "tsaghkadzor",
+      "sevan"
+    ],
+    "state": "Armenia",
+    "stateSlug": "armenia",
+    "entryCity": "Yerevan",
+    "exitCity": "Sevan"
   },
   {
     "id": "pkg-armenia-garni-geghard-symphony-stones-4n5d",
@@ -18089,7 +19861,23 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package pricing?",
         "answer": "Price is $490 USD (~₹41,000) per person on double sharing (increased by $60 / ₹5,000 from flyer rate $430)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Yerevan",
+      "Tsaghkadzor",
+      "Sevan",
+      "Garni"
+    ],
+    "citySlugs": [
+      "yerevan",
+      "tsaghkadzor",
+      "sevan",
+      "garni"
+    ],
+    "state": "Armenia",
+    "stateSlug": "armenia",
+    "entryCity": "Yerevan",
+    "exitCity": "Garni"
   },
   {
     "id": "pkg-armenia-areni-wine-noravank-jermuk-5n6d",
@@ -18237,7 +20025,23 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package pricing?",
         "answer": "Price is $615 USD (~₹51,500) per person on double sharing (increased by $60 / ₹5,000 from flyer rate $555)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Yerevan",
+      "Tsaghkadzor",
+      "Sevan",
+      "Garni"
+    ],
+    "citySlugs": [
+      "yerevan",
+      "tsaghkadzor",
+      "sevan",
+      "garni"
+    ],
+    "state": "Armenia",
+    "stateSlug": "armenia",
+    "entryCity": "Yerevan",
+    "exitCity": "Garni"
   },
   {
     "id": "pkg-baku-absheron-gabala-4n5d",
@@ -18371,7 +20175,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package pricing?",
         "answer": "Price is $390 USD (~₹32,500) per person on double sharing (increased by $60 / ₹5,000 from flyer rate $330)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Baku",
+      "Gabala",
+      "Absheron"
+    ],
+    "citySlugs": [
+      "baku",
+      "gabala",
+      "absheron"
+    ],
+    "state": "Azerbaijan",
+    "stateSlug": "azerbaijan",
+    "entryCity": "Baku",
+    "exitCity": "Absheron"
   },
   {
     "id": "pkg-baku-gabala-absheron-shopping-5n6d",
@@ -18518,7 +20336,21 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package pricing?",
         "answer": "Price is $430 USD (~₹36,000) per person on double sharing (increased by $60 / ₹5,000 from flyer rate $370)."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Baku",
+      "Gabala",
+      "Absheron"
+    ],
+    "citySlugs": [
+      "baku",
+      "gabala",
+      "absheron"
+    ],
+    "state": "Azerbaijan",
+    "stateSlug": "azerbaijan",
+    "entryCity": "Baku",
+    "exitCity": "Absheron"
   },
   {
     "id": "pkg-baku-gabala-overnight-stay-5n6d",
@@ -18673,6 +20505,20 @@ export const DEMO_PACKAGES: HolidayPackage[] = [
         "question": "What is the package pricing?",
         "answer": "Price is $530 USD (~₹44,000) per person on double sharing (increased by $60 / ₹5,000 from flyer rate $470). Includes 2 nights stay in luxury Gabala resort."
       }
-    ]
+    ],
+    "coveredCities": [
+      "Baku",
+      "Gabala",
+      "Absheron"
+    ],
+    "citySlugs": [
+      "baku",
+      "gabala",
+      "absheron"
+    ],
+    "state": "Azerbaijan",
+    "stateSlug": "azerbaijan",
+    "entryCity": "Baku",
+    "exitCity": "Absheron"
   }
 ];

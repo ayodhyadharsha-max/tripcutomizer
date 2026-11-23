@@ -152,7 +152,7 @@ export const OTA_DOMESTIC_SECTORS: SectorDefinition[] = [
     country: 'India',
     regionCategory: 'Spiritual',
     isInternational: false,
-    cities: ['Ram Janmabhoomi', 'Hanuman Garhi', 'Kanak Bhawan', 'Saryu Ghat', 'Ram Ki Paidi', 'Surya Kund', 'Nageshwarnath', 'Guptar Ghat'],
+    cities: ['Ayodhya', 'Varanasi', 'Prayagraj', 'Lucknow', 'Hanuman Garhi', 'Kanak Bhawan'],
     count: 120,
     minPrice: 5999,
     maxPrice: 35000,
@@ -164,7 +164,7 @@ export const OTA_DOMESTIC_SECTORS: SectorDefinition[] = [
     country: 'India',
     regionCategory: 'Spiritual',
     isInternational: false,
-    cities: ['Kashi Vishwanath', 'Dashashwamedh Ghat', 'Assi Ghat', 'Sarnath', 'Manikarnika', 'Ramnagar Fort'],
+    cities: ['Varanasi', 'Prayagraj', 'Ayodhya', 'Sarnath', 'Dashashwamedh Ghat', 'Assi Ghat'],
     count: 120,
     minPrice: 6999,
     maxPrice: 38000,
@@ -1082,14 +1082,63 @@ function generateSynthesizedPackage(
     itinerary.push(buildSectorDayItinerary(sector.destinationSlug, city, d, durObj.days, hotelName));
   }
 
-  const hotels = [
-    {
+  // Multi-city circuit tags (Non-duplicate master package architecture)
+  const coveredCities: string[] = [city];
+  if (durObj.nights >= 3 && sector.cities.length > 1) {
+    const nextCity1 = sector.cities[(pkgIndex + 1) % sector.cities.length];
+    if (nextCity1 && !coveredCities.includes(nextCity1)) {
+      coveredCities.push(nextCity1);
+    }
+  }
+  if (durObj.nights >= 5 && sector.cities.length > 2) {
+    const nextCity2 = sector.cities[(pkgIndex + 2) % sector.cities.length];
+    if (nextCity2 && !coveredCities.includes(nextCity2)) {
+      coveredCities.push(nextCity2);
+    }
+  }
+  const citySlugs = coveredCities.map((c) => slugify(c));
+  const entryCity = coveredCities[0];
+  const exitCity = coveredCities[coveredCities.length - 1];
+  const state = sector.region;
+  const stateSlug = sector.destinationSlug;
+
+  // Authentic night distribution across covered circuit cities
+  const hotels: { name: string; city: string; rating: string; nights: number }[] = [];
+  if (coveredCities.length === 1) {
+    hotels.push({
       name: hotelName,
       city: city,
       rating: hotelTier,
       nights: durObj.nights
+    });
+  } else {
+    let remainingNights = durObj.nights;
+    coveredCities.forEach((c, idx) => {
+      const isFirst = idx === 0;
+      const isLast = idx === coveredCities.length - 1;
+      let allocNights = 1;
+      if (isFirst) {
+        allocNights = Math.max(1, remainingNights - (coveredCities.length - 1));
+      } else if (isLast) {
+        allocNights = Math.max(1, remainingNights);
+      } else {
+        allocNights = 1;
+      }
+      allocNights = Math.min(remainingNights, allocNights);
+      remainingNights -= allocNights;
+      hotels.push({
+        name: getBrandedHotelName(c, hotelTier),
+        city: c,
+        rating: hotelTier,
+        nights: allocNights
+      });
+    });
+    // Ensure all nights accounted for
+    const sumNights = hotels.reduce((acc, h) => acc + h.nights, 0);
+    if (sumNights < durObj.nights && hotels.length > 0) {
+      hotels[0].nights += (durObj.nights - sumNights);
     }
-  ];
+  }
 
   const faqs = [
     {
@@ -1117,6 +1166,12 @@ function generateSynthesizedPackage(
     slug,
     destination: city + ', ' + sector.region,
     destinationSlug: sector.destinationSlug,
+    state,
+    stateSlug,
+    coveredCities,
+    citySlugs,
+    entryCity,
+    exitCity,
     country: sector.country,
     region: sector.regionCategory,
     isInternational: sector.isInternational,
@@ -1295,5 +1350,12 @@ export function findCatalogPackage(
 export function getCatalogPackagesByDestination(destinationSlug: string): HolidayPackage[] {
   const all = getAllCatalogPackages();
   const target = destinationSlug.toLowerCase().trim();
-  return all.filter((p) => p.destinationSlug.toLowerCase() === target || p.destination.toLowerCase().includes(target));
+  return all.filter(
+    (p) =>
+      p.destinationSlug.toLowerCase() === target ||
+      (p.stateSlug && p.stateSlug.toLowerCase() === target) ||
+      (p.citySlugs && p.citySlugs.includes(target)) ||
+      (p.coveredCities && p.coveredCities.some((c) => slugify(c) === target || c.toLowerCase().includes(target))) ||
+      p.destination.toLowerCase().includes(target)
+  );
 }

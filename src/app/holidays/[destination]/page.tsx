@@ -18,7 +18,14 @@ export async function generateMetadata({ params }: { params: { destination: stri
   const matched = allCatalog.filter((p) => {
     const dSlug = p.destinationSlug.toLowerCase();
     const dest = p.destination.toLowerCase();
-    return dSlug === rawSlug || dSlug.includes(rawSlug) || dest.includes(rawSlug);
+    return (
+      dSlug === rawSlug ||
+      dSlug.includes(rawSlug) ||
+      dest.includes(rawSlug) ||
+      (p.citySlugs && p.citySlugs.includes(rawSlug)) ||
+      (p.stateSlug && p.stateSlug === rawSlug) ||
+      (p.coveredCities && p.coveredCities.some((c) => c.toLowerCase().includes(rawSlug)))
+    );
   });
 
   const minPrice = matched.length > 0
@@ -105,8 +112,16 @@ export default function DestinationListingPage({ params }: { params: { destinati
     if (rawSlug === 'international' && p.isInternational) return true;
     if (rawSlug === 'india' && !p.isInternational) return true;
 
-    // Direct Destination / Country Match
-    if (dSlug === rawSlug || dSlug.includes(rawSlug) || dest.includes(rawSlug) || country.includes(rawSlug)) {
+    // Direct Destination / Country / Multi-City Circuit Match
+    if (
+      dSlug === rawSlug ||
+      dSlug.includes(rawSlug) ||
+      dest.includes(rawSlug) ||
+      country.includes(rawSlug) ||
+      (p.citySlugs && p.citySlugs.includes(rawSlug)) ||
+      (p.stateSlug && (p.stateSlug === rawSlug || p.stateSlug.includes(rawSlug))) ||
+      (p.coveredCities && p.coveredCities.some((c) => c.toLowerCase().includes(rawSlug)))
+    ) {
       return true;
     }
 
