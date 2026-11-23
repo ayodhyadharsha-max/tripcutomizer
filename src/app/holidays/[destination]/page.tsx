@@ -7,84 +7,16 @@ import { getAllProgrammaticPackages } from '@/data/programmaticPackages';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 import { AEODirectAnswerBox } from '@/components/holidays/AEODirectAnswerBox';
 
-export async function generateMetadata({ params }: { params: { destination: string } }): Promise<Metadata> {
-  const rawSlug = params.destination.toLowerCase().trim();
-  const destName = rawSlug
-    .split('-')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-
-  const allCatalog = getAllCatalogPackages();
-  const matched = allCatalog.filter((p) => {
-    const dSlug = p.destinationSlug.toLowerCase();
-    const dest = p.destination.toLowerCase();
-    return (
-      dSlug === rawSlug ||
-      dSlug.includes(rawSlug) ||
-      dest.includes(rawSlug) ||
-      (p.citySlugs && p.citySlugs.includes(rawSlug)) ||
-      (p.stateSlug && p.stateSlug === rawSlug) ||
-      (p.coveredCities && p.coveredCities.some((c) => c.toLowerCase().includes(rawSlug)))
-    );
-  });
-
-  const minPrice = matched.length > 0
-    ? Math.min(...matched.map((p) => Math.min(p.startingPrice || 14999, p.discountPrice || p.startingPrice || 14999)))
-    : 14999;
-
-  const heroImg = matched[0]?.heroImage || 'https://www.tripcustomizer.com/destinations/hero-holidays.jpg';
-  const title = `${destName} Tour Packages 2026: Starting @ ₹${minPrice.toLocaleString('en-IN')} | Trip Customizer`;
-  const description = `Book customized ${destName} holiday packages with 4-star hotels, flights, private transfers, visa assistance, and 24x7 expert desk support. Best verified deals starting @ ₹${minPrice.toLocaleString('en-IN')}.`;
-  const canonicalUrl = `https://www.tripcustomizer.com/holidays/${rawSlug}`;
-
-  return {
-    title,
-    description,
-    keywords: [
-      `${destName} tour packages`,
-      `${destName} holiday package`,
-      `${destName} tourism 2026`,
-      `${destName} honeymoon packages`,
-      `customized ${destName} itinerary`,
-      'Trip Customizer',
-    ],
-    alternates: {
-      canonical: canonicalUrl,
-    },
-    openGraph: {
-      title,
-      description,
-      url: canonicalUrl,
-      siteName: 'Trip Customizer',
-      type: 'website',
-      images: [
-        {
-          url: heroImg,
-          width: 1200,
-          height: 630,
-          alt: `${destName} Holiday Packages`,
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: [heroImg],
-    },
-  };
-}
-
-export default function DestinationListingPage({ params }: { params: { destination: string } }) {
-  const rawSlug = params.destination.toLowerCase().trim();
-
+function matchPackagesForDestination(rawSlug: string, allCatalog: ReturnType<typeof getAllCatalogPackages>) {
   const isIntlSlug = [
-    'international', 'europe', 'switzerland', 'france', 'uk', 'london', 'united-kingdom',
+    'international', 'europe', 'switzerland', 'swiss', 'france', 'uk', 'london', 'united-kingdom',
     'germany', 'austria', 'belgium', 'netherlands', 'italy', 'vatican', 'dubai', 'uae',
     'cairo', 'egypt', 'bali', 'indonesia', 'thailand', 'phuket', 'singapore', 'maldives',
     'georgia', 'tbilisi', 'batumi', 'japan', 'tokyo', 'osaka', 'kyoto', 'malaysia',
     'kuala-lumpur', 'nepal', 'kathmandu', 'pokhara', 'muktinath', 'armenia', 'yerevan',
-    'azerbaijan', 'baku', 'gabala', 'almaty', 'kazakhstan'
+    'azerbaijan', 'baku', 'gabala', 'almaty', 'kazakhstan', 'south-africa', 'southafrica',
+    'kruger', 'australia', 'new-zealand', 'nz', 'turkey', 'greece', 'mauritius', 'seychelles',
+    'sri-lanka', 'usa', 'canada', 'bhutan'
   ].some((s) => rawSlug.includes(s));
 
   const isDomesticSlug = [
@@ -93,11 +25,14 @@ export default function DestinationListingPage({ params }: { params: { destinati
     'rajasthan', 'jaipur', 'udaipur', 'jaisalmer', 'goa', 'kerala', 'coorg', 'munnar',
     'meghalaya', 'shillong', 'kaziranga', 'sikkim', 'darjeeling', 'kutch', 'dwarka',
     'somnath', 'amritsar', 'puri', 'rameshwaram', 'tirupati', 'shirdi', 'vaishno-devi',
-    'himachal', 'uttarakhand', 'gujarat', 'up', 'uttar-pradesh', 'north-east', 'himalayas'
+    'himachal', 'uttarakhand', 'gujarat', 'up', 'uttar-pradesh', 'north-east', 'himalayas',
+    'mathura', 'vrindavan', 'ayodhya-varanasi', 'mathura-vrindavan', 'tamilnadu', 'karnataka',
+    'maharashtra', 'wildlife', 'andaman', 'ooty', 'kodaikanal', 'madurai', 'kanyakumari',
+    'mysore', 'kabini', 'hampi', 'spiti', 'dharamshala', 'dalhousie', 'kasol', 'rishikesh',
+    'mussoorie', 'haridwar', 'lonavala', 'mahabaleshwar'
   ].some((s) => rawSlug.includes(s));
 
-  const allCatalog = getAllCatalogPackages();
-  const matchedPackages = allCatalog.filter((p) => {
+  return allCatalog.filter((p) => {
     // Strictly isolate international vs domestic routes
     if (isIntlSlug && !p.isInternational) return false;
     if (isDomesticSlug && p.isInternational) return false;
@@ -111,6 +46,85 @@ export default function DestinationListingPage({ params }: { params: { destinati
     // Direct Category match
     if (rawSlug === 'international' && p.isInternational) return true;
     if (rawSlug === 'india' && !p.isInternational) return true;
+
+    // 1. Ayodhya & Varanasi multi-city package matching
+    if (rawSlug === 'ayodhya-varanasi' || rawSlug === 'varanasi-ayodhya') {
+      if (dSlug === 'ayodhya' || dSlug === 'varanasi' || dest.includes('ayodhya') || dest.includes('varanasi') || name.includes('ayodhya') || name.includes('varanasi')) return true;
+    }
+
+    // 2. Mathura & Vrindavan pilgrimage matching
+    if (rawSlug === 'mathura-vrindavan' || rawSlug === 'vrindavan-mathura' || rawSlug === 'mathura' || rawSlug === 'vrindavan') {
+      if (dSlug === 'mathura' || dest.includes('mathura') || dest.includes('vrindavan') || name.includes('mathura') || name.includes('vrindavan') || (p.coveredCities && p.coveredCities.some(c => c.toLowerCase().includes('mathura') || c.toLowerCase().includes('vrindavan')))) return true;
+    }
+
+    // 3. Switzerland / Swiss Alps
+    if (rawSlug === 'switzerland' || rawSlug === 'swiss') {
+      if (dSlug === 'switzerland' || dSlug === 'europe' || dest.includes('switzerland') || dest.includes('europe') || name.includes('swiss') || name.includes('switzerland') || (p.coveredCities && p.coveredCities.some(c => ['lucerne', 'zurich', 'interlaken', 'jungfraujoch', 'bern', 'geneva'].includes(c.toLowerCase())))) return true;
+    }
+
+    // 4. Japan & South Korea
+    if (rawSlug === 'japan' || rawSlug === 'tokyo' || rawSlug === 'kyoto' || rawSlug === 'osaka') {
+      if (dSlug === 'japan' || dest.includes('japan') || country.includes('japan') || name.includes('japan')) return true;
+    }
+
+    // 5. South Africa Safari
+    if (rawSlug === 'south-africa' || rawSlug === 'southafrica' || rawSlug === 'kruger') {
+      if (dSlug === 'south-africa' || dest.includes('south africa') || country.includes('south africa') || name.includes('south africa')) return true;
+    }
+
+    // 6. Greece & Mediterranean
+    if (rawSlug === 'greece' || rawSlug === 'turkey-greece') {
+      if (dSlug === 'turkey' || dest.includes('turkey') || dest.includes('greece') || name.includes('turkey') || name.includes('greece')) return true;
+    }
+
+    // 7. Australia & New Zealand
+    if (rawSlug === 'new-zealand' || rawSlug === 'nz') {
+      if (dSlug === 'australia' || dest.includes('australia') || dest.includes('new zealand') || (p.coveredCities && p.coveredCities.some(c => c.toLowerCase().includes('auckland') || c.toLowerCase().includes('queenstown')))) return true;
+    }
+
+    // 8. Nepal & Bhutan
+    if (rawSlug === 'bhutan') {
+      if (dSlug === 'nepal' || dest.includes('nepal') || dest.includes('bhutan') || (p.coveredCities && p.coveredCities.some(c => c.toLowerCase().includes('thimphu') || c.toLowerCase().includes('paro')))) return true;
+    }
+
+    // 9. Singapore & Malaysia
+    if (rawSlug === 'malaysia') {
+      if (dSlug === 'singapore' || dest.includes('singapore') || dest.includes('malaysia') || (p.coveredCities && p.coveredCities.some(c => c.toLowerCase().includes('kuala') || c.toLowerCase().includes('genting')))) return true;
+    }
+
+    // 10. Dubai & UAE
+    if (rawSlug === 'uae') {
+      if (dSlug === 'dubai' || dest.includes('dubai') || dest.includes('uae')) return true;
+    }
+
+    // 11. Central Asia / Azerbaijan / Baku
+    if (rawSlug === 'azerbaijan' || rawSlug === 'almaty' || rawSlug === 'kazakhstan' || rawSlug === 'georgia' || rawSlug === 'tbilisi') {
+      if (dSlug === 'baku' || dest.includes('baku') || dest.includes('central asia') || country.includes('azerbaijan')) return true;
+    }
+
+    // 12. Uttarakhand Hill Stations & Excursions
+    if (['nainital', 'mussoorie', 'rishikesh', 'auli', 'chopta', 'corbett'].includes(rawSlug)) {
+      if (dSlug === 'uttarakhand' || dest.includes('uttarakhand') || (p.coveredCities && p.coveredCities.some(c => c.toLowerCase().includes(rawSlug)))) return true;
+    }
+
+    // 13. Himachal Valleys & Hill Stations
+    if (['manali', 'shimla', 'dharamshala', 'dalhousie', 'spiti', 'kasol'].includes(rawSlug)) {
+      if (dSlug === 'himachal' || dest.includes('himachal') || (p.coveredCities && p.coveredCities.some(c => c.toLowerCase().includes(rawSlug)))) return true;
+    }
+
+    // 14. Sacred Pilgrimages (Tirupati, Puri, Shirdi, Dwarka, Rameshwaram)
+    if (rawSlug === 'tirupati' || rawSlug === 'puri' || rawSlug === 'kedarnath' || rawSlug === 'badrinath') {
+      if (dSlug === 'char-dham' || (p.coveredCities && p.coveredCities.some(c => c.toLowerCase().includes(rawSlug)))) return true;
+    }
+    if (rawSlug === 'rameshwaram') {
+      if (dSlug === 'tamilnadu' || (p.coveredCities && p.coveredCities.some(c => c.toLowerCase().includes('rameshwaram')))) return true;
+    }
+    if (rawSlug === 'dwarka' || rawSlug === 'somnath') {
+      if (dSlug === 'gujarat' || dSlug === 'char-dham' || (p.coveredCities && p.coveredCities.some(c => c.toLowerCase().includes(rawSlug)))) return true;
+    }
+    if (rawSlug === 'shirdi') {
+      if (dSlug === 'maharashtra' || dSlug === 'char-dham' || (p.coveredCities && p.coveredCities.some(c => c.toLowerCase().includes('shirdi')))) return true;
+    }
 
     // Direct Destination / Country / Multi-City Circuit Match
     if (
@@ -239,13 +253,78 @@ export default function DestinationListingPage({ params }: { params: { destinati
       (dest.includes('maldives') || name.includes('maldives') || p.id === 'pkg-intl-maldives')
     ) return true;
 
+    return false;
   });
+}
+
+export async function generateMetadata({ params }: { params: { destination: string } }): Promise<Metadata> {
+  const rawSlug = params.destination.toLowerCase().trim();
+  const destName = rawSlug
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+
+  const allCatalog = getAllCatalogPackages();
+  const matched = matchPackagesForDestination(rawSlug, allCatalog);
+
+  const minPrice = matched.length > 0
+    ? Math.min(...matched.map((p) => Math.min(p.startingPrice || 14999, p.discountPrice || p.startingPrice || 14999)))
+    : 14999;
+
+  const heroImg = matched[0]?.heroImage || 'https://www.tripcustomizer.com/destinations/hero-holidays.jpg';
+  const title = `${destName} Tour Packages 2026: Starting @ ₹${minPrice.toLocaleString('en-IN')} | Trip Customizer`;
+  const description = `Book customized ${destName} holiday packages with 4-star hotels, flights, private transfers, visa assistance, and 24x7 expert desk support. Best verified deals starting @ ₹${minPrice.toLocaleString('en-IN')}.`;
+  const canonicalUrl = `https://www.tripcustomizer.com/holidays/${rawSlug}`;
+
+  return {
+    title,
+    description,
+    keywords: [
+      `${destName} tour packages`,
+      `${destName} holiday package`,
+      `${destName} tourism 2026`,
+      `${destName} honeymoon packages`,
+      `customized ${destName} itinerary`,
+      'Trip Customizer',
+    ],
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      siteName: 'Trip Customizer',
+      type: 'website',
+      images: [
+        {
+          url: heroImg,
+          width: 1200,
+          height: 630,
+          alt: `${destName} Holiday Packages`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [heroImg],
+    },
+  };
+}
+
+export default function DestinationListingPage({ params }: { params: { destination: string } }) {
+  const rawSlug = params.destination.toLowerCase().trim();
+  const allCatalog = getAllCatalogPackages();
+  const matchedPackages = matchPackagesForDestination(rawSlug, allCatalog);
 
   if (matchedPackages.length === 0) {
     notFound();
   }
 
   const displayPackages = matchedPackages;
+  const isIntlSlug = matchedPackages.some((p) => p.isInternational);
 
   const allProgPackages = getAllProgrammaticPackages();
   const destinationProgPackages = allProgPackages.filter(

@@ -37,12 +37,12 @@ export const MegaMenuHolidays: React.FC = () => {
 
   const specialThemes = [
     { name: 'Char Dham Yatra', href: '/char-dham', icon: Compass, badge: 'Popular' },
-    { name: 'Do Dham Yatra', href: '/do-dham', icon: MapPin },
+    { name: 'Do Dham Yatra', href: '/holidays/char-dham', icon: MapPin },
     { name: 'International Honeymoon', href: '/honeymoon/international', icon: Heart, badge: 'Romantic' },
     { name: 'India Honeymoon', href: '/honeymoon/india', icon: Heart },
-    { name: 'Escorted Group Tours', href: '/escorted-tours', icon: Sparkles },
-    { name: 'Private Luxury Journeys', href: '/private-journeys', icon: Flame },
-    { name: 'Wildlife & Safaris', href: '/wildlife-tours', icon: Sun },
+    { name: 'Escorted Group Tours', href: '/holidays?theme=group', icon: Sparkles },
+    { name: 'Private Luxury Journeys', href: '/customize-trip', icon: Flame },
+    { name: 'Wildlife & Safaris', href: '/holidays/wildlife', icon: Sun },
     { name: 'Luxury Cruises', href: '/cruises', icon: Anchor },
   ];
 

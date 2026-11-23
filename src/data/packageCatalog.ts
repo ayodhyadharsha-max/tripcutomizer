@@ -230,6 +230,18 @@ export const OTA_DOMESTIC_SECTORS: SectorDefinition[] = [
     minPrice: 5999,
     maxPrice: 28000,
     heroImage: '/destinations/hero-beach.jpg'
+  },
+  {
+    region: 'Mathura & Vrindavan',
+    destinationSlug: 'mathura',
+    country: 'India',
+    regionCategory: 'Spiritual',
+    isInternational: false,
+    cities: ['Mathura', 'Vrindavan', 'Govardhan', 'Barsana', 'Gokul', 'Agra'],
+    count: 140,
+    minPrice: 5499,
+    maxPrice: 32000,
+    heroImage: '/destinations/mathura-vrindavan.jpg'
   }
 ];
 
@@ -401,6 +413,42 @@ export const OTA_INTERNATIONAL_SECTORS: SectorDefinition[] = [
     minPrice: 155000,
     maxPrice: 420000,
     heroImage: '/destinations/usa.jpg'
+  },
+  {
+    region: 'Japan & South Korea',
+    destinationSlug: 'japan',
+    country: 'Japan',
+    regionCategory: 'East Asia',
+    isInternational: true,
+    cities: ['Tokyo', 'Mount Fuji', 'Kyoto', 'Osaka', 'Nara', 'Hakone'],
+    count: 110,
+    minPrice: 95000,
+    maxPrice: 285000,
+    heroImage: '/destinations/japan.jpg'
+  },
+  {
+    region: 'Switzerland Alpine Wonders',
+    destinationSlug: 'switzerland',
+    country: 'Switzerland',
+    regionCategory: 'Europe',
+    isInternational: true,
+    cities: ['Zurich', 'Lucerne', 'Mount Titlis', 'Interlaken', 'Jungfraujoch', 'Bern'],
+    count: 130,
+    minPrice: 92000,
+    maxPrice: 295000,
+    heroImage: '/destinations/switzerland.jpg'
+  },
+  {
+    region: 'South Africa & Safari',
+    destinationSlug: 'south-africa',
+    country: 'South Africa',
+    regionCategory: 'Africa',
+    isInternational: true,
+    cities: ['Cape Town', 'Table Mountain', 'Cape Point', 'Boulders Beach', 'Kruger Safari', 'Johannesburg'],
+    count: 85,
+    minPrice: 85000,
+    maxPrice: 265000,
+    heroImage: '/destinations/south-africa.jpg'
   }
 ];
 
@@ -609,6 +657,20 @@ const SECTOR_IMAGE_POOLS: Record<string, string[]> = {
     '/destinations/verified/malaysia-batu-caves.jpg',
     '/destinations/verified/malaysia-cameron-highlands.jpg',
     '/destinations/malaysia.jpg',
+  ],
+  mathura: [
+    '/destinations/mathura-vrindavan.jpg',
+    '/destinations/verified/ayodhya-ram-mandir.jpg',
+    '/destinations/spiritual.jpg',
+  ],
+  switzerland: [
+    '/destinations/switzerland.jpg',
+    '/destinations/verified/europe-jungfrau.jpg',
+    '/destinations/europe.jpg',
+  ],
+  'south-africa': [
+    '/destinations/south-africa.jpg',
+    '/destinations/hero-holidays.jpg',
   ]
 };
 

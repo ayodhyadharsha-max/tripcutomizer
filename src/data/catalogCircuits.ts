@@ -59,6 +59,106 @@ export function getBrandedHotelName(city: string, hotelTier: string): string {
     return 'Ayodhya Ramayana Heritage / Hotel Krinshna Palace (3★ Standard)';
   }
 
+  if (lower.includes('mathura') || lower.includes('vrindavan') || lower.includes('govardhan') || lower.includes('barsana') || lower.includes('gokul')) {
+    if (hotelTier === '5 Star' || hotelTier === '5-Star Luxury') {
+      return 'Vrindavan Nidhivan Sarovar Portico / Brij View (5★ Luxury)';
+    }
+    if (hotelTier === '4 Star' || hotelTier === '4-Star Deluxe') {
+      return 'Vrindavan Best Western Vrindavan / Country Inn (4★ Deluxe)';
+    }
+    return 'Vrindavan Hotel Shri Radha Nikunj / Treebo (3★ Standard)';
+  }
+
+  if (lower === 'tokyo' || lower === 'japan') {
+    if (hotelTier === '5 Star' || hotelTier === '5-Star Luxury') {
+      return 'Tokyo Grand Hyatt / Keio Plaza Hotel Premier (5★ Luxury)';
+    }
+    if (hotelTier === '4 Star' || hotelTier === '4-Star Deluxe') {
+      return 'Tokyo Hotel Gracery Shinjuku / Daiwa Roynet (4★ Deluxe)';
+    }
+    return 'Tokyo Sotetsu Fresa Inn / APA Hotel (3★ Standard)';
+  }
+
+  if (lower === 'kyoto') {
+    if (hotelTier === '5 Star' || hotelTier === '5-Star Luxury') {
+      return 'Kyoto The Thousand Kyoto / Hotel Granvia (5★ Luxury)';
+    }
+    if (hotelTier === '4 Star' || hotelTier === '4-Star Deluxe') {
+      return 'Kyoto Daiwa Roynet Hotel Kyoto-Ekimae (4★ Deluxe)';
+    }
+    return 'Kyoto Sotetsu Fresa Inn Kyoto-Hachijoguchi (3★ Standard)';
+  }
+
+  if (lower === 'osaka') {
+    if (hotelTier === '5 Star' || hotelTier === '5-Star Luxury') {
+      return 'Osaka Swissotel Nankai / InterContinental Osaka (5★ Luxury)';
+    }
+    if (hotelTier === '4 Star' || hotelTier === '4-Star Deluxe') {
+      return 'Osaka Hotel Monterey Grasmere / Candeo Hotels (4★ Deluxe)';
+    }
+    return 'Osaka Dotonbori Hotel / Hotel Sunroute (3★ Standard)';
+  }
+
+  if (lower === 'zurich' || lower === 'switzerland') {
+    if (hotelTier === '5 Star' || hotelTier === '5-Star Luxury') {
+      return 'Zurich The Dolder Grand / Baur au Lac (5★ Luxury)';
+    }
+    if (hotelTier === '4 Star' || hotelTier === '4-Star Deluxe') {
+      return 'Zurich Radisson Blu Hotel Zurich Airport / Swissotel (4★ Deluxe)';
+    }
+    return 'Zurich Hotel Montana / ibis Styles Zurich (3★ Standard)';
+  }
+
+  if (lower === 'lucerne') {
+    if (hotelTier === '5 Star' || hotelTier === '5-Star Luxury') {
+      return 'Lucerne Grand Hotel National / Bürgenstock Resort (5★ Luxury)';
+    }
+    if (hotelTier === '4 Star' || hotelTier === '4-Star Deluxe') {
+      return 'Lucerne Hotel Astoria / Radisson Blu Lucerne (4★ Deluxe)';
+    }
+    return 'Lucerne Hotel Waldstätterhof / ibis Styles (3★ Standard)';
+  }
+
+  if (lower === 'interlaken' || lower === 'jungfrau' || lower === 'grindelwald') {
+    if (hotelTier === '5 Star' || hotelTier === '5-Star Luxury') {
+      return 'Interlaken Victoria-Jungfrau Grand Hotel & Spa (5★ Luxury)';
+    }
+    if (hotelTier === '4 Star' || hotelTier === '4-Star Deluxe') {
+      return 'Interlaken Hotel Royal St Georges / Stella Swiss (4★ Deluxe)';
+    }
+    return 'Interlaken Hotel Bernerhof / City Hotel Oberland (3★ Standard)';
+  }
+
+  if (lower.includes('cape town') || lower.includes('capetown')) {
+    if (hotelTier === '5 Star' || hotelTier === '5-Star Luxury') {
+      return 'Cape Town The Table Bay Hotel / Mount Nelson (5★ Luxury)';
+    }
+    if (hotelTier === '4 Star' || hotelTier === '4-Star Deluxe') {
+      return 'Cape Town Radisson Red V&A Waterfront / Protea (4★ Deluxe)';
+    }
+    return 'Cape Town City Lodge V&A Waterfront (3★ Standard)';
+  }
+
+  if (lower.includes('kruger')) {
+    if (hotelTier === '5 Star' || hotelTier === '5-Star Luxury') {
+      return 'Kruger Sabi Sabi Bush Lodge / Lion Sands Luxury Reserve (5★ Luxury)';
+    }
+    if (hotelTier === '4 Star' || hotelTier === '4-Star Deluxe') {
+      return 'Kruger Shalati Train on the Bridge / Protea Kruger Gate (4★ Deluxe)';
+    }
+    return 'Kruger Safari Rest Camp & Chalets (3★ Standard)';
+  }
+
+  if (lower.includes('johannesburg')) {
+    if (hotelTier === '5 Star' || hotelTier === '5-Star Luxury') {
+      return 'Johannesburg The Michelangelo Hotel / Saxon Hotel (5★ Luxury)';
+    }
+    if (hotelTier === '4 Star' || hotelTier === '4-Star Deluxe') {
+      return 'Johannesburg Radisson Blu Sandton / Southern Sun (4★ Deluxe)';
+    }
+    return 'Johannesburg City Lodge Sandton (3★ Standard)';
+  }
+
   if (lower === 'varanasi') {
     if (hotelTier === '5 Star' || hotelTier === '5-Star Luxury') {
       return 'Varanasi Taj Ganges / BrijRama Palace Heritage (5★ Luxury)';
@@ -3000,6 +3100,438 @@ export const MASTER_SECTOR_CIRCUITS: Record<string, MasterCircuitSpec> = {
         "Historic Cable Car Scenic Ride",
         "San Francisco Airport Departure Drop"
 ]
+    }
+  },
+
+  mathura: {
+    entryCity: "Delhi",
+    exitCity: "Delhi",
+    routeCities: ["Delhi", "Mathura", "Vrindavan", "Govardhan", "Barsana", "Gokul", "Agra"],
+    highlights: [
+      "Krishna Janmabhoomi & Historic Dwarkadhish Temple Darshan",
+      "Vrindavan Banke Bihari & Grand ISKCON Temple Aarti",
+      "Prem Mandir Musical Fountain & Sound Show",
+      "Sacred Govardhan Parikrama & Radha Kund Experience",
+      "Dedicated Private AC Cab with Chauffeur"
+    ],
+    stages: [
+      {
+        city: "Mathura",
+        stayCity: "Mathura",
+        title: "Arrival in Delhi / Mathura & Sacred Krishna Janmabhoomi Darshan",
+        desc: "Meet your private chauffeur on arrival in Delhi or Mathura Junction. Check in to your hotel and visit the sacred Shri Krishna Janmasthan Temple Complex, the historic Dwarkadhish Temple, and attend the devotional evening Yamuna Aarti at Vishram Ghat.",
+        acts: [
+          "Meet & Greet Private Transfer",
+          "Shri Krishna Janmabhoomi Temple Darshan",
+          "Dwarkadhish Temple Architecture Visit",
+          "Vishram Ghat Yamuna Aarti"
+        ]
+      },
+      {
+        city: "Vrindavan",
+        stayCity: "Vrindavan",
+        title: "Divine Vrindavan Shrines: Banke Bihari, ISKCON & Prem Mandir",
+        desc: "Full day pilgrimage in divine Vrindavan. Seek blessings at the revered Banke Bihari Temple, visit the magnificent white marble ISKCON Krishna Balaram Mandir, explore Nidhivan forest, and witness the spectacular musical fountain illumination at Prem Mandir.",
+        acts: [
+          "Shri Banke Bihari Temple Darshan",
+          "ISKCON Krishna Balaram Temple Tour",
+          "Nidhivan Sacred Grove Visit",
+          "Prem Mandir Light & Musical Fountain Show"
+        ]
+      },
+      {
+        city: "Govardhan",
+        stayCity: "Vrindavan",
+        title: "Sacred Govardhan Parikrama, Mansi Ganga & Radha Kund",
+        desc: "Morning pilgrimage drive to sacred Govardhan Hill. Undertake parikrama via Mukharbind Temple, take holy darshan at historic Mansi Ganga lake, visit Radha Kund and Shyam Kund, and capture stunning photos at the ornate sandstone cenotaph of Kusum Sarovar.",
+        acts: [
+          "Govardhan Hill Mukharbind Darshan",
+          "Mansi Ganga Holy Lake Visit",
+          "Radha Kund & Shyam Kund Sacred Parikrama",
+          "Kusum Sarovar Heritage Photography"
+        ]
+      },
+      {
+        city: "Barsana",
+        stayCity: "Vrindavan",
+        title: "Shri Radha Rani Temple Barsana & Rangeeli Mahal",
+        desc: "Excursion to Barsana, birthplace of Shri Radha Rani. Climb Bhanugarh Hill to visit the grand Shriji Temple (Radha Rani Mandir), experience the devotion at Rangeeli Mahal, and visit Nandgaon's historic Nand Bhavan where Lord Krishna grew up.",
+        acts: [
+          "Barsana Shri Radha Rani Mandir Darshan",
+          "Rangeeli Mahal & Kirti Mandir Visit",
+          "Nandgaon Nand Bhavan Temple",
+          "Braj Heritage Sweets Tasting"
+        ]
+      },
+      {
+        city: "Gokul",
+        stayCity: "Vrindavan",
+        title: "Bal Gopal Leela Sthal: Gokul Raman Reti & Chaurasi Khamba",
+        desc: "Journey into Gokul and Mahavan where Lord Krishna spent his childhood. Walk barefoot on the sacred sands of Raman Reti where holy deer roam, visit the ancient 84-pillared Chaurasi Khamba Temple, and explore Brahmand Ghat by the Yamuna.",
+        acts: [
+          "Raman Reti Holy Sand Experience",
+          "Chaurasi Khamba Historical Temple",
+          "Brahmand Ghat Yamuna View",
+          "Braj Village Countryside Walk"
+        ]
+      },
+      {
+        city: "Agra",
+        stayCity: "Mathura",
+        title: "Taj Mahal & Agra Fort Heritage Excursion from Mathura",
+        desc: "Day excursion to nearby Agra. Marvel at the world wonder Taj Mahal glowing in morning light on the banks of Yamuna, explore the majestic red sandstone ramparts of Agra Fort, and shop for authentic Mathura pedas and Agra petha.",
+        acts: [
+          "Taj Mahal Guided Monument Tour",
+          "Agra Fort Imperial Palaces Walk",
+          "Marble Inlay Artisan Workshop",
+          "Traditional Mathura Peda Tasting"
+        ]
+      },
+      {
+        city: "Vrindavan",
+        stayCity: "Vrindavan",
+        title: "Vrindavan Yamuna River Boat Ride, Keshi Ghat & Bhajan Sandhya",
+        desc: "Peaceful morning boat ride along Keshi Ghat on the Yamuna river. Visit Pagal Baba Temple and Priyakant Ju Temple, participate in an evening temple bhajan sandhya, and immerse yourself in the transcendent spiritual bliss of Braj Bhoomi.",
+        acts: [
+          "Keshi Ghat Morning Yamuna Boat Ride",
+          "Priyakant Ju Temple Marble Architecture",
+          "Pagal Baba High-Spire Temple",
+          "Evening Temple Bhajan Sandhya"
+        ]
+      }
+    ],
+    departureStage: {
+      title: "Resort Buffet Breakfast, Mathura Pedas Shopping & Return Transfer",
+      desc: "Relish a delicious vegetarian buffet breakfast. Pick up boxes of famous authentic Mathura pedas and handcrafted brass idols. Your private chauffeur transfers you to Delhi Airport (DEL) / Mathura Railway Station for your return journey.",
+      acts: [
+        "Resort Vegetarian Breakfast & Check-out",
+        "Famous Mathura Peda & Souvenir Shopping",
+        "Private Chauffeur Drop at Delhi / Station"
+      ]
+    }
+  },
+
+  japan: {
+    entryCity: "Tokyo",
+    exitCity: "Osaka",
+    routeCities: ["Tokyo", "Mount Fuji", "Hakone", "Kyoto", "Nara", "Osaka"],
+    highlights: [
+      "Shinkansen Bullet Train High-Speed Rail Experience",
+      "Mount Fuji 5th Station & Lake Ashi Pirate Ship Cruise",
+      "Kyoto Fushimi Inari 10,000 Vermilion Torii Gates",
+      "Nara Deer Park & Todai-ji Giant Bronze Buddha",
+      "Osaka Castle & Dotonbori Neon Street Food Walk"
+    ],
+    stages: [
+      {
+        city: "Tokyo",
+        stayCity: "Tokyo",
+        title: "Arrival in Tokyo, Senso-ji Temple & Shibuya Sky Crossing",
+        desc: "Arrive at Tokyo Narita (NRT) or Haneda (HND) Airport. Meet your private chauffeur for transfer to your hotel. Visit Tokyo's oldest temple, Senso-ji in Asakusa, browse Nakamise Dori street market, and experience the world-famous Shibuya Scramble Crossing and Hachiko Statue.",
+        acts: [
+          "Tokyo Airport Meet & Greet Transfer",
+          "Asakusa Senso-ji Temple & Kaminarimon Gate",
+          "Nakamise Dori Traditional Craft Walk",
+          "Iconic Shibuya Crossing & Hachiko Memorial"
+        ]
+      },
+      {
+        city: "Tokyo",
+        stayCity: "Tokyo",
+        title: "Modern Tokyo Highlights: Akihabara, Meiji Shrine & Ginza Boulevard",
+        desc: "Explore the contrasts of ultra-modern and tranquil Tokyo. Walk through the tranquil forested paths of Meiji Jingu Shrine, discover youth fashion in Harajuku Takeshita Street, explore electric gaming in Akihabara, and marvel at the panoramic view from Tokyo Skytree.",
+        acts: [
+          "Meiji Jingu Shinto Forest Shrine",
+          "Harajuku Takeshita Street & Omotesando",
+          "Akihabara Electric Town Experience",
+          "Tokyo Skytree 350m Observation Deck"
+        ]
+      },
+      {
+        city: "Hakone",
+        stayCity: "Hakone",
+        title: "Mount Fuji 5th Station, Lake Ashi Cruise & Owakudani Ropeway",
+        desc: "Scenic highway drive to Mount Fuji 5th Station (2,300m) for breathtaking volcanic views above the clouds. Board a pirate ship cruise across crater Lake Ashi, ride the Hakone Ropeway cable car over steaming sulfur vents of Owakudani, and relax in traditional Japanese onsen thermal baths.",
+        acts: [
+          "Mount Fuji 5th Station Alpine Vista",
+          "Lake Ashi Sightseeing Pirate Cruise",
+          "Hakone Ropeway Over Volcanic Valley",
+          "Traditional Japanese Thermal Onsen Experience"
+        ]
+      },
+      {
+        city: "Kyoto",
+        stayCity: "Kyoto",
+        title: "Shinkansen Bullet Train to Kyoto & Fushimi Inari Torii Gates",
+        desc: "Board the world-famous Shinkansen bullet train reaching 320 km/h to cultural capital Kyoto. Hike through the mesmerizing mountain tunnels of 10,000 vermilion torii gates at Fushimi Inari Taisha Shrine. In the evening, take a quiet stroll through historic Gion geisha district.",
+        acts: [
+          "High-Speed Shinkansen Bullet Train Ride",
+          "Fushimi Inari 10,000 Torii Gate Trek",
+          "Gion Historic Geisha District Walking Tour",
+          "Shirakawa Canal Lantern Night Walk"
+        ]
+      },
+      {
+        city: "Kyoto",
+        stayCity: "Kyoto",
+        title: "Golden Pavilion (Kinkaku-ji) & Arashiyama Bamboo Grove Walk",
+        desc: "Visit the shimmering zen temple Kinkaku-ji (Golden Pavilion) covered in gold leaf over Kyoko-chi pond. Stroll through the towering stalks of Arashiyama Bamboo Grove, cross the historic Togetsukyo Bridge, and visit UNESCO-listed Tenryu-ji Zen temple gardens.",
+        acts: [
+          "Kinkaku-ji Golden Pavilion Zen Temple",
+          "Arashiyama Soaring Bamboo Forest Trail",
+          "Tenryu-ji Landscape Zen Rock Garden",
+          "Togetsukyo Moon Crossing Wooden Bridge"
+        ]
+      },
+      {
+        city: "Nara",
+        stayCity: "Osaka",
+        title: "Ancient Nara Bowing Deer Park, Todai-ji Temple & Osaka Arrival",
+        desc: "Drive to Japan's ancient 8th-century capital, Nara. Feed sacred, friendly free-roaming sika deer in Nara Park. Marvel at the Great Buddha (Daibutsu) inside Todai-ji, one of the world's largest wooden buildings. Continue to buzzing commercial metropolis Osaka.",
+        acts: [
+          "Nara Deer Park Friendly Deer Feeding",
+          "Todai-ji Temple & Giant Bronze Buddha",
+          "Kasuga Taisha Stone Lantern Path",
+          "Scenic Transfer to Osaka Metropolis"
+        ]
+      },
+      {
+        city: "Osaka",
+        stayCity: "Osaka",
+        title: "Osaka Castle Park, Umeda Sky Building & Dotonbori Street Food Trail",
+        desc: "Discover the samurai heritage of Osaka Castle with its massive stone walls and moats. Take in 360-degree skyline views from the open-air Umeda Sky Floating Garden Observatory. In the evening, explore dazzling neon-lit Dotonbori with giant crab signs and takoyaki street stalls.",
+        acts: [
+          "Osaka Castle Tower & Samurai Museum",
+          "Umeda Sky Building Floating Garden",
+          "Dotonbori Glico Running Man Landmark",
+          "Authentic Takoyaki & Okonomiyaki Tasting"
+        ]
+      }
+    ],
+    departureStage: {
+      title: "Japanese Breakfast, Kansai Souvenir Shopping & Airport Departure Drop",
+      desc: "Savor a traditional Japanese or international buffet breakfast. Check out and pick up matcha confections, Tokyo Banana, and Japanese ceramics at Rinku Premium Outlets before your private transfer to Kansai International Airport (KIX) or Tokyo Haneda (HND).",
+      acts: [
+        "Hotel Buffet Breakfast & Check-out",
+        "Japanese Matcha & Duty-Free Souvenir Shopping",
+        "Private Chauffeur Drop at Kansai / Tokyo Airport"
+      ]
+    }
+  },
+
+  switzerland: {
+    entryCity: "Zurich",
+    exitCity: "Zurich",
+    routeCities: ["Zurich", "Lucerne", "Mount Titlis", "Interlaken", "Jungfraujoch", "Bern", "Rhine Falls"],
+    highlights: [
+      "Mount Titlis Rotair Revolving Cable Car & Glacier Ice Cave",
+      "Jungfraujoch Top of Europe High-Alpine Train Experience",
+      "Lake Lucerne Scenic Cruise & Chapel Bridge Walk",
+      "Interlaken Alpine Lakes & Swiss Chocolate Tasting",
+      "Swiss Travel Pass Panoramic Train Journeys"
+    ],
+    stages: [
+      {
+        city: "Zurich",
+        stayCity: "Zurich",
+        title: "Arrival in Zurich, Historic Altstadt & Lake Zurich Promenade",
+        desc: "Arrive at Zurich Airport (ZRH). Meet your private chauffeur or board the Swiss Federal Rail to your hotel. Stroll through the cobblestone alleys of Altstadt (Old Town), view the twin towers of Grossmünster, explore glamorous Bahnhofstrasse, and relax along Lake Zurich shore.",
+        acts: [
+          "Zurich Kloten Airport Welcome & Transfer",
+          "Altstadt Grossmünster & Fraumünster Church",
+          "Bahnhofstrasse Luxury Shopping Promenade",
+          "Lake Zurich Shoreline Evening Walk"
+        ]
+      },
+      {
+        city: "Lucerne",
+        stayCity: "Lucerne",
+        title: "Scenic Train to Lucerne, Chapel Bridge & Lion Monument",
+        desc: "Scenic rail journey along sparkling lakes to postcard-perfect Lucerne. Walk across the 14th-century wooden Chapel Bridge (Kapellbrücke) adorned with historic roof paintings, view the poignant Lion Monument carved into sandstone cliff, and enjoy a paddle steamer cruise on Lake Lucerne.",
+        acts: [
+          "Scenic Swiss Train to Lake Lucerne",
+          "Historic Wooden Chapel Bridge & Water Tower",
+          "Lion of Lucerne Monument Stone Carving",
+          "Lake Lucerne Alpine Paddle Steamer Cruise"
+        ]
+      },
+      {
+        city: "Engelberg",
+        stayCity: "Lucerne",
+        title: "Mount Titlis Rotair Revolving Cable Car & Glacier Ice Cave (3,020m)",
+        desc: "Travel to Engelberg and ascend Mount Titlis on the world's first revolving Titlis Rotair cable car. Walk through the blue glowing Glacier Cave, cross the thrilling Titlis Cliff Walk suspension bridge over 500-meter drops, and take the Ice Flyer chairlift over deep crevasses.",
+        acts: [
+          "Titlis Rotair 360-Degree Revolving Cable Car",
+          "Mount Titlis Cliff Walk Suspension Bridge",
+          "Deep Alpine Glacier Ice Cave Walk",
+          "Ice Flyer Gliding Chairlift Experience"
+        ]
+      },
+      {
+        city: "Interlaken",
+        stayCity: "Interlaken",
+        title: "GoldenPass Panoramic Express to Interlaken between Twin Lakes",
+        desc: "Board the panoramic GoldenPass express train across Brünig Pass to Interlaken, nestled between turquoise Lake Thun and Lake Brienz. Explore the bustling promenade of Höheweg with views of the snow-capped Jungfrau massif, and ride the funicular up to Harder Kulm viewpoint.",
+        acts: [
+          "GoldenPass Panoramic Scenic Railway",
+          "Höheweg Promenade Jungfrau Mountain Views",
+          "Harder Kulm Two Lakes Bridge Funicular",
+          "Swiss Wood Carving Artisan Village Tour"
+        ]
+      },
+      {
+        city: "Jungfraujoch",
+        stayCity: "Interlaken",
+        title: "Jungfraujoch 'Top of Europe' High-Alpine Cogwheel Train & Sphinx Observatory",
+        desc: "Ride the state-of-the-art Eiger Express tricable gondola to Eigergletscher, then board the historic Jungfrau cogwheel train piercing through the North Face to Jungfraujoch (3,454m). Marvel at the vast Aletsch Glacier, explore the sparkling Ice Palace, and step out on the Sphinx viewing terrace.",
+        acts: [
+          "Eiger Express Ultra-Modern Tricable Gondola",
+          "Jungfraubahn Cogwheel Train to 3,454 Meters",
+          "Aletsch Glacier (UNESCO World Heritage) Vista",
+          "Sparkling Ice Palace Carved Sculptures"
+        ]
+      },
+      {
+        city: "Grindelwald",
+        stayCity: "Interlaken",
+        title: "Grindelwald First Cliff Walk & UNESCO Old Town Bern Excursion",
+        desc: "Ascend to Grindelwald First to experience the thrilling metal First Cliff Walk by Tissot projecting around sheer cliff faces. In the afternoon, visit Bern, the Swiss capital with 6 km of limestone arcades, the 15th-century Zytglogge astronomical clock tower, and the Bear Park.",
+        acts: [
+          "Grindelwald First Cliff Walk by Tissot",
+          "Bern UNESCO Medieval Arcades & Fountains",
+          "Zytglogge Astronomical Clock Hourly Show",
+          "Bear Park & Aare Riverbank Panoramic View"
+        ]
+      },
+      {
+        city: "Rhine Falls",
+        stayCity: "Zurich",
+        title: "Europe's Largest Rhine Falls Cascades & Lindt Chocolate Experience",
+        desc: "Excursion to Schaffhausen to marvel at Rhine Falls, Europe's most powerful waterfall. Take a thrilling boat ride right into the churning foam at the central rock. Return to Kilchberg near Zurich for an interactive tour of Lindt Home of Chocolate with its 9-meter chocolate fountain.",
+        acts: [
+          "Rhine Falls Thunderous Cascades Boat Tour",
+          "Schloss Laufen Historic Castle Views",
+          "Lindt Home of Chocolate Giant Fountain Tour",
+          "Swiss Grand Chocolate Tasting Workshop"
+        ]
+      }
+    ],
+    departureStage: {
+      title: "Swiss Buffet Breakfast, Alpine Chocolate Shopping & Zurich Airport Drop",
+      desc: "Enjoy an authentic Swiss buffet breakfast featuring fresh alpine cheeses, breads, and muesli. Pick up genuine Swiss Army knives, Lindt praline boxes, and luxury Swiss watches before your private transfer to Zurich Airport (ZRH) for your return flight.",
+      acts: [
+        "Alpine Swiss Buffet Breakfast & Check-out",
+        "Swiss Chocolate, Cheese & Watch Shopping",
+        "Private Chauffeur Drop at Zurich International Airport"
+      ]
+    }
+  },
+
+  "south-africa": {
+    entryCity: "Cape Town",
+    exitCity: "Johannesburg",
+    routeCities: ["Cape Town", "Table Mountain", "Cape Point", "Boulders Beach", "Kruger Safari", "Johannesburg"],
+    highlights: [
+      "Table Mountain Aerial Cableway Rotating Views",
+      "Cape Peninsula Tour & Boulders Beach African Penguins",
+      "Kruger National Park Big Five Open-Vehicle Game Safari",
+      "Scenic Chapman's Peak Coastal Drive",
+      "Cape Winelands Stellenbosch Cellar Tour & Tasting"
+    ],
+    stages: [
+      {
+        city: "Cape Town",
+        stayCity: "Cape Town",
+        title: "Arrival in Cape Town & Table Mountain Rotating Cableway",
+        desc: "Arrive at Cape Town International Airport (CPT). Meet your private chauffeur and transfer to your coastal hotel. Board the rotating Table Mountain Aerial Cableway to the flat summit (1,085m) for jaw-dropping views of the Atlantic Ocean, Robben Island, and Victoria & Alfred Waterfront.",
+        acts: [
+          "Cape Town Airport Meet & Greet Transfer",
+          "Table Mountain 360-Degree Cable Car Ascent",
+          "Summit Flora & Rock Dassie Trail Walk",
+          "V&A Waterfront Harbor Sunset Stroll"
+        ]
+      },
+      {
+        city: "Cape Peninsula",
+        stayCity: "Cape Town",
+        title: "Cape Peninsula Scenic Drive, Cape Point & Boulders Beach Penguins",
+        desc: "Drive along dramatic Chapman's Peak cliffside drive overlooking Hout Bay. Take the Flying Dutchman funicular to the Cape Point lighthouse, stand at the historic Cape of Good Hope, and stroll along the wooden boardwalks of Boulders Beach alongside wild African penguin colonies.",
+        acts: [
+          "Chapman's Peak Ocean Cliff Drive",
+          "Cape of Good Hope Southwesternmost Tip",
+          "Cape Point Lighthouse Flying Dutchman Funicular",
+          "Boulders Beach African Penguin Colony Walk"
+        ]
+      },
+      {
+        city: "Stellenbosch",
+        stayCity: "Cape Town",
+        title: "Stellenbosch Historic Wine Route & Franschhoek Tram Tour",
+        desc: "Full day in the picturesque Cape Winelands. Explore the Cape Dutch oak-lined avenues of historic Stellenbosch, ride the open-air Franschhoek Wine Tram past manicured valleys and vineyards, and savor world-class artisanal cheeses, chocolate, and juice/wine pairings.",
+        acts: [
+          "Stellenbosch Cape Dutch Historic Town Walk",
+          "Franschhoek Valley Open-Air Tram Tour",
+          "Award-Winning Vineyard Cellar Master Tour",
+          "Artisanal Cheese, Olive & Chocolate Pairing"
+        ]
+      },
+      {
+        city: "Kruger",
+        stayCity: "Kruger Safari",
+        title: "Flight to Kruger National Park & Sunset Big 5 Safari Game Drive",
+        desc: "Morning flight from Cape Town to Kruger Mpumalanga (MQP) / Skukuza. Check into your luxury safari lodge on the edge of the wilderness. Embark on your first open-top 4x4 game drive led by expert rangers tracking lions, leopards, rhinos, elephants, and cape buffaloes.",
+        acts: [
+          "Domestic Flight to Kruger Safari Region",
+          "Luxury Bush Lodge Welcome & Check-in",
+          "Open-Top 4x4 Big Five Sunset Game Drive",
+          "Authentic African Boma Dinner by Campfire"
+        ]
+      },
+      {
+        city: "Kruger",
+        stayCity: "Kruger Safari",
+        title: "Full Day Wilderness Safari in Kruger National Park Open 4x4 Vehicle",
+        desc: "Full day immersed in untamed Kruger bushveld. Experience sunrise animal tracking when predators are active. Stop at Sabie River hippo pools, observe breeding herds of elephants and towering giraffes, and learn bushcraft navigation from tracker guides.",
+        acts: [
+          "Sunrise Big 5 Tracking Game Safari",
+          "Sabie River Hippo & Crocodile Spotting",
+          "Open Savannah Giraffe & Zebra Herds Walk",
+          "Stargazing & Nocturnal Bush Creature Drive"
+        ]
+      },
+      {
+        city: "Panorama Route",
+        stayCity: "Hazyview",
+        title: "Panorama Route: Blyde River Canyon, God's Window & Bourke's Luck Potholes",
+        desc: "Scenic excursion along the Panorama Route on the Drakensberg Escarpment. Gaze out from God's Window over the 1,000-meter drop, admire the geological swirl sculptures at Bourke's Luck Potholes, and marvel at the Three Rondavels rising over Blyde River Canyon.",
+        acts: [
+          "God's Window Escarpment Panoramic Lookout",
+          "Bourke's Luck Potholes Giant Rock Pools",
+          "Three Rondavels & Blyde River Canyon View",
+          "Lisbon Waterfalls Forest Photo Stop"
+        ]
+      },
+      {
+        city: "Johannesburg",
+        stayCity: "Johannesburg",
+        title: "Transfer to Johannesburg, Soweto Heritage Trail & Nelson Mandela Square",
+        desc: "Drive or fly to Johannesburg (City of Gold). Tour historic Soweto, visit Nelson Mandela's former family home on Vilakazi Street (the only street in the world home to two Nobel laureates), Hector Pieterson Memorial, and dine beside the giant bronze statue on Nelson Mandela Square.",
+        acts: [
+          "Scenic Transfer to Johannesburg Metropolis",
+          "Soweto Vilakazi Street Historical Walk",
+          "Nelson Mandela House Museum Tour",
+          "Nelson Mandela Square Sandton City Dining"
+        ]
+      }
+    ],
+    departureStage: {
+      title: "African Bush Breakfast, Zulu Beaded Craft Shopping & O.R. Tambo Airport Drop",
+      desc: "Enjoy an indulgent South African buffet breakfast. Pick up handcrafted Zulu beadwork, wood carvings, and rooibos tea at Rosebank Craft Market. Your chauffeur transfers you to O.R. Tambo International Airport (JNB) for your departure flight.",
+      acts: [
+        "South African Buffet Breakfast & Check-out",
+        "Rosebank African Craft Market Souvenir Shopping",
+        "Private Chauffeur Drop at O.R. Tambo Airport"
+      ]
     }
   }
 
