@@ -685,76 +685,141 @@ function slugify(text: string): string {
 
 function computeB2BPackagePricing(
   sector: SectorDefinition,
-  hotelTier: string,
+  themeObj: { raw: string; theme: string; suffix: string },
   nights: number,
   days: number,
   pkgIndex: number
 ): { startingPrice: number; discountPrice: number } {
-  // 1. Hotel Room Rate with Real Indian B2B Seasonal Rates
-  const isHill = ['kashmir', 'himachal', 'uttarakhand', 'ladakh', 'sikkim', 'darjeeling', 'spiti'].includes(sector.destinationSlug);
-  const isPilgrim = ['ayodhya', 'varanasi', 'char-dham', 'mathura', 'tirupati', 'ujjain', 'dwarka', 'puri', 'shirdi'].includes(sector.destinationSlug);
-  const isLeisure = ['goa', 'kerala', 'rajasthan', 'andaman', 'jaisalmer', 'jaipur', 'udaipur', 'jodhpur'].includes(sector.destinationSlug);
-
-  // Base Room Night Rate (Per Room / Night for 2 Adults)
-  let roomNightRate = 3200;
-  if (hotelTier === '3 Star') {
-    // 3-Star: Pilgrimage MAP ₹3,800, Hill MAP ₹4,200, Winter Peak Leisure ₹4,000, Plains ₹3,200
-    roomNightRate = isPilgrim ? 3800 : isHill ? 4200 : isLeisure ? 4000 : 3200;
-  } else if (hotelTier === '4 Star') {
-    // 4-Star: Pilgrimage MAP ₹6,800, Hill MAP ₹7,800, Winter Peak Leisure ₹7,500, Plains ₹5,800
-    roomNightRate = isPilgrim ? 6800 : isHill ? 7800 : isLeisure ? 7500 : 5800;
-  } else {
-    // 5-Star (Commercial 5★): Pilgrimage ₹13,000, Hill ₹15,000, Winter Peak Leisure ₹14,500, Plains ₹11,500
-    roomNightRate = isPilgrim ? 13000 : isHill ? 15000 : isLeisure ? 14500 : 11500;
-  }
-
-  // Special experience supplement per booking (Houseboats, Desert Safari Tents, Ferries, Safaris)
-  let specialStay = 0;
-  if (sector.destinationSlug === 'kashmir') {
-    specialStay = hotelTier === '3 Star' ? 5000 : hotelTier === '4 Star' ? 7500 : 10000; // Dal Lake Houseboat
-  } else if (sector.destinationSlug === 'kerala') {
-    specialStay = hotelTier === '3 Star' ? 8500 : hotelTier === '4 Star' ? 12000 : 16000; // Alleppey Private Houseboat
-  } else if ((sector.destinationSlug === 'rajasthan' || sector.destinationSlug === 'jaisalmer') && pkgIndex % 2 === 0) {
-    specialStay = hotelTier === '3 Star' ? 3500 : hotelTier === '4 Star' ? 5000 : 7500; // Jaisalmer Desert Camp
-  } else if (sector.destinationSlug === 'andaman') {
-    specialStay = 5200 * 2; // Makruzz / Nautika Cruise Ferry for 2 pax (PB -> Havelock -> Neil -> PB)
-  } else if (['corbett', 'ranthambore', 'sasan-gir', 'kaziranga'].includes(sector.destinationSlug)) {
-    specialStay = 7500; // Dedicated Jungle Jeep Safari (Permit + Gypsy + Guide)
-  }
-
-  const totalHotelCost = (nights * roomNightRate) + specialStay;
-
-  // 2. Outstation Cab Rate by Vehicle and Tier (Multi-day 250 km running)
-  let cabRatePerDay = 3000;
-  if (hotelTier === '3 Star') {
-    cabRatePerDay = isHill ? (['ladakh', 'spiti'].includes(sector.destinationSlug) ? 7500 : 3800) : 3000; // Sedan
-  } else if (hotelTier === '4 Star') {
-    cabRatePerDay = isHill ? (['ladakh', 'spiti'].includes(sector.destinationSlug) ? 8500 : 5000) : 4200; // Ertiga / Innova Std
-  } else {
-    cabRatePerDay = isHill ? (['ladakh', 'spiti'].includes(sector.destinationSlug) ? 9500 : 6500) : 5800; // Innova Crysta
-  }
+  const slug = sector.destinationSlug.toLowerCase();
+  
+  // 1. Destination Category & Base Room Night Rate (Per Room / Night for 2 Adults in 3★ / Standard)
+  let baseRoomRate = 3400;
+  let baseCabDaily = 3200;
+  let bufferCost = 1500 * 2;
 
   if (sector.isInternational) {
-    cabRatePerDay = 3500; // International airport & private transfers
+    // Realistic International B2B Room + Transfer Rates (Per Room Night for 2 Adults in INR)
+    if (['thailand', 'vietnam', 'nepal', 'sri-lanka'].includes(slug)) {
+      baseRoomRate = 4500;
+      baseCabDaily = 3800;
+    } else if (['bali', 'indonesia', 'malaysia'].includes(slug)) {
+      baseRoomRate = 5200;
+      baseCabDaily = 4200;
+    } else if (['dubai', 'uae', 'turkey', 'egypt', 'baku'].includes(slug)) {
+      baseRoomRate = 7500;
+      baseCabDaily = 4800;
+    } else if (['singapore'].includes(slug)) {
+      baseRoomRate = 8800;
+      baseCabDaily = 5200;
+    } else if (['maldives', 'mauritius'].includes(slug)) {
+      baseRoomRate = 16500;
+      baseCabDaily = 2500;
+    } else if (['europe', 'switzerland'].includes(slug)) {
+      baseRoomRate = 18500;
+      baseCabDaily = 7500;
+    } else if (['japan', 'south-africa'].includes(slug)) {
+      baseRoomRate = 16000;
+      baseCabDaily = 6800;
+    } else if (['australia', 'usa'].includes(slug)) {
+      baseRoomRate = 21000;
+      baseCabDaily = 8500;
+    } else {
+      baseRoomRate = 6500;
+      baseCabDaily = 4500;
+    }
+  } else {
+    // Domestic India Categories
+    const isHill = ['kashmir', 'himachal', 'uttarakhand', 'ladakh', 'sikkim', 'darjeeling', 'spiti'].includes(slug);
+    const isPilgrim = ['ayodhya', 'varanasi', 'char-dham', 'mathura', 'tirupati', 'ujjain', 'dwarka', 'puri', 'shirdi'].includes(slug);
+    const isLeisure = ['goa', 'kerala', 'rajasthan', 'andaman', 'coorg', 'tamilnadu', 'gujarat', 'wildlife', 'maharashtra'].includes(slug);
+
+    if (slug === 'ladakh') {
+      baseRoomRate = 5500;
+      baseCabDaily = 7500;
+    } else if (slug === 'andaman') {
+      baseRoomRate = 4800;
+      baseCabDaily = 3800;
+    } else if (isHill) {
+      baseRoomRate = 4200;
+      baseCabDaily = 3800;
+    } else if (isPilgrim) {
+      baseRoomRate = 3600;
+      baseCabDaily = 3200;
+    } else if (isLeisure) {
+      baseRoomRate = 4000;
+      baseCabDaily = 3400;
+    } else {
+      baseRoomRate = 3200;
+      baseCabDaily = 3000;
+    }
   }
 
-  // Sightseeing Entry, Tolls & Buffer
-  const bufferCost = (hotelTier === '3 Star' ? 1200 : hotelTier === '4 Star' ? 1800 : 2500) * 2;
-  const totalCabCost = days * cabRatePerDay;
+  // Special experience supplement per booking
+  let specialSupplement = 0;
+  if (slug === 'kashmir') {
+    specialSupplement = 5500;
+  } else if (slug === 'kerala') {
+    specialSupplement = 9500;
+  } else if (slug === 'rajasthan' && pkgIndex % 2 === 0) {
+    specialSupplement = 4200;
+  } else if (slug === 'andaman') {
+    specialSupplement = 10400;
+  } else if (['wildlife', 'corbett', 'kaziranga', 'south-africa'].includes(slug)) {
+    specialSupplement = slug === 'south-africa' ? 14000 : 7500;
+  } else if (slug === 'switzerland' || slug === 'europe') {
+    specialSupplement = 12500;
+  } else if (slug === 'japan') {
+    specialSupplement = 11000;
+  }
 
-  // Net Cost for 2 Adults (Twin Sharing 1 Room + 1 Dedicated Outstation Cab + Buffer)
-  const netCostForTwo = totalHotelCost + totalCabCost + bufferCost;
+  // 2. Theme Multiplier & Inclusions Value
+  let themeMultiplier = 1.0;
+  const themeName = themeObj.theme.toLowerCase();
+  const rawTheme = themeObj.raw.toLowerCase();
 
-  // 22% Guaranteed Agency Profit Margin
+  if (themeName.includes('honeymoon') || rawTheme.includes('honeymoon')) {
+    themeMultiplier = 1.18;
+  } else if (themeName.includes('luxury') || rawTheme.includes('luxury')) {
+    themeMultiplier = 1.38;
+  } else if (themeName.includes('budget') || rawTheme.includes('budget')) {
+    themeMultiplier = 0.92;
+  } else if (themeName.includes('family') || rawTheme.includes('family')) {
+    themeMultiplier = 1.08;
+  } else if (themeName.includes('adventure') || rawTheme.includes('adventure') || rawTheme.includes('wildlife')) {
+    themeMultiplier = 1.12;
+  } else if (themeName.includes('spiritual') || rawTheme.includes('pilgrimage')) {
+    themeMultiplier = 0.96;
+  }
+
+  const subtleVariance = ((pkgIndex * 179) % 7 - 3) * 150;
+
+  const totalHotelCost = (nights * baseRoomRate) + specialSupplement;
+  const totalCabCost = days * baseCabDaily;
+  const netCostForTwo = (totalHotelCost + totalCabCost + bufferCost) * themeMultiplier + subtleVariance;
+
   const sellingPriceForTwo = netCostForTwo * 1.22;
+  let rawPerPerson = sellingPriceForTwo / 2;
 
-  // Base per-person starting rate (twin sharing)
-  const startingPrice = Math.round((sellingPriceForTwo / 2) / 100) * 100;
+  if (sector.minPrice && sector.maxPrice) {
+    const durationFactor = Math.min(1.0, Math.max(0.4, (days - 3) / 7));
+    const expectedBase = sector.minPrice + (sector.maxPrice - sector.minPrice) * durationFactor * 0.45;
+    rawPerPerson = Math.max(sector.minPrice * 0.9, Math.min(sector.maxPrice * 1.1, (rawPerPerson + expectedBase) / 2));
+  }
 
-  // MRP Strike-through price (25% higher teaser discount)
-  const discountPrice = Math.round((startingPrice * 1.25) / 100) * 100;
+  rawPerPerson = rawPerPerson * (themeMultiplier > 1.2 ? 1.08 : themeMultiplier < 0.95 ? 0.95 : 1.0);
 
-  return { startingPrice, discountPrice };
+  let finalStartingPrice = Math.round(rawPerPerson / 100) * 100;
+  if (finalStartingPrice > 10000) {
+    finalStartingPrice = finalStartingPrice - 1;
+  }
+
+  const discountMultiplier = 1.24 + ((pkgIndex % 5) * 0.02);
+  let finalDiscountPrice = Math.round((finalStartingPrice * discountMultiplier) / 100) * 100;
+  if (finalDiscountPrice > 10000) {
+    finalDiscountPrice = finalDiscountPrice - 1;
+  }
+
+  return { startingPrice: finalStartingPrice, discountPrice: finalDiscountPrice };
 }
 
 function generateSynthesizedPackage(
@@ -777,7 +842,7 @@ function generateSynthesizedPackage(
 
   const { startingPrice, discountPrice } = computeB2BPackagePricing(
     sector,
-    '3 Star',
+    themeObj,
     durObj.nights,
     durObj.days,
     pkgIndex
