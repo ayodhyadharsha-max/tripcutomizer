@@ -7,7 +7,43 @@ const supabaseKey =
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
   '';
 
+let isSupabaseDisabledUntil = 0;
+
+export const markSupabaseOffline = (cooldownMs = 60000) => {
+  isSupabaseDisabledUntil = Date.now() + cooldownMs;
+  console.warn(`[Supabase Circuit Breaker] Marked Supabase offline for ${cooldownMs}ms`);
+};
+
+export const markSupabaseOnline = () => {
+  isSupabaseDisabledUntil = 0;
+};
+
+export const isSupabaseOffline = (): boolean => {
+  return Date.now() < isSupabaseDisabledUntil;
+};
+
+export async function withTimeout<T>(
+  promise: Promise<T> | PromiseLike<T> | any,
+  ms = 800,
+  errorMsg = 'Supabase operation timed out'
+): Promise<T> {
+  let timer: NodeJS.Timeout;
+  const timeoutPromise = new Promise<never>((_, reject) => {
+    timer = setTimeout(() => reject(new Error(errorMsg)), ms);
+  });
+  return Promise.race([
+    Promise.resolve(promise).then((res) => {
+      clearTimeout(timer);
+      return res;
+    }),
+    timeoutPromise,
+  ]);
+}
+
 export const getSupabaseServer = () => {
+  if (isSupabaseOffline()) {
+    return null;
+  }
   if (!supabaseUrl || !supabaseKey || supabaseUrl.includes('placeholder')) {
     return null;
   }
@@ -24,3 +60,4 @@ export const getSupabaseServer = () => {
 };
 
 export default getSupabaseServer;
+

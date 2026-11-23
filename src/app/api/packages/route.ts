@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { HolidayPackage } from '@/data/packagesData';
-import getSupabaseServer from '@/lib/supabaseServer';
+import getSupabaseServer, { withTimeout, markSupabaseOffline, isSupabaseOffline } from '@/lib/supabaseServer';
 import {
   mapSupabaseRowToPackage,
   saveServerCustomPackages,
@@ -20,31 +20,9 @@ export async function GET(req: Request) {
     const id = searchParams.get('id')?.toLowerCase().trim();
     const queryParam = slug || id || '';
 
-    const supabaseServer = getSupabaseServer();
-
     // 1. Single package lookup by slug or id
     if (queryParam) {
-      if (supabaseServer) {
-        try {
-          const { data, error } = await supabaseServer
-            .from('packages')
-            .select('*')
-            .or(`slug.eq.${queryParam},id.eq.${queryParam}`)
-            .maybeSingle();
-
-          if (!error && data) {
-            return NextResponse.json({
-              success: true,
-              package: mapSupabaseRowToPackage(data),
-              source: 'supabase',
-            });
-          }
-        } catch (supaErr) {
-          console.warn('[API GET /api/packages] Supabase query note:', supaErr);
-        }
-      }
-
-      // Fallback to local server store
+      // Check local server store first (0ms)
       const localPackages = getServerCustomPackages();
       const localMatch = localPackages.find(
         (p) =>
@@ -58,29 +36,68 @@ export async function GET(req: Request) {
         return NextResponse.json({ success: true, package: localMatch, source: 'local_store' });
       }
 
+      // Check Supabase only if circuit breaker is not tripped
+      if (!isSupabaseOffline()) {
+        const supabaseServer = getSupabaseServer();
+        if (supabaseServer) {
+          try {
+            const { data, error }: any = await withTimeout(
+              supabaseServer
+                .from('packages')
+                .select('*')
+                .or(`slug.eq.${queryParam},id.eq.${queryParam}`)
+                .maybeSingle(),
+              800,
+              'Supabase package query timed out'
+            );
+
+            if (!error && data) {
+              const mapped = mapSupabaseRowToPackage(data);
+              saveServerCustomPackages([mapped]).catch(() => {});
+              return NextResponse.json({
+                success: true,
+                package: mapped,
+                source: 'supabase',
+              });
+            }
+          } catch (supaErr: any) {
+            console.warn('[API GET /api/packages] Supabase query note:', supaErr?.message || supaErr);
+            markSupabaseOffline(60000);
+          }
+        }
+      }
+
       return NextResponse.json({ success: false, error: 'Package not found' }, { status: 404 });
     }
 
     // 2. Query all custom/MMT packages
-    if (supabaseServer) {
-      try {
-        const { data, error } = await supabaseServer
-          .from('packages')
-          .select('*')
-          .order('created_at', { ascending: false });
+    if (!isSupabaseOffline()) {
+      const supabaseServer = getSupabaseServer();
+      if (supabaseServer) {
+        try {
+          const { data, error }: any = await withTimeout(
+            supabaseServer
+              .from('packages')
+              .select('*')
+              .order('created_at', { ascending: false }),
+            1000,
+            'Supabase packages query timed out'
+          );
 
-        if (!error && Array.isArray(data) && data.length > 0) {
-          const mapped = data.map(mapSupabaseRowToPackage);
-          return NextResponse.json({
-            success: true,
-            packages: mapped,
-            isLegacyDeleted: getServerIsLegacyDeleted(),
-            total: mapped.length,
-            source: 'supabase',
-          });
+          if (!error && Array.isArray(data) && data.length > 0) {
+            const mapped = data.map(mapSupabaseRowToPackage);
+            return NextResponse.json({
+              success: true,
+              packages: mapped,
+              isLegacyDeleted: getServerIsLegacyDeleted(),
+              total: mapped.length,
+              source: 'supabase',
+            });
+          }
+        } catch (supaErr: any) {
+          console.warn('[API GET /api/packages] Supabase query note:', supaErr?.message || supaErr);
+          markSupabaseOffline(60000);
         }
-      } catch (supaErr) {
-        console.warn('[API GET /api/packages] Supabase query note:', supaErr);
       }
     }
 
@@ -144,6 +161,15 @@ export async function POST(req: Request) {
     // 1. Always save to local server storage as persistent cache
     await saveServerCustomPackages(rawPackages).catch(() => {});
 
+    if (isSupabaseOffline()) {
+      return NextResponse.json({
+        success: true,
+        count: rows.length,
+        message: `Successfully saved ${rows.length} packages to server catalog. (Supabase is currently cooling down)`,
+        source: 'server_store',
+      });
+    }
+
     const supabaseServer = getSupabaseServer();
 
     if (!supabaseServer) {
@@ -156,9 +182,11 @@ export async function POST(req: Request) {
     }
 
     try {
-      const { error: supaErr } = await supabaseServer
-        .from('packages')
-        .upsert(rows, { onConflict: 'id' });
+      const { error: supaErr }: any = await withTimeout(
+        supabaseServer.from('packages').upsert(rows, { onConflict: 'id' }),
+        2000,
+        'Supabase upsert timed out'
+      );
 
       if (supaErr) {
         console.warn('[API POST /api/packages] Supabase upsert note:', supaErr);
@@ -178,6 +206,7 @@ export async function POST(req: Request) {
       });
     } catch (supaEx: any) {
       console.warn('[API POST /api/packages] Supabase connection exception:', supaEx);
+      markSupabaseOffline(60000);
       return NextResponse.json({
         success: true,
         count: rows.length,
@@ -206,11 +235,20 @@ export async function DELETE(req: Request) {
     const id = body.id || queryId;
     const action = body.action;
 
-    const supabaseServer = getSupabaseServer();
-
     if (action === 'delete_legacy') {
-      if (supabaseServer) {
-        await supabaseServer.from('packages').delete().eq('batch_source', 'legacy');
+      if (!isSupabaseOffline()) {
+        const supabaseServer = getSupabaseServer();
+        if (supabaseServer) {
+          try {
+            await withTimeout(
+              supabaseServer.from('packages').delete().eq('batch_source', 'legacy'),
+              1500,
+              'Supabase delete legacy timed out'
+            );
+          } catch (e: any) {
+            markSupabaseOffline(60000);
+          }
+        }
       }
       await setServerLegacyDeleted(true);
       return NextResponse.json({ success: true, message: 'Legacy packages deleted successfully' });
@@ -222,10 +260,21 @@ export async function DELETE(req: Request) {
     }
 
     if (id) {
-      if (supabaseServer) {
-        const { error } = await supabaseServer.from('packages').delete().eq('id', id);
-        if (error) {
-          return NextResponse.json({ success: false, error: error.message }, { status: 400 });
+      if (!isSupabaseOffline()) {
+        const supabaseServer = getSupabaseServer();
+        if (supabaseServer) {
+          try {
+            const { error }: any = await withTimeout(
+              supabaseServer.from('packages').delete().eq('id', id),
+              1500,
+              'Supabase delete timed out'
+            );
+            if (error) {
+              console.warn('[API DELETE /api/packages] Supabase delete error:', error);
+            }
+          } catch (e: any) {
+            markSupabaseOffline(60000);
+          }
         }
       }
       await deleteServerCustomPackage(id).catch(() => {});

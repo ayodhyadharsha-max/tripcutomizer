@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { HolidayPackage } from '@/data/packagesData';
-import getSupabaseServer from '@/lib/supabaseServer';
+import getSupabaseServer, { withTimeout, markSupabaseOffline, isSupabaseOffline } from '@/lib/supabaseServer';
 
 let memoryPackages: HolidayPackage[] | null = null;
 let memoryLegacyDeleted: boolean | null = null;
@@ -189,39 +189,46 @@ export async function saveServerCustomPackages(newPackages: HolidayPackage[]): P
   memoryPackages = updated;
   writePackagesToFile(updated);
 
-  // Background sync to Supabase
-  try {
-    const supabaseServer = getSupabaseServer();
-    if (supabaseServer) {
-      const rows = newPackages.map((p) => ({
-        id: p.id,
-        name: p.name,
-        slug: p.slug,
-        destination: p.destination,
-        destination_slug: p.destinationSlug,
-        duration_days: p.durationDays,
-        duration_nights: p.durationNights,
-        starting_price: p.startingPrice,
-        discount_price: p.discountPrice || null,
-        theme: p.theme || 'Holiday Explorer',
-        hotel_category: p.hotelCategory || '4-Star Deluxe',
-        meal_plan: p.mealPlan || 'Breakfast Included',
-        hero_image: p.heroImage || `/destinations/${p.destinationSlug}.jpg`,
-        highlights: p.highlights || [],
-        inclusions: p.inclusions || [],
-        exclusions: p.exclusions || [],
-        itinerary: p.itinerary || [],
-        hotels: p.hotels || [],
-        batch_source: 'mmt_sync',
-        is_international: Boolean(p.isInternational),
-        rating: p.rating || 4.8,
-        reviews_count: p.reviewsCount || 120,
-        updated_at: new Date().toISOString(),
-      }));
-      await supabaseServer.from('packages').upsert(rows, { onConflict: 'id' });
+  // Background sync to Supabase (only if circuit breaker not active)
+  if (!isSupabaseOffline()) {
+    try {
+      const supabaseServer = getSupabaseServer();
+      if (supabaseServer) {
+        const rows = newPackages.map((p) => ({
+          id: p.id,
+          name: p.name,
+          slug: p.slug,
+          destination: p.destination,
+          destination_slug: p.destinationSlug,
+          duration_days: p.durationDays,
+          duration_nights: p.durationNights,
+          starting_price: p.startingPrice,
+          discount_price: p.discountPrice || null,
+          theme: p.theme || 'Holiday Explorer',
+          hotel_category: p.hotelCategory || '4-Star Deluxe',
+          meal_plan: p.mealPlan || 'Breakfast Included',
+          hero_image: p.heroImage || `/destinations/${p.destinationSlug}.jpg`,
+          highlights: p.highlights || [],
+          inclusions: p.inclusions || [],
+          exclusions: p.exclusions || [],
+          itinerary: p.itinerary || [],
+          hotels: p.hotels || [],
+          batch_source: 'mmt_sync',
+          is_international: Boolean(p.isInternational),
+          rating: p.rating || 4.8,
+          reviews_count: p.reviewsCount || 120,
+          updated_at: new Date().toISOString(),
+        }));
+        await withTimeout(
+          supabaseServer.from('packages').upsert(rows, { onConflict: 'id' }),
+          1500,
+          'Supabase upsert timed out'
+        );
+      }
+    } catch (err: any) {
+      console.warn('[serverPackageStore] Supabase sync note:', err?.message || err);
+      markSupabaseOffline(60000);
     }
-  } catch (err) {
-    console.warn('[serverPackageStore] Supabase sync note:', err);
   }
 }
 
@@ -231,12 +238,20 @@ export async function deleteServerCustomPackage(id: string): Promise<void> {
   memoryPackages = updated;
   writePackagesToFile(updated);
 
-  try {
-    const supabaseServer = getSupabaseServer();
-    if (supabaseServer) {
-      await supabaseServer.from('packages').delete().eq('id', id);
+  if (!isSupabaseOffline()) {
+    try {
+      const supabaseServer = getSupabaseServer();
+      if (supabaseServer) {
+        await withTimeout(
+          supabaseServer.from('packages').delete().eq('id', id),
+          1500,
+          'Supabase delete timed out'
+        );
+      }
+    } catch (err: any) {
+      markSupabaseOffline(60000);
     }
-  } catch {}
+  }
 }
 
 export function findServerPackage(destinationParam?: string, packageParam?: string): HolidayPackage | null {

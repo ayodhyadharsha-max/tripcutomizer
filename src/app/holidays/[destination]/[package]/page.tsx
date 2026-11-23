@@ -1,83 +1,95 @@
-import React from 'react';
+import React, { cache } from 'react';
 import type { Metadata } from 'next';
 import { HolidayPackage } from '@/data/packagesData';
 import { findCatalogPackage } from '@/data/packageCatalog';
-import { findServerPackage, mapSupabaseRowToPackage } from '@/lib/serverPackageStore';
-import getSupabaseServer from '@/lib/supabaseServer';
+import { findServerPackage, mapSupabaseRowToPackage, saveServerCustomPackages } from '@/lib/serverPackageStore';
+import getSupabaseServer, { withTimeout, markSupabaseOffline, isSupabaseOffline } from '@/lib/supabaseServer';
 import { PackageDetailClientView } from '@/components/holidays/PackageDetailClientView';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-async function getMatchedPackage(destinationParam: string, packageParam: string): Promise<HolidayPackage | null> {
+const getMatchedPackage = cache(async (destinationParam: string, packageParam: string): Promise<HolidayPackage | null> => {
   const decodedPkgParam = decodeURIComponent(packageParam || '').toLowerCase().trim();
   const decodedDestParam = decodeURIComponent(destinationParam || '').toLowerCase().trim();
 
   if (!decodedPkgParam) return null;
 
-  // 1. Direct Supabase Query: check exact slug, then id, then substring
-  try {
-    const supabaseServer = getSupabaseServer();
-    if (supabaseServer) {
-      // A. Exact slug match
-      const { data: slugData, error: slugErr } = await supabaseServer
-        .from('packages')
-        .select('*')
-        .eq('slug', decodedPkgParam)
-        .maybeSingle();
-
-      if (slugData && !slugErr) {
-        return mapSupabaseRowToPackage(slugData);
-      }
-
-      // B. Exact id match
-      const { data: idData, error: idErr } = await supabaseServer
-        .from('packages')
-        .select('*')
-        .eq('id', decodedPkgParam)
-        .maybeSingle();
-
-      if (idData && !idErr) {
-        return mapSupabaseRowToPackage(idData);
-      }
-
-      // C. Substring / ilike match on slug
-      const { data: likeData } = await supabaseServer
-        .from('packages')
-        .select('*')
-        .ilike('slug', `%${decodedPkgParam}%`)
-        .limit(1)
-        .maybeSingle();
-
-      if (likeData) {
-        return mapSupabaseRowToPackage(likeData);
-      }
-    }
-  } catch (err) {
-    console.warn('[getMatchedPackage] Supabase fetch error:', err);
-  }
-
-  // 2. Look in persistent server store fallback
+  // 1. Look in persistent server store first (0ms)
   try {
     const serverPkg = findServerPackage(decodedDestParam, decodedPkgParam);
     if (serverPkg) return serverPkg;
   } catch (err) {}
 
-  // 3. Look in static catalog
-  const catalogPkg = findCatalogPackage(decodedDestParam, decodedPkgParam);
-  if (catalogPkg) {
-    if (
-      catalogPkg.slug.toLowerCase() === decodedPkgParam ||
-      catalogPkg.id.toLowerCase() === decodedPkgParam ||
-      decodedPkgParam.includes(catalogPkg.slug.toLowerCase()) ||
-      catalogPkg.slug.toLowerCase().includes(decodedPkgParam)
-    ) {
-      return catalogPkg;
+  // 2. Look in static catalog (0ms)
+  try {
+    const catalogPkg = findCatalogPackage(decodedDestParam, decodedPkgParam);
+    if (catalogPkg) {
+      if (
+        catalogPkg.slug.toLowerCase() === decodedPkgParam ||
+        catalogPkg.id.toLowerCase() === decodedPkgParam ||
+        decodedPkgParam.includes(catalogPkg.slug.toLowerCase()) ||
+        catalogPkg.slug.toLowerCase().includes(decodedPkgParam)
+      ) {
+        return catalogPkg;
+      }
+    }
+  } catch (err) {}
+
+  // 3. Fallback to Supabase ONLY if not found locally and circuit breaker is not triggered
+  if (!isSupabaseOffline()) {
+    try {
+      const supabaseServer = getSupabaseServer();
+      if (supabaseServer) {
+        // Enforce max 800ms timeout so the page never hangs if Supabase is slow or down
+        const supaResult: any = await withTimeout(
+          supabaseServer
+            .from('packages')
+            .select('*')
+            .or(`slug.eq.${decodedPkgParam},id.eq.${decodedPkgParam}`)
+            .maybeSingle(),
+          800,
+          'Supabase lookup timed out'
+        );
+
+        if (supaResult && supaResult.data && !supaResult.error) {
+          const pkg = mapSupabaseRowToPackage(supaResult.data);
+          try {
+            saveServerCustomPackages([pkg]);
+          } catch {}
+          return pkg;
+        }
+
+        // Secondary check if partial slug matches
+        if (!supaResult?.data) {
+          const fallbackQuery: any = await withTimeout(
+            supabaseServer
+              .from('packages')
+              .select('*')
+              .ilike('slug', `%${decodedPkgParam}%`)
+              .limit(1)
+              .maybeSingle(),
+            500,
+            'Supabase fallback lookup timed out'
+          );
+
+          if (fallbackQuery && fallbackQuery.data && !fallbackQuery.error) {
+            const pkg = mapSupabaseRowToPackage(fallbackQuery.data);
+            try {
+              saveServerCustomPackages([pkg]);
+            } catch {}
+            return pkg;
+          }
+        }
+      }
+    } catch (err: any) {
+      console.warn('[getMatchedPackage] Supabase fetch error or timeout, tripping circuit breaker:', err?.message || err);
+      markSupabaseOffline(60000);
     }
   }
 
   return null;
-}
+});
 
 export async function generateMetadata({
   params,
