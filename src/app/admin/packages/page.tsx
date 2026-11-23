@@ -68,6 +68,9 @@ export default function AdminPackagesPage() {
   } | null>(null);
 
   // Upload Processing State
+  const [uploadTab, setUploadTab] = useState<'file' | 'paste'>('file');
+  const [pastedJsonText, setPastedJsonText] = useState('');
+  const [recoveredNote, setRecoveredNote] = useState<string | null>(null);
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [parsedPreviewPackages, setParsedPreviewPackages] = useState<HolidayPackage[]>([]);
   const [parseErrors, setParseErrors] = useState<string[]>([]);
@@ -202,18 +205,23 @@ export default function AdminPackagesPage() {
       }
 
       const fileName = file.name.toLowerCase();
-      let result: { packages: HolidayPackage[]; errors: string[] };
 
       if (fileName.endsWith('.json')) {
-        result = parsePackagesFromJson(content);
+        const jsonRes = parsePackagesFromJson(content);
+        setParsedPreviewPackages(jsonRes.packages);
+        setParseErrors(jsonRes.errors);
+        setRecoveredNote(jsonRes.recoveredNote || null);
       } else if (fileName.endsWith('.csv')) {
-        result = parsePackagesFromCsv(content);
+        const csvRes = parsePackagesFromCsv(content);
+        setParsedPreviewPackages(csvRes.packages);
+        setParseErrors(csvRes.errors);
+        setRecoveredNote(null);
       } else {
-        result = { packages: [], errors: ['Unsupported file format. Please upload a .json or .csv file.'] };
+        setParsedPreviewPackages([]);
+        setParseErrors(['Unsupported file format. Please upload a .json or .csv file.']);
+        setRecoveredNote(null);
       }
 
-      setParsedPreviewPackages(result.packages);
-      setParseErrors(result.errors);
       setIsProcessingFile(false);
     };
 
@@ -225,7 +233,22 @@ export default function AdminPackagesPage() {
     reader.readAsText(file);
   };
 
-  // Confirm Bulk Upload & Save to Database (Chunked Auto-Batching in batches of 25)
+  // Direct Textarea JSON Parsing Handler with Auto-Sanitization & Truncation Recovery
+  const handlePastedJsonChange = (text: string) => {
+    setPastedJsonText(text);
+    if (!text.trim()) {
+      setParsedPreviewPackages([]);
+      setParseErrors([]);
+      setRecoveredNote(null);
+      return;
+    }
+    const result = parsePackagesFromJson(text);
+    setParsedPreviewPackages(result.packages);
+    setParseErrors(result.errors);
+    setRecoveredNote(result.recoveredNote || null);
+  };
+
+  // Confirm Bulk Upload & Save to Database (Chunked Auto-Batching in batches of 15)
   const handleConfirmImport = async () => {
     if (parsedPreviewPackages.length === 0) return;
 
@@ -236,7 +259,7 @@ export default function AdminPackagesPage() {
     }));
 
     setIsProcessingFile(true);
-    const CHUNK_SIZE = 25;
+    const CHUNK_SIZE = 15;
     const totalPackages = sanitizedToImport.length;
     const chunks: HolidayPackage[][] = [];
     for (let i = 0; i < totalPackages; i += CHUNK_SIZE) {
@@ -303,6 +326,8 @@ export default function AdminPackagesPage() {
       refreshCatalogData();
       setIsUploadModalOpen(false);
       setUploadedFile(null);
+      setPastedJsonText('');
+      setRecoveredNote(null);
       setParsedPreviewPackages([]);
       setUploadProgress(null);
       if (fileInputRef.current) fileInputRef.current.value = '';
@@ -327,6 +352,8 @@ export default function AdminPackagesPage() {
       refreshCatalogData();
       setIsUploadModalOpen(false);
       setUploadedFile(null);
+      setPastedJsonText('');
+      setRecoveredNote(null);
       setParsedPreviewPackages([]);
       setUploadProgress(null);
       if (fileInputRef.current) fileInputRef.current.value = '';
@@ -838,6 +865,11 @@ export default function AdminPackagesPage() {
                 onClick={() => {
                   if (!isProcessingFile) {
                     setIsUploadModalOpen(false);
+                    setUploadedFile(null);
+                    setPastedJsonText('');
+                    setRecoveredNote(null);
+                    setParsedPreviewPackages([]);
+                    setParseErrors([]);
                     setUploadProgress(null);
                   }
                 }}
@@ -848,66 +880,176 @@ export default function AdminPackagesPage() {
               </button>
             </div>
 
-            {/* Drag & Drop File Upload Box */}
-            <div
-              onClick={() => fileInputRef.current?.click()}
-              onDragOver={(e) => e.preventDefault()}
-              onDrop={(e) => {
-                e.preventDefault();
-                const file = e.dataTransfer.files?.[0];
-                if (file) processSelectedFile(file);
-              }}
-              className="border-2 border-dashed border-slate-300 hover:border-brand-500 hover:bg-brand-50/30 rounded-2xl p-8 text-center cursor-pointer transition-all space-y-3"
-            >
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept=".json,.csv"
-                onChange={handleFileChange}
-                className="hidden"
-              />
+            {/* Tab Switcher: Upload File vs Paste JSON Array */}
+            <div className="flex items-center space-x-1 p-1 bg-slate-100 rounded-xl">
+              <button
+                type="button"
+                onClick={() => setUploadTab('file')}
+                className={`flex-1 py-2 px-3 text-xs font-bold rounded-lg transition-all flex items-center justify-center space-x-2 ${
+                  uploadTab === 'file'
+                    ? 'bg-white text-brand-700 shadow-2xs'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                <FileText className="w-3.5 h-3.5" />
+                <span>Upload File (.json / .csv)</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setUploadTab('paste')}
+                className={`flex-1 py-2 px-3 text-xs font-bold rounded-lg transition-all flex items-center justify-center space-x-2 ${
+                  uploadTab === 'paste'
+                    ? 'bg-white text-brand-700 shadow-2xs'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                <span>Paste JSON Array (Safari Direct)</span>
+              </button>
+            </div>
 
-              <div className="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center mx-auto shadow-2xs">
-                <FileText className="w-6 h-6" />
-              </div>
+            {/* TAB 1: Drag & Drop File Upload Box */}
+            {uploadTab === 'file' && (
+              <>
+                <div
+                  onClick={() => fileInputRef.current?.click()}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    const file = e.dataTransfer.files?.[0];
+                    if (file) processSelectedFile(file);
+                  }}
+                  className="border-2 border-dashed border-slate-300 hover:border-brand-500 hover:bg-brand-50/30 rounded-2xl p-8 text-center cursor-pointer transition-all space-y-3"
+                >
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept=".json,.csv"
+                    onChange={handleFileChange}
+                    className="hidden"
+                  />
 
-              <div>
-                <span className="text-xs font-black text-slate-900 block">
-                  {uploadedFile ? uploadedFile.name : 'Click to select or drag & drop .json / .csv file'}
-                </span>
-                <span className="text-[11px] text-slate-500 mt-1 block">
-                  Supports .json (Array of packages) and .csv (Excel / Spreadsheet)
-                </span>
-              </div>
+                  <div className="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center mx-auto shadow-2xs">
+                    <FileText className="w-6 h-6" />
+                  </div>
 
-              {uploadedFile && (
-                <div className="text-[11px] font-bold text-brand-700 bg-brand-50 inline-block px-3 py-1 rounded-full">
-                  Size: {(uploadedFile.size / 1024).toFixed(1)} KB • Status: Ready
+                  <div>
+                    <span className="text-xs font-black text-slate-900 block">
+                      {uploadedFile ? uploadedFile.name : 'Click to select or drag & drop .json / .csv file'}
+                    </span>
+                    <span className="text-[11px] text-slate-500 mt-1 block">
+                      Supports .json (Array of packages) and .csv (Excel / Spreadsheet)
+                    </span>
+                  </div>
+
+                  {uploadedFile && (
+                    <div className="text-[11px] font-bold text-brand-700 bg-brand-50 inline-block px-3 py-1 rounded-full">
+                      Size: {(uploadedFile.size / 1024).toFixed(1)} KB • Status: Ready
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
 
-            {/* Download Sample Quick Links */}
-            <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl text-xs font-bold text-slate-600">
-              <span className="text-[11px]">Need the template format?</span>
-              <div className="space-x-2">
-                <button
-                  type="button"
-                  onClick={downloadSampleCsv}
-                  className="text-[11px] text-emerald-700 hover:underline font-bold"
-                >
-                  Download Sample CSV
-                </button>
-                <span className="text-slate-300">•</span>
-                <button
-                  type="button"
-                  onClick={downloadSampleJson}
-                  className="text-[11px] text-brand-700 hover:underline font-bold"
-                >
-                  Download Sample JSON
-                </button>
+                {/* Download Sample Quick Links */}
+                <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl text-xs font-bold text-slate-600">
+                  <span className="text-[11px]">Need the template format?</span>
+                  <div className="space-x-2">
+                    <button
+                      type="button"
+                      onClick={downloadSampleCsv}
+                      className="text-[11px] text-emerald-700 hover:underline font-bold"
+                    >
+                      Download Sample CSV
+                    </button>
+                    <span className="text-slate-300">•</span>
+                    <button
+                      type="button"
+                      onClick={downloadSampleJson}
+                      className="text-[11px] text-brand-700 hover:underline font-bold"
+                    >
+                      Download Sample JSON
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
+
+            {/* TAB 2: Direct Paste JSON Array Textarea */}
+            {uploadTab === 'paste' && (
+              <div className="space-y-3 animate-in fade-in">
+                <div className="flex items-center justify-between text-xs">
+                  <label className="font-bold text-slate-700 flex items-center space-x-1.5">
+                    <span>Direct Paste JSON Array</span>
+                    <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                      Smart Auto-Sanitizer Active
+                    </span>
+                  </label>
+                  {pastedJsonText && (
+                    <span className="text-[11px] text-slate-400 font-mono">
+                      {(pastedJsonText.length / 1024).toFixed(1)} KB ({pastedJsonText.length} chars)
+                    </span>
+                  )}
+                </div>
+
+                <div className="relative">
+                  <textarea
+                    rows={8}
+                    value={pastedJsonText}
+                    onChange={(e) => handlePastedJsonChange(e.target.value)}
+                    placeholder={`[
+  {
+    "name": "Arunachal 3 Sisters Special Tour",
+    "destination": "Arunachal Pradesh",
+    "durationDays": 12,
+    "durationNights": 11,
+    "startingPrice": 34999,
+    "theme": "Adventure & Nature",
+    "highlights": ["Kaziranga Safari", "Tawang Monastery", "Cherrapunjee Waterfalls"],
+    "itinerary": [
+      {
+        "dayNumber": 1,
+        "title": "Arrival in Guwahati - Drive to Kaziranga",
+        "hotel": "Hotel Kaziranga Golf Resort",
+        "meals": ["Dinner"],
+        "transfers": "Private AC Cab"
+      }
+    ]
+  }
+]`}
+                    className="w-full text-xs font-mono p-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all resize-y"
+                  />
+                  {!pastedJsonText && (
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-40">
+                      <div className="text-center text-slate-400 text-xs">
+                        Paste any JSON array of packages here...
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className="flex items-center justify-between text-[11px]">
+                  <p className="text-slate-500">
+                    💡 Automatically cleans smart quotes, trailing commas, and rescues truncated arrays.
+                  </p>
+                  {pastedJsonText && (
+                    <button
+                      type="button"
+                      onClick={() => handlePastedJsonChange('')}
+                      className="text-xs text-rose-600 hover:text-rose-800 font-semibold"
+                    >
+                      Clear Text
+                    </button>
+                  )}
+                </div>
               </div>
-            </div>
+            )}
+
+            {/* Recovered Note Banner */}
+            {recoveredNote && (
+              <div className="p-3 bg-teal-50 border border-teal-200 rounded-2xl text-xs text-teal-900 font-bold flex items-center space-x-2 animate-in fade-in">
+                <Sparkles className="w-4 h-4 text-teal-600 shrink-0" />
+                <span>{recoveredNote}</span>
+              </div>
+            )}
 
             {/* Chunked Upload Progress Indicator */}
             {uploadProgress && (
@@ -915,7 +1057,7 @@ export default function AdminPackagesPage() {
                 <div className="flex items-center justify-between text-xs font-bold text-brand-900">
                   <span className="flex items-center space-x-2">
                     <Loader2 className="w-4 h-4 animate-spin text-brand-600" />
-                    <span>Importing packages ({uploadProgress.completed} of {uploadProgress.total})...</span>
+                    <span>Uploading {uploadProgress.completed} / {uploadProgress.total} packages...</span>
                   </span>
                   <span>Batch {uploadProgress.currentChunk} of {uploadProgress.totalChunks} ({uploadProgress.percent}%)</span>
                 </div>
@@ -926,7 +1068,7 @@ export default function AdminPackagesPage() {
                   />
                 </div>
                 <p className="text-[10px] text-brand-700">
-                  Chunked in batches of 25 packages to prevent server timeouts and payload limits.
+                  Chunked in batches of 15 packages sequentially to prevent server timeouts and payload limits.
                 </p>
               </div>
             )}
@@ -988,6 +1130,11 @@ export default function AdminPackagesPage() {
                 disabled={isProcessingFile}
                 onClick={() => {
                   setIsUploadModalOpen(false);
+                  setUploadedFile(null);
+                  setPastedJsonText('');
+                  setRecoveredNote(null);
+                  setParsedPreviewPackages([]);
+                  setParseErrors([]);
                   setUploadProgress(null);
                 }}
                 className="text-xs font-bold"

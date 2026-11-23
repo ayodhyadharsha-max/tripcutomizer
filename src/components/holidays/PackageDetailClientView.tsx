@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -263,6 +263,144 @@ const DESTINATION_HOTEL_TIERS: Record<string, { standard: string; deluxe: string
   }
 };
 
+// Multi-city night split generator derived from itinerary stays
+export function deriveMultiCityNightSplit(pkg: HolidayPackage): { city: string; nights: number }[] {
+  // 1. Try parsing night split from package name or theme (e.g. "2N Manali 1N Kasol 2N Shimla")
+  const titleSearchText = [pkg.name || '', pkg.theme || ''].join(' ');
+  const regex = /(\d+)\s*(?:N|Nights?)\s+([A-Za-z\s]+?)(?=(?:\s+\d+\s*(?:N|Nights?))|$|[,\-•|(/])/gi;
+  const parsedFromTitle: { city: string; nights: number }[] = [];
+  let match: RegExpExecArray | null;
+  while ((match = regex.exec(titleSearchText)) !== null) {
+    const nights = parseInt(match[1], 10);
+    const rawCity = match[2].trim();
+    const cleanCity = rawCity.replace(/\b(Special|Tour|Package|Holiday|Trip|Days|Nights|Assam|Arunachal|Meghalaya)\b/gi, '').trim();
+    if (nights > 0 && cleanCity.length >= 3) {
+      parsedFromTitle.push({
+        city: cleanCity.charAt(0).toUpperCase() + cleanCity.slice(1),
+        nights,
+      });
+    }
+  }
+
+  const titleTotalNights = parsedFromTitle.reduce((acc, curr) => acc + curr.nights, 0);
+  if (parsedFromTitle.length > 1 && titleTotalNights > 0 && Math.abs(titleTotalNights - (pkg.durationNights || 0)) <= 2) {
+    return parsedFromTitle;
+  }
+
+  // 2. Check if pkg.hotels already has multiple distinct valid cities
+  if (Array.isArray(pkg.hotels) && pkg.hotels.length > 1) {
+    const distinctCities = new Set(pkg.hotels.map((h) => (h.city || '').toLowerCase().trim()));
+    if (distinctCities.size > 1) {
+      return pkg.hotels.map((h) => ({
+        city: h.city || pkg.destination,
+        nights: Number(h.nights) || 1,
+      }));
+    }
+  }
+
+  // 3. Derive from itinerary stays
+  if (Array.isArray(pkg.itinerary) && pkg.itinerary.length > 0) {
+    const knownCities = [
+      'Kaziranga', 'Guwahati', 'Shillong', 'Cherrapunjee', 'Cherrapunji', 'Tawang', 'Dirang',
+      'Bomdila', 'Bhalukpong', 'Tezpur', 'Jorhat', 'Majuli', 'Kohima', 'Imphal', 'Gangtok',
+      'Pelling', 'Darjeeling', 'Lachung', 'Lachen', 'Namchi', 'Ravangla',
+      'Manali', 'Shimla', 'Dharamshala', 'Dalhousie', 'Kasol', 'Kullu', 'Amritsar', 'Srinagar',
+      'Gulmarg', 'Pahalgam', 'Sonamarg', 'Leh', 'Nubra', 'Pangong', 'Kargil', 'Haridwar',
+      'Rishikesh', 'Mussoorie', 'Nainital', 'Auli', 'Chopta', 'Kedarnath', 'Badrinath',
+      'Ayodhya', 'Varanasi', 'Prayagraj', 'Lucknow', 'Mathura', 'Vrindavan', 'Agra', 'Ujjain',
+      'Gwalior', 'Khajuraho', 'Bhopal', 'Orchha', 'Jaipur', 'Udaipur', 'Jodhpur', 'Jaisalmer',
+      'Pushkar', 'Bikaner', 'Mount Abu', 'Ranthambore', 'Ahmedabad', 'Kutch', 'Dwarka', 'Somnath',
+      'Gir', 'Goa', 'Mumbai', 'Lonavala', 'Mahabaleshwar', 'Munnar', 'Thekkady', 'Alleppey',
+      'Kovalam', 'Kochi', 'Cochin', 'Wayanad', 'Varkala', 'Ooty', 'Kodaikanal', 'Coorg', 'Mysore',
+      'Kabini', 'Hampi', 'Bangalore', 'Madurai', 'Rameshwaram', 'Kanyakumari', 'Tirupati',
+      'Pondicherry', 'Andaman', 'Port Blair', 'Havelock', 'Neil', 'Dubai', 'Abu Dhabi', 'Bangkok',
+      'Pattaya', 'Phuket', 'Krabi', 'Singapore', 'Bali', 'Kuala Lumpur', 'Hanoi', 'Da Nang',
+      'Ho Chi Minh', 'Baku', 'Tbilisi', 'Almaty', 'Kathmandu', 'Pokhara', 'Male', 'Paris', 'Zurich',
+      'Lucerne', 'Interlaken', 'Rome', 'Venice'
+    ];
+
+    const totalNights = pkg.durationNights || Math.max(1, pkg.itinerary.length - 1);
+    const nightCities: string[] = [];
+
+    for (let dayNum = 1; dayNum <= totalNights; dayNum++) {
+      const dayItem = pkg.itinerary.find((d) => d.dayNumber === dayNum) || pkg.itinerary[dayNum - 1];
+      if (!dayItem) break;
+
+      const title = (dayItem.title || '').trim();
+      const hotel = (dayItem.hotel || '').trim();
+      const desc = (dayItem.description || '').trim();
+
+      let stayCity: string | null = null;
+
+      // Check hotel string for known city
+      for (const city of knownCities) {
+        if (hotel.toLowerCase().includes(city.toLowerCase())) {
+          stayCity = city;
+          break;
+        }
+      }
+
+      // Check title pattern (e.g. "Drive to Dirang", "Transfer to Tawang", "Arrival in Kaziranga")
+      if (!stayCity) {
+        const toMatch = title.match(/(?:to|transfer to|drive to|reach|arrival in|arrive at)\s+([A-Za-z]+)/i);
+        if (toMatch && toMatch[1]) {
+          const candidate = toMatch[1].trim();
+          const found = knownCities.find((c) => c.toLowerCase() === candidate.toLowerCase());
+          if (found) stayCity = found;
+        }
+      }
+
+      // Check title for known city
+      if (!stayCity) {
+        for (const city of knownCities) {
+          if (title.toLowerCase().includes(city.toLowerCase())) {
+            stayCity = city;
+            break;
+          }
+        }
+      }
+
+      // Check description for known city
+      if (!stayCity) {
+        for (const city of knownCities) {
+          if (desc.toLowerCase().includes(city.toLowerCase())) {
+            stayCity = city;
+            break;
+          }
+        }
+      }
+
+      // Fallback to previous night or primary destination
+      if (!stayCity) {
+        stayCity = nightCities[nightCities.length - 1] || pkg.destination?.split(',')[0]?.split(' ')[0] || 'City';
+      }
+
+      nightCities.push(stayCity);
+    }
+
+    if (nightCities.length > 0) {
+      const grouped: { city: string; nights: number }[] = [];
+      for (const c of nightCities) {
+        const last = grouped[grouped.length - 1];
+        if (last && last.city.toLowerCase() === c.toLowerCase()) {
+          last.nights += 1;
+        } else {
+          grouped.push({ city: c, nights: 1 });
+        }
+      }
+      if (grouped.length > 0) {
+        return grouped;
+      }
+    }
+  }
+
+  // Fallback: single destination
+  return [{
+    city: pkg.destination || 'Destination',
+    nights: pkg.durationNights || 5,
+  }];
+}
+
 export function PackageDetailClientView({
   params,
   initialPackage,
@@ -340,6 +478,7 @@ export function PackageDetailClientView({
 
   // Safe reference for state hooks before render (strictly typed)
   const pkg: HolidayPackage = activePkg || getAllCatalogPackages()[0];
+  const cityNightSplit = useMemo(() => deriveMultiCityNightSplit(pkg), [pkg]);
 
   // Active Main Sub-Tab State
   const [activeTab, setActiveTab] = useState<'itinerary' | 'inclusions' | 'summary' | 'highlights' | 'faqs'>('itinerary');
@@ -720,11 +859,25 @@ export function PackageDetailClientView({
       return 'Check-out completed (Departure Day)';
     }
 
+    // Helper to strip any category suffix like "(3★ Standard)", "(4-Star Deluxe)", etc.
+    const cleanHotelName = (name: string): string => {
+      return (name || '')
+        .replace(/\s*\([^)]*(?:★|Star|Deluxe|Standard|Luxury|Category|MAP with Dinner|Cultural Show|CP)[^)]*\)/gi, '')
+        .replace(/\s*\([345]-Star[^)]*\)/gi, '')
+        .trim();
+    };
+
+    // If originalHotel is already defined, return clean name directly without category suffix
+    if (originalHotel && originalHotel.trim().length > 3) {
+      const cleaned = cleanHotelName(originalHotel);
+      if (cleaned.length > 2) return cleaned;
+    }
+
     // Check for Houseboat
     if (raw.includes('houseboat') || title.includes('houseboat') || title.includes('shikara')) {
-      if (tier === 'standard') return 'Dal Lake Standard Heritage Houseboat (3★ Standard)';
-      if (tier === 'luxury') return 'Dal Lake Royal Palace Super Deluxe Houseboat (5★ Luxury)';
-      return 'Dal Lake Luxury 4★ Heritage Houseboat (MAP with Dinner)';
+      if (tier === 'standard') return 'Dal Lake Standard Heritage Houseboat';
+      if (tier === 'luxury') return 'Dal Lake Royal Palace Super Deluxe Houseboat';
+      return 'Dal Lake Luxury Heritage Houseboat';
     }
 
     // Check for Desert Camp
@@ -735,14 +888,9 @@ export function PackageDetailClientView({
       title.includes('camp') ||
       title.includes('safari stay')
     ) {
-      if (tier === 'standard') return 'Sam Sand Dunes Comfort Swiss Desert Camp (3★ Standard)';
-      if (tier === 'luxury') return 'Suryagarh / Sam Luxury Glamping Desert Palace (5★ Luxury)';
-      return 'Sam Sand Dunes Royal Swiss Desert Resort (4★ Deluxe with Cultural Show)';
-    }
-
-    // If tier is 3-Star Standard and originalHotel is already defined, return it directly
-    if (tier === 'standard' && originalHotel && originalHotel.trim().length > 3) {
-      return originalHotel.includes('3★') ? originalHotel : `${originalHotel} (3★ Standard)`;
+      if (tier === 'standard') return 'Sam Sand Dunes Comfort Swiss Desert Camp';
+      if (tier === 'luxury') return 'Suryagarh / Sam Luxury Glamping Desert Palace';
+      return 'Sam Sand Dunes Royal Swiss Desert Resort';
     }
 
     // Target destination key matching - check raw (hotel name/city) FIRST to ensure accuracy
@@ -953,19 +1101,19 @@ export function PackageDetailClientView({
     }
 
     if (matchedKey && DESTINATION_HOTEL_TIERS[matchedKey]) {
-      return DESTINATION_HOTEL_TIERS[matchedKey][tier];
+      return cleanHotelName(DESTINATION_HOTEL_TIERS[matchedKey][tier]);
     }
 
-    // Generic fallback for any other city
+    // Generic fallback for any other city without appended category
     const cityName = pkg.destination?.split(',')[0]?.split(' ')[0] || 'City';
     const cleanCity = cityName.charAt(0).toUpperCase() + cityName.slice(1);
     if (tier === 'standard') {
-      return `Ginger / Treebo Trend ${cleanCity} (3★ Standard)`;
+      return `Ginger / Treebo Trend ${cleanCity}`;
     }
     if (tier === 'luxury') {
-      return `Taj / Radisson Blu ${cleanCity} Luxury Palace (5★ Luxury)`;
+      return `Taj / Radisson Blu ${cleanCity} Luxury Palace`;
     }
-    return `Fortune / Lemon Tree Premier ${cleanCity} (4★ Deluxe)`;
+    return `Fortune / Lemon Tree Premier ${cleanCity}`;
   };
 
   // Dynamic Total Calculation
@@ -1237,14 +1385,14 @@ export function PackageDetailClientView({
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-tight">
                 {pkg.name}
               </h1>
-              {/* Hotel / City Night Breakdown Pill */}
-              {pkg.hotels && pkg.hotels.length > 0 && (
+              {/* Multi-City Night Breakdown Pill (Derived from Itinerary Stays) */}
+              {cityNightSplit && cityNightSplit.length > 0 && (
                 <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-slate-600 mt-2">
-                  {pkg.hotels.map((h, idx) => (
+                  {cityNightSplit.map((h, idx) => (
                     <span key={idx} className="flex items-center space-x-1 bg-slate-100 px-2.5 py-1 rounded-lg">
                       <MapPin className="w-3 h-3 text-brand-600" />
                       <span>{h.nights}N {h.city}</span>
-                      {idx < pkg.hotels.length - 1 && <span className="text-slate-300 ml-1">|</span>}
+                      {idx < cityNightSplit.length - 1 && <span className="text-slate-300 ml-1">|</span>}
                     </span>
                   ))}
                   <span className={`text-[11px] font-black px-2.5 py-1 rounded-lg uppercase tracking-wider flex items-center space-x-1 ${
@@ -1647,8 +1795,8 @@ export function PackageDetailClientView({
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {(pkg.hotels && pkg.hotels.length > 0 ? pkg.hotels : [{ name: pkg.destination, city: pkg.destination, rating: pkg.hotelCategory, nights: pkg.durationNights }]).map((h, i) => {
-                        const tierHotelName = getTierHotelName(h.name, h.city, tourTier);
+                      {(cityNightSplit && cityNightSplit.length > 0 ? cityNightSplit : [{ city: pkg.destination, nights: pkg.durationNights }]).map((h, i) => {
+                        const tierHotelName = getTierHotelName(undefined, h.city, tourTier);
                         const tierRating = tourTier === 'standard' ? '3★ Standard' : tourTier === 'deluxe' ? '4★ Deluxe' : '5★ Luxury';
                         const amenities = tourTier === 'standard'
                           ? 'Free Wi-Fi • Buffet Breakfast • AC Room • 24x7 Hot Water'
@@ -1746,8 +1894,8 @@ export function PackageDetailClientView({
                   </div>
                 </div>
 
-                {/* Night Stay Breakdown */}
-                {pkg.hotels && pkg.hotels.length > 0 && (
+                {/* Night Stay Breakdown (Multi-City Derived from Itinerary) */}
+                {cityNightSplit && cityNightSplit.length > 0 && (
                   <div className="p-4 bg-amber-50/70 border border-amber-200 rounded-2xl space-y-2">
                     <div className="flex items-center justify-between">
                       <span className="font-black text-xs text-amber-950 block">Night Stay City & Hotel Breakdown:</span>
@@ -1756,9 +1904,9 @@ export function PackageDetailClientView({
                       </span>
                     </div>
                     <div className="flex flex-wrap gap-2 text-xs font-bold text-amber-900">
-                      {pkg.hotels.map((h, idx) => (
+                      {cityNightSplit.map((h, idx) => (
                         <span key={idx} className="bg-white border border-amber-300 px-3 py-1.5 rounded-xl shadow-2xs">
-                          🌙 {h.nights} Nights in {h.city} ({getTierHotelName(h.name, h.city, tourTier)})
+                          🌙 {h.nights} Nights in {h.city} ({getTierHotelName(undefined, h.city, tourTier)})
                         </span>
                       ))}
                     </div>

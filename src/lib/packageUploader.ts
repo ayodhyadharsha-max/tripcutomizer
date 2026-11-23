@@ -703,10 +703,100 @@ export function parsePackagesFromCsv(csvText: string): { packages: HolidayPackag
   return { packages, errors };
 }
 
-// Parse JSON content into HolidayPackage[]
-export function parsePackagesFromJson(jsonText: string): { packages: HolidayPackage[]; errors: string[] } {
+// Smart Sanitizer and Truncation Recovery for JSON
+export function smartSanitizeAndRecoverJson(raw: string): { data: any; recovered: boolean; note?: string } {
+  if (!raw || typeof raw !== 'string') {
+    throw new Error('Empty JSON input provided.');
+  }
+
+  // 1. Strip UTF-8 BOM and markdown code fences (```json ... ```)
+  let text = raw.replace(/^\uFEFF/, '').trim();
+  text = text.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim();
+
+  // 2. Normalize smart / curly quotes to standard ASCII quotes
+  text = text
+    .replace(/[\u201C\u201D\u201E\u201F\u00AB\u00BB]/g, '"') // double curly quotes
+    .replace(/[\u2018\u2019\u201A\u201B]/g, "'");             // single curly quotes
+
+  // 3. Strip trailing commas before closing brackets or braces
+  text = text.replace(/,\s*([\]}])/g, '$1');
+
+  // Attempt direct parse first
+  try {
+    const direct = JSON.parse(text);
+    return { data: direct, recovered: false };
+  } catch (errFirst: any) {
+    // 4. Try sanitizing unescaped newlines and tabs inside double-quoted strings
+    try {
+      const sanitizedText = text.replace(/"([^"\\]*(?:\\[\s\S][^"\\]*)*)"/g, (match) => {
+        return match.replace(/\r?\n/g, '\\n').replace(/\t/g, '\\t');
+      });
+      const parsedWithEscapes = JSON.parse(sanitizedText);
+      return { data: parsedWithEscapes, recovered: false };
+    } catch {}
+
+    // 5. Truncation Recovery for Array:
+    // If copied output was cut off mid-way (Safari clipboard / LLM token limit cutoff),
+    // search backwards from the end for the last valid '}' that closes a package object.
+    const openBracketIdx = text.indexOf('[');
+    if (openBracketIdx !== -1) {
+      let searchIdx = text.lastIndexOf('}');
+      while (searchIdx > openBracketIdx) {
+        const sub = text.slice(openBracketIdx, searchIdx + 1);
+        const candidateJson = sub.replace(/,\s*$/, '') + ']';
+        try {
+          const salvaged = JSON.parse(candidateJson);
+          if (Array.isArray(salvaged) && salvaged.length > 0) {
+            return {
+              data: salvaged,
+              recovered: true,
+              note: `Truncated JSON recovered: Successfully salvaged ${salvaged.length} complete packages up to the cutoff point.`
+            };
+          }
+        } catch {
+          try {
+            const escapedCandidate = candidateJson.replace(/"([^"\\]*(?:\\[\s\S][^"\\]*)*)"/g, (match) => {
+              return match.replace(/\r?\n/g, '\\n').replace(/\t/g, '\\t');
+            });
+            const salvaged = JSON.parse(escapedCandidate);
+            if (Array.isArray(salvaged) && salvaged.length > 0) {
+              return {
+                data: salvaged,
+                recovered: true,
+                note: `Truncated JSON recovered: Successfully salvaged ${salvaged.length} complete packages up to the cutoff point.`
+              };
+            }
+          } catch {}
+        }
+        searchIdx = text.lastIndexOf('}', searchIdx - 1);
+      }
+    }
+
+    // 6. Truncation recovery for single object
+    let lastClose = text.lastIndexOf('}');
+    while (lastClose > 0) {
+      const candidateObj = text.slice(0, lastClose + 1);
+      try {
+        const salvagedObj = JSON.parse(candidateObj);
+        return {
+          data: salvagedObj,
+          recovered: true,
+          note: `Truncated JSON recovered: Successfully salvaged package object up to the cutoff point.`
+        };
+      } catch {}
+      lastClose = text.lastIndexOf('}', lastClose - 1);
+    }
+
+    // If all recovery attempts failed, throw the original syntax error
+    throw errFirst;
+  }
+}
+
+// Parse JSON content into HolidayPackage[] with Auto-Sanitization & Recovery
+export function parsePackagesFromJson(jsonText: string): { packages: HolidayPackage[]; errors: string[]; recoveredNote?: string } {
   const errors: string[] = [];
   const packages: HolidayPackage[] = [];
+  let recoveredNote: string | undefined;
 
   const cleanNum = (val: any, fallback: number = 0): number => {
     if (typeof val === 'number') return isNaN(val) ? fallback : val;
@@ -716,12 +806,15 @@ export function parsePackagesFromJson(jsonText: string): { packages: HolidayPack
   };
 
   try {
-    const cleanJsonText = jsonText.replace(/^\uFEFF/, '').trim();
-    const parsed = JSON.parse(cleanJsonText);
+    const { data: parsed, recovered, note } = smartSanitizeAndRecoverJson(jsonText);
+    if (recovered && note) {
+      recoveredNote = note;
+    }
+
     const items: any[] = Array.isArray(parsed) ? parsed : parsed.packages && Array.isArray(parsed.packages) ? parsed.packages : [parsed];
 
     if (items.length === 0) {
-      return { packages: [], errors: ['JSON does not contain any package items.'] };
+      return { packages: [], errors: ['JSON does not contain any package items.'], recoveredNote };
     }
 
     items.forEach((item, idx) => {
@@ -810,5 +903,5 @@ export function parsePackagesFromJson(jsonText: string): { packages: HolidayPack
     errors.push(`JSON Parse Error: ${err?.message || 'Invalid JSON format'}`);
   }
 
-  return { packages, errors };
+  return { packages, errors, recoveredNote };
 }
