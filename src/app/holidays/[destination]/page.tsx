@@ -8,6 +8,9 @@ import { getAllProgrammaticPackages } from '@/data/programmaticPackages';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 import { AEODirectAnswerBox } from '@/components/holidays/AEODirectAnswerBox';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 function matchPackagesForDestination(rawSlug: string, allCatalog: ReturnType<typeof getAllCatalogPackages>) {
   const isIntlSlug = [
     'international', 'europe', 'switzerland', 'swiss', 'france', 'uk', 'london', 'united-kingdom',

@@ -2,10 +2,77 @@ import fs from 'fs';
 import path from 'path';
 import { HolidayPackage } from '@/data/packagesData';
 import getSupabaseServer from '@/lib/supabaseServer';
-import prisma from '@/lib/prisma';
 
 let memoryPackages: HolidayPackage[] | null = null;
 let memoryLegacyDeleted: boolean | null = null;
+
+export function mapSupabaseRowToPackage(row: any): HolidayPackage {
+  const destinationSlug = row.destination_slug || row.destinationSlug || 'india';
+  return {
+    id: row.id,
+    name: row.name,
+    slug: row.slug,
+    destination: row.destination,
+    destinationSlug: destinationSlug,
+    state: row.state || row.destination,
+    stateSlug: row.state_slug || destinationSlug,
+    country: row.country || (row.is_international ? 'International' : 'India'),
+    region: row.region || (row.is_international ? 'International' : 'India'),
+    isInternational: Boolean(row.is_international ?? row.isInternational),
+    durationDays: row.duration_days ?? row.durationDays ?? 5,
+    durationNights: row.duration_nights ?? row.durationNights ?? 4,
+    startingPrice: Number(row.starting_price ?? row.startingPrice ?? 19999),
+    discountPrice: row.discount_price ? Number(row.discount_price) : undefined,
+    rating: Number(row.rating || 4.8),
+    reviewsCount: Number(row.reviews_count || 120),
+    heroImage: row.hero_image || row.heroImage || `/destinations/${destinationSlug}.jpg`,
+    gallery: Array.isArray(row.gallery)
+      ? row.gallery
+      : [row.hero_image || `/destinations/${destinationSlug}.jpg`],
+    highlights: Array.isArray(row.highlights)
+      ? row.highlights
+      : typeof row.highlights === 'string'
+      ? JSON.parse(row.highlights)
+      : [],
+    inclusions: Array.isArray(row.inclusions)
+      ? row.inclusions
+      : typeof row.inclusions === 'string'
+      ? JSON.parse(row.inclusions)
+      : [],
+    exclusions: Array.isArray(row.exclusions)
+      ? row.exclusions
+      : typeof row.exclusions === 'string'
+      ? JSON.parse(row.exclusions)
+      : [],
+    itinerary: Array.isArray(row.itinerary)
+      ? row.itinerary
+      : typeof row.itinerary === 'string'
+      ? JSON.parse(row.itinerary)
+      : [],
+    hotels: Array.isArray(row.hotels)
+      ? row.hotels
+      : typeof row.hotels === 'string'
+      ? JSON.parse(row.hotels)
+      : [],
+    faqs: Array.isArray(row.faqs)
+      ? row.faqs
+      : typeof row.faqs === 'string'
+      ? JSON.parse(row.faqs)
+      : [
+          {
+            question: `Can this ${row.destination || 'holiday'} package be customized?`,
+            answer: `Yes, all hotel categories, cab transfers, dates, and sightseeing options are 100% customizable upon request.`,
+          },
+        ],
+    theme: row.theme || 'Holiday Explorer',
+    hotelCategory: row.hotel_category || row.hotelCategory || '4-Star Deluxe',
+    mealPlan: row.meal_plan || row.mealPlan || 'Breakfast Included',
+    flightsIncluded: Boolean(row.flights_included ?? row.flightsIncluded),
+    transfersIncluded: row.transfers_included !== undefined ? Boolean(row.transfers_included) : true,
+    departureCity: row.departure_city || 'Flexible Origin',
+    batch_source: row.batch_source || 'mmt_sync',
+  };
+}
 
 const getPrimaryFilePath = (): string => {
   const dir = path.join(process.cwd(), 'data');
@@ -30,9 +97,6 @@ const getTmpMetaFilePath = (): string => {
   return path.join('/tmp', 'tc_package_meta.json');
 };
 
-/**
- * Loads custom packages from filesystem (trying /tmp first, then data/custom_packages.json).
- */
 export function loadPackagesFromFile(): HolidayPackage[] {
   const paths = [getTmpFilePath(), getPrimaryFilePath()];
   for (const p of paths) {
@@ -51,9 +115,6 @@ export function loadPackagesFromFile(): HolidayPackage[] {
   return [];
 }
 
-/**
- * Persists packages to both filesystem locations safely.
- */
 export function writePackagesToFile(packages: HolidayPackage[]): void {
   const jsonStr = JSON.stringify(packages, null, 2);
   const paths = [getPrimaryFilePath(), getTmpFilePath()];
@@ -64,9 +125,6 @@ export function writePackagesToFile(packages: HolidayPackage[]): void {
   }
 }
 
-/**
- * Loads isLegacyDeleted flag from filesystem.
- */
 export function loadLegacyDeletedFromFile(): boolean {
   const paths = [getTmpMetaFilePath(), getMetaFilePath()];
   for (const p of paths) {
@@ -85,9 +143,6 @@ export function loadLegacyDeletedFromFile(): boolean {
   return false;
 }
 
-/**
- * Writes isLegacyDeleted flag to filesystem.
- */
 export function writeLegacyDeletedToFile(isDeleted: boolean): void {
   const jsonStr = JSON.stringify({ isLegacyDeleted: isDeleted, updatedAt: new Date().toISOString() });
   const paths = [getMetaFilePath(), getTmpMetaFilePath()];
@@ -98,22 +153,15 @@ export function writeLegacyDeletedToFile(isDeleted: boolean): void {
   }
 }
 
-/**
- * Get all server custom packages (combining in-memory cache, filesystem, and Supabase/Prisma).
- */
 export function getServerCustomPackages(): HolidayPackage[] {
   if (memoryPackages !== null) {
     return memoryPackages;
   }
-
   const fromFile = loadPackagesFromFile();
   memoryPackages = fromFile;
   return memoryPackages;
 }
 
-/**
- * Check if legacy packages are deleted on server.
- */
 export function getServerIsLegacyDeleted(): boolean {
   if (memoryLegacyDeleted !== null) {
     return memoryLegacyDeleted;
@@ -122,26 +170,18 @@ export function getServerIsLegacyDeleted(): boolean {
   return memoryLegacyDeleted;
 }
 
-/**
- * Set legacy packages deleted flag across memory, filesystem, and database.
- */
 export async function setServerLegacyDeleted(isDeleted: boolean): Promise<void> {
   memoryLegacyDeleted = isDeleted;
   writeLegacyDeletedToFile(isDeleted);
 }
 
-/**
- * Save new or updated custom packages to server memory, files, Supabase, and Prisma.
- */
 export async function saveServerCustomPackages(newPackages: HolidayPackage[]): Promise<void> {
   const current = getServerCustomPackages();
   const map = new Map<string, HolidayPackage>();
 
-  // Add existing
   current.forEach((p) => map.set(p.id, p));
-  // Upsert new
   newPackages.forEach((p) => {
-    p.batch_source = 'mmt_sync'; // Guarantee batch_source
+    p.batch_source = 'mmt_sync';
     map.set(p.id, p);
   });
 
@@ -149,111 +189,42 @@ export async function saveServerCustomPackages(newPackages: HolidayPackage[]): P
   memoryPackages = updated;
   writePackagesToFile(updated);
 
-  // Background sync to Supabase (if available)
+  // Background sync to Supabase
   try {
     const supabaseServer = getSupabaseServer();
     if (supabaseServer) {
-      for (const p of newPackages) {
-        await supabaseServer.from('packages').upsert({
-          id: p.id,
-          name: p.name,
-          slug: p.slug,
-          destination: p.destination,
-          destination_slug: p.destinationSlug,
-          duration_days: p.durationDays,
-          duration_nights: p.durationNights,
-          starting_price: p.startingPrice,
-          discount_price: p.discountPrice || null,
-          theme: p.theme || 'Holiday Explorer',
-          hotel_category: p.hotelCategory || '4-Star Deluxe',
-          batch_source: 'mmt_sync',
-          is_international: Boolean(p.isInternational),
-          rating: p.rating || 4.8,
-          reviews_count: p.reviewsCount || 120,
-          hero_image: p.heroImage || `/destinations/${p.destinationSlug}.jpg`,
-          highlights: p.highlights || [],
-          inclusions: p.inclusions || [],
-          exclusions: p.exclusions || [],
-          itinerary: p.itinerary || [],
-          hotels: p.hotels || [],
-          updated_at: new Date().toISOString(),
-        }, { onConflict: 'id' });
-      }
+      const rows = newPackages.map((p) => ({
+        id: p.id,
+        name: p.name,
+        slug: p.slug,
+        destination: p.destination,
+        destination_slug: p.destinationSlug,
+        duration_days: p.durationDays,
+        duration_nights: p.durationNights,
+        starting_price: p.startingPrice,
+        discount_price: p.discountPrice || null,
+        theme: p.theme || 'Holiday Explorer',
+        hotel_category: p.hotelCategory || '4-Star Deluxe',
+        meal_plan: p.mealPlan || 'Breakfast Included',
+        hero_image: p.heroImage || `/destinations/${p.destinationSlug}.jpg`,
+        highlights: p.highlights || [],
+        inclusions: p.inclusions || [],
+        exclusions: p.exclusions || [],
+        itinerary: p.itinerary || [],
+        hotels: p.hotels || [],
+        batch_source: 'mmt_sync',
+        is_international: Boolean(p.isInternational),
+        rating: p.rating || 4.8,
+        reviews_count: p.reviewsCount || 120,
+        updated_at: new Date().toISOString(),
+      }));
+      await supabaseServer.from('packages').upsert(rows, { onConflict: 'id' });
     }
   } catch (err) {
-    console.warn('[serverPackageStore] Supabase sync warning:', err);
-  }
-
-  // Background sync to Prisma (if available)
-  try {
-    if (prisma && prisma.holidayPackage) {
-      for (const p of newPackages) {
-        // Find or create destination first
-        let dest = await prisma.destination.findFirst({
-          where: { slug: p.destinationSlug },
-        });
-        if (!dest) {
-          dest = await prisma.destination.create({
-            data: {
-              name: p.destination,
-              slug: p.destinationSlug,
-              country: p.country || 'India',
-              region: p.region || 'India',
-              heroImage: p.heroImage || `/destinations/${p.destinationSlug}.jpg`,
-              description: `${p.destination} holiday tours and vacations.`,
-              isInternational: Boolean(p.isInternational),
-            },
-          });
-        }
-
-        await prisma.holidayPackage.upsert({
-          where: { slug: p.slug },
-          update: {
-            name: p.name,
-            durationDays: p.durationDays,
-            durationNights: p.durationNights,
-            startingPrice: p.startingPrice,
-            discountPrice: p.discountPrice,
-            heroImage: p.heroImage || `/destinations/${p.destinationSlug}.jpg`,
-            gallery: JSON.stringify(p.gallery || []),
-            highlights: JSON.stringify(p.highlights || []),
-            inclusions: JSON.stringify(p.inclusions || []),
-            exclusions: JSON.stringify(p.exclusions || []),
-            theme: p.theme || 'Holiday Explorer',
-            hotelCategory: p.hotelCategory || '4-Star Deluxe',
-            batch_source: 'mmt_sync',
-            rating: p.rating || 4.8,
-          },
-          create: {
-            id: p.id,
-            name: p.name,
-            slug: p.slug,
-            destinationId: dest.id,
-            durationDays: p.durationDays,
-            durationNights: p.durationNights,
-            startingPrice: p.startingPrice,
-            discountPrice: p.discountPrice,
-            heroImage: p.heroImage || `/destinations/${p.destinationSlug}.jpg`,
-            gallery: JSON.stringify(p.gallery || []),
-            highlights: JSON.stringify(p.highlights || []),
-            inclusions: JSON.stringify(p.inclusions || []),
-            exclusions: JSON.stringify(p.exclusions || []),
-            theme: p.theme || 'Holiday Explorer',
-            hotelCategory: p.hotelCategory || '4-Star Deluxe',
-            batch_source: 'mmt_sync',
-            rating: p.rating || 4.8,
-          },
-        });
-      }
-    }
-  } catch (prismaErr) {
-    // Ignore SQLite / Prisma constraints if uninitialized in serverless
+    console.warn('[serverPackageStore] Supabase sync note:', err);
   }
 }
 
-/**
- * Delete a single package by id.
- */
 export async function deleteServerCustomPackage(id: string): Promise<void> {
   const current = getServerCustomPackages();
   const updated = current.filter((p) => p.id !== id);
@@ -266,17 +237,8 @@ export async function deleteServerCustomPackage(id: string): Promise<void> {
       await supabaseServer.from('packages').delete().eq('id', id);
     }
   } catch {}
-
-  try {
-    if (prisma && prisma.holidayPackage) {
-      await prisma.holidayPackage.deleteMany({ where: { id } });
-    }
-  } catch {}
 }
 
-/**
- * Find package by destination slug or package slug / id with high precision.
- */
 export function findServerPackage(destinationParam?: string, packageParam?: string): HolidayPackage | null {
   const p1 = decodeURIComponent(destinationParam || '').toLowerCase().trim();
   const p2 = decodeURIComponent(packageParam || '').toLowerCase().trim();

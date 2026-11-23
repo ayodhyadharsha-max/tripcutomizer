@@ -224,33 +224,46 @@ export default function AdminPackagesPage() {
       batch_source: 'mmt_sync',
     }));
 
-    // 1. Instant client-side persistence
-    cloudStore.saveCustomPackages(sanitizedToImport);
-    refreshCatalogData();
-    setIsUploadModalOpen(false);
-    setUploadedFile(null);
-    setParsedPreviewPackages([]);
-    setActiveBatchFilter('mmt_sync');
-    setCurrentPage(1);
+    setIsProcessingFile(true);
 
-    // 2. Server DB persistence (Supabase / Prisma / server store)
     try {
+      // 1. Direct Supabase server persistence
       const res = await fetch('/api/packages', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ packages: sanitizedToImport }),
       });
-      const data = await res.json();
-      if (data.success) {
-        triggerNotification(
-          `Successfully saved ${sanitizedToImport.length} MMT Sync packages to database & live catalog.`,
-          'success'
-        );
-      } else {
-        triggerNotification(`Saved locally. Server note: ${data.error || 'Sync pending'}`, 'info');
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.success) {
+        const errorDetail = data.details ? ` (${data.details})` : '';
+        const errorMessage = data.error || 'Failed to save packages to Supabase database.';
+        triggerNotification(`❌ Supabase Error: ${errorMessage}${errorDetail}`, 'error');
+        setIsProcessingFile(false);
+        return;
       }
-    } catch {
-      triggerNotification(`Saved locally in browser. Syncing to database in background.`, 'info');
+
+      // 2. Only on verified DB success, sync client store and close modal
+      cloudStore.saveCustomPackages(sanitizedToImport);
+      refreshCatalogData();
+      setIsUploadModalOpen(false);
+      setUploadedFile(null);
+      setParsedPreviewPackages([]);
+      setActiveBatchFilter('mmt_sync');
+      setCurrentPage(1);
+
+      triggerNotification(
+        `✅ Successfully saved ${sanitizedToImport.length} MMT Sync packages to live Supabase database!`,
+        'success'
+      );
+    } catch (netErr: any) {
+      triggerNotification(
+        `❌ Network Error: Could not connect to /api/packages (${netErr?.message || 'Check network connection'}).`,
+        'error'
+      );
+    } finally {
+      setIsProcessingFile(false);
     }
   };
 

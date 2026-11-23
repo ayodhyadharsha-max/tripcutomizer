@@ -2,18 +2,42 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { HolidayPackage } from '@/data/packagesData';
 import { findCatalogPackage } from '@/data/packageCatalog';
-import { findServerPackage } from '@/lib/serverPackageStore';
+import { findServerPackage, mapSupabaseRowToPackage } from '@/lib/serverPackageStore';
+import getSupabaseServer from '@/lib/supabaseServer';
 import { PackageDetailClientView } from '@/components/holidays/PackageDetailClientView';
 
-function getMatchedPackage(destinationParam: string, packageParam: string): HolidayPackage | null {
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+async function getMatchedPackage(destinationParam: string, packageParam: string): Promise<HolidayPackage | null> {
   const decodedPkgParam = decodeURIComponent(packageParam || '').toLowerCase().trim();
   const decodedDestParam = decodeURIComponent(destinationParam || '').toLowerCase().trim();
 
-  // 1. Look in persistent server store (Supabase, Prisma, file store)
-  const serverPkg = findServerPackage(decodedDestParam, decodedPkgParam);
-  if (serverPkg) return serverPkg;
+  // 1. Direct Supabase Query by slug or id
+  try {
+    const supabaseServer = getSupabaseServer();
+    if (supabaseServer) {
+      const { data, error } = await supabaseServer
+        .from('packages')
+        .select('*')
+        .or(`slug.eq.${decodedPkgParam},id.eq.${decodedPkgParam}`)
+        .maybeSingle();
 
-  // 2. Look in static catalog
+      if (data && !error) {
+        return mapSupabaseRowToPackage(data);
+      }
+    }
+  } catch (err) {
+    // Graceful fallback if Supabase table is empty or uninitialized
+  }
+
+  // 2. Look in persistent server store fallback
+  try {
+    const serverPkg = findServerPackage(decodedDestParam, decodedPkgParam);
+    if (serverPkg) return serverPkg;
+  } catch (err) {}
+
+  // 3. Look in static catalog
   const catalogPkg = findCatalogPackage(decodedDestParam, decodedPkgParam);
   if (catalogPkg) {
     if (
@@ -34,7 +58,7 @@ export async function generateMetadata({
 }: {
   params: { destination: string; package: string };
 }): Promise<Metadata> {
-  const pkg = getMatchedPackage(params.destination, params.package);
+  const pkg = await getMatchedPackage(params.destination, params.package);
   if (!pkg) {
     return {
       title: 'Tour Package Not Found',
@@ -89,16 +113,16 @@ export async function generateMetadata({
   };
 }
 
-export default function ServerPackageDetailPage({
+export default async function ServerPackageDetailPage({
   params,
 }: {
   params: { destination: string; package: string };
 }) {
-  const pkg = getMatchedPackage(params.destination, params.package);
+  const pkg = await getMatchedPackage(params.destination, params.package);
   if (!pkg) {
-    // If not found in server SSR, render client view to check local cloudStore / client API
     return <PackageDetailClientView params={params} initialPackage={null} />;
   }
+
   const price = Math.min(pkg.startingPrice || 0, pkg.discountPrice || pkg.startingPrice || 0) || pkg.startingPrice || 14999;
   const overviewText = pkg.highlights && pkg.highlights.length > 0 ? pkg.highlights.join('. ') : pkg.name;
 
@@ -146,7 +170,7 @@ export default function ServerPackageDetailPage({
       name: 'Trip Customizer',
       url: 'https://www.tripcustomizer.com',
     },
-    itinerary: pkg.itinerary.map((day) => ({
+    itinerary: (pkg.itinerary || []).map((day) => ({
       '@type': 'City',
       name: `Day ${day.dayNumber}: ${day.title}`,
       description: day.description,
@@ -185,7 +209,7 @@ export default function ServerPackageDetailPage({
     ],
   };
 
-  // 4. FAQPage Schema (if package faqs exist)
+  // 4. FAQPage Schema
   const faqJsonLd = pkg.faqs && pkg.faqs.length > 0 ? {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',

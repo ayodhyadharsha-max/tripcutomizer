@@ -89,20 +89,23 @@ CREATE TABLE IF NOT EXISTS public.packages (
     discount_price NUMERIC(10, 2),
     theme TEXT,
     hotel_category TEXT,
-    batch_source TEXT DEFAULT 'legacy' NOT NULL, -- 'legacy' | 'mmt_sync'
-    is_international BOOLEAN DEFAULT FALSE,
-    rating NUMERIC(3, 2) DEFAULT 4.8,
-    reviews_count INTEGER DEFAULT 120,
+    meal_plan TEXT DEFAULT 'Breakfast Included',
     hero_image TEXT,
     highlights JSONB DEFAULT '[]'::jsonb,
     inclusions JSONB DEFAULT '[]'::jsonb,
     exclusions JSONB DEFAULT '[]'::jsonb,
     itinerary JSONB DEFAULT '[]'::jsonb,
     hotels JSONB DEFAULT '[]'::jsonb,
+    faqs JSONB DEFAULT '[]'::jsonb,
+    batch_source TEXT DEFAULT 'legacy' NOT NULL, -- 'legacy' | 'mmt_sync'
+    is_international BOOLEAN DEFAULT FALSE,
+    rating NUMERIC(3, 2) DEFAULT 4.8,
+    reviews_count INTEGER DEFAULT 120,
     created_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
     updated_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );
 
+CREATE INDEX IF NOT EXISTS idx_packages_slug ON public.packages(slug);
 CREATE INDEX IF NOT EXISTS idx_packages_batch_source ON public.packages(batch_source);
 CREATE INDEX IF NOT EXISTS idx_packages_dest_slug ON public.packages(destination_slug);
 
@@ -112,8 +115,9 @@ CREATE INDEX IF NOT EXISTS idx_packages_dest_slug ON public.packages(destination
 ALTER TABLE public.customers ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.bookings ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.leads ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.packages ENABLE ROW LEVEL SECURITY;
 
--- Allow public access with anon key for app operation (can be restricted further as required)
+-- Allow public access for app operations
 CREATE POLICY "Allow public insert and read for customers" ON public.customers
     FOR ALL USING (true) WITH CHECK (true);
 
@@ -121,4 +125,13 @@ CREATE POLICY "Allow public insert and read for bookings" ON public.bookings
     FOR ALL USING (true) WITH CHECK (true);
 
 CREATE POLICY "Allow public insert and read for leads" ON public.leads
+    FOR ALL USING (true) WITH CHECK (true);
+
+-- Packages RLS policies: SELECT, INSERT, UPDATE, DELETE
+DROP POLICY IF EXISTS "Allow public read on packages" ON public.packages;
+CREATE POLICY "Allow public read on packages" ON public.packages
+    FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Allow public write on packages" ON public.packages;
+CREATE POLICY "Allow public write on packages" ON public.packages
     FOR ALL USING (true) WITH CHECK (true);
