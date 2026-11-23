@@ -2,6 +2,7 @@ import { db } from '@/lib/firebase';
 import { collection, doc, setDoc, onSnapshot } from 'firebase/firestore';
 import { supabase } from '@/lib/supabase';
 import { sendWeb3FormLead } from '@/lib/web3forms';
+import { HolidayPackage } from '@/data/packagesData';
 
 export interface PassengerDetail {
   name: string;
@@ -76,6 +77,8 @@ const STORAGE_KEYS = {
   PROFILES: 'tc_cloud_profiles_v1',
   CURRENT_USER: 'tc_cloud_current_user_v1',
   CO_TRAVELLERS: 'tc_cloud_co_travellers_v1',
+  CUSTOM_PACKAGES: 'tc_cloud_custom_packages_v1',
+  LEGACY_PACKAGES_DELETED: 'tc_cloud_legacy_deleted_v1',
 };
 
 // Initial Seed Data
@@ -777,9 +780,45 @@ export const cloudStore = {
         localStorage.removeItem(STORAGE_KEYS.PROFILES);
         localStorage.removeItem(STORAGE_KEYS.CURRENT_USER);
         localStorage.removeItem(STORAGE_KEYS.CO_TRAVELLERS);
+        localStorage.removeItem(STORAGE_KEYS.CUSTOM_PACKAGES);
+        localStorage.removeItem(STORAGE_KEYS.LEGACY_PACKAGES_DELETED);
         window.dispatchEvent(new Event('storage'));
       } catch (e) {}
     }
+  },
+
+  getCustomPackages: (): HolidayPackage[] => {
+    return getStoredData<HolidayPackage[]>(STORAGE_KEYS.CUSTOM_PACKAGES, []);
+  },
+
+  saveCustomPackages: (newPackages: HolidayPackage[]): void => {
+    const existing = cloudStore.getCustomPackages();
+    const existingIds = new Set(existing.map((p) => p.id));
+    const toAdd = newPackages.filter((p) => !existingIds.has(p.id));
+    const updated = [...toAdd, ...existing];
+    setStoredData(STORAGE_KEYS.CUSTOM_PACKAGES, updated);
+  },
+
+  setAllCustomPackages: (packages: HolidayPackage[]): void => {
+    setStoredData(STORAGE_KEYS.CUSTOM_PACKAGES, packages);
+  },
+
+  deleteCustomPackage: (id: string): void => {
+    const existing = cloudStore.getCustomPackages();
+    const updated = existing.filter((p) => p.id !== id);
+    setStoredData(STORAGE_KEYS.CUSTOM_PACKAGES, updated);
+  },
+
+  isLegacyPackagesDeleted: (): boolean => {
+    return getStoredData<boolean>(STORAGE_KEYS.LEGACY_PACKAGES_DELETED, false);
+  },
+
+  deleteLegacyPackages: (): void => {
+    setStoredData(STORAGE_KEYS.LEGACY_PACKAGES_DELETED, true);
+  },
+
+  restoreLegacyPackages: (): void => {
+    setStoredData(STORAGE_KEYS.LEGACY_PACKAGES_DELETED, false);
   },
 };
 

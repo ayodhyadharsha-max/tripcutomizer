@@ -74,6 +74,7 @@ model HolidayPackage {
   exclusions     String
   theme          String
   hotelCategory  String
+  batch_source   String             @default("legacy")
   rating         Float              @default(4.5)
   isFeatured     Boolean            @default(false)
   isHoneymoon    Boolean            @default(false)

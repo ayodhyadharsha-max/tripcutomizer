@@ -76,6 +76,36 @@ CREATE INDEX IF NOT EXISTS idx_leads_phone ON public.leads(phone);
 CREATE INDEX IF NOT EXISTS idx_leads_created ON public.leads(created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_leads_status ON public.leads(status);
 
+-- 4. PACKAGES TABLE (WITH BATCH_SOURCE TRACKING)
+CREATE TABLE IF NOT EXISTS public.packages (
+    id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    slug TEXT NOT NULL UNIQUE,
+    destination TEXT NOT NULL,
+    destination_slug TEXT NOT NULL,
+    duration_days INTEGER NOT NULL,
+    duration_nights INTEGER NOT NULL,
+    starting_price NUMERIC(10, 2) NOT NULL,
+    discount_price NUMERIC(10, 2),
+    theme TEXT,
+    hotel_category TEXT,
+    batch_source TEXT DEFAULT 'legacy' NOT NULL, -- 'legacy' | 'mmt_sync'
+    is_international BOOLEAN DEFAULT FALSE,
+    rating NUMERIC(3, 2) DEFAULT 4.8,
+    reviews_count INTEGER DEFAULT 120,
+    hero_image TEXT,
+    highlights JSONB DEFAULT '[]'::jsonb,
+    inclusions JSONB DEFAULT '[]'::jsonb,
+    exclusions JSONB DEFAULT '[]'::jsonb,
+    itinerary JSONB DEFAULT '[]'::jsonb,
+    hotels JSONB DEFAULT '[]'::jsonb,
+    created_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
+    updated_at TIMESTAMPTZ DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_packages_batch_source ON public.packages(batch_source);
+CREATE INDEX IF NOT EXISTS idx_packages_dest_slug ON public.packages(destination_slug);
+
 -- =========================================================
 -- 🔒 ROW LEVEL SECURITY (RLS) POLICIES
 -- =========================================================

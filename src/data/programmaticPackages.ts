@@ -35,6 +35,7 @@ export interface ProgrammaticPackage {
   reviewsCount: number;
   heroImage: string;
   departureCity: ProgrammaticDepartureCity;
+  batch_source?: string;
   highlights: string[];
   inclusions: string[];
   exclusions: string[];

@@ -40,6 +40,7 @@ export interface HolidayPackage {
   flightsIncluded: boolean;
   transfersIncluded: boolean;
   departureCity: string;
+  batch_source?: string; // 'legacy' | 'mmt_sync'
   itinerary: ItineraryDay[];
   hotels: { name: string; city: string; rating: string; nights: number }[];
   faqs: { question: string; answer: string }[];

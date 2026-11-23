@@ -923,6 +923,7 @@ function generateSynthesizedPackage(
     exclusions: circuit.exclusions,
     theme: themeObj.theme,
     hotelCategory: hotelTier,
+    batch_source: 'legacy',
     mealPlan: 'Breakfast Included',
     flightsIncluded: false,
     transfersIncluded: true,
@@ -992,11 +993,29 @@ function initializeCatalog(): { all: HolidayPackage[]; lookup: Map<string, Holid
 }
 
 export function getAllCatalogPackages(): HolidayPackage[] {
-  return initializeCatalog().all;
+  const baseCatalog = initializeCatalog().all;
+
+  // In browser runtime, seamlessly merge user uploaded MMT Sync packages and honor legacy delete
+  if (typeof window !== 'undefined') {
+    try {
+      const rawLegacyDeleted = localStorage.getItem('tc_cloud_legacy_deleted_v1');
+      const isLegacyDeleted = rawLegacyDeleted ? JSON.parse(rawLegacyDeleted) : false;
+
+      const rawCustom = localStorage.getItem('tc_cloud_custom_packages_v1');
+      const customPackages: HolidayPackage[] = rawCustom ? JSON.parse(rawCustom) : [];
+
+      const activeLegacy = isLegacyDeleted ? [] : baseCatalog;
+      return [...customPackages, ...activeLegacy];
+    } catch (e) {
+      return baseCatalog;
+    }
+  }
+
+  return baseCatalog;
 }
 
 export function getCatalogPackageCount(): number {
-  return initializeCatalog().all.length;
+  return getAllCatalogPackages().length;
 }
 
 export function findCatalogPackage(
