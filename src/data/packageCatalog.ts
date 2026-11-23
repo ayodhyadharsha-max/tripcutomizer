@@ -683,140 +683,139 @@ function slugify(text: string): string {
     .replace(/^-+|-+$/g, '');
 }
 
+function getThemeRank(rawTheme: string, themeName: string): number {
+  const t = (rawTheme + ' ' + themeName).toLowerCase();
+  if (t.includes('budget')) return 0;
+  if (t.includes('pilgrimage') || t.includes('spiritual')) return 1;
+  if (t.includes('weekend')) return 2;
+  if (t.includes('standard') || t.includes('holiday explorer')) return 3;
+  if (t.includes('family')) return 4;
+  if (t.includes('adventure') || t.includes('trek')) return 5;
+  if (t.includes('wildlife') || t.includes('safari')) return 6;
+  if (t.includes('honeymoon')) return 7;
+  if (t.includes('luxury')) return 8;
+  return 3;
+}
+
 function computeB2BPackagePricing(
   sector: SectorDefinition,
   themeObj: { raw: string; theme: string; suffix: string },
   nights: number,
   days: number,
-  pkgIndex: number
+  pkgIndex: number,
+  durIndex: number
 ): { startingPrice: number; discountPrice: number } {
   const slug = sector.destinationSlug.toLowerCase();
   
   // 1. Destination Category & Base Room Night Rate (Per Room / Night for 2 Adults in 3★ / Standard)
   let baseRoomRate = 3400;
-  let baseCabDaily = 3200;
-  let bufferCost = 1500 * 2;
+  let baseCabDaily = 3000;
 
   if (sector.isInternational) {
-    // Realistic International B2B Room + Transfer Rates (Per Room Night for 2 Adults in INR)
     if (['thailand', 'vietnam', 'nepal', 'sri-lanka'].includes(slug)) {
-      baseRoomRate = 4500;
+      baseRoomRate = 4800;
       baseCabDaily = 3800;
     } else if (['bali', 'indonesia', 'malaysia'].includes(slug)) {
-      baseRoomRate = 5200;
+      baseRoomRate = 5400;
       baseCabDaily = 4200;
     } else if (['dubai', 'uae', 'turkey', 'egypt', 'baku'].includes(slug)) {
-      baseRoomRate = 7500;
+      baseRoomRate = 7800;
       baseCabDaily = 4800;
     } else if (['singapore'].includes(slug)) {
-      baseRoomRate = 8800;
-      baseCabDaily = 5200;
+      baseRoomRate = 9200;
+      baseCabDaily = 5400;
     } else if (['maldives', 'mauritius'].includes(slug)) {
-      baseRoomRate = 16500;
+      baseRoomRate = 18000;
       baseCabDaily = 2500;
     } else if (['europe', 'switzerland'].includes(slug)) {
-      baseRoomRate = 18500;
-      baseCabDaily = 7500;
+      baseRoomRate = 19500;
+      baseCabDaily = 7800;
     } else if (['japan', 'south-africa'].includes(slug)) {
-      baseRoomRate = 16000;
-      baseCabDaily = 6800;
+      baseRoomRate = 17000;
+      baseCabDaily = 7200;
     } else if (['australia', 'usa'].includes(slug)) {
-      baseRoomRate = 21000;
-      baseCabDaily = 8500;
+      baseRoomRate = 22000;
+      baseCabDaily = 8800;
     } else {
-      baseRoomRate = 6500;
-      baseCabDaily = 4500;
+      baseRoomRate = 6800;
+      baseCabDaily = 4600;
     }
   } else {
     // Domestic India Categories
-    const isHill = ['kashmir', 'himachal', 'uttarakhand', 'ladakh', 'sikkim', 'darjeeling', 'spiti'].includes(slug);
-    const isPilgrim = ['ayodhya', 'varanasi', 'char-dham', 'mathura', 'tirupati', 'ujjain', 'dwarka', 'puri', 'shirdi'].includes(slug);
-    const isLeisure = ['goa', 'kerala', 'rajasthan', 'andaman', 'coorg', 'tamilnadu', 'gujarat', 'wildlife', 'maharashtra'].includes(slug);
+    // Budget/Plains & Spiritual: UP, Rajasthan, Gujarat, MP (₹3,200 – ₹4,200 per night)
+    const isPlainsOrPilgrim = ['ayodhya', 'varanasi', 'mathura', 'rajasthan', 'gujarat', 'wildlife', 'maharashtra'].includes(slug);
+    // Hill Stations & Backwaters: Himachal, Uttarakhand, Kerala, Coorg/Ooty (₹3,800 – ₹4,800 per night)
+    const isHillOrBackwaters = ['himachal', 'uttarakhand', 'kerala', 'coorg', 'tamilnadu', 'goa'].includes(slug);
+    // High-Cost / Island / Remote Circuits: Kashmir, Andaman, Ladakh, Sikkim/North-East (₹4,500 – ₹6,000 per night)
+    const isRemoteOrIsland = ['kashmir', 'andaman', 'ladakh', 'sikkim', 'north-east', 'char-dham'].includes(slug);
 
     if (slug === 'ladakh') {
-      baseRoomRate = 5500;
-      baseCabDaily = 7500;
+      baseRoomRate = 5600;
+      baseCabDaily = 7200; // High mountain passes 4x4 heavy SUV
     } else if (slug === 'andaman') {
+      baseRoomRate = 5200;
+      baseCabDaily = 4000;
+    } else if (isRemoteOrIsland) {
       baseRoomRate = 4800;
-      baseCabDaily = 3800;
-    } else if (isHill) {
+      baseCabDaily = 4200;
+    } else if (isHillOrBackwaters) {
       baseRoomRate = 4200;
       baseCabDaily = 3800;
-    } else if (isPilgrim) {
-      baseRoomRate = 3600;
-      baseCabDaily = 3200;
-    } else if (isLeisure) {
-      baseRoomRate = 4000;
-      baseCabDaily = 3400;
+    } else if (isPlainsOrPilgrim) {
+      baseRoomRate = 3400;
+      baseCabDaily = 3000;
     } else {
-      baseRoomRate = 3200;
+      baseRoomRate = 3400;
       baseCabDaily = 3000;
     }
   }
 
-  // Special experience supplement per booking
+  // Surcharges for specialized experiences (per person twin-sharing basis)
   let specialSupplement = 0;
   if (slug === 'kashmir') {
-    specialSupplement = 5500;
+    specialSupplement = 2500; // Dal Lake Houseboat stay & Shikara
   } else if (slug === 'kerala') {
-    specialSupplement = 9500;
-  } else if (slug === 'rajasthan' && pkgIndex % 2 === 0) {
-    specialSupplement = 4200;
+    specialSupplement = 4000; // Private Alleppey Houseboat with full board
+  } else if (slug === 'rajasthan') {
+    specialSupplement = 2000; // Jaisalmer Desert Camp with Camel Safari
   } else if (slug === 'andaman') {
-    specialSupplement = 10400;
+    specialSupplement = 5000; // Catamaran cruise ferries
   } else if (['wildlife', 'corbett', 'kaziranga', 'south-africa'].includes(slug)) {
-    specialSupplement = slug === 'south-africa' ? 14000 : 7500;
+    specialSupplement = slug === 'south-africa' ? 7000 : 3500; // Dedicated 4x4 Jeep Safari
   } else if (slug === 'switzerland' || slug === 'europe') {
-    specialSupplement = 12500;
+    specialSupplement = 7000; // Mt. Titlis Rotair Cable Car & Jungfraujoch
   } else if (slug === 'japan') {
-    specialSupplement = 11000;
+    specialSupplement = 6000; // Shinkansen Bullet Train & Fuji Cruise
   }
 
-  // 2. Theme Multiplier & Inclusions Value
-  let themeMultiplier = 1.0;
-  const themeName = themeObj.theme.toLowerCase();
-  const rawTheme = themeObj.raw.toLowerCase();
+  const pNight = baseRoomRate / 2;
+  const pCab = baseCabDaily / 2;
+  const rawStep = (pNight + pCab) * 1.22;
+  
+  // Ensure duration step is at least 5000 for domestic, and rounded to nearest 500
+  // So the 9 themes of 500 span (0 to 4000) fit strictly inside the duration gap
+  const durStep = Math.max(5000, Math.round(rawStep / 500) * 500);
 
-  if (themeName.includes('honeymoon') || rawTheme.includes('honeymoon')) {
-    themeMultiplier = 1.18;
-  } else if (themeName.includes('luxury') || rawTheme.includes('luxury')) {
-    themeMultiplier = 1.38;
-  } else if (themeName.includes('budget') || rawTheme.includes('budget')) {
-    themeMultiplier = 0.92;
-  } else if (themeName.includes('family') || rawTheme.includes('family')) {
-    themeMultiplier = 1.08;
-  } else if (themeName.includes('adventure') || rawTheme.includes('adventure') || rawTheme.includes('wildlife')) {
-    themeMultiplier = 1.12;
-  } else if (themeName.includes('spiritual') || rawTheme.includes('pilgrimage')) {
-    themeMultiplier = 0.96;
-  }
+  // Baseline for 3N/4D (durIndex 0)
+  const base3N = Math.round(((3 * pNight) + (4 * pCab) + specialSupplement) * 1.22 / 500) * 500;
+  
+  // Duration tier base
+  const durationBase = base3N + (durIndex * durStep);
 
-  const subtleVariance = ((pkgIndex * 179) % 7 - 3) * 150;
+  // Theme offset
+  const themeRank = getThemeRank(themeObj.raw, themeObj.theme);
+  const themeOffset = themeRank * 500;
 
-  const totalHotelCost = (nights * baseRoomRate) + specialSupplement;
-  const totalCabCost = days * baseCabDaily;
-  const netCostForTwo = (totalHotelCost + totalCabCost + bufferCost) * themeMultiplier + subtleVariance;
+  // Final psychological starting price (e.g. 14999, 18499, 22999)
+  let finalStartingPrice = durationBase + themeOffset - 1;
+  if (finalStartingPrice < 4999) finalStartingPrice = 4999;
 
-  const sellingPriceForTwo = netCostForTwo * 1.22;
-  let rawPerPerson = sellingPriceForTwo / 2;
-
-  if (sector.minPrice && sector.maxPrice) {
-    const durationFactor = Math.min(1.0, Math.max(0.4, (days - 3) / 7));
-    const expectedBase = sector.minPrice + (sector.maxPrice - sector.minPrice) * durationFactor * 0.45;
-    rawPerPerson = Math.max(sector.minPrice * 0.9, Math.min(sector.maxPrice * 1.1, (rawPerPerson + expectedBase) / 2));
-  }
-
-  rawPerPerson = rawPerPerson * (themeMultiplier > 1.2 ? 1.08 : themeMultiplier < 0.95 ? 0.95 : 1.0);
-
-  let finalStartingPrice = Math.round(rawPerPerson / 100) * 100;
-  if (finalStartingPrice > 10000) {
-    finalStartingPrice = finalStartingPrice - 1;
-  }
-
-  const discountMultiplier = 1.24 + ((pkgIndex % 5) * 0.02);
-  let finalDiscountPrice = Math.round((finalStartingPrice * discountMultiplier) / 100) * 100;
-  if (finalDiscountPrice > 10000) {
-    finalDiscountPrice = finalDiscountPrice - 1;
+  // Strikethrough price: strictly 15% to 22% higher than starting price
+  const targetPct = 0.175 + ((pkgIndex % 4) * 0.009); // 17.5% to 20.2%
+  let finalDiscountPrice = Math.round((finalStartingPrice * (1 + targetPct)) / 500) * 500 - 1;
+  const diffPct = ((finalDiscountPrice - finalStartingPrice) / finalStartingPrice) * 100;
+  if (diffPct < 15.0 || diffPct > 22.0) {
+    finalDiscountPrice = Math.round((finalStartingPrice * 1.185) / 100) * 100 - 1;
   }
 
   return { startingPrice: finalStartingPrice, discountPrice: finalDiscountPrice };
@@ -827,7 +826,8 @@ function generateSynthesizedPackage(
   sectorIndex: number,
   pkgIndex: number,
   durObj: { label: string; days: number; nights: number },
-  themeObj: { raw: string; theme: string; suffix: string }
+  themeObj: { raw: string; theme: string; suffix: string },
+  durIdx?: number
 ): HolidayPackage {
   // All package cards across the catalog strictly default to 3-Star Standard baseline pricing
   const hotelTier = '3-Star Standard';
@@ -840,12 +840,15 @@ function generateSynthesizedPackage(
     hotelTier
   );
 
+  const effectiveDurIndex = durIdx ?? DURATIONS_CONFIG.findIndex(d => d.label === durObj.label);
+
   const { startingPrice, discountPrice } = computeB2BPackagePricing(
     sector,
     themeObj,
     durObj.nights,
     durObj.days,
-    pkgIndex
+    pkgIndex,
+    effectiveDurIndex >= 0 ? effectiveDurIndex : 0
   );
 
   const ratings = [4.7, 4.8, 4.9, 4.85, 4.95];
@@ -944,9 +947,10 @@ function initializeCatalog(): { all: HolidayPackage[]; lookup: Map<string, Holid
   // Generate 100% clean, non-duplicate master packages (Industry Standard Architecture)
   let pkgSeq = 1;
   OTA_DOMESTIC_SECTORS.forEach((sector, sIdx) => {
+    let durIdx = 0;
     for (const durObj of DURATIONS_CONFIG) {
       for (const themeObj of THEMES_CONFIG) {
-        const pkg = generateSynthesizedPackage(sector, sIdx, pkgSeq, durObj, themeObj);
+        const pkg = generateSynthesizedPackage(sector, sIdx, pkgSeq, durObj, themeObj, durIdx);
         all.push(pkg);
         lookup.set(pkg.id.toLowerCase(), pkg);
         lookup.set(pkg.slug.toLowerCase(), pkg);
@@ -954,10 +958,12 @@ function initializeCatalog(): { all: HolidayPackage[]; lookup: Map<string, Holid
         lookup.set(pkg.id.toLowerCase().replace(/^pkg-/, ''), pkg);
         pkgSeq++;
       }
+      durIdx++;
     }
   });
 
   OTA_INTERNATIONAL_SECTORS.forEach((sector, sIdx) => {
+    let durIdx = 0;
     for (const durObj of DURATIONS_CONFIG) {
       for (const themeObj of THEMES_CONFIG) {
         const pkg = generateSynthesizedPackage(
@@ -965,7 +971,8 @@ function initializeCatalog(): { all: HolidayPackage[]; lookup: Map<string, Holid
           sIdx + OTA_DOMESTIC_SECTORS.length,
           pkgSeq,
           durObj,
-          themeObj
+          themeObj,
+          durIdx
         );
         all.push(pkg);
         lookup.set(pkg.id.toLowerCase(), pkg);
@@ -974,6 +981,7 @@ function initializeCatalog(): { all: HolidayPackage[]; lookup: Map<string, Holid
         lookup.set(pkg.id.toLowerCase().replace(/^pkg-/, ''), pkg);
         pkgSeq++;
       }
+      durIdx++;
     }
   });
 
