@@ -1,22 +1,19 @@
 import { HolidayPackage } from '@/data/packagesData';
 
+// Specific target package requested by user
+export function isTargetHyderabadPackage(pkgOrSlug?: any): boolean {
+  if (!pkgOrSlug) return false;
+  const slug = typeof pkgOrSlug === 'string' ? pkgOrSlug : (pkgOrSlug.slug || pkgOrSlug.id || '');
+  return slug.toLowerCase().includes('andhra-pradesh-premium-hyderabad-getaway');
+}
+
 // Check if a package is strictly a Premium / Luxury tier package (no 3-star allowed)
+// Strictly scoped to the specified package
 export function isPremiumPackage(
   pkgOrCategory?: { name?: string; slug?: string; hotelCategory?: string; theme?: string } | string
 ): boolean {
   if (!pkgOrCategory) return false;
-  const str =
-    typeof pkgOrCategory === 'string'
-      ? pkgOrCategory
-      : `${pkgOrCategory.name || ''} ${pkgOrCategory.slug || ''} ${pkgOrCategory.hotelCategory || ''} ${pkgOrCategory.theme || ''}`;
-  const lower = str.toLowerCase();
-  return (
-    lower.includes('premium') ||
-    lower.includes('luxury') ||
-    lower.includes('5-star') ||
-    lower.includes('5★') ||
-    lower.includes('premium-hyderabad')
-  );
+  return isTargetHyderabadPackage(pkgOrCategory);
 }
 
 // Resolve baseline hotel tier of a package ('standard' | 'deluxe' | 'luxury')
@@ -25,28 +22,14 @@ export function getPackageBaselineTier(
   pkgName?: string,
   pkgSlug?: string
 ): 'standard' | 'deluxe' | 'luxury' {
-  const cat = (hotelCategory || '').toLowerCase();
-  const name = (pkgName || '').toLowerCase();
-  const slug = (pkgSlug || '').toLowerCase();
-
-  if (
-    cat.includes('5') ||
-    cat.includes('luxury') ||
-    cat.includes('5-star') ||
-    cat.includes('5★') ||
-    name.includes('luxury') ||
-    slug.includes('premium-hyderabad')
-  ) {
+  if (pkgSlug && isTargetHyderabadPackage(pkgSlug)) {
     return 'luxury';
   }
-  if (
-    cat.includes('4') ||
-    cat.includes('deluxe') ||
-    cat.includes('4-star') ||
-    cat.includes('4★') ||
-    name.includes('premium') ||
-    slug.includes('premium')
-  ) {
+  const cat = (hotelCategory || '').toLowerCase();
+  if (cat.includes('5') || cat.includes('luxury') || cat.includes('5-star') || cat.includes('5★')) {
+    return 'luxury';
+  }
+  if (cat.includes('4') || cat.includes('deluxe') || cat.includes('4-star') || cat.includes('4★')) {
     return 'deluxe';
   }
   return 'standard';
@@ -58,14 +41,8 @@ export function getPackageHotelBadgeInfo(
   pkgName?: string,
   pkgSlug?: string
 ) {
-  const isHydOrPremium =
-    (pkgSlug && (pkgSlug.includes('premium-hyderabad') || pkgSlug.includes('hyderabad'))) ||
-    (pkgName && (pkgName.toLowerCase().includes('premium hyderabad') || pkgName.toLowerCase().includes('premium')));
-
-  const tier = getPackageBaselineTier(hotelCategory, pkgName, pkgSlug);
-
-  // If it's the Premium Hyderabad package or 5-Star Luxury
-  if (isHydOrPremium || tier === 'luxury') {
+  // ONLY for that specific Hyderabad package, show 5-star card badge
+  if (pkgSlug && isTargetHyderabadPackage(pkgSlug)) {
     return {
       tier: 'luxury' as const,
       badgeLabel: '5★ Luxury',
@@ -75,12 +52,24 @@ export function getPackageHotelBadgeInfo(
     };
   }
 
+  const tier = getPackageBaselineTier(hotelCategory);
+
+  if (tier === 'luxury') {
+    return {
+      tier: 'luxury' as const,
+      badgeLabel: '5★ Luxury',
+      twinSharingLabel: '5★ Luxury Twin Sharing',
+      optionsLabel: 'Customizable • 3★ / 4★ Available',
+      badgeClass: 'bg-amber-100 text-amber-950 border-amber-300',
+    };
+  }
+
   if (tier === 'deluxe') {
     return {
       tier: 'deluxe' as const,
       badgeLabel: '4★ Deluxe',
       twinSharingLabel: '4★ Deluxe Twin Sharing',
-      optionsLabel: 'Upgradable to 5★ Luxury',
+      optionsLabel: 'Customizable • 3★ / 5★ Available',
       badgeClass: 'bg-brand-50 text-brand-900 border-brand-200',
     };
   }
@@ -93,4 +82,5 @@ export function getPackageHotelBadgeInfo(
     badgeClass: 'bg-amber-50 text-amber-900 border-amber-200/60',
   };
 }
+
 
