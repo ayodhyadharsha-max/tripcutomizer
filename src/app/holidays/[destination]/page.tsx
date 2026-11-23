@@ -33,7 +33,7 @@ function matchPackagesForDestination(rawSlug: string, allCatalog: ReturnType<typ
     'mathura', 'vrindavan', 'ayodhya-varanasi', 'mathura-vrindavan', 'tamilnadu', 'karnataka',
     'maharashtra', 'wildlife', 'andaman', 'ooty', 'kodaikanal', 'madurai', 'kanyakumari',
     'mysore', 'kabini', 'hampi', 'spiti', 'dharamshala', 'dalhousie', 'kasol', 'rishikesh',
-    'mussoorie', 'haridwar', 'lonavala', 'mahabaleshwar'
+    'mussoorie', 'haridwar', 'lonavala', 'mahabaleshwar', 'andhra', 'andhra-pradesh', 'hyderabad', 'telangana'
   ].some((s) => rawSlug.includes(s));
 
   return allCatalog.filter((p) => {
@@ -128,6 +128,18 @@ function matchPackagesForDestination(rawSlug: string, allCatalog: ReturnType<typ
     }
     if (rawSlug === 'shirdi') {
       if (dSlug === 'maharashtra' || dSlug === 'char-dham' || (p.coveredCities && p.coveredCities.some(c => c.toLowerCase().includes('shirdi')))) return true;
+    }
+
+    // 15. Andhra Pradesh & Hyderabad
+    if (rawSlug === 'andhra-pradesh' || rawSlug === 'hyderabad' || rawSlug === 'telangana' || rawSlug === 'andhra') {
+      if (
+        dSlug === 'andhra-pradesh' ||
+        dSlug === 'hyderabad' ||
+        dest.includes('andhra') ||
+        dest.includes('hyderabad') ||
+        name.includes('hyderabad') ||
+        (p.coveredCities && p.coveredCities.some(c => c.toLowerCase().includes('hyderabad')))
+      ) return true;
     }
 
     // Direct Destination / Country / Multi-City Circuit Match

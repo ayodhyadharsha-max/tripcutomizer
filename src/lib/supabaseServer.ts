@@ -24,7 +24,7 @@ export const isSupabaseOffline = (): boolean => {
 
 export async function withTimeout<T>(
   promise: Promise<T> | PromiseLike<T> | any,
-  ms = 800,
+  ms = 2500,
   errorMsg = 'Supabase operation timed out'
 ): Promise<T> {
   let timer: NodeJS.Timeout;

@@ -11,7 +11,7 @@ import { Badge } from '@/components/ui/Badge';
 import { HolidayPackage } from '@/data/packagesData';
 import { findCatalogPackage, getAllCatalogPackages } from '@/data/packageCatalog';
 import { formatCurrency } from '@/lib/utils';
-import { getPackageBaselineTier, getPackageHotelBadgeInfo } from '@/lib/packageUtils';
+import { getPackageBaselineTier, getPackageHotelBadgeInfo, isPremiumPackage } from '@/lib/packageUtils';
 import { useAuth } from '@/context/AuthContext';
 import { cloudStore, CoTraveller } from '@/lib/cloudStore';
 import { sendWeb3FormLead } from '@/lib/web3forms';
@@ -261,6 +261,16 @@ const DESTINATION_HOTEL_TIERS: Record<string, { standard: string; deluxe: string
     standard: 'Suba International / Treebo Trend Mumbai (3★ Standard)',
     deluxe: 'Courtyard by Marriott Mumbai / Radisson Blu (4★ Deluxe)',
     luxury: 'Courtyard by Marriott Mumbai / Radisson Blu Mumbai (5★ Luxury)'
+  },
+  hyderabad: {
+    standard: 'Novotel Hyderabad Convention Centre / Lemon Tree Premier Hitec City (4★ Deluxe)',
+    deluxe: 'Novotel Hyderabad Convention Centre / Radisson Hyderabad Hitec City (4★ Deluxe)',
+    luxury: 'Taj Krishna Banjara Hills / ITC Kakatiya / Trident Hyderabad (5★ Luxury)'
+  },
+  andhra: {
+    standard: 'Novotel Hyderabad / Lemon Tree Premier (4★ Deluxe)',
+    deluxe: 'Novotel Hyderabad / Radisson Hitec City (4★ Deluxe)',
+    luxury: 'Taj Krishna Banjara Hills / ITC Kakatiya (5★ Luxury)'
   }
 };
 
@@ -501,14 +511,25 @@ export function PackageDetailClientView({
   const [inclusionCategory, setInclusionCategory] = useState<'all' | 'hotels' | 'sightseeing' | 'meals' | 'transfers' | 'exclusions'>('all');
 
   // Pricing & Tier State: Defaults to the package's native baseline hotel category (3★ Standard, 4★ Deluxe, or 5★ Luxury)
-  const baselineTier = useMemo(() => getPackageBaselineTier(pkg.hotelCategory), [pkg.hotelCategory]);
-  const [tourTier, setTourTier] = useState<'standard' | 'deluxe' | 'luxury'>(() => getPackageBaselineTier(pkg?.hotelCategory));
+  const isPremium = useMemo(() => isPremiumPackage(pkg), [pkg]);
+  const baselineTier = useMemo(
+    () => getPackageBaselineTier(pkg.hotelCategory, pkg.name, pkg.slug),
+    [pkg.hotelCategory, pkg.name, pkg.slug]
+  );
+  const [tourTier, setTourTier] = useState<'standard' | 'deluxe' | 'luxury'>(() => {
+    const base = getPackageBaselineTier(pkg?.hotelCategory, pkg?.name, pkg?.slug);
+    if (isPremiumPackage(pkg) && base === 'standard') return 'deluxe';
+    return base;
+  });
 
   useEffect(() => {
-    if (pkg?.hotelCategory) {
-      setTourTier(getPackageBaselineTier(pkg.hotelCategory));
+    const base = getPackageBaselineTier(pkg?.hotelCategory, pkg?.name, pkg?.slug);
+    if (isPremiumPackage(pkg)) {
+      setTourTier(base === 'luxury' ? 'luxury' : 'deluxe');
+    } else {
+      setTourTier(base);
     }
-  }, [pkg?.id, pkg?.hotelCategory]);
+  }, [pkg?.id, pkg?.hotelCategory, pkg?.name, pkg?.slug]);
 
   // Thomas Cook Style Travel Details & Calculate Price Wizard View State
   const [isCalculatePriceView, setIsCalculatePriceView] = useState(false);
@@ -895,17 +916,44 @@ export function PackageDetailClientView({
 
     // Helper to strip any category suffix like "(3★ Standard)", "(4-Star Deluxe)", etc.
     const cleanHotelName = (name: string): string => {
-      return (name || '')
+      let cleaned = (name || '')
         .replace(/\s*\([^)]*(?:★|Star|Deluxe|Standard|Luxury|Category|MAP with Dinner|Cultural Show|CP)[^)]*\)/gi, '')
         .replace(/\s*\([345]-Star[^)]*\)/gi, '')
         .trim();
+
+      if (
+        isPremium ||
+        cleaned.toLowerCase().includes('standard') ||
+        cleaned.toLowerCase().includes('3-star') ||
+        cleaned.toLowerCase().includes('3★')
+      ) {
+        cleaned = cleaned
+          .replace(/\b3\s*(?:-| )?(?:Star|★)?\s*Standard\b/gi, '')
+          .replace(/\b3\s*(?:-| )?(?:Star|★)\b/gi, '')
+          .replace(/\bTreebo\s*Trend\b/gi, 'Novotel / Lemon Tree')
+          .replace(/\bGinger\b/gi, 'Fortune Park')
+          .replace(/\bStandard Hotel\b/gi, 'Deluxe Hotel')
+          .replace(/\bStandard Accommodation\b/gi, 'Deluxe Accommodation')
+          .trim();
+      }
+
+      return cleaned;
     };
 
-    // If originalHotel is already defined, return clean name directly without category suffix
-    if (originalHotel && originalHotel.trim().length > 3) {
+    // If originalHotel is already defined and is NOT a generic 3-Star placeholder
+    if (
+      originalHotel &&
+      originalHotel.trim().length > 3 &&
+      !originalHotel.toLowerCase().includes('3-star') &&
+      !originalHotel.toLowerCase().includes('3★') &&
+      !originalHotel.toLowerCase().includes('standard') &&
+      !originalHotel.toLowerCase().includes('hotel / resort')
+    ) {
       const cleaned = cleanHotelName(originalHotel);
       if (cleaned.length > 2) return cleaned;
     }
+
+    const effectiveTier = isPremium && tier === 'standard' ? 'deluxe' : tier;
 
     // Check for Houseboat
     if (raw.includes('houseboat') || title.includes('houseboat') || title.includes('shikara')) {
@@ -1018,6 +1066,8 @@ export function PackageDetailClientView({
       matchedKey = 'delhi';
     } else if (raw.includes('mumbai')) {
       matchedKey = 'mumbai';
+    } else if (raw.includes('hyderabad') || raw.includes('andhra') || raw.includes('secunderabad')) {
+      matchedKey = 'hyderabad';
     }
 
     // Secondary fallback: if raw did not match, check day title or city
@@ -1110,6 +1160,8 @@ export function PackageDetailClientView({
         matchedKey = 'delhi';
       } else if (title.includes('mumbai')) {
         matchedKey = 'mumbai';
+      } else if (title.includes('hyderabad') || title.includes('charminar') || title.includes('ramoji') || title.includes('golconda')) {
+        matchedKey = 'hyderabad';
       }
     }
 
@@ -1135,19 +1187,16 @@ export function PackageDetailClientView({
     }
 
     if (matchedKey && DESTINATION_HOTEL_TIERS[matchedKey]) {
-      return cleanHotelName(DESTINATION_HOTEL_TIERS[matchedKey][tier]);
+      return cleanHotelName(DESTINATION_HOTEL_TIERS[matchedKey][effectiveTier]);
     }
 
     // Generic fallback for any other city without appended category
     const cityName = pkg.destination?.split(',')[0]?.split(' ')[0] || 'City';
     const cleanCity = cityName.charAt(0).toUpperCase() + cityName.slice(1);
-    if (tier === 'standard') {
-      return `Ginger / Treebo Trend ${cleanCity}`;
-    }
-    if (tier === 'luxury') {
+    if (effectiveTier === 'luxury') {
       return `Taj / Radisson Blu ${cleanCity} Luxury Palace`;
     }
-    return `Fortune / Lemon Tree Premier ${cleanCity}`;
+    return `Novotel / Lemon Tree Premier ${cleanCity}`;
   };
 
   // Dynamic Total Calculation
@@ -1728,7 +1777,9 @@ export function PackageDetailClientView({
                                 </div>
                                 <div className="space-y-1">
                                   <h3 className="font-black text-sm sm:text-base text-slate-900">
-                                    {dayItem.title}
+                                    {isPremium
+                                      ? dayItem.title.replace(/3-Star Standard|3-Star|3 Star Standard|3★ Standard|3★/gi, '4-Star Deluxe')
+                                      : dayItem.title}
                                   </h3>
                                   <div className="flex flex-wrap items-center gap-3 text-[11px] font-semibold text-slate-500">
                                     <span className="flex items-center space-x-1">
@@ -1751,7 +1802,13 @@ export function PackageDetailClientView({
                             {/* Card Content Body */}
                             {isOpen && (
                               <div className="px-5 pb-5 pt-3 border-t border-slate-100 bg-slate-50/40 text-xs text-slate-600 space-y-4">
-                                <p className="leading-relaxed text-slate-700">{dayItem.description}</p>
+                                <p className="leading-relaxed text-slate-700">
+                                  {isPremium
+                                    ? dayItem.description
+                                        .replace(/3-Star Standard|3-Star|3 Star Standard|3★ Standard|3★/gi, '4-Star Deluxe')
+                                        .replace(/Standard accommodation/gi, 'Deluxe accommodation')
+                                    : dayItem.description}
+                                </p>
 
                                 {/* Activity / Highlights Bullets */}
                                 {dayItem.activities && dayItem.activities.length > 0 && (
@@ -1824,26 +1881,42 @@ export function PackageDetailClientView({
                         <span>Included Hotels & Accommodations</span>
                       </h3>
                       <Badge variant="blue">
-                        {tourTier === 'standard' ? '3★ Standard' : tourTier === 'deluxe' ? '4★ Deluxe' : '5★ Luxury'} Category
+                        {tourTier === 'luxury'
+                          ? '5★ Luxury'
+                          : isPremium || tourTier === 'deluxe'
+                          ? '4★ Deluxe'
+                          : '3★ Standard'}{' '}
+                        Category
                       </Badge>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {(cityNightSplit && cityNightSplit.length > 0 ? cityNightSplit : [{ city: pkg.destination, nights: pkg.durationNights }]).map((h, i) => {
-                        const tierHotelName = getTierHotelName(undefined, h.city, tourTier);
-                        const tierRating = tourTier === 'standard' ? '3★ Standard' : tourTier === 'deluxe' ? '4★ Deluxe' : '5★ Luxury';
-                        const amenities = tourTier === 'standard'
-                          ? 'Free Wi-Fi • Buffet Breakfast • AC Room • 24x7 Hot Water'
-                          : tourTier === 'deluxe'
-                          ? 'Swimming Pool / View • Daily Buffet Breakfast • Tea/Coffee Maker • Room Service'
-                          : 'Luxury Spa • Fine-Dining Restaurant • Private Balcony • Concierge & Valet';
+                        const effectiveTierForAccom = isPremium && tourTier === 'standard' ? 'deluxe' : tourTier;
+                        const tierHotelName = getTierHotelName(undefined, h.city, effectiveTierForAccom);
+                        const tierRating =
+                          effectiveTierForAccom === 'luxury'
+                            ? '5★ Luxury'
+                            : effectiveTierForAccom === 'deluxe'
+                            ? '4★ Deluxe'
+                            : '3★ Standard';
+                        const amenities =
+                          effectiveTierForAccom === 'luxury'
+                            ? 'Luxury Spa • Fine-Dining Restaurant • Private Balcony • Concierge & Valet'
+                            : effectiveTierForAccom === 'deluxe'
+                            ? 'Swimming Pool / View • Daily Buffet Breakfast • Tea/Coffee Maker • Room Service'
+                            : 'Free Wi-Fi • Buffet Breakfast • AC Room • 24x7 Hot Water';
 
                         return (
                           <div key={i} className="p-4 bg-slate-50 rounded-2xl border border-slate-200/80 space-y-2 hover:border-brand-300 transition-all">
                             <div className="flex items-start justify-between gap-2">
                               <span className="font-black text-sm text-slate-900 leading-snug">{tierHotelName}</span>
                               <span className={`text-[10px] font-black px-2 py-0.5 rounded-md shrink-0 ${
-                                tourTier === 'standard' ? 'bg-slate-200 text-slate-800' : tourTier === 'deluxe' ? 'bg-brand-100 text-brand-800' : 'bg-amber-100 text-amber-900'
+                                effectiveTierForAccom === 'standard'
+                                  ? 'bg-slate-200 text-slate-800'
+                                  : effectiveTierForAccom === 'deluxe'
+                                  ? 'bg-brand-100 text-brand-800'
+                                  : 'bg-amber-100 text-amber-900'
                               }`}>
                                 {tierRating}
                               </span>
@@ -1872,12 +1945,17 @@ export function PackageDetailClientView({
                     </h3>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                      {pkg.inclusions.map((inc, i) => (
-                        <div key={i} className="flex items-start space-x-2 bg-white p-3 rounded-xl border border-blue-100 text-slate-800 font-semibold shadow-2xs">
-                          <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                          <span>{inc}</span>
-                        </div>
-                      ))}
+                      {pkg.inclusions.map((inc, i) => {
+                        const cleanInc = isPremium
+                          ? inc.replace(/3-Star Standard|3-Star|3 Star Standard|3★ Standard|3★/gi, '4-Star Deluxe & 5-Star Luxury')
+                          : inc;
+                        return (
+                          <div key={i} className="flex items-start space-x-2 bg-white p-3 rounded-xl border border-blue-100 text-slate-800 font-semibold shadow-2xs">
+                            <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                            <span>{cleanInc}</span>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 )}
@@ -1998,13 +2076,15 @@ export function PackageDetailClientView({
                     },
                     {
                       question: `What hotel category is provided in this package?`,
-                      answer: `This package is currently configured with ${
-                        tourTier === 'standard'
-                          ? '3-Star Standard accommodations (e.g. Treebo Trend / Hotel Ramayana / Kashi Heritage)'
-                          : tourTier === 'deluxe'
-                          ? '4-Star Deluxe accommodations (e.g. Park Inn by Radisson / Radisson Hotel / Lemon Tree Premier)'
-                          : '5-Star Luxury accommodations (e.g. Praveg Tent City Royal Suites / Taj Ganges / BrijRama Palace)'
-                      } with clean, hygienic rooms, private bath, and daily buffet breakfast. You can toggle between 3★, 4★, and 5★ anytime to customize your stay.`
+                      answer: isPremium
+                        ? `This premium package is configured with handpicked 4-Star Deluxe (e.g. Novotel Hyderabad Convention Centre / Lemon Tree Premier) and 5-Star Luxury (e.g. Taj Krishna Banjara Hills / ITC Kakatiya) accommodations with daily buffet breakfast and 24x7 concierge assistance.`
+                        : `This package is currently configured with ${
+                            tourTier === 'standard'
+                              ? '3-Star Standard accommodations (e.g. Treebo Trend / Hotel Ramayana / Kashi Heritage)'
+                              : tourTier === 'deluxe'
+                              ? '4-Star Deluxe accommodations (e.g. Park Inn by Radisson / Radisson Hotel / Lemon Tree Premier)'
+                              : '5-Star Luxury accommodations (e.g. Praveg Tent City Royal Suites / Taj Ganges / BrijRama Palace)'
+                          } with clean, hygienic rooms, private bath, and daily buffet breakfast. You can toggle between 3★, 4★, and 5★ anytime to customize your stay.`
                     },
                     {
                       question: `Are sightseeing transfers private or shared?`,
@@ -2055,41 +2135,70 @@ export function PackageDetailClientView({
                 <span className="text-[10px] font-extrabold text-slate-400 block uppercase tracking-wider">
                   Select Hotel & Package Tier
                 </span>
-                <div className="grid grid-cols-3 gap-1.5 p-1 bg-slate-100 rounded-xl text-xs font-bold">
-                  <button
-                    onClick={() => { setTourTier('standard'); setIsPriceCalculated(false); }}
-                    className={`py-2 rounded-lg transition-all cursor-pointer flex flex-col items-center justify-center ${
-                      tourTier === 'standard' ? 'bg-white text-slate-950 shadow-xs' : 'text-slate-600 hover:text-slate-900'
-                    }`}
-                  >
-                    <span>3★ Standard</span>
-                    {baselineTier === 'standard' && (
-                      <span className="text-[9px] text-emerald-600 font-extrabold uppercase tracking-wider">Included</span>
-                    )}
-                  </button>
-                  <button
-                    onClick={() => { setTourTier('deluxe'); setIsPriceCalculated(false); }}
-                    className={`py-2 rounded-lg transition-all cursor-pointer flex flex-col items-center justify-center ${
-                      tourTier === 'deluxe' ? 'bg-brand-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
-                    }`}
-                  >
-                    <span>4★ Deluxe</span>
-                    {baselineTier === 'deluxe' && (
-                      <span className={`text-[9px] font-extrabold uppercase tracking-wider ${tourTier === 'deluxe' ? 'text-amber-300' : 'text-brand-600'}`}>Included</span>
-                    )}
-                  </button>
-                  <button
-                    onClick={() => { setTourTier('luxury'); setIsPriceCalculated(false); }}
-                    className={`py-2 rounded-lg transition-all cursor-pointer flex flex-col items-center justify-center ${
-                      tourTier === 'luxury' ? 'bg-amber-500 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
-                    }`}
-                  >
-                    <span>5★ Luxury</span>
-                    {baselineTier === 'luxury' && (
-                      <span className={`text-[9px] font-extrabold uppercase tracking-wider ${tourTier === 'luxury' ? 'text-amber-200' : 'text-amber-600'}`}>Included</span>
-                    )}
-                  </button>
-                </div>
+                {isPremium ? (
+                  <div className="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-xl text-xs font-bold">
+                    <button
+                      type="button"
+                      onClick={() => { setTourTier('deluxe'); setIsPriceCalculated(false); }}
+                      className={`py-2.5 rounded-lg transition-all cursor-pointer flex flex-col items-center justify-center ${
+                        tourTier === 'deluxe' ? 'bg-brand-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                      }`}
+                    >
+                      <span>4★ Deluxe</span>
+                      <span className={`text-[9px] font-extrabold uppercase tracking-wider ${tourTier === 'deluxe' ? 'text-amber-300' : 'text-brand-600'}`}>
+                        {baselineTier === 'deluxe' ? 'Included' : 'Standard Base'}
+                      </span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => { setTourTier('luxury'); setIsPriceCalculated(false); }}
+                      className={`py-2.5 rounded-lg transition-all cursor-pointer flex flex-col items-center justify-center ${
+                        tourTier === 'luxury' ? 'bg-amber-500 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                      }`}
+                    >
+                      <span>5★ Luxury</span>
+                      <span className={`text-[9px] font-extrabold uppercase tracking-wider ${tourTier === 'luxury' ? 'text-amber-200' : 'text-amber-600'}`}>
+                        {baselineTier === 'luxury' ? 'Included' : 'Upgrade Option'}
+                      </span>
+                    </button>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-3 gap-1.5 p-1 bg-slate-100 rounded-xl text-xs font-bold">
+                    <button
+                      onClick={() => { setTourTier('standard'); setIsPriceCalculated(false); }}
+                      className={`py-2 rounded-lg transition-all cursor-pointer flex flex-col items-center justify-center ${
+                        tourTier === 'standard' ? 'bg-white text-slate-950 shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                      }`}
+                    >
+                      <span>3★ Standard</span>
+                      {baselineTier === 'standard' && (
+                        <span className="text-[9px] text-emerald-600 font-extrabold uppercase tracking-wider">Included</span>
+                      )}
+                    </button>
+                    <button
+                      onClick={() => { setTourTier('deluxe'); setIsPriceCalculated(false); }}
+                      className={`py-2 rounded-lg transition-all cursor-pointer flex flex-col items-center justify-center ${
+                        tourTier === 'deluxe' ? 'bg-brand-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                      }`}
+                    >
+                      <span>4★ Deluxe</span>
+                      {baselineTier === 'deluxe' && (
+                        <span className={`text-[9px] font-extrabold uppercase tracking-wider ${tourTier === 'deluxe' ? 'text-amber-300' : 'text-brand-600'}`}>Included</span>
+                      )}
+                    </button>
+                    <button
+                      onClick={() => { setTourTier('luxury'); setIsPriceCalculated(false); }}
+                      className={`py-2 rounded-lg transition-all cursor-pointer flex flex-col items-center justify-center ${
+                        tourTier === 'luxury' ? 'bg-amber-500 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                      }`}
+                    >
+                      <span>5★ Luxury</span>
+                      {baselineTier === 'luxury' && (
+                        <span className={`text-[9px] font-extrabold uppercase tracking-wider ${tourTier === 'luxury' ? 'text-amber-200' : 'text-amber-600'}`}>Included</span>
+                      )}
+                    </button>
+                  </div>
+                )}
               </div>
 
               {/* Price Display Block */}

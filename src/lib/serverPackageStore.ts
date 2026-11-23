@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { HolidayPackage } from '@/data/packagesData';
+import { HYDERABAD_PREMIUM_PACKAGE } from '@/data/packageCatalog';
 import getSupabaseServer, { withTimeout, markSupabaseOffline, isSupabaseOffline } from '@/lib/supabaseServer';
 
 let memoryPackages: HolidayPackage[] | null = null;
@@ -158,7 +159,17 @@ export function getServerCustomPackages(): HolidayPackage[] {
     return memoryPackages;
   }
   const fromFile = loadPackagesFromFile();
-  memoryPackages = fromFile;
+  const map = new Map<string, HolidayPackage>();
+  map.set(HYDERABAD_PREMIUM_PACKAGE.id, HYDERABAD_PREMIUM_PACKAGE);
+  fromFile.forEach((p) => {
+    // If it's the premium hyderabad package, ensure it uses the updated clean premium definition
+    if (p.slug.includes('premium-hyderabad') || p.id.includes('premium-hyderabad')) {
+      map.set(p.id, { ...HYDERABAD_PREMIUM_PACKAGE, ...p, hotelCategory: '5-Star Luxury' });
+    } else {
+      map.set(p.id, p);
+    }
+  });
+  memoryPackages = Array.from(map.values());
   return memoryPackages;
 }
 

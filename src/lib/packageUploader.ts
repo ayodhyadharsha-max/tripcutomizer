@@ -300,8 +300,13 @@ export function parseRawMmtText(
     // 5. Star Category
     let hotelCategory = '4-Star Deluxe';
     const allText = bLines.join(' ');
-    if (/5\s*(?:Star|★)|Luxury/i.test(allText)) hotelCategory = '5-Star Luxury';
-    else if (/3\s*(?:Star|★)|Standard/i.test(allText)) hotelCategory = '3-Star Standard';
+    if (/5\s*(?:Star|★)|Luxury/i.test(allText)) {
+      hotelCategory = '5-Star Luxury';
+    } else if (name.toLowerCase().includes('premium')) {
+      hotelCategory = '4-Star Deluxe';
+    } else if (/3\s*(?:Star|★)/i.test(allText) && !/premium|luxury/i.test(name)) {
+      hotelCategory = '3-Star Standard';
+    }
 
     // 6. Meal Plan
     let mealPlan = 'Daily Breakfast Included';

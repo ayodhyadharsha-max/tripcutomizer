@@ -41,14 +41,14 @@ const getMatchedPackage = cache(async (destinationParam: string, packageParam: s
     try {
       const supabaseServer = getSupabaseServer();
       if (supabaseServer) {
-        // Enforce max 800ms timeout so the page never hangs if Supabase is slow or down
+        // Enforce max 2500ms timeout so the page never hangs if Supabase is slow or down
         const supaResult: any = await withTimeout(
           supabaseServer
             .from('packages')
             .select('*')
             .or(`slug.eq.${decodedPkgParam},id.eq.${decodedPkgParam}`)
             .maybeSingle(),
-          800,
+          2500,
           'Supabase lookup timed out'
         );
 
@@ -69,7 +69,7 @@ const getMatchedPackage = cache(async (destinationParam: string, packageParam: s
               .ilike('slug', `%${decodedPkgParam}%`)
               .limit(1)
               .maybeSingle(),
-            500,
+            1500,
             'Supabase fallback lookup timed out'
           );
 

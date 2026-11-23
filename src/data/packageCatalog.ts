@@ -242,6 +242,18 @@ export const OTA_DOMESTIC_SECTORS: SectorDefinition[] = [
     minPrice: 5499,
     maxPrice: 32000,
     heroImage: '/destinations/mathura-vrindavan.jpg'
+  },
+  {
+    region: 'Andhra Pradesh & Hyderabad',
+    destinationSlug: 'andhra-pradesh',
+    country: 'India',
+    regionCategory: 'South India',
+    isInternational: false,
+    cities: ['Hyderabad', 'Ramoji Film City', 'Golconda', 'Charminar', 'Secunderabad', 'Tirupati'],
+    count: 150,
+    minPrice: 14999,
+    maxPrice: 42000,
+    heroImage: 'https://images.unsplash.com/photo-1605007493699-ce65834f8a00?w=1200&q=80&fm=webp&fit=crop'
   }
 ];
 
@@ -937,6 +949,149 @@ function generateSynthesizedPackage(
 let _memoizedAllCatalog: HolidayPackage[] | null = null;
 let _memoizedLookupMap: Map<string, HolidayPackage> | null = null;
 
+export const HYDERABAD_PREMIUM_PACKAGE: HolidayPackage = {
+  id: 'pkg-mmt-andhra-pradesh-premium-hyderabad-getaway-3n4d-4d3n-mmt-5',
+  slug: 'andhra-pradesh-premium-hyderabad-getaway-3n4d-4d3n-mmt-5',
+  name: 'Premium Hyderabad Getaway (3N/4D)',
+  destination: 'Andhra Pradesh',
+  destinationSlug: 'andhra-pradesh',
+  state: 'Andhra Pradesh & Telangana',
+  stateSlug: 'andhra-pradesh',
+  country: 'India',
+  region: 'South India',
+  isInternational: false,
+  durationDays: 4,
+  durationNights: 3,
+  startingPrice: 19999,
+  discountPrice: 24999,
+  rating: 4.9,
+  reviewsCount: 168,
+  heroImage: 'https://images.unsplash.com/photo-1605007493699-ce65834f8a00?w=1200&q=80&fm=webp&fit=crop',
+  gallery: [
+    'https://images.unsplash.com/photo-1605007493699-ce65834f8a00?w=1200&q=80&fm=webp&fit=crop',
+    'https://images.unsplash.com/photo-1572455857811-045fb4255b5d?w=1200&q=80&fm=webp&fit=crop',
+    'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=1200&q=80&fm=webp&fit=crop',
+  ],
+  highlights: [
+    'Handpicked 4-Star Deluxe / 5-Star Luxury Accommodations (Novotel / Taj Krishna)',
+    'Exclusive VIP Guided Charminar, Mecca Masjid & Chowmahalla Palace Heritage Walk',
+    'Full-Day Ramoji Film City Grand Studio Experience with Express Passes',
+    'Golconda Fort Sound & Light Show & Royal Qutb Shahi Tombs Tour',
+    'Private AC Sedan Cab reserved exclusively for your travel group',
+    'Daily Lavish Buffet Breakfast & Chef-Crafted Multi-Cuisine Dinners',
+  ],
+  inclusions: [
+    '3 Nights accommodation in verified 4-Star Deluxe / 5-Star Luxury Hotels',
+    'Daily Lavish Buffet Breakfast and Chef-Crafted Dinners (MAP Plan)',
+    'Private AC Sedan vehicle for all airport/station transfers and scheduled sightseeing',
+    'Full-day excursion to Ramoji Film City with entry tickets included',
+    'Evening heritage boat cruise at Hussain Sagar Lake with Buddha statue views',
+    'All toll taxes, parking charges, interstate permits, fuel, and driver allowances',
+    'Dedicated 24x7 Trip Customizer on-trip concierge assistance',
+  ],
+  exclusions: [
+    'Airfare or train tickets (available upon request at actual flight rates)',
+    'Monument camera fees, joy rides, and personal adventure activities',
+    'Personal expenses such as laundry, room service, alcoholic beverages, and tips',
+    'Any services or meals not explicitly mentioned in the inclusions list',
+  ],
+  itinerary: [
+    {
+      dayNumber: 1,
+      title: 'Arrival in Hyderabad & Iconic Charminar & Chowmahalla Palace Heritage Tour',
+      description: 'Arrive at Rajiv Gandhi International Airport (HYD) or Hyderabad / Secunderabad Railway Station. Meet our private chauffeur and transfer to your luxury hotel. After refreshment, proceed on an enchanting heritage tour covering the world-famous Charminar, historic Mecca Masjid, the perfume and bangle lanes of Laad Bazaar, and the royal Chowmahalla Palace of the Nizams. In the evening, savor authentic Hyderabadi cuisine.',
+      meals: ['Dinner'],
+      activities: [
+        'Private Airport / Railway Station Pickup & Luxury Hotel Check-in',
+        'Charminar & Historic Mecca Masjid Heritage Walk',
+        'Chowmahalla Palace Nizam State Rooms & Vintage Car Gallery',
+        'Laad Bazaar Traditional Choodi & Ittar Shopping Walk',
+      ],
+      hotel: 'Novotel Hyderabad Convention Centre / Taj Krishna Banjara Hills',
+      transfers: 'Private AC Cab Airport / Station Pickup & City Sightseeing',
+    },
+    {
+      dayNumber: 2,
+      title: 'Full-Day Ramoji Film City Grand Studio Tour & Thematic Shows',
+      description: 'Begin the day with an indulgent buffet breakfast at the hotel. Board your private vehicle for a full-day excursion to Ramoji Film City—the Guinness World Record holder as the world’s largest integrated film studio complex. Explore magnificent film sets, the Japanese Garden, action stunt shows, live dance performances at Eureka, the Action Studio, and cinematic illusions. Return to the hotel by evening for dinner and leisure.',
+      meals: ['Breakfast', 'Dinner'],
+      activities: [
+        'Full-Day Excursion to Ramoji Film City with Guided Studio Tour',
+        'Live Action Stunt Shows & Eureka Cultural Performances',
+        'Film Set Explorations (Bahubali Sets, London Street & Mughal Gardens)',
+        'Eco-Zone Bird Park & Butterfly Garden Exploration',
+      ],
+      hotel: 'Novotel Hyderabad Convention Centre / Taj Krishna Banjara Hills',
+      transfers: 'Private AC Cab for Full-Day Ramoji Film City Excursion',
+    },
+    {
+      dayNumber: 3,
+      title: 'Golconda Fort, Royal Qutb Shahi Tombs, Salar Jung Museum & Hussain Sagar Sunset',
+      description: 'After morning breakfast, head to the majestic Golconda Fort—a legendary medieval citadel renowned for its acoustic engineering and diamond vaults (once home to the Koh-i-Noor). Continue to the nearby Qutb Shahi Tombs with their grand domed architecture. Next, visit the world-famous Salar Jung Museum, housing extraordinary rare artifacts and the Veiled Rebecca statue. Finish the day with a serene boat ride on Hussain Sagar Lake offering panoramic sunset views of the monolithic Buddha Statue and Birla Mandir on Naubat Pahad.',
+      meals: ['Breakfast', 'Dinner'],
+      activities: [
+        'Golconda Fort Citadel Tour with Acoustic Clapping Portico & Royal Pavilions',
+        'Qutb Shahi Royal Tombs & Garden Monuments Tour',
+        'Salar Jung Museum Artifacts & Musical Clock Viewing',
+        'Hussain Sagar Lake Scenic Sunset Boat Cruise to Buddha Statue',
+        'Birla Mandir White Marble Temple Visit on Naubat Pahad',
+      ],
+      hotel: 'Novotel Hyderabad Convention Centre / Taj Krishna Banjara Hills',
+      transfers: 'Private AC Cab for Full-Day Heritage & Lake Sightseeing',
+    },
+    {
+      dayNumber: 4,
+      title: 'Shilparamam Cultural Village & Airport / Station Departure Transfer',
+      description: 'Savor a leisurely buffet breakfast at your hotel. Complete hotel check-out formalities. Depending on your flight or train schedule, visit Shilparamam Arts & Crafts Village to shop for authentic handlooms, pearls, and brass artifacts, or explore Hitec City Cyber Towers. Your chauffeur will provide a smooth transfer to Rajiv Gandhi International Airport (HYD) or Railway Station for your onward journey with unforgettable memories.',
+      meals: ['Breakfast'],
+      activities: [
+        'Morning Buffet Breakfast & Smooth Luxury Hotel Check-out',
+        'Shilparamam Cultural Arts & Crafts Village Handloom Shopping',
+        'Private AC Vehicle Drop to Airport / Railway Station',
+      ],
+      hotel: 'Check-out completed (Departure Day)',
+      transfers: 'Private AC Cab Departure Airport / Railway Station Drop',
+    },
+  ],
+  hotels: [
+    {
+      name: 'Novotel Hyderabad Convention Centre / Taj Krishna Banjara Hills',
+      city: 'Hyderabad',
+      rating: '4.9',
+      nights: 3,
+    },
+  ],
+  faqs: [
+    {
+      question: 'Is Premium Hyderabad Getaway 100% customizable?',
+      answer: 'Yes! You can customize your hotel tier between 4-Star Deluxe and 5-Star Luxury, adjust night stays, add extra sightseeing (like Snow World or Wonderla), or include flight bookings.',
+    },
+    {
+      question: 'Which hotels are provided in 4-Star Deluxe and 5-Star Luxury tiers?',
+      answer: 'For 4-Star Deluxe, we partner with Novotel Hyderabad Convention Centre, Radisson Hyderabad Hitec City, or Lemon Tree Premier. For 5-Star Luxury, accommodations are provided at Taj Krishna Banjara Hills, ITC Kakatiya, or Trident Hyderabad with complimentary buffet breakfast.',
+    },
+    {
+      question: 'Are Ramoji Film City entry tickets included in this tour package?',
+      answer: 'Yes, full-day Ramoji Film City entry tickets with studio tours and live entertainment shows are included in this package along with private round-trip vehicle transfers.',
+    },
+    {
+      question: 'Is airport pickup and drop included in the package?',
+      answer: 'Yes, dedicated round-trip private AC cab transfers from Rajiv Gandhi International Airport (HYD) or Secunderabad/Hyderabad Railway Station are fully included.',
+    },
+  ],
+  theme: 'Luxury Getaway',
+  hotelCategory: '5-Star Luxury',
+  mealPlan: 'Daily Buffet Breakfast & Dinner',
+  flightsIncluded: false,
+  transfersIncluded: true,
+  departureCity: 'Flexible Origin / Hyderabad Pickup',
+  batch_source: 'mmt_sync',
+};
+
+export const CURATED_CUSTOM_PACKAGES: HolidayPackage[] = [
+  HYDERABAD_PREMIUM_PACKAGE,
+];
+
 function initializeCatalog(): { all: HolidayPackage[]; lookup: Map<string, HolidayPackage> } {
   if (_memoizedAllCatalog && _memoizedLookupMap) {
     return { all: _memoizedAllCatalog, lookup: _memoizedLookupMap };
@@ -944,6 +1099,15 @@ function initializeCatalog(): { all: HolidayPackage[]; lookup: Map<string, Holid
 
   const lookup = new Map<string, HolidayPackage>();
   const all: HolidayPackage[] = [];
+
+  // Register Curated Custom Packages First
+  CURATED_CUSTOM_PACKAGES.forEach((pkg) => {
+    all.push(pkg);
+    lookup.set(pkg.id.toLowerCase(), pkg);
+    lookup.set(pkg.slug.toLowerCase(), pkg);
+    lookup.set('pkg-' + pkg.slug.toLowerCase(), pkg);
+    lookup.set(pkg.id.toLowerCase().replace(/^pkg-/, ''), pkg);
+  });
 
   // Generate 100% clean, non-duplicate master packages (Industry Standard Architecture)
   let pkgSeq = 1;

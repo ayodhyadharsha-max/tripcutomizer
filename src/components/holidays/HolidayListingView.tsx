@@ -782,7 +782,7 @@ export function HolidayListingView({
                   const itemDealPrice = Math.min(pkg.startingPrice, pkg.discountPrice || pkg.startingPrice);
                   const itemMrpPrice = Math.max(pkg.startingPrice, pkg.discountPrice || Math.round(itemDealPrice * 1.25));
                   const savingsPercent = itemMrpPrice > itemDealPrice ? Math.round(((itemMrpPrice - itemDealPrice) / itemMrpPrice) * 100) : 0;
-                  const hotelBadge = getPackageHotelBadgeInfo(pkg.hotelCategory);
+                  const hotelBadge = getPackageHotelBadgeInfo(pkg.hotelCategory, pkg.name, pkg.slug);
 
                   return (
                   <Card

@@ -561,7 +561,7 @@ export function tripcustomizerHolidayView() {
                     {pkg.name}
                   </h3>
                   <p className="text-xs text-slate-300 font-semibold">
-                    {getPackageHotelBadgeInfo(pkg.hotelCategory).badgeLabel} from <span className="text-amber-400 font-black text-sm">{formatCurrency(pkg.startingPrice)}</span>
+                    {getPackageHotelBadgeInfo(pkg.hotelCategory, pkg.name, pkg.slug).badgeLabel} from <span className="text-amber-400 font-black text-sm">{formatCurrency(pkg.startingPrice)}</span>
                   </p>
                 </div>
 
