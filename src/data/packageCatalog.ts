@@ -1235,9 +1235,119 @@ export const HYDERABAD_CITYSCAPE_PACKAGE: HolidayPackage = {
   batch_source: 'mmt_sync',
 };
 
+export const ARAKU_VALLEY_BLISS_PACKAGE: HolidayPackage = {
+  id: 'pkg-mmt-andhra-pradesh-araku-valley-bliss-1n2d-2d1n-mmt-2',
+  slug: 'andhra-pradesh-araku-valley-bliss-1n2d-2d1n-mmt-2',
+  name: 'Araku Valley Bliss (1N/2D)',
+  destination: 'Andhra Pradesh',
+  destinationSlug: 'andhra-pradesh',
+  state: 'Andhra Pradesh',
+  stateSlug: 'andhra-pradesh',
+  country: 'India',
+  region: 'South India',
+  isInternational: false,
+  durationDays: 2,
+  durationNights: 1,
+  startingPrice: 6499,
+  discountPrice: 8999,
+  rating: 4.8,
+  reviewsCount: 115,
+  heroImage: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200&q=80&fm=webp&fit=crop',
+  gallery: [
+    'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200&q=80&fm=webp&fit=crop',
+    'https://images.unsplash.com/photo-1511497584788-87676104235f?w=1200&q=80&fm=webp&fit=crop',
+    'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=80&fm=webp&fit=crop',
+  ],
+  highlights: [
+    'Scenic drive from Visakhapatnam to Araku Valley through Eastern Ghats & Ananthagiri Hills',
+    'Explore million-year-old Borra Caves with magnificent stalactite & stalagmite formations',
+    'Visit Padmapuram Botanical Gardens & traditional Tribal Museum',
+    'Aromatic Organic Araku Coffee Plantation Tour & Coffee Museum Tasting',
+    'Chaparai Water Cascade & Galikonda Highest Viewpoint Stopover',
+    'Verified 3-Star Hill Resort Accommodation (Haritha Valley Resort / Ushodaya Resort)',
+    'Dedicated Private AC Sedan Cab from Vizag pickup to drop',
+  ],
+  inclusions: [
+    '1 Night stay in verified 3-Star Standard resort in Araku Valley (Haritha Valley Resort / Ushodaya Resort)',
+    'Daily Breakfast & Chef-Crafted Dinner Included (MAP Plan)',
+    'Private AC Sedan vehicle for all transfers from Visakhapatnam and Araku sightseeing',
+    'Entry tickets to Borra Caves, Padmapuram Botanical Gardens & Tribal Museum',
+    'All toll taxes, parking fees, driver allowance, and 5% GST included',
+    '24x7 Trip Customizer on-trip dedicated concierge support',
+  ],
+  exclusions: [
+    'Train or flight tickets to / from Visakhapatnam (available on request)',
+    'Camera fees, personal adventure sports, and joy rides',
+    'Personal expenses like room service, laundry, extra snacks, and tips',
+    'Any services or meals not explicitly mentioned in package inclusions',
+  ],
+  itinerary: [
+    {
+      dayNumber: 1,
+      title: 'Visakhapatnam to Araku Valley via Borra Caves & Coffee Plantations',
+      description: 'Morning pickup from Visakhapatnam Airport or Railway Station by our private chauffeur. Embark on a breathtaking drive climbing through the misty Eastern Ghats. Stop at the spectacular million-year-old Borra Caves to marvel at natural limestone formations. Drive through lush green Ananthagiri hills and visit organic coffee plantations and Galikonda Viewpoint. Check-in to your resort in Araku Valley. In the afternoon, visit the Araku Tribal Museum and Coffee Museum showcasing indigenous culture and aromatic local brews. Enjoy dinner and cozy overnight stay at the resort.',
+      meals: ['Dinner'],
+      activities: [
+        'Private Pickup from Visakhapatnam Airport / Railway Station',
+        'Scenic Eastern Ghats & Ananthagiri Hills Drive',
+        'Guided Exploration of Borra Caves Stalactites & Stalagmites',
+        'Araku Tribal Museum & Coffee Museum Visit',
+        'Resort Check-in & Scenic Valley Evening Walk',
+      ],
+      hotel: 'Haritha Valley Resort / Ushodaya Resort Araku (3★ Standard)',
+      transfers: 'Private AC Cab Vizag to Araku with En-route Sightseeing',
+    },
+    {
+      dayNumber: 2,
+      title: 'Padmapuram Gardens, Chaparai Waterfalls & Drop to Visakhapatnam',
+      description: 'Wake up to crisp hill station air and savor a delicious breakfast at the resort. Check out and head to the historic Padmapuram Botanical Gardens, famous for its hanging tree cottages and vibrant flora. Next, visit the picturesque Chaparai Water Cascade surrounded by dense forests. Begin your scenic descent back toward Visakhapatnam. Depending on flight/train schedule, enjoy a brief visit to RK Beach or Submarine Museum before transfer to Visakhapatnam Airport or Railway Station for your onward journey.',
+      meals: ['Breakfast'],
+      activities: [
+        'Resort Breakfast & Check-out Formalities',
+        'Padmapuram Botanical Gardens & Tree Hut Tour',
+        'Chaparai Water Cascade & Forest Stream Exploration',
+        'Scenic Valley Descent toward Visakhapatnam',
+        'Private AC Vehicle Drop to Vizag Airport / Railway Station',
+      ],
+      hotel: 'Check-out completed (Departure Day)',
+      transfers: 'Private AC Cab Sightseeing & Visakhapatnam Drop',
+    },
+  ],
+  hotels: [
+    {
+      name: 'Haritha Valley Resort / Ushodaya Resort Araku (3★ Standard)',
+      city: 'Araku Valley',
+      rating: '4.8',
+      nights: 1,
+    },
+  ],
+  faqs: [
+    {
+      question: 'Which hotel is provided in this Araku Valley package?',
+      answer: 'This package includes verified 3-Star Standard accommodations (Haritha Valley Resort / Ushodaya Resort Araku) with valley views, private attached bathroom, and daily breakfast & dinner. Upgrades to luxury resorts are available upon request.',
+    },
+    {
+      question: 'Is transportation from Visakhapatnam included?',
+      answer: 'Yes! A dedicated private AC Sedan cab is provided exclusively for your group, picking you up from Visakhapatnam Airport or Railway Station, handling all Araku sightseeing, and dropping you back.',
+    },
+    {
+      question: 'Can this package be customized for Vistadome train tickets?',
+      answer: 'Yes! We can arrange Vistadome train tickets between Vizag and Araku on request, subject to IRCTC availability.',
+    },
+  ],
+  theme: 'Nature & Hill Station',
+  hotelCategory: '3-Star Standard',
+  mealPlan: 'Breakfast & Dinner Included',
+  flightsIncluded: false,
+  transfersIncluded: true,
+  departureCity: 'Visakhapatnam Pickup & Drop',
+  batch_source: 'mmt_sync',
+};
+
 export const CURATED_CUSTOM_PACKAGES: HolidayPackage[] = [
   HYDERABAD_PREMIUM_PACKAGE,
   HYDERABAD_CITYSCAPE_PACKAGE,
+  ARAKU_VALLEY_BLISS_PACKAGE,
 ];
 
 function initializeCatalog(): { all: HolidayPackage[]; lookup: Map<string, HolidayPackage> } {
@@ -1372,59 +1482,39 @@ export function findCatalogPackage(
 
   if (!p1 && !p2) return all[0];
 
-  // Candidates to test for exact package ID or slug match:
-  // If p2 is provided, test p2 first (standard signature: findCatalogPackage(destination, packageSlug))
-  const pkgCandidates = p2 ? [p2, p1] : [p1];
-
-  for (const candidate of pkgCandidates) {
-    if (!candidate) continue;
+  // If p2 (package slug/id) is provided, ONLY search for that specific package.
+  // NEVER fall back to p1 (destination) as a package slug/id!
+  if (p2) {
+    const stripped = p2.replace(/^pkg-/, '');
 
     // Direct lookup map match
-    const direct = lookup.get(candidate);
+    const direct = lookup.get(p2) || lookup.get(stripped) || lookup.get('pkg-' + p2);
     if (direct) return direct;
-
-    const stripped = candidate.replace(/^pkg-/, '');
-    const strippedMatch = lookup.get(stripped);
-    if (strippedMatch) return strippedMatch;
-
-    const withPrefix = lookup.get('pkg-' + candidate);
-    if (withPrefix) return withPrefix;
 
     // Exact match across all packages (including custom MMT Sync packages)
     const exactMatch = all.find(
       (p) =>
-        p.slug.toLowerCase() === candidate ||
-        p.id.toLowerCase() === candidate ||
-        candidate === p.slug.toLowerCase().replace(/^pkg-/, '') ||
-        candidate === p.id.toLowerCase().replace(/^pkg-/, '')
+        p.slug.toLowerCase() === p2 ||
+        p.id.toLowerCase() === p2 ||
+        p.slug.toLowerCase().replace(/^pkg-/, '') === stripped ||
+        p.id.toLowerCase().replace(/^pkg-/, '') === stripped
     );
     if (exactMatch) return exactMatch;
 
-    // Substring / Slug match across all packages
-    const otaMatch = all.find(
-      (p) =>
-        p.slug.toLowerCase().includes(candidate) ||
-        candidate.includes(p.slug.toLowerCase()) ||
-        p.name.toLowerCase().includes(candidate)
-    );
-    if (otaMatch) return otaMatch;
+    // Specific slug was requested but not found in catalog; DO NOT fall back to destination!
+    return undefined;
   }
 
   // Destination match fallback: ONLY performed if no specific package slug (p2) was requested
-  if (!p2) {
-    const destCandidates = [p1];
-    for (const dest of destCandidates) {
-      if (!dest) continue;
-      const destMatch = all.find(
-        (p) =>
-          p.destinationSlug.toLowerCase() === dest ||
-          (p.citySlugs && p.citySlugs.includes(dest)) ||
-          (p.stateSlug && p.stateSlug.toLowerCase() === dest) ||
-          p.destination.toLowerCase().includes(dest)
-      );
-      if (destMatch) return destMatch;
-    }
-    return all[0];
+  if (p1) {
+    const destMatch = all.find(
+      (p) =>
+        p.destinationSlug.toLowerCase() === p1 ||
+        (p.citySlugs && p.citySlugs.includes(p1)) ||
+        (p.stateSlug && p.stateSlug.toLowerCase() === p1) ||
+        p.destination.toLowerCase() === p1
+    );
+    if (destMatch) return destMatch;
   }
 
   return undefined;

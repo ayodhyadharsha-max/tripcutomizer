@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { HolidayPackage } from '@/data/packagesData';
-import { HYDERABAD_PREMIUM_PACKAGE, HYDERABAD_CITYSCAPE_PACKAGE } from '@/data/packageCatalog';
+import { HYDERABAD_PREMIUM_PACKAGE, HYDERABAD_CITYSCAPE_PACKAGE, ARAKU_VALLEY_BLISS_PACKAGE } from '@/data/packageCatalog';
 import getSupabaseServer, { withTimeout, markSupabaseOffline, isSupabaseOffline } from '@/lib/supabaseServer';
 
 let memoryPackages: HolidayPackage[] | null = null;
@@ -162,12 +162,15 @@ export function getServerCustomPackages(): HolidayPackage[] {
   const map = new Map<string, HolidayPackage>();
   map.set(HYDERABAD_PREMIUM_PACKAGE.id, HYDERABAD_PREMIUM_PACKAGE);
   map.set(HYDERABAD_CITYSCAPE_PACKAGE.id, HYDERABAD_CITYSCAPE_PACKAGE);
+  map.set(ARAKU_VALLEY_BLISS_PACKAGE.id, ARAKU_VALLEY_BLISS_PACKAGE);
   fromFile.forEach((p) => {
     // If it's the premium hyderabad package, ensure it uses the updated clean premium definition
     if (p.slug.includes('premium-hyderabad') || p.id.includes('premium-hyderabad')) {
       map.set(p.id, { ...HYDERABAD_PREMIUM_PACKAGE, ...p, hotelCategory: '5-Star Luxury' });
     } else if (p.slug.includes('hyderabad-cityscape-escape') || p.id.includes('hyderabad-cityscape-escape')) {
       map.set(p.id, { ...HYDERABAD_CITYSCAPE_PACKAGE, ...p, hotelCategory: '3-Star Standard' });
+    } else if (p.slug.includes('araku-valley-bliss') || p.id.includes('araku-valley-bliss')) {
+      map.set(p.id, { ...ARAKU_VALLEY_BLISS_PACKAGE, ...p });
     } else {
       map.set(p.id, p);
     }
@@ -273,19 +276,28 @@ export function findServerPackage(destinationParam?: string, packageParam?: stri
   const p2 = decodeURIComponent(packageParam || '').toLowerCase().trim();
   const customList = getServerCustomPackages();
 
-  const candidates = p2 ? [p2, p1] : [p1];
-
-  for (const candidate of candidates) {
-    if (!candidate) continue;
-
+  // If specific package slug is requested, ONLY search for that package slug/id.
+  // NEVER fall back to destination parameter p1!
+  if (p2) {
+    const stripped = p2.replace(/^pkg-/, '');
     const matched = customList.find(
       (p) =>
-        p.slug.toLowerCase() === candidate ||
-        p.id.toLowerCase() === candidate ||
-        candidate.includes(p.slug.toLowerCase()) ||
-        p.slug.toLowerCase().includes(candidate)
+        p.slug.toLowerCase() === p2 ||
+        p.id.toLowerCase() === p2 ||
+        p.slug.toLowerCase().replace(/^pkg-/, '') === stripped ||
+        p.id.toLowerCase().replace(/^pkg-/, '') === stripped
     );
-    if (matched) return matched;
+    return matched || null;
+  }
+
+  // Only if NO specific package slug was requested, search by destination slug
+  if (p1) {
+    const matched = customList.find(
+      (p) =>
+        p.destinationSlug.toLowerCase() === p1 ||
+        (p.stateSlug && p.stateSlug.toLowerCase() === p1)
+    );
+    return matched || null;
   }
 
   return null;

@@ -24,12 +24,13 @@ export async function GET(req: Request) {
     if (queryParam) {
       // Check local server store first (0ms)
       const localPackages = getServerCustomPackages();
+      const strippedParam = queryParam.replace(/^pkg-/, '');
       const localMatch = localPackages.find(
         (p) =>
           p.slug.toLowerCase() === queryParam ||
           p.id.toLowerCase() === queryParam ||
-          queryParam.includes(p.slug.toLowerCase()) ||
-          p.slug.toLowerCase().includes(queryParam)
+          p.slug.toLowerCase().replace(/^pkg-/, '') === strippedParam ||
+          p.id.toLowerCase().replace(/^pkg-/, '') === strippedParam
       );
 
       if (localMatch) {

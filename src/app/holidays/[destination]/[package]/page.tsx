@@ -15,24 +15,27 @@ const getMatchedPackage = cache(async (destinationParam: string, packageParam: s
 
   if (!decodedPkgParam) return null;
 
+  const isExactMatch = (pkg: HolidayPackage) => {
+    const stripped = decodedPkgParam.replace(/^pkg-/, '');
+    return (
+      pkg.slug.toLowerCase() === decodedPkgParam ||
+      pkg.id.toLowerCase() === decodedPkgParam ||
+      pkg.slug.toLowerCase().replace(/^pkg-/, '') === stripped ||
+      pkg.id.toLowerCase().replace(/^pkg-/, '') === stripped
+    );
+  };
+
   // 1. Look in persistent server store first (0ms)
   try {
     const serverPkg = findServerPackage(decodedDestParam, decodedPkgParam);
-    if (serverPkg) return serverPkg;
+    if (serverPkg && isExactMatch(serverPkg)) return serverPkg;
   } catch (err) {}
 
   // 2. Look in static catalog (0ms)
   try {
     const catalogPkg = findCatalogPackage(decodedDestParam, decodedPkgParam);
-    if (catalogPkg) {
-      if (
-        catalogPkg.slug.toLowerCase() === decodedPkgParam ||
-        catalogPkg.id.toLowerCase() === decodedPkgParam ||
-        decodedPkgParam.includes(catalogPkg.slug.toLowerCase()) ||
-        catalogPkg.slug.toLowerCase().includes(decodedPkgParam)
-      ) {
-        return catalogPkg;
-      }
+    if (catalogPkg && isExactMatch(catalogPkg)) {
+      return catalogPkg;
     }
   } catch (err) {}
 

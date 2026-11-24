@@ -267,6 +267,16 @@ const DESTINATION_HOTEL_TIERS: Record<string, { standard: string; deluxe: string
     deluxe: 'Novotel Hyderabad Convention Centre / Radisson Hyderabad Hitec City (4★ Deluxe)',
     luxury: 'Taj Krishna Banjara Hills / ITC Kakatiya / Trident Hyderabad (5★ Luxury)'
   },
+  araku: {
+    standard: 'Haritha Valley Resort / Ushodaya Resort Araku (3★ Standard)',
+    deluxe: 'Nature Nest Hill Resort / Vistadome Eco Luxury Araku (4★ Deluxe)',
+    luxury: 'The Gateway Hotel Beach Road / Novotel Varun Beach Vizag (5★ Luxury)'
+  },
+  visakhapatnam: {
+    standard: 'Hotel Keys Select / Treebo Trend Vizag (3★ Standard)',
+    deluxe: 'Four Points by Sheraton / The Park Visakhapatnam (4★ Deluxe)',
+    luxury: 'Novotel Visakhapatnam Varun Beach / Radisson Blu (5★ Luxury)'
+  },
   andhra: {
     standard: 'Hotel Deccan Serai / Treebo Trend (3★ Standard)',
     deluxe: 'Novotel Hyderabad / Radisson Hitec City (4★ Deluxe)',
@@ -324,6 +334,7 @@ export function deriveMultiCityNightSplit(pkg: HolidayPackage): { city: string; 
       'Gir', 'Goa', 'Mumbai', 'Lonavala', 'Mahabaleshwar', 'Munnar', 'Thekkady', 'Alleppey',
       'Kovalam', 'Kochi', 'Cochin', 'Wayanad', 'Varkala', 'Ooty', 'Kodaikanal', 'Coorg', 'Mysore',
       'Kabini', 'Hampi', 'Bangalore', 'Madurai', 'Rameshwaram', 'Kanyakumari', 'Tirupati',
+      'Araku', 'Visakhapatnam', 'Vizag', 'Hyderabad',
       'Pondicherry', 'Andaman', 'Port Blair', 'Havelock', 'Neil', 'Dubai', 'Abu Dhabi', 'Bangkok',
       'Pattaya', 'Phuket', 'Krabi', 'Singapore', 'Bali', 'Kuala Lumpur', 'Hanoi', 'Da Nang',
       'Ho Chi Minh', 'Baku', 'Tbilisi', 'Almaty', 'Kathmandu', 'Pokhara', 'Male', 'Paris', 'Zurich',
@@ -432,26 +443,21 @@ export function PackageDetailClientView({
   const [activePkg, setActivePkg] = useState<HolidayPackage | null>(() => {
     if (initialPackage) return initialPackage;
 
+    const strippedTarget = decodedPkgParam.replace(/^pkg-/, '');
+    const isStrictMatch = (p: HolidayPackage) =>
+      p.slug.toLowerCase() === decodedPkgParam ||
+      p.id.toLowerCase() === decodedPkgParam ||
+      p.slug.toLowerCase().replace(/^pkg-/, '') === strippedTarget ||
+      p.id.toLowerCase().replace(/^pkg-/, '') === strippedTarget;
+
     if (typeof window !== 'undefined') {
       const customList = cloudStore.getCustomPackages();
-      const customMatch = customList.find(
-        (p) =>
-          p.slug.toLowerCase() === decodedPkgParam ||
-          p.id.toLowerCase() === decodedPkgParam ||
-          decodedPkgParam.includes(p.slug.toLowerCase()) ||
-          p.slug.toLowerCase().includes(decodedPkgParam)
-      );
+      const customMatch = customList.find(isStrictMatch);
       if (customMatch) return customMatch;
     }
 
     const found = findCatalogPackage(decodedDestParam, decodedPkgParam);
-    if (
-      found &&
-      (found.slug.toLowerCase() === decodedPkgParam ||
-        found.id.toLowerCase() === decodedPkgParam ||
-        decodedPkgParam.includes(found.slug.toLowerCase()) ||
-        found.slug.toLowerCase().includes(decodedPkgParam))
-    ) {
+    if (found && isStrictMatch(found)) {
       return found;
     }
 
@@ -1152,6 +1158,10 @@ export function PackageDetailClientView({
         matchedKey = 'delhi';
       } else if (title.includes('mumbai')) {
         matchedKey = 'mumbai';
+      } else if (title.includes('araku') || raw.includes('araku')) {
+        matchedKey = 'araku';
+      } else if (title.includes('visakhapatnam') || title.includes('vizag') || raw.includes('visakhapatnam') || raw.includes('vizag')) {
+        matchedKey = 'visakhapatnam';
       } else if (title.includes('hyderabad') || title.includes('charminar') || title.includes('ramoji') || title.includes('golconda')) {
         matchedKey = 'hyderabad';
       }
