@@ -993,6 +993,41 @@ export function PackageDetailClientView({
       return explicitHotels[tier]!;
     }
 
+    // Look for author-defined hotel in pkg.hotels or pkg.itinerary
+    let candidateHotel = originalHotel;
+    if (!candidateHotel && dayTitleOrCity) {
+      const cityClean = dayTitleOrCity.toLowerCase().trim();
+      const inHotels = pkg.hotels?.find(
+        (h) =>
+          (h.city || '').toLowerCase().trim().includes(cityClean) ||
+          cityClean.includes((h.city || '').toLowerCase().trim())
+      )?.name;
+      if (inHotels) {
+        candidateHotel = inHotels;
+      } else {
+        const inItinerary = pkg.itinerary?.find(
+          (d) =>
+            d.hotel &&
+            d.hotel.trim().length > 2 &&
+            !d.hotel.toLowerCase().includes('check-out') &&
+            !d.hotel.toLowerCase().includes('standard hotel') &&
+            ((d.title || '').toLowerCase().includes(cityClean) ||
+              (d.hotel || '').toLowerCase().includes(cityClean))
+        )?.hotel;
+        if (inItinerary) candidateHotel = inItinerary;
+      }
+    }
+
+    if (!candidateHotel && pkg.hotels?.[0]?.name) {
+      candidateHotel = pkg.hotels[0].name;
+    }
+
+    // If an author hotel exists and we are rendering standard baseline tier, ALWAYS honor it!
+    if (candidateHotel && candidateHotel.trim().length > 2 && tier === 'standard') {
+      const cleaned = cleanHotelName(candidateHotel);
+      if (cleaned.length > 2) return cleaned;
+    }
+
     // If originalHotel is already defined
     if (
       originalHotel &&
