@@ -139,42 +139,140 @@ export function QuickPackageCreatorModal({
 
   if (!isOpen) return null;
 
-  // Smart Parser for pasted raw itinerary text
+  // Helper: Synchronize itinerary days count dynamically with duration
+  const syncItineraryDays = (targetCount: number) => {
+    const safeCount = Math.max(1, Math.min(30, targetCount));
+    setItineraryDays((prev) => {
+      if (prev.length === safeCount) return prev;
+      if (prev.length < safeCount) {
+        const added: DayEntry[] = [];
+        for (let i = prev.length + 1; i <= safeCount; i++) {
+          const hotelName = hotels[Math.min(i - 1, hotels.length - 1)]?.name || hotels[0]?.name || 'Standard Hotel';
+          added.push({
+            dayNumber: i,
+            title: i === safeCount ? 'Departure & Onward Journey' : `Day ${i} Sightseeing & Experiences`,
+            description:
+              i === safeCount
+                ? 'Enjoy breakfast at the hotel, complete check-out formalities, and transfer smoothly to the airport or railway station with sweet memories.'
+                : 'Morning breakfast at hotel, embark on full day local sightseeing, landmark visits, and evening leisure.',
+            hotel: i === safeCount ? 'Check-out completed (Departure Day)' : hotelName,
+            meals: i === 1 ? ['Dinner'] : i === safeCount ? ['Breakfast'] : ['Breakfast', 'Dinner'],
+            activities: i === safeCount ? 'Check-out, Airport / Station Transfer' : 'Local Sightseeing & Experiences',
+          });
+        }
+        return [...prev, ...added];
+      } else {
+        return prev.slice(0, safeCount);
+      }
+    });
+  };
+
+  const handleDurationChange = (days: number, nights?: number) => {
+    const safeDays = Math.max(1, Math.min(30, days));
+    const safeNights = nights !== undefined ? Math.max(0, nights) : Math.max(0, safeDays - 1);
+    setDurationDays(safeDays);
+    setDurationNights(safeNights);
+    syncItineraryDays(safeDays);
+  };
+
+  const addDay = () => {
+    const nextDayNumber = itineraryDays.length + 1;
+    const hotelName = hotels[Math.min(nextDayNumber - 1, hotels.length - 1)]?.name || hotels[0]?.name || 'Standard Hotel';
+    const newDay: DayEntry = {
+      dayNumber: nextDayNumber,
+      title: `Day ${nextDayNumber} Sightseeing & Exploration`,
+      description: 'Morning breakfast at hotel, visit popular attractions, local viewpoints, and enjoy leisure time.',
+      hotel: hotelName,
+      meals: ['Breakfast', 'Dinner'],
+      activities: 'Sightseeing & Transfers',
+    };
+    const updated = [...itineraryDays, newDay];
+    setItineraryDays(updated);
+    setDurationDays(updated.length);
+    setDurationNights(Math.max(0, updated.length - 1));
+  };
+
+  const removeDay = (idxToRemove?: number) => {
+    if (itineraryDays.length <= 1) {
+      alert('A package must have at least 1 day.');
+      return;
+    }
+    let updated: DayEntry[];
+    if (typeof idxToRemove === 'number') {
+      updated = itineraryDays.filter((_, idx) => idx !== idxToRemove);
+    } else {
+      updated = itineraryDays.slice(0, -1);
+    }
+    const renumbered = updated.map((d, i) => ({ ...d, dayNumber: i + 1 }));
+    setItineraryDays(renumbered);
+    setDurationDays(renumbered.length);
+    setDurationNights(Math.max(0, renumbered.length - 1));
+  };
+
+  // Smart Parser for pasted raw itinerary text (Lenient & Multi-format: WhatsApp, Markdown, Numbers, Paragraphs)
   const handleSmartParseItinerary = () => {
     if (!rawItineraryText.trim()) {
-      alert('Please paste some itinerary text first (e.g. Day 1: ... Day 2: ...).');
+      const sample = `Day 1: Arrival & Hotel Check-in
+Pickup from airport/station. Check-in to hotel and evening Marina Beach or local temple walk. Stay at ${hotels[0]?.name || 'Kansone Hotel'}.
+
+Day 2: Full Day Sightseeing & Heritage Exploration
+Breakfast at hotel. Visit major monuments, museums, and local markets. Overnight stay at hotel.
+
+Day 3: Scenic Drive & Departure
+Morning breakfast, check out from hotel and transfer smoothly to airport/railway station.`;
+      setRawItineraryText(sample);
+      alert('💡 A sample template has been loaded into the text box!\n\nYou can edit it or paste your WhatsApp text, then click "Parse & Generate Days".');
       return;
     }
 
-    const lines = rawItineraryText.split('\n').filter((l) => l.trim().length > 0);
+    // Strip markdown formatting (* or ** or #) commonly in WhatsApp/Docs
+    const cleanedText = rawItineraryText.replace(/[*_#]/g, '');
+    const lines = cleanedText.split('\n').map((l) => l.trim()).filter((l) => l.length > 0);
+
     const parsed: DayEntry[] = [];
     let currentDay: Partial<DayEntry> | null = null;
 
+    // Matches: Day 1, Day 01, Day-1, D1, 1., 1), Day 1: Title, etc.
+    const dayRegex = /^(?:Day\s*(\d+)|Day-(\d+)|D(\d+)|(\d+)\s*[\.\)])\s*[:\-–—\.]*\s*(.*)/i;
+
     lines.forEach((line) => {
-      const dayMatch = line.match(/^(?:Day\s*(\d+)|Day-(\d+))\s*[:\-–.]\s*(.*)/i);
-      if (dayMatch) {
+      const match = line.match(dayRegex);
+      if (match) {
         if (currentDay && currentDay.dayNumber) {
           parsed.push({
             dayNumber: currentDay.dayNumber,
             title: currentDay.title || `Day ${currentDay.dayNumber} Sightseeing`,
             description: currentDay.description || currentDay.title || '',
-            hotel: currentDay.hotel || (hotels[0]?.name || 'Standard Hotel'),
+            hotel: currentDay.hotel || (hotels[Math.min(currentDay.dayNumber - 1, hotels.length - 1)]?.name || hotels[0]?.name || 'Standard Hotel'),
             meals: ['Breakfast', 'Dinner'],
-            activities: currentDay.activities || 'Sightseeing & Transfers',
+            activities: currentDay.activities || currentDay.title || 'Sightseeing & Transfers',
           });
         }
-        const dayNum = parseInt(dayMatch[1] || dayMatch[2], 10);
-        const title = dayMatch[3].trim();
+
+        const dayNum = parseInt(match[1] || match[2] || match[3] || match[4], 10) || (parsed.length + 1);
+        const titlePart = match[5]?.trim() || '';
+
+        // Auto-detect hotel mention in line if present (e.g. "Stay at X", "Hotel: X", "Overnight at X")
+        let detectedHotel = '';
+        const hotelMatch = line.match(/(?:stay at|overnight at|hotel[:\s]+)\s*([^.,;\n]+)/i);
+        if (hotelMatch) {
+          detectedHotel = hotelMatch[1].trim();
+        }
+
         currentDay = {
           dayNumber: dayNum,
-          title: title,
-          description: title,
-          hotel: hotels[Math.min(dayNum - 1, hotels.length - 1)]?.name || hotels[0]?.name || 'Standard Hotel',
-          meals: ['Breakfast', 'Dinner'],
-          activities: title,
+          title: titlePart || `Day ${dayNum} Sightseeing`,
+          description: line,
+          hotel: detectedHotel || (hotels[Math.min(dayNum - 1, hotels.length - 1)]?.name || hotels[0]?.name || 'Standard Hotel'),
+          meals: dayNum === 1 ? ['Dinner'] : ['Breakfast', 'Dinner'],
+          activities: titlePart || 'Sightseeing & Transfers',
         };
       } else if (currentDay) {
-        currentDay.description = `${currentDay.description} ${line.trim()}`.trim();
+        currentDay.description = `${currentDay.description} ${line}`.trim();
+        const subHotel = line.match(/(?:stay at|overnight at|hotel[:\s]+)\s*([^.,;\n]+)/i);
+        if (subHotel && !currentDay.hotel) {
+          currentDay.hotel = subHotel[1].trim();
+        }
       }
     });
 
@@ -183,19 +281,39 @@ export function QuickPackageCreatorModal({
         dayNumber: (currentDay as any).dayNumber,
         title: (currentDay as any).title || `Day ${(currentDay as any).dayNumber}`,
         description: (currentDay as any).description || '',
-        hotel: (currentDay as any).hotel || hotels[0]?.name || 'Standard Hotel',
+        hotel: (currentDay as any).hotel || (hotels[0]?.name || 'Standard Hotel'),
         meals: ['Breakfast', 'Dinner'],
         activities: (currentDay as any).activities || 'Sightseeing & Transfers',
       });
     }
 
+    // Fallback: If no "Day X" keyword was matched, convert each non-empty block/line into a day!
+    if (parsed.length === 0 && lines.length > 0) {
+      lines.forEach((line, index) => {
+        const dayNum = index + 1;
+        const parts = line.split(/[.:\-–]/);
+        const title = parts[0]?.trim() || `Day ${dayNum}`;
+        const desc = parts.slice(1).join('. ').trim() || line;
+        parsed.push({
+          dayNumber: dayNum,
+          title: title.length > 60 ? `Day ${dayNum} Exploration` : title,
+          description: desc || line,
+          hotel: hotels[Math.min(dayNum - 1, hotels.length - 1)]?.name || hotels[0]?.name || 'Standard Hotel',
+          meals: dayNum === 1 ? ['Dinner'] : dayNum === lines.length ? ['Breakfast'] : ['Breakfast', 'Dinner'],
+          activities: title,
+        });
+      });
+    }
+
     if (parsed.length > 0) {
-      setItineraryDays(parsed);
-      setDurationDays(parsed.length);
-      setDurationNights(Math.max(1, parsed.length - 1));
-      alert(`✨ Successfully parsed ${parsed.length} days into structured itinerary!`);
+      // Renumber sequentially 1..N
+      const normalized = parsed.map((d, i) => ({ ...d, dayNumber: i + 1 }));
+      setItineraryDays(normalized);
+      setDurationDays(normalized.length);
+      setDurationNights(Math.max(0, normalized.length - 1));
+      alert(`✨ Successfully generated ${normalized.length} Days Itinerary!\nDuration set to ${Math.max(0, normalized.length - 1)}N / ${normalized.length}D.`);
     } else {
-      alert('Could not detect "Day 1:", "Day 2:" format. Please check the text format.');
+      alert('Could not parse text. Please enter at least 1 line or click again to view the sample template.');
     }
   };
 
@@ -508,6 +626,40 @@ export function QuickPackageCreatorModal({
                     />
                   </div>
 
+                  <div className="md:col-span-12 space-y-1.5">
+                    <span className="block text-[11px] font-bold text-slate-700">Duration Presets (1-Click Days & Nights Sync):</span>
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      {[
+                        { label: 'Same Day (1D)', days: 1, nights: 0 },
+                        { label: '1N / 2D', days: 2, nights: 1 },
+                        { label: '2N / 3D', days: 3, nights: 2 },
+                        { label: '3N / 4D', days: 4, nights: 3 },
+                        { label: '4N / 5D', days: 5, nights: 4 },
+                        { label: '5N / 6D', days: 6, nights: 5 },
+                        { label: '6N / 7D', days: 7, nights: 6 },
+                        { label: '7N / 8D', days: 8, nights: 7 },
+                        { label: '9N / 10D', days: 10, nights: 9 },
+                        { label: '14N / 15D', days: 15, nights: 14 },
+                      ].map((preset) => {
+                        const isActive = durationDays === preset.days && durationNights === preset.nights;
+                        return (
+                          <button
+                            key={preset.label}
+                            type="button"
+                            onClick={() => handleDurationChange(preset.days, preset.nights)}
+                            className={`text-[10px] font-bold px-2.5 py-1 rounded-lg border transition-all cursor-pointer ${
+                              isActive
+                                ? 'bg-brand-600 text-white border-brand-600 shadow-sm'
+                                : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-100 hover:border-slate-300'
+                            }`}
+                          >
+                            {preset.label}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
                   <div className="md:col-span-3">
                     <label className="block text-[11px] font-bold text-slate-700 mb-1">Duration Days</label>
                     <input
@@ -517,8 +669,7 @@ export function QuickPackageCreatorModal({
                       value={durationDays}
                       onChange={(e) => {
                         const days = Number(e.target.value);
-                        setDurationDays(days);
-                        setDurationNights(Math.max(1, days - 1));
+                        handleDurationChange(days, durationNights);
                       }}
                       className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 font-bold text-center"
                     />
@@ -528,7 +679,7 @@ export function QuickPackageCreatorModal({
                     <label className="block text-[11px] font-bold text-slate-700 mb-1">Duration Nights</label>
                     <input
                       type="number"
-                      min={1}
+                      min={0}
                       max={30}
                       value={durationNights}
                       onChange={(e) => setDurationNights(Number(e.target.value))}
@@ -787,11 +938,33 @@ export function QuickPackageCreatorModal({
 
               {/* 5. Itinerary Builder (Dual Mode) Card */}
               <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-2">
                   <span className="text-[11px] font-black uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
                     <Calendar className="w-3.5 h-3.5 text-brand-600" />
                     <span>5. Itinerary Details ({itineraryDays.length} Days)</span>
                   </span>
+
+                  {/* Manual Day Control Buttons */}
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      type="button"
+                      onClick={addDay}
+                      className="text-[10px] bg-brand-50 border border-brand-200 text-brand-700 hover:bg-brand-100 font-bold px-2.5 py-1 rounded-lg flex items-center gap-1 cursor-pointer transition-colors"
+                    >
+                      <Plus className="w-3 h-3" />
+                      <span>+ Add Day</span>
+                    </button>
+                    {itineraryDays.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => removeDay()}
+                        className="text-[10px] bg-rose-50 border border-rose-200 text-rose-700 hover:bg-rose-100 font-bold px-2.5 py-1 rounded-lg flex items-center gap-1 cursor-pointer transition-colors"
+                      >
+                        <Trash2 className="w-3 h-3" />
+                        <span>Remove Last Day</span>
+                      </button>
+                    )}
+                  </div>
                 </div>
 
                 {/* Smart Text Paste Assistant */}
@@ -824,9 +997,21 @@ export function QuickPackageCreatorModal({
                   {itineraryDays.map((d, dIdx) => (
                     <div key={dIdx} className="bg-white p-3 rounded-xl border border-slate-200 space-y-2">
                       <div className="flex items-center justify-between border-b border-slate-100 pb-1.5">
-                        <span className="font-black text-xs text-brand-700 bg-brand-50 px-2 py-0.5 rounded-md">
-                          Day {d.dayNumber}
-                        </span>
+                        <div className="flex items-center gap-2">
+                          <span className="font-black text-xs text-brand-700 bg-brand-50 px-2 py-0.5 rounded-md">
+                            Day {d.dayNumber}
+                          </span>
+                          {itineraryDays.length > 1 && (
+                            <button
+                              type="button"
+                              title="Delete this day"
+                              onClick={() => removeDay(dIdx)}
+                              className="text-slate-400 hover:text-rose-600 p-0.5 rounded hover:bg-rose-50 transition-colors cursor-pointer"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          )}
+                        </div>
                         <div className="flex items-center gap-2">
                           <span className="text-[10px] text-slate-400 font-bold">Stay:</span>
                           <input
