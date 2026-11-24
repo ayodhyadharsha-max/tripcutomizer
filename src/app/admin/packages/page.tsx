@@ -8,6 +8,7 @@ import { HolidayPackage } from '@/data/packagesData';
 import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { cloudStore } from '@/lib/cloudStore';
 import { formatCurrency } from '@/lib/utils';
+import { QuickPackageCreatorModal } from '@/components/admin/QuickPackageCreatorModal';
 import {
   downloadSampleCsv,
   downloadSampleJson,
@@ -53,6 +54,7 @@ export default function AdminPackagesPage() {
   const [pageSize, setPageSize] = useState(25);
 
   // Modal States
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isTemplateMenuOpen, setIsTemplateMenuOpen] = useState(false);
@@ -491,6 +493,16 @@ export default function AdminPackagesPage() {
               </div>
             )}
           </div>
+
+          {/* Quick Package Creator (AI Assistant) Button */}
+          <Button
+            size="sm"
+            onClick={() => setIsCreateModalOpen(true)}
+            className="text-xs font-bold bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 flex items-center space-x-1.5 shadow-sm cursor-pointer"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-slate-950" />
+            <span>+ Create New Package</span>
+          </Button>
 
           {/* Bulk Package Uploader Button */}
           <Button
@@ -1211,6 +1223,19 @@ export default function AdminPackagesPage() {
           </div>
         </div>
       )}
+
+      {/* Quick Package Creator Modal */}
+      <QuickPackageCreatorModal
+        isOpen={isCreateModalOpen}
+        onClose={() => setIsCreateModalOpen(false)}
+        onPackageCreated={(newPkg) => {
+          refreshCatalogData();
+          setNotification({
+            message: `✨ Package "${newPkg.name}" successfully published and live on website!`,
+            type: 'success',
+          });
+        }}
+      />
     </div>
   );
 }

@@ -1,0 +1,923 @@
+'use client';
+
+import React, { useState } from 'react';
+import { Card } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import { HolidayPackage } from '@/data/packagesData';
+import { cloudStore } from '@/lib/cloudStore';
+import { formatCurrency } from '@/lib/utils';
+import {
+  X,
+  Sparkles,
+  Plus,
+  Trash2,
+  CheckCircle2,
+  Upload,
+  Image as ImageIcon,
+  Hotel,
+  Calendar,
+  MapPin,
+  Tag,
+  DollarSign,
+  FileText,
+  ExternalLink,
+  Loader2,
+  Wand2,
+  ShieldCheck,
+  Check,
+} from 'lucide-react';
+
+interface QuickPackageCreatorModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onPackageCreated?: (pkg: HolidayPackage) => void;
+}
+
+interface HotelEntry {
+  city: string;
+  name: string;
+  nights: number;
+  rating?: string;
+}
+
+interface DayEntry {
+  dayNumber: number;
+  title: string;
+  description: string;
+  hotel: string;
+  meals: string[];
+  activities: string;
+}
+
+export function QuickPackageCreatorModal({
+  isOpen,
+  onClose,
+  onPackageCreated,
+}: QuickPackageCreatorModalProps) {
+  // 1. Basic Package Details
+  const [name, setName] = useState('');
+  const [destination, setDestination] = useState('Andhra Pradesh');
+  const [durationDays, setDurationDays] = useState(5);
+  const [durationNights, setDurationNights] = useState(4);
+  const [baselineTier, setBaselineTier] = useState<'3-Star Standard' | '4-Star Deluxe' | '5-Star Luxury'>('3-Star Standard');
+  const [theme, setTheme] = useState('Pilgrimage & Heritage');
+  const [departureCity, setDepartureCity] = useState('');
+  const [mealPlan, setMealPlan] = useState('Breakfast & Dinner Included (MAP)');
+
+  // 2. Pricing
+  const [startingPrice, setStartingPrice] = useState<number | ''>(25000);
+  const [discountPrice, setDiscountPrice] = useState<number | ''>(29999);
+
+  // 3. Hotel Details
+  const [hotels, setHotels] = useState<HotelEntry[]>([
+    { city: 'Chennai', name: 'Kansone Hotel And Banquets', nights: 1, rating: '4.8' },
+    { city: 'Tirupati', name: 'Hotel MountView Comforts', nights: 2, rating: '4.8' },
+    { city: 'Mahabalipuram', name: 'Mamalla Beach Resort', nights: 1, rating: '4.8' },
+  ]);
+
+  // 4. Photos
+  const [heroImage, setHeroImage] = useState(
+    'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=1200&q=80&fm=webp&fit=crop'
+  );
+  const [galleryText, setGalleryText] = useState(
+    'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=1200&q=80&fm=webp&fit=crop\nhttps://images.unsplash.com/photo-1621682372775-533449e550ed?w=1200&q=80&fm=webp&fit=crop\nhttps://images.unsplash.com/photo-1609766857041-ed402ea8069a?w=1200&q=80&fm=webp&fit=crop'
+  );
+
+  // 5. Itinerary
+  const [rawItineraryText, setRawItineraryText] = useState('');
+  const [itineraryDays, setItineraryDays] = useState<DayEntry[]>([
+    {
+      dayNumber: 1,
+      title: 'Arrival & City Heritage Exploration',
+      description: 'Pickup from airport or railway station. Check-in to hotel and relax. Afternoon sightseeing of major local landmarks, temples, and beaches. Savor local dinner and overnight stay.',
+      hotel: 'Kansone Hotel And Banquets',
+      meals: ['Dinner'],
+      activities: 'Airport Pickup, Hotel Check-in, Local Sightseeing, Evening Promenade',
+    },
+    {
+      dayNumber: 2,
+      title: 'Intercity Scenic Drive & Temple Darshan',
+      description: 'Morning breakfast at hotel, check out and embark on a scenic drive to next destination. En-route temple darshan and sightseeing stops. Evening hotel check-in and leisure.',
+      hotel: 'Hotel MountView Comforts',
+      meals: ['Breakfast', 'Dinner'],
+      activities: 'Scenic Interstate Transfer, En-route Darshan, Hotel Check-in, Temple Aarti',
+    },
+    {
+      dayNumber: 3,
+      title: 'Full Day Sacred Darshan & Pilgrimage Highlights',
+      description: 'Early morning sacred temple visit and special darshan. Collect divine prasadam, explore spiritual landmarks, viewpoints, and evening temple ceremonies. Return to hotel for dinner.',
+      hotel: 'Hotel MountView Comforts',
+      meals: ['Breakfast', 'Dinner'],
+      activities: 'Morning Sacred Darshan, Holy Pushkarini Walk, Spiritual Sightseeing, Evening Leisure',
+    },
+    {
+      dayNumber: 4,
+      title: 'Coastal Heritage & UNESCO Monument Tour',
+      description: 'After breakfast, drive to UNESCO World Heritage coastal town. Check-in to beachside resort. Marvel at ancient rock carvings, shore monuments, and enjoy relaxed sea-breeze evening.',
+      hotel: 'Mamalla Beach Resort',
+      meals: ['Breakfast', 'Dinner'],
+      activities: 'Coastal Scenic Drive, UNESCO Shore Temple Tour, Beachside Walk, Sunset Relaxation',
+    },
+    {
+      dayNumber: 5,
+      title: 'Resort Breakfast & Departure Transfer',
+      description: 'Morning coastal breeze and resort breakfast. Check out and transfer smoothly to airport or railway station for return journey with blessings and beautiful memories.',
+      hotel: 'Check-out completed (Departure Day)',
+      meals: ['Breakfast'],
+      activities: 'Resort Breakfast, Check-out Formalities, Private AC Drop to Airport / Station',
+    },
+  ]);
+
+  // 6. Highlights & Inclusions Custom Notes
+  const [customHighlights, setCustomHighlights] = useState('');
+  const [customInclusions, setCustomInclusions] = useState('');
+
+  // Submission State
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [publishedPackage, setPublishedPackage] = useState<HolidayPackage | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  if (!isOpen) return null;
+
+  // Smart Parser for pasted raw itinerary text
+  const handleSmartParseItinerary = () => {
+    if (!rawItineraryText.trim()) {
+      alert('Please paste some itinerary text first (e.g. Day 1: ... Day 2: ...).');
+      return;
+    }
+
+    const lines = rawItineraryText.split('\n').filter((l) => l.trim().length > 0);
+    const parsed: DayEntry[] = [];
+    let currentDay: Partial<DayEntry> | null = null;
+
+    lines.forEach((line) => {
+      const dayMatch = line.match(/^(?:Day\s*(\d+)|Day-(\d+))\s*[:\-–.]\s*(.*)/i);
+      if (dayMatch) {
+        if (currentDay && currentDay.dayNumber) {
+          parsed.push({
+            dayNumber: currentDay.dayNumber,
+            title: currentDay.title || `Day ${currentDay.dayNumber} Sightseeing`,
+            description: currentDay.description || currentDay.title || '',
+            hotel: currentDay.hotel || (hotels[0]?.name || 'Standard Hotel'),
+            meals: ['Breakfast', 'Dinner'],
+            activities: currentDay.activities || 'Sightseeing & Transfers',
+          });
+        }
+        const dayNum = parseInt(dayMatch[1] || dayMatch[2], 10);
+        const title = dayMatch[3].trim();
+        currentDay = {
+          dayNumber: dayNum,
+          title: title,
+          description: title,
+          hotel: hotels[Math.min(dayNum - 1, hotels.length - 1)]?.name || hotels[0]?.name || 'Standard Hotel',
+          meals: ['Breakfast', 'Dinner'],
+          activities: title,
+        };
+      } else if (currentDay) {
+        currentDay.description = `${currentDay.description} ${line.trim()}`.trim();
+      }
+    });
+
+    if (currentDay && (currentDay as any).dayNumber) {
+      parsed.push({
+        dayNumber: (currentDay as any).dayNumber,
+        title: (currentDay as any).title || `Day ${(currentDay as any).dayNumber}`,
+        description: (currentDay as any).description || '',
+        hotel: (currentDay as any).hotel || hotels[0]?.name || 'Standard Hotel',
+        meals: ['Breakfast', 'Dinner'],
+        activities: (currentDay as any).activities || 'Sightseeing & Transfers',
+      });
+    }
+
+    if (parsed.length > 0) {
+      setItineraryDays(parsed);
+      setDurationDays(parsed.length);
+      setDurationNights(Math.max(1, parsed.length - 1));
+      alert(`✨ Successfully parsed ${parsed.length} days into structured itinerary!`);
+    } else {
+      alert('Could not detect "Day 1:", "Day 2:" format. Please check the text format.');
+    }
+  };
+
+  // Quick Preset Photo Switcher
+  const applyPhotoPreset = (type: 'temple' | 'valley' | 'beach' | 'heritage') => {
+    if (type === 'temple') {
+      setHeroImage('https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=1200&q=80&fm=webp&fit=crop');
+      setGalleryText(
+        'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=1200&q=80&fm=webp&fit=crop\nhttps://images.unsplash.com/photo-1621682372775-533449e550ed?w=1200&q=80&fm=webp&fit=crop\nhttps://images.unsplash.com/photo-1609766857041-ed402ea8069a?w=1200&q=80&fm=webp&fit=crop'
+      );
+    } else if (type === 'valley') {
+      setHeroImage('https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200&q=80&fm=webp&fit=crop');
+      setGalleryText(
+        'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200&q=80&fm=webp&fit=crop\nhttps://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=80&fm=webp&fit=crop'
+      );
+    } else if (type === 'beach') {
+      setHeroImage('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80&fm=webp&fit=crop');
+      setGalleryText(
+        'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80&fm=webp&fit=crop\nhttps://images.unsplash.com/photo-1519046904884-53103b34b206?w=1200&q=80&fm=webp&fit=crop'
+      );
+    } else {
+      setHeroImage('https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=1200&q=80&fm=webp&fit=crop');
+      setGalleryText(
+        'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=1200&q=80&fm=webp&fit=crop\nhttps://images.unsplash.com/photo-1572455857811-045fb4255b5d?w=1200&q=80&fm=webp&fit=crop'
+      );
+    }
+  };
+
+  // Add hotel row
+  const addHotelRow = () => {
+    setHotels([...hotels, { city: '', name: '', nights: 1, rating: '4.8' }]);
+  };
+
+  const removeHotelRow = (idx: number) => {
+    setHotels(hotels.filter((_, i) => i !== idx));
+  };
+
+  const updateHotelRow = (idx: number, field: keyof HotelEntry, val: any) => {
+    const updated = [...hotels];
+    updated[idx] = { ...updated[idx], [field]: val };
+    setHotels(updated);
+  };
+
+  // Submit and Publish Package
+  const handlePublish = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim()) {
+      alert('Please enter a Package Name.');
+      return;
+    }
+    if (!startingPrice || Number(startingPrice) <= 0) {
+      alert('Please enter a valid Starting Price.');
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      // 1. Generate clean slug
+      const destinationSlug = destination
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
+
+      const baseSlug = name
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
+
+      const finalSlug = baseSlug.startsWith(destinationSlug)
+        ? baseSlug
+        : `${destinationSlug}-${baseSlug}`;
+
+      const galleryList = galleryText
+        .split('\n')
+        .map((s) => s.trim())
+        .filter((s) => s.startsWith('http') || s.startsWith('/'));
+
+      // 2. Prepare structured itinerary
+      const finalItinerary = itineraryDays.map((d) => ({
+        dayNumber: d.dayNumber,
+        title: d.title,
+        description: d.description,
+        hotel: d.hotel,
+        meals: d.meals,
+        activities: d.activities.split(',').map((a) => a.trim()).filter(Boolean),
+        transfers: 'Private AC Dedicated Cab Transfers',
+      }));
+
+      // 3. Prepare hotel list
+      const finalHotels = hotels
+        .filter((h) => h.name.trim().length > 0)
+        .map((h) => ({
+          name: h.name.trim(),
+          city: h.city.trim() || destination,
+          nights: Number(h.nights) || 1,
+          rating: h.rating || '4.8',
+        }));
+
+      // 4. Prepare highlights & inclusions
+      const hotelHighlights = finalHotels.map((h) => `${h.city}: ${h.name} (${h.nights}N)`).join(' • ');
+      const highlights = customHighlights.trim()
+        ? customHighlights.split('\n').filter(Boolean)
+        : [
+            `Verified Stay at ${hotelHighlights || 'Premium Handpicked Hotels'}`,
+            `Baseline ${baselineTier} Accommodation with Upgrade Options on Request`,
+            `Dedicated Private AC Vehicle for Transfers & Sightseeing`,
+            `Sightseeing & Sacred Heritage Tours with Concierge Guidance`,
+            `24x7 Trip Customizer On-Trip Emergency Support`,
+          ];
+
+      const inclusions = customInclusions.trim()
+        ? customInclusions.split('\n').filter(Boolean)
+        : [
+            `${durationNights} Nights verified hotel accommodation as per selected category`,
+            mealPlan,
+            `Private AC vehicle for all transfers and complete tour itinerary`,
+            `Driver allowance, state border taxes, toll fees, parking charges, and 5% GST included`,
+            `Dedicated 24x7 personal concierge on call throughout your journey`,
+          ];
+
+      const exclusions = [
+        'Airfare or train tickets (available upon request at live rates)',
+        'Monument camera tickets, special pooja/abhishekam tickets, joyrides, and watersports',
+        'Personal expenses like room service, laundry, extra snacks, and tips',
+        'Any services or meals not explicitly mentioned in inclusions',
+      ];
+
+      const newPackage: HolidayPackage = {
+        id: `pkg-admin-${finalSlug}`,
+        slug: finalSlug,
+        name: name.trim(),
+        destination: destination.trim(),
+        destinationSlug: destinationSlug,
+        state: destination.trim(),
+        stateSlug: destinationSlug,
+        country: 'India',
+        region: 'India',
+        isInternational: false,
+        durationDays: Number(durationDays),
+        durationNights: Number(durationNights),
+        startingPrice: Number(startingPrice),
+        discountPrice: discountPrice ? Number(discountPrice) : Math.round(Number(startingPrice) * 1.2),
+        rating: 4.8,
+        reviewsCount: 125,
+        heroImage: heroImage.trim() || `/destinations/${destinationSlug}.jpg`,
+        gallery: galleryList.length > 0 ? galleryList : [heroImage.trim()],
+        highlights,
+        inclusions,
+        exclusions,
+        itinerary: finalItinerary,
+        hotels: finalHotels,
+        faqs: [
+          {
+            question: `Which hotels are included in ${name}?`,
+            answer: `This package includes verified ${baselineTier} properties: ${hotelHighlights}. You can also request upgrades to 4★ Deluxe or 5★ Luxury on live rates.`,
+          },
+          {
+            question: 'Is private transportation included?',
+            answer: `Yes! A dedicated private AC vehicle is provided throughout the entire tour for all transfers and sightseeing.`,
+          },
+        ],
+        theme: theme,
+        hotelCategory: baselineTier,
+        mealPlan: mealPlan,
+        flightsIncluded: false,
+        transfersIncluded: true,
+        departureCity: departureCity || `${destination} Pickup & Drop`,
+        batch_source: 'mmt_sync',
+      };
+
+      // 5. Submit to Server API (/api/packages)
+      const res = await fetch('/api/packages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ packages: [newPackage] }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      // Also persist to client-side custom store for instant reflection
+      cloudStore.saveCustomPackages([newPackage]);
+
+      if (onPackageCreated) {
+        onPackageCreated(newPackage);
+      }
+
+      setPublishedPackage(newPackage);
+      setIsSubmitting(false);
+    } catch (err: any) {
+      console.error('[QuickPackageCreatorModal] Save error:', err);
+      setSubmitError(err?.message || 'Failed to save package. Please try again.');
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5 overflow-y-auto animate-in fade-in duration-200">
+      <div className="bg-white rounded-3xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
+        {/* Header Bar */}
+        <div className="px-6 py-4 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800 shrink-0">
+          <div className="flex items-center space-x-2.5">
+            <div className="p-1.5 bg-gradient-to-tr from-amber-500 to-amber-400 rounded-xl text-slate-950">
+              <Sparkles className="w-5 h-5" />
+            </div>
+            <div>
+              <h2 className="text-base font-black tracking-tight text-white flex items-center gap-2">
+                <span>Quick Package Creator</span>
+                <span className="text-[10px] bg-amber-400 text-slate-950 font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                  Admin AI
+                </span>
+              </h2>
+              <p className="text-[11px] text-slate-400 font-medium">
+                Enter itinerary, hotels, pricing & photos — automatically published to live website with Upgrade on Request!
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="text-slate-400 hover:text-white p-1 rounded-full hover:bg-slate-800 transition-colors cursor-pointer"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Modal Body */}
+        <div className="p-6 overflow-y-auto space-y-6 flex-1 text-xs">
+          {publishedPackage ? (
+            /* Success State */
+            <div className="text-center py-10 space-y-4 max-w-lg mx-auto">
+              <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-sm">
+                <CheckCircle2 className="w-10 h-10" />
+              </div>
+              <h3 className="text-2xl font-black text-slate-900">Package Published Live!</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                <strong>{publishedPackage.name}</strong> is now live on the platform! Non-baseline hotel tiers are set to <strong>Upgrade on Request</strong>, so customers can request live quotes without any fake pricing.
+              </p>
+
+              <div className="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-left space-y-1 text-xs font-mono break-all">
+                <span className="text-[10px] text-slate-400 font-bold uppercase block">Live URL:</span>
+                <span className="text-brand-700 font-bold">
+                  https://www.tripcustomizer.com/holidays/{publishedPackage.destinationSlug}/{publishedPackage.slug}
+                </span>
+              </div>
+
+              <div className="pt-4 flex flex-col sm:flex-row gap-2 justify-center">
+                <a
+                  href={`/holidays/${publishedPackage.destinationSlug}/${publishedPackage.slug}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center space-x-2 bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs px-6 py-3 rounded-xl shadow-md transition-all"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  <span>Open Live Package ↗</span>
+                </a>
+                <Button
+                  onClick={() => {
+                    setPublishedPackage(null);
+                    setName('');
+                    setStartingPrice(25000);
+                  }}
+                  variant="outline"
+                  className="text-xs font-bold py-3"
+                >
+                  + Create Another Package
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <form onSubmit={handlePublish} className="space-y-6">
+              {submitError && (
+                <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 rounded-xl font-bold">
+                  ⚠️ {submitError}
+                </div>
+              )}
+
+              {/* 1. Basic Package Details Card */}
+              <div className="p-4 bg-slate-50/80 rounded-2xl border border-slate-200 space-y-3">
+                <span className="text-[11px] font-black uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                  <Tag className="w-3.5 h-3.5 text-brand-600" />
+                  <span>1. Basic Package Information</span>
+                </span>
+
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
+                  <div className="md:col-span-8">
+                    <label className="block text-[11px] font-bold text-slate-700 mb-1">Package Title *</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Sacred Tirupati, Mahabalipuram & Chennai Trip (4N/5D)"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 font-bold focus:outline-none focus:border-brand-500"
+                    />
+                  </div>
+
+                  <div className="md:col-span-4">
+                    <label className="block text-[11px] font-bold text-slate-700 mb-1">State / Destination *</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Andhra Pradesh, Kerala, Kashmir"
+                      value={destination}
+                      onChange={(e) => setDestination(e.target.value)}
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 font-semibold focus:outline-none focus:border-brand-500"
+                    />
+                  </div>
+
+                  <div className="md:col-span-3">
+                    <label className="block text-[11px] font-bold text-slate-700 mb-1">Duration Days</label>
+                    <input
+                      type="number"
+                      min={1}
+                      max={30}
+                      value={durationDays}
+                      onChange={(e) => {
+                        const days = Number(e.target.value);
+                        setDurationDays(days);
+                        setDurationNights(Math.max(1, days - 1));
+                      }}
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 font-bold text-center"
+                    />
+                  </div>
+
+                  <div className="md:col-span-3">
+                    <label className="block text-[11px] font-bold text-slate-700 mb-1">Duration Nights</label>
+                    <input
+                      type="number"
+                      min={1}
+                      max={30}
+                      value={durationNights}
+                      onChange={(e) => setDurationNights(Number(e.target.value))}
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 font-bold text-center"
+                    />
+                  </div>
+
+                  <div className="md:col-span-6">
+                    <label className="block text-[11px] font-bold text-slate-700 mb-1">Baseline Hotel Category *</label>
+                    <select
+                      value={baselineTier}
+                      onChange={(e: any) => setBaselineTier(e.target.value)}
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 font-bold focus:outline-none focus:border-brand-500 cursor-pointer"
+                    >
+                      <option value="3-Star Standard">3★ Standard (Base included • 4★ & 5★ Upgrade on Request)</option>
+                      <option value="4-Star Deluxe">4★ Deluxe (Base included • 5★ Upgrade on Request)</option>
+                      <option value="5-Star Luxury">5★ Luxury (Top Luxury Tier Included)</option>
+                    </select>
+                  </div>
+
+                  <div className="md:col-span-6">
+                    <label className="block text-[11px] font-bold text-slate-700 mb-1">Theme</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Pilgrimage & Heritage, Nature & Hills"
+                      value={theme}
+                      onChange={(e) => setTheme(e.target.value)}
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900"
+                    />
+                  </div>
+
+                  <div className="md:col-span-6">
+                    <label className="block text-[11px] font-bold text-slate-700 mb-1">Departure / Pickup City</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Chennai Pickup & Drop"
+                      value={departureCity}
+                      onChange={(e) => setDepartureCity(e.target.value)}
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* 2. Pricing & Meal Plan Card */}
+              <div className="p-4 bg-emerald-50/60 rounded-2xl border border-emerald-200 space-y-3">
+                <span className="text-[11px] font-black uppercase tracking-wider text-emerald-900 flex items-center gap-1.5">
+                  <DollarSign className="w-3.5 h-3.5 text-emerald-700" />
+                  <span>2. Pricing & Meal Plan</span>
+                </span>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <div>
+                    <label className="block text-[11px] font-bold text-emerald-950 mb-1">
+                      Starting Price (₹ / Adult) *
+                    </label>
+                    <div className="relative">
+                      <span className="absolute left-3 top-2 font-bold text-emerald-700">₹</span>
+                      <input
+                        type="number"
+                        required
+                        min={1000}
+                        placeholder="25000"
+                        value={startingPrice}
+                        onChange={(e) => setStartingPrice(e.target.value ? Number(e.target.value) : '')}
+                        className="w-full bg-white border border-emerald-300 rounded-xl pl-7 pr-3 py-2 text-emerald-950 font-black text-sm focus:outline-none focus:border-emerald-600"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 mb-1">
+                      Discounted / Original Price (₹)
+                    </label>
+                    <div className="relative">
+                      <span className="absolute left-3 top-2 font-bold text-slate-400">₹</span>
+                      <input
+                        type="number"
+                        placeholder="29999"
+                        value={discountPrice}
+                        onChange={(e) => setDiscountPrice(e.target.value ? Number(e.target.value) : '')}
+                        className="w-full bg-white border border-slate-200 rounded-xl pl-7 pr-3 py-2 text-slate-800 font-bold focus:outline-none focus:border-brand-500"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 mb-1">Meal Plan</label>
+                    <select
+                      value={mealPlan}
+                      onChange={(e) => setMealPlan(e.target.value)}
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 font-semibold focus:outline-none focus:border-brand-500 cursor-pointer"
+                    >
+                      <option value="Breakfast & Dinner Included (MAP)">Breakfast & Dinner Included (MAP)</option>
+                      <option value="Breakfast Included (CP)">Breakfast Included (CP)</option>
+                      <option value="All Meals Included (AP)">All Meals Included (AP)</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. Hotel Details Card */}
+              <div className="p-4 bg-amber-50/60 rounded-2xl border border-amber-200 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-black uppercase tracking-wider text-amber-900 flex items-center gap-1.5">
+                    <Hotel className="w-3.5 h-3.5 text-amber-700" />
+                    <span>3. Hotel Details (City-wise)</span>
+                  </span>
+                  <button
+                    type="button"
+                    onClick={addHotelRow}
+                    className="text-[10px] font-bold bg-amber-200 hover:bg-amber-300 text-amber-950 px-2.5 py-1 rounded-lg flex items-center gap-1 cursor-pointer transition-colors"
+                  >
+                    <Plus className="w-3 h-3" />
+                    <span>Add City Hotel</span>
+                  </button>
+                </div>
+
+                <div className="space-y-2">
+                  {hotels.map((h, idx) => (
+                    <div key={idx} className="grid grid-cols-12 gap-2 bg-white p-2.5 rounded-xl border border-amber-200 items-center">
+                      <div className="col-span-3">
+                        <input
+                          type="text"
+                          placeholder="City (e.g. Chennai)"
+                          value={h.city}
+                          onChange={(e) => updateHotelRow(idx, 'city', e.target.value)}
+                          className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 font-bold text-slate-900"
+                        />
+                      </div>
+                      <div className="col-span-5">
+                        <input
+                          type="text"
+                          placeholder="Hotel Name (e.g. Kansone Hotel And Banquets)"
+                          value={h.name}
+                          onChange={(e) => updateHotelRow(idx, 'name', e.target.value)}
+                          className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 font-bold text-brand-700"
+                        />
+                      </div>
+                      <div className="col-span-2">
+                        <div className="flex items-center gap-1">
+                          <input
+                            type="number"
+                            min={1}
+                            placeholder="Nights"
+                            value={h.nights}
+                            onChange={(e) => updateHotelRow(idx, 'nights', Number(e.target.value))}
+                            className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 text-center font-bold text-slate-800"
+                          />
+                          <span className="text-[10px] text-slate-400 font-bold">N</span>
+                        </div>
+                      </div>
+                      <div className="col-span-2 flex items-center justify-end gap-2">
+                        <span className="text-[10px] font-bold text-amber-700 bg-amber-100 px-1.5 py-0.5 rounded">
+                          ★ {h.rating || '4.8'}
+                        </span>
+                        {hotels.length > 1 && (
+                          <button
+                            type="button"
+                            onClick={() => removeHotelRow(idx)}
+                            className="text-rose-500 hover:text-rose-700 p-1 cursor-pointer"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 4. Photos & Presets Card */}
+              <div className="p-4 bg-indigo-50/60 rounded-2xl border border-indigo-200 space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <span className="text-[11px] font-black uppercase tracking-wider text-indigo-950 flex items-center gap-1.5">
+                    <ImageIcon className="w-3.5 h-3.5 text-indigo-700" />
+                    <span>4. Photos & Gallery</span>
+                  </span>
+
+                  {/* 1-Click Photo Presets */}
+                  <div className="flex flex-wrap items-center gap-1">
+                    <span className="text-[10px] text-indigo-700 font-bold">Presets:</span>
+                    <button
+                      type="button"
+                      onClick={() => applyPhotoPreset('temple')}
+                      className="text-[10px] bg-white border border-indigo-200 hover:bg-indigo-100 px-2 py-0.5 rounded-md font-semibold text-indigo-900 cursor-pointer"
+                    >
+                      🛕 Temple
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => applyPhotoPreset('valley')}
+                      className="text-[10px] bg-white border border-indigo-200 hover:bg-indigo-100 px-2 py-0.5 rounded-md font-semibold text-indigo-900 cursor-pointer"
+                    >
+                      ⛰️ Green Valley
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => applyPhotoPreset('beach')}
+                      className="text-[10px] bg-white border border-indigo-200 hover:bg-indigo-100 px-2 py-0.5 rounded-md font-semibold text-indigo-900 cursor-pointer"
+                    >
+                      🏖️ Beach
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => applyPhotoPreset('heritage')}
+                      className="text-[10px] bg-white border border-indigo-200 hover:bg-indigo-100 px-2 py-0.5 rounded-md font-semibold text-indigo-900 cursor-pointer"
+                    >
+                      🏰 Heritage
+                    </button>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-start">
+                  <div className="md:col-span-8 space-y-2">
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-700 mb-1">Main Hero Image URL *</label>
+                      <input
+                        type="url"
+                        required
+                        placeholder="https://images.unsplash.com/..."
+                        value={heroImage}
+                        onChange={(e) => setHeroImage(e.target.value)}
+                        className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-700 mb-1">Gallery Photo URLs (One per line)</label>
+                      <textarea
+                        rows={3}
+                        value={galleryText}
+                        onChange={(e) => setGalleryText(e.target.value)}
+                        className="w-full bg-white border border-slate-200 rounded-xl p-2.5 text-slate-900 text-[11px] font-mono"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Thumbnail Live Preview */}
+                  <div className="md:col-span-4 bg-white p-2.5 rounded-2xl border border-indigo-200 text-center space-y-1">
+                    <span className="text-[10px] font-bold text-slate-400 block uppercase">Card Preview</span>
+                    <div className="w-full h-28 rounded-xl overflow-hidden bg-slate-100 relative">
+                      {heroImage ? (
+                        <img src={heroImage} alt="Preview" className="w-full h-full object-cover" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-slate-400 text-xs">
+                          No Image
+                        </div>
+                      )}
+                    </div>
+                    <span className="text-[10px] font-bold text-slate-700 block truncate">{name || 'Package Card'}</span>
+                    <span className="text-[10px] font-black text-brand-700 block">{formatCurrency(Number(startingPrice) || 0)}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* 5. Itinerary Builder (Dual Mode) Card */}
+              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-black uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
+                    <Calendar className="w-3.5 h-3.5 text-brand-600" />
+                    <span>5. Itinerary Details ({itineraryDays.length} Days)</span>
+                  </span>
+                </div>
+
+                {/* Smart Text Paste Assistant */}
+                <div className="p-3 bg-white rounded-xl border border-brand-200 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-bold text-brand-900 flex items-center gap-1">
+                      <Wand2 className="w-3.5 h-3.5 text-brand-600" />
+                      <span>Smart Itinerary Text Parser (Optional Quick Paste)</span>
+                    </span>
+                    <button
+                      type="button"
+                      onClick={handleSmartParseItinerary}
+                      className="bg-brand-600 hover:bg-brand-700 text-white font-bold text-[10px] px-3 py-1 rounded-lg flex items-center gap-1 cursor-pointer transition-colors"
+                    >
+                      <Sparkles className="w-3 h-3 text-amber-300" />
+                      <span>✨ Parse & Generate Days</span>
+                    </button>
+                  </div>
+                  <textarea
+                    rows={3}
+                    placeholder="Paste raw notes like:&#10;Day 1: Arrival in Chennai. Pickup and visit Marina beach. Stay at Kansone Hotel.&#10;Day 2: Drive to Tirupati via Srikalahasti. Stay at Hotel MountView Comforts.&#10;Day 3: Tirumala Balaji Darshan..."
+                    value={rawItineraryText}
+                    onChange={(e) => setRawItineraryText(e.target.value)}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-slate-800 text-[11px] focus:outline-none"
+                  />
+                </div>
+
+                {/* Day-by-Day Cards */}
+                <div className="space-y-2.5 pt-1">
+                  {itineraryDays.map((d, dIdx) => (
+                    <div key={dIdx} className="bg-white p-3 rounded-xl border border-slate-200 space-y-2">
+                      <div className="flex items-center justify-between border-b border-slate-100 pb-1.5">
+                        <span className="font-black text-xs text-brand-700 bg-brand-50 px-2 py-0.5 rounded-md">
+                          Day {d.dayNumber}
+                        </span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-[10px] text-slate-400 font-bold">Stay:</span>
+                          <input
+                            type="text"
+                            placeholder="Hotel Stay Name"
+                            value={d.hotel}
+                            onChange={(e) => {
+                              const updated = [...itineraryDays];
+                              updated[dIdx].hotel = e.target.value;
+                              setItineraryDays(updated);
+                            }}
+                            className="bg-slate-50 border border-slate-200 rounded px-2 py-0.5 text-[11px] font-bold text-slate-800"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-12 gap-2">
+                        <div className="md:col-span-8">
+                          <input
+                            type="text"
+                            placeholder={`Day ${d.dayNumber} Title`}
+                            value={d.title}
+                            onChange={(e) => {
+                              const updated = [...itineraryDays];
+                              updated[dIdx].title = e.target.value;
+                              setItineraryDays(updated);
+                            }}
+                            className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 font-bold text-slate-900 text-xs"
+                          />
+                        </div>
+                        <div className="md:col-span-4">
+                          <input
+                            type="text"
+                            placeholder="Activities (comma-separated)"
+                            value={d.activities}
+                            onChange={(e) => {
+                              const updated = [...itineraryDays];
+                              updated[dIdx].activities = e.target.value;
+                              setItineraryDays(updated);
+                            }}
+                            className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-700 text-[11px]"
+                          />
+                        </div>
+                        <div className="md:col-span-12">
+                          <textarea
+                            rows={2}
+                            placeholder="Detailed description of the day's experiences..."
+                            value={d.description}
+                            onChange={(e) => {
+                              const updated = [...itineraryDays];
+                              updated[dIdx].description = e.target.value;
+                              setItineraryDays(updated);
+                            }}
+                            className="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-slate-800 text-[11px]"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Submit Button */}
+              <div className="pt-2">
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  variant="accent"
+                  size="lg"
+                  className="w-full font-black py-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 text-sm shadow-xl cursor-pointer flex items-center justify-center gap-2"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin text-slate-950" />
+                      <span>Publishing Package to Catalog & Supabase...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="w-5 h-5 text-slate-950" />
+                      <span>PUBLISH PACKAGE TO LIVE WEBSITE →</span>
+                    </>
+                  )}
+                </Button>
+                <p className="text-[11px] text-center text-slate-400 font-medium mt-2">
+                  🔒 Automatically configured with baseline {baselineTier}. Higher tiers will show "Upgrade on Request" without fake pricing.
+                </p>
+              </div>
+            </form>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
