@@ -50,7 +50,7 @@ export interface PassengerData {
 
 const DESTINATION_HOTEL_TIERS: Record<string, { standard: string; deluxe: string; luxury: string }> = {
   ayodhya: {
-    standard: 'Hotel Ramayana / Treebo Trend Ayodhya (3★ Standard)',
+    standard: 'Royal Palm Inn / Hotel Ramayana (3★ Standard)',
     deluxe: 'Park Inn by Radisson Ayodhya / Cygnett Collection KK (4★ Deluxe)',
     luxury: 'Praveg Tent City Royal Suites / The Fern Residency Ayodhya (5★ Luxury)'
   },
@@ -312,11 +312,31 @@ const DESTINATION_HOTEL_TIERS: Record<string, { standard: string; deluxe: string
 };
 
 // Multi-city night split generator derived from itinerary stays
-export function deriveMultiCityNightSplit(pkg: HolidayPackage): { city: string; nights: number }[] {
-  // 1. Try parsing night split from package name or theme (e.g. "2N Manali 1N Kasol 2N Shimla")
+export interface CityNightStay {
+  city: string;
+  nights: number;
+  hotelName?: string;
+  rating?: string;
+}
+
+export function deriveMultiCityNightSplit(pkg: HolidayPackage): CityNightStay[] {
+  // 1. Highest Priority: Explicit author-defined hotels list from pkg.hotels
+  if (Array.isArray(pkg.hotels) && pkg.hotels.length > 0) {
+    const validHotels = pkg.hotels.filter((h) => h && (h.name || h.city));
+    if (validHotels.length > 0) {
+      return validHotels.map((h) => ({
+        city: h.city || pkg.destination?.split(',')[0]?.trim() || 'Destination',
+        nights: Number(h.nights) || 1,
+        hotelName: h.name,
+        rating: h.rating || '4.8',
+      }));
+    }
+  }
+
+  // 2. Try parsing night split from package name or theme (e.g. "2N Manali 1N Kasol 2N Shimla")
   const titleSearchText = [pkg.name || '', pkg.theme || ''].join(' ');
   const regex = /(\d+)\s*(?:N|Nights?)\s+([A-Za-z\s]+?)(?=(?:\s+\d+\s*(?:N|Nights?))|$|[,\-•|(/])/gi;
-  const parsedFromTitle: { city: string; nights: number }[] = [];
+  const parsedFromTitle: CityNightStay[] = [];
   let match: RegExpExecArray | null;
   while ((match = regex.exec(titleSearchText)) !== null) {
     const nights = parseInt(match[1], 10);
@@ -333,17 +353,6 @@ export function deriveMultiCityNightSplit(pkg: HolidayPackage): { city: string; 
   const titleTotalNights = parsedFromTitle.reduce((acc, curr) => acc + curr.nights, 0);
   if (parsedFromTitle.length > 1 && titleTotalNights > 0 && Math.abs(titleTotalNights - (pkg.durationNights || 0)) <= 2) {
     return parsedFromTitle;
-  }
-
-  // 2. Check if pkg.hotels already has multiple distinct valid cities
-  if (Array.isArray(pkg.hotels) && pkg.hotels.length > 1) {
-    const distinctCities = new Set(pkg.hotels.map((h) => (h.city || '').toLowerCase().trim()));
-    if (distinctCities.size > 1) {
-      return pkg.hotels.map((h) => ({
-        city: h.city || pkg.destination,
-        nights: Number(h.nights) || 1,
-      }));
-    }
   }
 
   // 3. Derive from itinerary stays
@@ -1993,9 +2002,21 @@ export function PackageDetailClientView({
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {(cityNightSplit && cityNightSplit.length > 0 ? cityNightSplit : [{ city: pkg.destination, nights: pkg.durationNights }]).map((h, i) => {
+                      {(cityNightSplit && cityNightSplit.length > 0
+                        ? cityNightSplit
+                        : [{ city: pkg.destination, nights: pkg.durationNights, hotelName: pkg.hotels?.[0]?.name }]
+                      ).map((h, i) => {
                         const effectiveTierForAccom = isPremium && tourTier === 'standard' ? 'deluxe' : tourTier;
-                        const tierHotelName = getTierHotelName(undefined, h.city, effectiveTierForAccom);
+                        const customHotel =
+                          h.hotelName ||
+                          pkg.hotels?.find((x) => (x.city || '').toLowerCase().trim() === (h.city || '').toLowerCase().trim())?.name ||
+                          pkg.hotels?.[i]?.name ||
+                          pkg.itinerary?.find((d) => (d.hotel || '').toLowerCase().includes((h.city || '').toLowerCase()))?.hotel;
+
+                        const tierHotelName =
+                          effectiveTierForAccom === 'standard' && customHotel && customHotel.trim().length > 2
+                            ? cleanHotelName(customHotel)
+                            : getTierHotelName(customHotel, h.city, effectiveTierForAccom);
                         const tierRating =
                           effectiveTierForAccom === 'luxury'
                             ? '5★ Luxury'
@@ -2118,11 +2139,21 @@ export function PackageDetailClientView({
                       </span>
                     </div>
                     <div className="flex flex-wrap gap-2 text-xs font-bold text-amber-900">
-                      {cityNightSplit.map((h, idx) => (
-                        <span key={idx} className="bg-white border border-amber-300 px-3 py-1.5 rounded-xl shadow-2xs">
-                          🌙 {h.nights} Nights in {h.city} ({getTierHotelName(undefined, h.city, tourTier)})
-                        </span>
-                      ))}
+                      {cityNightSplit.map((h, idx) => {
+                        const customHotel =
+                          h.hotelName ||
+                          pkg.hotels?.find((x) => (x.city || '').toLowerCase().trim() === (h.city || '').toLowerCase().trim())?.name ||
+                          pkg.hotels?.[idx]?.name;
+                        const hotelDisplayName =
+                          tourTier === 'standard' && customHotel && customHotel.trim().length > 2
+                            ? cleanHotelName(customHotel)
+                            : getTierHotelName(customHotel, h.city, tourTier);
+                        return (
+                          <span key={idx} className="bg-white border border-amber-300 px-3 py-1.5 rounded-xl shadow-2xs">
+                            🌙 {h.nights} Nights in {h.city} ({hotelDisplayName})
+                          </span>
+                        );
+                      })}
                     </div>
                   </div>
                 )}
