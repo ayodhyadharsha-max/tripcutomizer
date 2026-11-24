@@ -22,11 +22,13 @@ import {
 import { useAuth } from '@/context/AuthContext';
 import { cloudStore, CoTraveller } from '@/lib/cloudStore';
 import { sendWeb3FormLead } from '@/lib/web3forms';
+import { QuickPackageCreatorModal } from '@/components/admin/QuickPackageCreatorModal';
 import {
   Star, Clock, MapPin, CheckCircle2, ChevronRight, ChevronDown, ChevronUp,
   Hotel, Plane, Utensils, ShieldCheck, MessageCircle, Share2, Download,
   PhoneCall, Sparkles, Tag, Check, X, Car, Info, Users, ArrowRight,
-  CheckCircle, XCircle, FileText, Plus, Minus, Calendar, ArrowLeft, Baby, UserCheck, AlertTriangle, Loader2
+  CheckCircle, XCircle, FileText, Plus, Minus, Calendar, ArrowLeft, Baby, UserCheck, AlertTriangle, Loader2,
+  Pencil
 } from 'lucide-react';
 
 export type ChildAgeCategory = 'under5' | 'age5to9' | 'age10to14' | 'age15to17' | 'age18plus';
@@ -702,6 +704,9 @@ export function PackageDetailClientView({
 
   // Inclusions Tab Filter
   const [inclusionCategory, setInclusionCategory] = useState<'all' | 'hotels' | 'sightseeing' | 'meals' | 'transfers' | 'exclusions'>('all');
+
+  // Admin Quick Package Editor State
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   // Pricing & Tier State: Defaults to the package's native baseline hotel category (3★ Standard, 4★ Deluxe, or 5★ Luxury)
   const isPremium = useMemo(() => isPremiumPackage(pkg), [pkg]);
@@ -1959,19 +1964,28 @@ export function PackageDetailClientView({
                 </button>
               </div>
 
-              {/* Action Buttons: Share & Download */}
-              <div className="hidden sm:flex items-center space-x-2 pl-2 border-l border-slate-200">
+              {/* Action Buttons: Edit Package (Admin), Share & Download */}
+              <div className="flex items-center space-x-2 pl-2 sm:border-l border-slate-200">
+                <button
+                  onClick={() => setIsEditModalOpen(true)}
+                  title="Edit Package Price, Hotels & Details"
+                  className="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 font-black text-xs transition-colors cursor-pointer shadow-2xs"
+                >
+                  <Pencil className="w-3.5 h-3.5 text-amber-700" />
+                  <span>Edit Package</span>
+                </button>
+
                 <button
                   onClick={handleShare}
                   title="Share Package"
-                  className="p-2 rounded-xl text-slate-600 hover:bg-slate-100 hover:text-brand-600 transition-colors cursor-pointer"
+                  className="hidden sm:inline-flex p-2 rounded-xl text-slate-600 hover:bg-slate-100 hover:text-brand-600 transition-colors cursor-pointer"
                 >
                   <Share2 className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => window.print()}
                   title="Download Itinerary"
-                  className="p-2 rounded-xl text-slate-600 hover:bg-slate-100 hover:text-brand-600 transition-colors cursor-pointer"
+                  className="hidden sm:inline-flex p-2 rounded-xl text-slate-600 hover:bg-slate-100 hover:text-brand-600 transition-colors cursor-pointer"
                 >
                   <Download className="w-4 h-4" />
                 </button>
@@ -2761,6 +2775,15 @@ export function PackageDetailClientView({
                   <span className="text-[10px] text-slate-500 block font-medium">
                     {effectiveAdultsCount === 1 ? 'Solo Traveler Rate (Private Room & Cab Included)' : effectiveAdultsCount === 2 ? `Twin Sharing Couple Rate • Total ${formatCurrency(effectiveAdultsCount * basePricePerPerson)} for 2 Adults` : `Group Saver Rate • Total ${formatCurrency(effectiveAdultsCount * basePricePerPerson)} for ${effectiveAdultsCount} Adults`}
                   </span>
+
+                  <button
+                    type="button"
+                    onClick={() => setIsEditModalOpen(true)}
+                    className="w-full mt-2 py-1.5 px-3 bg-white hover:bg-amber-50 text-amber-900 border border-amber-300 rounded-xl font-bold text-[11px] flex items-center justify-center space-x-1.5 transition-colors cursor-pointer shadow-2xs"
+                  >
+                    <Pencil className="w-3 h-3 text-amber-700" />
+                    <span>Edit Price & Package (Admin)</span>
+                  </button>
                 </div>
               )}
 
@@ -3772,6 +3795,17 @@ export function PackageDetailClientView({
           </div>
         </div>
       )}
+
+      {/* Quick Package Editor Modal for Instant Price/Details Updates */}
+      <QuickPackageCreatorModal
+        isOpen={isEditModalOpen}
+        packageToEdit={pkg}
+        onClose={() => setIsEditModalOpen(false)}
+        onPackageCreated={(updated) => {
+          setActivePkg(updated);
+          setIsEditModalOpen(false);
+        }}
+      />
     </div>
   );
 }

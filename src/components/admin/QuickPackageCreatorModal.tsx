@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { HolidayPackage } from '@/data/packagesData';
@@ -25,12 +25,15 @@ import {
   Wand2,
   ShieldCheck,
   Check,
+  Pencil,
+  Edit3,
 } from 'lucide-react';
 
 interface QuickPackageCreatorModalProps {
   isOpen: boolean;
   onClose: () => void;
   onPackageCreated?: (pkg: HolidayPackage) => void;
+  packageToEdit?: HolidayPackage | null;
 }
 
 interface HotelEntry {
@@ -53,6 +56,7 @@ export function QuickPackageCreatorModal({
   isOpen,
   onClose,
   onPackageCreated,
+  packageToEdit,
 }: QuickPackageCreatorModalProps) {
   // 1. Basic Package Details
   const [name, setName] = useState('');
@@ -136,6 +140,88 @@ export function QuickPackageCreatorModal({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [publishedPackage, setPublishedPackage] = useState<HolidayPackage | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
+
+  // Synchronize state when packageToEdit changes or modal opens
+  useEffect(() => {
+    if (packageToEdit && isOpen) {
+      setName(packageToEdit.name || '');
+      setDestination(packageToEdit.destination || 'Andhra Pradesh');
+      setDurationDays(packageToEdit.durationDays || 5);
+      setDurationNights(packageToEdit.durationNights || Math.max(0, (packageToEdit.durationDays || 5) - 1));
+
+      const cat = packageToEdit.hotelCategory || '3-Star Standard';
+      if (cat.includes('5') || cat.toLowerCase().includes('luxury')) {
+        setBaselineTier('5-Star Luxury');
+      } else if (cat.includes('4') || cat.toLowerCase().includes('deluxe')) {
+        setBaselineTier('4-Star Deluxe');
+      } else {
+        setBaselineTier('3-Star Standard');
+      }
+
+      setTheme(packageToEdit.theme || 'Pilgrimage & Heritage');
+      setDepartureCity(packageToEdit.departureCity || '');
+      setMealPlan(packageToEdit.mealPlan || 'Breakfast & Dinner Included (MAP)');
+      setStartingPrice(packageToEdit.startingPrice || 25000);
+      setDiscountPrice(packageToEdit.discountPrice || '');
+
+      if (Array.isArray(packageToEdit.hotels) && packageToEdit.hotels.length > 0) {
+        setHotels(
+          packageToEdit.hotels.map((h) => ({
+            city: h.city || packageToEdit.destination || '',
+            name: h.name || '',
+            nights: Number(h.nights) || 1,
+            rating: h.rating || '4.8',
+          }))
+        );
+      } else {
+        setHotels([
+          {
+            city: packageToEdit.destination || 'Destination',
+            name: 'Standard Hotel',
+            nights: packageToEdit.durationNights || 1,
+            rating: '4.8',
+          },
+        ]);
+      }
+
+      const img =
+        packageToEdit.heroImage ||
+        (packageToEdit as any).image ||
+        'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=1200&q=80&fm=webp&fit=crop';
+      setHeroImage(img);
+
+      const gList =
+        Array.isArray(packageToEdit.gallery) && packageToEdit.gallery.length > 0
+          ? packageToEdit.gallery
+          : [img].filter(Boolean);
+      setGalleryText(gList.join('\n'));
+
+      if (Array.isArray(packageToEdit.itinerary) && packageToEdit.itinerary.length > 0) {
+        setItineraryDays(
+          packageToEdit.itinerary.map((d) => ({
+            dayNumber: d.dayNumber,
+            title: d.title || `Day ${d.dayNumber} Sightseeing`,
+            description: d.description || '',
+            hotel: d.hotel || '',
+            meals: Array.isArray(d.meals) ? d.meals : ['Breakfast', 'Dinner'],
+            activities: Array.isArray(d.activities) ? d.activities.join(', ') : d.activities || '',
+          }))
+        );
+      }
+
+      if (Array.isArray(packageToEdit.highlights) && packageToEdit.highlights.length > 0) {
+        setCustomHighlights(packageToEdit.highlights.join('\n'));
+      }
+      if (Array.isArray(packageToEdit.inclusions) && packageToEdit.inclusions.length > 0) {
+        setCustomInclusions(packageToEdit.inclusions.join('\n'));
+      }
+      setPublishedPackage(null);
+      setSubmitError(null);
+    } else if (!packageToEdit && isOpen) {
+      setPublishedPackage(null);
+      setSubmitError(null);
+    }
+  }, [packageToEdit, isOpen]);
 
   if (!isOpen) return null;
 
@@ -573,23 +659,26 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
         'Any services or meals not explicitly mentioned in inclusions',
       ];
 
+      const targetId = packageToEdit?.id || `pkg-admin-${finalSlug}`;
+      const targetSlug = packageToEdit?.slug || finalSlug;
+
       const newPackage: HolidayPackage = {
-        id: `pkg-admin-${finalSlug}`,
-        slug: finalSlug,
+        id: targetId,
+        slug: targetSlug,
         name: name.trim(),
         destination: destination.trim(),
         destinationSlug: destinationSlug,
         state: destination.trim(),
         stateSlug: destinationSlug,
-        country: 'India',
-        region: 'India',
-        isInternational: false,
+        country: packageToEdit?.country || 'India',
+        region: packageToEdit?.region || 'India',
+        isInternational: Boolean(packageToEdit?.isInternational),
         durationDays: Number(durationDays),
         durationNights: Number(durationNights),
         startingPrice: Number(startingPrice),
         discountPrice: discountPrice ? Number(discountPrice) : Math.round(Number(startingPrice) * 1.2),
-        rating: 4.8,
-        reviewsCount: 125,
+        rating: packageToEdit?.rating || 4.8,
+        reviewsCount: packageToEdit?.reviewsCount || 125,
         heroImage: heroImage.trim() || `/destinations/${destinationSlug}.jpg`,
         gallery: galleryList.length > 0 ? galleryList : [heroImage.trim()],
         highlights,
@@ -597,7 +686,7 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
         exclusions,
         itinerary: finalItinerary,
         hotels: finalHotels,
-        faqs: [
+        faqs: packageToEdit?.faqs && packageToEdit.faqs.length > 0 ? packageToEdit.faqs : [
           {
             question: `Which hotels are included in ${name}?`,
             answer: `This package includes verified ${baselineTier} properties: ${hotelHighlights}. You can also request upgrades to 4★ Deluxe or 5★ Luxury on live rates.`,
@@ -610,23 +699,20 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
         theme: theme,
         hotelCategory: baselineTier,
         mealPlan: mealPlan,
-        flightsIncluded: false,
+        flightsIncluded: Boolean(packageToEdit?.flightsIncluded),
         transfersIncluded: true,
         departureCity: departureCity || `${destination} Pickup & Drop`,
-        batch_source: 'mmt_sync',
+        batch_source: packageToEdit?.batch_source || 'mmt_sync',
       };
 
-      // 5. Submit to Server API (/api/packages)
+      // 5. Submit to Server API (/api/packages) & persistent client CloudStore
+      cloudStore.saveCustomPackages([newPackage]);
+
       const res = await fetch('/api/packages', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ packages: [newPackage] }),
-      });
-
-      const data = await res.json().catch(() => ({}));
-
-      // Also persist to client-side custom store for instant reflection
-      cloudStore.saveCustomPackages([newPackage]);
+      }).catch(() => null);
 
       if (onPackageCreated) {
         onPackageCreated(newPackage);
@@ -647,18 +733,22 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
         {/* Header Bar */}
         <div className="px-6 py-4 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800 shrink-0">
           <div className="flex items-center space-x-2.5">
-            <div className="p-1.5 bg-gradient-to-tr from-amber-500 to-amber-400 rounded-xl text-slate-950">
-              <Sparkles className="w-5 h-5" />
+            <div className={`p-1.5 rounded-xl text-slate-950 ${packageToEdit ? 'bg-gradient-to-tr from-sky-400 to-blue-500 text-white' : 'bg-gradient-to-tr from-amber-500 to-amber-400'}`}>
+              {packageToEdit ? <Pencil className="w-5 h-5" /> : <Sparkles className="w-5 h-5" />}
             </div>
             <div>
               <h2 className="text-base font-black tracking-tight text-white flex items-center gap-2">
-                <span>Quick Package Creator</span>
-                <span className="text-[10px] bg-amber-400 text-slate-950 font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">
-                  Admin AI
+                <span>{packageToEdit ? 'Edit Holiday Package' : 'Quick Package Creator'}</span>
+                <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider ${
+                  packageToEdit ? 'bg-sky-400 text-slate-950' : 'bg-amber-400 text-slate-950'
+                }`}>
+                  {packageToEdit ? 'EDIT MODE' : 'ADMIN AI'}
                 </span>
               </h2>
               <p className="text-[11px] text-slate-400 font-medium">
-                Enter itinerary, hotels, pricing & photos — automatically published to live website with Upgrade on Request!
+                {packageToEdit
+                  ? `Editing live details & pricing for: "${packageToEdit.name}" (ID: ${packageToEdit.id})`
+                  : 'Enter itinerary, hotels, pricing & photos — automatically published to live website with Upgrade on Request!'}
               </p>
             </div>
           </div>
@@ -679,9 +769,11 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
               <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-sm">
                 <CheckCircle2 className="w-10 h-10" />
               </div>
-              <h3 className="text-2xl font-black text-slate-900">Package Published Live!</h3>
+              <h3 className="text-2xl font-black text-slate-900">
+                {packageToEdit ? 'Package Updated Successfully!' : 'Package Published Live!'}
+              </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                <strong>{publishedPackage.name}</strong> is now live on the platform! Non-baseline hotel tiers are set to <strong>Upgrade on Request</strong>, so customers can request live quotes without any fake pricing.
+                <strong>{publishedPackage.name}</strong> {packageToEdit ? 'has been updated live on the platform!' : 'is now live on the platform!'} All changes to price, hotels, meals, and itinerary are active immediately.
               </p>
 
               <div className="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-left space-y-1 text-xs font-mono break-all">
@@ -704,13 +796,17 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
                 <Button
                   onClick={() => {
                     setPublishedPackage(null);
-                    setName('');
-                    setStartingPrice(25000);
+                    if (!packageToEdit) {
+                      setName('');
+                      setStartingPrice(25000);
+                    } else {
+                      onClose();
+                    }
                   }}
                   variant="outline"
                   className="text-xs font-bold py-3"
                 >
-                  + Create Another Package
+                  {packageToEdit ? 'Done & Close' : '+ Create Another Package'}
                 </Button>
               </div>
             </div>
@@ -1249,22 +1345,35 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
                   disabled={isSubmitting}
                   variant="accent"
                   size="lg"
-                  className="w-full font-black py-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 text-sm shadow-xl cursor-pointer flex items-center justify-center gap-2"
+                  className={`w-full font-black py-4 text-sm shadow-xl cursor-pointer flex items-center justify-center gap-2 ${
+                    packageToEdit
+                      ? 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white'
+                      : 'bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950'
+                  }`}
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="w-5 h-5 animate-spin text-slate-950" />
-                      <span>Publishing Package to Catalog & Supabase...</span>
+                      <Loader2 className={`w-5 h-5 animate-spin ${packageToEdit ? 'text-white' : 'text-slate-950'}`} />
+                      <span>{packageToEdit ? 'Saving & Updating Package...' : 'Publishing Package to Catalog & Supabase...'}</span>
                     </>
                   ) : (
                     <>
-                      <Sparkles className="w-5 h-5 text-slate-950" />
-                      <span>PUBLISH PACKAGE TO LIVE WEBSITE →</span>
+                      {packageToEdit ? (
+                        <>
+                          <Check className="w-5 h-5 text-white" />
+                          <span>SAVE & UPDATE PACKAGE (LIVE) →</span>
+                        </>
+                      ) : (
+                        <>
+                          <Sparkles className="w-5 h-5 text-slate-950" />
+                          <span>PUBLISH PACKAGE TO LIVE WEBSITE →</span>
+                        </>
+                      )}
                     </>
                   )}
                 </Button>
                 <p className="text-[11px] text-center text-slate-400 font-medium mt-2">
-                  🔒 Automatically configured with baseline {baselineTier}. Higher tiers will show "Upgrade on Request" without fake pricing.
+                  🔒 {packageToEdit ? `Updating live package with baseline ${baselineTier}. All changes will immediately reflect on the website.` : `Automatically configured with baseline ${baselineTier}. Higher tiers will show "Upgrade on Request" without fake pricing.`}
                 </p>
               </div>
             </form>

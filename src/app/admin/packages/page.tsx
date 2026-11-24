@@ -38,6 +38,7 @@ import {
   ShieldAlert,
   Sparkles,
   Loader2,
+  Pencil,
 } from 'lucide-react';
 
 export default function AdminPackagesPage() {
@@ -55,6 +56,7 @@ export default function AdminPackagesPage() {
 
   // Modal States
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [editingPackage, setEditingPackage] = useState<HolidayPackage | null>(null);
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isTemplateMenuOpen, setIsTemplateMenuOpen] = useState(false);
@@ -497,7 +499,10 @@ export default function AdminPackagesPage() {
           {/* Quick Package Creator (AI Assistant) Button */}
           <Button
             size="sm"
-            onClick={() => setIsCreateModalOpen(true)}
+            onClick={() => {
+              setEditingPackage(null);
+              setIsCreateModalOpen(true);
+            }}
             className="text-xs font-bold bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 flex items-center space-x-1.5 shadow-sm cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5 text-slate-950" />
@@ -796,6 +801,18 @@ export default function AdminPackagesPage() {
 
                     {/* Actions */}
                     <td className="p-3 text-right whitespace-nowrap space-x-1">
+                      {/* Edit Package Button */}
+                      <button
+                        onClick={() => {
+                          setEditingPackage(pkg);
+                          setIsCreateModalOpen(true);
+                        }}
+                        className="inline-flex p-1.5 text-blue-600 hover:text-blue-800 rounded-lg hover:bg-blue-50 transition-colors cursor-pointer"
+                        title="Edit Package Price, Hotels & Itinerary"
+                      >
+                        <Pencil className="w-3.5 h-3.5" />
+                      </button>
+
                       <a
                         href={`/holidays/${pkg.destinationSlug}/${pkg.slug}`}
                         target="_blank"
@@ -1224,16 +1241,23 @@ export default function AdminPackagesPage() {
         </div>
       )}
 
-      {/* Quick Package Creator Modal */}
+      {/* Quick Package Creator & Editor Modal */}
       <QuickPackageCreatorModal
         isOpen={isCreateModalOpen}
-        onClose={() => setIsCreateModalOpen(false)}
+        packageToEdit={editingPackage}
+        onClose={() => {
+          setIsCreateModalOpen(false);
+          setEditingPackage(null);
+        }}
         onPackageCreated={(newPkg) => {
           refreshCatalogData();
           setNotification({
-            message: `✨ Package "${newPkg.name}" successfully published and live on website!`,
+            message: editingPackage
+              ? `✅ Package "${newPkg.name}" updated successfully!`
+              : `✨ Package "${newPkg.name}" successfully published and live on website!`,
             type: 'success',
           });
+          setEditingPackage(null);
         }}
       />
     </div>
