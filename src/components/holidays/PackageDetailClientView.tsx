@@ -460,6 +460,156 @@ export function deriveMultiCityNightSplit(pkg: HolidayPackage): CityNightStay[] 
   }];
 }
 
+/**
+ * Real-world Indian tourism standard meal scheduling (MAP / Half Board):
+ * - Day 1 (Arrival / Check-in): Check-in is in afternoon. Dinner is served at hotel. NEVER breakfast on Day 1 morning before check-in.
+ * - In-between Days (Day 2 to N-1): Full day hotel stay includes Breakfast & Dinner.
+ * - Day N (Departure / Check-out): Morning Breakfast at hotel before 11:00 AM checkout. NEVER dinner after checkout.
+ * - 1-Day Same Day Excursion: Explicit meal or Welcome Refreshments / Lunch.
+ */
+export function getSanitizedDayMeals(
+  dayNumber: number,
+  totalDays: number,
+  explicitMeals?: string[] | string,
+  mealPlan?: string
+): string[] {
+  const plan = (mealPlan || '').toLowerCase();
+  const isBreakfastOnly = plan.includes('cp') || plan.includes('breakfast only') || plan.includes('ep');
+  const isAllMeals = plan.includes('ap') || plan.includes('all meals') || plan.includes('american plan');
+
+  if (totalDays <= 1) {
+    if (explicitMeals) {
+      const arr = Array.isArray(explicitMeals) ? explicitMeals : String(explicitMeals).split(',');
+      const cleaned = arr.map((m) => m.trim()).filter(Boolean);
+      if (cleaned.length > 0) return cleaned;
+    }
+    return ['Welcome Refreshments', 'Lunch / Snacks'];
+  }
+
+  // Day 1 (Arrival / Check-in Day)
+  if (dayNumber === 1) {
+    if (isBreakfastOnly) {
+      return ['Welcome Drink on Arrival'];
+    }
+    if (explicitMeals) {
+      const arr = Array.isArray(explicitMeals) ? explicitMeals : String(explicitMeals).split(',');
+      const cleaned = arr.map((m) => m.trim()).filter(Boolean);
+      // Remove any erroneous "Breakfast" from Day 1 check-in
+      const nonBreakfast = cleaned.filter((m) => !/breakfast/i.test(m));
+      if (nonBreakfast.length > 0) return nonBreakfast;
+    }
+    return ['Dinner Included'];
+  }
+
+  // Day N (Final Departure / Check-out Day)
+  if (dayNumber === totalDays) {
+    if (explicitMeals) {
+      const arr = Array.isArray(explicitMeals) ? explicitMeals : String(explicitMeals).split(',');
+      const cleaned = arr.map((m) => m.trim()).filter(Boolean);
+      // Remove any erroneous "Dinner" from final checkout day
+      const nonDinner = cleaned.filter((m) => !/dinner/i.test(m));
+      if (nonDinner.length > 0) return nonDinner;
+    }
+    return ['Buffet Breakfast'];
+  }
+
+  // Intermediate Days (Day 2 to totalDays - 1)
+  if (isBreakfastOnly) {
+    return ['Buffet Breakfast'];
+  }
+  if (isAllMeals) {
+    return ['Buffet Breakfast', 'Lunch', 'Dinner Included'];
+  }
+  return ['Buffet Breakfast', 'Dinner Included'];
+}
+
+/**
+ * Cleans and extracts actual sightseeing landmarks, temples, and attractions.
+ * Replaces generic placeholders like "Sightseeing & Transfers" with real places
+ * extracted from dayTitle, dayDescription, and itinerary context.
+ */
+export function getSanitizedSightseeingActivities(
+  dayTitle: string,
+  dayDescription: string,
+  rawActivities?: string | string[],
+  dayNumber: number = 1,
+  totalDays: number = 1
+): string[] {
+  const genericPatterns = [
+    /^sightseeing\s*(&|\+|and)?\s*transfers?$/i,
+    /^sightseeing$/i,
+    /^transfers?$/i,
+    /^local\s*sightseeing(\s*(&|\+|and)?\s*experiences?)?$/i,
+    /^day\s*\d+\s*(sightseeing|exploration|tour)?$/i,
+    /^tour$/i,
+    /^check-?out,\s*airport\s*\/\s*station\s*transfer$/i,
+    /^airport\s*\/\s*station\s*drop$/i,
+  ];
+
+  let list: string[] = [];
+  if (rawActivities) {
+    const rawArr = Array.isArray(rawActivities) ? rawActivities : String(rawActivities).split(',');
+    list = rawArr
+      .map((a) => a.trim())
+      .filter((a) => {
+        if (!a || a.length < 3) return false;
+        return !genericPatterns.some((pattern) => pattern.test(a));
+      });
+  }
+
+  // If valid specific activities were provided, return them!
+  if (list.length > 0) {
+    return list;
+  }
+
+  // Otherwise, smartly extract real places and attractions from dayTitle and dayDescription
+  const combinedText = `${dayTitle || ''}. ${dayDescription || ''}`.replace(/\s+/g, ' ');
+  const extracted: string[] = [];
+
+  // Match known landmark patterns: Mandir, Temple, Fort, Beach, Ghat, Palace, Ashram, Falls, Lake, etc.
+  const landmarkMatches = combinedText.match(
+    /(?:Shri\s+|Lord\s+)?([A-Z][A-Za-z0-9'&.\s]{2,40}?(?:Mandir|Temple|Fort|Palace|Beach|Ghat|Ghats|Aarti|Mahal|Falls|Lake|Sanctuary|Museum|Caves|Ashram|Dham|Memorial|Resort|Park|Bazaar|Valley|Pass|Viewpoint|Museum|Garden|Bridge))/g
+  );
+  if (landmarkMatches) {
+    landmarkMatches.forEach((m) => {
+      const clean = m.trim();
+      if (clean.length > 4 && !extracted.some((e) => e.toLowerCase() === clean.toLowerCase())) {
+        extracted.push(clean);
+      }
+    });
+  }
+
+  // Extract from title if title has segments separated by &, +, -, or |
+  const titleParts = (dayTitle || '')
+    .replace(/^Day\s*\d+\s*[:\-]\s*/i, '')
+    .split(/[&+|•–—,-]/)
+    .map((s) => s.trim())
+    .filter((s) => s.length > 4 && !genericPatterns.some((p) => p.test(s)));
+
+  titleParts.forEach((part) => {
+    if (!extracted.some((e) => e.toLowerCase() === part.toLowerCase())) {
+      extracted.push(part);
+    }
+  });
+
+  // If still empty or minimal, build context-aware meaningful steps:
+  if (extracted.length === 0) {
+    if (dayNumber === 1) {
+      extracted.push('Airport / Station Pickup & Hotel Check-in');
+      extracted.push('Evening Local Promenade & Sunset View');
+    } else if (dayNumber === totalDays) {
+      extracted.push('Morning Hotel Breakfast & Leisure');
+      extracted.push('Local Souvenir Shopping & Market Stroll');
+      extracted.push('Departure Drop to Airport / Railway Station');
+    } else {
+      extracted.push('Full Day Guided Sightseeing & Landmark Visits');
+      extracted.push('Photo-Stops at Scenic Viewpoints & Heritage Sites');
+    }
+  }
+
+  return extracted.slice(0, 6);
+}
+
 export function PackageDetailClientView({
   params,
   initialPackage,
@@ -1934,7 +2084,7 @@ export function PackageDetailClientView({
                                     </span>
                                     <span className="flex items-center space-x-1">
                                       <Utensils className="w-3.5 h-3.5 text-emerald-600" />
-                                      <span>Meals: {dayItem.meals?.join(', ') || 'Breakfast & Dinner'}</span>
+                                      <span>Meals: {getSanitizedDayMeals(dayItem.dayNumber, pkg.itinerary.length, dayItem.meals, pkg.mealPlan).join(' & ')}</span>
                                     </span>
                                   </div>
                                 </div>
@@ -1957,19 +2107,29 @@ export function PackageDetailClientView({
                                 </p>
 
                                 {/* Activity / Highlights Bullets */}
-                                {dayItem.activities && dayItem.activities.length > 0 && (
-                                  <div className="space-y-2 bg-white p-3.5 rounded-xl border border-slate-200/80">
-                                    <span className="font-bold text-slate-900 text-xs block">Key Activities & Sightseeing:</span>
-                                    <ul className="space-y-1.5">
-                                      {dayItem.activities.map((act, actIdx) => (
-                                        <li key={actIdx} className="flex items-start space-x-2 text-slate-700">
-                                          <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                                          <span>{act}</span>
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  </div>
-                                )}
+                                {(() => {
+                                  const acts = getSanitizedSightseeingActivities(
+                                    dayItem.title,
+                                    dayItem.description,
+                                    dayItem.activities,
+                                    dayItem.dayNumber,
+                                    pkg.itinerary.length
+                                  );
+                                  if (acts.length === 0) return null;
+                                  return (
+                                    <div className="space-y-2 bg-white p-3.5 rounded-xl border border-slate-200/80">
+                                      <span className="font-bold text-slate-900 text-xs block">Key Activities & Sightseeing:</span>
+                                      <ul className="space-y-1.5">
+                                        {acts.map((act, actIdx) => (
+                                          <li key={actIdx} className="flex items-start space-x-2 text-slate-700">
+                                            <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                                            <span className="font-medium">{act}</span>
+                                          </li>
+                                        ))}
+                                      </ul>
+                                    </div>
+                                  );
+                                })()}
 
                                 {/* Stay & Transfer Details Badge */}
                                 <div className="flex flex-wrap items-center gap-4 text-slate-800 bg-emerald-50/60 p-3 rounded-xl border border-emerald-100">
@@ -2110,9 +2270,13 @@ export function PackageDetailClientView({
                     <div className="space-y-3">
                       {pkg.itinerary && pkg.itinerary.length > 0 ? (
                         pkg.itinerary.map((d, dIdx) => {
-                          const activityList = d.activities
-                            ? (Array.isArray(d.activities) ? d.activities : String(d.activities).split(',')).map((a) => a.trim()).filter(Boolean)
-                            : [];
+                          const activityList = getSanitizedSightseeingActivities(
+                            d.title,
+                            d.description,
+                            d.activities,
+                            d.dayNumber,
+                            pkg.itinerary.length
+                          );
 
                           return (
                             <div key={dIdx} className="p-3.5 bg-slate-50 rounded-xl border border-slate-200/80 space-y-2">
@@ -2182,14 +2346,17 @@ export function PackageDetailClientView({
                           Daily fresh, hygienic breakfast and dinner served at your hotel restaurant ({pkg.mealPlan || 'MAP Plan'}).
                         </p>
                         <div className="pt-2 space-y-1">
-                          {pkg.itinerary?.map((d, idx) => (
-                            <div key={idx} className="flex items-center justify-between text-[11px] border-b border-amber-100 pb-1">
-                              <span className="text-slate-600 font-bold">Day {d.dayNumber}:</span>
-                              <span className="text-amber-900 font-extrabold">
-                                {d.meals?.join(' & ') || (d.dayNumber === 1 ? 'Dinner' : d.dayNumber === pkg.itinerary.length ? 'Breakfast' : 'Breakfast & Dinner')}
-                              </span>
-                            </div>
-                          ))}
+                          {pkg.itinerary?.map((d, idx) => {
+                            const dayMeals = getSanitizedDayMeals(d.dayNumber, pkg.itinerary.length, d.meals, pkg.mealPlan);
+                            return (
+                              <div key={idx} className="flex items-center justify-between text-[11px] border-b border-amber-100 pb-1">
+                                <span className="text-slate-600 font-bold">Day {d.dayNumber}:</span>
+                                <span className="text-amber-900 font-extrabold">
+                                  {dayMeals.join(' & ')}
+                                </span>
+                              </div>
+                            );
+                          })}
                         </div>
                       </div>
 
@@ -2320,11 +2487,15 @@ export function PackageDetailClientView({
                             </span>
                             <div className="space-y-0.5">
                               <span className="font-bold text-slate-900 block">{d.title}</span>
-                              {d.activities && (
-                                <span className="text-slate-600 text-[11px] block">
-                                  🏛️ {Array.isArray(d.activities) ? d.activities.join(' • ') : d.activities}
-                                </span>
-                              )}
+                              {(() => {
+                                const acts = getSanitizedSightseeingActivities(d.title, d.description, d.activities, d.dayNumber, pkg.itinerary.length);
+                                if (acts.length === 0) return null;
+                                return (
+                                  <span className="text-slate-600 text-[11px] block">
+                                    🏛️ {acts.join(' • ')}
+                                  </span>
+                                );
+                              })()}
                             </div>
                           </div>
                         ))}

@@ -156,13 +156,45 @@ export function QuickPackageCreatorModal({
                 ? 'Enjoy breakfast at the hotel, complete check-out formalities, and transfer smoothly to the airport or railway station with sweet memories.'
                 : 'Morning breakfast at hotel, embark on full day local sightseeing, landmark visits, and evening leisure.',
             hotel: i === safeCount ? 'Check-out completed (Departure Day)' : hotelName,
-            meals: i === 1 ? ['Dinner'] : i === safeCount ? ['Breakfast'] : ['Breakfast', 'Dinner'],
-            activities: i === safeCount ? 'Check-out, Airport / Station Transfer' : 'Local Sightseeing & Experiences',
+            meals: safeCount <= 1 ? ['Welcome Refreshments', 'Lunch'] : i === 1 ? ['Dinner'] : i === safeCount ? ['Breakfast'] : ['Breakfast', 'Dinner'],
+            activities: i === safeCount ? 'Hotel Breakfast, Check-out Formalities, Airport / Station Transfer' : 'Guided Sightseeing & Local Attractions',
           });
         }
-        return [...prev, ...added];
+        const combined = [...prev, ...added];
+        return combined.map((d, i) => {
+          const dayNum = i + 1;
+          const isFinal = dayNum === safeCount;
+          return {
+            ...d,
+            dayNumber: dayNum,
+            meals:
+              safeCount <= 1
+                ? ['Welcome Refreshments', 'Lunch']
+                : dayNum === 1
+                ? ['Dinner']
+                : isFinal
+                ? ['Breakfast']
+                : ['Breakfast', 'Dinner'],
+          };
+        });
       } else {
-        return prev.slice(0, safeCount);
+        const sliced = prev.slice(0, safeCount);
+        return sliced.map((d, i) => {
+          const dayNum = i + 1;
+          const isFinal = dayNum === safeCount;
+          return {
+            ...d,
+            dayNumber: dayNum,
+            meals:
+              safeCount <= 1
+                ? ['Welcome Refreshments', 'Lunch']
+                : dayNum === 1
+                ? ['Dinner']
+                : isFinal
+                ? ['Breakfast']
+                : ['Breakfast', 'Dinner'],
+          };
+        });
       }
     });
   };
@@ -178,15 +210,23 @@ export function QuickPackageCreatorModal({
   const addDay = () => {
     const nextDayNumber = itineraryDays.length + 1;
     const hotelName = hotels[Math.min(nextDayNumber - 1, hotels.length - 1)]?.name || hotels[0]?.name || 'Standard Hotel';
+    const totalDays = nextDayNumber;
+
+    // Previous days become middle days (except Day 1 which stays Dinner)
+    const updated = itineraryDays.map((d, idx) => ({
+      ...d,
+      meals: idx === 0 ? ['Dinner'] : ['Breakfast', 'Dinner'],
+    }));
+
     const newDay: DayEntry = {
       dayNumber: nextDayNumber,
-      title: `Day ${nextDayNumber} Sightseeing & Exploration`,
-      description: 'Morning breakfast at hotel, visit popular attractions, local viewpoints, and enjoy leisure time.',
-      hotel: hotelName,
-      meals: ['Breakfast', 'Dinner'],
-      activities: 'Sightseeing & Transfers',
+      title: `Day ${nextDayNumber} Sightseeing & Departure`,
+      description: 'Morning breakfast at hotel, complete check-out formalities, and transfer smoothly to airport or railway station.',
+      hotel: 'Check-out completed (Departure Day)',
+      meals: ['Breakfast'],
+      activities: 'Hotel Breakfast, Check-out Formalities, Airport / Station Transfer',
     };
-    const updated = [...itineraryDays, newDay];
+    updated.push(newDay);
     setItineraryDays(updated);
     setDurationDays(updated.length);
     setDurationNights(Math.max(0, updated.length - 1));
@@ -203,7 +243,22 @@ export function QuickPackageCreatorModal({
     } else {
       updated = itineraryDays.slice(0, -1);
     }
-    const renumbered = updated.map((d, i) => ({ ...d, dayNumber: i + 1 }));
+    const totalCount = updated.length;
+    const renumbered = updated.map((d, i) => {
+      const dayNum = i + 1;
+      return {
+        ...d,
+        dayNumber: dayNum,
+        meals:
+          totalCount <= 1
+            ? ['Welcome Refreshments', 'Lunch']
+            : dayNum === 1
+            ? ['Dinner']
+            : dayNum === totalCount
+            ? ['Breakfast']
+            : ['Breakfast', 'Dinner'],
+      };
+    });
     setItineraryDays(renumbered);
     setDurationDays(renumbered.length);
     setDurationNights(Math.max(0, renumbered.length - 1));
@@ -306,8 +361,39 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
     }
 
     if (parsed.length > 0) {
-      // Renumber sequentially 1..N
-      const normalized = parsed.map((d, i) => ({ ...d, dayNumber: i + 1 }));
+      // Renumber sequentially 1..N and enforce strict MAP meal schedule:
+      // Day 1: Dinner, Day N: Breakfast, Middle Days: Breakfast & Dinner
+      const totalCount = parsed.length;
+      const normalized = parsed.map((d, i) => {
+        const dayNumber = i + 1;
+        const meals =
+          totalCount <= 1
+            ? ['Welcome Refreshments', 'Lunch']
+            : dayNumber === 1
+            ? ['Dinner']
+            : dayNumber === totalCount
+            ? ['Breakfast']
+            : ['Breakfast', 'Dinner'];
+
+        // Clean activities: don't default to 'Sightseeing & Transfers'
+        const act =
+          d.activities && !/sightseeing\s*(&|\+|and)?\s*transfers?/i.test(d.activities)
+            ? d.activities
+            : d.title && !/^Day\s*\d+/i.test(d.title)
+            ? d.title
+            : dayNumber === 1
+            ? 'Airport / Station Pickup, Hotel Check-in, Evening Sightseeing'
+            : dayNumber === totalCount
+            ? 'Hotel Breakfast, Check-out Formalities, Airport / Station Transfer'
+            : 'Guided Full Day Sightseeing & Local Attractions';
+
+        return {
+          ...d,
+          dayNumber,
+          meals,
+          activities: act,
+        };
+      });
       setItineraryDays(normalized);
       setDurationDays(normalized.length);
       setDurationNights(Math.max(0, normalized.length - 1));
@@ -396,15 +482,41 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
         .filter((s) => s.startsWith('http') || s.startsWith('/'));
 
       // 2. Prepare structured itinerary
-      const finalItinerary = itineraryDays.map((d) => ({
-        dayNumber: d.dayNumber,
-        title: d.title,
-        description: d.description,
-        hotel: d.hotel,
-        meals: d.meals,
-        activities: d.activities.split(',').map((a) => a.trim()).filter(Boolean),
-        transfers: 'Private AC Dedicated Cab Transfers',
-      }));
+      const totalItineraryDays = itineraryDays.length;
+      const finalItinerary = itineraryDays.map((d) => {
+        const dayNumber = d.dayNumber;
+        const sanitizedMeals =
+          totalItineraryDays <= 1
+            ? ['Welcome Refreshments', 'Lunch']
+            : dayNumber === 1
+            ? ['Dinner']
+            : dayNumber === totalItineraryDays
+            ? ['Breakfast']
+            : ['Breakfast', 'Dinner'];
+
+        const rawActs = d.activities ? d.activities.split(',').map((a) => a.trim()).filter(Boolean) : [];
+        const cleanActs = rawActs.filter((a) => !/sightseeing\s*(&|\+|and)?\s*transfers?/i.test(a));
+        const finalActs =
+          cleanActs.length > 0
+            ? cleanActs
+            : d.title && !/^Day\s*\d+/i.test(d.title)
+            ? [d.title]
+            : dayNumber === 1
+            ? ['Airport / Station Pickup', 'Hotel Check-in', 'Evening Sightseeing']
+            : dayNumber === totalItineraryDays
+            ? ['Hotel Breakfast', 'Check-out Formalities', 'Airport / Station Drop']
+            : ['Guided Sightseeing', 'Local Attractions Visit'];
+
+        return {
+          dayNumber: d.dayNumber,
+          title: d.title,
+          description: d.description,
+          hotel: d.hotel,
+          meals: sanitizedMeals,
+          activities: finalActs,
+          transfers: 'Private AC Dedicated Cab Transfers',
+        };
+      });
 
       // 3. Prepare hotel list
       const finalHotels = hotels

@@ -3681,7 +3681,7 @@ export function getSectorCircuit(
             dayNumber: 2,
             title: stages[1].title,
             description: stages[1].desc,
-            meals: ['Breakfast'],
+            meals: ['Breakfast', 'Dinner'],
             activities: stages[1].acts,
             hotel: assignedHotel,
             transfers: 'Dedicated Private AC Cab for Full Day Ayodhya Temple Sightseeing'
@@ -3693,7 +3693,7 @@ export function getSectorCircuit(
             dayNumber: 3,
             title: stages[2].title,
             description: stages[2].desc,
-            meals: ['Breakfast'],
+            meals: ['Breakfast', 'Dinner'],
             activities: stages[2].acts,
             hotel: assignedHotel,
             transfers: 'Private AC Vehicle Transfer Ayodhya -> Prayagraj -> Varanasi'
@@ -3705,7 +3705,7 @@ export function getSectorCircuit(
             dayNumber: 4,
             title: stages[3].title,
             description: stages[3].desc,
-            meals: ['Breakfast'],
+            meals: ['Breakfast', 'Dinner'],
             activities: stages[3].acts,
             hotel: assignedHotel,
             transfers: 'Dedicated Private AC Cab for Full Day Varanasi & Sarnath Sightseeing'
@@ -3814,7 +3814,7 @@ export function getSectorCircuit(
           dayNumber: d,
           title: kStage.title,
           description: kStage.desc,
-          meals: isHouseboat ? ['Breakfast', 'Lunch', 'Dinner'] : ['Breakfast'],
+          meals: isHouseboat ? ['Breakfast', 'Lunch', 'Dinner'] : ['Breakfast', 'Dinner'],
           activities: kStage.acts,
           hotel: assignedHotel,
           transfers: kStage.transfers || (isHouseboat ? 'Private AC Cab Transfer to Alleppey Houseboat Jetty' : 'Dedicated Private AC Cab for Full Day Sightseeing & Transfers')
@@ -3829,7 +3829,7 @@ export function getSectorCircuit(
           dayNumber: d,
           title: hbStage.title,
           description: hbStage.desc,
-          meals: ['Breakfast'],
+          meals: ['Breakfast', 'Dinner'],
           activities: hbStage.acts,
           hotel: assignedHotel,
           transfers: 'Dedicated Private AC Cab Transfer to Dal Lake Houseboat'
@@ -3844,7 +3844,7 @@ export function getSectorCircuit(
           dayNumber: d,
           title: stg.title,
           description: stg.desc,
-          meals: isHouseboat ? ['Breakfast', 'Lunch', 'Dinner'] : ['Breakfast'],
+          meals: isHouseboat ? ['Breakfast', 'Lunch', 'Dinner'] : ['Breakfast', 'Dinner'],
           activities: stg.acts,
           hotel: assignedHotel,
           transfers: stg.transfers || 'Dedicated Private AC Cab for Full Day Sightseeing & Transfers'
@@ -3870,7 +3870,7 @@ export function getSectorCircuit(
           dayNumber: d,
           title: `Day ${d}: ${extraTitle}`,
           description: extraDesc,
-          meals: ['Breakfast'],
+          meals: ['Breakfast', 'Dinner'],
           activities: extraActs,
           hotel: assignedHotel,
           transfers: 'Dedicated Private AC Cab for Full Day Local Sightseeing'
@@ -3987,8 +3987,15 @@ export function getSectorCircuit(
       dayNumber: i + 1,
       title: i === 0 ? `Arrival in ${defaultCity}` : i === totalDays - 1 ? `Departure from ${defaultCity}` : `Day ${i + 1}: ${defaultCity} Sightseeing`,
       description: `Tour experience in ${defaultCity}.`,
-      meals: i === 0 ? ['Dinner'] : ['Breakfast'],
-      activities: [`${defaultCity} Sightseeing`],
+      meals:
+        totalDays <= 1
+          ? ['Welcome Refreshments', 'Lunch']
+          : i === 0
+          ? ['Dinner']
+          : i === totalDays - 1
+          ? ['Breakfast']
+          : ['Breakfast', 'Dinner'],
+      activities: [`${defaultCity} Sightseeing & Heritage Exploration`],
       hotel: i === totalDays - 1 ? 'Check-out completed' : getBrandedHotelName(defaultCity, hotelTier),
       transfers: 'Private AC Cab'
     })),
