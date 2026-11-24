@@ -418,13 +418,28 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
 
       // 4. Prepare highlights & inclusions
       const hotelHighlights = finalHotels.map((h) => `${h.city}: ${h.name} (${h.nights}N)`).join(' • ');
-      const highlights = customHighlights.trim()
+
+      // Extract top sightseeing from itinerary
+      const itinerarySightseeingList: string[] = [];
+      finalItinerary.forEach((d) => {
+        const act: any = d.activities;
+        if (Array.isArray(act) && act.length > 0) {
+          itinerarySightseeingList.push(act.join(', '));
+        } else if (typeof act === 'string' && act.trim()) {
+          itinerarySightseeingList.push(act.trim());
+        } else if (d.title) {
+          itinerarySightseeingList.push(d.title);
+        }
+      });
+      const topSightseeing = itinerarySightseeingList.slice(0, 3);
+
+      const highlights: string[] = customHighlights.trim()
         ? customHighlights.split('\n').filter(Boolean)
         : [
-            `Verified Stay at ${hotelHighlights || 'Premium Handpicked Hotels'}`,
-            `Baseline ${baselineTier} Accommodation with Upgrade Options on Request`,
-            `Dedicated Private AC Vehicle for Transfers & Sightseeing`,
-            `Sightseeing & Sacred Heritage Tours with Concierge Guidance`,
+            ...topSightseeing,
+            `Verified Stay: ${hotelHighlights || 'Handpicked Hotels'}`,
+            `Dedicated Private AC Cab for all Transfers & Sightseeing`,
+            `Daily ${mealPlan}`,
             `24x7 Trip Customizer On-Trip Emergency Support`,
           ];
 
@@ -433,8 +448,9 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
         : [
             `${durationNights} Nights verified hotel accommodation as per selected category`,
             mealPlan,
-            `Private AC vehicle for all transfers and complete tour itinerary`,
-            `Driver allowance, state border taxes, toll fees, parking charges, and 5% GST included`,
+            `Dedicated Private AC Vehicle for all transfers & complete sightseeing itinerary`,
+            `All sightseeing excursions: ${finalItinerary.map((d) => d.title).filter(Boolean).slice(0, 3).join(', ')}`,
+            `Driver night allowance, interstate border taxes, toll fees, parking charges & 5% GST included`,
             `Dedicated 24x7 personal concierge on call throughout your journey`,
           ];
 

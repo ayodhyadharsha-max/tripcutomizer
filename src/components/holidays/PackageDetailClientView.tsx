@@ -2059,45 +2059,184 @@ export function PackageDetailClientView({
                   </Card>
                 )}
 
-                {/* What your tour price includes (BLUE BOX WITH GREEN CHECKMARKS) */}
-                {(inclusionCategory === 'all' || inclusionCategory === 'sightseeing' || inclusionCategory === 'meals') && (
-                  <div className="p-6 bg-blue-50/70 border border-blue-200 rounded-3xl space-y-4">
-                    <h3 className="font-black text-blue-950 text-base flex items-center space-x-2">
-                      <CheckCircle className="w-5 h-5 text-emerald-600" />
-                      <span>What your tour price includes?</span>
-                    </h3>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                      {pkg.inclusions.map((inc, i) => {
-                        const cleanInc = isPremium
-                          ? inc.replace(/3-Star Standard|3-Star|3 Star Standard|3★ Standard|3★/gi, '4-Star Deluxe & 5-Star Luxury')
-                          : inc;
-                        return (
-                          <div key={i} className="flex items-start space-x-2 bg-white p-3 rounded-xl border border-blue-100 text-slate-800 font-semibold shadow-2xs">
-                            <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                            <span>{cleanInc}</span>
-                          </div>
-                        );
-                      })}
+                {/* 2. Sightseeing Section (Day-by-Day Activities & Landmark Visits) */}
+                {(inclusionCategory === 'all' || inclusionCategory === 'sightseeing') && (
+                  <Card className="p-5 bg-white border-slate-200/80 rounded-2xl space-y-4 shadow-xs">
+                    <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                      <h3 className="font-black text-slate-900 text-base flex items-center space-x-2">
+                        <MapPin className="w-5 h-5 text-brand-600" />
+                        <span>Included Sightseeing & Tour Experiences</span>
+                      </h3>
+                      <Badge variant="blue">
+                        {pkg.itinerary?.length || pkg.durationDays} Days Route Covered
+                      </Badge>
                     </div>
-                  </div>
+
+                    <div className="space-y-3">
+                      {pkg.itinerary && pkg.itinerary.length > 0 ? (
+                        pkg.itinerary.map((d, dIdx) => {
+                          const activityList = d.activities
+                            ? (Array.isArray(d.activities) ? d.activities : String(d.activities).split(',')).map((a) => a.trim()).filter(Boolean)
+                            : [];
+
+                          return (
+                            <div key={dIdx} className="p-3.5 bg-slate-50 rounded-xl border border-slate-200/80 space-y-2">
+                              <div className="flex items-center gap-2">
+                                <span className="text-[11px] font-black bg-brand-600 text-white px-2 py-0.5 rounded-md">
+                                  Day {d.dayNumber}
+                                </span>
+                                <span className="font-bold text-xs text-slate-900">
+                                  {d.title}
+                                </span>
+                              </div>
+
+                              {activityList.length > 0 && (
+                                <div className="flex flex-wrap gap-1.5 pt-1">
+                                  {activityList.map((act, aIdx) => (
+                                    <span key={aIdx} className="text-[11px] font-semibold bg-white border border-slate-200 text-slate-700 px-2 py-0.5 rounded-md shadow-2xs flex items-center gap-1">
+                                      <Check className="w-3 h-3 text-emerald-600" />
+                                      <span>{act}</span>
+                                    </span>
+                                  ))}
+                                </div>
+                              )}
+
+                              {d.description && (
+                                <p className="text-[11px] text-slate-600 leading-relaxed line-clamp-2">
+                                  {d.description}
+                                </p>
+                              )}
+                            </div>
+                          );
+                        })
+                      ) : (
+                        <div className="p-4 bg-slate-50 rounded-xl text-xs text-slate-600">
+                          Complete guided sightseeing in private AC vehicle as per package itinerary.
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl flex items-center gap-2 text-xs text-emerald-800 font-bold">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                      <span>Dedicated Private AC Vehicle with chauffeur provided for all sightseeing points & transfers throughout the trip.</span>
+                    </div>
+                  </Card>
                 )}
 
-                {/* What your tour price does NOT include (ORANGE BOX WITH RED CROSSMARKS) */}
+                {/* 3. Meals & Transfers Section */}
+                {(inclusionCategory === 'all' || inclusionCategory === 'meals') && (
+                  <Card className="p-5 bg-white border-slate-200/80 rounded-2xl space-y-4 shadow-xs">
+                    <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                      <h3 className="font-black text-slate-900 text-base flex items-center space-x-2">
+                        <Utensils className="w-5 h-5 text-brand-600" />
+                        <span>Included Meals & Private Transfers</span>
+                      </h3>
+                      <Badge variant="green">
+                        {pkg.mealPlan || 'Breakfast & Dinner (MAP)'}
+                      </Badge>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                      {/* Meals breakdown */}
+                      <div className="p-4 bg-amber-50/60 rounded-xl border border-amber-200 space-y-2">
+                        <span className="font-black text-xs text-amber-950 flex items-center gap-1.5">
+                          <Utensils className="w-3.5 h-3.5 text-amber-700" />
+                          <span>Meal Plan Details</span>
+                        </span>
+                        <p className="text-[11px] text-slate-700 leading-relaxed font-semibold">
+                          Daily fresh, hygienic breakfast and dinner served at your hotel restaurant ({pkg.mealPlan || 'MAP Plan'}).
+                        </p>
+                        <div className="pt-2 space-y-1">
+                          {pkg.itinerary?.map((d, idx) => (
+                            <div key={idx} className="flex items-center justify-between text-[11px] border-b border-amber-100 pb-1">
+                              <span className="text-slate-600 font-bold">Day {d.dayNumber}:</span>
+                              <span className="text-amber-900 font-extrabold">
+                                {d.meals?.join(' & ') || (d.dayNumber === 1 ? 'Dinner' : d.dayNumber === pkg.itinerary.length ? 'Breakfast' : 'Breakfast & Dinner')}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Vehicle & Transfers breakdown */}
+                      <div className="p-4 bg-blue-50/60 rounded-xl border border-blue-200 space-y-2">
+                        <span className="font-black text-xs text-blue-950 flex items-center gap-1.5">
+                          <Car className="w-3.5 h-3.5 text-blue-700" />
+                          <span>Private Vehicle & Chauffeur</span>
+                        </span>
+                        <div className="space-y-1.5 text-[11px] text-slate-700 font-semibold pt-1">
+                          <div className="flex items-start gap-1.5">
+                            <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                            <span>Dedicated Private AC Sedan / SUV exclusively for your family / group throughout the tour.</span>
+                          </div>
+                          <div className="flex items-start gap-1.5">
+                            <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                            <span>Airport / Railway Station pickup on arrival and drop on departure included.</span>
+                          </div>
+                          <div className="flex items-start gap-1.5">
+                            <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                            <span>Fuel charges, interstate toll taxes, driver night allowance, and parking fees 100% included.</span>
+                          </div>
+                          <div className="flex items-start gap-1.5">
+                            <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                            <span>Verified, polite local driver with route expertise and 24x7 trip support.</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Card>
+                )}
+
+                {/* 4. Exclusions Section */}
                 {(inclusionCategory === 'all' || inclusionCategory === 'exclusions') && (
                   <div className="p-6 bg-amber-50/70 border border-amber-200 rounded-3xl space-y-4">
-                    <h3 className="font-black text-amber-950 text-base flex items-center space-x-2">
-                      <XCircle className="w-5 h-5 text-rose-600" />
-                      <span>What your tour price does not include?</span>
-                    </h3>
+                    <div className="flex items-center justify-between border-b border-amber-200/60 pb-3">
+                      <h3 className="font-black text-amber-950 text-base flex items-center space-x-2">
+                        <XCircle className="w-5 h-5 text-rose-600" />
+                        <span>What your tour price does NOT include?</span>
+                      </h3>
+                      <span className="text-[10px] font-black bg-rose-100 text-rose-800 px-2 py-0.5 rounded-md uppercase">
+                        Clear & Transparent
+                      </span>
+                    </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                      {pkg.exclusions.map((exc, i) => (
+                      {(pkg.exclusions && pkg.exclusions.length > 0 ? pkg.exclusions : [
+                        'Airfare or train tickets (available upon request at live rates)',
+                        'Monument entry tickets, camera passes, joyrides, and ropeway tickets',
+                        'Special VIP pooja / darshan tickets, temple rituals, or local priest fees',
+                        'Personal expenses like room service, laundry, extra beverages, and tips',
+                        'Any meals or services not explicitly mentioned in the inclusions',
+                        'Early check-in or late check-out charges at hotels',
+                      ]).map((exc, i) => (
                         <div key={i} className="flex items-start space-x-2 bg-white p-3 rounded-xl border border-amber-100 text-slate-700 font-semibold shadow-2xs">
                           <X className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
                           <span>{exc}</span>
                         </div>
                       ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* 5. General Inclusions Overview (When viewing All) */}
+                {inclusionCategory === 'all' && (
+                  <div className="p-5 bg-blue-50/70 border border-blue-200 rounded-2xl space-y-3">
+                    <h4 className="font-black text-blue-950 text-xs uppercase tracking-wider flex items-center space-x-2">
+                      <CheckCircle className="w-4 h-4 text-emerald-600" />
+                      <span>Additional Included Inclusions</span>
+                    </h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                      {pkg.inclusions.map((inc, i) => {
+                        const cleanInc = isPremium
+                          ? inc.replace(/3-Star Standard|3-Star|3 Star Standard|3★ Standard|3★/gi, '4-Star Deluxe & 5-Star Luxury')
+                          : inc;
+                        return (
+                          <div key={i} className="flex items-start space-x-2 bg-white p-2.5 rounded-lg border border-blue-100 text-slate-800 font-semibold">
+                            <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                            <span>{cleanInc}</span>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 )}
