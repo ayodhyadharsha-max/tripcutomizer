@@ -56,7 +56,7 @@ export function getBrandedHotelName(city: string, hotelTier: string): string {
     if (hotelTier === '4 Star' || hotelTier === '4-Star Deluxe') {
       return 'Ayodhya Park Inn by Radisson / Clarks Inn Express (4★ Deluxe)';
     }
-    return 'Ayodhya Ramayana Heritage / Hotel Krinshna Palace (3★ Standard)';
+    return 'Royal Palm Inn (3★ Standard)';
   }
 
   if (lower.includes('mathura') || lower.includes('vrindavan') || lower.includes('govardhan') || lower.includes('barsana') || lower.includes('gokul')) {

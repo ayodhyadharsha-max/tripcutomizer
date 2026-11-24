@@ -50,7 +50,7 @@ export interface PassengerData {
 
 const DESTINATION_HOTEL_TIERS: Record<string, { standard: string; deluxe: string; luxury: string }> = {
   ayodhya: {
-    standard: 'Royal Palm Inn / Hotel Ramayana (3★ Standard)',
+    standard: 'Royal Palm Inn (3★ Standard)',
     deluxe: 'Park Inn by Radisson Ayodhya / Cygnett Collection KK (4★ Deluxe)',
     luxury: 'Praveg Tent City Royal Suites / The Fern Residency Ayodhya (5★ Luxury)'
   },
@@ -2246,11 +2246,56 @@ export function PackageDetailClientView({
             {/* TAB CONTENT 3: SUMMARY */}
             {activeTab === 'summary' && (
               <Card className="p-6 bg-white border-slate-200/80 rounded-3xl space-y-6 animate-in fade-in">
-                <div className="space-y-2">
-                  <h3 className="font-black text-lg text-slate-900">Tour Summary & Overview</h3>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    Experience an unforgettable journey across {pkg.destination}. Designed specifically for family travel, couples, and heritage enthusiasts with 100% verified hotels, private cabs, and dedicated tour manager support.
-                  </p>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
+                    <h3 className="font-black text-lg text-slate-900 flex items-center gap-2">
+                      <Sparkles className="w-5 h-5 text-amber-500" />
+                      <span>Tour Summary & Overview</span>
+                    </h3>
+                    <Badge variant="blue">{pkg.durationDays}D / {pkg.durationNights}N</Badge>
+                  </div>
+
+                  {/* Highlights from package */}
+                  {pkg.highlights && pkg.highlights.length > 0 && (
+                    <div className="space-y-2">
+                      <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 block">Package Highlights:</span>
+                      <div className="flex flex-wrap gap-2">
+                        {pkg.highlights.map((hl, hIdx) => (
+                          <span
+                            key={hIdx}
+                            className="bg-amber-50/70 border border-amber-200 text-amber-950 text-xs px-3 py-1.5 rounded-xl font-bold flex items-center gap-1.5 shadow-2xs"
+                          >
+                            <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                            <span>{hl}</span>
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Day-by-Day Route & Activities Summary */}
+                  {pkg.itinerary && pkg.itinerary.length > 0 && (
+                    <div className="pt-2 space-y-2">
+                      <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 block">Itinerary Sightseeing Route:</span>
+                      <div className="grid grid-cols-1 gap-2">
+                        {pkg.itinerary.map((d, dIdx) => (
+                          <div key={dIdx} className="p-3 bg-slate-50 rounded-xl border border-slate-200/70 flex items-start gap-2.5 text-xs">
+                            <span className="font-black text-brand-700 bg-white border border-brand-200 px-2 py-0.5 rounded-md shrink-0">
+                              Day {d.dayNumber}
+                            </span>
+                            <div className="space-y-0.5">
+                              <span className="font-bold text-slate-900 block">{d.title}</span>
+                              {d.activities && (
+                                <span className="text-slate-600 text-[11px] block">
+                                  🏛️ {Array.isArray(d.activities) ? d.activities.join(' • ') : d.activities}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -2282,7 +2327,9 @@ export function PackageDetailClientView({
                         const customHotel =
                           h.hotelName ||
                           pkg.hotels?.find((x) => (x.city || '').toLowerCase().trim() === (h.city || '').toLowerCase().trim())?.name ||
-                          pkg.hotels?.[idx]?.name;
+                          pkg.hotels?.[idx]?.name ||
+                          pkg.itinerary?.find((d) => d.hotel && d.hotel.trim().length > 2 && !d.hotel.toLowerCase().includes('check-out') && (d.title?.toLowerCase().includes((h.city || '').toLowerCase()) || d.hotel?.toLowerCase().includes((h.city || '').toLowerCase())))?.hotel ||
+                          pkg.itinerary?.[0]?.hotel;
                         const hotelDisplayName =
                           tourTier === 'standard' && customHotel && customHotel.trim().length > 2
                             ? cleanHotelName(customHotel)
@@ -2352,7 +2399,7 @@ export function PackageDetailClientView({
                         ? `This premium package is configured with handpicked 4-Star Deluxe (e.g. Novotel Hyderabad Convention Centre / Lemon Tree Premier) and 5-Star Luxury (e.g. Taj Krishna Banjara Hills / ITC Kakatiya) accommodations with daily buffet breakfast and 24x7 concierge assistance.`
                         : `This package is currently configured with ${
                             tourTier === 'standard'
-                              ? '3-Star Standard accommodations (e.g. Treebo Trend / Hotel Ramayana / Kashi Heritage)'
+                              ? '3-Star Standard accommodations (e.g. Royal Palm Inn / Treebo Trend / Kashi Heritage)'
                               : tourTier === 'deluxe'
                               ? '4-Star Deluxe accommodations (e.g. Park Inn by Radisson / Radisson Hotel / Lemon Tree Premier)'
                               : '5-Star Luxury accommodations (e.g. Praveg Tent City Royal Suites / Taj Ganges / BrijRama Palace)'
