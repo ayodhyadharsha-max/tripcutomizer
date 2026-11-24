@@ -7,12 +7,67 @@ export interface PackageTierConfig {
   cardTwinSharingLabel: string;
   cardOptionsLabel: string;
   cardBadgeClass: string;
+  tierPrices?: {
+    standard?: number;
+    deluxe?: number;
+    luxury?: number;
+  };
+  tierHotels?: {
+    standard?: string;
+    deluxe?: string;
+    luxury?: string;
+  };
 }
 
 // User-specified overrides for specific packages one by one
 export const CUSTOM_PACKAGE_TIER_OVERRIDES: Record<string, Partial<PackageTierConfig>> = {
-  // Links added by user will be explicitly configured here
+  'andhra-pradesh-araku-valley-bliss-1n2d-2d1n-mmt-2': {
+    baselineTier: 'standard',
+    allowedTiers: ['standard', 'deluxe'],
+    cardBadgeLabel: '3★ Standard',
+    cardTwinSharingLabel: '3★ Standard Twin Sharing',
+    cardOptionsLabel: '4★ Deluxe Upgrade Available',
+    cardBadgeClass: 'bg-amber-50 text-amber-900 border-amber-200/60',
+    tierPrices: {
+      standard: 7999,
+      deluxe: 10999,
+    },
+    tierHotels: {
+      standard: 'Vana Resort Araku (Standard Room)',
+      deluxe: 'Vana Resort Araku (Deluxe Room)',
+    },
+  },
 };
+
+export function getPackageAllowedTiers(
+  pkgOrSlug?: any
+): ('standard' | 'deluxe' | 'luxury')[] {
+  if (!pkgOrSlug) return ['standard', 'deluxe', 'luxury'];
+  const slug = typeof pkgOrSlug === 'string' ? pkgOrSlug : (pkgOrSlug.slug || pkgOrSlug.id || '');
+  const cleanSlug = slug.toLowerCase().trim();
+  if (CUSTOM_PACKAGE_TIER_OVERRIDES[cleanSlug]?.allowedTiers) {
+    return CUSTOM_PACKAGE_TIER_OVERRIDES[cleanSlug]!.allowedTiers!;
+  }
+  return ['standard', 'deluxe', 'luxury'];
+}
+
+export function getPackageTierPrices(
+  pkgOrSlug?: any
+): { standard?: number; deluxe?: number; luxury?: number } | undefined {
+  if (!pkgOrSlug) return undefined;
+  const slug = typeof pkgOrSlug === 'string' ? pkgOrSlug : (pkgOrSlug.slug || pkgOrSlug.id || '');
+  const cleanSlug = slug.toLowerCase().trim();
+  return CUSTOM_PACKAGE_TIER_OVERRIDES[cleanSlug]?.tierPrices;
+}
+
+export function getPackageTierHotels(
+  pkgOrSlug?: any
+): { standard?: string; deluxe?: string; luxury?: string } | undefined {
+  if (!pkgOrSlug) return undefined;
+  const slug = typeof pkgOrSlug === 'string' ? pkgOrSlug : (pkgOrSlug.slug || pkgOrSlug.id || '');
+  const cleanSlug = slug.toLowerCase().trim();
+  return CUSTOM_PACKAGE_TIER_OVERRIDES[cleanSlug]?.tierHotels;
+}
 
 export function getPackageBaselineTier(
   hotelCategory?: string,

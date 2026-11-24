@@ -11,7 +11,14 @@ import { Badge } from '@/components/ui/Badge';
 import { HolidayPackage } from '@/data/packagesData';
 import { findCatalogPackage, getAllCatalogPackages } from '@/data/packageCatalog';
 import { formatCurrency } from '@/lib/utils';
-import { getPackageBaselineTier, getPackageHotelBadgeInfo, isPremiumPackage } from '@/lib/packageUtils';
+import {
+  getPackageBaselineTier,
+  getPackageHotelBadgeInfo,
+  isPremiumPackage,
+  getPackageAllowedTiers,
+  getPackageTierPrices,
+  getPackageTierHotels
+} from '@/lib/packageUtils';
 import { useAuth } from '@/context/AuthContext';
 import { cloudStore, CoTraveller } from '@/lib/cloudStore';
 import { sendWeb3FormLead } from '@/lib/web3forms';
@@ -518,24 +525,25 @@ export function PackageDetailClientView({
 
   // Pricing & Tier State: Defaults to the package's native baseline hotel category (3★ Standard, 4★ Deluxe, or 5★ Luxury)
   const isPremium = useMemo(() => isPremiumPackage(pkg), [pkg]);
+  const allowedTiers = useMemo(() => getPackageAllowedTiers(pkg), [pkg]);
   const baselineTier = useMemo(
     () => getPackageBaselineTier(pkg.hotelCategory, pkg.name, pkg.slug),
     [pkg.hotelCategory, pkg.name, pkg.slug]
   );
   const [tourTier, setTourTier] = useState<'standard' | 'deluxe' | 'luxury'>(() => {
     const base = getPackageBaselineTier(pkg?.hotelCategory, pkg?.name, pkg?.slug);
-    if (isPremiumPackage(pkg) && base === 'standard') return 'deluxe';
+    const tiers = getPackageAllowedTiers(pkg);
+    if (!tiers.includes(base)) return tiers[0] || 'standard';
     return base;
   });
 
   useEffect(() => {
     const base = getPackageBaselineTier(pkg?.hotelCategory, pkg?.name, pkg?.slug);
-    if (isPremiumPackage(pkg)) {
-      setTourTier(base === 'luxury' ? 'luxury' : 'deluxe');
-    } else {
-      setTourTier(base);
+    const tiers = getPackageAllowedTiers(pkg);
+    if (!tiers.includes(tourTier)) {
+      setTourTier(tiers.includes(base) ? base : tiers[0] || 'standard');
     }
-  }, [pkg?.id, pkg?.hotelCategory, pkg?.name, pkg?.slug]);
+  }, [pkg?.id, pkg?.hotelCategory, pkg?.name, pkg?.slug, allowedTiers, baselineTier, tourTier]);
 
   // Thomas Cook Style Travel Details & Calculate Price Wizard View State
   const [isCalculatePriceView, setIsCalculatePriceView] = useState(false);
@@ -821,6 +829,12 @@ export function PackageDetailClientView({
   // Guaranteed exact match between catalog card (outside) and detail page (inside) on initial load,
   // respecting whether the package baseline is 3★ Standard, 4★ Deluxe, or 5★ Luxury.
   const calculateTierPrice = (targetTier: 'standard' | 'deluxe' | 'luxury'): number => {
+    // 1. Explicit override check first
+    const explicitPrices = getPackageTierPrices(pkg);
+    if (explicitPrices && explicitPrices[targetTier]) {
+      return explicitPrices[targetTier]!;
+    }
+
     const baseStartingPrice = Math.min(pkg.startingPrice, pkg.discountPrice || pkg.startingPrice);
     const baseTier = baselineTier;
 
@@ -918,6 +932,12 @@ export function PackageDetailClientView({
       title.includes('checkout & fly')
     ) {
       return 'Check-out completed (Departure Day)';
+    }
+
+    // Explicit hotel override for package
+    const explicitHotels = getPackageTierHotels(pkg);
+    if (explicitHotels && explicitHotels[tier]) {
+      return explicitHotels[tier]!;
     }
 
     // Helper to strip any category suffix like "(3★ Standard)", "(4-Star Deluxe)", etc.
@@ -2137,70 +2157,62 @@ export function PackageDetailClientView({
                 <span className="text-[10px] font-extrabold text-slate-400 block uppercase tracking-wider">
                   Select Hotel & Package Tier
                 </span>
-                {isPremium ? (
-                  <div className="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-xl text-xs font-bold">
-                    <button
-                      type="button"
-                      onClick={() => { setTourTier('deluxe'); setIsPriceCalculated(false); }}
-                      className={`py-2.5 rounded-lg transition-all cursor-pointer flex flex-col items-center justify-center ${
-                        tourTier === 'deluxe' ? 'bg-brand-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
-                      }`}
-                    >
-                      <span>4★ Deluxe</span>
-                      <span className={`text-[9px] font-extrabold uppercase tracking-wider ${tourTier === 'deluxe' ? 'text-amber-300' : 'text-brand-600'}`}>
-                        {baselineTier === 'deluxe' ? 'Included' : 'Standard Base'}
-                      </span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => { setTourTier('luxury'); setIsPriceCalculated(false); }}
-                      className={`py-2.5 rounded-lg transition-all cursor-pointer flex flex-col items-center justify-center ${
-                        tourTier === 'luxury' ? 'bg-amber-500 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
-                      }`}
-                    >
-                      <span>5★ Luxury</span>
-                      <span className={`text-[9px] font-extrabold uppercase tracking-wider ${tourTier === 'luxury' ? 'text-amber-200' : 'text-amber-600'}`}>
-                        {baselineTier === 'luxury' ? 'Included' : 'Upgrade Option'}
-                      </span>
-                    </button>
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-3 gap-1.5 p-1 bg-slate-100 rounded-xl text-xs font-bold">
-                    <button
-                      onClick={() => { setTourTier('standard'); setIsPriceCalculated(false); }}
-                      className={`py-2 rounded-lg transition-all cursor-pointer flex flex-col items-center justify-center ${
-                        tourTier === 'standard' ? 'bg-white text-slate-950 shadow-xs' : 'text-slate-600 hover:text-slate-900'
-                      }`}
-                    >
-                      <span>3★ Standard</span>
-                      {baselineTier === 'standard' && (
-                        <span className="text-[9px] text-emerald-600 font-extrabold uppercase tracking-wider">Included</span>
-                      )}
-                    </button>
-                    <button
-                      onClick={() => { setTourTier('deluxe'); setIsPriceCalculated(false); }}
-                      className={`py-2 rounded-lg transition-all cursor-pointer flex flex-col items-center justify-center ${
-                        tourTier === 'deluxe' ? 'bg-brand-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
-                      }`}
-                    >
-                      <span>4★ Deluxe</span>
-                      {baselineTier === 'deluxe' && (
-                        <span className={`text-[9px] font-extrabold uppercase tracking-wider ${tourTier === 'deluxe' ? 'text-amber-300' : 'text-brand-600'}`}>Included</span>
-                      )}
-                    </button>
-                    <button
-                      onClick={() => { setTourTier('luxury'); setIsPriceCalculated(false); }}
-                      className={`py-2 rounded-lg transition-all cursor-pointer flex flex-col items-center justify-center ${
-                        tourTier === 'luxury' ? 'bg-amber-500 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
-                      }`}
-                    >
-                      <span>5★ Luxury</span>
-                      {baselineTier === 'luxury' && (
-                        <span className={`text-[9px] font-extrabold uppercase tracking-wider ${tourTier === 'luxury' ? 'text-amber-200' : 'text-amber-600'}`}>Included</span>
-                      )}
-                    </button>
-                  </div>
-                )}
+                <div
+                  className={`grid ${
+                    allowedTiers.length === 1
+                      ? 'grid-cols-1'
+                      : allowedTiers.length === 2
+                      ? 'grid-cols-2'
+                      : 'grid-cols-3'
+                  } gap-1.5 p-1 bg-slate-100 rounded-xl text-xs font-bold`}
+                >
+                  {allowedTiers.map((tierKey) => {
+                    const isSelected = tourTier === tierKey;
+                    const isBase = baselineTier === tierKey;
+                    const label =
+                      tierKey === 'standard'
+                        ? '3★ Standard'
+                        : tierKey === 'deluxe'
+                        ? '4★ Deluxe'
+                        : '5★ Luxury';
+                    const activeClass =
+                      tierKey === 'standard'
+                        ? 'bg-white text-slate-950 shadow-xs'
+                        : tierKey === 'deluxe'
+                        ? 'bg-brand-600 text-white shadow-xs'
+                        : 'bg-amber-500 text-white shadow-xs';
+                    const subColor = isSelected
+                      ? tierKey === 'standard'
+                        ? 'text-emerald-600'
+                        : tierKey === 'deluxe'
+                        ? 'text-amber-300'
+                        : 'text-amber-200'
+                      : tierKey === 'standard'
+                      ? 'text-emerald-700'
+                      : tierKey === 'deluxe'
+                      ? 'text-brand-600'
+                      : 'text-amber-600';
+
+                    return (
+                      <button
+                        key={tierKey}
+                        type="button"
+                        onClick={() => {
+                          setTourTier(tierKey);
+                          setIsPriceCalculated(false);
+                        }}
+                        className={`py-2 rounded-lg transition-all cursor-pointer flex flex-col items-center justify-center ${
+                          isSelected ? activeClass : 'text-slate-600 hover:text-slate-900'
+                        }`}
+                      >
+                        <span>{label}</span>
+                        <span className={`text-[9px] font-extrabold uppercase tracking-wider ${subColor}`}>
+                          {isBase ? 'Included' : tierKey === 'standard' ? 'Standard Base' : 'Upgrade Option'}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
 
               {/* Price Display Block */}

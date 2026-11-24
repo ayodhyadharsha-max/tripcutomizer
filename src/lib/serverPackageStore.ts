@@ -170,7 +170,7 @@ export function getServerCustomPackages(): HolidayPackage[] {
     } else if (p.slug.includes('hyderabad-cityscape-escape') || p.id.includes('hyderabad-cityscape-escape')) {
       map.set(p.id, { ...HYDERABAD_CITYSCAPE_PACKAGE, ...p, hotelCategory: '3-Star Standard' });
     } else if (p.slug.includes('araku-valley-bliss') || p.id.includes('araku-valley-bliss')) {
-      map.set(p.id, { ...ARAKU_VALLEY_BLISS_PACKAGE, ...p });
+      map.set(p.id, { ...p, ...ARAKU_VALLEY_BLISS_PACKAGE });
     } else {
       map.set(p.id, p);
     }
