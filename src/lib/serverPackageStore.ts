@@ -8,6 +8,7 @@ import {
   HYDERABAD_WEEKEND_SPECIAL_PACKAGE,
   HYDERABAD_SRISAILAM_PACKAGE,
   ARAKU_VALLEY_BLISS_PACKAGE,
+  SACRED_TIRUPATI_MAHABALIPURAM_CHENNAI_PACKAGE,
 } from '@/data/packageCatalog';
 import getSupabaseServer, { withTimeout, markSupabaseOffline, isSupabaseOffline } from '@/lib/supabaseServer';
 
@@ -173,6 +174,7 @@ export function getServerCustomPackages(): HolidayPackage[] {
   map.set(HYDERABAD_WEEKEND_SPECIAL_PACKAGE.id, HYDERABAD_WEEKEND_SPECIAL_PACKAGE);
   map.set(HYDERABAD_SRISAILAM_PACKAGE.id, HYDERABAD_SRISAILAM_PACKAGE);
   map.set(ARAKU_VALLEY_BLISS_PACKAGE.id, ARAKU_VALLEY_BLISS_PACKAGE);
+  map.set(SACRED_TIRUPATI_MAHABALIPURAM_CHENNAI_PACKAGE.id, SACRED_TIRUPATI_MAHABALIPURAM_CHENNAI_PACKAGE);
   fromFile.forEach((p) => {
     // If it's the premium hyderabad package, ensure it uses the updated clean premium definition
     if (p.slug.includes('premium-hyderabad') || p.id.includes('premium-hyderabad')) {
@@ -187,6 +189,8 @@ export function getServerCustomPackages(): HolidayPackage[] {
       map.set(p.id, { ...p, ...HYDERABAD_SRISAILAM_PACKAGE, hotelCategory: '3-Star Standard' });
     } else if (p.slug.includes('araku-valley-bliss') || p.id.includes('araku-valley-bliss')) {
       map.set(p.id, { ...p, ...ARAKU_VALLEY_BLISS_PACKAGE });
+    } else if (p.slug.includes('sacred-tirupati-mahabalipuram-chennai') || p.id.includes('sacred-tirupati-mahabalipuram-chennai')) {
+      map.set(p.id, { ...p, ...SACRED_TIRUPATI_MAHABALIPURAM_CHENNAI_PACKAGE, startingPrice: 25000, hotelCategory: '3-Star Standard' });
     } else {
       map.set(p.id, p);
     }

@@ -102,6 +102,22 @@ export const CUSTOM_PACKAGE_TIER_OVERRIDES: Record<string, Partial<PackageTierCo
       luxury: 'Courtyard by Marriott Hyderabad',
     },
   },
+  'andhra-pradesh-sacred-tirupati-mahabalipuram-chennai-trip-4n5d-5d4n-mmt-2': {
+    baselineTier: 'standard',
+    allowedTiers: ['standard', 'deluxe', 'luxury'],
+    cardBadgeLabel: '3★ Standard',
+    cardTwinSharingLabel: '3★ Standard Twin Sharing',
+    cardOptionsLabel: '4★ Deluxe & 5★ Luxury Available on Request',
+    cardBadgeClass: 'bg-amber-50 text-amber-900 border-amber-200/60',
+    tierPrices: {
+      standard: 25000,
+    },
+    tierHotels: {
+      standard: 'Kansone Hotel And Banquets (Chennai) / Hotel MountView Comforts (Tirupati) / Mamalla Beach Resort (Mahabalipuram)',
+      deluxe: 'The Residency Towers (Chennai) / Fortune Select Grand Ridge (Tirupati) / Grande Bay Resort (Mahabalipuram)',
+      luxury: 'The Leela Palace (Chennai) / Minerva Grand (Tirupati) / Radisson Blu Resort Temple Bay (Mahabalipuram)',
+    },
+  },
 };
 
 export function getPackageAllowedTiers(

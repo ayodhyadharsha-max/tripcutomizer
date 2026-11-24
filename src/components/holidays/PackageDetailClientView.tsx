@@ -250,9 +250,24 @@ const DESTINATION_HOTEL_TIERS: Record<string, { standard: string; deluxe: string
     luxury: 'Tamara Kodai / Heritage Luxury Kodai Resort (5★ Luxury)'
   },
   tirupati: {
-    standard: 'Hotel Bliss / Treebo Trend Tirupati (3★ Standard)',
+    standard: 'Hotel MountView Comforts (3★ Standard)',
     deluxe: 'Fortune Select Grand Ridge / Marasa Sarovar Premiere (4★ Deluxe)',
     luxury: 'Minerva Grand Tirupati / Fortune Select Grand (5★ Luxury)'
+  },
+  chennai: {
+    standard: 'Kansone Hotel And Banquets (3★ Standard)',
+    deluxe: 'The Residency Towers / Pride Hotel Chennai (4★ Deluxe)',
+    luxury: 'The Leela Palace / ITC Grand Chola Chennai (5★ Luxury)'
+  },
+  mahabalipuram: {
+    standard: 'Mamalla Beach Resort (3★ Standard)',
+    deluxe: 'Grande Bay Resort and Spa / Chariot Beach Resort (4★ Deluxe)',
+    luxury: 'Radisson Blu Resort Temple Bay Mamallapuram (5★ Luxury)'
+  },
+  mamallapuram: {
+    standard: 'Mamalla Beach Resort (3★ Standard)',
+    deluxe: 'Grande Bay Resort and Spa / Chariot Beach Resort (4★ Deluxe)',
+    luxury: 'Radisson Blu Resort Temple Bay Mamallapuram (5★ Luxury)'
   },
   shirdi: {
     standard: 'Hotel Sai Leela / Treebo Trend Shirdi (3★ Standard)',
@@ -346,6 +361,7 @@ export function deriveMultiCityNightSplit(pkg: HolidayPackage): { city: string; 
       'Gir', 'Goa', 'Mumbai', 'Lonavala', 'Mahabaleshwar', 'Munnar', 'Thekkady', 'Alleppey',
       'Kovalam', 'Kochi', 'Cochin', 'Wayanad', 'Varkala', 'Ooty', 'Kodaikanal', 'Coorg', 'Mysore',
       'Kabini', 'Hampi', 'Bangalore', 'Madurai', 'Rameshwaram', 'Kanyakumari', 'Tirupati',
+      'Chennai', 'Mahabalipuram', 'Mamallapuram',
       'Araku', 'Visakhapatnam', 'Vizag', 'Hyderabad',
       'Pondicherry', 'Andaman', 'Port Blair', 'Havelock', 'Neil', 'Dubai', 'Abu Dhabi', 'Bangkok',
       'Pattaya', 'Phuket', 'Krabi', 'Singapore', 'Bali', 'Kuala Lumpur', 'Hanoi', 'Da Nang',
@@ -906,7 +922,9 @@ export function PackageDetailClientView({
 
   const calculatedBaseRate = calculateTierPrice(tourTier);
   const basePricePerPerson = Math.round(calculatedBaseRate * paxMultiplier);
+  const explicitPrices = getPackageTierPrices(pkg);
   const isBaselineTier = tourTier === baselineTier;
+  const isUpgradeQuoteTier = !isBaselineTier && (!explicitPrices || !explicitPrices[tourTier]);
   const originalPricePerPerson =
     isBaselineTier && pkg.discountPrice && pkg.discountPrice > pkg.startingPrice
       ? Math.round(pkg.discountPrice * paxMultiplier)
@@ -915,6 +933,27 @@ export function PackageDetailClientView({
     originalPricePerPerson > basePricePerPerson
       ? Math.round(((originalPricePerPerson - basePricePerPerson) / originalPricePerPerson) * 100)
       : 18;
+
+  // Helper to strip any category suffix like "(3★ Standard)", "(4-Star Deluxe)", etc.
+  const cleanHotelName = (name: string): string => {
+    let cleaned = (name || '')
+      .replace(/\s*\([^)]*(?:★|Star|Deluxe|Standard|Luxury|Category|MAP with Dinner|Cultural Show|CP)[^)]*\)/gi, '')
+      .replace(/\s*\([345]-Star[^)]*\)/gi, '')
+      .trim();
+
+    if (isPremium) {
+      cleaned = cleaned
+        .replace(/\b3\s*(?:-| )?(?:Star|★)?\s*Standard\b/gi, '')
+        .replace(/\b3\s*(?:-| )?(?:Star|★)\b/gi, '')
+        .replace(/\bTreebo\s*Trend\b/gi, 'Novotel / Lemon Tree')
+        .replace(/\bGinger\b/gi, 'Fortune Park')
+        .replace(/\bStandard Hotel\b/gi, 'Deluxe Hotel')
+        .replace(/\bStandard Accommodation\b/gi, 'Deluxe Accommodation')
+        .trim();
+    }
+
+    return cleaned;
+  };
 
   // Dynamic Tier-Based Hotel Resolution Helper (MakeMyTrip 3-Star, 4-Star & 5-Star Tiers)
   const getTierHotelName = (
@@ -944,27 +983,6 @@ export function PackageDetailClientView({
     if (explicitHotels && explicitHotels[tier]) {
       return explicitHotels[tier]!;
     }
-
-    // Helper to strip any category suffix like "(3★ Standard)", "(4-Star Deluxe)", etc.
-    const cleanHotelName = (name: string): string => {
-      let cleaned = (name || '')
-        .replace(/\s*\([^)]*(?:★|Star|Deluxe|Standard|Luxury|Category|MAP with Dinner|Cultural Show|CP)[^)]*\)/gi, '')
-        .replace(/\s*\([345]-Star[^)]*\)/gi, '')
-        .trim();
-
-      if (isPremium) {
-        cleaned = cleaned
-          .replace(/\b3\s*(?:-| )?(?:Star|★)?\s*Standard\b/gi, '')
-          .replace(/\b3\s*(?:-| )?(?:Star|★)\b/gi, '')
-          .replace(/\bTreebo\s*Trend\b/gi, 'Novotel / Lemon Tree')
-          .replace(/\bGinger\b/gi, 'Fortune Park')
-          .replace(/\bStandard Hotel\b/gi, 'Deluxe Hotel')
-          .replace(/\bStandard Accommodation\b/gi, 'Deluxe Accommodation')
-          .trim();
-      }
-
-      return cleaned;
-    };
 
     // If originalHotel is already defined
     if (
@@ -1083,6 +1101,10 @@ export function PackageDetailClientView({
       matchedKey = 'kodaikanal';
     } else if (raw.includes('tirupati')) {
       matchedKey = 'tirupati';
+    } else if (raw.includes('chennai') || raw.includes('madras')) {
+      matchedKey = 'chennai';
+    } else if (raw.includes('mahabalipuram') || raw.includes('mamallapuram')) {
+      matchedKey = 'mahabalipuram';
     } else if (raw.includes('shirdi')) {
       matchedKey = 'shirdi';
     } else if (raw.includes('delhi')) {
@@ -1177,6 +1199,10 @@ export function PackageDetailClientView({
         matchedKey = 'kodaikanal';
       } else if (title.includes('tirupati')) {
         matchedKey = 'tirupati';
+      } else if (title.includes('chennai') || title.includes('madras') || title.includes('marina beach')) {
+        matchedKey = 'chennai';
+      } else if (title.includes('mahabalipuram') || title.includes('mamallapuram') || title.includes('shore temple')) {
+        matchedKey = 'mahabalipuram';
       } else if (title.includes('shirdi')) {
         matchedKey = 'shirdi';
       } else if (title.includes('delhi')) {
@@ -1297,6 +1323,55 @@ export function PackageDetailClientView({
       setCallbackName('');
       setCallbackPhone('');
     }, 5000);
+  };
+
+  // Hotel Upgrade Quote State & Handler
+  const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
+  const [upgradeName, setUpgradeName] = useState('');
+  const [upgradePhone, setUpgradePhone] = useState('');
+  const [upgradeEmail, setUpgradeEmail] = useState('');
+  const [upgradeNotes, setUpgradeNotes] = useState('');
+  const [isUpgradeSubmitting, setIsUpgradeSubmitting] = useState(false);
+  const [upgradeSuccess, setUpgradeSuccess] = useState(false);
+
+  const handleUpgradeSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const phoneToUse = (upgradePhone || contactPhone || '').trim();
+    if (!phoneToUse || phoneToUse.replace(/\D/g, '').length < 10) {
+      alert('Please enter a valid 10-digit mobile number so our travel specialist can contact you with the live upgrade quote.');
+      return;
+    }
+    setIsUpgradeSubmitting(true);
+    const nameToUse = (upgradeName || contactName || (user?.name || 'Valued Traveller')).trim();
+    const emailToUse = (upgradeEmail || contactEmail || (user?.email || '')).trim();
+    const tierLabel = tourTier === 'luxury' ? '5★ Luxury' : '4★ Deluxe';
+    const hotelProperty = cleanHotelName(getTierHotelName(pkg.hotels?.[0]?.name, pkg.destination, tourTier));
+
+    // 1. Save lead to local cloudStore
+    cloudStore.saveLead({
+      name: nameToUse,
+      phone: phoneToUse,
+      email: emailToUse,
+      destination: `${pkg.name} [${tierLabel} Upgrade Request]`,
+      status: 'New',
+      source: `Hotel Upgrade Quote (${tierLabel})`,
+    });
+
+    // 2. Send instant email notification via Web3Forms
+    await sendWeb3FormLead({
+      subject: `[Trip Customizer] 🏨 Hotel Upgrade Request: ${nameToUse} (${tierLabel} - ${pkg.name})`,
+      name: nameToUse,
+      email: emailToUse,
+      phone: phoneToUse,
+      destination: pkg.name,
+      travel_date: travelDate,
+      travelers_count: `${effectiveAdultsCount} Adults${totalTravellersCount > effectiveAdultsCount ? `, ${totalTravellersCount - effectiveAdultsCount} Kids` : ''}`,
+      budget: `${tierLabel} Upgrade on Request`,
+      message: `Customer requested live hotel upgrade to ${tierLabel} (${hotelProperty}).\nPackage: ${pkg.name}\nBase Tier: ${baselineTier.toUpperCase()}\nTravel Date: ${travelDate}\nJoining City: ${joiningCity}\nCustomer Notes: ${upgradeNotes || 'Please share upgrade pricing and live room options.'}`,
+    });
+
+    setIsUpgradeSubmitting(false);
+    setUpgradeSuccess(true);
   };
 
   // Calculate Price Submit
@@ -2198,6 +2273,13 @@ export function PackageDetailClientView({
                       ? 'text-brand-600'
                       : 'text-amber-600';
 
+                    const isExplicit = Boolean(explicitPrices && explicitPrices[tierKey]);
+                    const subLabel = isBase
+                      ? 'Included'
+                      : isExplicit
+                      ? 'Fixed Rate'
+                      : 'Quote on Request';
+
                     return (
                       <button
                         key={tierKey}
@@ -2212,7 +2294,7 @@ export function PackageDetailClientView({
                       >
                         <span>{label}</span>
                         <span className={`text-[9px] font-extrabold uppercase tracking-wider ${subColor}`}>
-                          {isBase ? 'Included' : tierKey === 'standard' ? 'Standard Base' : 'Upgrade Option'}
+                          {subLabel}
                         </span>
                       </button>
                     );
@@ -2221,24 +2303,43 @@ export function PackageDetailClientView({
               </div>
 
               {/* Price Display Block */}
-              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 space-y-1">
-                <div className="flex items-center space-x-2">
-                  <span className="text-xs text-slate-400 line-through font-semibold">
-                    {formatCurrency(originalPricePerPerson)}
-                  </span>
-                  <span className="bg-emerald-100 text-emerald-800 text-[10px] font-black px-2 py-0.5 rounded-full">
-                    {discountPercent}% OFF
-                  </span>
+              {isUpgradeQuoteTier ? (
+                <div className="bg-amber-50/90 p-4 rounded-2xl border border-amber-200/90 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-amber-900 bg-amber-200/80 px-2 py-0.5 rounded-full">
+                      {tourTier === 'luxury' ? '5★ Luxury' : '4★ Deluxe'} • Custom Upgrade
+                    </span>
+                    <span className="text-xs font-bold text-amber-800">Live Hotel Upgrade</span>
+                  </div>
+                  <div className="flex items-baseline space-x-1.5">
+                    <span className="text-2xl font-black text-amber-950">{formatCurrency(basePricePerPerson)}</span>
+                    <span className="text-xs text-amber-800 font-semibold">/ adult base</span>
+                  </div>
+                  <p className="text-[11px] text-amber-900/90 font-medium leading-relaxed">
+                    Base package includes {baselineTier === 'standard' ? '3★ Standard' : '4★ Deluxe'} hotels. 
+                    Upgrade to <strong>{tourTier === 'luxury' ? '5★ Luxury' : '4★ Deluxe'} ({cleanHotelName(getTierHotelName(pkg.hotels?.[0]?.name, pkg.destination, tourTier))})</strong> is quoted based on live hotel rates for your travel dates. Request a quote below.
+                  </p>
                 </div>
+              ) : (
+                <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 space-y-1">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-xs text-slate-400 line-through font-semibold">
+                      {formatCurrency(originalPricePerPerson)}
+                    </span>
+                    <span className="bg-emerald-100 text-emerald-800 text-[10px] font-black px-2 py-0.5 rounded-full">
+                      {discountPercent}% OFF
+                    </span>
+                  </div>
 
-                <div className="flex items-baseline space-x-1">
-                  <span className="text-3xl font-black text-brand-700">{formatCurrency(basePricePerPerson)}</span>
-                  <span className="text-xs text-slate-500 font-semibold">/ adult</span>
+                  <div className="flex items-baseline space-x-1">
+                    <span className="text-3xl font-black text-brand-700">{formatCurrency(basePricePerPerson)}</span>
+                    <span className="text-xs text-slate-500 font-semibold">/ adult</span>
+                  </div>
+                  <span className="text-[10px] text-slate-500 block font-medium">
+                    {effectiveAdultsCount === 1 ? 'Solo Traveler Rate (Private Room & Cab Included)' : effectiveAdultsCount === 2 ? `Twin Sharing Couple Rate • Total ${formatCurrency(effectiveAdultsCount * basePricePerPerson)} for 2 Adults` : `Group Saver Rate • Total ${formatCurrency(effectiveAdultsCount * basePricePerPerson)} for ${effectiveAdultsCount} Adults`}
+                  </span>
                 </div>
-                <span className="text-[10px] text-slate-500 block font-medium">
-                  {effectiveAdultsCount === 1 ? 'Solo Traveler Rate (Private Room & Cab Included)' : effectiveAdultsCount === 2 ? `Twin Sharing Couple Rate • Total ${formatCurrency(effectiveAdultsCount * basePricePerPerson)} for 2 Adults` : `Group Saver Rate • Total ${formatCurrency(effectiveAdultsCount * basePricePerPerson)} for ${effectiveAdultsCount} Adults`}
-                </span>
-              </div>
+              )}
 
               {/* Interactive Coupon / Promo Code Input Card */}
               <div className="p-3.5 bg-amber-50/90 border border-amber-200 rounded-2xl text-xs space-y-2.5 shadow-2xs">
@@ -2320,16 +2421,29 @@ export function PackageDetailClientView({
                 <span>Earn {rewardPoints} Trip Customizer Rewards Points</span>
               </div>
 
-              {/* Primary Action Button: Calculate Price & Enter Travel Details */}
+              {/* Primary Action Button: Calculate Price & Enter Travel Details OR Request Upgrade Quote */}
               <div className="space-y-2 pt-1">
-                <Button
-                  onClick={() => setIsCalculatePriceView(true)}
-                  variant="accent"
-                  size="lg"
-                  className="w-full font-black py-3.5 text-slate-950 text-sm shadow-md cursor-pointer hover:scale-[1.01] transition-transform flex items-center justify-center space-x-2"
-                >
-                  <span>CALCULATE PRICE & BOOK TOUR →</span>
-                </Button>
+                {isUpgradeQuoteTier ? (
+                  <Button
+                    type="button"
+                    onClick={() => setIsUpgradeModalOpen(true)}
+                    variant="accent"
+                    size="lg"
+                    className="w-full font-black py-3.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 text-xs sm:text-sm shadow-md cursor-pointer hover:scale-[1.01] transition-transform flex items-center justify-center space-x-2"
+                  >
+                    <Sparkles className="w-4 h-4 text-slate-950" />
+                    <span>REQUEST {tourTier === 'luxury' ? '5★ LUXURY' : '4★ DELUXE'} UPGRADE QUOTE →</span>
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => setIsCalculatePriceView(true)}
+                    variant="accent"
+                    size="lg"
+                    className="w-full font-black py-3.5 text-slate-950 text-sm shadow-md cursor-pointer hover:scale-[1.01] transition-transform flex items-center justify-center space-x-2"
+                  >
+                    <span>CALCULATE PRICE & BOOK TOUR →</span>
+                  </Button>
+                )}
 
                 <a
                   href="https://wa.me/917408763401"
@@ -3041,29 +3155,197 @@ export function PackageDetailClientView({
                     </div>
                   )}
 
-                  {/* Book Online Button */}
-                  <Button
-                    onClick={handleProceedToCheckout}
-                    disabled={isNavigatingToCheckout || (!isPriceCalculated && (!contactPhone || !contactEmail))}
-                    variant="accent"
-                    size="lg"
-                    className="w-full font-black py-4 text-slate-950 text-sm shadow-md cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                  >
-                    {isNavigatingToCheckout ? (
-                      <>
-                        <Loader2 className="w-5 h-5 animate-spin text-slate-950" />
-                        <span>Preparing Secure Checkout...</span>
-                      </>
-                    ) : isPriceCalculated ? (
-                      'BOOK ONLINE NOW →'
-                    ) : (
-                      'Book Online'
-                    )}
-                  </Button>
+                  {/* Book Online OR Request Upgrade Quote */}
+                  {isUpgradeQuoteTier ? (
+                    <Button
+                      onClick={() => setIsUpgradeModalOpen(true)}
+                      variant="accent"
+                      size="lg"
+                      className="w-full font-black py-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 text-sm shadow-md cursor-pointer flex items-center justify-center gap-2"
+                    >
+                      <Sparkles className="w-4 h-4 text-slate-950" />
+                      <span>SUBMIT {tourTier.toUpperCase()} UPGRADE REQUEST →</span>
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={handleProceedToCheckout}
+                      disabled={isNavigatingToCheckout || (!isPriceCalculated && (!contactPhone || !contactEmail))}
+                      variant="accent"
+                      size="lg"
+                      className="w-full font-black py-4 text-slate-950 text-sm shadow-md cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    >
+                      {isNavigatingToCheckout ? (
+                        <>
+                          <Loader2 className="w-5 h-5 animate-spin text-slate-950" />
+                          <span>Preparing Secure Checkout...</span>
+                        </>
+                      ) : isPriceCalculated ? (
+                        'BOOK ONLINE NOW →'
+                      ) : (
+                        'Book Online'
+                      )}
+                    </Button>
+                  )}
                 </Card>
               </div>
 
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* 6. HOTEL UPGRADE REQUEST MODAL */}
+      {isUpgradeModalOpen && (
+        <div className="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto animate-in fade-in duration-200">
+          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-7 shadow-2xl border border-slate-200 relative animate-in zoom-in-95">
+            <button
+              type="button"
+              onClick={() => {
+                setIsUpgradeModalOpen(false);
+                setUpgradeSuccess(false);
+              }}
+              className="absolute top-5 right-5 text-slate-400 hover:text-slate-700 p-1 rounded-full hover:bg-slate-100 cursor-pointer"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {upgradeSuccess ? (
+              <div className="text-center py-6 space-y-4">
+                <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
+                  <CheckCircle2 className="w-10 h-10" />
+                </div>
+                <h3 className="text-xl font-black text-slate-900">Upgrade Request Submitted!</h3>
+                <p className="text-xs text-slate-600 leading-relaxed max-w-sm mx-auto">
+                  We have received your request for <strong>{tourTier === 'luxury' ? '5★ Luxury' : '4★ Deluxe'}</strong> hotel upgrade ({cleanHotelName(getTierHotelName(pkg.hotels?.[0]?.name, pkg.destination, tourTier))}).
+                  Our holiday specialist will check live room availability for your travel dates and call/WhatsApp you within 15 minutes.
+                </p>
+                <div className="pt-2 flex flex-col sm:flex-row gap-2 justify-center">
+                  <a
+                    href={`https://wa.me/917408763401?text=${encodeURIComponent(`Hi Trip Customizer, I requested a ${tourTier.toUpperCase()} hotel upgrade for ${pkg.name}. Please share live rates.`)}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center justify-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-5 py-3 rounded-xl shadow-md transition-all"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    <span>Chat on WhatsApp Directly</span>
+                  </a>
+                  <Button
+                    onClick={() => {
+                      setIsUpgradeModalOpen(false);
+                      setUpgradeSuccess(false);
+                    }}
+                    variant="outline"
+                    className="text-xs font-bold py-3"
+                  >
+                    Done
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <div>
+                  <div className="flex items-center space-x-2 text-amber-700 bg-amber-50 px-3 py-1 rounded-full text-xs font-black inline-flex mb-2">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>Live Hotel Upgrade Request</span>
+                  </div>
+                  <h3 className="text-lg font-black text-slate-900">
+                    Upgrade to {tourTier === 'luxury' ? '5★ Luxury' : '4★ Deluxe'} Tier
+                  </h3>
+                  <p className="text-xs text-slate-500 font-medium">
+                    Package: <strong>{pkg.name}</strong>
+                  </p>
+                  <p className="text-xs text-slate-700 font-bold mt-1 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                    🏨 Hotel Property: <span className="text-brand-700">{cleanHotelName(getTierHotelName(pkg.hotels?.[0]?.name, pkg.destination, tourTier))}</span>
+                  </p>
+                </div>
+
+                <form onSubmit={handleUpgradeSubmit} className="space-y-3 pt-1 text-xs">
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 mb-1">Your Full Name *</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Ramesh Sharma"
+                      value={upgradeName || contactName}
+                      onChange={(e) => setUpgradeName(e.target.value)}
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-900 font-semibold focus:outline-none focus:border-brand-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 mb-1">Mobile Number (WhatsApp) *</label>
+                    <div className="flex space-x-2">
+                      <span className="bg-slate-100 border border-slate-200 px-3 py-2.5 rounded-xl text-slate-600 font-bold shrink-0">
+                        +91
+                      </span>
+                      <input
+                        type="tel"
+                        required
+                        placeholder="10-digit mobile number"
+                        value={upgradePhone || contactPhone}
+                        onChange={(e) => setUpgradePhone(e.target.value)}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-900 font-semibold focus:outline-none focus:border-brand-500"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2.5">
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-700 mb-1">Travel Date</label>
+                      <input
+                        type="date"
+                        value={travelDate}
+                        onChange={(e) => setTravelDate(e.target.value)}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-900 font-medium focus:outline-none focus:border-brand-500 text-xs"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-700 mb-1">Travellers</label>
+                      <input
+                        type="text"
+                        disabled
+                        value={`${effectiveAdultsCount} Adults${totalTravellersCount > effectiveAdultsCount ? `, ${totalTravellersCount - effectiveAdultsCount} Kids` : ''}`}
+                        className="w-full bg-slate-100 border border-slate-200 rounded-xl px-3 py-2 text-slate-600 font-medium text-xs"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-bold text-slate-700 mb-1">Special Preferences / Notes (Optional)</label>
+                    <textarea
+                      rows={2}
+                      placeholder="e.g. Need sea-facing room, extra bed for child, etc."
+                      value={upgradeNotes}
+                      onChange={(e) => setUpgradeNotes(e.target.value)}
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-slate-900 text-xs focus:outline-none focus:border-brand-500"
+                    />
+                  </div>
+
+                  <Button
+                    type="submit"
+                    disabled={isUpgradeSubmitting}
+                    variant="accent"
+                    size="lg"
+                    className="w-full font-black py-3.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 text-xs sm:text-sm shadow-md cursor-pointer flex items-center justify-center gap-2 mt-2"
+                  >
+                    {isUpgradeSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin text-slate-950" />
+                        <span>Sending Upgrade Request...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles className="w-4 h-4 text-slate-950" />
+                        <span>GET LIVE UPGRADE QUOTE ON CALL / WHATSAPP →</span>
+                      </>
+                    )}
+                  </Button>
+                  <p className="text-[10px] text-center text-slate-400 font-medium">
+                    🔒 No spam guarantee. Our holiday consultant will provide honest, transparent live hotel pricing.
+                  </p>
+                </form>
+              </div>
+            )}
           </div>
         </div>
       )}
