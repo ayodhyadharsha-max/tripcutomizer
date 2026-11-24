@@ -1252,8 +1252,9 @@ export const ARAKU_VALLEY_BLISS_PACKAGE: HolidayPackage = {
   discountPrice: 9999,
   rating: 4.8,
   reviewsCount: 115,
-  heroImage: '/packages/araku/ananthagiri-hills.avif',
+  heroImage: '/packages/araku/araku-valley-card.webp',
   gallery: [
+    '/packages/araku/araku-valley-card.webp',
     '/packages/araku/ananthagiri-hills.avif',
     '/packages/araku/borra-caves.avif',
     '/packages/araku/katiki-waterfalls.avif',
