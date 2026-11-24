@@ -1,7 +1,14 @@
 import fs from 'fs';
 import path from 'path';
 import { HolidayPackage } from '@/data/packagesData';
-import { HYDERABAD_PREMIUM_PACKAGE, HYDERABAD_CITYSCAPE_PACKAGE, ARAKU_VALLEY_BLISS_PACKAGE } from '@/data/packageCatalog';
+import {
+  HYDERABAD_PREMIUM_PACKAGE,
+  HYDERABAD_CITYSCAPE_PACKAGE,
+  HYDERABAD_EXCITING_RAMOJI_PACKAGE,
+  HYDERABAD_WEEKEND_SPECIAL_PACKAGE,
+  HYDERABAD_SRISAILAM_PACKAGE,
+  ARAKU_VALLEY_BLISS_PACKAGE,
+} from '@/data/packageCatalog';
 import getSupabaseServer, { withTimeout, markSupabaseOffline, isSupabaseOffline } from '@/lib/supabaseServer';
 
 let memoryPackages: HolidayPackage[] | null = null;
@@ -162,13 +169,22 @@ export function getServerCustomPackages(): HolidayPackage[] {
   const map = new Map<string, HolidayPackage>();
   map.set(HYDERABAD_PREMIUM_PACKAGE.id, HYDERABAD_PREMIUM_PACKAGE);
   map.set(HYDERABAD_CITYSCAPE_PACKAGE.id, HYDERABAD_CITYSCAPE_PACKAGE);
+  map.set(HYDERABAD_EXCITING_RAMOJI_PACKAGE.id, HYDERABAD_EXCITING_RAMOJI_PACKAGE);
+  map.set(HYDERABAD_WEEKEND_SPECIAL_PACKAGE.id, HYDERABAD_WEEKEND_SPECIAL_PACKAGE);
+  map.set(HYDERABAD_SRISAILAM_PACKAGE.id, HYDERABAD_SRISAILAM_PACKAGE);
   map.set(ARAKU_VALLEY_BLISS_PACKAGE.id, ARAKU_VALLEY_BLISS_PACKAGE);
   fromFile.forEach((p) => {
     // If it's the premium hyderabad package, ensure it uses the updated clean premium definition
     if (p.slug.includes('premium-hyderabad') || p.id.includes('premium-hyderabad')) {
-      map.set(p.id, { ...HYDERABAD_PREMIUM_PACKAGE, ...p, hotelCategory: '5-Star Luxury' });
+      map.set(p.id, { ...p, ...HYDERABAD_PREMIUM_PACKAGE, hotelCategory: '5-Star Luxury' });
     } else if (p.slug.includes('hyderabad-cityscape-escape') || p.id.includes('hyderabad-cityscape-escape')) {
-      map.set(p.id, { ...HYDERABAD_CITYSCAPE_PACKAGE, ...p, hotelCategory: '3-Star Standard' });
+      map.set(p.id, { ...p, ...HYDERABAD_CITYSCAPE_PACKAGE, hotelCategory: '3-Star Standard' });
+    } else if (p.slug.includes('exciting-hyderabad-with-ramoji') || p.id.includes('exciting-hyderabad-with-ramoji')) {
+      map.set(p.id, { ...p, ...HYDERABAD_EXCITING_RAMOJI_PACKAGE, hotelCategory: '3-Star Standard' });
+    } else if (p.slug.includes('hyderabad-getaway-weekend-special') || p.id.includes('hyderabad-getaway-weekend-special')) {
+      map.set(p.id, { ...p, ...HYDERABAD_WEEKEND_SPECIAL_PACKAGE, hotelCategory: '3-Star Standard' });
+    } else if (p.slug.includes('hyderabad-with-srisailam') || p.id.includes('hyderabad-with-srisailam')) {
+      map.set(p.id, { ...p, ...HYDERABAD_SRISAILAM_PACKAGE, hotelCategory: '3-Star Standard' });
     } else if (p.slug.includes('araku-valley-bliss') || p.id.includes('araku-valley-bliss')) {
       map.set(p.id, { ...p, ...ARAKU_VALLEY_BLISS_PACKAGE });
     } else {

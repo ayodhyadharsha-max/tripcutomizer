@@ -37,6 +37,71 @@ export const CUSTOM_PACKAGE_TIER_OVERRIDES: Record<string, Partial<PackageTierCo
       deluxe: 'Vana Resort Araku (Deluxe Room)',
     },
   },
+  'andhra-pradesh-exciting-hyderabad-with-ramoji-film-city-3n4d-4d3n-mmt-3': {
+    baselineTier: 'standard',
+    allowedTiers: ['standard', 'deluxe', 'luxury'],
+    cardBadgeLabel: '3★ Standard',
+    cardTwinSharingLabel: '3★ Standard Twin Sharing',
+    cardOptionsLabel: '4★ Deluxe & 5★ Luxury Available',
+    cardBadgeClass: 'bg-amber-50 text-amber-900 border-amber-200/60',
+    tierHotels: {
+      standard: 'The Cent Hotel Hyderabad',
+      deluxe: 'Grand Continent Premier Banjara Hills',
+      luxury: 'Courtyard by Marriott Hyderabad',
+    },
+  },
+  'andhra-pradesh-hyderabad-cityscape-escape-4n5d-5d4n-mmt-1': {
+    baselineTier: 'standard',
+    allowedTiers: ['standard', 'deluxe', 'luxury'],
+    cardBadgeLabel: '3★ Standard',
+    cardTwinSharingLabel: '3★ Standard Twin Sharing',
+    cardOptionsLabel: '4★ Deluxe & 5★ Luxury Available',
+    cardBadgeClass: 'bg-amber-50 text-amber-900 border-amber-200/60',
+    tierHotels: {
+      standard: 'The Cent Hotel Hyderabad',
+      deluxe: 'Grand Continent Premier Banjara Hills',
+      luxury: 'Courtyard by Marriott Hyderabad',
+    },
+  },
+  'andhra-pradesh-hyderabad-getaway-weekend-special-2n3d-3d2n-mmt-4': {
+    baselineTier: 'standard',
+    allowedTiers: ['standard', 'deluxe', 'luxury'],
+    cardBadgeLabel: '3★ Standard',
+    cardTwinSharingLabel: '3★ Standard Twin Sharing',
+    cardOptionsLabel: '4★ Deluxe & 5★ Luxury Available',
+    cardBadgeClass: 'bg-amber-50 text-amber-900 border-amber-200/60',
+    tierHotels: {
+      standard: 'The Cent Hotel Hyderabad',
+      deluxe: 'Grand Continent Premier Banjara Hills',
+      luxury: 'Courtyard by Marriott Hyderabad',
+    },
+  },
+  'andhra-pradesh-hyderabad-with-srisailam-temple-visit-3n4d-4d3n-mmt-1': {
+    baselineTier: 'standard',
+    allowedTiers: ['standard', 'deluxe', 'luxury'],
+    cardBadgeLabel: '3★ Standard',
+    cardTwinSharingLabel: '3★ Standard Twin Sharing',
+    cardOptionsLabel: '4★ Deluxe & 5★ Luxury Available',
+    cardBadgeClass: 'bg-amber-50 text-amber-900 border-amber-200/60',
+    tierHotels: {
+      standard: 'The Cent Hotel Hyderabad',
+      deluxe: 'Grand Continent Premier Banjara Hills',
+      luxury: 'Courtyard by Marriott Hyderabad',
+    },
+  },
+  'andhra-pradesh-premium-hyderabad-getaway-3n4d-4d3n-mmt-5': {
+    baselineTier: 'luxury',
+    allowedTiers: ['standard', 'deluxe', 'luxury'],
+    cardBadgeLabel: '5★ Luxury',
+    cardTwinSharingLabel: '5★ Luxury Twin Sharing',
+    cardOptionsLabel: '3★ Standard & 4★ Deluxe Available',
+    cardBadgeClass: 'bg-amber-100 text-amber-950 border-amber-300',
+    tierHotels: {
+      standard: 'The Cent Hotel Hyderabad',
+      deluxe: 'Grand Continent Premier Banjara Hills',
+      luxury: 'Courtyard by Marriott Hyderabad',
+    },
+  },
 };
 
 export function getPackageAllowedTiers(

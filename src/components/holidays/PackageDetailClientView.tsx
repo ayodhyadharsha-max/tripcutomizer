@@ -270,13 +270,18 @@ const DESTINATION_HOTEL_TIERS: Record<string, { standard: string; deluxe: string
     luxury: 'Courtyard by Marriott Mumbai / Radisson Blu Mumbai (5★ Luxury)'
   },
   hyderabad: {
-    standard: 'Hotel Deccan Serai / Treebo Trend Hyderabad (3★ Standard)',
-    deluxe: 'Novotel Hyderabad Convention Centre / Radisson Hyderabad Hitec City (4★ Deluxe)',
-    luxury: 'Taj Krishna Banjara Hills / ITC Kakatiya / Trident Hyderabad (5★ Luxury)'
+    standard: 'The Cent Hotel Hyderabad (3★ Standard)',
+    deluxe: 'Grand Continent Premier Banjara Hills (4★ Deluxe)',
+    luxury: 'Courtyard by Marriott Hyderabad (5★ Luxury)'
+  },
+  srisailam: {
+    standard: 'Hotel Haritha Srisailam (3★ Standard)',
+    deluxe: 'Grand Akkamahadevi / Pathaleswara Sadan Deluxe (4★ Deluxe)',
+    luxury: 'Ganga Sadan Luxury Suites Srisailam (5★ Luxury)'
   },
   araku: {
-    standard: 'Haritha Valley Resort / Ushodaya Resort Araku (3★ Standard)',
-    deluxe: 'Nature Nest Hill Resort / Vistadome Eco Luxury Araku (4★ Deluxe)',
+    standard: 'Vana Resort Araku (Standard Room) (3★ Standard)',
+    deluxe: 'Vana Resort Araku (Deluxe Room) (4★ Deluxe)',
     luxury: 'The Gateway Hotel Beach Road / Novotel Varun Beach Vizag (5★ Luxury)'
   },
   visakhapatnam: {
@@ -285,9 +290,9 @@ const DESTINATION_HOTEL_TIERS: Record<string, { standard: string; deluxe: string
     luxury: 'Novotel Visakhapatnam Varun Beach / Radisson Blu (5★ Luxury)'
   },
   andhra: {
-    standard: 'Hotel Deccan Serai / Treebo Trend (3★ Standard)',
-    deluxe: 'Novotel Hyderabad / Radisson Hitec City (4★ Deluxe)',
-    luxury: 'Taj Krishna Banjara Hills / ITC Kakatiya (5★ Luxury)'
+    standard: 'The Cent Hotel Hyderabad (3★ Standard)',
+    deluxe: 'Grand Continent Premier Banjara Hills (4★ Deluxe)',
+    luxury: 'Courtyard by Marriott Hyderabad (5★ Luxury)'
   }
 };
 
