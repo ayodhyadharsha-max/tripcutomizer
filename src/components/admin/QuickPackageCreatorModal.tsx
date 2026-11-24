@@ -839,8 +839,9 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
                         {hotels.length > 1 && (
                           <button
                             type="button"
+                            title="Remove this hotel"
                             onClick={() => removeHotelRow(idx)}
-                            className="text-rose-500 hover:text-rose-700 p-1 cursor-pointer"
+                            className="text-rose-500 hover:text-white hover:bg-rose-600 p-1 rounded-md transition-colors cursor-pointer"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
@@ -848,6 +849,16 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
                       </div>
                     </div>
                   ))}
+
+                  {/* Add Another Hotel Button */}
+                  <button
+                    type="button"
+                    onClick={addHotelRow}
+                    className="w-full py-2.5 px-3 bg-white hover:bg-amber-100 border-2 border-dashed border-amber-300 hover:border-amber-400 rounded-xl text-amber-950 font-bold text-xs flex items-center justify-center gap-1.5 cursor-pointer transition-all active:scale-[0.99] shadow-sm"
+                  >
+                    <Plus className="w-4 h-4 text-amber-700" />
+                    <span>+ Add Another Hotel ({hotels.length + 1})</span>
+                  </button>
                 </div>
               </div>
 
@@ -938,30 +949,35 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
 
               {/* 5. Itinerary Builder (Dual Mode) Card */}
               <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-2">
-                  <span className="text-[11px] font-black uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5 text-brand-600" />
-                    <span>5. Itinerary Details ({itineraryDays.length} Days)</span>
-                  </span>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-2.5">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-black uppercase tracking-wider text-slate-900 flex items-center gap-1.5">
+                      <Calendar className="w-4 h-4 text-brand-600" />
+                      <span>5. Itinerary Details</span>
+                    </span>
+                    <span className="text-[11px] bg-brand-100 text-brand-800 font-extrabold px-2.5 py-0.5 rounded-full border border-brand-200">
+                      {itineraryDays.length} Days ({Math.max(0, itineraryDays.length - 1)} Nights)
+                    </span>
+                  </div>
 
-                  {/* Manual Day Control Buttons */}
-                  <div className="flex items-center gap-1.5">
+                  {/* Header + Add Day & - Remove Day buttons */}
+                  <div className="flex items-center gap-2">
                     <button
                       type="button"
                       onClick={addDay}
-                      className="text-[10px] bg-brand-50 border border-brand-200 text-brand-700 hover:bg-brand-100 font-bold px-2.5 py-1 rounded-lg flex items-center gap-1 cursor-pointer transition-colors"
+                      className="text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-sm cursor-pointer transition-all active:scale-95"
                     >
-                      <Plus className="w-3 h-3" />
+                      <Plus className="w-4 h-4" />
                       <span>+ Add Day</span>
                     </button>
                     {itineraryDays.length > 1 && (
                       <button
                         type="button"
                         onClick={() => removeDay()}
-                        className="text-[10px] bg-rose-50 border border-rose-200 text-rose-700 hover:bg-rose-100 font-bold px-2.5 py-1 rounded-lg flex items-center gap-1 cursor-pointer transition-colors"
+                        className="text-xs bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold px-3 py-1.5 rounded-xl flex items-center gap-1 cursor-pointer transition-all active:scale-95 border border-rose-200"
                       >
-                        <Trash2 className="w-3 h-3" />
-                        <span>Remove Last Day</span>
+                        <Trash2 className="w-3.5 h-3.5" />
+                        <span>- Remove Day</span>
                       </button>
                     )}
                   </div>
@@ -993,37 +1009,38 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
                 </div>
 
                 {/* Day-by-Day Cards */}
-                <div className="space-y-2.5 pt-1">
+                <div className="space-y-3 pt-1">
                   {itineraryDays.map((d, dIdx) => (
-                    <div key={dIdx} className="bg-white p-3 rounded-xl border border-slate-200 space-y-2">
-                      <div className="flex items-center justify-between border-b border-slate-100 pb-1.5">
+                    <div key={dIdx} className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm space-y-2.5">
+                      <div className="flex items-center justify-between border-b border-slate-100 pb-2">
                         <div className="flex items-center gap-2">
-                          <span className="font-black text-xs text-brand-700 bg-brand-50 px-2 py-0.5 rounded-md">
+                          <span className="font-black text-xs text-brand-800 bg-brand-100 border border-brand-200 px-2.5 py-1 rounded-lg">
                             Day {d.dayNumber}
                           </span>
                           {itineraryDays.length > 1 && (
                             <button
                               type="button"
-                              title="Delete this day"
+                              title={`Remove Day ${d.dayNumber}`}
                               onClick={() => removeDay(dIdx)}
-                              className="text-slate-400 hover:text-rose-600 p-0.5 rounded hover:bg-rose-50 transition-colors cursor-pointer"
+                              className="text-xs text-rose-600 hover:text-white bg-rose-50 hover:bg-rose-600 border border-rose-200 px-2 py-0.5 rounded-lg flex items-center gap-1 font-bold transition-all cursor-pointer"
                             >
-                              <Trash2 className="w-3.5 h-3.5" />
+                              <Trash2 className="w-3 h-3" />
+                              <span>- Remove Day {d.dayNumber}</span>
                             </button>
                           )}
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className="text-[10px] text-slate-400 font-bold">Stay:</span>
+                          <span className="text-[11px] text-slate-500 font-bold">Stay / Hotel:</span>
                           <input
                             type="text"
-                            placeholder="Hotel Stay Name"
+                            placeholder="Hotel Name"
                             value={d.hotel}
                             onChange={(e) => {
                               const updated = [...itineraryDays];
                               updated[dIdx].hotel = e.target.value;
                               setItineraryDays(updated);
                             }}
-                            className="bg-slate-50 border border-slate-200 rounded px-2 py-0.5 text-[11px] font-bold text-slate-800"
+                            className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1 text-xs font-bold text-slate-800 focus:bg-white focus:border-brand-500"
                           />
                         </div>
                       </div>
@@ -1032,14 +1049,14 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
                         <div className="md:col-span-8">
                           <input
                             type="text"
-                            placeholder={`Day ${d.dayNumber} Title`}
+                            placeholder={`Day ${d.dayNumber} Title (e.g. Arrival & Temple Darshan)`}
                             value={d.title}
                             onChange={(e) => {
                               const updated = [...itineraryDays];
                               updated[dIdx].title = e.target.value;
                               setItineraryDays(updated);
                             }}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 font-bold text-slate-900 text-xs"
+                            className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 font-bold text-slate-900 text-xs focus:bg-white focus:border-brand-500"
                           />
                         </div>
                         <div className="md:col-span-4">
@@ -1052,25 +1069,48 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
                               updated[dIdx].activities = e.target.value;
                               setItineraryDays(updated);
                             }}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-700 text-[11px]"
+                            className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-slate-700 text-[11px] focus:bg-white focus:border-brand-500"
                           />
                         </div>
                         <div className="md:col-span-12">
                           <textarea
                             rows={2}
-                            placeholder="Detailed description of the day's experiences..."
+                            placeholder="Detailed description of the day's experiences, timings and route..."
                             value={d.description}
                             onChange={(e) => {
                               const updated = [...itineraryDays];
                               updated[dIdx].description = e.target.value;
                               setItineraryDays(updated);
                             }}
-                            className="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-slate-800 text-[11px]"
+                            className="w-full bg-slate-50 border border-slate-200 rounded-lg p-2 text-slate-800 text-[11px] focus:bg-white focus:border-brand-500"
                           />
                         </div>
                       </div>
                     </div>
                   ))}
+
+                  {/* Big + Add Day & - Remove Day at bottom of Day list */}
+                  <div className="pt-2 flex flex-col sm:flex-row gap-2">
+                    <button
+                      type="button"
+                      onClick={addDay}
+                      className="flex-1 py-3 px-4 bg-emerald-50 hover:bg-emerald-100 border-2 border-dashed border-emerald-400 hover:border-emerald-500 rounded-2xl text-emerald-800 font-black text-xs flex items-center justify-center gap-2 cursor-pointer transition-all shadow-sm active:scale-[0.99]"
+                    >
+                      <Plus className="w-4 h-4 text-emerald-600" />
+                      <span>+ Add Day {itineraryDays.length + 1} to Itinerary</span>
+                    </button>
+
+                    {itineraryDays.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => removeDay()}
+                        className="py-3 px-4 bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-700 rounded-2xl font-bold text-xs flex items-center justify-center gap-1.5 cursor-pointer transition-all active:scale-[0.99]"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                        <span>- Remove Last Day</span>
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
 
