@@ -8,8 +8,8 @@ import { Button } from '@/components/ui/Button';
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [adminEmail, setAdminEmail] = useState('');
-  const [adminPassword, setAdminPassword] = useState('');
+  const [adminEmail, setAdminEmail] = useState('admin@tripcustomizer.com');
+  const [adminPassword, setAdminPassword] = useState('admin123');
   const [errorMsg, setErrorMsg] = useState('');
 
   const [isLoading, setIsLoading] = useState(false);
@@ -66,13 +66,13 @@ export default function AdminLoginPage() {
 
         <form onSubmit={handleAdminLogin} className="space-y-4 text-xs">
           <div>
-            <label className="font-bold text-slate-300 block mb-1">Admin Email / ID</label>
+            <label className="font-bold text-slate-300 block mb-1">Admin Email / Username</label>
             <div className="relative">
               <User className="w-4 h-4 text-slate-500 absolute left-3.5 top-3" />
               <input
                 required
-                type="email"
-                placeholder="admin@tripcustomizer.com"
+                type="text"
+                placeholder="admin@tripcustomizer.com or admin"
                 value={adminEmail}
                 onChange={(e) => setAdminEmail(e.target.value)}
                 className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 font-semibold text-white focus:outline-none focus:border-brand-500"
@@ -81,13 +81,13 @@ export default function AdminLoginPage() {
           </div>
 
           <div>
-            <label className="font-bold text-slate-300 block mb-1">Secret Admin Passcode</label>
+            <label className="font-bold text-slate-300 block mb-1">Admin Passcode</label>
             <div className="relative">
               <Lock className="w-4 h-4 text-slate-500 absolute left-3.5 top-3" />
               <input
                 required
                 type="password"
-                placeholder="••••••••"
+                placeholder="admin123"
                 value={adminPassword}
                 onChange={(e) => setAdminPassword(e.target.value)}
                 className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 font-semibold text-white focus:outline-none focus:border-brand-500"
@@ -97,16 +97,30 @@ export default function AdminLoginPage() {
 
           <Button
             type="submit"
+            disabled={isLoading}
             variant="accent"
             size="lg"
             className="w-full font-black py-3 text-slate-950 text-xs shadow-xl mt-2 cursor-pointer"
           >
-            LOG IN TO ADMIN DESK →
+            {isLoading ? 'VERIFYING CREDENTIALS...' : 'LOG IN TO ADMIN DESK →'}
           </Button>
         </form>
 
-        <div className="p-3 bg-slate-950/60 rounded-xl text-[11px] text-slate-500 text-center font-mono border border-slate-800/80">
-          Demo Admin Credentials: <strong className="text-slate-300">admin@tripcustomizer.com</strong> / <strong className="text-amber-400">admin123</strong>
+        <div className="p-3 bg-slate-950/80 rounded-2xl text-[11px] text-slate-400 border border-slate-800 space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="font-mono text-slate-300">Default: <strong>admin@tripcustomizer.com</strong> / <strong>admin123</strong></span>
+          </div>
+          <button
+            type="button"
+            onClick={() => {
+              setAdminEmail('admin@tripcustomizer.com');
+              setAdminPassword('admin123');
+              setErrorMsg('');
+            }}
+            className="w-full py-2 bg-brand-600/20 hover:bg-brand-600/40 border border-brand-500/40 text-brand-300 rounded-xl font-bold text-xs transition-colors cursor-pointer flex items-center justify-center gap-1.5"
+          >
+            <span>✨ 1-Click Auto-Fill Admin Credentials</span>
+          </button>
         </div>
       </Card>
     </div>

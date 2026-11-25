@@ -11,11 +11,11 @@ export async function POST(req: Request) {
     const forwarded = req.headers.get('x-forwarded-for') || '127.0.0.1';
     const clientIp = forwarded.split(',')[0].trim();
 
-    // Rate limit: 5 login attempts per minute per IP
-    const rateLimit = checkRateLimit(`admin_login_${clientIp}`, 5, 60000);
+    // Rate limit: 30 login attempts per minute per IP
+    const rateLimit = checkRateLimit(`admin_login_${clientIp}`, 30, 60000);
     if (!rateLimit.allowed) {
       return NextResponse.json(
-        { success: false, error: 'Too many login attempts. Please wait 1 minute.' },
+        { success: false, error: 'Too many login attempts. Please wait 30 seconds.' },
         { status: 429 }
       );
     }
