@@ -114,7 +114,7 @@ export default function AdminPackagesPage() {
         'success'
       );
     } catch (err: any) {
-      triggerNotification(`Cloud sync note: ${err?.message || 'Updated'}`, 'info');
+      triggerNotification(`❌ ${err?.message || 'Sync failed'}`, 'error');
     } finally {
       setIsSyncingToCloud(false);
     }

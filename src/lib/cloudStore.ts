@@ -981,30 +981,56 @@ export const cloudStore = {
     const leads = cloudStore.getLeads();
     const isLegacyDel = cloudStore.isLegacyPackagesDeleted();
 
-    // 1. Sync settings
+    // 1. Verify Firestore access with settings document first
     try {
-      await setDoc(doc(db, 'settings', 'package_config'), { isLegacyDeleted: isLegacyDel, updatedAt: new Date().toISOString() }, { merge: true });
-    } catch (e) {}
-
-    // 2. Sync packages
-    for (const p of pkgs) {
-      try {
-        await setDoc(doc(db, 'packages', p.id), p, { merge: true });
-      } catch (e) {}
+      await setDoc(
+        doc(db, 'settings', 'package_config'),
+        {
+          isLegacyDeleted: isLegacyDel,
+          totalPackages: pkgs.length,
+          totalBookings: bookings.length,
+          updatedAt: new Date().toISOString(),
+        },
+        { merge: true }
+      );
+    } catch (permErr: any) {
+      console.error('[CloudStore] Firestore settings sync failed:', permErr);
+      throw new Error(
+        `Firebase Error (${permErr?.code || 'permission-denied'}): ${permErr?.message || 'Access blocked. Check Firestore security rules in Firebase Console.'}`
+      );
     }
 
-    // 3. Sync bookings
-    for (const b of bookings) {
-      try {
-        await setDoc(doc(db, 'bookings', b.id), b, { merge: true });
-      } catch (e) {}
+    // 2. Batch Sync Packages (in chunks of 25 for maximum performance)
+    const PKG_CHUNK = 25;
+    for (let i = 0; i < pkgs.length; i += PKG_CHUNK) {
+      const chunk = pkgs.slice(i, i + PKG_CHUNK);
+      await Promise.all(
+        chunk.map((p) => setDoc(doc(db, 'packages', p.id), p, { merge: true }).catch((err) => {
+          console.warn(`[CloudStore] Failed to sync package ${p.id}:`, err);
+        }))
+      );
     }
 
-    // 4. Sync leads
-    for (const l of leads) {
-      try {
-        await setDoc(doc(db, 'leads', l.id), l, { merge: true });
-      } catch (e) {}
+    // 3. Batch Sync Bookings
+    const BK_CHUNK = 25;
+    for (let i = 0; i < bookings.length; i += BK_CHUNK) {
+      const chunk = bookings.slice(i, i + BK_CHUNK);
+      await Promise.all(
+        chunk.map((b) => setDoc(doc(db, 'bookings', b.id), b, { merge: true }).catch((err) => {
+          console.warn(`[CloudStore] Failed to sync booking ${b.id}:`, err);
+        }))
+      );
+    }
+
+    // 4. Batch Sync Leads
+    const LD_CHUNK = 25;
+    for (let i = 0; i < leads.length; i += LD_CHUNK) {
+      const chunk = leads.slice(i, i + LD_CHUNK);
+      await Promise.all(
+        chunk.map((l) => setDoc(doc(db, 'leads', l.id), l, { merge: true }).catch((err) => {
+          console.warn(`[CloudStore] Failed to sync lead ${l.id}:`, err);
+        }))
+      );
     }
 
     return { packagesCount: pkgs.length, bookingsCount: bookings.length, leadsCount: leads.length };

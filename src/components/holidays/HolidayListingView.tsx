@@ -181,6 +181,25 @@ export function HolidayListingView({
 
   const PAGE_SIZE = 24;
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [liveCatalogVersion, setLiveCatalogVersion] = useState(0);
+
+  React.useEffect(() => {
+    // Sync packages from Cloud Firestore / Server on mount
+    cloudStore.syncCustomPackagesFromServer().then(() => {
+      setLiveCatalogVersion((v) => v + 1);
+    });
+
+    const handleUpdate = () => {
+      setLiveCatalogVersion((v) => v + 1);
+    };
+
+    window.addEventListener('storage', handleUpdate);
+    window.addEventListener('cloudstore_update', handleUpdate);
+    return () => {
+      window.removeEventListener('storage', handleUpdate);
+      window.removeEventListener('cloudstore_update', handleUpdate);
+    };
+  }, []);
 
   React.useEffect(() => {
     setVisibleCount(PAGE_SIZE);
@@ -425,6 +444,7 @@ export function HolidayListingView({
     selectedDuration,
     maxPrice,
     sortBy,
+    liveCatalogVersion,
   ]);
 
   const visiblePackages = useMemo(() => {
