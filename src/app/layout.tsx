@@ -27,6 +27,17 @@ export const metadata: Metadata = {
     'customized tour packages',
     'holiday packages india',
     'international tour packages',
+    // Trending Winter 2026/2027 Peak Searches
+    'winter tour packages india 2026',
+    'kashmir winter snow tour packages',
+    'gulmarg gondola ticket booking kashmir package',
+    'auli skiing tour package ropeway resort',
+    'rann utsav kutch tent city packages 2026-27',
+    'christmas new year travel packages 2027',
+    'thailand visa free 60 days holiday package',
+    'dubai shopping festival dsf 2026 tour packages',
+    'ayodhya ram mandir vip darshan packages aarti booking',
+    'varanasi ganga aarti dev deepawali tour package',
     // 1. Trending International Honeymoon Packages
     'Maldives honeymoon packages',
     'Bali honeymoon packages',
@@ -558,6 +569,12 @@ export default function RootLayout({
         {/* Preconnect for Instant Photo Delivery */}
         <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        {/* Geo-Targeting & Local Discovery Meta Tags for Google, Bing & AI Engines */}
+        <meta name="geo.region" content="IN-UP" />
+        <meta name="geo.placename" content="Ayodhya" />
+        <meta name="geo.position" content="26.7922;82.1998" />
+        <meta name="ICBM" content="26.7922, 82.1998" />
+        <meta name="format-detection" content="telephone=yes" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchemas) }}
