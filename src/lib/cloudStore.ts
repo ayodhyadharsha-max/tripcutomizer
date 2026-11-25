@@ -374,55 +374,30 @@ let isCloudListenerInitialized = false;
 
 const initCloudListeners = () => {
   if (typeof window === 'undefined' || isCloudListenerInitialized) return;
-  if (!window.location.pathname.startsWith('/admin')) return;
   isCloudListenerInitialized = true;
 
-  syncFromCloud();
-  setInterval(() => {
+  // Sync server bookings and leads if on admin route
+  if (window.location.pathname.startsWith('/admin')) {
     syncFromCloud();
-  }, 4000);
+    setInterval(() => {
+      syncFromCloud();
+    }, 4000);
+  }
 
   if (db && process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
     try {
-      onSnapshot(collection(db, 'bookings'), (snapshot) => {
-        if (!snapshot.empty) {
-          const cloudBookings: CustomerBooking[] = [];
-          snapshot.forEach((docSnap) => {
-            cloudBookings.push(docSnap.data() as CustomerBooking);
-          });
-
-          const localBookings = getStoredData<CustomerBooking[]>(STORAGE_KEYS.BOOKINGS, []);
-          const bookingMap = new Map<string, CustomerBooking>();
-          localBookings.forEach((b) => bookingMap.set(b.id, b));
-          cloudBookings.forEach((b) => bookingMap.set(b.id, b));
-
-          const merged = Array.from(bookingMap.values()).sort(
-            (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-          );
-          setStoredData(STORAGE_KEYS.BOOKINGS, merged);
+      // 1. Settings listener (e.g. legacy packages deletion across all devices)
+      onSnapshot(doc(db, 'settings', 'package_config'), (snapshot) => {
+        if (snapshot.exists()) {
+          const data = snapshot.data();
+          if (data && typeof data.isLegacyDeleted === 'boolean') {
+            setStoredData(STORAGE_KEYS.LEGACY_PACKAGES_DELETED, data.isLegacyDeleted);
+            window.dispatchEvent(new Event('cloudstore_update'));
+          }
         }
       }, () => {});
 
-      onSnapshot(collection(db, 'leads'), (snapshot) => {
-        if (!snapshot.empty) {
-          const cloudLeads: CustomerLead[] = [];
-          snapshot.forEach((docSnap) => {
-            cloudLeads.push(docSnap.data() as CustomerLead);
-          });
-
-          const localLeads = getStoredData<CustomerLead[]>(STORAGE_KEYS.LEADS, []);
-          const leadMap = new Map<string, CustomerLead>();
-          localLeads.forEach((l) => leadMap.set(l.id, l));
-          cloudLeads.forEach((l) => leadMap.set(l.id, l));
-
-          const merged = Array.from(leadMap.values()).sort(
-            (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-          );
-          setStoredData(STORAGE_KEYS.LEADS, merged);
-        }
-      }, () => {});
-
-      // Packages listener from Cloud Firestore
+      // 2. Global Packages listener from Cloud Firestore (runs for all visitors & admin)
       onSnapshot(collection(db, 'packages'), (snapshot) => {
         if (!snapshot.empty) {
           const cloudPkgs: HolidayPackage[] = [];
@@ -440,7 +415,52 @@ const initCloudListeners = () => {
           window.dispatchEvent(new Event('cloudstore_update'));
         }
       }, () => {});
-    } catch (e) {}
+
+      // 3. Admin-only real-time bookings & leads listeners
+      if (window.location.pathname.startsWith('/admin')) {
+        onSnapshot(collection(db, 'bookings'), (snapshot) => {
+          if (!snapshot.empty) {
+            const cloudBookings: CustomerBooking[] = [];
+            snapshot.forEach((docSnap) => {
+              cloudBookings.push(docSnap.data() as CustomerBooking);
+            });
+
+            const localBookings = getStoredData<CustomerBooking[]>(STORAGE_KEYS.BOOKINGS, []);
+            const bookingMap = new Map<string, CustomerBooking>();
+            localBookings.forEach((b) => bookingMap.set(b.id, b));
+            cloudBookings.forEach((b) => bookingMap.set(b.id, b));
+
+            const merged = Array.from(bookingMap.values()).sort(
+              (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+            );
+            setStoredData(STORAGE_KEYS.BOOKINGS, merged);
+            window.dispatchEvent(new Event('cloudstore_update'));
+          }
+        }, () => {});
+
+        onSnapshot(collection(db, 'leads'), (snapshot) => {
+          if (!snapshot.empty) {
+            const cloudLeads: CustomerLead[] = [];
+            snapshot.forEach((docSnap) => {
+              cloudLeads.push(docSnap.data() as CustomerLead);
+            });
+
+            const localLeads = getStoredData<CustomerLead[]>(STORAGE_KEYS.LEADS, []);
+            const leadMap = new Map<string, CustomerLead>();
+            localLeads.forEach((l) => leadMap.set(l.id, l));
+            cloudLeads.forEach((l) => leadMap.set(l.id, l));
+
+            const merged = Array.from(leadMap.values()).sort(
+              (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+            );
+            setStoredData(STORAGE_KEYS.LEADS, merged);
+            window.dispatchEvent(new Event('cloudstore_update'));
+          }
+        }, () => {});
+      }
+    } catch (e) {
+      console.warn('[CloudStore] Firestore listener note:', e);
+    }
   }
 };
 
@@ -807,6 +827,9 @@ export const cloudStore = {
   },
 
   getCustomPackages: (): HolidayPackage[] => {
+    if (typeof window !== 'undefined') {
+      initCloudListeners();
+    }
     return getStoredData<HolidayPackage[]>(STORAGE_KEYS.CUSTOM_PACKAGES, []);
   },
 
@@ -824,8 +847,9 @@ export const cloudStore = {
           const merged = Array.from(map.values());
           setStoredData(STORAGE_KEYS.CUSTOM_PACKAGES, merged);
 
-          if (typeof data.isLegacyDeleted === 'boolean') {
-            setStoredData(STORAGE_KEYS.LEGACY_PACKAGES_DELETED, data.isLegacyDeleted);
+          // Only accept server's legacy deleted if explicitly true; never overwrite local true with false
+          if (data.isLegacyDeleted === true) {
+            setStoredData(STORAGE_KEYS.LEGACY_PACKAGES_DELETED, true);
           }
           return merged;
         }
@@ -904,6 +928,17 @@ export const cloudStore = {
   deleteLegacyPackages: (): void => {
     setStoredData(STORAGE_KEYS.LEGACY_PACKAGES_DELETED, true);
     if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('cloudstore_update'));
+    }
+
+    // Persist to Cloud Firestore settings so all devices know legacy is deleted
+    if (db && process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
+      try {
+        setDoc(doc(db, 'settings', 'package_config'), { isLegacyDeleted: true, updatedAt: new Date().toISOString() }, { merge: true }).catch(() => {});
+      } catch (e) {}
+    }
+
+    if (typeof window !== 'undefined') {
       try {
         fetch('/api/packages', {
           method: 'DELETE',
@@ -917,6 +952,16 @@ export const cloudStore = {
   restoreLegacyPackages: (): void => {
     setStoredData(STORAGE_KEYS.LEGACY_PACKAGES_DELETED, false);
     if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('cloudstore_update'));
+    }
+
+    if (db && process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
+      try {
+        setDoc(doc(db, 'settings', 'package_config'), { isLegacyDeleted: false, updatedAt: new Date().toISOString() }, { merge: true }).catch(() => {});
+      } catch (e) {}
+    }
+
+    if (typeof window !== 'undefined') {
       try {
         fetch('/api/packages', {
           method: 'DELETE',
@@ -925,6 +970,44 @@ export const cloudStore = {
         }).catch(() => {});
       } catch {}
     }
+  },
+
+  syncAllLocalToCloud: async (): Promise<{ packagesCount: number; bookingsCount: number; leadsCount: number }> => {
+    if (typeof window === 'undefined' || !db || !process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
+      return { packagesCount: 0, bookingsCount: 0, leadsCount: 0 };
+    }
+    const pkgs = cloudStore.getCustomPackages();
+    const bookings = cloudStore.getBookings();
+    const leads = cloudStore.getLeads();
+    const isLegacyDel = cloudStore.isLegacyPackagesDeleted();
+
+    // 1. Sync settings
+    try {
+      await setDoc(doc(db, 'settings', 'package_config'), { isLegacyDeleted: isLegacyDel, updatedAt: new Date().toISOString() }, { merge: true });
+    } catch (e) {}
+
+    // 2. Sync packages
+    for (const p of pkgs) {
+      try {
+        await setDoc(doc(db, 'packages', p.id), p, { merge: true });
+      } catch (e) {}
+    }
+
+    // 3. Sync bookings
+    for (const b of bookings) {
+      try {
+        await setDoc(doc(db, 'bookings', b.id), b, { merge: true });
+      } catch (e) {}
+    }
+
+    // 4. Sync leads
+    for (const l of leads) {
+      try {
+        await setDoc(doc(db, 'leads', l.id), l, { merge: true });
+      } catch (e) {}
+    }
+
+    return { packagesCount: pkgs.length, bookingsCount: bookings.length, leadsCount: leads.length };
   },
 };
 

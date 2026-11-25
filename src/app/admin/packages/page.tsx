@@ -38,6 +38,7 @@ import {
   ShieldAlert,
   Sparkles,
   Loader2,
+  Cloud,
   Pencil,
 } from 'lucide-react';
 
@@ -101,11 +102,47 @@ export default function AdminPackagesPage() {
     setPackages(activeList);
   };
 
+  const [isSyncingToCloud, setIsSyncingToCloud] = useState(false);
+
+  // Sync all local packages and bookings to Firebase Firestore so other devices get them immediately
+  const handleCloudPush = async () => {
+    setIsSyncingToCloud(true);
+    try {
+      const res = await cloudStore.syncAllLocalToCloud();
+      triggerNotification(
+        `✅ Cloud Sync Complete: ${res.packagesCount} packages & ${res.bookingsCount} bookings synced to live cloud! All other systems will now show them.`,
+        'success'
+      );
+    } catch (err: any) {
+      triggerNotification(`Cloud sync note: ${err?.message || 'Updated'}`, 'info');
+    } finally {
+      setIsSyncingToCloud(false);
+    }
+  };
+
+  // Download complete local packages as JSON file backup
+  const handleDownloadBackup = () => {
+    const all = cloudStore.getCustomPackages();
+    const blob = new Blob([JSON.stringify(all, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `tripcustomizer-catalog-backup-${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    triggerNotification(`📥 Downloaded ${all.length} packages backup JSON file!`, 'success');
+  };
+
   useEffect(() => {
     refreshCatalogData();
     cloudStore.syncCustomPackagesFromServer().then(() => {
       refreshCatalogData();
     });
+
+    // Auto-sync local packages to Firestore in background on mount
+    setTimeout(() => {
+      cloudStore.syncAllLocalToCloud().catch(() => {});
+    }, 1500);
 
     // Listen to storage events across tabs
     const handleStorageUpdate = () => refreshCatalogData();
@@ -495,6 +532,32 @@ export default function AdminPackagesPage() {
               </div>
             )}
           </div>
+
+          {/* Cloud Sync Button */}
+          <Button
+            size="sm"
+            onClick={handleCloudPush}
+            disabled={isSyncingToCloud}
+            className="text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white flex items-center space-x-1.5 shadow-sm cursor-pointer"
+          >
+            {isSyncingToCloud ? (
+              <Loader2 className="w-3.5 h-3.5 animate-spin text-white" />
+            ) : (
+              <Cloud className="w-3.5 h-3.5 text-white" />
+            )}
+            <span>{isSyncingToCloud ? 'Syncing to Cloud...' : '☁️ Sync to All Devices'}</span>
+          </Button>
+
+          {/* Backup Catalog JSON Button */}
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleDownloadBackup}
+            className="text-xs font-bold text-slate-700 border-slate-300 hover:bg-slate-50 flex items-center space-x-1.5 cursor-pointer"
+          >
+            <Download className="w-3.5 h-3.5 text-slate-500" />
+            <span>Backup Catalog (.json)</span>
+          </Button>
 
           {/* Quick Package Creator (AI Assistant) Button */}
           <Button

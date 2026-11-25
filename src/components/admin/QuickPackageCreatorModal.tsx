@@ -79,13 +79,71 @@ export function QuickPackageCreatorModal({
     { city: 'Mahabalipuram', name: 'Mamalla Beach Resort', nights: 1, rating: '4.8' },
   ]);
 
-  // 4. Photos
+  // 4. Photos & Instant Upload
   const [heroImage, setHeroImage] = useState(
     'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=1200&q=80&fm=webp&fit=crop'
   );
   const [galleryText, setGalleryText] = useState(
     'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=1200&q=80&fm=webp&fit=crop\nhttps://images.unsplash.com/photo-1621682372775-533449e550ed?w=1200&q=80&fm=webp&fit=crop\nhttps://images.unsplash.com/photo-1609766857041-ed402ea8069a?w=1200&q=80&fm=webp&fit=crop'
   );
+  const [isUploadingPhoto, setIsUploadingPhoto] = useState(false);
+
+  const PRESET_DESTINATION_PHOTOS = [
+    { label: '🏔️ Kashmir', url: 'https://images.unsplash.com/photo-1595815771614-ade9d652a65d?w=1200&q=80&fm=webp&fit=crop' },
+    { label: '🏖️ Goa', url: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=1200&q=80&fm=webp&fit=crop' },
+    { label: '🏙️ Dubai', url: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=80&fm=webp&fit=crop' },
+    { label: '🌴 Bali', url: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1200&q=80&fm=webp&fit=crop' },
+    { label: '🛕 Ayodhya', url: 'https://images.unsplash.com/photo-1707056507457-3f338d3878b2?w=1200&q=80&fm=webp&fit=crop' },
+    { label: '🎿 Auli', url: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200&q=80&fm=webp&fit=crop' },
+    { label: '🐘 Kerala', url: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=1200&q=80&fm=webp&fit=crop' },
+    { label: '🏰 Rajasthan', url: 'https://images.unsplash.com/photo-1477587458883-47145ed94245?w=1200&q=80&fm=webp&fit=crop' },
+    { label: '🏯 Thailand', url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80&fm=webp&fit=crop' },
+    { label: '🏝️ Andaman', url: 'https://images.unsplash.com/photo-1589308078059-be1415eab4c3?w=1200&q=80&fm=webp&fit=crop' },
+  ];
+
+  const handleDevicePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsUploadingPhoto(true);
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const maxW = 1200;
+        const maxH = 800;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > maxW) {
+            height = Math.round((height * maxW) / width);
+            width = maxW;
+          }
+        } else {
+          if (height > maxH) {
+            width = Math.round((width * maxH) / height);
+            height = maxH;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(img, 0, 0, width, height);
+          const dataUrl = canvas.toDataURL('image/webp', 0.85);
+          setHeroImage(dataUrl);
+        }
+        setIsUploadingPhoto(false);
+      };
+      img.onerror = () => setIsUploadingPhoto(false);
+      img.src = event.target?.result as string;
+    };
+    reader.onerror = () => setIsUploadingPhoto(false);
+    reader.readAsDataURL(file);
+  };
 
   // 5. Itinerary
   const [rawItineraryText, setRawItineraryText] = useState('');
@@ -1129,28 +1187,64 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-start">
-                  <div className="md:col-span-8 space-y-2">
+                  <div className="md:col-span-8 space-y-2.5">
                     <div>
-                      <label className="block text-[11px] font-bold text-slate-700 mb-1">Main Hero Image URL *</label>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <label className="block text-[11px] font-bold text-slate-700">Main Hero Image URL *</label>
+                        <label
+                          htmlFor="hero-photo-upload"
+                          className="inline-flex items-center gap-1 text-[11px] font-extrabold text-white bg-indigo-600 hover:bg-indigo-700 px-2.5 py-1 rounded-lg cursor-pointer shadow-xs transition-all"
+                        >
+                          {isUploadingPhoto ? '⏳ Optimizing...' : '📁 Upload Photo from Device'}
+                        </label>
+                        <input
+                          id="hero-photo-upload"
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={handleDevicePhotoUpload}
+                        />
+                      </div>
                       <input
                         type="url"
                         required
-                        placeholder="https://images.unsplash.com/..."
+                        placeholder="https://images.unsplash.com/... or upload directly from device above"
                         value={heroImage}
                         onChange={(e) => setHeroImage(e.target.value)}
                         className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs"
                       />
                     </div>
 
+                    {/* Quick Destination Photo Buttons */}
+                    <div>
+                      <span className="text-[10px] font-bold text-slate-500 block mb-1">⚡ Quick 1-Click Destination Photos:</span>
+                      <div className="flex flex-wrap gap-1">
+                        {PRESET_DESTINATION_PHOTOS.map((preset) => (
+                          <button
+                            key={preset.label}
+                            type="button"
+                            onClick={() => setHeroImage(preset.url)}
+                            className="text-[10px] bg-slate-100 hover:bg-indigo-100 border border-slate-200 hover:border-indigo-300 px-2 py-0.5 rounded-md font-medium text-slate-700 hover:text-indigo-900 transition-all cursor-pointer"
+                          >
+                            {preset.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
                     <div>
                       <label className="block text-[11px] font-bold text-slate-700 mb-1">Gallery Photo URLs (One per line)</label>
                       <textarea
-                        rows={3}
+                        rows={2}
                         value={galleryText}
                         onChange={(e) => setGalleryText(e.target.value)}
                         className="w-full bg-white border border-slate-200 rounded-xl p-2.5 text-slate-900 text-[11px] font-mono"
                       />
                     </div>
+
+                    <p className="text-[10px] text-slate-600 bg-amber-50/80 border border-amber-200 rounded-lg p-2">
+                      💡 <strong>Photo Tip:</strong> Upar <strong>&quot;Upload Photo from Device&quot;</strong> button se phone/computer se direct photo select kar sakte hain. Ya phir <strong>postimages.org</strong> par photo daal kar uska Direct Link yahan paste kar dein.
+                    </p>
                   </div>
 
                   {/* Thumbnail Live Preview */}
