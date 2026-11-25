@@ -23,7 +23,7 @@ export const ThailandInquiryForm: React.FC = () => {
     try {
       // 1. Direct Web3Forms submission for instant email lead delivery
       const web3Payload = {
-        access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || 'YOUR_ACCESS_KEY_HERE',
+        access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || 'c542ca79-b08a-4352-bf3e-1045518a0486',
         subject: `🌴 New Thailand 60-Day Visa-Free Inquiry: ${formData.name} (${formData.departureCity})`,
         from_name: 'Trip Customizer Thailand Desk',
         name: formData.name,
