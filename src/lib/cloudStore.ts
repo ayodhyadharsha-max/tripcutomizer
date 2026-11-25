@@ -972,11 +972,17 @@ export const cloudStore = {
     }
   },
 
-  syncAllLocalToCloud: async (): Promise<{ packagesCount: number; bookingsCount: number; leadsCount: number }> => {
-    if (typeof window === 'undefined' || !db || !process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
+  syncAllLocalToCloud: async (explicitPackages?: HolidayPackage[]): Promise<{ packagesCount: number; bookingsCount: number; leadsCount: number }> => {
+    if (typeof window === 'undefined' || !db) {
       return { packagesCount: 0, bookingsCount: 0, leadsCount: 0 };
     }
-    const pkgs = cloudStore.getCustomPackages();
+    let pkgs = (explicitPackages && explicitPackages.length > 0) ? explicitPackages : cloudStore.getCustomPackages();
+    if (!pkgs || pkgs.length === 0) {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEYS.CUSTOM_PACKAGES);
+        if (raw) pkgs = JSON.parse(raw);
+      } catch (e) {}
+    }
     const bookings = cloudStore.getBookings();
     const leads = cloudStore.getLeads();
     const isLegacyDel = cloudStore.isLegacyPackagesDeleted();

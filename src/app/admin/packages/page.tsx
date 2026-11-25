@@ -108,7 +108,7 @@ export default function AdminPackagesPage() {
   const handleCloudPush = async () => {
     setIsSyncingToCloud(true);
     try {
-      const res = await cloudStore.syncAllLocalToCloud();
+      const res = await cloudStore.syncAllLocalToCloud(packages);
       triggerNotification(
         `✅ Cloud Sync Complete: ${res.packagesCount} packages & ${res.bookingsCount} bookings synced to live cloud! All other systems will now show them.`,
         'success'
