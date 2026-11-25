@@ -5,6 +5,7 @@
 [build.environment]
   NODE_VERSION = "20"
   PUPPETEER_SKIP_DOWNLOAD = "true"
+  SECRETS_SCAN_OMIT_KEYS = "WEB3FORMS_ACCESS_KEY,NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,NEXT_PUBLIC_WEB3FORMS_KEY"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
