@@ -24,7 +24,8 @@ export const sendWeb3FormLead = async (payload: Web3FormPayload): Promise<boolea
     payload.access_key ||
     process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ||
     process.env.NEXT_PUBLIC_WEB3FORMS_KEY ||
-    'c542ca79-b08a-4352-bf3e-1045518a0486';
+    process.env.WEB3FORMS_ACCESS_KEY ||
+    '';
 
   if (!apiKey) {
     console.warn('[Web3Forms] Missing access key in environment variables');

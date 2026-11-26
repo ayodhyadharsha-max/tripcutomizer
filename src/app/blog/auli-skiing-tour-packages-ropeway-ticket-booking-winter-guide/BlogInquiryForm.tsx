@@ -23,7 +23,7 @@ export const AuliInquiryForm: React.FC = () => {
     try {
       // 1. Direct Web3Forms submission for instant email lead delivery
       const web3Payload = {
-        access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || 'c542ca79-b08a-4352-bf3e-1045518a0486',
+        access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || '',
         subject: `🎿 New Auli Skiing & Winter Snow Inquiry: ${formData.name} (${formData.pickupCity})`,
         from_name: 'Trip Customizer Auli Winter Desk',
         name: formData.name,

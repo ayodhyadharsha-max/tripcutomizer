@@ -15,6 +15,8 @@ const ALLOWED_EMAILS = new Set([
   'help@tripcustomizer.com',
   'support@tripcustomizer.com',
   'admin@tripcustomizer.com',
+  'admin@gmail.com',
+  'ayodhyadharshan@gmail.com',
   'test@example.com',
   'user@example.com'
 ]);
