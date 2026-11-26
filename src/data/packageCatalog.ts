@@ -1977,28 +1977,23 @@ export function getAllCatalogPackages(): HolidayPackage[] {
       const rawCustom = localStorage.getItem('tc_cloud_custom_packages_v1');
       const customPackages: HolidayPackage[] = rawCustom ? JSON.parse(rawCustom) : [];
 
-      // Curated map to override stale localStorage items
+      // Curated map for default fallback baseline only
       const curatedMap = new Map<string, HolidayPackage>();
       CURATED_CUSTOM_PACKAGES.forEach((cp) => {
         curatedMap.set(cp.id.toLowerCase(), cp);
         curatedMap.set(cp.slug.toLowerCase(), cp);
       });
 
-      let hasUpdates = false;
       const sanitizedCustom = customPackages.map((cp) => {
+        // If the package was edited by user, never overwrite user edits!
+        if (cp.user_edited) return cp;
         const cur = curatedMap.get(cp.id.toLowerCase()) || curatedMap.get(cp.slug.toLowerCase());
         if (cur) {
-          hasUpdates = true;
-          return { ...cp, ...cur };
+          // Curated provides baseline defaults, user's cp fields take precedence
+          return { ...cur, ...cp };
         }
         return cp;
       });
-
-      if (hasUpdates) {
-        try {
-          localStorage.setItem('tc_cloud_custom_packages_v1', JSON.stringify(sanitizedCustom));
-        } catch {}
-      }
 
       // Avoid duplicates between sanitizedCustom and baseCatalog
       const customIds = new Set(

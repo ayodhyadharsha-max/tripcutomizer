@@ -139,11 +139,6 @@ export default function AdminPackagesPage() {
       refreshCatalogData();
     });
 
-    // Auto-sync local packages to Firestore in background on mount
-    setTimeout(() => {
-      cloudStore.syncAllLocalToCloud().catch(() => {});
-    }, 1500);
-
     // Listen to storage events across tabs
     const handleStorageUpdate = () => refreshCatalogData();
     window.addEventListener('storage', handleStorageUpdate);
@@ -1313,10 +1308,23 @@ export default function AdminPackagesPage() {
           setEditingPackage(null);
         }}
         onPackageCreated={(newPkg) => {
+          setPackages((prev) => {
+            const exists = prev.some(
+              (p) => p.id.toLowerCase() === newPkg.id.toLowerCase() || p.slug.toLowerCase() === newPkg.slug.toLowerCase()
+            );
+            if (exists) {
+              return prev.map((p) =>
+                p.id.toLowerCase() === newPkg.id.toLowerCase() || p.slug.toLowerCase() === newPkg.slug.toLowerCase()
+                  ? newPkg
+                  : p
+              );
+            }
+            return [newPkg, ...prev];
+          });
           refreshCatalogData();
           setNotification({
             message: editingPackage
-              ? `✅ Package "${newPkg.name}" updated successfully!`
+              ? `✅ Package "${newPkg.name}" updated successfully! Price: ${formatCurrency(newPkg.startingPrice)}`
               : `✨ Package "${newPkg.name}" successfully published and live on website!`,
             type: 'success',
           });

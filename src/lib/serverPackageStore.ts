@@ -176,6 +176,11 @@ export function getServerCustomPackages(): HolidayPackage[] {
   map.set(ARAKU_VALLEY_BLISS_PACKAGE.id, ARAKU_VALLEY_BLISS_PACKAGE);
   map.set(SACRED_TIRUPATI_MAHABALIPURAM_CHENNAI_PACKAGE.id, SACRED_TIRUPATI_MAHABALIPURAM_CHENNAI_PACKAGE);
   fromFile.forEach((p) => {
+    // If it's user edited or has updated_at, preserve it completely!
+    if (p.user_edited || p.updated_at) {
+      map.set(p.id, p);
+      return;
+    }
     // If it's the premium hyderabad package, ensure it uses the updated clean premium definition
     if (p.slug.includes('premium-hyderabad') || p.id.includes('premium-hyderabad')) {
       map.set(p.id, { ...p, ...HYDERABAD_PREMIUM_PACKAGE, hotelCategory: '5-Star Luxury' });

@@ -407,10 +407,33 @@ const initCloudListeners = () => {
 
           const localPkgs = getStoredData<HolidayPackage[]>(STORAGE_KEYS.CUSTOM_PACKAGES, []);
           const pkgMap = new Map<string, HolidayPackage>();
-          localPkgs.forEach((p) => pkgMap.set(p.id, p));
-          cloudPkgs.forEach((p) => pkgMap.set(p.id, p));
 
-          const merged = Array.from(pkgMap.values());
+          // Cloud packages first
+          cloudPkgs.forEach((p) => {
+            pkgMap.set(p.id.toLowerCase(), p);
+            if (p.slug) pkgMap.set(p.slug.toLowerCase(), p);
+          });
+
+          // Local packages with user edits or newer timestamps take precedence!
+          localPkgs.forEach((lp) => {
+            const cp = pkgMap.get(lp.id.toLowerCase()) || (lp.slug ? pkgMap.get(lp.slug.toLowerCase()) : undefined);
+            if (!cp) {
+              pkgMap.set(lp.id.toLowerCase(), lp);
+            } else {
+              const lpTime = lp.updated_at ? new Date(lp.updated_at).getTime() : 0;
+              const cpTime = cp.updated_at ? new Date(cp.updated_at).getTime() : 0;
+              if (lp.user_edited || lpTime >= cpTime) {
+                pkgMap.set(lp.id.toLowerCase(), lp);
+                if (lp.slug) pkgMap.set(lp.slug.toLowerCase(), lp);
+              }
+            }
+          });
+
+          // Dedup by unique ID
+          const dedupedMap = new Map<string, HolidayPackage>();
+          Array.from(pkgMap.values()).forEach((p) => dedupedMap.set(p.id, p));
+
+          const merged = Array.from(dedupedMap.values());
           setStoredData(STORAGE_KEYS.CUSTOM_PACKAGES, merged);
           window.dispatchEvent(new Event('cloudstore_update'));
         }
@@ -842,8 +865,14 @@ export const cloudStore = {
         if (data.success && Array.isArray(data.packages)) {
           const local = cloudStore.getCustomPackages();
           const map = new Map<string, HolidayPackage>();
-          local.forEach((p) => map.set(p.id, p));
-          data.packages.forEach((p: HolidayPackage) => map.set(p.id, p));
+          data.packages.forEach((p: HolidayPackage) => map.set(p.id.toLowerCase(), p));
+          // Local packages with user edits or newer timestamps take precedence!
+          local.forEach((lp) => {
+            const serverPkg = map.get(lp.id.toLowerCase());
+            if (!serverPkg || lp.user_edited || (lp.updated_at && (!serverPkg.updated_at || new Date(lp.updated_at).getTime() >= new Date(serverPkg.updated_at).getTime()))) {
+              map.set(lp.id.toLowerCase(), lp);
+            }
+          });
           const merged = Array.from(map.values());
           setStoredData(STORAGE_KEYS.CUSTOM_PACKAGES, merged);
 
@@ -860,26 +889,44 @@ export const cloudStore = {
 
   saveCustomPackages: (newPackages: HolidayPackage[]): void => {
     const existing = cloudStore.getCustomPackages();
-    const map = new Map<string, HolidayPackage>();
-    // Seed with existing packages
-    existing.forEach((p) => map.set(p.id, p));
-    // Upsert new packages (updates existing with new content or appends new packages)
-    newPackages.forEach((p) => map.set(p.id, p));
-    const updated = Array.from(map.values());
+    const updated = [...existing];
+
+    newPackages.forEach((pkg) => {
+      const normalizedPkg: HolidayPackage = {
+        ...pkg,
+        batch_source: 'mmt_sync',
+        updated_at: pkg.updated_at || new Date().toISOString(),
+        user_edited: true,
+      };
+
+      const targetId = (normalizedPkg.id || '').toLowerCase();
+      const targetSlug = (normalizedPkg.slug || '').toLowerCase();
+
+      const existingIdx = updated.findIndex(
+        (p) => (p.id || '').toLowerCase() === targetId || (p.slug || '').toLowerCase() === targetSlug
+      );
+
+      if (existingIdx !== -1) {
+        updated[existingIdx] = normalizedPkg;
+      } else {
+        updated.push(normalizedPkg);
+      }
+
+      // Sync to Cloud Firestore DB
+      if (db) {
+        try {
+          setDoc(doc(db, 'packages', normalizedPkg.id), normalizedPkg, { merge: true }).catch((err) => {
+            console.warn('[CloudStore] Firestore package save note:', err);
+          });
+        } catch (e) {
+          console.warn('[CloudStore] Firestore package save error:', e);
+        }
+      }
+    });
+
     setStoredData(STORAGE_KEYS.CUSTOM_PACKAGES, updated);
     if (typeof window !== 'undefined') {
       window.dispatchEvent(new Event('cloudstore_update'));
-    }
-
-    // Sync to Cloud Firestore if available
-    if (db) {
-      try {
-        newPackages.forEach((pkg) => {
-          setDoc(doc(db, 'packages', pkg.id), pkg, { merge: true }).catch(() => {});
-        });
-      } catch (e) {
-        console.warn('Firestore package sync note:', e);
-      }
     }
 
     // Asynchronously persist to backend database and server store
@@ -982,6 +1029,11 @@ export const cloudStore = {
         const raw = localStorage.getItem(STORAGE_KEYS.CUSTOM_PACKAGES);
         if (raw) pkgs = JSON.parse(raw);
       } catch (e) {}
+    }
+
+    if (!pkgs || pkgs.length === 0) {
+      console.warn('[CloudStore] syncAllLocalToCloud skipped: 0 packages found locally to sync.');
+      return { packagesCount: 0, bookingsCount: 0, leadsCount: 0 };
     }
     const bookings = cloudStore.getBookings();
     const leads = cloudStore.getLeads();

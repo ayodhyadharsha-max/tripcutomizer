@@ -625,25 +625,25 @@ export function PackageDetailClientView({
   const decodedPkgParam = decodeURIComponent(params.package || '').toLowerCase().trim();
   const decodedDestParam = decodeURIComponent(params.destination || '').toLowerCase().trim();
 
+  const strippedTarget = decodedPkgParam.replace(/^pkg-/, '');
+  const isStrictMatch = (p: HolidayPackage) =>
+    p.slug.toLowerCase() === decodedPkgParam ||
+    p.id.toLowerCase() === decodedPkgParam ||
+    p.slug.toLowerCase().replace(/^pkg-/, '') === strippedTarget ||
+    p.id.toLowerCase().replace(/^pkg-/, '') === strippedTarget;
+
   // Multi-tier package lookup:
-  // 1. initialPackage (from server SSR)
-  // 2. Direct check in cloudStore custom packages (browser)
+  // 1. Direct check in cloudStore custom packages (browser) - guarantees user edits take immediate effect!
+  // 2. initialPackage (from server SSR)
   // 3. Exact match in catalog
   const [activePkg, setActivePkg] = useState<HolidayPackage | null>(() => {
-    if (initialPackage) return initialPackage;
-
-    const strippedTarget = decodedPkgParam.replace(/^pkg-/, '');
-    const isStrictMatch = (p: HolidayPackage) =>
-      p.slug.toLowerCase() === decodedPkgParam ||
-      p.id.toLowerCase() === decodedPkgParam ||
-      p.slug.toLowerCase().replace(/^pkg-/, '') === strippedTarget ||
-      p.id.toLowerCase().replace(/^pkg-/, '') === strippedTarget;
-
     if (typeof window !== 'undefined') {
       const customList = cloudStore.getCustomPackages();
       const customMatch = customList.find(isStrictMatch);
       if (customMatch) return customMatch;
     }
+
+    if (initialPackage) return initialPackage;
 
     const found = findCatalogPackage(decodedDestParam, decodedPkgParam);
     if (found && isStrictMatch(found)) {
@@ -652,6 +652,23 @@ export function PackageDetailClientView({
 
     return null;
   });
+
+  // Realtime synchronization: listen for package edits & cloud updates
+  useEffect(() => {
+    const handlePackageUpdate = () => {
+      const customList = cloudStore.getCustomPackages();
+      const customMatch = customList.find(isStrictMatch);
+      if (customMatch) {
+        setActivePkg(customMatch);
+      }
+    };
+    window.addEventListener('storage', handlePackageUpdate);
+    window.addEventListener('cloudstore_update', handlePackageUpdate);
+    return () => {
+      window.removeEventListener('storage', handlePackageUpdate);
+      window.removeEventListener('cloudstore_update', handlePackageUpdate);
+    };
+  }, [decodedPkgParam, decodedDestParam]);
 
   const [isLoadingApi, setIsLoadingApi] = useState<boolean>(!activePkg);
 

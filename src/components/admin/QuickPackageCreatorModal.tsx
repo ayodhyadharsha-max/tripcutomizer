@@ -760,7 +760,9 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
         flightsIncluded: Boolean(packageToEdit?.flightsIncluded),
         transfersIncluded: true,
         departureCity: departureCity || `${destination} Pickup & Drop`,
-        batch_source: packageToEdit?.batch_source || 'mmt_sync',
+        batch_source: 'mmt_sync',
+        updated_at: new Date().toISOString(),
+        user_edited: true,
       };
 
       // 5. Submit to Server API (/api/packages) & persistent client CloudStore
