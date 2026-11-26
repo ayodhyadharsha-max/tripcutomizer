@@ -162,7 +162,7 @@ const syncBookingToCloud = async (booking: CustomerBooking) => {
   } catch (e) {}
 
   // C. Sync to Cloud Firestore DB
-  if (db && process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
+  if (db) {
     try {
       await setDoc(doc(db, 'bookings', booking.id), booking, { merge: true });
     } catch (e) {
@@ -206,7 +206,7 @@ const syncLeadToCloud = async (lead: CustomerLead) => {
   } catch (e) {}
 
   // C. Sync to Cloud Firestore
-  if (db && process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
+  if (db) {
     try {
       await setDoc(doc(db, 'leads', lead.id), lead, { merge: true });
     } catch (e) {
@@ -238,7 +238,7 @@ const syncProfileToCloud = async (profile: UserProfile) => {
   }
 
   // B. Sync to Cloud Firestore
-  if (db && process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
+  if (db) {
     try {
       await setDoc(doc(db, 'profiles', profile.uid), profile, { merge: true });
     } catch (e) {
@@ -384,7 +384,7 @@ const initCloudListeners = () => {
     }, 4000);
   }
 
-  if (db && process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
+  if (db) {
     try {
       // 1. Settings listener (e.g. legacy packages deletion across all devices)
       onSnapshot(doc(db, 'settings', 'package_config'), (snapshot) => {
@@ -872,7 +872,7 @@ export const cloudStore = {
     }
 
     // Sync to Cloud Firestore if available
-    if (db && process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
+    if (db) {
       try {
         newPackages.forEach((pkg) => {
           setDoc(doc(db, 'packages', pkg.id), pkg, { merge: true }).catch(() => {});
@@ -932,7 +932,7 @@ export const cloudStore = {
     }
 
     // Persist to Cloud Firestore settings so all devices know legacy is deleted
-    if (db && process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
+    if (db) {
       try {
         setDoc(doc(db, 'settings', 'package_config'), { isLegacyDeleted: true, updatedAt: new Date().toISOString() }, { merge: true }).catch(() => {});
       } catch (e) {}
@@ -955,7 +955,7 @@ export const cloudStore = {
       window.dispatchEvent(new Event('cloudstore_update'));
     }
 
-    if (db && process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
+    if (db) {
       try {
         setDoc(doc(db, 'settings', 'package_config'), { isLegacyDeleted: false, updatedAt: new Date().toISOString() }, { merge: true }).catch(() => {});
       } catch (e) {}

@@ -12,13 +12,6 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID || 'G-J3CHVB5ZZL',
 };
 
-// Guard against missing Firebase credentials in client console
-if (!process.env.NEXT_PUBLIC_FIREBASE_API_KEY && typeof window !== 'undefined') {
-  console.warn(
-    '⚠️ Firebase credentials missing! Please configure NEXT_PUBLIC_FIREBASE_* variables in your .env.local file.'
-  );
-}
-
 // Initialize Firebase App safely
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
