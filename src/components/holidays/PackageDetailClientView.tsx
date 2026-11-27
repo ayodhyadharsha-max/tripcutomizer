@@ -1488,13 +1488,19 @@ export function PackageDetailClientView({
 
   const rewardPoints = Math.round(basePricePerPerson * 0.01);
 
-  // Fallback Gallery Images for 4-image grid
-  const galleryImages = [
-    pkg.heroImage,
-    pkg.gallery?.[0] || '/destinations/kashmir.jpg',
-    pkg.gallery?.[1] || '/destinations/ayodhya-varanasi.jpg',
-    pkg.gallery?.[2] || '/destinations/rajasthan.jpg',
-  ];
+  // Inside Gallery Images (Cleaned from dummy fallbacks)
+  const rawGallery = Array.isArray(pkg.gallery) ? pkg.gallery : [];
+  const cleanInsideImages = rawGallery.filter(
+    (img) =>
+      typeof img === 'string' &&
+      img.trim().length > 0 &&
+      !img.includes('/destinations/kashmir.jpg') &&
+      !img.includes('/destinations/ayodhya-varanasi.jpg') &&
+      !img.includes('/destinations/rajasthan.jpg') &&
+      img !== pkg.heroImage
+  );
+
+  const mainHeroImg = pkg.heroImage || (pkg as any).image || '/destinations/kashmir.jpg';
 
   // Day toggle handler
   const toggleDay = (dayNum: number) => {
@@ -1872,12 +1878,12 @@ export function PackageDetailClientView({
           </div>
         </div>
 
-        {/* 3. 4-IMAGE GRID GALLERY */}
-        <div className="mb-8 grid grid-cols-1 lg:grid-cols-12 gap-3 rounded-3xl overflow-hidden shadow-md">
-          {/* Main Hero Image (Left 8 cols) */}
-          <div className="lg:col-span-8 relative h-72 sm:h-96 lg:h-[400px] w-full bg-slate-200 group overflow-hidden">
+        {/* 3. DYNAMIC IMAGE GALLERY */}
+        {cleanInsideImages.length === 0 ? (
+          /* Clean full-width hero view when no inside photos added yet */
+          <div className="mb-8 rounded-3xl overflow-hidden shadow-md relative h-72 sm:h-96 lg:h-[420px] w-full bg-slate-200 group">
             <Image
-              src={galleryImages[0]}
+              src={mainHeroImg}
               alt={pkg.name}
               fill
               unoptimized
@@ -1889,32 +1895,106 @@ export function PackageDetailClientView({
               <span>Verified Destination Photography</span>
             </div>
           </div>
-
-          {/* Right 3 Stacked Grid Images (Right 4 cols) */}
-          <div className="lg:col-span-4 grid grid-cols-3 lg:grid-cols-1 gap-3 h-36 lg:h-[400px]">
-            {galleryImages.slice(1, 4).map((imgUrl, i) => (
-              <div key={i} className="relative h-full w-full bg-slate-200 overflow-hidden group">
-                <Image
-                  src={imgUrl}
-                  alt={`${pkg.name} view ${i + 1}`}
-                  fill
-                  unoptimized
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                {i === 2 && (
-                  <button
-                    onClick={handleShare}
-                    className="absolute inset-0 bg-slate-950/40 backdrop-blur-[2px] hover:bg-slate-950/50 transition-colors flex flex-col items-center justify-center text-white p-2 text-center"
-                  >
-                    <Sparkles className="w-5 h-5 mb-1 text-amber-400" />
-                    <span className="font-black text-xs">View Full Gallery</span>
-                    <span className="text-[10px] text-slate-200">+{pkg.highlights.length * 3} Photos</span>
-                  </button>
-                )}
+        ) : cleanInsideImages.length === 1 ? (
+          /* Hero (Left 8 cols) + 1 Inside Photo (Right 4 cols) */
+          <div className="mb-8 grid grid-cols-1 lg:grid-cols-12 gap-3 rounded-3xl overflow-hidden shadow-md">
+            <div className="lg:col-span-8 relative h-72 sm:h-96 lg:h-[400px] w-full bg-slate-200 group overflow-hidden">
+              <Image
+                src={mainHeroImg}
+                alt={pkg.name}
+                fill
+                unoptimized
+                priority
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute top-4 left-4 bg-slate-950/70 backdrop-blur-md text-white font-bold text-xs px-3 py-1 rounded-full flex items-center space-x-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Verified Destination Photography</span>
               </div>
-            ))}
+            </div>
+            <div className="lg:col-span-4 relative h-48 lg:h-[400px] w-full bg-slate-200 overflow-hidden group">
+              <Image
+                src={cleanInsideImages[0]}
+                alt={`${pkg.name} view 1`}
+                fill
+                unoptimized
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
           </div>
-        </div>
+        ) : cleanInsideImages.length === 2 ? (
+          /* Hero (Left 8 cols) + 2 Stacked Inside Photos (Right 4 cols) */
+          <div className="mb-8 grid grid-cols-1 lg:grid-cols-12 gap-3 rounded-3xl overflow-hidden shadow-md">
+            <div className="lg:col-span-8 relative h-72 sm:h-96 lg:h-[400px] w-full bg-slate-200 group overflow-hidden">
+              <Image
+                src={mainHeroImg}
+                alt={pkg.name}
+                fill
+                unoptimized
+                priority
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute top-4 left-4 bg-slate-950/70 backdrop-blur-md text-white font-bold text-xs px-3 py-1 rounded-full flex items-center space-x-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Verified Destination Photography</span>
+              </div>
+            </div>
+            <div className="lg:col-span-4 grid grid-cols-2 lg:grid-cols-1 gap-3 h-48 lg:h-[400px]">
+              {cleanInsideImages.slice(0, 2).map((imgUrl, i) => (
+                <div key={i} className="relative h-full w-full bg-slate-200 overflow-hidden group">
+                  <Image
+                    src={imgUrl}
+                    alt={`${pkg.name} view ${i + 1}`}
+                    fill
+                    unoptimized
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          /* Hero (Left 8 cols) + 3 Stacked Inside Photos (Right 4 cols) */
+          <div className="mb-8 grid grid-cols-1 lg:grid-cols-12 gap-3 rounded-3xl overflow-hidden shadow-md">
+            <div className="lg:col-span-8 relative h-72 sm:h-96 lg:h-[400px] w-full bg-slate-200 group overflow-hidden">
+              <Image
+                src={mainHeroImg}
+                alt={pkg.name}
+                fill
+                unoptimized
+                priority
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute top-4 left-4 bg-slate-950/70 backdrop-blur-md text-white font-bold text-xs px-3 py-1 rounded-full flex items-center space-x-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Verified Destination Photography</span>
+              </div>
+            </div>
+            <div className="lg:col-span-4 grid grid-cols-3 lg:grid-cols-1 gap-3 h-36 lg:h-[400px]">
+              {cleanInsideImages.slice(0, 3).map((imgUrl, i) => (
+                <div key={i} className="relative h-full w-full bg-slate-200 overflow-hidden group">
+                  <Image
+                    src={imgUrl}
+                    alt={`${pkg.name} view ${i + 1}`}
+                    fill
+                    unoptimized
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  {i === 2 && cleanInsideImages.length > 3 && (
+                    <button
+                      onClick={handleShare}
+                      className="absolute inset-0 bg-slate-950/50 backdrop-blur-[2px] hover:bg-slate-950/60 transition-colors flex flex-col items-center justify-center text-white p-2 text-center"
+                    >
+                      <Sparkles className="w-5 h-5 mb-1 text-amber-400" />
+                      <span className="font-black text-xs">View Full Gallery</span>
+                      <span className="text-[10px] text-slate-200">+{cleanInsideImages.length - 3} Photos</span>
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* 4. MAIN CONTENT LAYOUT: TABS & DETAILS (LEFT) vs STICKY SIDEBAR (RIGHT) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">

@@ -83,10 +83,10 @@ export function QuickPackageCreatorModal({
   const [heroImage, setHeroImage] = useState(
     'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=1200&q=80&fm=webp&fit=crop'
   );
-  const [galleryText, setGalleryText] = useState(
-    'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=1200&q=80&fm=webp&fit=crop\nhttps://images.unsplash.com/photo-1621682372775-533449e550ed?w=1200&q=80&fm=webp&fit=crop\nhttps://images.unsplash.com/photo-1609766857041-ed402ea8069a?w=1200&q=80&fm=webp&fit=crop'
-  );
+  const [galleryImages, setGalleryImages] = useState<string[]>([]);
+  const [newGalleryUrl, setNewGalleryUrl] = useState('');
   const [isUploadingPhoto, setIsUploadingPhoto] = useState(false);
+  const [isUploadingGallery, setIsUploadingGallery] = useState(false);
 
   const PRESET_DESTINATION_PHOTOS = [
     { label: '🏔️ Kashmir', url: 'https://images.unsplash.com/photo-1595815771614-ade9d652a65d?w=1200&q=80&fm=webp&fit=crop' },
@@ -143,6 +143,80 @@ export function QuickPackageCreatorModal({
     };
     reader.onerror = () => setIsUploadingPhoto(false);
     reader.readAsDataURL(file);
+  };
+
+  const handleGalleryDeviceUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    setIsUploadingGallery(true);
+    const newPhotos: string[] = [];
+
+    const processFile = (file: File): Promise<string> => {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            const maxW = 1200;
+            const maxH = 800;
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+              if (width > maxW) {
+                height = Math.round((height * maxW) / width);
+                width = maxW;
+              }
+            } else {
+              if (height > maxH) {
+                width = Math.round((width * maxH) / height);
+                height = maxH;
+              }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            if (ctx) {
+              ctx.drawImage(img, 0, 0, width, height);
+              resolve(canvas.toDataURL('image/webp', 0.82));
+            } else {
+              resolve('');
+            }
+          };
+          img.onerror = () => resolve('');
+          img.src = event.target?.result as string;
+        };
+        reader.onerror = () => resolve('');
+        reader.readAsDataURL(file);
+      });
+    };
+
+    for (let i = 0; i < files.length; i++) {
+      const dataUrl = await processFile(files[i]);
+      if (dataUrl) newPhotos.push(dataUrl);
+    }
+
+    setGalleryImages((prev) => [...prev, ...newPhotos]);
+    setIsUploadingGallery(false);
+    e.target.value = '';
+  };
+
+  const removeGalleryPhoto = (indexToRemove: number) => {
+    setGalleryImages((prev) => prev.filter((_, idx) => idx !== indexToRemove));
+  };
+
+  const clearAllGalleryPhotos = () => {
+    setGalleryImages([]);
+  };
+
+  const handleAddGalleryUrl = () => {
+    if (newGalleryUrl.trim()) {
+      setGalleryImages((prev) => [...prev, newGalleryUrl.trim()]);
+      setNewGalleryUrl('');
+    }
   };
 
   // 5. Itinerary
@@ -250,9 +324,9 @@ export function QuickPackageCreatorModal({
 
       const gList =
         Array.isArray(packageToEdit.gallery) && packageToEdit.gallery.length > 0
-          ? packageToEdit.gallery
-          : [img].filter(Boolean);
-      setGalleryText(gList.join('\n'));
+          ? packageToEdit.gallery.filter(Boolean)
+          : [];
+      setGalleryImages(gList);
 
       if (Array.isArray(packageToEdit.itinerary) && packageToEdit.itinerary.length > 0) {
         setItineraryDays(
@@ -551,24 +625,12 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
   const applyPhotoPreset = (type: 'temple' | 'valley' | 'beach' | 'heritage') => {
     if (type === 'temple') {
       setHeroImage('https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=1200&q=80&fm=webp&fit=crop');
-      setGalleryText(
-        'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=1200&q=80&fm=webp&fit=crop\nhttps://images.unsplash.com/photo-1621682372775-533449e550ed?w=1200&q=80&fm=webp&fit=crop\nhttps://images.unsplash.com/photo-1609766857041-ed402ea8069a?w=1200&q=80&fm=webp&fit=crop'
-      );
     } else if (type === 'valley') {
       setHeroImage('https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200&q=80&fm=webp&fit=crop');
-      setGalleryText(
-        'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200&q=80&fm=webp&fit=crop\nhttps://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=80&fm=webp&fit=crop'
-      );
     } else if (type === 'beach') {
       setHeroImage('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80&fm=webp&fit=crop');
-      setGalleryText(
-        'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80&fm=webp&fit=crop\nhttps://images.unsplash.com/photo-1519046904884-53103b34b206?w=1200&q=80&fm=webp&fit=crop'
-      );
     } else {
       setHeroImage('https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=1200&q=80&fm=webp&fit=crop');
-      setGalleryText(
-        'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=1200&q=80&fm=webp&fit=crop\nhttps://images.unsplash.com/photo-1572455857811-045fb4255b5d?w=1200&q=80&fm=webp&fit=crop'
-      );
     }
   };
 
@@ -620,10 +682,9 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
         ? baseSlug
         : `${destinationSlug}-${baseSlug}`;
 
-      const galleryList = galleryText
-        .split('\n')
+      const galleryList = galleryImages
         .map((s) => s.trim())
-        .filter((s) => s.startsWith('http') || s.startsWith('/'));
+        .filter((s) => s.startsWith('http') || s.startsWith('/') || s.startsWith('data:image'));
 
       // 2. Prepare structured itinerary
       const totalItineraryDays = itineraryDays.length;
@@ -738,7 +799,7 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
         rating: packageToEdit?.rating || 4.8,
         reviewsCount: packageToEdit?.reviewsCount || 125,
         heroImage: heroImage.trim() || `/destinations/${destinationSlug}.jpg`,
-        gallery: galleryList.length > 0 ? galleryList : [heroImage.trim()],
+        gallery: galleryList,
         highlights,
         inclusions,
         exclusions,
@@ -1146,17 +1207,20 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
                 </div>
               </div>
 
-              {/* 4. Photos & Presets Card */}
-              <div className="p-4 bg-indigo-50/60 rounded-2xl border border-indigo-200 space-y-3">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                  <span className="text-[11px] font-black uppercase tracking-wider text-indigo-950 flex items-center gap-1.5">
-                    <ImageIcon className="w-3.5 h-3.5 text-indigo-700" />
-                    <span>4. Photos & Gallery</span>
-                  </span>
-
-                  {/* 1-Click Photo Presets */}
-                  <div className="flex flex-wrap items-center gap-1">
-                    <span className="text-[10px] text-indigo-700 font-bold">Presets:</span>
+              {/* 4. Package Photography (Front & Inside Photos) */}
+              <div className="p-4 bg-indigo-50/40 rounded-2xl border border-indigo-100 space-y-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-indigo-100 pb-2.5">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-black uppercase tracking-wider text-indigo-950 flex items-center gap-1.5">
+                      <ImageIcon className="w-4 h-4 text-indigo-600" />
+                      4. Package Photography (Front & Inside Photos)
+                    </span>
+                    <span className="text-[10px] bg-indigo-100 text-indigo-800 font-bold px-2 py-0.5 rounded-full">
+                      HD WebP Compressed
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[10px] text-indigo-700 font-bold">Front Presets:</span>
                     <button
                       type="button"
                       onClick={() => applyPhotoPreset('temple')}
@@ -1188,16 +1252,20 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-start">
+                {/* Sub-section A: FRONT / HERO PHOTO */}
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-start p-3.5 bg-white rounded-xl border border-indigo-100">
                   <div className="md:col-span-8 space-y-2.5">
                     <div>
                       <div className="flex items-center justify-between mb-1.5">
-                        <label className="block text-[11px] font-bold text-slate-700">Main Hero Image URL *</label>
+                        <label className="block text-[11px] font-bold text-slate-800">
+                          🌟 Front Photo / Hero Image (Card & Main Banner) *
+                        </label>
                         <label
                           htmlFor="hero-photo-upload"
-                          className="inline-flex items-center gap-1 text-[11px] font-extrabold text-white bg-indigo-600 hover:bg-indigo-700 px-2.5 py-1 rounded-lg cursor-pointer shadow-xs transition-all"
+                          className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-white bg-indigo-600 hover:bg-indigo-700 px-3 py-1 rounded-lg cursor-pointer shadow-xs transition-all"
                         >
-                          {isUploadingPhoto ? '⏳ Optimizing...' : '📁 Upload Photo from Device'}
+                          <Upload className="w-3.5 h-3.5" />
+                          {isUploadingPhoto ? '⏳ Optimizing...' : '📁 Upload Front Photo from Device'}
                         </label>
                         <input
                           id="hero-photo-upload"
@@ -1210,14 +1278,14 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
                       <input
                         type="url"
                         required
-                        placeholder="https://images.unsplash.com/... or upload directly from device above"
+                        placeholder="https://... or click 'Upload Front Photo' above"
                         value={heroImage}
                         onChange={(e) => setHeroImage(e.target.value)}
-                        className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs"
                       />
                     </div>
 
-                    {/* Quick Destination Photo Buttons */}
+                    {/* Quick 1-Click Destination Photos */}
                     <div>
                       <span className="text-[10px] font-bold text-slate-500 block mb-1">⚡ Quick 1-Click Destination Photos:</span>
                       <div className="flex flex-wrap gap-1">
@@ -1233,26 +1301,12 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
                         ))}
                       </div>
                     </div>
-
-                    <div>
-                      <label className="block text-[11px] font-bold text-slate-700 mb-1">Gallery Photo URLs (One per line)</label>
-                      <textarea
-                        rows={2}
-                        value={galleryText}
-                        onChange={(e) => setGalleryText(e.target.value)}
-                        className="w-full bg-white border border-slate-200 rounded-xl p-2.5 text-slate-900 text-[11px] font-mono"
-                      />
-                    </div>
-
-                    <p className="text-[10px] text-slate-600 bg-amber-50/80 border border-amber-200 rounded-lg p-2">
-                      💡 <strong>Photo Tip:</strong> Upar <strong>&quot;Upload Photo from Device&quot;</strong> button se phone/computer se direct photo select kar sakte hain. Ya phir <strong>postimages.org</strong> par photo daal kar uska Direct Link yahan paste kar dein.
-                    </p>
                   </div>
 
-                  {/* Thumbnail Live Preview */}
-                  <div className="md:col-span-4 bg-white p-2.5 rounded-2xl border border-indigo-200 text-center space-y-1">
+                  {/* Thumbnail Live Card Preview */}
+                  <div className="md:col-span-4 bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-center space-y-1">
                     <span className="text-[10px] font-bold text-slate-400 block uppercase">Card Preview</span>
-                    <div className="w-full h-28 rounded-xl overflow-hidden bg-slate-100 relative">
+                    <div className="w-full h-24 rounded-lg overflow-hidden bg-slate-200 relative">
                       {heroImage ? (
                         <img src={heroImage} alt="Preview" className="w-full h-full object-cover" />
                       ) : (
@@ -1264,6 +1318,120 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
                     <span className="text-[10px] font-bold text-slate-700 block truncate">{name || 'Package Card'}</span>
                     <span className="text-[10px] font-black text-brand-700 block">{formatCurrency(Number(startingPrice) || 0)}</span>
                   </div>
+                </div>
+
+                {/* Sub-section B: INSIDE / GALLERY PHOTOS */}
+                <div className="p-3.5 bg-white rounded-xl border border-indigo-100 space-y-3">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-800">
+                        🖼️ Inside Photos / Gallery Grid (Detail Page ke andar dikhegi)
+                      </label>
+                      <p className="text-[10px] text-slate-500">
+                        Package ke andar jo photos dikhni chahiye. Device se direct multiple photos select kar sakte hain.
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <label
+                        htmlFor="gallery-photo-upload"
+                        className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-white bg-emerald-600 hover:bg-emerald-700 px-3 py-1.5 rounded-lg cursor-pointer shadow-xs transition-all"
+                      >
+                        <Upload className="w-3.5 h-3.5" />
+                        {isUploadingGallery ? '⏳ Processing...' : '📁 Upload Inside Photos (Multi-Select)'}
+                      </label>
+                      <input
+                        id="gallery-photo-upload"
+                        type="file"
+                        multiple
+                        accept="image/*"
+                        className="hidden"
+                        onChange={handleGalleryDeviceUpload}
+                      />
+
+                      {galleryImages.length > 0 && (
+                        <button
+                          type="button"
+                          onClick={clearAllGalleryPhotos}
+                          className="inline-flex items-center gap-1 text-[11px] font-bold text-rose-600 bg-rose-50 hover:bg-rose-100 border border-rose-200 px-2.5 py-1.5 rounded-lg cursor-pointer transition-all"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                          Clear All Inside Photos
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Add by URL option */}
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="url"
+                      placeholder="Paste Image URL here to add individually..."
+                      value={newGalleryUrl}
+                      onChange={(e) => setNewGalleryUrl(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          e.preventDefault();
+                          handleAddGalleryUrl();
+                        }
+                      }}
+                      className="flex-1 bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-slate-900 text-xs"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleAddGalleryUrl}
+                      className="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-3 py-1.5 rounded-lg border border-slate-300 transition-all cursor-pointer"
+                    >
+                      + Add URL
+                    </button>
+                  </div>
+
+                  {/* Inside Photos Visual Thumbnails Grid */}
+                  {galleryImages.length === 0 ? (
+                    <div className="p-4 border-2 border-dashed border-slate-200 rounded-xl text-center bg-slate-50/50">
+                      <ImageIcon className="w-6 h-6 text-slate-400 mx-auto mb-1" />
+                      <p className="text-xs font-semibold text-slate-600">
+                        Koi inside photo nahi lagi hai (Clean slate).
+                      </p>
+                      <p className="text-[10px] text-slate-400">
+                        Upar <strong>&quot;Upload Inside Photos&quot;</strong> button dabakar phone/computer se photos lagayein, ya khali chhod dein clean front view ke liye.
+                      </p>
+                    </div>
+                  ) : (
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-[11px] font-bold text-slate-700">
+                          📸 {galleryImages.length} Inside Photos Attached:
+                        </span>
+                        <span className="text-[10px] text-slate-400">Photo par ✕ dabakar delete kar sakte hain</span>
+                      </div>
+                      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2">
+                        {galleryImages.map((imgUrl, idx) => (
+                          <div
+                            key={idx}
+                            className="relative group rounded-lg overflow-hidden border border-slate-200 aspect-video bg-slate-100"
+                          >
+                            <img
+                              src={imgUrl}
+                              alt={`Inside photo ${idx + 1}`}
+                              className="w-full h-full object-cover"
+                            />
+                            <span className="absolute top-1 left-1 bg-black/60 text-white text-[9px] font-black px-1.5 py-0.5 rounded">
+                              #{idx + 1}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => removeGalleryPhoto(idx)}
+                              className="absolute top-1 right-1 bg-rose-600 hover:bg-rose-700 text-white rounded-full p-1 shadow-md opacity-90 group-hover:opacity-100 transition-all cursor-pointer"
+                              title="Delete this photo"
+                            >
+                              <X className="w-3 h-3" />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
 

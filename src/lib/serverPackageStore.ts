@@ -35,9 +35,7 @@ export function mapSupabaseRowToPackage(row: any): HolidayPackage {
     rating: Number(row.rating || 4.8),
     reviewsCount: Number(row.reviews_count || 120),
     heroImage: row.hero_image || row.heroImage || `/destinations/${destinationSlug}.jpg`,
-    gallery: Array.isArray(row.gallery)
-      ? row.gallery
-      : [row.hero_image || `/destinations/${destinationSlug}.jpg`],
+    gallery: Array.isArray(row.gallery) ? row.gallery : [],
     highlights: Array.isArray(row.highlights)
       ? row.highlights
       : typeof row.highlights === 'string'

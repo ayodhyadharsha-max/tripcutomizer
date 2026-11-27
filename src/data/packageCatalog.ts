@@ -925,11 +925,7 @@ function generateSynthesizedPackage(
     rating,
     reviewsCount,
     heroImage: assignedHeroImage,
-    gallery: [
-      assignedHeroImage,
-      gallerySecondary,
-      galleryTertiary
-    ],
+    gallery: [],
     highlights: combinedHighlights,
     inclusions: circuit.inclusions,
     exclusions: circuit.exclusions,
