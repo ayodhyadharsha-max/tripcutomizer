@@ -1970,6 +1970,11 @@ export function getAllCatalogPackages(): HolidayPackage[] {
       const rawLegacyDeleted = localStorage.getItem('tc_cloud_legacy_deleted_v1');
       const isLegacyDeleted = rawLegacyDeleted ? JSON.parse(rawLegacyDeleted) : false;
 
+      const rawDeleted = localStorage.getItem('tc_cloud_deleted_packages_v1');
+      const deletedIds = new Set<string>(
+        rawDeleted ? (JSON.parse(rawDeleted) as string[]).map((s) => s.toLowerCase().trim()) : []
+      );
+
       const rawCustom = localStorage.getItem('tc_cloud_custom_packages_v1');
       const customPackages: HolidayPackage[] = rawCustom ? JSON.parse(rawCustom) : [];
 
@@ -1980,23 +1985,33 @@ export function getAllCatalogPackages(): HolidayPackage[] {
         curatedMap.set(cp.slug.toLowerCase(), cp);
       });
 
-      const sanitizedCustom = customPackages.map((cp) => {
-        // If the package was edited by user, never overwrite user edits!
-        if (cp.user_edited) return cp;
-        const cur = curatedMap.get(cp.id.toLowerCase()) || curatedMap.get(cp.slug.toLowerCase());
-        if (cur) {
-          // Curated provides baseline defaults, user's cp fields take precedence
-          return { ...cur, ...cp };
-        }
-        return cp;
-      });
+      const sanitizedCustom = customPackages
+        .filter(
+          (cp) =>
+            !deletedIds.has(cp.id.toLowerCase().trim()) &&
+            !deletedIds.has(cp.slug.toLowerCase().trim())
+        )
+        .map((cp) => {
+          // If the package was edited by user, never overwrite user edits!
+          if (cp.user_edited) return cp;
+          const cur = curatedMap.get(cp.id.toLowerCase()) || curatedMap.get(cp.slug.toLowerCase());
+          if (cur) {
+            // Curated provides baseline defaults, user's cp fields take precedence
+            return { ...cur, ...cp };
+          }
+          return cp;
+        });
 
       // Avoid duplicates between sanitizedCustom and baseCatalog
       const customIds = new Set(
         sanitizedCustom.map((p) => p.id.toLowerCase()).concat(sanitizedCustom.map((p) => p.slug.toLowerCase()))
       );
       const nonDuplicateBase = baseCatalog.filter(
-        (p) => !customIds.has(p.id.toLowerCase()) && !customIds.has(p.slug.toLowerCase())
+        (p) =>
+          !customIds.has(p.id.toLowerCase()) &&
+          !customIds.has(p.slug.toLowerCase()) &&
+          !deletedIds.has(p.id.toLowerCase()) &&
+          !deletedIds.has(p.slug.toLowerCase())
       );
 
       const activeLegacy = isLegacyDeleted ? [] : nonDuplicateBase;

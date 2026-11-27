@@ -14,6 +14,38 @@ import getSupabaseServer, { withTimeout, markSupabaseOffline, isSupabaseOffline 
 
 let memoryPackages: HolidayPackage[] | null = null;
 let memoryLegacyDeleted: boolean | null = null;
+let memoryDeletedIds: string[] | null = null;
+
+const getDeletedFilePath = (): string => {
+  const dir = path.join(process.cwd(), 'data');
+  return path.join(dir, 'deleted_packages.json');
+};
+
+export function getServerDeletedPackageIds(): string[] {
+  if (memoryDeletedIds !== null) {
+    return memoryDeletedIds;
+  }
+  try {
+    const p = getDeletedFilePath();
+    if (fs.existsSync(p)) {
+      const content = fs.readFileSync(p, 'utf-8');
+      if (content.trim()) {
+        memoryDeletedIds = JSON.parse(content);
+        return memoryDeletedIds || [];
+      }
+    }
+  } catch {}
+  memoryDeletedIds = [];
+  return memoryDeletedIds;
+}
+
+export function writeServerDeletedPackageIds(ids: string[]): void {
+  memoryDeletedIds = ids;
+  try {
+    const p = getDeletedFilePath();
+    fs.writeFileSync(p, JSON.stringify(ids, null, 2), 'utf-8');
+  } catch {}
+}
 
 export function mapSupabaseRowToPackage(row: any): HolidayPackage {
   const destinationSlug = row.destination_slug || row.destinationSlug || 'india';
@@ -198,7 +230,10 @@ export function getServerCustomPackages(): HolidayPackage[] {
       map.set(p.id, p);
     }
   });
-  memoryPackages = Array.from(map.values());
+  const deletedSet = new Set(getServerDeletedPackageIds().map((s) => s.toLowerCase()));
+  memoryPackages = Array.from(map.values()).filter(
+    (p) => !deletedSet.has(p.id.toLowerCase()) && !deletedSet.has(p.slug.toLowerCase())
+  );
   return memoryPackages;
 }
 
@@ -272,9 +307,20 @@ export async function saveServerCustomPackages(newPackages: HolidayPackage[]): P
   }
 }
 
-export async function deleteServerCustomPackage(id: string): Promise<void> {
+export async function deleteServerCustomPackage(id: string, slug?: string): Promise<void> {
+  const deleted = getServerDeletedPackageIds();
+  const toAdd = [id, slug].filter(Boolean) as string[];
+  const newDeleted = Array.from(new Set([...deleted, ...toAdd]));
+  writeServerDeletedPackageIds(newDeleted);
+
   const current = getServerCustomPackages();
-  const updated = current.filter((p) => p.id !== id);
+  const targetId = (id || '').toLowerCase();
+  const targetSlug = (slug || '').toLowerCase();
+  const updated = current.filter(
+    (p) =>
+      (p.id || '').toLowerCase() !== targetId &&
+      (!targetSlug || (p.slug || '').toLowerCase() !== targetSlug)
+  );
   memoryPackages = updated;
   writePackagesToFile(updated);
 
@@ -283,7 +329,10 @@ export async function deleteServerCustomPackage(id: string): Promise<void> {
       const supabaseServer = getSupabaseServer();
       if (supabaseServer) {
         await withTimeout(
-          supabaseServer.from('packages').delete().eq('id', id),
+          supabaseServer
+            .from('packages')
+            .delete()
+            .or(`id.eq.${id},slug.eq.${id}${slug ? `,slug.eq.${slug},id.eq.${slug}` : ''}`),
           1500,
           'Supabase delete timed out'
         );

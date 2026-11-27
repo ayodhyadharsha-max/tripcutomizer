@@ -226,14 +226,16 @@ export async function POST(req: Request) {
 export async function DELETE(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
-    const queryId = searchParams.get('id');
+    const queryId = searchParams.get('id')?.trim();
+    const querySlug = searchParams.get('slug')?.trim();
 
     let body: any = {};
     try {
       body = await req.json();
     } catch {}
 
-    const id = body.id || queryId;
+    const id = (body.id || queryId || '').trim();
+    const slug = (body.slug || querySlug || '').trim();
     const action = body.action;
 
     if (action === 'delete_legacy') {
@@ -260,13 +262,17 @@ export async function DELETE(req: Request) {
       return NextResponse.json({ success: true, message: 'Legacy packages restored successfully' });
     }
 
-    if (id) {
+    if (id || slug) {
+      const target = id || slug;
       if (!isSupabaseOffline()) {
         const supabaseServer = getSupabaseServer();
         if (supabaseServer) {
           try {
             const { error }: any = await withTimeout(
-              supabaseServer.from('packages').delete().eq('id', id),
+              supabaseServer
+                .from('packages')
+                .delete()
+                .or(`id.eq.${target},slug.eq.${target}${slug ? `,slug.eq.${slug},id.eq.${slug}` : ''}`),
               1500,
               'Supabase delete timed out'
             );
@@ -278,8 +284,8 @@ export async function DELETE(req: Request) {
           }
         }
       }
-      await deleteServerCustomPackage(id).catch(() => {});
-      return NextResponse.json({ success: true, message: `Package ${id} deleted successfully` });
+      await deleteServerCustomPackage(target, slug || undefined).catch(() => {});
+      return NextResponse.json({ success: true, message: `Package ${target} deleted successfully` });
     }
 
     return NextResponse.json(

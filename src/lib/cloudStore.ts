@@ -79,6 +79,7 @@ const STORAGE_KEYS = {
   CO_TRAVELLERS: 'tc_cloud_co_travellers_v1',
   CUSTOM_PACKAGES: 'tc_cloud_custom_packages_v1',
   LEGACY_PACKAGES_DELETED: 'tc_cloud_legacy_deleted_v1',
+  DELETED_PACKAGES: 'tc_cloud_deleted_packages_v1',
 };
 
 // Initial Seed Data
@@ -849,11 +850,20 @@ export const cloudStore = {
     }
   },
 
+  getDeletedPackageIds: (): string[] => {
+    return getStoredData<string[]>(STORAGE_KEYS.DELETED_PACKAGES, []);
+  },
+
   getCustomPackages: (): HolidayPackage[] => {
     if (typeof window !== 'undefined') {
       initCloudListeners();
     }
-    return getStoredData<HolidayPackage[]>(STORAGE_KEYS.CUSTOM_PACKAGES, []);
+    const list = getStoredData<HolidayPackage[]>(STORAGE_KEYS.CUSTOM_PACKAGES, []);
+    const deleted = new Set(cloudStore.getDeletedPackageIds().map((s) => s.toLowerCase()));
+    if (deleted.size === 0) return list;
+    return list.filter(
+      (p) => !deleted.has((p.id || '').toLowerCase()) && !deleted.has((p.slug || '').toLowerCase())
+    );
   },
 
   syncCustomPackagesFromServer: async (): Promise<HolidayPackage[]> => {
@@ -888,6 +898,18 @@ export const cloudStore = {
   },
 
   saveCustomPackages: (newPackages: HolidayPackage[]): void => {
+    // Un-delete if any re-saved
+    const deletedList = cloudStore.getDeletedPackageIds();
+    if (deletedList.length > 0) {
+      const reSavedIds = new Set(
+        newPackages.flatMap((p) => [p.id?.toLowerCase(), p.slug?.toLowerCase()].filter(Boolean) as string[])
+      );
+      const filteredDeleted = deletedList.filter((id) => !reSavedIds.has(id.toLowerCase()));
+      if (filteredDeleted.length !== deletedList.length) {
+        setStoredData(STORAGE_KEYS.DELETED_PACKAGES, filteredDeleted);
+      }
+    }
+
     const existing = cloudStore.getCustomPackages();
     const updated = [...existing];
 
@@ -954,18 +976,34 @@ export const cloudStore = {
     }
   },
 
-  deleteCustomPackage: (id: string): void => {
+  deletePackage: (id: string, slug?: string): void => {
+    const deletedList = cloudStore.getDeletedPackageIds();
+    const toAdd = [id, slug].filter(Boolean) as string[];
+    const newDeleted = Array.from(new Set([...deletedList, ...toAdd]));
+    setStoredData(STORAGE_KEYS.DELETED_PACKAGES, newDeleted);
+
     const existing = cloudStore.getCustomPackages();
-    const updated = existing.filter((p) => p.id !== id);
+    const targetId = (id || '').toLowerCase();
+    const targetSlug = (slug || '').toLowerCase();
+    const updated = existing.filter(
+      (p) =>
+        (p.id || '').toLowerCase() !== targetId &&
+        (!targetSlug || (p.slug || '').toLowerCase() !== targetSlug)
+    );
     setStoredData(STORAGE_KEYS.CUSTOM_PACKAGES, updated);
 
     if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('cloudstore_update'));
       try {
-        fetch(`/api/packages?id=${encodeURIComponent(id)}`, {
+        fetch(`/api/packages?id=${encodeURIComponent(id)}${slug ? `&slug=${encodeURIComponent(slug)}` : ''}`, {
           method: 'DELETE',
         }).catch(() => {});
       } catch {}
     }
+  },
+
+  deleteCustomPackage: (id: string): void => {
+    cloudStore.deletePackage(id);
   },
 
   isLegacyPackagesDeleted: (): boolean => {

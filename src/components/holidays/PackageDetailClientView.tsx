@@ -1031,14 +1031,21 @@ export function PackageDetailClientView({
   // Guaranteed exact match between catalog card (outside) and detail page (inside) on initial load,
   // respecting whether the package baseline is 3★ Standard, 4★ Deluxe, or 5★ Luxury.
   const calculateTierPrice = (targetTier: 'standard' | 'deluxe' | 'luxury'): number => {
-    // 1. Explicit override check first
-    const explicitPrices = getPackageTierPrices(pkg);
-    if (explicitPrices && explicitPrices[targetTier]) {
-      return explicitPrices[targetTier]!;
+    const baseStartingPrice = Number(pkg.startingPrice) || Math.min(pkg.startingPrice, pkg.discountPrice || pkg.startingPrice);
+    const baseTier = baselineTier;
+
+    // Guaranteed 1:1 match for package starting price at baseline tier
+    if (targetTier === baseTier) {
+      return baseStartingPrice;
     }
 
-    const baseStartingPrice = Math.min(pkg.startingPrice, pkg.discountPrice || pkg.startingPrice);
-    const baseTier = baselineTier;
+    // 1. Explicit override check for non-baseline tiers (if not edited by admin)
+    if (!pkg.user_edited) {
+      const explicitPrices = getPackageTierPrices(pkg);
+      if (explicitPrices && explicitPrices[targetTier]) {
+        return explicitPrices[targetTier]!;
+      }
+    }
 
     const nights = Math.max(1, pkg.durationNights || 1);
     const days = Math.max(1, pkg.durationDays || (nights + 1));

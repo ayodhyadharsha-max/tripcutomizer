@@ -87,18 +87,32 @@ export default function AdminPackagesPage() {
     const legacyDeleted = cloudStore.isLegacyPackagesDeleted();
     setIsLegacyDeleted(legacyDeleted);
 
-    const baseCatalog = getAllCatalogPackages();
-    const customMmt = cloudStore.getCustomPackages();
+    const deletedIds = new Set(cloudStore.getDeletedPackageIds().map((s) => s.toLowerCase().trim()));
+    const customMmt = cloudStore.getCustomPackages().filter(
+      (p) => !deletedIds.has(p.id.toLowerCase().trim()) && !deletedIds.has(p.slug.toLowerCase().trim())
+    );
 
-    // Map through base packages to guarantee batch_source = 'legacy'
-    const taggedLegacy = baseCatalog
+    const baseCatalog = getAllCatalogPackages();
+
+    const customIds = new Set(customMmt.map((p) => p.id.toLowerCase().trim()));
+    const customSlugs = new Set(customMmt.map((p) => p.slug.toLowerCase().trim()));
+
+    // Filter out duplicates (if id or slug is already in customMmt) and deleted from base catalog
+    const nonDuplicateLegacy = baseCatalog
       .filter((p) => (p.batch_source || 'legacy') === 'legacy')
+      .filter(
+        (p) =>
+          !customIds.has(p.id.toLowerCase().trim()) &&
+          !customSlugs.has(p.slug.toLowerCase().trim()) &&
+          !deletedIds.has(p.id.toLowerCase().trim()) &&
+          !deletedIds.has(p.slug.toLowerCase().trim())
+      )
       .map((p) => ({ ...p, batch_source: 'legacy' }));
 
     // Tagged custom MMT sync
     const taggedMmt = customMmt.map((p) => ({ ...p, batch_source: 'mmt_sync' }));
 
-    const activeList = legacyDeleted ? taggedMmt : [...taggedMmt, ...taggedLegacy];
+    const activeList = legacyDeleted ? taggedMmt : [...taggedMmt, ...nonDuplicateLegacy];
     setPackages(activeList);
   };
 
@@ -428,17 +442,12 @@ export default function AdminPackagesPage() {
     triggerNotification('All legacy packages have been restored successfully.', 'success');
   };
 
-  // Delete Single Custom Package
+  // Delete Single Package (Supports both Custom & Legacy packages)
   const handleDeleteSinglePackage = (pkg: HolidayPackage) => {
-    if (pkg.batch_source !== 'mmt_sync') {
-      alert('Legacy catalog packages cannot be deleted individually. Use "Delete Legacy Packages" button to remove all legacy packages.');
-      return;
-    }
-
     if (confirm(`Are you sure you want to delete "${pkg.name}"?`)) {
-      cloudStore.deleteCustomPackage(pkg.id);
+      cloudStore.deletePackage(pkg.id, pkg.slug);
       refreshCatalogData();
-      triggerNotification(`Deleted package ${pkg.name}.`, 'info');
+      triggerNotification(`Deleted package "${pkg.name}".`, 'info');
     }
   };
 

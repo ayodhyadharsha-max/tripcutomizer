@@ -155,6 +155,29 @@ export function getPackageBaselineTier(
   pkgName?: string,
   pkgSlug?: string
 ): 'standard' | 'deluxe' | 'luxury' {
+  const cat = (hotelCategory || '').toLowerCase();
+  const name = (pkgName || '').toLowerCase();
+
+  // 1. Direct hotelCategory check
+  if (cat.includes('luxury') || cat.includes('5 star') || cat.includes('5★') || cat.includes('5-star')) {
+    return 'luxury';
+  }
+  if (cat.includes('deluxe') || cat.includes('4 star') || cat.includes('4★') || cat.includes('4-star')) {
+    return 'deluxe';
+  }
+  if (cat.includes('standard') || cat.includes('3 star') || cat.includes('3★') || cat.includes('3-star')) {
+    return 'standard';
+  }
+
+  // 2. Package name check
+  if (name.includes('luxury') || name.includes('5 star') || name.includes('5★')) {
+    return 'luxury';
+  }
+  if (name.includes('deluxe') || name.includes('4 star') || name.includes('4★')) {
+    return 'deluxe';
+  }
+
+  // 3. Fallback to slug override
   const cleanSlug = (pkgSlug || '').toLowerCase().trim();
   if (cleanSlug && CUSTOM_PACKAGE_TIER_OVERRIDES[cleanSlug]?.baselineTier) {
     return CUSTOM_PACKAGE_TIER_OVERRIDES[cleanSlug]!.baselineTier!;
@@ -176,26 +199,47 @@ export function isPremiumPackage(
 }
 
 // Get dynamic UI labels and badge styling for listing cards
-// Defaults all cards across the catalog to 3★ Standard with upgrade options
+// Derives labels dynamically from package baseline tier
 export function getPackageHotelBadgeInfo(
   hotelCategory?: string,
   pkgName?: string,
   pkgSlug?: string
 ) {
+  const tier = getPackageBaselineTier(hotelCategory, pkgName, pkgSlug);
   const cleanSlug = (pkgSlug || '').toLowerCase().trim();
   const override = cleanSlug ? CUSTOM_PACKAGE_TIER_OVERRIDES[cleanSlug] : undefined;
 
-  if (override) {
+  if (override && override.cardBadgeLabel) {
     return {
-      tier: override.baselineTier || 'standard',
-      badgeLabel: override.cardBadgeLabel || '3★ Standard',
-      twinSharingLabel: override.cardTwinSharingLabel || '3★ Standard Twin Sharing',
+      tier,
+      badgeLabel: override.cardBadgeLabel,
+      twinSharingLabel: override.cardTwinSharingLabel || (tier === 'luxury' ? '5★ Luxury Twin Sharing' : tier === 'deluxe' ? '4★ Deluxe Twin Sharing' : '3★ Standard Twin Sharing'),
       optionsLabel: override.cardOptionsLabel || 'Upgradable to 4★ / 5★',
       badgeClass: override.cardBadgeClass || 'bg-amber-50 text-amber-900 border-amber-200/60',
     };
   }
 
-  // Default for all cards across catalog: 3★ Standard baseline
+  if (tier === 'luxury') {
+    return {
+      tier: 'luxury' as const,
+      badgeLabel: '5★ Luxury',
+      twinSharingLabel: '5★ Luxury Twin Sharing',
+      optionsLabel: '3★ Standard & 4★ Deluxe Available',
+      badgeClass: 'bg-amber-100 text-amber-950 border-amber-300',
+    };
+  }
+
+  if (tier === 'deluxe') {
+    return {
+      tier: 'deluxe' as const,
+      badgeLabel: '4★ Deluxe',
+      twinSharingLabel: '4★ Deluxe Twin Sharing',
+      optionsLabel: '3★ Standard & 5★ Luxury Available',
+      badgeClass: 'bg-blue-50 text-blue-900 border-blue-200/60',
+    };
+  }
+
+  // Default for standard
   return {
     tier: 'standard' as const,
     badgeLabel: '3★ Standard',

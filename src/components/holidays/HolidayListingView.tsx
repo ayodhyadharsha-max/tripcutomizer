@@ -219,6 +219,22 @@ export function HolidayListingView({
       ? allCatalog
       : (initialPackages && initialPackages.length > 0 ? initialPackages : allCatalog);
 
+    const deletedIds = new Set(cloudStore.getDeletedPackageIds().map((s) => s.toLowerCase().trim()));
+    const nonDeletedPool = sourcePool.filter(
+      (p) => !deletedIds.has(p.id.toLowerCase().trim()) && !deletedIds.has(p.slug.toLowerCase().trim())
+    );
+
+    // Deduplicate pool (so edited package overrides legacy package with same slug or ID)
+    const seenKeys = new Set<string>();
+    const deduplicatedPool: HolidayPackage[] = [];
+    for (const p of nonDeletedPool) {
+      const key = (p.slug || p.id).toLowerCase().trim();
+      if (!seenKeys.has(key)) {
+        seenKeys.add(key);
+        deduplicatedPool.push(p);
+      }
+    }
+
     // Common stop words to extract core destination tokens
     const stopWords = new Set([
       'tour', 'tours', 'package', 'packages', 'from', 'with', 'for', 'and', 'the', 'to', 'in', 'of',
@@ -229,7 +245,7 @@ export function HolidayListingView({
       .split(/[\s\-_,]+/)
       .filter((t) => t.length > 1 && !stopWords.has(t));
 
-    const matches = sourcePool.filter((pkg) => {
+    const matches = deduplicatedPool.filter((pkg) => {
       // 1. Search keyword filter
       let matchesSearch = true;
       if (rawQuery) {
@@ -799,8 +815,8 @@ export function HolidayListingView({
               /* Packages Listing Array */
               <div className="space-y-6">
                 {visiblePackages.map((pkg, idx) => {
-                  const itemDealPrice = Math.min(pkg.startingPrice, pkg.discountPrice || pkg.startingPrice);
-                  const itemMrpPrice = Math.max(pkg.startingPrice, pkg.discountPrice || Math.round(itemDealPrice * 1.25));
+                  const itemDealPrice = Number(pkg.startingPrice) || Math.min(pkg.startingPrice, pkg.discountPrice || pkg.startingPrice);
+                  const itemMrpPrice = Math.max(itemDealPrice, pkg.discountPrice || Math.round(itemDealPrice * 1.25));
                   const savingsPercent = itemMrpPrice > itemDealPrice ? Math.round(((itemMrpPrice - itemDealPrice) / itemMrpPrice) * 100) : 0;
                   const hotelBadge = getPackageHotelBadgeInfo(pkg.hotelCategory, pkg.name, pkg.slug);
 
