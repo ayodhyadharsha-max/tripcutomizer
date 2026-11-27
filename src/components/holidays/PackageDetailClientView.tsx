@@ -24,11 +24,11 @@ import { cloudStore, CoTraveller } from '@/lib/cloudStore';
 import { sendWeb3FormLead } from '@/lib/web3forms';
 import { QuickPackageCreatorModal } from '@/components/admin/QuickPackageCreatorModal';
 import {
-  Star, Clock, MapPin, CheckCircle2, ChevronRight, ChevronDown, ChevronUp,
+  Star, Clock, MapPin, CheckCircle2, ChevronRight, ChevronLeft, ChevronDown, ChevronUp,
   Hotel, Plane, Utensils, ShieldCheck, MessageCircle, Share2, Download,
   PhoneCall, Sparkles, Tag, Check, X, Car, Info, Users, ArrowRight,
   CheckCircle, XCircle, FileText, Plus, Minus, Calendar, ArrowLeft, Baby, UserCheck, AlertTriangle, Loader2,
-  Pencil
+  Pencil, Camera
 } from 'lucide-react';
 
 export type ChildAgeCategory = 'under5' | 'age5to9' | 'age10to14' | 'age15to17' | 'age18plus';
@@ -1502,6 +1502,43 @@ export function PackageDetailClientView({
 
   const mainHeroImg = pkg.heroImage || (pkg as any).image || '/destinations/kashmir.jpg';
 
+  // Lightbox Fullscreen Gallery Modal State
+  const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false);
+  const [selectedGalleryIndex, setSelectedGalleryIndex] = useState(0);
+
+  const allDisplayPhotos = useMemo(() => {
+    const list = [mainHeroImg, ...cleanInsideImages].filter(Boolean);
+    return Array.from(new Set(list));
+  }, [mainHeroImg, cleanInsideImages]);
+
+  const openGalleryModal = (index: number = 0) => {
+    setSelectedGalleryIndex(Math.max(0, Math.min(index, allDisplayPhotos.length - 1)));
+    setIsGalleryModalOpen(true);
+  };
+
+  const closeGalleryModal = () => {
+    setIsGalleryModalOpen(false);
+  };
+
+  const nextGalleryPhoto = () => {
+    setSelectedGalleryIndex((prev) => (prev + 1) % allDisplayPhotos.length);
+  };
+
+  const prevGalleryPhoto = () => {
+    setSelectedGalleryIndex((prev) => (prev - 1 + allDisplayPhotos.length) % allDisplayPhotos.length);
+  };
+
+  useEffect(() => {
+    if (!isGalleryModalOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeGalleryModal();
+      if (e.key === 'ArrowRight') nextGalleryPhoto();
+      if (e.key === 'ArrowLeft') prevGalleryPhoto();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isGalleryModalOpen, allDisplayPhotos.length]);
+
   // Day toggle handler
   const toggleDay = (dayNum: number) => {
     if (openDays.includes(dayNum)) {
@@ -1881,7 +1918,10 @@ export function PackageDetailClientView({
         {/* 3. DYNAMIC IMAGE GALLERY */}
         {cleanInsideImages.length === 0 ? (
           /* Clean full-width hero view when no inside photos added yet */
-          <div className="mb-8 rounded-3xl overflow-hidden shadow-md relative h-72 sm:h-96 lg:h-[420px] w-full bg-slate-200 group">
+          <div
+            onClick={() => openGalleryModal(0)}
+            className="mb-8 rounded-3xl overflow-hidden shadow-md relative h-72 sm:h-96 lg:h-[420px] w-full bg-slate-200 group cursor-pointer"
+          >
             <Image
               src={mainHeroImg}
               alt={pkg.name}
@@ -1894,11 +1934,18 @@ export function PackageDetailClientView({
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
               <span>Verified Destination Photography</span>
             </div>
+            <div className="absolute bottom-4 right-4 bg-slate-950/75 hover:bg-brand-600 backdrop-blur-md text-white font-bold text-xs px-3.5 py-1.5 rounded-full flex items-center space-x-1.5 shadow-lg transition-colors cursor-pointer">
+              <Camera className="w-3.5 h-3.5 text-amber-400" />
+              <span>View Photo (Click to Enlarge)</span>
+            </div>
           </div>
         ) : cleanInsideImages.length === 1 ? (
           /* Hero (Left 8 cols) + 1 Inside Photo (Right 4 cols) */
           <div className="mb-8 grid grid-cols-1 lg:grid-cols-12 gap-3 rounded-3xl overflow-hidden shadow-md">
-            <div className="lg:col-span-8 relative h-72 sm:h-96 lg:h-[400px] w-full bg-slate-200 group overflow-hidden">
+            <div
+              onClick={() => openGalleryModal(0)}
+              className="lg:col-span-8 relative h-72 sm:h-96 lg:h-[400px] w-full bg-slate-200 group overflow-hidden cursor-pointer"
+            >
               <Image
                 src={mainHeroImg}
                 alt={pkg.name}
@@ -1911,8 +1958,15 @@ export function PackageDetailClientView({
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Verified Destination Photography</span>
               </div>
+              <div className="absolute bottom-4 right-4 bg-slate-950/75 hover:bg-brand-600 backdrop-blur-md text-white font-bold text-xs px-3.5 py-1.5 rounded-full flex items-center space-x-1.5 shadow-lg transition-colors">
+                <Camera className="w-3.5 h-3.5 text-amber-400" />
+                <span>View Photos (2)</span>
+              </div>
             </div>
-            <div className="lg:col-span-4 relative h-48 lg:h-[400px] w-full bg-slate-200 overflow-hidden group">
+            <div
+              onClick={() => openGalleryModal(1)}
+              className="lg:col-span-4 relative h-48 lg:h-[400px] w-full bg-slate-200 overflow-hidden group cursor-pointer"
+            >
               <Image
                 src={cleanInsideImages[0]}
                 alt={`${pkg.name} view 1`}
@@ -1925,7 +1979,10 @@ export function PackageDetailClientView({
         ) : cleanInsideImages.length === 2 ? (
           /* Hero (Left 8 cols) + 2 Stacked Inside Photos (Right 4 cols) */
           <div className="mb-8 grid grid-cols-1 lg:grid-cols-12 gap-3 rounded-3xl overflow-hidden shadow-md">
-            <div className="lg:col-span-8 relative h-72 sm:h-96 lg:h-[400px] w-full bg-slate-200 group overflow-hidden">
+            <div
+              onClick={() => openGalleryModal(0)}
+              className="lg:col-span-8 relative h-72 sm:h-96 lg:h-[400px] w-full bg-slate-200 group overflow-hidden cursor-pointer"
+            >
               <Image
                 src={mainHeroImg}
                 alt={pkg.name}
@@ -1938,10 +1995,18 @@ export function PackageDetailClientView({
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Verified Destination Photography</span>
               </div>
+              <div className="absolute bottom-4 right-4 bg-slate-950/75 hover:bg-brand-600 backdrop-blur-md text-white font-bold text-xs px-3.5 py-1.5 rounded-full flex items-center space-x-1.5 shadow-lg transition-colors">
+                <Camera className="w-3.5 h-3.5 text-amber-400" />
+                <span>View Photos (3)</span>
+              </div>
             </div>
             <div className="lg:col-span-4 grid grid-cols-2 lg:grid-cols-1 gap-3 h-48 lg:h-[400px]">
               {cleanInsideImages.slice(0, 2).map((imgUrl, i) => (
-                <div key={i} className="relative h-full w-full bg-slate-200 overflow-hidden group">
+                <div
+                  key={i}
+                  onClick={() => openGalleryModal(i + 1)}
+                  className="relative h-full w-full bg-slate-200 overflow-hidden group cursor-pointer"
+                >
                   <Image
                     src={imgUrl}
                     alt={`${pkg.name} view ${i + 1}`}
@@ -1956,7 +2021,10 @@ export function PackageDetailClientView({
         ) : (
           /* Hero (Left 8 cols) + 3 Stacked Inside Photos (Right 4 cols) */
           <div className="mb-8 grid grid-cols-1 lg:grid-cols-12 gap-3 rounded-3xl overflow-hidden shadow-md">
-            <div className="lg:col-span-8 relative h-72 sm:h-96 lg:h-[400px] w-full bg-slate-200 group overflow-hidden">
+            <div
+              onClick={() => openGalleryModal(0)}
+              className="lg:col-span-8 relative h-72 sm:h-96 lg:h-[400px] w-full bg-slate-200 group overflow-hidden cursor-pointer"
+            >
               <Image
                 src={mainHeroImg}
                 alt={pkg.name}
@@ -1969,10 +2037,18 @@ export function PackageDetailClientView({
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Verified Destination Photography</span>
               </div>
+              <div className="absolute bottom-4 right-4 bg-slate-950/75 hover:bg-brand-600 backdrop-blur-md text-white font-bold text-xs px-3.5 py-1.5 rounded-full flex items-center space-x-1.5 shadow-lg transition-colors">
+                <Camera className="w-3.5 h-3.5 text-amber-400" />
+                <span>View All Photos ({allDisplayPhotos.length})</span>
+              </div>
             </div>
             <div className="lg:col-span-4 grid grid-cols-3 lg:grid-cols-1 gap-3 h-36 lg:h-[400px]">
               {cleanInsideImages.slice(0, 3).map((imgUrl, i) => (
-                <div key={i} className="relative h-full w-full bg-slate-200 overflow-hidden group">
+                <div
+                  key={i}
+                  onClick={() => openGalleryModal(i + 1)}
+                  className="relative h-full w-full bg-slate-200 overflow-hidden group cursor-pointer"
+                >
                   <Image
                     src={imgUrl}
                     alt={`${pkg.name} view ${i + 1}`}
@@ -1980,14 +2056,20 @@ export function PackageDetailClientView({
                     unoptimized
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  {i === 2 && cleanInsideImages.length > 3 && (
+                  {i === 2 && (
                     <button
-                      onClick={handleShare}
-                      className="absolute inset-0 bg-slate-950/50 backdrop-blur-[2px] hover:bg-slate-950/60 transition-colors flex flex-col items-center justify-center text-white p-2 text-center"
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openGalleryModal(0);
+                      }}
+                      className="absolute inset-0 bg-slate-950/60 backdrop-blur-[2px] hover:bg-slate-950/75 transition-colors flex flex-col items-center justify-center text-white p-2 text-center cursor-pointer"
                     >
                       <Sparkles className="w-5 h-5 mb-1 text-amber-400" />
                       <span className="font-black text-xs">View Full Gallery</span>
-                      <span className="text-[10px] text-slate-200">+{cleanInsideImages.length - 3} Photos</span>
+                      <span className="text-[10px] text-slate-200">
+                        {allDisplayPhotos.length > 4 ? `+${allDisplayPhotos.length - 4} More Photos` : `${allDisplayPhotos.length} Photos`}
+                      </span>
                     </button>
                   )}
                 </div>
@@ -3885,6 +3967,90 @@ export function PackageDetailClientView({
                 </form>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* LIGHTBOX FULLSCREEN GALLERY MODAL */}
+      {isGalleryModalOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col justify-between animate-in fade-in duration-200"
+          role="dialog"
+          aria-modal="true"
+        >
+          {/* Top Header Bar */}
+          <div className="flex items-center justify-between p-4 sm:p-6 text-white border-b border-white/10">
+            <div className="flex items-center space-x-3">
+              <span className="font-black text-sm sm:text-base text-white truncate max-w-[200px] sm:max-w-md">
+                {pkg.name}
+              </span>
+              <span className="text-xs bg-white/20 text-white font-extrabold px-3 py-1 rounded-full">
+                {selectedGalleryIndex + 1} / {allDisplayPhotos.length}
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={closeGalleryModal}
+              className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer"
+              title="Close gallery (Esc)"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Main Large Image Display with Previous / Next Controls */}
+          <div className="relative flex-1 flex items-center justify-center p-4 sm:p-8 overflow-hidden select-none">
+            {allDisplayPhotos.length > 1 && (
+              <button
+                type="button"
+                onClick={prevGalleryPhoto}
+                className="absolute left-3 sm:left-6 z-10 p-3 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/20 transition-all cursor-pointer active:scale-95 shadow-xl"
+                title="Previous photo (←)"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+            )}
+
+            <div className="relative w-full h-full max-w-5xl max-h-[75vh] flex items-center justify-center">
+              <img
+                src={allDisplayPhotos[selectedGalleryIndex]}
+                alt={`${pkg.name} photo ${selectedGalleryIndex + 1}`}
+                className="max-w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl transition-all duration-300"
+              />
+            </div>
+
+            {allDisplayPhotos.length > 1 && (
+              <button
+                type="button"
+                onClick={nextGalleryPhoto}
+                className="absolute right-3 sm:right-6 z-10 p-3 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/20 transition-all cursor-pointer active:scale-95 shadow-xl"
+                title="Next photo (→)"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            )}
+          </div>
+
+          {/* Bottom Thumbnails Strip */}
+          <div className="p-3 sm:p-4 bg-black/60 border-t border-white/10 overflow-x-auto flex items-center justify-center gap-2 scrollbar-none">
+            {allDisplayPhotos.map((photoUrl, pIdx) => (
+              <button
+                key={pIdx}
+                type="button"
+                onClick={() => setSelectedGalleryIndex(pIdx)}
+                className={`relative w-16 h-12 sm:w-20 sm:h-14 rounded-lg overflow-hidden shrink-0 border-2 transition-all cursor-pointer ${
+                  selectedGalleryIndex === pIdx
+                    ? 'border-brand-500 scale-105 shadow-md shadow-brand-500/30'
+                    : 'border-transparent opacity-50 hover:opacity-100'
+                }`}
+              >
+                <img
+                  src={photoUrl}
+                  alt={`Thumbnail ${pIdx + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </button>
+            ))}
           </div>
         </div>
       )}

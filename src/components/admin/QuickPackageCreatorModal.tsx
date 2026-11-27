@@ -87,6 +87,7 @@ export function QuickPackageCreatorModal({
   const [newGalleryUrl, setNewGalleryUrl] = useState('');
   const [isUploadingPhoto, setIsUploadingPhoto] = useState(false);
   const [isUploadingGallery, setIsUploadingGallery] = useState(false);
+  const [previewPhotoUrl, setPreviewPhotoUrl] = useState<string | null>(null);
 
   const PRESET_DESTINATION_PHOTOS = [
     { label: '🏔️ Kashmir', url: 'https://images.unsplash.com/photo-1595815771614-ade9d652a65d?w=1200&q=80&fm=webp&fit=crop' },
@@ -1339,8 +1340,12 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
 
                   {/* Thumbnail Live Card Preview */}
                   <div className="md:col-span-4 bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-center space-y-1">
-                    <span className="text-[10px] font-bold text-slate-400 block uppercase">Card Preview</span>
-                    <div className="w-full h-24 rounded-lg overflow-hidden bg-slate-200 relative">
+                    <span className="text-[10px] font-bold text-slate-400 block uppercase">Card Preview (Click to View)</span>
+                    <div
+                      onClick={() => heroImage && setPreviewPhotoUrl(heroImage)}
+                      title={heroImage ? "Click to enlarge preview" : ""}
+                      className={`w-full h-24 rounded-lg overflow-hidden bg-slate-200 relative ${heroImage ? 'cursor-pointer hover:ring-2 hover:ring-indigo-500 transition-all' : ''}`}
+                    >
                       {heroImage ? (
                         <img src={heroImage} alt="Preview" className="w-full h-full object-cover" />
                       ) : (
@@ -1437,25 +1442,30 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
                         <span className="text-[11px] font-bold text-slate-700">
                           📸 {galleryImages.length} Inside Photos Attached:
                         </span>
-                        <span className="text-[10px] text-slate-400">Photo par ✕ dabakar delete kar sakte hain</span>
+                        <span className="text-[10px] text-slate-400">Click photo to view • ✕ dabakar delete karein</span>
                       </div>
                       <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2">
                         {galleryImages.map((imgUrl, idx) => (
                           <div
                             key={idx}
-                            className="relative group rounded-lg overflow-hidden border border-slate-200 aspect-video bg-slate-100"
+                            onClick={() => setPreviewPhotoUrl(imgUrl)}
+                            title="Click to view enlarged photo"
+                            className="relative group rounded-lg overflow-hidden border border-slate-200 aspect-video bg-slate-100 cursor-pointer hover:ring-2 hover:ring-indigo-500 hover:shadow-md transition-all"
                           >
                             <img
                               src={imgUrl}
                               alt={`Inside photo ${idx + 1}`}
-                              className="w-full h-full object-cover"
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                             />
                             <span className="absolute top-1 left-1 bg-black/60 text-white text-[9px] font-black px-1.5 py-0.5 rounded">
                               #{idx + 1}
                             </span>
                             <button
                               type="button"
-                              onClick={() => removeGalleryPhoto(idx)}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                removeGalleryPhoto(idx);
+                              }}
                               className="absolute top-1 right-1 bg-rose-600 hover:bg-rose-700 text-white rounded-full p-1 shadow-md opacity-90 group-hover:opacity-100 transition-all cursor-pointer"
                               title="Delete this photo"
                             >
@@ -1678,6 +1688,37 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
           )}
         </div>
       </div>
+
+      {/* Enlarged Photo Preview Modal */}
+      {previewPhotoUrl && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-150"
+          onClick={() => setPreviewPhotoUrl(null)}
+        >
+          <div
+            className="relative max-w-4xl max-h-[85vh] bg-slate-900 rounded-2xl overflow-hidden shadow-2xl border border-white/10"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="absolute top-3 right-3 z-10 flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setPreviewPhotoUrl(null)}
+                className="p-2 rounded-full bg-black/60 hover:bg-black/90 text-white transition-all cursor-pointer shadow-lg border border-white/20"
+                title="Close (Esc)"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="p-2 flex items-center justify-center">
+              <img
+                src={previewPhotoUrl}
+                alt="Enlarged photo preview"
+                className="max-h-[80vh] w-auto max-w-full object-contain rounded-xl"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
