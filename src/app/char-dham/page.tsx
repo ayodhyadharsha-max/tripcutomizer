@@ -32,7 +32,7 @@ export const metadata: Metadata = {
         alt: 'Char Dham Yatra Sacred Tour Package 2026',
       },
     ],
-    locale: 'en_US',
+    locale: 'en_IN',
     type: 'website',
   },
   twitter: {

@@ -32,7 +32,7 @@ export const metadata: Metadata = {
         alt: 'Bali Honeymoon Package with Private Pool Villa',
       },
     ],
-    locale: 'en_US',
+    locale: 'en_IN',
     type: 'website',
   },
   twitter: {

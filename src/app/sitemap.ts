@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { getAllCatalogPackages } from '@/data/packageCatalog';
+import { getServerCustomPackages } from '@/lib/serverPackageStore';
 import { getAllProgrammaticSlugs } from '@/data/programmaticPackages';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -339,7 +340,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'manali', 'shimla', 'auli', 'nainital', 'mussoorie', 'udaipur', 'jaipur', 'jaisalmer', 'munnar', 'coorg', 'kutch'
   ];
 
-  const allCatalog = getAllCatalogPackages();
+  const serverCustom = getServerCustomPackages();
+  const allCatalog = [...serverCustom, ...getAllCatalogPackages()];
   const catalogDestSlugs = allCatalog.map((p) => p.destinationSlug);
   const destinationSlugs = Array.from(new Set([...targetIntlKeywords, ...targetSpiritualKeywords, ...catalogDestSlugs]));
 

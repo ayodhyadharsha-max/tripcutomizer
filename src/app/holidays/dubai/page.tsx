@@ -32,7 +32,7 @@ export const metadata: Metadata = {
         alt: 'Dubai 5 Days Luxury Tour Package',
       },
     ],
-    locale: 'en_US',
+    locale: 'en_IN',
     type: 'website',
   },
   twitter: {

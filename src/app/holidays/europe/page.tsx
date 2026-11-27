@@ -32,7 +32,7 @@ export const metadata: Metadata = {
         alt: 'Europe Tour Packages 10 Days Customized',
       },
     ],
-    locale: 'en_US',
+    locale: 'en_IN',
     type: 'website',
   },
   twitter: {

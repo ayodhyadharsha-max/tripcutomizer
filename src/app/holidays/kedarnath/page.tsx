@@ -32,7 +32,7 @@ export const metadata: Metadata = {
         alt: 'Kedarnath Badrinath Divine Yatra Package Price 2026',
       },
     ],
-    locale: 'en_US',
+    locale: 'en_IN',
     type: 'website',
   },
   twitter: {

@@ -32,7 +32,7 @@ export const metadata: Metadata = {
         alt: 'Vietnam Customized Itinerary 7 Days Package',
       },
     ],
-    locale: 'en_US',
+    locale: 'en_IN',
     type: 'website',
   },
   twitter: {

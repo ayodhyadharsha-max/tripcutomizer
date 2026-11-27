@@ -32,7 +32,7 @@ export const metadata: Metadata = {
         alt: 'Azerbaijan Baku 5 Days Tour Package from Delhi',
       },
     ],
-    locale: 'en_US',
+    locale: 'en_IN',
     type: 'website',
   },
   twitter: {

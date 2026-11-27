@@ -32,7 +32,7 @@ export const metadata: Metadata = {
         alt: 'Budget Thailand Tour Package for Couple Under 30k',
       },
     ],
-    locale: 'en_US',
+    locale: 'en_IN',
     type: 'website',
   },
   twitter: {

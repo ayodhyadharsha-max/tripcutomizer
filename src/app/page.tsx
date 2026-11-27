@@ -67,7 +67,7 @@ export const metadata: Metadata = {
         alt: 'Trip Customizer Customized Holiday Packages',
       },
     ],
-    locale: 'en_US',
+    locale: 'en_IN',
     type: 'website',
   },
   twitter: {

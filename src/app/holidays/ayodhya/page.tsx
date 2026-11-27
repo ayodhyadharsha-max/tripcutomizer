@@ -33,7 +33,7 @@ export const metadata: Metadata = {
         alt: 'Ayodhya Ram Mandir VIP Darshan Tour Package',
       },
     ],
-    locale: 'en_US',
+    locale: 'en_IN',
     type: 'website',
   },
   twitter: {

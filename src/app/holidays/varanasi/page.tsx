@@ -32,7 +32,7 @@ export const metadata: Metadata = {
         alt: 'Varanasi Luxury Ganga Aarti Ghat Tour Package',
       },
     ],
-    locale: 'en_US',
+    locale: 'en_IN',
     type: 'website',
   },
   twitter: {
