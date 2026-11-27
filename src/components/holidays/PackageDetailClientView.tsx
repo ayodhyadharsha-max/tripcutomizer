@@ -1136,6 +1136,78 @@ export function PackageDetailClientView({
     return cleaned;
   };
 
+  // Dynamically derive active hotel stays from itinerary days first, then pkg.hotels
+  const activeHotelStays = useMemo(() => {
+    // 1. Highest priority: Check if pkg.itinerary days have real hotels defined
+    if (Array.isArray(pkg.itinerary) && pkg.itinerary.length > 0) {
+      const fromItinerary: { city: string; name: string; nights: number; rating: string }[] = [];
+      pkg.itinerary.forEach((d) => {
+        const rawH = (d.hotel || '').trim();
+        if (
+          !rawH ||
+          /check-?out|departure|none|self|transfer to airport|onward journey|standard hotel/i.test(rawH)
+        ) {
+          return;
+        }
+        let city = pkg.destination?.split(',')[0]?.trim() || 'Destination';
+        const inMatch = (d.title || '').match(/(?:in|at|to)\s+([A-Za-z]+)/i);
+        if (inMatch && inMatch[1] && inMatch[1].length > 2) {
+          city = inMatch[1].trim();
+        }
+        const last = fromItinerary[fromItinerary.length - 1];
+        if (last && last.name.toLowerCase() === rawH.toLowerCase()) {
+          last.nights += 1;
+        } else {
+          fromItinerary.push({
+            name: rawH,
+            city,
+            nights: 1,
+            rating: '4.8',
+          });
+        }
+      });
+      if (fromItinerary.length > 0) {
+        return fromItinerary;
+      }
+    }
+
+    // 2. Second priority: pkg.hotels if valid and not dummy Kansone
+    if (Array.isArray(pkg.hotels) && pkg.hotels.length > 0) {
+      const valid = pkg.hotels.filter(
+        (h) =>
+          h &&
+          h.name &&
+          h.name.trim().length > 1 &&
+          !h.name.toLowerCase().includes('kansone')
+      );
+      if (valid.length > 0) {
+        return valid.map((h) => ({
+          city: h.city || pkg.destination || 'Destination',
+          name: h.name,
+          nights: Number(h.nights) || 1,
+          rating: h.rating || '4.8',
+        }));
+      }
+    }
+
+    // 3. Fallback to cityNightSplit or destination
+    return cityNightSplit && cityNightSplit.length > 0
+      ? cityNightSplit.map((s) => ({
+          city: s.city,
+          name: s.hotelName || `${s.city} Selected Hotel`,
+          nights: s.nights,
+          rating: s.rating || '4.8',
+        }))
+      : [{ city: pkg.destination, name: `${pkg.destination} Handpicked Hotel`, nights: pkg.durationNights || 1, rating: '4.8' }];
+  }, [pkg, cityNightSplit]);
+
+  const activeHotelsString = useMemo(() => {
+    return activeHotelStays
+      .filter((h) => h.name && !h.name.toLowerCase().includes('standard hotel'))
+      .map((h) => `${h.city}: ${cleanHotelName(h.name)} (${h.nights}N)`)
+      .join(' • ');
+  }, [activeHotelStays]);
+
   // Dynamic Tier-Based Hotel Resolution Helper (MakeMyTrip 3-Star, 4-Star & 5-Star Tiers)
   const getTierHotelName = (
     originalHotel: string | undefined,
@@ -2390,12 +2462,7 @@ export function PackageDetailClientView({
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {(Array.isArray(pkg.hotels) && pkg.hotels.length > 0
-                        ? pkg.hotels
-                        : cityNightSplit && cityNightSplit.length > 0
-                        ? cityNightSplit.map((s) => ({ city: s.city, name: s.hotelName || 'Standard Hotel', nights: s.nights, rating: s.rating || '4.8' }))
-                        : [{ city: pkg.destination, name: 'Standard Hotel', nights: pkg.durationNights, rating: '4.8' }]
-                      ).map((h: any, i: number) => {
+                      {activeHotelStays.map((h: any, i: number) => {
                         const hotelDisplayName = h.name && h.name.trim().length > 1
                           ? cleanHotelName(h.name)
                           : getTierHotelName(h.name, h.city, tourTier);
@@ -2618,9 +2685,16 @@ export function PackageDetailClientView({
                     </h4>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                       {(Array.isArray(pkg.inclusions) && pkg.inclusions.length > 0
-                        ? pkg.inclusions
+                        ? pkg.inclusions.map((inc) => {
+                            if (
+                              /accommodation at verified properties|verified hotel accommodation|kansone/i.test(inc)
+                            ) {
+                              return `${pkg.durationNights} Nights accommodation at verified properties: ${activeHotelsString || `${baselineTier} Handpicked Hotels`} (${baselineTier})`;
+                            }
+                            return inc;
+                          })
                         : [
-                            `${pkg.durationNights} Nights accommodation at verified properties: ${(pkg.hotels || []).map((h) => `${h.city}: ${h.name} (${h.nights}N)`).join(' • ') || 'Handpicked Hotels'}`,
+                            `${pkg.durationNights} Nights accommodation at verified properties: ${activeHotelsString || 'Handpicked Hotels'}`,
                             `Daily Meals Included: ${pkg.mealPlan || 'Breakfast & Dinner (MAP)'}`,
                             'Dedicated Private AC Vehicle for all transfers & complete sightseeing itinerary',
                             `All sightseeing excursions: ${(pkg.itinerary || []).map((d) => d.title).filter(Boolean).slice(0, 4).join(', ')}`,
@@ -2728,12 +2802,7 @@ export function PackageDetailClientView({
                       </span>
                     </div>
                     <div className="flex flex-wrap gap-2 text-xs font-bold text-amber-900">
-                      {(Array.isArray(pkg.hotels) && pkg.hotels.length > 0
-                        ? pkg.hotels
-                        : cityNightSplit && cityNightSplit.length > 0
-                        ? cityNightSplit.map((s) => ({ city: s.city, name: s.hotelName || 'Standard Hotel', nights: s.nights }))
-                        : [{ city: pkg.destination, name: 'Standard Hotel', nights: pkg.durationNights }]
-                      ).map((h: any, idx: number) => {
+                      {activeHotelStays.map((h: any, idx: number) => {
                         const hotelDisplayName = h.name && h.name.trim().length > 1
                           ? cleanHotelName(h.name)
                           : getTierHotelName(h.name, h.city, tourTier);
@@ -2767,17 +2836,23 @@ export function PackageDetailClientView({
               <div className="space-y-4 animate-in fade-in">
                 <h3 className="font-black text-lg text-slate-900">Key Highlights of this Tour</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {pkg.highlights.map((hl, i) => (
-                    <Card key={i} className="p-5 bg-white border-slate-200/80 rounded-2xl flex items-start space-x-3 shadow-xs">
-                      <div className="w-8 h-8 rounded-xl bg-amber-100 text-amber-700 font-black text-xs flex items-center justify-center shrink-0">
-                        #{i + 1}
-                      </div>
-                      <div>
-                        <span className="font-black text-sm text-slate-900 block mb-1">{hl}</span>
-                        <p className="text-xs text-slate-500">Includes guided assistance and pre-arranged entry tickets.</p>
-                      </div>
-                    </Card>
-                  ))}
+                  {pkg.highlights.map((hl, i) => {
+                    let displayHl = hl;
+                    if (/^Verified Stay:/i.test(hl) || hl.toLowerCase().includes('kansone')) {
+                      displayHl = `Verified Stay: ${activeHotelsString || `${baselineTier} Handpicked Hotels`}`;
+                    }
+                    return (
+                      <Card key={i} className="p-5 bg-white border-slate-200/80 rounded-2xl flex items-start space-x-3 shadow-xs">
+                        <div className="w-8 h-8 rounded-xl bg-amber-100 text-amber-700 font-black text-xs flex items-center justify-center shrink-0">
+                          #{i + 1}
+                        </div>
+                        <div>
+                          <span className="font-black text-sm text-slate-900 block mb-1">{displayHl}</span>
+                          <p className="text-xs text-slate-500">Includes guided assistance and pre-arranged entry tickets.</p>
+                        </div>
+                      </Card>
+                    );
+                  })}
                 </div>
               </div>
             )}
@@ -2798,7 +2873,7 @@ export function PackageDetailClientView({
                     },
                     {
                       question: `What hotel category is provided in this package?`,
-                      answer: `This package includes verified ${pkg.hotelCategory || '3-Star Standard'} accommodations: ${(pkg.hotels || []).filter(h => h.name).map((h) => `${h.city}: ${h.name} (${h.nights}N)`).join(' • ') || 'Handpicked Properties'}. You can also request upgrades to 4★ Deluxe or 5★ Luxury on live rates.`
+                      answer: `This package includes verified ${pkg.hotelCategory || '3-Star Standard'} accommodations: ${activeHotelsString || 'Handpicked Properties'}. You can also request upgrades to 4★ Deluxe or 5★ Luxury on live rates.`
                     },
                     {
                       question: `Are sightseeing transfers private or shared?`,
@@ -2810,6 +2885,13 @@ export function PackageDetailClientView({
                     }
                   ]).map((faqItem, fIdx) => {
                     const isOpen = openFaqs.includes(fIdx);
+                    let displayAnswer = faqItem.answer;
+                    if (
+                      faqItem.question.toLowerCase().includes('hotel') ||
+                      faqItem.answer.toLowerCase().includes('kansone')
+                    ) {
+                      displayAnswer = `This package includes verified ${baselineTier} properties: ${activeHotelsString || `${baselineTier} accommodations`}. You can also request upgrades to 4★ Deluxe or 5★ Luxury on live rates.`;
+                    }
                     return (
                       <Card key={fIdx} className="bg-white border-slate-200/80 rounded-2xl overflow-hidden shadow-2xs">
                         <button
@@ -2829,7 +2911,7 @@ export function PackageDetailClientView({
                         </button>
                         {isOpen && (
                           <div className="px-5 pb-5 pt-2 text-xs text-slate-600 border-t border-slate-100 bg-slate-50/50 leading-relaxed">
-                            {faqItem.answer}
+                            {displayAnswer}
                           </div>
                         )}
                       </Card>
@@ -2929,7 +3011,7 @@ export function PackageDetailClientView({
                   </div>
                   <p className="text-[11px] text-amber-900/90 font-medium leading-relaxed">
                     Base package includes {baselineTier === 'standard' ? '3★ Standard' : '4★ Deluxe'} hotels. 
-                    Upgrade to <strong>{tourTier === 'luxury' ? '5★ Luxury' : '4★ Deluxe'} ({cleanHotelName(getTierHotelName(pkg.hotels?.[0]?.name, pkg.destination, tourTier))})</strong> is quoted based on live hotel rates for your travel dates. Request a quote below.
+                    Upgrade to <strong>{tourTier === 'luxury' ? '5★ Luxury' : '4★ Deluxe'} ({cleanHotelName(getTierHotelName(activeHotelStays[0]?.name || pkg.hotels?.[0]?.name, pkg.destination, tourTier))})</strong> is quoted based on live hotel rates for your travel dates. Request a quote below.
                   </p>
                 </div>
               ) : (
@@ -3837,7 +3919,7 @@ export function PackageDetailClientView({
                 </div>
                 <h3 className="text-xl font-black text-slate-900">Upgrade Request Submitted!</h3>
                 <p className="text-xs text-slate-600 leading-relaxed max-w-sm mx-auto">
-                  We have received your request for <strong>{tourTier === 'luxury' ? '5★ Luxury' : '4★ Deluxe'}</strong> hotel upgrade ({cleanHotelName(getTierHotelName(pkg.hotels?.[0]?.name, pkg.destination, tourTier))}).
+                  We have received your request for <strong>{tourTier === 'luxury' ? '5★ Luxury' : '4★ Deluxe'}</strong> hotel upgrade ({cleanHotelName(getTierHotelName(activeHotelStays[0]?.name || pkg.hotels?.[0]?.name, pkg.destination, tourTier))}).
                   Our holiday specialist will check live room availability for your travel dates and call/WhatsApp you within 15 minutes.
                 </p>
                 <div className="pt-2 flex flex-col sm:flex-row gap-2 justify-center">
@@ -3876,7 +3958,7 @@ export function PackageDetailClientView({
                     Package: <strong>{pkg.name}</strong>
                   </p>
                   <p className="text-xs text-slate-700 font-bold mt-1 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
-                    🏨 Hotel Property: <span className="text-brand-700">{cleanHotelName(getTierHotelName(pkg.hotels?.[0]?.name, pkg.destination, tourTier))}</span>
+                    🏨 Hotel Property: <span className="text-brand-700">{cleanHotelName(getTierHotelName(activeHotelStays[0]?.name || pkg.hotels?.[0]?.name, pkg.destination, tourTier))}</span>
                   </p>
                 </div>
 

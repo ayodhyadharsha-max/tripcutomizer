@@ -40,7 +40,7 @@ interface HotelEntry {
   city: string;
   name: string;
   nights: number;
-  rating?: string;
+  rating: string;
 }
 
 interface DayEntry {
@@ -52,6 +52,40 @@ interface DayEntry {
   activities: string;
 }
 
+// Helper to derive structured hotel stays from itinerary days
+export const deriveHotelsFromItineraryDays = (
+  days: { dayNumber: number; title: string; hotel?: string; [key: string]: any }[],
+  dest: string
+): HotelEntry[] => {
+  const stays: HotelEntry[] = [];
+  days.forEach((day) => {
+    const rawHotel = (day.hotel || '').trim();
+    if (
+      !rawHotel ||
+      /check-?out|departure|none|self|transfer to airport|onward journey|standard hotel/i.test(rawHotel)
+    ) {
+      return;
+    }
+    let detectedCity = dest || 'Destination';
+    const cityMatch = (day.title || '').match(/(?:in|at|to)\s+([A-Za-z]+)/i);
+    if (cityMatch && cityMatch[1] && cityMatch[1].length > 2) {
+      detectedCity = cityMatch[1].trim();
+    }
+    const lastStay = stays[stays.length - 1];
+    if (lastStay && lastStay.name.toLowerCase() === rawHotel.toLowerCase()) {
+      lastStay.nights += 1;
+    } else {
+      stays.push({
+        name: rawHotel,
+        city: detectedCity,
+        nights: 1,
+        rating: '4.8',
+      });
+    }
+  });
+  return stays;
+};
+
 export function QuickPackageCreatorModal({
   isOpen,
   onClose,
@@ -60,7 +94,7 @@ export function QuickPackageCreatorModal({
 }: QuickPackageCreatorModalProps) {
   // 1. Basic Package Details
   const [name, setName] = useState('');
-  const [destination, setDestination] = useState('Andhra Pradesh');
+  const [destination, setDestination] = useState('Ayodhya');
   const [durationDays, setDurationDays] = useState(5);
   const [durationNights, setDurationNights] = useState(4);
   const [baselineTier, setBaselineTier] = useState<'3-Star Standard' | '4-Star Deluxe' | '5-Star Luxury'>('3-Star Standard');
@@ -74,9 +108,7 @@ export function QuickPackageCreatorModal({
 
   // 3. Hotel Details
   const [hotels, setHotels] = useState<HotelEntry[]>([
-    { city: 'Chennai', name: 'Kansone Hotel And Banquets', nights: 1, rating: '4.8' },
-    { city: 'Tirupati', name: 'Hotel MountView Comforts', nights: 2, rating: '4.8' },
-    { city: 'Mahabalipuram', name: 'Mamalla Beach Resort', nights: 1, rating: '4.8' },
+    { city: 'Ayodhya', name: 'Grand Heritage Hotel', nights: 4, rating: '4.8' },
   ]);
 
   // 4. Photos & Instant Upload
@@ -226,42 +258,42 @@ export function QuickPackageCreatorModal({
     {
       dayNumber: 1,
       title: 'Arrival & City Heritage Exploration',
-      description: 'Pickup from airport or railway station. Check-in to hotel and relax. Afternoon sightseeing of major local landmarks, temples, and beaches. Savor local dinner and overnight stay.',
-      hotel: 'Kansone Hotel And Banquets',
+      description: 'Pickup from airport or railway station. Check-in to hotel and relax. Afternoon sightseeing of major local landmarks and evening promenade. Savor delicious dinner and overnight stay.',
+      hotel: 'Grand Heritage Hotel',
       meals: ['Dinner'],
       activities: 'Airport Pickup, Hotel Check-in, Local Sightseeing, Evening Promenade',
     },
     {
       dayNumber: 2,
-      title: 'Intercity Scenic Drive & Temple Darshan',
-      description: 'Morning breakfast at hotel, check out and embark on a scenic drive to next destination. En-route temple darshan and sightseeing stops. Evening hotel check-in and leisure.',
-      hotel: 'Hotel MountView Comforts',
+      title: 'Intercity Scenic Drive & Landmark Exploration',
+      description: 'Morning breakfast at hotel, check out and embark on a scenic drive to next destination. En-route sightseeing stops and local lunch. Evening hotel check-in and leisure.',
+      hotel: 'Royal Comfort Resort',
       meals: ['Breakfast', 'Dinner'],
-      activities: 'Scenic Interstate Transfer, En-route Darshan, Hotel Check-in, Temple Aarti',
+      activities: 'Scenic Interstate Transfer, En-route Sightseeing, Hotel Check-in, Evening Aarti',
     },
     {
       dayNumber: 3,
-      title: 'Full Day Sacred Darshan & Pilgrimage Highlights',
-      description: 'Early morning sacred temple visit and special darshan. Collect divine prasadam, explore spiritual landmarks, viewpoints, and evening temple ceremonies. Return to hotel for dinner.',
-      hotel: 'Hotel MountView Comforts',
+      title: 'Full Day Sightseeing & Cultural Highlights',
+      description: 'Early morning temple or monument visit and special guided tour. Explore prominent viewpoints, heritage spots, and evening cultural shows. Return to hotel for dinner.',
+      hotel: 'Royal Comfort Resort',
       meals: ['Breakfast', 'Dinner'],
-      activities: 'Morning Sacred Darshan, Holy Pushkarini Walk, Spiritual Sightseeing, Evening Leisure',
+      activities: 'Guided Sightseeing, Holy Shrine Walk, Panoramic Viewpoint, Evening Cultural Show',
     },
     {
       dayNumber: 4,
-      title: 'Coastal Heritage & UNESCO Monument Tour',
-      description: 'After breakfast, drive to UNESCO World Heritage coastal town. Check-in to beachside resort. Marvel at ancient rock carvings, shore monuments, and enjoy relaxed sea-breeze evening.',
-      hotel: 'Mamalla Beach Resort',
+      title: 'Scenic Excursion & Nature Safari Experience',
+      description: 'After breakfast, embark on picturesque excursion to nearby valley or lake. Enjoy boating, photography, and shopping for authentic local souvenirs.',
+      hotel: 'Grand Heritage Hotel',
       meals: ['Breakfast', 'Dinner'],
-      activities: 'Coastal Scenic Drive, UNESCO Shore Temple Tour, Beachside Walk, Sunset Relaxation',
+      activities: 'Nature Excursion, Scenic Lake Visit, Local Handicrafts Shopping, Sunset Relaxation',
     },
     {
       dayNumber: 5,
-      title: 'Resort Breakfast & Departure Transfer',
-      description: 'Morning coastal breeze and resort breakfast. Check out and transfer smoothly to airport or railway station for return journey with blessings and beautiful memories.',
+      title: 'Hotel Breakfast & Departure Transfer',
+      description: 'Morning breakfast at hotel, check out and transfer smoothly to airport or railway station for return journey with sweet memories.',
       hotel: 'Check-out completed (Departure Day)',
       meals: ['Breakfast'],
-      activities: 'Resort Breakfast, Check-out Formalities, Private AC Drop to Airport / Station',
+      activities: 'Hotel Breakfast, Check-out Formalities, Airport / Station Transfer',
     },
   ]);
 
@@ -297,20 +329,49 @@ export function QuickPackageCreatorModal({
       setStartingPrice(packageToEdit.startingPrice || 25000);
       setDiscountPrice(packageToEdit.discountPrice || '');
 
-      if (Array.isArray(packageToEdit.hotels) && packageToEdit.hotels.length > 0) {
-        setHotels(
-          packageToEdit.hotels.map((h) => ({
-            city: h.city || packageToEdit.destination || '',
-            name: h.name || '',
-            nights: Number(h.nights) || 1,
-            rating: h.rating || '4.8',
-          }))
-        );
+      let mappedItinerary: DayEntry[] = [];
+      if (Array.isArray(packageToEdit.itinerary) && packageToEdit.itinerary.length > 0) {
+        mappedItinerary = packageToEdit.itinerary.map((d) => ({
+          dayNumber: d.dayNumber,
+          title: d.title || `Day ${d.dayNumber} Sightseeing`,
+          description: d.description || '',
+          hotel: d.hotel || '',
+          meals: Array.isArray(d.meals) ? d.meals : ['Breakfast', 'Dinner'],
+          activities: Array.isArray(d.activities) ? d.activities.join(', ') : d.activities || '',
+        }));
+        setItineraryDays(mappedItinerary);
+      }
+
+      // Live hotel extraction: prioritize itinerary hotels
+      const derivedFromItinerary = deriveHotelsFromItineraryDays(mappedItinerary, packageToEdit.destination || '');
+      if (derivedFromItinerary.length > 0) {
+        setHotels(derivedFromItinerary);
+      } else if (Array.isArray(packageToEdit.hotels) && packageToEdit.hotels.length > 0) {
+        const validHotels = packageToEdit.hotels.filter(h => h.name && !h.name.toLowerCase().includes('kansone'));
+        if (validHotels.length > 0) {
+          setHotels(
+            validHotels.map((h) => ({
+              city: h.city || packageToEdit.destination || '',
+              name: h.name || '',
+              nights: Number(h.nights) || 1,
+              rating: h.rating || '4.8',
+            }))
+          );
+        } else {
+          setHotels([
+            {
+              city: packageToEdit.destination || 'Destination',
+              name: `${packageToEdit.destination || 'Selected'} Handpicked Hotel`,
+              nights: packageToEdit.durationNights || 1,
+              rating: '4.8',
+            },
+          ]);
+        }
       } else {
         setHotels([
           {
             city: packageToEdit.destination || 'Destination',
-            name: 'Standard Hotel',
+            name: `${packageToEdit.destination || 'Selected'} Handpicked Hotel`,
             nights: packageToEdit.durationNights || 1,
             rating: '4.8',
           },
@@ -328,19 +389,6 @@ export function QuickPackageCreatorModal({
           ? packageToEdit.gallery.filter(Boolean)
           : [];
       setGalleryImages(gList);
-
-      if (Array.isArray(packageToEdit.itinerary) && packageToEdit.itinerary.length > 0) {
-        setItineraryDays(
-          packageToEdit.itinerary.map((d) => ({
-            dayNumber: d.dayNumber,
-            title: d.title || `Day ${d.dayNumber} Sightseeing`,
-            description: d.description || '',
-            hotel: d.hotel || '',
-            meals: Array.isArray(d.meals) ? d.meals : ['Breakfast', 'Dinner'],
-            activities: Array.isArray(d.activities) ? d.activities.join(', ') : d.activities || '',
-          }))
-        );
-      }
 
       if (Array.isArray(packageToEdit.highlights) && packageToEdit.highlights.length > 0) {
         setCustomHighlights(packageToEdit.highlights.join('\n'));
@@ -616,6 +664,10 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
       setItineraryDays(normalized);
       setDurationDays(normalized.length);
       setDurationNights(Math.max(0, normalized.length - 1));
+      const parsedHotels = deriveHotelsFromItineraryDays(normalized, destination);
+      if (parsedHotels.length > 0) {
+        setHotels(parsedHotels);
+      }
       alert(`✨ Successfully generated ${normalized.length} Days Itinerary!\nDuration set to ${Math.max(0, normalized.length - 1)}N / ${normalized.length}D.`);
     } else {
       alert('Could not parse text. Please enter at least 1 line or click again to view the sample template.');
@@ -743,15 +795,30 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
         };
       });
 
-      // 3. Prepare hotel list
-      const finalHotels = hotels
-        .filter((h) => h.name.trim().length > 0)
+      // 3. Prepare hotel list: prioritize live hotels extracted directly from itinerary days!
+      const itineraryHotels = deriveHotelsFromItineraryDays(finalItinerary, destination);
+      const manualHotels = hotels
+        .filter((h) => h.name.trim().length > 0 && !h.name.toLowerCase().includes('kansone'))
         .map((h) => ({
           name: h.name.trim(),
           city: h.city.trim() || destination,
           nights: Number(h.nights) || 1,
           rating: h.rating || '4.8',
         }));
+
+      const finalHotels: HotelEntry[] =
+        itineraryHotels.length > 0
+          ? itineraryHotels
+          : manualHotels.length > 0
+          ? manualHotels
+          : [
+              {
+                name: `${destination} Handpicked Selected Hotel`,
+                city: destination,
+                nights: Number(durationNights) || 1,
+                rating: '4.8',
+              },
+            ];
 
       // 4. Prepare highlights, inclusions & FAQs dynamically reflecting live hotels, meals & nights
       const hotelHighlights = finalHotels
@@ -1568,9 +1635,14 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
                             placeholder="Hotel Name"
                             value={d.hotel}
                             onChange={(e) => {
+                              const newHotelVal = e.target.value;
                               const updated = [...itineraryDays];
-                              updated[dIdx].hotel = e.target.value;
+                              updated[dIdx].hotel = newHotelVal;
                               setItineraryDays(updated);
+                              const derived = deriveHotelsFromItineraryDays(updated, destination);
+                              if (derived.length > 0) {
+                                setHotels(derived);
+                              }
                             }}
                             className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1 text-xs font-bold text-slate-800 focus:bg-white focus:border-brand-500"
                           />
