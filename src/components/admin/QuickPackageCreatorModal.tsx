@@ -645,8 +645,27 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
 
   const updateHotelRow = (idx: number, field: keyof HotelEntry, val: any) => {
     const updated = [...hotels];
+    const prevHotelName = updated[idx]?.name;
     updated[idx] = { ...updated[idx], [field]: val };
     setHotels(updated);
+
+    // If hotel name changed, sync with itinerary days that had the old name or default name
+    if (field === 'name' && typeof val === 'string' && val.trim().length > 1) {
+      setItineraryDays((prevDays) =>
+        prevDays.map((day) => {
+          if (
+            !day.hotel ||
+            day.hotel === prevHotelName ||
+            day.hotel.toLowerCase().includes('hotel') ||
+            day.hotel.toLowerCase().includes('standard') ||
+            day.hotel.toLowerCase().includes('kansone')
+          ) {
+            return { ...day, hotel: val.trim() };
+          }
+          return day;
+        })
+      );
+    }
   };
 
   // Submit and Publish Package
@@ -733,8 +752,11 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
           rating: h.rating || '4.8',
         }));
 
-      // 4. Prepare highlights & inclusions
-      const hotelHighlights = finalHotels.map((h) => `${h.city}: ${h.name} (${h.nights}N)`).join(' • ');
+      // 4. Prepare highlights, inclusions & FAQs dynamically reflecting live hotels, meals & nights
+      const hotelHighlights = finalHotels
+        .filter((h) => h.name)
+        .map((h) => `${h.city}: ${h.name} (${h.nights}N)`)
+        .join(' • ');
 
       // Extract top sightseeing from itinerary
       const itinerarySightseeingList: string[] = [];
@@ -750,32 +772,53 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
       });
       const topSightseeing = itinerarySightseeingList.slice(0, 3);
 
-      const highlights: string[] = customHighlights.trim()
-        ? customHighlights.split('\n').filter(Boolean)
-        : [
-            ...topSightseeing,
-            `Verified Stay: ${hotelHighlights || 'Handpicked Hotels'}`,
-            `Dedicated Private AC Cab for all Transfers & Sightseeing`,
-            `Daily ${mealPlan}`,
-            `24x7 Trip Customizer On-Trip Emergency Support`,
-          ];
+      const dynamicHotelInclusion = hotelHighlights
+        ? `${durationNights} Nights accommodation at verified properties: ${hotelHighlights} (${baselineTier})`
+        : `${durationNights} Nights verified hotel accommodation as per ${baselineTier} category`;
 
-      const inclusions = customInclusions.trim()
-        ? customInclusions.split('\n').filter(Boolean)
-        : [
-            `${durationNights} Nights verified hotel accommodation as per selected category`,
-            mealPlan,
-            `Dedicated Private AC Vehicle for all transfers & complete sightseeing itinerary`,
-            `All sightseeing excursions: ${finalItinerary.map((d) => d.title).filter(Boolean).slice(0, 3).join(', ')}`,
-            `Driver night allowance, interstate border taxes, toll fees, parking charges & 5% GST included`,
-            `Dedicated 24x7 personal concierge on call throughout your journey`,
-          ];
+      const dynamicMealInclusion = `Daily Meals Included: ${mealPlan}`;
+      const dynamicTransportInclusion = `Dedicated Private AC Vehicle for all transfers & complete sightseeing itinerary`;
+      const dynamicSightseeingInclusion = `All sightseeing excursions & transfers: ${finalItinerary.map((d) => d.title).filter(Boolean).slice(0, 4).join(', ')}`;
+      const dynamicTaxesInclusion = `Driver night allowance, interstate border taxes, toll fees, parking charges & 5% GST included`;
+      const dynamicConciergeInclusion = `Dedicated 24x7 personal concierge on call throughout your journey`;
+
+      const inclusions: string[] = [
+        dynamicHotelInclusion,
+        dynamicMealInclusion,
+        dynamicTransportInclusion,
+        dynamicSightseeingInclusion,
+        dynamicTaxesInclusion,
+        dynamicConciergeInclusion,
+      ];
+
+      const highlights: string[] = [
+        ...topSightseeing,
+        `Verified Stay: ${hotelHighlights || `${baselineTier} Handpicked Hotels`}`,
+        `Dedicated Private AC Cab for all Transfers & Sightseeing`,
+        `Daily ${mealPlan}`,
+        `24x7 Trip Customizer On-Trip Emergency Support`,
+      ];
 
       const exclusions = [
         'Airfare or train tickets (available upon request at live rates)',
         'Monument camera tickets, special pooja/abhishekam tickets, joyrides, and watersports',
         'Personal expenses like room service, laundry, extra snacks, and tips',
         'Any services or meals not explicitly mentioned in inclusions',
+      ];
+
+      const faqs = [
+        {
+          question: `Which hotels are included in ${name}?`,
+          answer: `This package includes verified ${baselineTier} properties: ${hotelHighlights || `${baselineTier} accommodations`}. You can also request upgrades to 4★ Deluxe or 5★ Luxury on live rates.`,
+        },
+        {
+          question: 'Is private transportation included?',
+          answer: `Yes! A dedicated private AC vehicle is provided throughout the entire tour for all transfers and sightseeing.`,
+        },
+        {
+          question: 'Can this itinerary and hotels be customized?',
+          answer: `Yes, 100%! All our packages are fully customizable. You can modify hotel choices, add extra nights, or add custom sightseeing activities with our travel desk.`,
+        },
       ];
 
       const targetId = packageToEdit?.id || `pkg-admin-${finalSlug}`;
@@ -805,16 +848,7 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
         exclusions,
         itinerary: finalItinerary,
         hotels: finalHotels,
-        faqs: packageToEdit?.faqs && packageToEdit.faqs.length > 0 ? packageToEdit.faqs : [
-          {
-            question: `Which hotels are included in ${name}?`,
-            answer: `This package includes verified ${baselineTier} properties: ${hotelHighlights}. You can also request upgrades to 4★ Deluxe or 5★ Luxury on live rates.`,
-          },
-          {
-            question: 'Is private transportation included?',
-            answer: `Yes! A dedicated private AC vehicle is provided throughout the entire tour for all transfers and sightseeing.`,
-          },
-        ],
+        faqs,
         theme: theme,
         hotelCategory: baselineTier,
         mealPlan: mealPlan,
