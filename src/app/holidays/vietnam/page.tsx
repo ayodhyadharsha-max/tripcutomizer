@@ -4,7 +4,7 @@ import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
 export const metadata: Metadata = {
-  title: 'Vietnam Customized Itinerary 7 Days Package',
+  title: 'Vietnam Customized Itinerary 7 Days Packages 2026 | Trip Customizer',
   description:
     'Book 6N/7D customized Vietnam tour package. Includes Hanoi, Ha Long Bay luxury cruise, Da Nang, Ba Na Hills Golden Bridge, Hoi An & e-visa assistance.',
   keywords: [

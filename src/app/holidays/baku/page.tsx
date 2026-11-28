@@ -4,7 +4,7 @@ import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
 export const metadata: Metadata = {
-  title: 'Azerbaijan Baku 5 Days Tour Package from Delhi',
+  title: 'Azerbaijan Baku 5 Days Tour Packages from Delhi 2026 | Trip Customizer',
   description:
     'Book 4N/5D Baku Azerbaijan tour package from Delhi. Includes Flame Towers, Ateshgah Fire Temple, Gobustan mud volcanoes, 4-star hotel stay & visa.',
   keywords: [

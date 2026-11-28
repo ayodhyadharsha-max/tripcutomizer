@@ -4,7 +4,7 @@ import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
 export const metadata: Metadata = {
-  title: 'Varanasi Luxury Ganga Aarti Ghat Tour Package',
+  title: 'Varanasi Luxury Ganga Aarti Ghat Tour Packages 2026 | Trip Customizer',
   description:
     'Book 3N/4D Varanasi spiritual tour package featuring Dashashwamedh Ghat Ganga Aarti VIP boat view, Kashi Vishwanath Temple VIP darshan & 4-star hotel stay.',
   keywords: [

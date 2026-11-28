@@ -4,7 +4,7 @@ import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
 export const metadata: Metadata = {
-  title: 'Bali Honeymoon Package with Private Pool Villa (5N/6D)',
+  title: 'Bali Honeymoon Packages with Private Pool Villa (5N/6D) | Trip Customizer',
   description:
     'Book customized Bali honeymoon package featuring private pool villa, floating breakfast, Nusa Penida island tour, couples spa treatment & airport transfers.',
   keywords: [

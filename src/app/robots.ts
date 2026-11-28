@@ -3,63 +3,43 @@ import { MetadataRoute } from 'next';
 export default function robots(): MetadataRoute.Robots {
   const baseUrl = 'https://www.tripcustomizer.com';
 
+  const disallowList = [
+    '/admin/',
+    '/agent/',
+    '/api/',
+    '/checkout',
+    '/booking/checkout',
+    '/booking/success',
+    '/login',
+    '/register',
+    '/manage-booking',
+  ];
+
+  const aiBots = [
+    'GPTBot',
+    'PerplexityBot',
+    'ClaudeBot',
+    'Google-Extended',
+    'Bytespider',
+    'CCBot',
+    'Applebot-Extended',
+    'Cohere-ai',
+    'OAI-SearchBot',
+    'Diffbot',
+  ];
+
   return {
     rules: [
       {
         userAgent: '*',
         allow: '/',
-        disallow: [
-          '/admin/',
-          '/agent/',
-          '/api/',
-          '/checkout',
-          '/booking/checkout',
-          '/booking/success',
-          '/login',
-          '/register',
-          '/manage-booking',
-        ],
+        disallow: disallowList,
       },
-      {
-        userAgent: 'GPTBot',
+      ...aiBots.map((bot) => ({
+        userAgent: bot,
         allow: '/',
-      },
-      {
-        userAgent: 'PerplexityBot',
-        allow: '/',
-      },
-      {
-        userAgent: 'ClaudeBot',
-        allow: '/',
-      },
-      {
-        userAgent: 'Google-Extended',
-        allow: '/',
-      },
-      {
-        userAgent: 'Bytespider',
-        allow: '/',
-      },
-      {
-        userAgent: 'CCBot',
-        allow: '/',
-      },
-      {
-        userAgent: 'Applebot-Extended',
-        allow: '/',
-      },
-      {
-        userAgent: 'Cohere-ai',
-        allow: '/',
-      },
-      {
-        userAgent: 'OAI-SearchBot',
-        allow: '/',
-      },
-      {
-        userAgent: 'Diffbot',
-        allow: '/',
-      },
+        disallow: disallowList,
+      })),
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
     host: baseUrl,

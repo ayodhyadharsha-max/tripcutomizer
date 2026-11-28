@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
 import { getAllCatalogPackages } from '@/data/packageCatalog';
-import { getServerCustomPackages } from '@/lib/serverPackageStore';
+import { getServerCustomPackages, getServerDeletedPackageIds } from '@/lib/serverPackageStore';
 import { getAllProgrammaticSlugs } from '@/data/programmaticPackages';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -341,7 +341,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const serverCustom = getServerCustomPackages();
-  const allCatalog = [...serverCustom, ...getAllCatalogPackages()];
+  const deletedIds = new Set(getServerDeletedPackageIds().map((s) => s.toLowerCase().trim()));
+  const allCatalog = [...serverCustom, ...getAllCatalogPackages()].filter(
+    (p) =>
+      !deletedIds.has((p.id || '').toLowerCase().trim()) &&
+      !deletedIds.has((p.slug || '').toLowerCase().trim())
+  );
   const catalogDestSlugs = allCatalog.map((p) => p.destinationSlug);
   const destinationSlugs = Array.from(new Set([...targetIntlKeywords, ...targetSpiritualKeywords, ...catalogDestSlugs]));
 
@@ -366,7 +371,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.88,
   }));
 
-  // 5. Package Detail Pages (All Verified Packages in Catalog with Strict Deduplication)
+  // 5. Package Detail Pages (All Verified Packages in Catalog with Strict Deduplication & Non-Deleted)
   const seenUrls = new Set<string>();
   const packagePages: MetadataRoute.Sitemap = [];
 
@@ -376,7 +381,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       seenUrls.add(url);
       packagePages.push({
         url,
-        lastModified: currentDate,
+        lastModified: pkg.updated_at ? new Date(pkg.updated_at).toISOString() : currentDate,
         changeFrequency: 'weekly',
         priority: 0.85,
       });

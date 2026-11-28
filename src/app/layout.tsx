@@ -259,7 +259,7 @@ export default function RootLayout({
       name: 'Trip Customizer',
       image: 'https://www.tripcustomizer.com/logo-square.png',
       logo: 'https://www.tripcustomizer.com/logo-square.png',
-      '@id': 'https://www.tripcustomizer.com',
+      '@id': 'https://www.tripcustomizer.com/#travelagency',
       url: 'https://www.tripcustomizer.com',
       telephone: '+91 7408763401',
       priceRange: '₹₹',
@@ -438,6 +438,7 @@ export default function RootLayout({
     {
       '@context': 'https://schema.org',
       '@type': 'Organization',
+      '@id': 'https://www.tripcustomizer.com/#organization',
       name: 'Trip Customizer',
       legalName: 'Trip Customizer Private Limited',
       url: 'https://www.tripcustomizer.com',

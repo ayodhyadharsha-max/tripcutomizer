@@ -4,7 +4,7 @@ import { getAllCatalogPackages } from '@/data/packageCatalog';
 import { HolidayListingView } from '@/components/holidays/HolidayListingView';
 
 export const metadata: Metadata = {
-  title: 'Ayodhya Ram Mandir VIP Darshan Tour Package',
+  title: 'Ayodhya Ram Mandir VIP Darshan Tour Packages 2026 | Trip Customizer',
   description:
     'Book customized Ayodhya spiritual tour package including Ram Janmabhoomi VIP darshan, Saryu Aarti, local AC transport & 4-star hotel stay.',
   keywords: [
