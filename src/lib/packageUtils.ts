@@ -110,12 +110,32 @@ export const CUSTOM_PACKAGE_TIER_OVERRIDES: Record<string, Partial<PackageTierCo
     cardOptionsLabel: '4★ Deluxe & 5★ Luxury Available on Request',
     cardBadgeClass: 'bg-amber-50 text-amber-900 border-amber-200/60',
     tierPrices: {
-      standard: 25000,
+      standard: 14999,
+      deluxe: 18999,
+      luxury: 25999,
     },
     tierHotels: {
-      standard: 'Kansone Hotel And Banquets (Chennai) / Hotel MountView Comforts (Tirupati) / Mamalla Beach Resort (Mahabalipuram)',
-      deluxe: 'The Residency Towers (Chennai) / Fortune Select Grand Ridge (Tirupati) / Grande Bay Resort (Mahabalipuram)',
-      luxury: 'The Leela Palace (Chennai) / Minerva Grand (Tirupati) / Radisson Blu Resort Temple Bay (Mahabalipuram)',
+      standard: 'Hotel MountView Comforts (Tirupati)',
+      deluxe: 'Fortune Select Grand Ridge (Tirupati)',
+      luxury: 'Minerva Grand Tirupati / Taj Tirupati',
+    },
+  },
+  'andhra-pradesh-soulful-tirupati-pilgrimage-3n4d-4d3n-mmt-2': {
+    baselineTier: 'standard',
+    allowedTiers: ['standard', 'deluxe', 'luxury'],
+    cardBadgeLabel: '3★ Standard',
+    cardTwinSharingLabel: '3★ Standard Twin Sharing',
+    cardOptionsLabel: '4★ Deluxe & 5★ Luxury Available on Request',
+    cardBadgeClass: 'bg-amber-50 text-amber-900 border-amber-200/60',
+    tierPrices: {
+      standard: 14999,
+      deluxe: 18999,
+      luxury: 25999,
+    },
+    tierHotels: {
+      standard: 'Hotel MountView Comforts (Tirupati)',
+      deluxe: 'Fortune Select Grand Ridge (Tirupati)',
+      luxury: 'Minerva Grand Tirupati / Taj Tirupati',
     },
   },
 };

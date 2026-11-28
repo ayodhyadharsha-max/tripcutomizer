@@ -94,25 +94,43 @@ export default function AdminPackagesPage() {
 
     const baseCatalog = getAllCatalogPackages();
 
-    const customIds = new Set(customMmt.map((p) => p.id.toLowerCase().trim()));
-    const customSlugs = new Set(customMmt.map((p) => p.slug.toLowerCase().trim()));
+    // Clean deduplication across custom MMT and base catalog
+    const seenIds = new Set<string>();
+    const seenSlugs = new Set<string>();
+    const seenNames = new Set<string>();
+    const activeList: HolidayPackage[] = [];
 
-    // Filter out duplicates (if id or slug is already in customMmt) and deleted from base catalog
-    const nonDuplicateLegacy = baseCatalog
-      .filter((p) => (p.batch_source || 'legacy') === 'legacy')
-      .filter(
-        (p) =>
-          !customIds.has(p.id.toLowerCase().trim()) &&
-          !customSlugs.has(p.slug.toLowerCase().trim()) &&
-          !deletedIds.has(p.id.toLowerCase().trim()) &&
-          !deletedIds.has(p.slug.toLowerCase().trim())
-      )
-      .map((p) => ({ ...p, batch_source: 'legacy' }));
+    // 1. Add custom/edited packages first so user edits always take priority
+    customMmt.forEach((p) => {
+      const cleanId = (p.id || '').toLowerCase().trim();
+      const cleanSlug = (p.slug || '').toLowerCase().trim();
+      const cleanName = (p.name || '').toLowerCase().trim();
+      if (!cleanId && !cleanSlug) return;
+      if (deletedIds.has(cleanId) || deletedIds.has(cleanSlug)) return;
+      if (seenIds.has(cleanId) || (cleanSlug && seenSlugs.has(cleanSlug))) return;
 
-    // Tagged custom MMT sync
-    const taggedMmt = customMmt.map((p) => ({ ...p, batch_source: 'mmt_sync' }));
+      seenIds.add(cleanId);
+      if (cleanSlug) seenSlugs.add(cleanSlug);
+      if (cleanName) seenNames.add(cleanName);
+      activeList.push({ ...p, batch_source: 'mmt_sync' });
+    });
 
-    const activeList = legacyDeleted ? taggedMmt : [...taggedMmt, ...nonDuplicateLegacy];
+    // 2. Add base catalog packages if legacy not deleted
+    if (!legacyDeleted) {
+      baseCatalog.forEach((p) => {
+        const cleanId = (p.id || '').toLowerCase().trim();
+        const cleanSlug = (p.slug || '').toLowerCase().trim();
+        const cleanName = (p.name || '').toLowerCase().trim();
+        if (deletedIds.has(cleanId) || deletedIds.has(cleanSlug)) return;
+        if (seenIds.has(cleanId) || (cleanSlug && seenSlugs.has(cleanSlug)) || (cleanName && seenNames.has(cleanName))) return;
+
+        seenIds.add(cleanId);
+        if (cleanSlug) seenSlugs.add(cleanSlug);
+        if (cleanName) seenNames.add(cleanName);
+        activeList.push({ ...p, batch_source: p.batch_source || 'legacy' });
+      });
+    }
+
     setPackages(activeList);
   };
 
@@ -446,6 +464,13 @@ export default function AdminPackagesPage() {
   const handleDeleteSinglePackage = (pkg: HolidayPackage) => {
     if (confirm(`Are you sure you want to delete "${pkg.name}"?`)) {
       cloudStore.deletePackage(pkg.id, pkg.slug);
+      setPackages((prev) =>
+        prev.filter(
+          (p) =>
+            p.id.toLowerCase() !== pkg.id.toLowerCase() &&
+            p.slug.toLowerCase() !== pkg.slug.toLowerCase()
+        )
+      );
       refreshCatalogData();
       triggerNotification(`Deleted package "${pkg.name}".`, 'info');
     }

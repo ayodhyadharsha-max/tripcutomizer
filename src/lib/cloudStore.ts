@@ -1,5 +1,5 @@
 import { db } from '@/lib/firebase';
-import { collection, doc, setDoc, onSnapshot } from 'firebase/firestore';
+import { collection, doc, setDoc, onSnapshot, deleteDoc } from 'firebase/firestore';
 import { supabase } from '@/lib/supabase';
 import { sendWeb3FormLead } from '@/lib/web3forms';
 import { HolidayPackage } from '@/data/packagesData';
@@ -401,9 +401,13 @@ const initCloudListeners = () => {
       // 2. Global Packages listener from Cloud Firestore (runs for all visitors & admin)
       onSnapshot(collection(db, 'packages'), (snapshot) => {
         if (!snapshot.empty) {
+          const deletedIds = new Set(cloudStore.getDeletedPackageIds().map((s) => s.toLowerCase().trim()));
           const cloudPkgs: HolidayPackage[] = [];
           snapshot.forEach((docSnap) => {
-            cloudPkgs.push(docSnap.data() as HolidayPackage);
+            const p = docSnap.data() as HolidayPackage;
+            if (p && !deletedIds.has((p.id || '').toLowerCase().trim()) && !deletedIds.has((p.slug || '').toLowerCase().trim())) {
+              cloudPkgs.push(p);
+            }
           });
 
           const localPkgs = getStoredData<HolidayPackage[]>(STORAGE_KEYS.CUSTOM_PACKAGES, []);
@@ -417,6 +421,9 @@ const initCloudListeners = () => {
 
           // Local packages with user edits or newer timestamps take precedence!
           localPkgs.forEach((lp) => {
+            if (deletedIds.has((lp.id || '').toLowerCase().trim()) || deletedIds.has((lp.slug || '').toLowerCase().trim())) {
+              return;
+            }
             const cp = pkgMap.get(lp.id.toLowerCase()) || (lp.slug ? pkgMap.get(lp.slug.toLowerCase()) : undefined);
             if (!cp) {
               pkgMap.set(lp.id.toLowerCase(), lp);
@@ -432,7 +439,11 @@ const initCloudListeners = () => {
 
           // Dedup by unique ID
           const dedupedMap = new Map<string, HolidayPackage>();
-          Array.from(pkgMap.values()).forEach((p) => dedupedMap.set(p.id, p));
+          Array.from(pkgMap.values()).forEach((p) => {
+            if (!deletedIds.has((p.id || '').toLowerCase().trim()) && !deletedIds.has((p.slug || '').toLowerCase().trim())) {
+              dedupedMap.set(p.id, p);
+            }
+          });
 
           const merged = Array.from(dedupedMap.values());
           setStoredData(STORAGE_KEYS.CUSTOM_PACKAGES, merged);
@@ -991,6 +1002,14 @@ export const cloudStore = {
         (!targetSlug || (p.slug || '').toLowerCase() !== targetSlug)
     );
     setStoredData(STORAGE_KEYS.CUSTOM_PACKAGES, updated);
+
+    // Delete directly from Cloud Firestore
+    if (db) {
+      try {
+        if (id) deleteDoc(doc(db, 'packages', id)).catch(() => {});
+        if (slug && slug !== id) deleteDoc(doc(db, 'packages', slug)).catch(() => {});
+      } catch (e) {}
+    }
 
     if (typeof window !== 'undefined') {
       window.dispatchEvent(new Event('cloudstore_update'));

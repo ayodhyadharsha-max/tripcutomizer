@@ -630,7 +630,8 @@ export function PackageDetailClientView({
     p.slug.toLowerCase() === decodedPkgParam ||
     p.id.toLowerCase() === decodedPkgParam ||
     p.slug.toLowerCase().replace(/^pkg-/, '') === strippedTarget ||
-    p.id.toLowerCase().replace(/^pkg-/, '') === strippedTarget;
+    p.id.toLowerCase().replace(/^pkg-/, '') === strippedTarget ||
+    (decodedPkgParam.includes('tirupati') && (p.slug.toLowerCase().includes('tirupati') || p.name.toLowerCase().includes('tirupati')));
 
   // Multi-tier package lookup:
   // 1. Direct check in cloudStore custom packages (browser) - guarantees user edits take immediate effect!

@@ -1721,23 +1721,23 @@ export const ARAKU_VALLEY_BLISS_PACKAGE: HolidayPackage = {
   batch_source: 'mmt_sync',
 };
 
-export const SACRED_TIRUPATI_MAHABALIPURAM_CHENNAI_PACKAGE: HolidayPackage = {
+export const SOULFUL_TIRUPATI_PILGRIMAGE_PACKAGE: HolidayPackage = {
   id: 'pkg-mmt-andhra-pradesh-sacred-tirupati-mahabalipuram-chennai-trip-4n5d-5d4n-mmt-2',
   slug: 'andhra-pradesh-sacred-tirupati-mahabalipuram-chennai-trip-4n5d-5d4n-mmt-2',
-  name: 'Sacred Tirupati, Mahabalipuram & Chennai Trip (4N/5D)',
-  destination: 'Andhra Pradesh',
-  destinationSlug: 'andhra-pradesh',
-  state: 'Andhra Pradesh & Tamil Nadu',
+  name: 'Soulful Tirupati Pilgrimage (3N/4D)',
+  destination: 'Tirupati',
+  destinationSlug: 'tirupati',
+  state: 'Andhra Pradesh',
   stateSlug: 'andhra-pradesh',
   country: 'India',
   region: 'South India',
   isInternational: false,
-  durationDays: 5,
-  durationNights: 4,
-  startingPrice: 25000,
-  discountPrice: 29999,
-  rating: 4.8,
-  reviewsCount: 138,
+  durationDays: 4,
+  durationNights: 3,
+  startingPrice: 14999,
+  discountPrice: 18999,
+  rating: 4.9,
+  reviewsCount: 164,
   heroImage: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=1200&q=80&fm=webp&fit=crop',
   gallery: [
     'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=1200&q=80&fm=webp&fit=crop',
@@ -1746,136 +1746,112 @@ export const SACRED_TIRUPATI_MAHABALIPURAM_CHENNAI_PACKAGE: HolidayPackage = {
     'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&q=80&fm=webp&fit=crop',
   ],
   highlights: [
-    'Handpicked 3★ Standard Stays: Kansone Hotel (Chennai), Hotel MountView Comforts (Tirupati) & Mamalla Beach Resort (Mahabalipuram)',
+    'Handpicked 3★ Standard Stay: Hotel MountView Comforts (Tirupati, 3 Nights)',
     'Holy Sri Venkateswara Swamy Tirumala Balaji Darshan with Padmavathi Temple Visit',
-    'UNESCO World Heritage Shore Temple, Pancha Rathas & Arjuna’s Penance in Mahabalipuram',
-    'Vibrant Chennai Heritage: Marina Beach, San Thome Cathedral & Kapaleeshwarar Temple',
-    'Comfortable Private Dedicated AC Cab throughout from Chennai Pickup to Chennai Drop',
-    '4★ Deluxe & 5★ Luxury Upgrades Available on Request with Live Supplier Rates',
+    'Famous Sacred TTD Tirupati Laddu Prasadam collection assistance',
+    'Excursion to revered Srikalahasti Temple (Rahu-Ketu Kshetra & Vayu Linga)',
+    'Comfortable dedicated Private AC Cab from Tirupati/Renigunta arrival to departure',
+    '4★ Deluxe & 5★ Luxury Upgrades Available on Request with Live Rates',
   ],
   inclusions: [
-    '1 Night stay in Chennai at Kansone Hotel And Banquets (3★ Standard)',
-    '2 Nights stay in Tirupati at Hotel MountView Comforts (3★ Standard)',
-    '1 Night stay in Mahabalipuram at Mamalla Beach Resort (3★ Standard)',
-    'Daily Breakfast & Dinner Included across all hotel stays (MAP Plan)',
-    'Private AC Sedan vehicle for all airport/station transfers, intercity drives & sightseeing',
-    'Assistance with Tirumala Balaji darshan slots and temple guidance',
+    '3 Nights verified hotel stay in Tirupati at Hotel MountView Comforts (3★ Standard)',
+    'Daily Breakfast & Dinner Included across all days (MAP Plan)',
+    'Dedicated Private AC vehicle for all transfers, Tirumala ghat road & sightseeing',
+    'Assistance with Tirumala Balaji darshan guidelines and queue reporting',
+    'En-route excursion to holy Srikalahasti Temple and Sri Padmavathi Temple',
     'All state border taxes, toll gates, parking charges, driver allowances & 5% GST included',
     '24x7 Trip Customizer on-trip dedicated concierge support',
   ],
   exclusions: [
-    'Train or flight tickets to and from Chennai (available upon request at live rates)',
+    'Train or flight tickets to and from Tirupati / Renigunta (available upon request at live rates)',
     'Special TTD Darshan / Seva / Sheegra Darshan entry tickets',
-    'Monument camera fees and personal activity charges',
+    'Monument camera fees and personal pooja activity charges',
     'Personal expenses like room service, laundry, extra snacks, and tips',
     'Any services or meals not explicitly mentioned in inclusions',
   ],
   itinerary: [
     {
       dayNumber: 1,
-      title: 'Arrival in Chennai & Coastal City Heritage Tour',
-      description: 'Arrive at Chennai International Airport or Chennai Central Railway Station where your private chauffeur awaits. Check-in to Kansone Hotel And Banquets. After relaxing, head out to explore historic Marina Beach, San Thome Cathedral Basilica built over St. Thomas’s tomb, and the magnificent 7th-century Kapaleeshwarar Temple. Savor authentic South Indian hospitality and dinner. Overnight stay in Chennai at Kansone Hotel And Banquets.',
+      title: 'Arrival in Holy Tirupati & Sri Padmavathi Ammavari Temple Darshan',
+      description: 'Arrive at Tirupati Railway Station or Renigunta Airport where your dedicated private chauffeur warmly greets you. Transfer and check in to Hotel MountView Comforts in Tirupati. After refreshing, proceed to the auspicious Sri Padmavathi Ammavari Temple at Tiruchanur to seek blessings before visiting Tirumala. Later in the evening, visit ISKCON Tirupati temple for soothing Vedic aarti and spiritual atmosphere. Relish authentic South Indian dinner and overnight stay in Tirupati.',
       meals: ['Dinner'],
       activities: [
-        'Private Pickup from Chennai Airport / Railway Station',
-        'Check-in at Kansone Hotel And Banquets (3★ Standard)',
-        'Marina Beach Sunset Promenade',
-        'San Thome Cathedral Basilica & Kapaleeshwarar Temple Visit',
+        'Private Pickup from Tirupati Railway Station / Renigunta Airport',
+        'Check-in at Hotel MountView Comforts (3★ Standard)',
+        'Holy Sri Padmavathi Ammavari Temple at Tiruchanur Darshan',
+        'Evening Aarti and Temple Visit at ISKCON Tirupati',
       ],
-      hotel: 'Kansone Hotel And Banquets',
-      transfers: 'Private AC Cab Airport/Station Pickup & Chennai Sightseeing',
+      hotel: 'Hotel MountView Comforts',
+      transfers: 'Private AC Cab Station/Airport Pickup & Tiruchanur Sightseeing',
     },
     {
       dayNumber: 2,
-      title: 'Chennai to Holy Tirupati via Srikalahasti Temple',
-      description: 'Enjoy breakfast at Kansone Hotel, check out, and take a picturesque 3.5-hour drive to Tirupati in Andhra Pradesh. En-route, visit the revered Srikalahasti Temple (famous Vayu Linga and Rahu-Ketu Kshetra). Arrive in Tirupati and check in to Hotel MountView Comforts. In the afternoon, visit Sri Padmavathi Ammavari Temple at Tiruchanur and ISKCON Tirupati. Relish dinner and enjoy an overnight stay in Tirupati at Hotel MountView Comforts.',
-      meals: ['Breakfast', 'Dinner'],
-      activities: [
-        'Scenic Drive from Chennai to Tirupati (approx. 135 km / 3.5 hrs)',
-        'Srikalahasti Temple (Vayu Linga) Darshan en-route',
-        'Check-in at Hotel MountView Comforts (3★ Standard)',
-        'Sri Padmavathi Ammavari Temple at Tiruchanur Darshan',
-        'Evening Aarti at ISKCON Temple Tirupati',
-      ],
-      hotel: 'Hotel MountView Comforts',
-      transfers: 'Private AC Cab Chennai to Tirupati with En-route Sightseeing',
-    },
-    {
-      dayNumber: 3,
-      title: 'Tirumala Lord Venkateswara Balaji Darshan',
-      description: 'Early morning breakfast at Hotel MountView Comforts followed by drive up the sacred Seven Hills of Tirumala. Experience divine darshan of Lord Sri Venkateswara Swamy (Balaji) in the sanctum sanctorum. Collect holy Tirupati Laddu Prasadam. Visit Swami Pushkarini, Varahaswamy Temple, and Akasa Ganga. Descend back to Tirupati in the evening. Dinner and overnight stay in Tirupati at Hotel MountView Comforts.',
+      title: 'Tirumala Lord Venkateswara Balaji VIP Darshan & Seven Hills Excursion',
+      description: 'Early morning breakfast at Hotel MountView Comforts followed by a scenic drive up the sacred Seven Hills of Tirumala along the picturesque ghat road. Experience the divine, soul-stirring darshan of Lord Sri Venkateswara Swamy (Balaji) in the sanctum sanctorum (Ananda Nilayam). Collect the holy and world-famous Tirupati Laddu Prasadam. Visit Swami Pushkarini holy water tank, Sri Varahaswamy Temple, and Akasa Ganga waterfall. Descend back to Tirupati in the evening. Dinner and overnight stay in Tirupati.',
       meals: ['Breakfast', 'Dinner'],
       activities: [
         'Scenic Morning Drive up the Seven Hills to Tirumala',
-        'Sacred Tirumala Lord Venkateswara Balaji Darshan',
-        'Swami Pushkarini, Sri Varahaswamy Temple & Akasa Ganga',
+        'Divine Sanctum Darshan of Lord Venkateswara Swamy (Balaji)',
+        'Holy Dip / Sprinkling at Swami Pushkarini & Sri Varahaswamy Darshan',
         'Collect Famous TTD Tirupati Laddu Prasadam',
-        'Return descent to Tirupati for Relaxing Evening',
+        'Visit Natural Rock Arch (Silathoranam) and Akasa Ganga',
+        'Evening return descent to Tirupati hotel',
       ],
       hotel: 'Hotel MountView Comforts',
       transfers: 'Private AC Cab Tirupati to Tirumala Ghat Road Round-Trip',
     },
     {
-      dayNumber: 4,
-      title: 'Tirupati to Mahabalipuram (UNESCO Heritage Coastal Town)',
-      description: 'After breakfast at Hotel MountView Comforts, check out and drive towards the UNESCO World Heritage town of Mahabalipuram (Mamallapuram). Check-in to Mamalla Beach Resort. In the afternoon, marvel at the breathtaking 8th-century Shore Temple overlooking the Bay of Bengal, the monolithic Pancha Rathas (Five Rathas), the giant rock relief of Arjuna’s Penance, and the balancing boulder Krishna’s Butter Ball. Enjoy a peaceful sea-breeze evening along the coast. Dinner and overnight stay in Mahabalipuram at Mamalla Beach Resort.',
+      dayNumber: 3,
+      title: 'Sacred Srikalahasti Temple (Rahu-Ketu Kshetra) & Kanipakam Excursion',
+      description: 'Relish a wholesome breakfast at the hotel. Today, embark on a sacred excursion to the world-renowned Srikalahasti Temple, dedicated to Lord Shiva as the Vayu Linga (Air Element of the Pancha Bhootas). Seek relief from astrological doshas with the revered Rahu-Ketu Sarpa Dosha Nivarana pooja. Continue to the historic Kanipakam Sri Varasiddhi Vinayaka Temple, known for the self-manifested (Swayambhu) Ganesha idol situated inside a holy well. Return to Tirupati by evening for a relaxed dinner and overnight stay in Tirupati.',
       meals: ['Breakfast', 'Dinner'],
       activities: [
-        'Interstate Drive from Tirupati to Mahabalipuram (approx. 140 km)',
-        'Check-in at Mamalla Beach Resort (3★ Standard Beachside Stay)',
-        'Guided Tour of UNESCO Shore Temple overlooking the Bay of Bengal',
-        'Pancha Rathas (Five Rathas) & Arjuna’s Penance Monolithic Carvings',
-        'Krishna’s Butter Ball Photo Stop & Relaxed Coastal Beach Walk',
+        'Scenic Drive from Tirupati to Srikalahasti (approx. 38 km / 1 hr)',
+        'Srikalahasti Temple (Vayu Linga & Rahu-Ketu Kshetra) Holy Darshan',
+        'Kanipakam Sri Varasiddhi Vinayaka Swayambhu Temple Visit',
+        'Evening Return to Tirupati Hotel & Relaxing Dinner',
       ],
-      hotel: 'Mamalla Beach Resort',
-      transfers: 'Private AC Cab Tirupati to Mahabalipuram with Sightseeing',
+      hotel: 'Hotel MountView Comforts',
+      transfers: 'Private AC Cab Tirupati to Srikalahasti & Kanipakam Day Tour',
     },
     {
-      dayNumber: 5,
-      title: 'Mahabalipuram to Chennai Departure',
-      description: 'Wake up to the sound of ocean waves at Mamalla Beach Resort and enjoy a hearty breakfast. Check out and embark on a smooth coastal drive along the East Coast Road (ECR) towards Chennai. Optional stop at DakshinaChitra Heritage Museum or Covelong Beach. Transfer to Chennai International Airport or Chennai Central Railway Station for your flight/train back home with blessings of Lord Balaji and timeless coastal memories.',
+      dayNumber: 4,
+      title: 'Morning Spiritual Walks, Souvenir Shopping & Departure Drop',
+      description: 'Enjoy a leisurely breakfast at Hotel MountView Comforts. Spend your morning exploring the local Tirupati bazaar for authentic wooden carvings, temple brass idols, pure sandalwood products, and traditional sweets. Complete hotel check-out formalities. Your dedicated chauffeur will transfer you to Tirupati Railway Station or Renigunta Airport for your journey back home with the divine blessings of Lord Venkateswara Balaji and eternal peace in your heart.',
       meals: ['Breakfast'],
       activities: [
-        'Morning Ocean Breeze Walk & Resort Breakfast',
-        'Scenic Drive along East Coast Road (ECR) to Chennai',
-        'Drop at Chennai International Airport or Railway Station',
+        'Morning Temple Bazaar Shopping for Spiritual Idols & Souvenirs',
+        'Hotel Check-out Formalities',
+        'Drop at Tirupati Railway Station or Renigunta Airport',
       ],
       hotel: 'Check-out completed (Departure Day)',
-      transfers: 'Private AC Cab Mahabalipuram to Chennai Airport / Station Drop',
+      transfers: 'Private AC Cab Hotel to Tirupati Railway Station / Airport Drop',
     },
   ],
   hotels: [
     {
-      name: 'Kansone Hotel And Banquets',
-      city: 'Chennai',
-      rating: '4.8',
-      nights: 1,
-    },
-    {
       name: 'Hotel MountView Comforts',
       city: 'Tirupati',
       rating: '4.8',
-      nights: 2,
-    },
-    {
-      name: 'Mamalla Beach Resort',
-      city: 'Mahabalipuram',
-      rating: '4.8',
-      nights: 1,
+      nights: 3,
     },
   ],
   faqs: [
     {
-      question: 'Which hotels are included in this Sacred Tirupati & Mahabalipuram tour?',
-      answer: 'This package includes verified 3-Star Standard properties: Kansone Hotel And Banquets in Chennai (1 Night), Hotel MountView Comforts in Tirupati (2 Nights), and Mamalla Beach Resort in Mahabalipuram (1 Night). All rooms include private attached bath and daily breakfast & dinner.',
+      question: 'Which hotels are provided in Soulful Tirupati Pilgrimage?',
+      answer: 'This package includes verified 3-Star Standard accommodations at Hotel MountView Comforts in Tirupati (3 Nights) with private modern attached bath, air conditioning, and daily breakfast & dinner included. Upgrades to 4★ Deluxe (Fortune Select Grand Ridge) or 5★ Luxury (Minerva Grand / Taj Tirupati) are available on live rates.',
     },
     {
-      question: 'Can I upgrade to 4-Star Deluxe or 5-Star Luxury hotels?',
-      answer: 'Yes! You can request an upgrade to 4★ Deluxe (The Residency Towers Chennai, Fortune Select Grand Ridge Tirupati, Grande Bay Resort Mahabalipuram) or 5★ Luxury (The Leela Palace Chennai, Minerva Grand Tirupati, Radisson Blu Resort Temple Bay). Our team checks live inventory and provides a custom quote within 15 minutes.',
+      question: 'Can I upgrade to 4-Star Deluxe or 5-Star Luxury hotels in Tirupati?',
+      answer: 'Yes! You can choose 4★ Deluxe (Fortune Select Grand Ridge / Marasa Sarovar Premiere) or 5★ Luxury (Minerva Grand Tirupati / Taj Tirupati). Our travel desk checks live room inventory instantly and assists with smooth upgrades.',
     },
     {
       question: 'How does Tirumala Balaji Darshan assistance work?',
       answer: 'Our dedicated on-ground team assists with guidelines for booking TTD Special Entry Darshan (₹300) tickets or Virtual Seva slots, guiding you on reporting times, dress codes, and ghat road transit.',
+    },
+    {
+      question: 'Is private transportation included throughout the 4 days?',
+      answer: 'Yes! A dedicated private AC vehicle (Sedan for 2-3 guests, Ertiga / Innova for larger families) is provided throughout the entire tour for all transfers, Tirumala ghat road, and Srikalahasti excursions.',
     },
   ],
   theme: 'Pilgrimage & Heritage',
@@ -1883,9 +1859,11 @@ export const SACRED_TIRUPATI_MAHABALIPURAM_CHENNAI_PACKAGE: HolidayPackage = {
   mealPlan: 'Breakfast & Dinner Included',
   flightsIncluded: false,
   transfersIncluded: true,
-  departureCity: 'Chennai Pickup & Drop',
+  departureCity: 'Tirupati / Renigunta Pickup & Drop',
   batch_source: 'mmt_sync',
 };
+
+export const SACRED_TIRUPATI_MAHABALIPURAM_CHENNAI_PACKAGE: HolidayPackage = SOULFUL_TIRUPATI_PILGRIMAGE_PACKAGE;
 
 export const CURATED_CUSTOM_PACKAGES: HolidayPackage[] = [
   HYDERABAD_PREMIUM_PACKAGE,
@@ -1912,6 +1890,14 @@ function initializeCatalog(): { all: HolidayPackage[]; lookup: Map<string, Holid
     lookup.set(pkg.slug.toLowerCase(), pkg);
     lookup.set('pkg-' + pkg.slug.toLowerCase(), pkg);
     lookup.set(pkg.id.toLowerCase().replace(/^pkg-/, ''), pkg);
+    
+    // Register Tirupati aliases so both old and new slugs resolve instantly
+    if (pkg.name.toLowerCase().includes('tirupati')) {
+      lookup.set('andhra-pradesh-soulful-tirupati-pilgrimage-3n4d-4d3n-mmt-2', pkg);
+      lookup.set('tirupati-soulful-tirupati-pilgrimage-3n4d-4d3n-mmt-2', pkg);
+      lookup.set('soulful-tirupati-pilgrimage-3n4d-4d3n-mmt-2', pkg);
+      lookup.set('soulful-tirupati-pilgrimage-3n-4d', pkg);
+    }
   });
 
   // Generate 100% clean, non-duplicate master packages (Industry Standard Architecture)

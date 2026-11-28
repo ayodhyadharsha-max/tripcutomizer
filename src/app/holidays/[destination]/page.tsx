@@ -118,10 +118,10 @@ function matchPackagesForDestination(rawSlug: string, allCatalog: ReturnType<typ
 
     // 14. Sacred Pilgrimages (Tirupati, Puri, Shirdi, Dwarka, Rameshwaram)
     if (rawSlug === 'tirupati' || rawSlug === 'puri' || rawSlug === 'kedarnath' || rawSlug === 'badrinath') {
-      if (dSlug === 'char-dham' || (p.coveredCities && p.coveredCities.some(c => c.toLowerCase().includes(rawSlug)))) return true;
+      if (dSlug === 'char-dham' || dSlug.includes(rawSlug) || dest.includes(rawSlug) || name.includes(rawSlug) || (p.coveredCities && p.coveredCities.some(c => c.toLowerCase().includes(rawSlug)))) return true;
     }
     if (rawSlug === 'rameshwaram') {
-      if (dSlug === 'tamilnadu' || (p.coveredCities && p.coveredCities.some(c => c.toLowerCase().includes('rameshwaram')))) return true;
+      if (dSlug === 'tamilnadu' || dest.includes('rameshwaram') || name.includes('rameshwaram') || (p.coveredCities && p.coveredCities.some(c => c.toLowerCase().includes('rameshwaram')))) return true;
     }
     if (rawSlug === 'dwarka' || rawSlug === 'somnath') {
       if (dSlug === 'gujarat' || dSlug === 'char-dham' || (p.coveredCities && p.coveredCities.some(c => c.toLowerCase().includes(rawSlug)))) return true;
@@ -135,9 +135,12 @@ function matchPackagesForDestination(rawSlug: string, allCatalog: ReturnType<typ
       if (
         dSlug === 'andhra-pradesh' ||
         dSlug === 'hyderabad' ||
+        dSlug === 'tirupati' ||
         dest.includes('andhra') ||
         dest.includes('hyderabad') ||
+        dest.includes('tirupati') ||
         name.includes('hyderabad') ||
+        name.includes('tirupati') ||
         (p.coveredCities && p.coveredCities.some(c => c.toLowerCase().includes('hyderabad')))
       ) return true;
     }

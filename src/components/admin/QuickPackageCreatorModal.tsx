@@ -889,8 +889,19 @@ Morning breakfast, check out from hotel and transfer smoothly to airport/railway
         },
       ];
 
+      // Keep ID and slug clean and synchronized. If title or destination changed, calculate new targetSlug
+      const isEditing = Boolean(packageToEdit);
       const targetId = packageToEdit?.id || `pkg-admin-${finalSlug}`;
-      const targetSlug = packageToEdit?.slug || finalSlug;
+      const targetSlug = isEditing && name.trim().toLowerCase() === (packageToEdit?.name || '').trim().toLowerCase()
+        ? (packageToEdit?.slug || finalSlug)
+        : finalSlug;
+
+      // If slug or ID changed while editing, cleanly unregister the old identifier to prevent duplicate packages showing
+      if (packageToEdit) {
+        if (packageToEdit.id !== targetId || packageToEdit.slug !== targetSlug) {
+          cloudStore.deletePackage(packageToEdit.id, packageToEdit.slug);
+        }
+      }
 
       const newPackage: HolidayPackage = {
         id: targetId,

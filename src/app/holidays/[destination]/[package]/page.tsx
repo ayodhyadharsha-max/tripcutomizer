@@ -21,7 +21,8 @@ const getMatchedPackage = cache(async (destinationParam: string, packageParam: s
       pkg.slug.toLowerCase() === decodedPkgParam ||
       pkg.id.toLowerCase() === decodedPkgParam ||
       pkg.slug.toLowerCase().replace(/^pkg-/, '') === stripped ||
-      pkg.id.toLowerCase().replace(/^pkg-/, '') === stripped
+      pkg.id.toLowerCase().replace(/^pkg-/, '') === stripped ||
+      (decodedPkgParam.includes('tirupati') && (pkg.slug.toLowerCase().includes('tirupati') || pkg.name.toLowerCase().includes('tirupati')))
     );
   };
 
