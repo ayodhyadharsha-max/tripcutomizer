@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { HolidayPackage } from '@/data/packagesData';
+import { findCatalogPackage } from '@/data/packageCatalog';
 import getSupabaseServer, { withTimeout, markSupabaseOffline, isSupabaseOffline } from '@/lib/supabaseServer';
 import {
   mapSupabaseRowToPackage,
@@ -30,11 +31,19 @@ export async function GET(req: Request) {
           p.slug.toLowerCase() === queryParam ||
           p.id.toLowerCase() === queryParam ||
           p.slug.toLowerCase().replace(/^pkg-/, '') === strippedParam ||
-          p.id.toLowerCase().replace(/^pkg-/, '') === strippedParam
+          p.id.toLowerCase().replace(/^pkg-/, '') === strippedParam ||
+          (queryParam.includes('vizag') && (p.slug.toLowerCase().includes('vizag') || p.name.toLowerCase().includes('vizag'))) ||
+          (queryParam.includes('tirupati') && (p.slug.toLowerCase().includes('tirupati') || p.name.toLowerCase().includes('tirupati')))
       );
 
       if (localMatch) {
         return NextResponse.json({ success: true, package: localMatch, source: 'local_store' });
+      }
+
+      // Check static catalog
+      const catalogMatch = findCatalogPackage('', queryParam);
+      if (catalogMatch) {
+        return NextResponse.json({ success: true, package: catalogMatch, source: 'catalog' });
       }
 
       // Check Supabase only if circuit breaker is not tripped

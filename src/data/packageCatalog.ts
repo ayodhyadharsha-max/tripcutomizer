@@ -1607,6 +1607,141 @@ export const HYDERABAD_SRISAILAM_PACKAGE: HolidayPackage = {
   batch_source: 'mmt_sync',
 };
 
+export const VIZAG_ADVENTURE_ESCAPE_PACKAGE: HolidayPackage = {
+  id: 'pkg-admin-andhra-pradesh-vizag-adventure-escape-2n-3d',
+  slug: 'andhra-pradesh-vizag-adventure-escape-2n-3d',
+  name: 'Vizag Adventure Escape (2N/3D)',
+  destination: 'Andhra Pradesh',
+  destinationSlug: 'andhra-pradesh',
+  state: 'Andhra Pradesh',
+  stateSlug: 'andhra-pradesh',
+  country: 'India',
+  region: 'South India',
+  isInternational: false,
+  durationDays: 3,
+  durationNights: 2,
+  startingPrice: 9499,
+  discountPrice: 12999,
+  rating: 4.8,
+  reviewsCount: 128,
+  heroImage: '/packages/araku/araku-valley-card.webp',
+  gallery: [
+    '/packages/araku/araku-valley-card.webp',
+    '/packages/araku/ananthagiri-hills.avif',
+    '/packages/araku/borra-caves.avif',
+    '/packages/araku/katiki-waterfalls.avif',
+    '/packages/araku/chaparai-waterfalls.avif',
+    '/packages/araku/padmapuram-gardens.avif',
+    '/packages/araku/coffee-museum.avif',
+    '/packages/araku/tribal-museum.avif',
+  ],
+  highlights: [
+    'Stay at verified scenic properties: Hotel Keys Select / Treebo Trend Vizag (1N) & At Home Prakruthi Resorts Araku (1N)',
+    'Scenic drive from Visakhapatnam to Araku Valley through Eastern Ghats & Ananthagiri Hills',
+    'Explore million-year-old Borra Caves with stalactite & stalagmite formations',
+    'Visit Padmapuram Botanical Gardens, Chaparai Waterfalls & Tribal Museum',
+    'Aromatic Organic Araku Coffee Plantation Tour & Coffee Museum Tasting',
+    'Vizag City Tour: Submarine Museum, Kailasagiri & Rishikonda Beach',
+    'Dedicated Private AC Sedan Cab from Vizag pickup to drop',
+  ],
+  inclusions: [
+    '2 Nights verified hotel stay in Vizag & Araku Valley (Standard / Deluxe category)',
+    'Daily Breakfast & Dinner Included (MAP Plan)',
+    'Private AC Sedan vehicle for all transfers from Visakhapatnam and Araku sightseeing',
+    'Entry tickets to Borra Caves, Padmapuram Botanical Gardens & Tribal Museum',
+    'All toll taxes, parking fees, driver allowance, and 5% GST included',
+    '24x7 Trip Customizer on-trip dedicated concierge support',
+  ],
+  exclusions: [
+    'Train or flight tickets to / from Visakhapatnam (available on request)',
+    'Camera fees, personal adventure sports, and joy rides',
+    'Personal expenses like room service, laundry, extra snacks, and tips',
+    'Any services or meals not explicitly mentioned in package inclusions',
+  ],
+  itinerary: [
+    {
+      dayNumber: 1,
+      title: 'Arrival in Visakhapatnam & Coastal City Tour',
+      description: 'Morning pickup from Visakhapatnam Airport or Railway Station by private chauffeur. Check-in at your hotel in Vizag. Afternoon visit to the famous INS Kursura Submarine Museum, TU 142 Aircraft Museum on RK Beach, and scenic cable car ride to Kailasagiri Hilltop offering panoramic Bay of Bengal ocean views. Evening at Rishikonda Beach. Dinner and overnight stay in Visakhapatnam.',
+      meals: ['Dinner'],
+      activities: [
+        'Private Pickup from Visakhapatnam Airport / Railway Station',
+        'Check-in at Hotel Keys Select / Treebo Trend Vizag (3★ Standard)',
+        'INS Kursura Submarine Museum & RK Beach Promenade',
+        'Kailasagiri Hilltop Ropeway & Bay of Bengal View',
+        'Rishikonda Beach Sunset & Relaxing Coastal Evening',
+      ],
+      hotel: 'Hotel Keys Select / Treebo Trend Vizag',
+      transfers: 'Private AC Cab Airport/Station Pickup & Vizag Sightseeing',
+    },
+    {
+      dayNumber: 2,
+      title: 'Visakhapatnam to Araku Valley via Borra Caves, Ananthagiri & Coffee Museum',
+      description: 'Morning pickup from hotel after breakfast. Embark on a picturesque drive through the Eastern Ghats and Ananthagiri Hills. Explore the breathtaking 1-million-year-old Borra Caves and visit Katiki Waterfalls (subject to accessibility). Continue through scenic coffee plantations and visit the Araku Coffee Museum and Tribal Museum. Check-in at At Home Prakruthi Resorts Araku. Dinner and overnight stay in Araku Valley.',
+      meals: ['Breakfast', 'Dinner'],
+      activities: [
+        'Scenic Eastern Ghats & Ananthagiri Hills Drive',
+        'Guided Exploration of Borra Caves & Katiki Waterfalls',
+        'Araku Coffee Museum & Organic Coffee Tasting',
+        'Araku Tribal Museum Visit',
+        'Check-in at Valley Resort & Campfire Evening',
+      ],
+      hotel: 'At Home Prakruthi Resorts Araku',
+      transfers: 'Private AC Cab Vizag to Araku Valley with En-route Sightseeing',
+    },
+    {
+      dayNumber: 3,
+      title: 'Padmapuram Gardens, Chaparai Waterfalls & Drop to Visakhapatnam',
+      description: 'Wake up to the refreshing misty hill breeze and enjoy breakfast at the resort. Check out and visit Padmapuram Botanical Gardens, famous for its hanging tree huts and rare flora. Next, explore Chaparai Waterfalls surrounded by lush forests. Begin your scenic descent through the hills and transfer to Visakhapatnam Airport or Railway Station for your onward journey with timeless memories.',
+      meals: ['Breakfast'],
+      activities: [
+        'Resort Breakfast & Check-out Formalities',
+        'Padmapuram Botanical Gardens & Tree Hut Tour',
+        'Chaparai Water Cascade & Forest Stream Exploration',
+        'Scenic Valley Descent toward Visakhapatnam',
+        'Private AC Vehicle Drop to Vizag Airport / Railway Station',
+      ],
+      hotel: 'Check-out completed (Departure Day)',
+      transfers: 'Private AC Cab Araku to Visakhapatnam Airport / Station Drop',
+    },
+  ],
+  hotels: [
+    {
+      name: 'Hotel Keys Select Vizag',
+      city: 'Visakhapatnam',
+      rating: '4.8',
+      nights: 1,
+    },
+    {
+      name: 'At Home Prakruthi Resorts',
+      city: 'Araku Valley',
+      rating: '4.8',
+      nights: 1,
+    },
+  ],
+  faqs: [
+    {
+      question: 'Which hotels are included in Vizag Adventure Escape (2N/3D)?',
+      answer: 'This package includes verified 3-Star Standard properties: 1 Night in Visakhapatnam at Hotel Keys Select / Treebo Trend Vizag, and 1 Night in Araku Valley at At Home Prakruthi Resorts with attached modern bath and daily breakfast & dinner included.',
+    },
+    {
+      question: 'Is private transportation included throughout the tour?',
+      answer: 'Yes! A dedicated private AC vehicle (Sedan for 2-3 guests, Ertiga/Innova for groups) is provided from Vizag pickup to Vizag drop, covering all transfers, ghat roads, and sightseeing.',
+    },
+    {
+      question: 'Can this package be customized with Vistadome train tickets?',
+      answer: 'Yes, 100%! We can arrange the scenic Vistadome train journey from Visakhapatnam to Araku on request, subject to IRCTC availability.',
+    },
+  ],
+  theme: 'Nature & Hill Station',
+  hotelCategory: '3-Star Standard',
+  mealPlan: 'Breakfast & Dinner Included',
+  flightsIncluded: false,
+  transfersIncluded: true,
+  departureCity: 'Visakhapatnam Pickup & Drop',
+  batch_source: 'mmt_sync',
+};
+
 export const ARAKU_VALLEY_BLISS_PACKAGE: HolidayPackage = {
   id: 'pkg-mmt-andhra-pradesh-araku-valley-bliss-1n2d-2d1n-mmt-2',
   slug: 'andhra-pradesh-araku-valley-bliss-1n2d-2d1n-mmt-2',
@@ -1871,6 +2006,7 @@ export const CURATED_CUSTOM_PACKAGES: HolidayPackage[] = [
   HYDERABAD_EXCITING_RAMOJI_PACKAGE,
   HYDERABAD_WEEKEND_SPECIAL_PACKAGE,
   HYDERABAD_SRISAILAM_PACKAGE,
+  VIZAG_ADVENTURE_ESCAPE_PACKAGE,
   ARAKU_VALLEY_BLISS_PACKAGE,
   SACRED_TIRUPATI_MAHABALIPURAM_CHENNAI_PACKAGE,
 ];
@@ -1897,6 +2033,15 @@ function initializeCatalog(): { all: HolidayPackage[]; lookup: Map<string, Holid
       lookup.set('tirupati-soulful-tirupati-pilgrimage-3n4d-4d3n-mmt-2', pkg);
       lookup.set('soulful-tirupati-pilgrimage-3n4d-4d3n-mmt-2', pkg);
       lookup.set('soulful-tirupati-pilgrimage-3n-4d', pkg);
+    }
+
+    // Register Vizag / Araku aliases so URL variants match seamlessly
+    if (pkg.name.toLowerCase().includes('vizag') || pkg.slug.toLowerCase().includes('vizag')) {
+      lookup.set('andhra-pradesh-vizag-adventure-escape-2n-3d', pkg);
+      lookup.set('andhra-pradesh-vizag-adventure-escape-2n3d', pkg);
+      lookup.set('vizag-adventure-escape-2n-3d', pkg);
+      lookup.set('vizag-adventure-escape-2n3d', pkg);
+      lookup.set('andhra-pradesh-araku-valley-bliss-1n-2d', pkg);
     }
   });
 

@@ -7,6 +7,7 @@ import {
   HYDERABAD_EXCITING_RAMOJI_PACKAGE,
   HYDERABAD_WEEKEND_SPECIAL_PACKAGE,
   HYDERABAD_SRISAILAM_PACKAGE,
+  VIZAG_ADVENTURE_ESCAPE_PACKAGE,
   ARAKU_VALLEY_BLISS_PACKAGE,
   SACRED_TIRUPATI_MAHABALIPURAM_CHENNAI_PACKAGE,
 } from '@/data/packageCatalog';
@@ -203,6 +204,7 @@ export function getServerCustomPackages(): HolidayPackage[] {
   map.set(HYDERABAD_EXCITING_RAMOJI_PACKAGE.id, HYDERABAD_EXCITING_RAMOJI_PACKAGE);
   map.set(HYDERABAD_WEEKEND_SPECIAL_PACKAGE.id, HYDERABAD_WEEKEND_SPECIAL_PACKAGE);
   map.set(HYDERABAD_SRISAILAM_PACKAGE.id, HYDERABAD_SRISAILAM_PACKAGE);
+  map.set(VIZAG_ADVENTURE_ESCAPE_PACKAGE.id, VIZAG_ADVENTURE_ESCAPE_PACKAGE);
   map.set(ARAKU_VALLEY_BLISS_PACKAGE.id, ARAKU_VALLEY_BLISS_PACKAGE);
   map.set(SACRED_TIRUPATI_MAHABALIPURAM_CHENNAI_PACKAGE.id, SACRED_TIRUPATI_MAHABALIPURAM_CHENNAI_PACKAGE);
   fromFile.forEach((p) => {
@@ -355,7 +357,9 @@ export function findServerPackage(destinationParam?: string, packageParam?: stri
         p.slug.toLowerCase() === p2 ||
         p.id.toLowerCase() === p2 ||
         p.slug.toLowerCase().replace(/^pkg-/, '') === stripped ||
-        p.id.toLowerCase().replace(/^pkg-/, '') === stripped
+        p.id.toLowerCase().replace(/^pkg-/, '') === stripped ||
+        (p2.includes('vizag') && (p.slug.toLowerCase().includes('vizag') || p.name.toLowerCase().includes('vizag'))) ||
+        (p2.includes('tirupati') && (p.slug.toLowerCase().includes('tirupati') || p.name.toLowerCase().includes('tirupati')))
     );
     return matched || null;
   }

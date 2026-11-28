@@ -21,6 +21,24 @@ export interface PackageTierConfig {
 
 // User-specified overrides for specific packages one by one
 export const CUSTOM_PACKAGE_TIER_OVERRIDES: Record<string, Partial<PackageTierConfig>> = {
+  'andhra-pradesh-vizag-adventure-escape-2n-3d': {
+    baselineTier: 'standard',
+    allowedTiers: ['standard', 'deluxe', 'luxury'],
+    cardBadgeLabel: '3★ Standard',
+    cardTwinSharingLabel: '3★ Standard Twin Sharing',
+    cardOptionsLabel: '4★ Deluxe & 5★ Luxury Available',
+    cardBadgeClass: 'bg-amber-50 text-amber-900 border-amber-200/60',
+    tierPrices: {
+      standard: 9499,
+      deluxe: 12999,
+      luxury: 17999,
+    },
+    tierHotels: {
+      standard: 'Hotel Keys Select Vizag / At Home Prakruthi Resorts Araku',
+      deluxe: 'Novotel Varun Beach Vizag / Haritha Valley Resort',
+      luxury: 'The Gateway Hotel Beach Road Vizag',
+    },
+  },
   'andhra-pradesh-araku-valley-bliss-1n2d-2d1n-mmt-2': {
     baselineTier: 'standard',
     allowedTiers: ['standard', 'deluxe'],

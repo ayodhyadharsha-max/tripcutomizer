@@ -631,6 +631,7 @@ export function PackageDetailClientView({
     p.id.toLowerCase() === decodedPkgParam ||
     p.slug.toLowerCase().replace(/^pkg-/, '') === strippedTarget ||
     p.id.toLowerCase().replace(/^pkg-/, '') === strippedTarget ||
+    (decodedPkgParam.includes('vizag') && (p.slug.toLowerCase().includes('vizag') || p.name.toLowerCase().includes('vizag') || p.slug.toLowerCase().includes('araku'))) ||
     (decodedPkgParam.includes('tirupati') && (p.slug.toLowerCase().includes('tirupati') || p.name.toLowerCase().includes('tirupati')));
 
   // Multi-tier package lookup:

@@ -22,6 +22,7 @@ const getMatchedPackage = cache(async (destinationParam: string, packageParam: s
       pkg.id.toLowerCase() === decodedPkgParam ||
       pkg.slug.toLowerCase().replace(/^pkg-/, '') === stripped ||
       pkg.id.toLowerCase().replace(/^pkg-/, '') === stripped ||
+      (decodedPkgParam.includes('vizag') && (pkg.slug.toLowerCase().includes('vizag') || pkg.name.toLowerCase().includes('vizag') || pkg.slug.toLowerCase().includes('araku'))) ||
       (decodedPkgParam.includes('tirupati') && (pkg.slug.toLowerCase().includes('tirupati') || pkg.name.toLowerCase().includes('tirupati')))
     );
   };
