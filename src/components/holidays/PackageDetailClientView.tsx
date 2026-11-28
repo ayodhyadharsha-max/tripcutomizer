@@ -1215,6 +1215,102 @@ export function PackageDetailClientView({
       .join(' • ');
   }, [activeHotelStays]);
 
+  // Dynamically derive package highlights from the Detailed Itinerary and active hotels
+  const dynamicHighlights = useMemo(() => {
+    // 1. Extract sightseeing highlights directly from itinerary days
+    const itinerarySightseeingList: string[] = [];
+    if (Array.isArray(pkg.itinerary) && pkg.itinerary.length > 0) {
+      pkg.itinerary.forEach((d) => {
+        const acts = getSanitizedSightseeingActivities(d.title, d.description, d.activities, d.dayNumber, pkg.itinerary.length);
+        acts.forEach((a) => {
+          if (a && a.length > 2 && !itinerarySightseeingList.includes(a)) {
+            itinerarySightseeingList.push(a);
+          }
+        });
+      });
+    }
+
+    const topActivities = itinerarySightseeingList.slice(0, 4);
+
+    // 2. Hotel stay highlight dynamically derived from activeHotelStays / activeHotelsString
+    const hotelHighlight = activeHotelsString
+      ? `Stay at verified properties: ${activeHotelsString}`
+      : `Stay at handpicked ${baselineTier} verified hotels`;
+
+    // 3. Any custom non-hotel highlights from pkg.highlights (strip out any old hotel names or stale strings)
+    const customNonHotelHighlights = (pkg.highlights || []).filter((h) => {
+      const lower = h.toLowerCase();
+      return (
+        !lower.includes('stay at') &&
+        !lower.includes('resort') &&
+        !lower.includes('hotel') &&
+        !lower.includes('night stay') &&
+        !lower.includes('verified stay') &&
+        !lower.includes('kansone') &&
+        !lower.includes('vana resort') &&
+        !lower.includes('standard room') &&
+        !lower.includes('deluxe room')
+      );
+    });
+
+    const list: string[] = [
+      hotelHighlight,
+      ...topActivities,
+      ...customNonHotelHighlights.slice(0, 3),
+      `Dedicated Private AC Vehicle for all Transfers & Sightseeing`,
+      `Daily ${pkg.mealPlan || 'Breakfast Included'}`,
+      `24x7 Trip Customizer On-Trip Emergency Support`,
+    ];
+
+    // Deduplicate
+    return Array.from(new Set(list));
+  }, [pkg.itinerary, pkg.highlights, pkg.mealPlan, activeHotelsString, baselineTier]);
+
+  // Dynamically derive FAQs from Detailed Itinerary and active hotels
+  const dynamicFaqs = useMemo(() => {
+    const hotelAnswer = `This package includes verified ${baselineTier} properties: ${activeHotelsString || `${baselineTier} accommodations`}. You can also request upgrades to 4★ Deluxe or 5★ Luxury on live rates.`;
+
+    const baseFaqs = (pkg.faqs && pkg.faqs.length > 0 ? pkg.faqs : [
+      {
+        question: `Which hotels are included in ${pkg.name}?`,
+        answer: hotelAnswer,
+      },
+      {
+        question: 'Is private transportation included?',
+        answer: `Yes! A dedicated private AC vehicle is provided throughout the entire tour for all transfers and sightseeing.`,
+      },
+      {
+        question: 'Can this itinerary and hotels be customized?',
+        answer: `Yes, 100%! All our packages are fully customizable. You can modify hotel choices, add extra nights, or add custom sightseeing activities with our travel desk.`,
+      },
+      {
+        question: 'What is the cancellation and refund policy?',
+        answer: `Full refunds are processed for cancellations made 15+ days prior to travel date. Flexible token booking option allows date changes up to 7 days prior.`,
+      },
+    ]);
+
+    return baseFaqs.map((faq) => {
+      const qLower = faq.question.toLowerCase();
+      const aLower = faq.answer.toLowerCase();
+      if (
+        qLower.includes('hotel') ||
+        qLower.includes('stay') ||
+        qLower.includes('resort') ||
+        aLower.includes('vana resort') ||
+        aLower.includes('kansone') ||
+        aLower.includes('standard room') ||
+        aLower.includes('deluxe room') ||
+        aLower.includes('resort araku')
+      ) {
+        return {
+          question: faq.question,
+          answer: hotelAnswer,
+        };
+      }
+      return faq;
+    });
+  }, [pkg.faqs, pkg.name, activeHotelsString, baselineTier]);
+
   // Dynamic Tier-Based Hotel Resolution Helper (MakeMyTrip 3-Star, 4-Star & 5-Star Tiers)
   const getTierHotelName = (
     originalHotel: string | undefined,
@@ -2737,12 +2833,12 @@ export function PackageDetailClientView({
                     <Badge variant="blue">{pkg.durationDays}D / {pkg.durationNights}N</Badge>
                   </div>
 
-                  {/* Highlights from package */}
-                  {pkg.highlights && pkg.highlights.length > 0 && (
+                  {/* Highlights from package (Dynamically synchronized with Detailed Itinerary) */}
+                  {dynamicHighlights && dynamicHighlights.length > 0 && (
                     <div className="space-y-2">
                       <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 block">Package Highlights:</span>
                       <div className="flex flex-wrap gap-2">
-                        {pkg.highlights.map((hl, hIdx) => (
+                        {dynamicHighlights.map((hl, hIdx) => (
                           <span
                             key={hIdx}
                             className="bg-amber-50/70 border border-amber-200 text-amber-950 text-xs px-3 py-1.5 rounded-xl font-bold flex items-center gap-1.5 shadow-2xs"
@@ -2758,14 +2854,14 @@ export function PackageDetailClientView({
                   {/* Day-by-Day Route & Activities Summary */}
                   {pkg.itinerary && pkg.itinerary.length > 0 && (
                     <div className="pt-2 space-y-2">
-                      <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 block">Itinerary Sightseeing Route:</span>
+                      <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 block">Itinerary Sightseeing Route & Night Stays:</span>
                       <div className="grid grid-cols-1 gap-2">
                         {pkg.itinerary.map((d, dIdx) => (
                           <div key={dIdx} className="p-3 bg-slate-50 rounded-xl border border-slate-200/70 flex items-start gap-2.5 text-xs">
                             <span className="font-black text-brand-700 bg-white border border-brand-200 px-2 py-0.5 rounded-md shrink-0">
                               Day {d.dayNumber}
                             </span>
-                            <div className="space-y-0.5">
+                            <div className="space-y-1 flex-1">
                               <span className="font-bold text-slate-900 block">{d.title}</span>
                               {(() => {
                                 const acts = getSanitizedSightseeingActivities(d.title, d.description, d.activities, d.dayNumber, pkg.itinerary.length);
@@ -2776,6 +2872,11 @@ export function PackageDetailClientView({
                                   </span>
                                 );
                               })()}
+                              {d.hotel && !/check-?out|departure|none/i.test(d.hotel) && (
+                                <span className="text-emerald-700 text-[11px] font-bold block pt-0.5">
+                                  🏨 Night Stay: {cleanHotelName(d.hotel)}
+                                </span>
+                              )}
                             </div>
                           </div>
                         ))}
@@ -2838,33 +2939,27 @@ export function PackageDetailClientView({
               </Card>
             )}
 
-            {/* TAB CONTENT 4: HIGHLIGHTS */}
+            {/* TAB CONTENT 4: HIGHLIGHTS (Dynamically derived from Detailed Itinerary) */}
             {activeTab === 'highlights' && (
               <div className="space-y-4 animate-in fade-in">
                 <h3 className="font-black text-lg text-slate-900">Key Highlights of this Tour</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {pkg.highlights.map((hl, i) => {
-                    let displayHl = hl;
-                    if (/^Verified Stay:/i.test(hl) || hl.toLowerCase().includes('kansone')) {
-                      displayHl = `Verified Stay: ${activeHotelsString || `${baselineTier} Handpicked Hotels`}`;
-                    }
-                    return (
-                      <Card key={i} className="p-5 bg-white border-slate-200/80 rounded-2xl flex items-start space-x-3 shadow-xs">
-                        <div className="w-8 h-8 rounded-xl bg-amber-100 text-amber-700 font-black text-xs flex items-center justify-center shrink-0">
-                          #{i + 1}
-                        </div>
-                        <div>
-                          <span className="font-black text-sm text-slate-900 block mb-1">{displayHl}</span>
-                          <p className="text-xs text-slate-500">Includes guided assistance and pre-arranged entry tickets.</p>
-                        </div>
-                      </Card>
-                    );
-                  })}
+                  {dynamicHighlights.map((hl, i) => (
+                    <Card key={i} className="p-5 bg-white border-slate-200/80 rounded-2xl flex items-start space-x-3 shadow-xs">
+                      <div className="w-8 h-8 rounded-xl bg-amber-100 text-amber-700 font-black text-xs flex items-center justify-center shrink-0">
+                        #{i + 1}
+                      </div>
+                      <div>
+                        <span className="font-black text-sm text-slate-900 block mb-1">{hl}</span>
+                        <p className="text-xs text-slate-500">Includes guided assistance, transport, and pre-arranged itinerary visits.</p>
+                      </div>
+                    </Card>
+                  ))}
                 </div>
               </div>
             )}
 
-            {/* TAB CONTENT 5: FAQS & POLICIES */}
+            {/* TAB CONTENT 5: FAQS & POLICIES (Dynamically derived from Itinerary & Hotels) */}
             {activeTab === 'faqs' && (
               <div className="space-y-4 animate-in fade-in">
                 <div className="bg-white p-5 rounded-2xl border border-slate-200/80 space-y-1">
@@ -2873,32 +2968,8 @@ export function PackageDetailClientView({
                 </div>
 
                 <div className="space-y-3">
-                  {(pkg.faqs && pkg.faqs.length > 0 ? pkg.faqs : [
-                    {
-                      question: `Is ${pkg.name} 100% customizable?`,
-                      answer: `Yes! All our tour packages can be customized to your preferred travel dates, hotel choices, flight options, and sightseeing preferences.`
-                    },
-                    {
-                      question: `What hotel category is provided in this package?`,
-                      answer: `This package includes verified ${pkg.hotelCategory || '3-Star Standard'} accommodations: ${activeHotelsString || 'Handpicked Properties'}. You can also request upgrades to 4★ Deluxe or 5★ Luxury on live rates.`
-                    },
-                    {
-                      question: `Are sightseeing transfers private or shared?`,
-                      answer: `All sightseeing and airport/railway station transfers are provided via private AC vehicle reserved exclusively for your family/group.`
-                    },
-                    {
-                      question: `What is the cancellation and refund policy?`,
-                      answer: `Full refunds are processed for cancellations made 15+ days prior to travel date. Flexible token booking option allows date changes up to 7 days prior.`
-                    }
-                  ]).map((faqItem, fIdx) => {
+                  {dynamicFaqs.map((faqItem, fIdx) => {
                     const isOpen = openFaqs.includes(fIdx);
-                    let displayAnswer = faqItem.answer;
-                    if (
-                      faqItem.question.toLowerCase().includes('hotel') ||
-                      faqItem.answer.toLowerCase().includes('kansone')
-                    ) {
-                      displayAnswer = `This package includes verified ${baselineTier} properties: ${activeHotelsString || `${baselineTier} accommodations`}. You can also request upgrades to 4★ Deluxe or 5★ Luxury on live rates.`;
-                    }
                     return (
                       <Card key={fIdx} className="bg-white border-slate-200/80 rounded-2xl overflow-hidden shadow-2xs">
                         <button
@@ -2918,7 +2989,7 @@ export function PackageDetailClientView({
                         </button>
                         {isOpen && (
                           <div className="px-5 pb-5 pt-2 text-xs text-slate-600 border-t border-slate-100 bg-slate-50/50 leading-relaxed">
-                            {displayAnswer}
+                            {faqItem.answer}
                           </div>
                         )}
                       </Card>

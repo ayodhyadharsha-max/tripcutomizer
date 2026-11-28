@@ -33,8 +33,8 @@ export const CUSTOM_PACKAGE_TIER_OVERRIDES: Record<string, Partial<PackageTierCo
       deluxe: 10999,
     },
     tierHotels: {
-      standard: 'Vana Resort Araku (Standard Room)',
-      deluxe: 'Vana Resort Araku (Deluxe Room)',
+      standard: 'Araku Valley Nature Resort',
+      deluxe: 'Araku Valley Luxury Hill Resort',
     },
   },
   'andhra-pradesh-exciting-hyderabad-with-ramoji-film-city-3n4d-4d3n-mmt-3': {
@@ -136,6 +136,7 @@ export function getPackageTierPrices(
   pkgOrSlug?: any
 ): { standard?: number; deluxe?: number; luxury?: number } | undefined {
   if (!pkgOrSlug) return undefined;
+  if (typeof pkgOrSlug === 'object' && pkgOrSlug.user_edited) return undefined;
   const slug = typeof pkgOrSlug === 'string' ? pkgOrSlug : (pkgOrSlug.slug || pkgOrSlug.id || '');
   const cleanSlug = slug.toLowerCase().trim();
   return CUSTOM_PACKAGE_TIER_OVERRIDES[cleanSlug]?.tierPrices;
@@ -145,6 +146,7 @@ export function getPackageTierHotels(
   pkgOrSlug?: any
 ): { standard?: string; deluxe?: string; luxury?: string } | undefined {
   if (!pkgOrSlug) return undefined;
+  if (typeof pkgOrSlug === 'object' && pkgOrSlug.user_edited) return undefined;
   const slug = typeof pkgOrSlug === 'string' ? pkgOrSlug : (pkgOrSlug.slug || pkgOrSlug.id || '');
   const cleanSlug = slug.toLowerCase().trim();
   return CUSTOM_PACKAGE_TIER_OVERRIDES[cleanSlug]?.tierHotels;

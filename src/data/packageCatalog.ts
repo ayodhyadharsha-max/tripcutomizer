@@ -1636,7 +1636,7 @@ export const ARAKU_VALLEY_BLISS_PACKAGE: HolidayPackage = {
     '/packages/araku/tribal-museum.avif',
   ],
   highlights: [
-    'Stay at scenic Vana Resort Araku (Standard Room for 3★ / Deluxe Room for 4★)',
+    'Stay at scenic Araku Valley verified resort with mountain views',
     'Scenic drive from Visakhapatnam to Araku Valley through Eastern Ghats & Ananthagiri Hills',
     'Explore million-year-old Borra Caves with stalactite & stalagmite formations',
     'Visit Padmapuram Botanical Gardens & traditional Tribal Museum',
@@ -1645,7 +1645,7 @@ export const ARAKU_VALLEY_BLISS_PACKAGE: HolidayPackage = {
     'Dedicated Private AC Sedan Cab from Vizag pickup to drop',
   ],
   inclusions: [
-    '1 Night stay at Vana Resort Araku (Standard Room for 3★ Standard / Deluxe Room for 4★ Deluxe)',
+    '1 Night verified hotel stay in Araku Valley (Standard / Deluxe category)',
     'Daily Breakfast & Dinner Included (MAP Plan)',
     'Private AC Sedan vehicle for all transfers from Visakhapatnam and Araku sightseeing',
     'Entry tickets to Borra Caves, Padmapuram Botanical Gardens & Tribal Museum',
@@ -1701,7 +1701,7 @@ export const ARAKU_VALLEY_BLISS_PACKAGE: HolidayPackage = {
   faqs: [
     {
       question: 'Which hotel is provided in this Araku Valley package?',
-      answer: 'This package includes verified stays at Vana Resort Araku (Standard Room for 3★ Standard at ₹7,999 pp, or Deluxe Room for 4★ Deluxe at ₹10,999 pp) with attached modern bath and daily breakfast & dinner included.',
+      answer: 'This package includes verified accommodations in Araku Valley with attached modern bath and daily meals as per selected plan. Upgrades to 4★ Deluxe are available on live rates.',
     },
     {
       question: 'Is transportation from Visakhapatnam included?',
